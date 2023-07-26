@@ -31,6 +31,7 @@ CREATE TABLE BOOKMARK(
 
 CREATE SEQUENCE bookmark_seq;
 
+--채팅방
 CREATE TABLE CHATROOM(
  chatroom_num number not null,
  trade_num number not null,
@@ -44,6 +45,7 @@ CREATE TABLE CHATROOM(
 
 CREATE SEQUENCE chatroom_seq;
 
+--채팅
 CREATE TABLE CHAT(
  chat_num number not null,
  chatroom_num number not null,
