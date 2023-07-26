@@ -85,7 +85,7 @@ CREATE TABLE player(
  constraint player_num primary key (player_num)
 );
 
-CREATE SEQUENCE player_seq;
+CREATE SEQUENCE player_seq; 
 
 --커뮤니티 댓글 신고
 CREATE TABLE COMMU_REPLY_REPORT	(
