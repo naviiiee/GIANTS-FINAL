@@ -41,15 +41,15 @@ create table COMPANY_DETAIL(
 	comp_zipcode varchar2(15) NOT null,
 	comp_address1 varchar2(90) NOT null,
 	comp_address2 varchar2(90) NOT null,
-	comp_photo blob
-	comp_photoname varchar2(100)
+	comp_photo blob,
+	comp_photoname varchar2(100),
 	comp_regdate date default sysdate NOT null,
 	comp_modifydate date,
 	comp_content varchar2(2000),
 	constraint COMPANY_DETAIL_pk primary key (comp_num),
 	constraint COMPANY_DETAIL_fk foreign key (mem_num) references MEMBER(mem_num)
 );
-create sequence COMPANY_DATAIL_seq;
+create sequence COMPANY_DETAIL_seq;
 
 --메일 인증 테이블
 create table MEMBER_CERT(
