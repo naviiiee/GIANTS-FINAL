@@ -45,7 +45,7 @@ CREATE TABLE CHATROOM(
 
 CREATE SEQUENCE chatroom_seq;
 
---채팅 상세
+--채팅 상세 
 CREATE TABLE CHAT(
  chat_num number not null,
  chatroom_num number not null,
