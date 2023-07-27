@@ -1,13 +1,18 @@
 @charset "UTF-8";
+/* 영문적용 폰트 */
 @font-face{
 	font-family:"Giants";
 	src:url("../font/Giants-Regular.ttf");
+	unicode-range:U+0041-005A, U+0061-007A;
+}
+/* 영문제외 글자 적용 폰트 */
+@font-face{
+	font-family:"NanumSquare";
+	src:url("https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css");
 }
 
 /* 전체 Layout */
-*{
-	font-family: 'NanumSquare';
-}
+*{ font-family: 'NanumSquare', 'Giants'; }
 
 #main{ width:1024px; margin:0 auto; font-size:10pt; }
 #main_header{ margin-bottom:10px; padding:0 10px 0 0; }
