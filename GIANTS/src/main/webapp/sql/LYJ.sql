@@ -25,7 +25,7 @@ create table G_ORDER_DETAIL(
 	detail_num number primary key, --주문 상세 식별 번호
 	mem_num number not null, --회원번호
 	order_num number not null, -- 주문번호
-	--order_quantity number(5) not null, --주문개수
+	order_quantity number(5) not null, --주문개수
 	order_point number(50) not null, --상품 1개 당 적립예정 포인트(결제 금액의 2%) 
 	order_dcost number default 3000 not null, --배송비
 	goods_num number not null, --상품 식별 번호
