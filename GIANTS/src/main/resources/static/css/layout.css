@@ -6,7 +6,7 @@
 
 /* 전체 Layout */
 *{
-	font-family:"Giants";
+	font-family: 'NanumSquare';
 }
 
 #main{ width:1024px; margin:0 auto; font-size:10pt; }
