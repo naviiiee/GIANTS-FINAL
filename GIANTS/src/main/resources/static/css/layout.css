@@ -1,5 +1,5 @@
 @charset "UTF-8";
-/* 영문적용 폰트 */
+/* 영문적용 폰트 */ 
 @font-face{
 	font-family:"Giants";
 	src:url("../font/Giants-Regular.ttf");
