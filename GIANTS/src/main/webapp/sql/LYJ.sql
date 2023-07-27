@@ -34,9 +34,9 @@ create table G_ORDER_DETAIL(
 	goods_dprice number(9) not null, --할인된 가격(상품가격*(1-할인율))
 	goods_total number(9) not null, --총 상품금액(동일 상품 합산 금액)
 	mem_point number default 0 not null, --회원 보유 포인트
-	--CONSTRAINT G_ORDER_DETAIL_FK2 foreign key(mem_num) references member(mem_num), 
+	CONSTRAINT G_ORDER_DETAIL_FK2 foreign key(mem_num) references member(mem_num), 
 	CONSTRAINT G_ORDER_DETAIL_FK1 foreign key(order_num) references g_order(order_num),
-	--CONSTRAINT G_ORDER_DETAIL_FK3 foreign key(goods_num) references goods(goods_num) 
+	CONSTRAINT G_ORDER_DETAIL_FK3 foreign key(goods_num) references goods(goods_num) 
 );
 
 CREATE SEQUENCE G_ORDER_DETAIL_SEQ;
