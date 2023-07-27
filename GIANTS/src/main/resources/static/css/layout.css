@@ -29,3 +29,18 @@ a:hover{ color:#052345; font-weight:bold; }
 /* 공통 정렬 */
 .align-center{ text-align:center; }
 .align-right{ text-align:right; }
+
+
+/* header */
+.float-right{ float:right; }
+
+.top_menu{
+	color: white;
+	height:43px;
+	background:#091624;
+}
+.nav{
+	color: white;
+	height:93px;
+	margin:0 auto;
+}
