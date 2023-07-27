@@ -10,7 +10,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<div id="main">
 	<div id="main_header">
 		<tiles:insertAttribute name="header"/>
 	</div>
@@ -20,6 +19,5 @@
 	<div id="main_footer">
 		<tiles:insertAttribute name="footer"/>
 	</div>
-</div>
 </body>
 </html>
