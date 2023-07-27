@@ -55,7 +55,7 @@ create table goods_fav(
 	constraint goods_fav_pk primary key (fav_num),
 	constraint goods_fav_fk1 foreign key (mem_num) references member (mem_num),
 	constraint goods_fav_fk2 foreign key (goods_num) references goods (goods_num)
-);
+); 
 
 create sequence goods_fav_seq;
 
