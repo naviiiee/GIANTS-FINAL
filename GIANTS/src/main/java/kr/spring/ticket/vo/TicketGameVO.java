@@ -8,7 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class TicketGameVO {
-	private int game_num;		// 경기구분번호
+	private int game_num;		// 경기구분번호 
 	private String game_date;	// 경기일자
 	private String game_time;	// 경기시작시간
 	private String game_team;	// 상태팀이름
