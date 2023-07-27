@@ -4,16 +4,18 @@ create table goods(
    goods_name varchar2(600) not null,
    goods_category number(1) not null, -- 1:유니폼/2:모자/3:응원도구/4:기타
    goods_quantity number(2) not null,
-   goods_option varchar2(60) not null,
+   player_num number not null, -- 선수번호
    goods_price number(9) not null,
    goods_disc number(3) default 0 not null,
    goods_dprice number(9) not null, -- 상품가격 * (1-할인율)
    goods_content clob not null,
-   goods_photo1 blob not null,
+   goods_photo blob not null,
+   goods_photoname varchar2(100) not null,
    goods_regdate date default sysdate not null,
    goods_mdate date,
    goods_status number(1) default 2 not null, -- 1:미표시, 2:표시
-   constraint goods_pk primary key (goods_num)
+   constraint goods_pk primary key (goods_num),
+   constraint goods_fk1 foreign key (player_num) references player (player_num)
 );
 
 create sequence goods_seq;
@@ -38,6 +40,7 @@ create table goods_review(
    review_score number(1) not null,
    review_content clob not null,
    review_photo blob,
+   review_photoname varchar2(100),
    review_regdate date default sysdate not null,
    review_mdate date,
    constraint goods_review_pk primary key (review_num),
