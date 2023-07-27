@@ -38,7 +38,7 @@ CREATE TABLE seat_status(
 	seat_row VARCHAR2(30) NOT NULL,
 	seat_col VARCHAR2(30) NOT NULL,
 	seat_date VARCHAR2(30) NOT NULL,
-	seat_auth NUMBER(20) NOT NULL,
+	seat_auth NUMBER(20) NOT NULL,	-- 1:예매완료, 2:예매불가
 	CONSTRAINT seat_status_pk PRIMARY KEY (status_num),
 	CONSTRAINT seat_status_fk FOREIGN KEY (seat_num) REFERENCES seat (seat_num)
 );
