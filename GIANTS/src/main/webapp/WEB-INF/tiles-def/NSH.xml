@@ -4,8 +4,8 @@
 
 <tiles-definitions>
 	<!-- 아래 설정을 상황에 맞게 수정해서 사용하세요 -->
-	<definition name="a2" extends="main">
-		<put-attribute name="title" value="SpringPage"/>
-		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
+	<definition name="ticketInfo" extends="main">
+		<put-attribute name="title" value="요금안내"/>
+		<put-attribute name="body" value="/WEB-INF/views/ticket/ticketInfo.jsp"/>
 	</definition>
 </tiles-definitions>
