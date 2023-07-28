@@ -4,7 +4,6 @@ create table goods(
    goods_name varchar2(600) not null,
    goods_category number(1) not null, -- 1:유니폼/2:모자/3:응원도구/4:기타
    goods_quantity number(2) not null,
-   player_num number not null, -- 선수번호
    goods_price number(9) not null,
    goods_disc number(3) default 0 not null,
    goods_dprice number(9) not null, -- 상품가격 * (1-할인율)
