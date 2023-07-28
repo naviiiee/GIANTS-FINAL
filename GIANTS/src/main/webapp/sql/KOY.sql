@@ -13,8 +13,7 @@ create table goods(
    goods_regdate date default sysdate not null,
    goods_mdate date,
    goods_status number(1) default 2 not null, -- 1:미표시, 2:표시
-   constraint goods_pk primary key (goods_num),
-   constraint goods_fk1 foreign key (player_num) references player (player_num)
+   constraint goods_pk primary key (goods_num)
 );
 
 create sequence goods_seq;
