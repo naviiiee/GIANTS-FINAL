@@ -13,6 +13,7 @@
 	<div id="main_header">
 		<tiles:insertAttribute name="header"/>
 	</div>
+	<tiles:insertAttribute name="sidebar"/>
 	<div id="main_body">
 		<tiles:insertAttribute name="body"/>
 	</div>

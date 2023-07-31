@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/sidebar.js"></script>
 <div id="header">
-	<div id="center-header">
+	<div id="header_bg_top"></div>
+	<div id="header_bg_bottom"></div>
+	<div id="center_header">
 		<div class="top-menu">
 			<ul class="float-right margin-zero">
 				<!-- 로그아웃상태 -->
@@ -25,7 +26,6 @@
 					<li class="top-menu-adminpage"><a href="#"><img src="${pageContext.request.contextPath}/images/캐릭터.png">관리페이지</a></li>
 				</c:if>
 				
-				<li><img alt="" src="${pageContext.request.contextPath}/images/검색어입력.gif"></li>
 			</ul>
 		</div>
 		<div class="nav">
@@ -44,42 +44,6 @@
 	</div>
 </div>
 
-<!-- button -->
-<div class="nav-right visible-xs">
-  <div class="button" id="btn">
-    <div class="bar top"></div>
-    <div class="bar middle"></div>
-    <div class="bar bottom"></div>
-  </div>
-</div>
-
-<!-- nav-right -->
-<main>
-  <nav>
-    <div class="nav-right hidden-xs">
-      <div class="button" id="btn">
-        <div class="bar top"></div>
-        <div class="bar middle"></div>
-        <div class="bar bottom"></div>
-      </div>
-    </div>
-    <!-- nav-right -->
-  </nav>
-  <a href="https://codepen.io/tonkec/" class="ua" target="_blank">
-    <i class="fa fa-user"></i>
-  </a>
-</main>
-
-<div class="sidebar">
-	<ul class="sidebar-list">
-		<li class="sidebar-item"><a href="#" class="sidebar-anchor"></a>소개</li>
-		<li class="sidebar-item"><a href="#" class="sidebar-anchor"></a>NEWS</li>
-		<li class="sidebar-item"><a href="#" class="sidebar-anchor"></a>굿즈</li>
-		<li class="sidebar-item"><a href="#" class="sidebar-anchor"></a>티켓</li>
-		<li class="sidebar-item"><a href="#" class="sidebar-anchor"></a>먹거리</li>
-		<li class="sidebar-item"><a href="#" class="sidebar-anchor"></a>중고거래</li>
-	</ul>
-</div>
 <%--
 <div>
 	<!-- 소개 -->
