@@ -1,18 +1,25 @@
 package kr.spring.ticket.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.spring.ticket.service.TicketService;
 import kr.spring.ticket.vo.TicketGameVO;
+import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -31,7 +38,16 @@ public class TicketController {
 	
 	/* ----- [Ticket] 경기목록 -----*/
 	@RequestMapping("/ticket/gameList.do")
-	public String gameList() { return "gameList"; }
+	public String gameList(TicketGameVO ticketGameVO, Model model) {
+		int count = ticketService.selectRowCount(ticketGameVO);
+		
+		List<TicketGameVO> list = ticketService.selectTicketGameList(ticketGameVO);
+		
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		
+		return "gameList";
+	}
 	
 	/* ----- [Ticket] 경기 등록 -----*/
 	// 등록 form
