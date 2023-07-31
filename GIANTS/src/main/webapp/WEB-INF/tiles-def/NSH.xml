@@ -12,4 +12,9 @@
 		<put-attribute name="title" value="경기등록"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticket/gameWrite.jsp"/>
 	</definition>
+	
+	<definition name="gameList" extends="main">
+		<put-attribute name="title" value="경기선택"/>
+		<put-attribute name="body" value="/WEB-INF/views/ticket/gameList.jsp"/>
+	</definition>
 </tiles-definitions>

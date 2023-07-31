@@ -1,12 +1,16 @@
 @charset "UTF-8";
 
-.ticket-body{ width:1200px; margin:0 auto; }
+.ticket-body{ width:1200px; margin:0 auto; min-height:560px; }
 .ticket-title{ margin:15px 0; }
-.ticket-title hr{ margin-top:15px; }
+.ticket-title hr, #insert_ticket hr{ margin:15px 0; }
+
+.error-color{ color:#dd032f; }
 
 /* 버튼 */
-.accept-btn{ height:30px; padding:5px 10px; border:1px #dd032f solid; border-radius:5px; color:white; background-color:#dd032f; font-weight:bold; cursor:pointer; }
+.accept-btn{ width:100px; height:30px; padding:5px 10px; border:1px #dd032f solid; border-radius:5px; color:white; background-color:#dd032f; font-weight:bold; cursor:pointer; }
 .accept-btn:hover{ background-color:transparent; color:#dd032f; transition:0.2s ease-out; }
+.default-btn{ width:100px; height:30px; padding:5px 10px; border:1px #999 solid; border-radius:5px; color:white; background-color:#999; font-weight:bold; cursor:pointer; }
+.default-btn:hover{ background-color:transparent; color:#999; transition:0.2s ease-out; }
 .big{ width:150px; height:50px; font-size:18px; }
 
 /* 요금안내 */
@@ -18,9 +22,11 @@
 .color-red{ border:2px solid #dd032f; margin:15px 0; }
 
 .info-left table, .info-right table{ width:90%; margin:0 auto; text-align:center; border-collapse:collapse; font-size:15px; }
-.info-left table tr, .info-right table tr{ border-bottom:2px solid #ccc; }
-.info-left table th, .info-right table th{ background:#ccc; padding:5px; }
+.info-left table tr, .info-right table tr{ border-bottom:2px solid #999; }
+.info-left table th, .info-right table th{ background:#999; padding:5px; }
 .info-left table td, .info-right table td{ padding:5px; }
 
 .info-list{ margin-top:15px; }
-.info-list li, .refunt-info li{ margin:10px 0; } 
+.info-list li, .refunt-info li{ margin:10px 0; }
+
+/* 경기 등록 및 수정 */

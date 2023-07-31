@@ -4,7 +4,7 @@ CREATE TABLE tgame(
 	game_date VARCHAR2(30) NOT NULL,
 	game_time VARCHAR2(20) NOT NULL,
 	game_team VARCHAR2(15) NOT NULL,
-	game_state NUMBER(1) DEFAULT 0 NOT NULL,	-- 0:예매가능, 1:경기취소, 2:매진
+	game_state NUMBER(1) DEFAULT 0 NOT NULL,	-- 0:예매대기, 1:예매가능, 2:매진, 3:경기취소
 	CONSTRAINT game_pk PRIMARY KEY (game_num)
 );
 CREATE SEQUENCE game_seq;
