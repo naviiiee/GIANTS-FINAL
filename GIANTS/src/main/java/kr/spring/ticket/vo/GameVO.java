@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class TicketGameVO {
+public class GameVO {
 	private int game_num;		// 경기구분번호
 	@Pattern(regexp="^(202[34])-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$")
 	private String game_date;	// 경기일자

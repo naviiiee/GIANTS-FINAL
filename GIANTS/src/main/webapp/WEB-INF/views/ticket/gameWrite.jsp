@@ -10,7 +10,7 @@
 		<h2>경기등록</h2>
 		<hr size="0.05" width="100%" noshade>
 	</div>
-	<form:form action="gameWrite.do" id="insert_ticket" modelAttribute="ticketGameVO">
+	<form:form action="gameWrite.do" id="insert_ticket" modelAttribute="gameVO">
 		<div class="form-list">
 		<ul>
 			<li>

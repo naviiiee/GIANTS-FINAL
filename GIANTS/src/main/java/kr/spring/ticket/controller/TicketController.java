@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.spring.ticket.service.TicketService;
-import kr.spring.ticket.vo.TicketGameVO;
+import kr.spring.ticket.vo.GameVO;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,7 +30,7 @@ public class TicketController {
 	
 	// javaBean(VO) 초기화
 	@ModelAttribute
-	public TicketGameVO initCommand() { return new TicketGameVO(); }
+	public GameVO initCommand() { return new GameVO(); }
 	
 	/* ----- [Ticket] 메인(요금안내 및 티켓예매 버튼 활성화) -----*/
 	@RequestMapping("/ticket/ticketInfo.do")
@@ -38,10 +38,10 @@ public class TicketController {
 	
 	/* ----- [Ticket] 경기목록 -----*/
 	@RequestMapping("/ticket/gameList.do")
-	public String gameList(TicketGameVO ticketGameVO, Model model) {
-		int count = ticketService.selectRowCount(ticketGameVO);
+	public String gameList(GameVO gameVO, Model model) {
+		int count = ticketService.selectRowCount(gameVO);
 		
-		List<TicketGameVO> list = ticketService.selectTicketGameList(ticketGameVO);
+		List<GameVO> list = ticketService.selectTicketGameList(gameVO);
 		
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
@@ -56,12 +56,12 @@ public class TicketController {
 	
 	// 전송된 데이터 처리
 	@PostMapping("/ticket/gameWrite.do")
-	public String gameSubmit(@Valid TicketGameVO ticketGameVO, BindingResult result) {
-		log.debug("<<경기등록>> : " + ticketGameVO);
+	public String gameSubmit(@Valid GameVO gameVO, BindingResult result) {
+		log.debug("<<경기등록>> : " + gameVO);
 		
 		if(result.hasErrors()) { return gameForm(); }
 		
-		ticketService.insertGame(ticketGameVO);
+		ticketService.insertGame(gameVO);
 				
 		return "redirect:/ticket/gameList.do";
 	}
