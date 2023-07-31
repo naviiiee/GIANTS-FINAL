@@ -27,5 +27,6 @@ public interface TicketMapper {
 	// 등록
 	public void insertGrade();
 	// 수정
+	
 	// 삭제
 }

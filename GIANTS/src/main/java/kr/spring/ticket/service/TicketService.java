@@ -12,4 +12,5 @@ public interface TicketService {
 	// 목록
 	public int selectRowCount(GameVO gameVO);
 	public List<GameVO> selectTicketGameList(GameVO gameVO);
+	
 }

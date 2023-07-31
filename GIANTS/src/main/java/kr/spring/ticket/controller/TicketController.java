@@ -65,4 +65,6 @@ public class TicketController {
 				
 		return "redirect:/ticket/gameList.do";
 	}
+	
+	
 }

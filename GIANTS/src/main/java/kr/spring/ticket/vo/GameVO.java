@@ -16,7 +16,7 @@ public class GameVO {
 	private String game_date;	// 경기일자
 	@Pattern(regexp="^(0[0-9]|1[0-9]|2[0-3]):(0[1-9]|[0-5][0-9])$")
 	private String game_time;	// 경기시작시간
-	@NotEmpty
+	@NotEmpty 
 	private String game_team;	// 상태팀이름
 	private int game_state;		// 경기예매가능여부
 }

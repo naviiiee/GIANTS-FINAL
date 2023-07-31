@@ -25,3 +25,4 @@ public class TicketServiceImpl implements TicketService {
 	@Override
 	public List<GameVO> selectTicketGameList(GameVO gameVO) { return ticketMapper.selectTicketGameList(gameVO); }
 }
+ 
