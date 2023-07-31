@@ -10,10 +10,15 @@
 	width: 1200px;
 	margin:0 auto;
 	min-height: 400px;
-	background-color: lightgray;
 }
 .main-container hr{
 	size: 1px;
+}
+
+.comp-profileImg{
+	border: 1px solid red;
+	width: 250px;
+	height: 250px; 
 }
 
 /* 상단 타이틀 시작 */
@@ -76,8 +81,9 @@
 	width: 100%;
 	height: 250px;
 	margin-top:30px;
-	border: 1px solid black;
+	border-bottom: 1px solid gray;
 }
+
 .food-list .f-list:hover{
 	cursor: pointer;
 }
@@ -104,7 +110,7 @@
 	font-size: 28pt;
 	position: absolute;
 	top:0;
-	left: 275px;
+	left: 300px;
 }
 
 .comp-score{
@@ -113,7 +119,7 @@
 	font-size: 13pt;
 	position: absolute;
 	top: 80px;
-	left: 275px;
+	left: 300px;
 }
 
 .comp-content{
@@ -123,11 +129,11 @@
 	font-size: 11pt;
 	position: absolute;
 	top: 133px;
-	left: 275px;
+	left: 300px;
 }
 
 /* 맨하단 페이징 */
-.foodList-paging{
+.paging{
 	margin: auto;
 	margin-top: 40px;
 	margin-bottom: 40px;
@@ -138,17 +144,32 @@
 /*  ===================================
 	============ CompDetail ==============
 	=================================== */
+.fixBtn{
+	width: 100px;
+	height: 34px; 
+	margin: 5px 10px 0px 0px;
+	font-size: 1.2em;
+	font-weight: bold;
+	color:red;
+	background-color: white;
+	border-radius: 5px; 
+}
+.fixBtn:hover{
+	cursor: pointer;
+	background-color: lightgray;
+}
+	
 .comp-container{
+	margin-top: 20px;
 	width: 100%;
 }
 .comp-container .comp-detail{
 	position:relative;
 	width: 100%;
 	height: 250px;
-	border: 1px solid black;
 	margin-bottom: 40px;
 }
-
+/* <!-- 메뉴보기, 리뷰보기 타이틀 -->	*/
 .comp-container .comp-menu{
 	position:relative;
 	height: 50px;
@@ -173,10 +194,39 @@
 }
 
 #showMenu{
-	top:1px;
+	top:0px;
 }
 
 #showReview{
-	top:1px;
+	top:0px;
 	left:600px;
+}
+
+/* 내용 */
+#compMenu_content{
+	min-height: 600px;
+	padding-top:5px;
+	border: 1px solid black;
+}
+
+#menu_tb{
+	margin: 50px auto;
+	width: 80%;
+	height: 90%;
+}
+#menu_tb td{
+	padding: 20px 30px;
+}
+
+.food-mainImg{
+	border: 1px solid blue;
+	border-radius:20px;
+	width: 210px;
+	height: 210px; 
+	margin-bottom: 10px;
+}
+
+#menu_tb td p{
+	display:inline-block;
+	font-size: 1.4em;
 }
