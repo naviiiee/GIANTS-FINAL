@@ -11,6 +11,7 @@
 		<hr size="0.05" width="100%" noshade>
 	</div>
 	<form:form action="gameWrite.do" id="insert_ticket" modelAttribute="ticketGameVO">
+		<div class="form-list">
 		<ul>
 			<li>
 				<form:label path="game_date">경기일</form:label>
@@ -36,6 +37,7 @@
 				<form:errors path="game_team" cssClass="error-color"/>
 			</li>
 		</ul>
+		</div>
 		<hr size="0.05" width="100%" noshade>
 		<div class="align-center">
 			<input type="button" value="이전" class="default-btn">
