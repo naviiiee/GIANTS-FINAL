@@ -1,9 +1,11 @@
 package kr.spring.ticket.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,11 +40,13 @@ public class TicketController {
 	
 	// 전송된 데이터 처리
 	@PostMapping("/ticket/gameWrite.do")
-	public String gameSubmit(TicketGameVO game, HttpSession session) {
-		log.debug("<<경기등록>> : " + game);
+	public String gameSubmit(@Valid TicketGameVO ticketGameVO, BindingResult result) {
+		log.debug("<<경기등록>> : " + ticketGameVO);
 		
-		ticketService.insertGame(game);
+		if(result.hasErrors()) { return gameForm(); }
 		
+		ticketService.insertGame(ticketGameVO);
+				
 		return "redirect:/ticket/gameList.do";
 	}
 }
