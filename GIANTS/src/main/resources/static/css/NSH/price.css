@@ -12,6 +12,7 @@
 /* 요금안내 */
 .price-info{ width:100%; display:flex; justify-content:center; margin:15px 0; font-size:16px; }
 .price-left, .price-right{ width:50%; margin:0 auto; }
+.refunt-info{ font-size:16px; margin:0 2%; }
 
 .info-left, .info-right{ width:90%; margin:0 auto; }
 .color-red{ border:2px solid #dd032f; margin:15px 0; }
@@ -20,3 +21,6 @@
 .info-left table tr, .info-right table tr{ border-bottom:2px solid #ccc; }
 .info-left table th, .info-right table th{ background:#ccc; padding:5px; }
 .info-left table td, .info-right table td{ padding:5px; }
+
+.info-list{ margin-top:15px; }
+.info-list li, .refunt-info li{ margin:10px 0; } 

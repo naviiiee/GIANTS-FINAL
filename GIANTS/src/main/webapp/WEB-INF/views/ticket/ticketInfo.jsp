@@ -31,6 +31,18 @@
 						<td>외야석</td><td>8,000￦</td><td>10,000￦</td>
 					</tr>
 				</table>
+				<div class="info-list">
+					<ul>
+						<li>
+							<img src="${pageContext.request.contextPath}/images/attention.png">
+							무료 입장은 36개월 미만 유아만 가능하며, 좌석의 권한은 제공되지 않음
+						</li>
+						<li>
+							<img src="${pageContext.request.contextPath}/images/attention.png">
+							주말 경기는 금, 토, 일, 공휴일 경기에 적용(임시공휴일 포함)
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<div class="price-right">
@@ -67,5 +79,22 @@
 			</div>
 		</div>
 	</div>
-	<div class="refunt-info"></div>
+	<div class="refunt-info">
+		<img src="${pageContext.request.contextPath}/images/square.png">
+		<b>환불안내</b>
+		<ul>
+			<li>
+				<img src="${pageContext.request.contextPath}/images/attention.png">
+				입장하신 후에는 입장권 교환 및 환불이 되지 않습니다.
+			</li>
+			<li>
+				<img src="${pageContext.request.contextPath}/images/attention.png">
+				우천으로 인해 경기 일시중단 시 환불되지 않습니다.
+			</li>
+			<li>
+				<img src="${pageContext.request.contextPath}/images/attention.png">
+				5회말 종료 후 강우 콜드게임은 정식 경기로 인정되므로 환불되지 않습니다.
+			</li>
+		</ul>
+	</div>
 </div>
