@@ -30,3 +30,10 @@
 .info-list li, .refunt-info li{ margin:10px 0; }
 
 /* 경기 등록 및 수정 */
+#insert_ticket{ margin:0 auto; font-size:16px; }
+
+.form-list{ width:50%; margin:0 auto; text-align:center; }
+.form-list ul li{ clear:both; margin:25px 0; }
+.form-list label{ width:100px; float:left; font-weight:bold; }
+.form-list input[type="text"]{ width:400px; height:30px; }
+.form-list input[type="radio"]{ accent-color:#dd032f; }
