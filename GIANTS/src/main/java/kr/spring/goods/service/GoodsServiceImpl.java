@@ -18,7 +18,7 @@ public class GoodsServiceImpl implements GoodsService{
 	
 	@Autowired
 	GoodsMapper goodsmapper;
-
+ 
 	@Override
 	public List<GoodsVO> selectGoodsList(Map<String, Object> map) {
 		return goodsmapper.selectGoodsList(map);

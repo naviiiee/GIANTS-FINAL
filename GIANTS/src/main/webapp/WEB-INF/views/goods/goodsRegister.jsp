@@ -8,7 +8,7 @@
 	<form:form modelAttribute="goodsVO" action="registerGoods.do" id="register_form">
 		<form:errors element="div" cssColor="error-color"/>
 		<ul>
-			<li>
+			<li> 
 				<form:label path="goods_name">상품명</form:label>
 				<form:input path="goods_name"/>
 				<form:errors path="goods_name" cssClass="error-color"/>

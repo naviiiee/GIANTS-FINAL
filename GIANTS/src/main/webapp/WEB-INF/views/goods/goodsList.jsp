@@ -70,7 +70,7 @@
 			<th>할인율</th>
 			<th>판매가격</th>
 			<th>등록일</th>
-			<th>상태</th>
+			<th>상태</th> 
 		</tr>
 		<c:forEach var="goods" items="${list}">
 		<tr>

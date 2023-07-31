@@ -28,7 +28,7 @@ public class GoodsVO {
 	private int goods_disc; //할인율
 	private int goods_dprice; //판매가 = 상품가격 * (1-할인율)
 	@NotEmpty
-	private String goods_content; //상품설명
+	private String goods_content; //상품설명 
 	private byte[] goods_photo; //(목록에 보이는) 상품 사진
 	private String goods_photoname; //상품 사진 파일명
 	private Date goods_regdate; //상품 등록일

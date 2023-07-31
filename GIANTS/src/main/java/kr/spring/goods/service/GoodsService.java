@@ -9,7 +9,7 @@ import kr.spring.goods.vo.GoodsVO;
 
 public interface GoodsService {
 	//=====일반 상품=====//
-	//전체|검색 상품 목록
+	//전체|검색 상품 목록 
 	public List<GoodsVO> selectGoodsList(Map<String, Object> map);
 	//전체|검색 상품 레코드수
 	public int selectGoodsRowCount(Map<String, Object> map);

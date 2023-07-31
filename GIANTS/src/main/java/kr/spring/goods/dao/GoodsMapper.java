@@ -18,7 +18,7 @@ public interface GoodsMapper {
 	public List<GoodsVO> selectGoodsList(Map<String, Object> map);
 	//전체|검색 상품 레코드수
 	public int selectGoodsRowCount(Map<String, Object> map);
-	//상품 정보 등록
+	//상품 정보 등록 
 	@Select("SELECT goods_seq.nextval FROM dual")
 	public int selectGoodsNum();
 	public void insertGoods(GoodsVO goodsVO);
