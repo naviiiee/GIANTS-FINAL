@@ -9,7 +9,7 @@
 				<c:if test="${empty user}">
 					<li class="top-menu-login"><a href="#"><img src="${pageContext.request.contextPath}/images/로그인이미지.png">로그인</a></li>
 					<li class="top-menu-register">
-						<a href="${pageContext.request.contextPath}/member/registerUser.do"><img src="${pageContext.request.contextPath}/images/캐릭터.png">회원가입</a>
+						<a href="${pageContext.request.contextPath}/member/registerCommon.do"><img src="${pageContext.request.contextPath}/images/캐릭터.png">회원가입</a>
 					</li>
 				</c:if>
 				
