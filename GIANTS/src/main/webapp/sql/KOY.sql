@@ -3,7 +3,6 @@ create table goods(
    goods_num number,
    goods_name varchar2(600) not null,
    goods_category number(1) not null, -- 1:유니폼/2:모자/3:응원도구/4:기타
-   goods_quantity number(2) not null,
    goods_price number(9) not null,
    goods_disc number(3) default 0 not null,
    goods_dprice number(9) not null, -- 상품가격 * (1-할인율)
@@ -20,15 +19,12 @@ create sequence goods_seq;
 
 -- 상품옵션
 create table goods_option(
-   opt_num number,
    goods_num number not null,
-   goods_size number(1) not null, -- 1:85/2:90/3:95/4:100/5:105/6:110
+   goods_size number(1) not null, -- 1:85/2:90/3:95/4:100/5:105/6:110/7:옵션없음
    goods_stock number(9) not null, 
-   constraint goods_opt_pk primary key (opt_num),
+   constraint goods_opt_pk primary key (goods_num),
    constraint goods_opt_fk1 foreign key (goods_num) references goods (goods_num)
 );
-
-create sequence goods_opt_seq;
 
 -- 상품후기
 create table goods_review(
