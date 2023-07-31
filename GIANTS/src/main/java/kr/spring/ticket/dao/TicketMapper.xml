@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.ticket.dao.TicketMapper">
+
+	<!-- [경기정보]등록 -->
+	<insert id="insertGame" parameterType="ticketGameVO">
+		INSERT INTO tgame (game_num, game_date, game_time, game_team)
+			   VALUES (tgame_seq.nextval, #{game_date}, #{game_time}, #{game_team})
+	</insert>
+
+</mapper>

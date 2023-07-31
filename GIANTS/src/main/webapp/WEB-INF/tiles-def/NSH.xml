@@ -7,4 +7,9 @@
 		<put-attribute name="title" value="요금안내"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticket/ticketInfo.jsp"/>
 	</definition>
+	
+	<definition name="gameWrite" extends="main">
+		<put-attribute name="title" value="경기등록"/>
+		<put-attribute name="body" value="/WEB-INF/views/ticket/gameWrite.jsp"/>
+	</definition>
 </tiles-definitions>
