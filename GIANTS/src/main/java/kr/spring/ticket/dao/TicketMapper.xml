@@ -7,5 +7,4 @@
 		INSERT INTO tgame (game_num, game_date, game_time, game_team)
 			   VALUES (tgame_seq.nextval, #{game_date}, #{game_time}, #{game_team})
 	</insert>
-
 </mapper>

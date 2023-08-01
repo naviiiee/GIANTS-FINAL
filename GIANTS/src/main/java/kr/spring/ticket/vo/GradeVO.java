@@ -14,5 +14,4 @@ public class GradeVO {
 	private int quantity;		// 좌석 수량
 	private int price_week;		// 주중 가격
 	private int price_weekend;	// 주말 가격
-	
 }

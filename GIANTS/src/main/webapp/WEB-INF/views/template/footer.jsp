@@ -11,7 +11,7 @@
 .footer-top li{
 	float:left;
 	margin:0 15px 10px 15px;
-}
+} 
 .footer-address{
 	clear:both;
     background:url(../images/ico_foot_loc.png) 0 4px no-repeat;
