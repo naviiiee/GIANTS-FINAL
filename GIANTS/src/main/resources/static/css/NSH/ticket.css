@@ -19,7 +19,7 @@
 .default-btn{ border:1px #999 solid; background-color:#999; }
 .default-btn:hover{ color:#999; }
 
-.small{ width:50px; height:25px; }
+.small{ width:50px; height:25px; } 
 .big{ width:150px; height:50px; font-size:18px; }
 
 /* 요금안내 */

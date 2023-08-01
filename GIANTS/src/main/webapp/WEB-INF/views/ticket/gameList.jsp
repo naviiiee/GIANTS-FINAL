@@ -41,7 +41,7 @@
 				</c:if>
 			</td>
 			<td>
-				<input type="button" value="수정" onclick="location.href='gameUpdate.do?game_num=${game.game_num}'" class="admin-btn small">
+				<input type="button" value="수정" onclick="location.href='gameUpdate.do?game_num=${game.game_num}'" class="admin-btn small"> 
 				<input type="button" value="좌석" onclick="location.href='gradeWrite.do?game_num=${game.game_num}'" class="admin-btn small">
 			</td>
 		</tr>

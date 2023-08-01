@@ -8,7 +8,7 @@
 		<h2>요금안내</h2>
 		<hr size="0.05" width="100%" noshade>
 	</div>
-	<div class="align-right">
+	<div class="align-right"> 
 		<input type="button" value="티켓예매" onclick="location.href='gameList.do'" class="accept-btn big">
 	</div>
 	<div class="price-info">

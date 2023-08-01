@@ -29,4 +29,5 @@ public interface TicketMapper {
 	// 수정
 	
 	// 삭제
+	
 }
