@@ -3,7 +3,9 @@ create table MEMBER(
 	mem_num number,
 	mem_id varchar2(12) unique NOT null,
 	mem_nickname varchar2(30),
-	mem_auth number(1),
+	mem_auth number(1) not null,
+	passwd varchar2(35) NOT null,
+
 	constraint MEMBER_PK primary key (mem_num)
 );
 
@@ -12,7 +14,6 @@ create table MEMBER_DETAIL(
 	mem_num number,
 	mem_auid varchar2(36) NOT null,
 	mem_name varchar2(30) NOT null,
-	mem_passwd varchar2(35) NOT null,
 	mem_public varchar2(6) NOT null,
 	mem_phone varchar2(15) NOT null,
 	mem_email varchar2(50) NOT null,
@@ -33,9 +34,10 @@ create sequence MEMBER_DETAIL_seq;
 create table COMPANY_DETAIL(
 	comp_num varchar2(40) NOT null,
 	comp_owner varchar2(30) NOT null,
+	comp_cate number(1),
 	mem_num number NOT null,
 	comp_name varchar2(90) NOT null,
-	comp_passwd varchar2(35) NOT null,
+	comp_cate number(1),
 	comp_phone varchar2(15) NOT null,
 	comp_email varchar2(50) NOT null,
 	comp_zipcode varchar2(15) NOT null,

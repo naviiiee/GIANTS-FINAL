@@ -136,8 +136,7 @@ public class GoodsController {
 		
 		return new ModelAndView("goodsView", "goods", goods);
 	}
-	
-	
+
 	
 	
 }

@@ -13,12 +13,11 @@ public class MemberVO {
 	private int mem_num;
 	@Pattern(regexp="^[A-Za-z0-9]{4,12}$")
 	private String mem_id;
-	private String mem_nick_name;
+	private String mem_nickname;
 	private int mem_auth;				//회원등급 ( 0:탈퇴 1:정지 2:일반 3:기업 9:관리 )
 	@Pattern(regexp="^[A-Za-z0-9]{4,12}$")
 	private String passwd;			
 	private String auto;				//자동로그인
-	
 	
 	private CompanyDetailVO companyDetailVO;
 	private MemberDetailVO memberDetailVO;
