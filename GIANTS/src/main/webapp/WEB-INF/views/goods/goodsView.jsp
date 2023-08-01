@@ -38,7 +38,7 @@
 	<hr size="1" width="97%">
 	<div>
 		<input type="button" value="찜하기">
-		<input type="button" value="장바구니">
+		<input type="button" value="장바구니" onclick="location.href='${pageContext.request.contextPath}/gorder/goods_cart.do'">
 		<input type="button" value="바로구매">
 	</div>
 	<br>
