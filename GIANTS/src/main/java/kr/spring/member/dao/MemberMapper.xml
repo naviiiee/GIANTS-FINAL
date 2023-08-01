@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.member.dao.MemberMapper">
-
+	<!-- 수동 매핑 지정 (일반) -->
+	<resultMap type="memberVO" id="memberMap">
+		<result property="memberDetailVO.mem_auid" column="mem_auid" />
+		<result property="memberDetailVO.mem_name" column="mem_name" />
+		<result property="memberDetailVO.mem_public" column="mem_public" />
+		<result property="memberDetailVO.mem_phone" column="mem_phone" />
+		<result property="memberDetailVO.mem_email" column="mem_email" />
+		<result property="memberDetailVO.mem_zipcode" column="mem_zipcode" />
+		<result property="memberDetailVO.mem_address1" column="mem_address1" />
+		<result property="memberDetailVO.mem_address2" column="mem_address2" />
+		<result property="memberDetailVO.mem_photo" column="mem_photo" />
+		<result property="memberDetailVO.mem_photoname" column="mem_photoname" />
+		<result property="memberDetailVO.mem_point" column="mem_point" />
+		<result property="memberDetailVO.mem_regdate" column="mem_regdate" />
+		<result property="memberDetailVO.mem_modifydate" column="mem_modifydate" />
+	</resultMap>
+	
 	<!-- 일반 회원가입 -->
 	<insert id="insertMember_detail" parameterType="memberVO">
 		INSERT INTO MEMBER_DETAIL(
@@ -27,6 +43,7 @@
 			#{memberDetailVO.mem_point}
 		)
 	</insert>
+	
 	<!-- ID를 이용한 회원정보 체크 -->
 	<select id="selectCheckMember" parameterType="string" resultType="memberVO">
 		SELECT
@@ -43,5 +60,17 @@
 			m.mem_num = d.mem_num
 		WHERE
 			m.mem_id=#{mem_id}
+	</select>
+	
+	<!-- 회원번호를 이용한 회원정보 구하기 -->
+	<select id="selectMember" parameterType="string" resultMap="memberMap">
+		SELECT
+			*
+		FROM
+			MEMBER m JOIN MEMBER_DETAIL d
+		ON
+			m.mem_num=d.mem_num
+		WHERE
+			m.mem_num=#{mem_num}
 	</select>
 </mapper>

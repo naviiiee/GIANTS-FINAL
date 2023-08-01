@@ -17,9 +17,13 @@ public interface MemberMapper {
 	@Insert("INSERT INTO MEMBER (mem_num,mem_id,passwd,mem_nickname,mem_auth) VALUES (#{mem_num},#{mem_id},#{passwd},#{mem_nickname},#{mem_auth})")
 	public void insertMember(MemberVO member);
 	public void insertMember_detail(MemberVO member);
+	
 	//ID를 이용한 회원정보 체크
 	public MemberVO selectCheckMember(String id);
+	
 	//회원번호를 이용한 회원정보 구하기
+	public MemberVO selectMember(Integer mem_num);
+	
 	
 	//회원정보수정
 	//비밀번호수정
