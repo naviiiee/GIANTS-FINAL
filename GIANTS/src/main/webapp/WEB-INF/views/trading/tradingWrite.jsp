@@ -24,7 +24,7 @@
 				<form:input path="trade_title"/>
 				<form:errors path="trade_title" cssClass="error-color"/>
 				</li>
-				<li>가격 : <fmt:formatNumber value="${trading.trade_price}" type="number"/>원</li>
+				<li>가격 : <fmt:formatNumber value="${trading.trade_price}" type="number"/>원</li> 
 				<li>내용</li>
 				<li>
 					<form:textarea path="trade_content"/>
