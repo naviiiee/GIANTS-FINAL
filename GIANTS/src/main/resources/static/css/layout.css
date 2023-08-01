@@ -26,6 +26,12 @@ body,div,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,p,form,fieldset,input,table,tr,th,t
 ul,ol,li{ list-style:none; margin:0px; padding:0px; }
 a { margin: 0; padding: 0; border: 0; font-size: 100%; }
 
+/* 페이지 기본 레이아웃
+------------------------*/
+.page-main {
+	width: 98%;
+	margin: 0 auto;
+}
 /* =====<a>태그 속성 =====
 ========================*/
 a{color:#555;text-decoration:none;}
