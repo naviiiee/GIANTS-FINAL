@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<!-- 경기등록 -->
+<!-- 경기수정 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/NSH/ticket.css">
 <div class="ticket-body">
 	<div class="ticket-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif">
-		<h2>경기등록</h2>
+		<h2>경기수정</h2>
 		<hr size="0.05" width="100%" noshade>
 	</div>
-	<form:form action="gameWrite.do" id="insert_game" modelAttribute="gameVO">
+	<form:form action="gameUpdate.do" id="update_game" modelAttribute="gameVO">
+		<form:hidden path="game_num"/>
 		<div class="form-list">
 		<ul>
 			<li>
@@ -36,12 +37,20 @@
 				<form:radiobutton path="game_team" value="eagles"/>한화
 				<form:errors path="game_team" cssClass="error-color"/>
 			</li>
+			<li>
+				<form:label path="game_state">경기상태</form:label>
+				<form:radiobutton path="game_state" value="0"/>준비중
+				<form:radiobutton path="game_state" value="1"/>예매가능
+				<form:radiobutton path="game_state" value="2"/>매진
+				<form:radiobutton path="game_state" value="3"/>경기취소
+				<form:errors path="game_state" cssClass="error-color"/>
+			</li>
 		</ul>
 		</div>
 		<hr size="0.05" width="100%" noshade>
 		<div class="align-center">
 			<input type="button" value="이전" onclick="location.href='gameList.do'" class="default-btn">
-			<form:button class="admin-btn">등록</form:button>
+			<form:button class="admin-btn">수정</form:button>
 		</div>
 	</form:form>
 </div>

@@ -37,7 +37,16 @@
 			<td>사직야구장</td>
 			<td>
 				<c:if test="${game.game_state == 0}">
-				<input type="button" value="준비중" class="default-btn" disabled="disabled">
+				<input type="button" value="준비중" class="default-btn" readonly="readonly">
+				</c:if>
+				<c:if test="${game.game_state == 1}">
+				<input type="button" value="예매" class="accept-btn">
+				</c:if>
+				<c:if test="${game.game_state == 2}">
+				<input type="button" value="매진" class="default-btn" readonly="readonly">
+				</c:if>
+				<c:if test="${game.game_state == 3}">
+				<input type="button" value="취소" class="default-btn" readonly="readonly">
 				</c:if>
 			</td>
 			<td>

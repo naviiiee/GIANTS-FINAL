@@ -17,4 +17,9 @@
 		<put-attribute name="title" value="경기선택"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticket/gameList.jsp"/>
 	</definition>
+	
+	<definition name="gameUpdate" extends="main">
+		<put-attribute name="title" value="경기수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/ticket/gameUpdate.jsp"/>
+	</definition>
 </tiles-definitions>

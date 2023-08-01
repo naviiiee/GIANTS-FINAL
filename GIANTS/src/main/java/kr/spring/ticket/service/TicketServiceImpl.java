@@ -24,5 +24,11 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public List<GameVO> selectTicketGameList(GameVO gameVO) { return ticketMapper.selectTicketGameList(gameVO); }
+
+	@Override
+	public GameVO selectGame(Integer game_num) { return ticketMapper.selectGame(game_num); }
+
+	@Override
+	public void updateGame(GameVO gameVO) { ticketMapper.updateGame(gameVO); }
 }
  

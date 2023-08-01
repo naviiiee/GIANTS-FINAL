@@ -66,5 +66,25 @@ public class TicketController {
 		return "redirect:/ticket/gameList.do";
 	}
 	
+	/* ----- [Ticket] 경기 수정 -----*/
+	// 등록 form
+	@GetMapping("/ticket/gameUpdate.do")
+	public String gameUpdateForm(@RequestParam int game_num, Model model) {
+		GameVO gameVO = ticketService.selectGame(game_num);
+		model.addAttribute(gameVO);
+		
+		return "gameUpdate";
+	}
 	
+	// 전송된 데이터 처리
+	@PostMapping("/ticket/gameUpdate.do")
+	public String gameUpdateSubmit(@Valid GameVO gameVO, BindingResult result) {
+		log.debug("<<경기상태 수정>> : " + gameVO);
+		
+		if(result.hasErrors()) { return "gameUpdate"; }
+		
+		ticketService.updateGame(gameVO);
+		
+		return "redirect:/ticket/gameList.do";
+	}
 }
