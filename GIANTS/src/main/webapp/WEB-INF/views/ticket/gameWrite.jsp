@@ -40,8 +40,8 @@
 		</div>
 		<hr size="0.05" width="100%" noshade>
 		<div class="align-center">
-			<input type="button" value="이전" class="default-btn">
-			<form:button class="accept-btn">등록</form:button>
+			<input type="button" value="이전" onclick="location.href='gameList.do'" class="default-btn">
+			<form:button class="admin-btn">등록</form:button>
 		</div>
 	</form:form>
 </div>

@@ -3,7 +3,8 @@
 <style>
 #footer{
 	width:750px;
-	margin:30px auto;
+	margin:0 auto;
+	padding:50px 0;
 	position:relative;
 }
 .footer-top img{ margin-right:5px; }
