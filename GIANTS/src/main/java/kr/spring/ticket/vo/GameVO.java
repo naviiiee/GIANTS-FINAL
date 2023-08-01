@@ -19,4 +19,5 @@ public class GameVO {
 	@NotEmpty 
 	private String game_team;	// 상태팀이름
 	private int game_state;		// 경기예매가능여부
+	
 }

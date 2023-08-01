@@ -22,4 +22,5 @@
 		<put-attribute name="title" value="경기수정"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticket/gameUpdate.jsp"/>
 	</definition>
+	
 </tiles-definitions>

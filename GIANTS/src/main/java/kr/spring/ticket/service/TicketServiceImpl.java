@@ -30,5 +30,6 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public void updateGame(GameVO gameVO) { ticketMapper.updateGame(gameVO); }
+	
 }
  
