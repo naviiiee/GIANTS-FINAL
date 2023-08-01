@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 중고거래 게시판 글 등록 시작 -->
 <!-- include libraries (jquery, bootstrap) -> CKEditor를 사용하기 위해 필요한 라이브러리 -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -23,6 +24,7 @@
 				<form:input path="trade_title"/>
 				<form:errors path="trade_title" cssClass="error-color"/>
 				</li>
+				<li>가격 : <fmt:formatNumber value="${trading.trade_price}" type="number"/>원</li>
 				<li>내용</li>
 				<li>
 					<form:textarea path="trade_content"/>

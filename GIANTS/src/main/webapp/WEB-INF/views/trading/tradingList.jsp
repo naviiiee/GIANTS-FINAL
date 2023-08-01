@@ -5,7 +5,7 @@
 <div class="page-main">
 	<h2>중고거래 게시판 목록</h2>
 	<form>
-		<c:if test="${empty user}">
+		<c:if test="${!empty user}">
 		<input type="button" value="글쓰기" onclick="location.href='tradingWrite.do'">
 		</c:if>
 	</form>
