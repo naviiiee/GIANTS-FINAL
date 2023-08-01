@@ -24,7 +24,7 @@ public class TradingVO {
 	private Date trade_modifydate; //수정일
 	private int trade_status; //거래 상태(0:판매중, 1:거래완료)
 	@NotEmpty
-	private String trade_photo1; //첨부파일명1
+	private String trade_photo1; //첨부파일명1 
 	@NotEmpty
 	private String trade_photo2; //첨부파일명2
 	private String trade_ip; //ip주소
