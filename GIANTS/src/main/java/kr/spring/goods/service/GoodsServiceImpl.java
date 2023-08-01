@@ -41,8 +41,7 @@ public class GoodsServiceImpl implements GoodsService{
 
 	@Override
 	public GoodsVO selectGoods(Integer goods_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return goodsmapper.selectGoods(goods_num);
 	}
 
 	@Override

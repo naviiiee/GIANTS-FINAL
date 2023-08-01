@@ -80,6 +80,12 @@
 		]]>
 	</select>
 	
-	
+	<!-- 굿즈 상세 -->
+	<select id="selectGoods" parameterType="goods_num">
+		SELECT
+			*
+		FROM goods g JOIN goods_option o USING(goods_num)
+		WHERE g.goods_num=#{goods_num}
+	</select>
 	
 </mapper>

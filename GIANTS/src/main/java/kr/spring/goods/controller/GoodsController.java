@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.goods.service.GoodsService;
 import kr.spring.goods.vo.GoodsVO;
 import kr.spring.util.PagingUtil;
+import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -119,5 +120,24 @@ public class GoodsController {
 		
 		return mav;
 	}
+	
+	/*==========================
+	 * 굿즈 상세페이지
+	 *==========================*/
+	@RequestMapping("/goods/goodsDetail.do")
+	public ModelAndView getGoodsDetail(@RequestParam int goods_num) {
+		log.debug("<<굿즈 상세 - goods_num>> : " + goods_num);
+		
+		//상품 상세
+		GoodsVO goods = goodsService.selectGoods(goods_num);
+		
+		//상품명에 태그를 허용하지 않음
+		goods.setGoods_name(StringUtil.useNoHtml(goods.getGoods_name()));
+		
+		return new ModelAndView("goodsView", "goods", goods);
+	}
+	
+	
+	
 	
 }
