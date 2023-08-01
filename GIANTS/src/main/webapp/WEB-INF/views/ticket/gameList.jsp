@@ -40,7 +40,7 @@
 				<input type="button" value="준비중" class="default-btn" readonly="readonly">
 				</c:if>
 				<c:if test="${game.game_state == 1}">
-				<input type="button" value="예매" class="accept-btn">
+				<input type="button" value="예매" onclick="location.href='#.do?game_num=${game.game_num}'" class="accept-btn">
 				</c:if>
 				<c:if test="${game.game_state == 2}">
 				<input type="button" value="매진" class="default-btn" readonly="readonly">
