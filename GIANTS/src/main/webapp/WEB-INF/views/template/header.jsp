@@ -18,6 +18,10 @@
 				<c:if test="${!empty user && mem_auth < 9}">
 					<li class="top-menu-loginout"><a href="#"><img src="${pageContext.request.contextPath}/images/로그아웃이미지.png">로그아웃</a></li>
 					<li class="top-menu-mypage"><a href="#"><img src="${pageContext.request.contextPath}/images/캐릭터.png">마이페이지</a></li>
+					<!-- 일반 회원인 경우 굿즈 장바구니 표시 -->
+					<c:if test="${mem_auth ==2 }">
+						<li class="top-menu-cart"><a href="#">장바구니</a></li>
+					</c:if>
 				</c:if>
 				
 				<!-- 로그인 상태 (관리자)-->
