@@ -14,4 +14,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/goods/goodsRegister.jsp"/>
 	</definition>
 	
+	<definition name="goodsView" extends="main">
+		<put-attribute name="title" value="굿즈싱세페이지"/>
+		<put-attribute name="body" value="/WEB-INF/views/goods/goodsView.jsp"/>
+	</definition>
+	
 </tiles-definitions>

@@ -84,7 +84,8 @@
 	<select id="selectGoods" parameterType="integer">
 		SELECT
 			*
-		FROM goods g JOIN goods_option o USING(goods_num)
+		FROM goods g JOIN goods_option o 
+		ON g.goods_num=o.goods_num
 		WHERE g.goods_num=#{goods_num}
 	</select>
 	
