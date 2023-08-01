@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<!-- 매장 상세보기 페이지 -->
+<!-- 매장 수정 페이지 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OSJ/food.css">
 <div class="main-container">
 	<div class="inner-title">
@@ -17,9 +17,10 @@
 		--><li><div id="food_c4">간 식</div></li><!--
 		--><li><div id="food_c5">패스트푸드</div></li>
 		</ul>
-		<!-- 관리자 접속시 수정 버튼 생성 -->
+		<!-- 우측 수정, 취소 버튼 -->
 		<div class="float-right">
-			<input type="button" class="adminBtn" value="수정하기" onclick='location.href="/food/foodFixCompDetail.do"'>
+			<input type="submit" class="adminBtn" value="수정">
+			<input type="button" class="adminBtn" value="취소" onclick='location.href="/food/foodCompDetail.do"'>
 		</div>
 	</div>
 	<div class="clear"></div>

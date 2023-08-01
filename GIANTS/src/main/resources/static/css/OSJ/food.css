@@ -144,7 +144,7 @@
 /*  ===================================
 	============ CompDetail ==============
 	=================================== */
-.fixBtn{
+.adminBtn{
 	width: 100px;
 	height: 34px; 
 	margin: 5px 10px 0px 0px;
@@ -154,7 +154,7 @@
 	background-color: white;
 	border-radius: 5px; 
 }
-.fixBtn:hover{
+.adminBtnBtn:hover{
 	cursor: pointer;
 	background-color: lightgray;
 }

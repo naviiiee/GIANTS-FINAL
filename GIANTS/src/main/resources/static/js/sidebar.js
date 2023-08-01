@@ -9,6 +9,7 @@ $(document).ready(function() {
 		$(".sidebar-hr").toggleClass("hr-out");
 		$(".sidebar").toggleClass("sidebar-Fin");
 		$(".sidebar").toggleClass("sidebar-Fout");
+		$(".sideTop").toggleClass("top-on");
 		$(".sidebar-item").toggleClass("active");
 		$("#sub_item1").attr('class','sidebar-right');
 	}

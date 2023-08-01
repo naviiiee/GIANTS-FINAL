@@ -200,13 +200,21 @@ a:hover,a:hover,a.visited:hover{color:#333;text-decoration:none;}
 	transition: transform .7s ease-in-out;
 }
 .sideTop{
-	height: 43px;
-	width: 360px;
+	height: 136px;
+	width: 0px;
 	position: fixed;
 	top:0px;
 	right:0px;
 	z-index: 5;
-    background-color: rgba(5,35,69,1);
+	opacity: 0;
+	background-color: rgba(5,35,69,1);
+	transition: .7s ease-in-out;
+}
+.top-on{
+	width:360px;
+	transition: .7s ease-in-out;
+	background-color: rgba(5,35,69,1);
+	opacity: 1;
 }
 /* 왼쪾으로 이동 */
 .move-to-left {
