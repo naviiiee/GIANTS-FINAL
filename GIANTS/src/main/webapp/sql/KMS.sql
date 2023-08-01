@@ -12,7 +12,6 @@ CREATE TABLE TRADING(
  trade_photo2 varchar2(300) not null,
  trade_ip varchar2(15) not null,
  mem_num number not null,
- bk_num number not null,
  constraint TRADING_PK primary key (trade_num),
  constraint TRADING_FK foreign key (mem_num) references MEMBER(mem_num)
 );
@@ -50,12 +49,12 @@ CREATE TABLE CHAT(
  chat_num number not null,
  chatroom_num number not null,
  mem_num number not null,
- message number(900) not null,
+ message varchar2(900) not null,
  reg_date date default SYSDATE not null,
  read_check number(1) not null,
  constraint CHAT_PK primary key (chat_num),
- constraint CHAT_FK1 foreign key (chatroom_num) references CHATROOM(chatroom_num),
- constraint BOOKMARK_FK2 foreign key (mem_num) references MEMBER(mem_num)
+ constraint CHAT_FK1 foreign key (chatroom_num) references CHATROOM(chatroom_num)
+ constraint CHAT_FK2 foreign key (mem_num) references CHATROOM(mem_num)
 );
 
 CREATE SEQUENCE chat_seq;

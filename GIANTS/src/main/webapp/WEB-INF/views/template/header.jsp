@@ -41,7 +41,7 @@
 				   <li class="li_depth1"><a href="#" class="dep1_tit"><span>굿즈</span></a>
 				   <li class="li_depth1"><a href="${pageContext.request.contextPath}/ticket/ticketInfo.do" class="dep1_tit"><span>티켓</span></a>
 				   <li class="li_depth1"><a href="${pageContext.request.contextPath}/food/foodList.do" class="dep1_tit"><span>푸드</span></a>
-				   <li class="li_depth1"><a href="#" class="dep1_tit"><span>중고거래</span></a>
+				   <li class="li_depth1"><a href="${pageContext.request.contextPath}/trading/tradingList.do" class="dep1_tit"><span>중고거래</span></a>
 				</ul>
 			</div>
 		</div>
