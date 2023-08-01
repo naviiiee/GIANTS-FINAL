@@ -3,7 +3,7 @@
 <mapper namespace="kr.spring.ticket.dao.TicketMapper">
 
 	<!-- [경기정보]등록 -->
-	<insert id="insertGame" parameterType="ticketGameVO">
+	<insert id="insertGame" parameterType="gameVO">
 		INSERT INTO tgame (game_num, game_date, game_time, game_team)
 			   VALUES (tgame_seq.nextval, #{game_date}, #{game_time}, #{game_team})
 	</insert>
