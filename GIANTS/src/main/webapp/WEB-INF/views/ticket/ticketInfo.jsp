@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/NSH/ticket.css">
 <div class="page-main">
 	<div class="ticket-title">
-		<img src="${pageContext.request.contextPath}/images/title_icon.gif" width="50" height="6">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>요금안내</h2>
 		<hr size="0.05" width="100%" noshade>
 	</div>
