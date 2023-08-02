@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 회원가입 시작 -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/confirmId.js"></script>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/confirmId.js"></script> --%>
 <div>
 	<h2>회원가입</h2>
 	<div>자이언츠 일반회원가입입니다.</div>
@@ -16,8 +16,8 @@
 			<li>
 				<form:label path="mem_id">아이디</form:label>
 				<form:input path="mem_id" placeholder="영문, 숫자 4~12자" autocomplete="off"/>
-				<input type="button" id="confirmId" value="ID중복체크">
-				<span id="message_id"></span>
+				<!-- <input type="button" id="confirmId" value="ID중복체크">
+				<span id="message_id"></span> -->
 				<form:errors path="mem_id" cssClass="error-color"/>
  			</li>
 			<li>

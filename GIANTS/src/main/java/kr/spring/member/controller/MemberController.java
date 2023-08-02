@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.util.AuthCheckException;
 
 @Controller
 public class MemberController {	
@@ -37,6 +39,7 @@ public class MemberController {
 	public MemberVO initCommand() {
 		return new MemberVO();
 	}
+	
 	//아이디 중복 체크
 	@RequestMapping("/member/confimId.do")
 	@ResponseBody
@@ -68,12 +71,12 @@ public class MemberController {
 	public String form() {
 		return "commonRegister";
 	}
-	//회원가입 폼 호출
+	//일반회원가입 폼 호출
 	@GetMapping("/member/registerMember.do")
 	public String formMember() {
 		return "memberRegister";
 	}
-	//회원가입 처리
+	//일반회원가입 처리
 	@PostMapping("/member/registerMember.do")
 	public String submit(@Valid MemberVO memberVO, @Valid MemberDetailVO memberdetailVO,BindingResult result, Model model) {
 		logger.debug("<<회원가입>> : " + memberVO);
@@ -84,9 +87,9 @@ public class MemberController {
 		memberdetailVO.setMem_point(0);
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
-		if(result.hasErrors()) {
-			return formMember();
-		}
+		/*
+		 * if(result.hasErrors()) { return formMember(); }
+		 */
 		
 		//정상 처리 시 회원가입
 		memberService.insertMember(memberVO);
@@ -95,4 +98,81 @@ public class MemberController {
 		return "common/notice";
 	}
 	
+	/* === 로그인
+	=======================*/
+	//로그인폼
+	@GetMapping("/member/login.do")
+	public String formLogin() {
+		return "memberLogin";
+	}
+	//로그인 데이터 처리
+		@PostMapping("/member/login.do")
+		public String submitLogin(@Valid MemberVO memberVO,
+								  BindingResult result,
+								  HttpSession session) {
+			logger.debug("<<회원로그인>> : " + memberVO);
+			
+			//id와 passwd 필드만 유효성 체크 결과 오류가 있으면 폼 호출
+			if(result.hasFieldErrors("id") || result.hasFieldErrors("passwd")) {
+				return formLogin();
+			}
+			//로그인 체크(id, 비밀번호 일치 여부 체크)
+			MemberVO member= null;
+			try {
+				member = memberService.selectCheckMember(memberVO.getMem_id());
+				
+				boolean check = false;
+				
+				if(member!=null) {
+					//비밀번호 일치 여부 체크
+					check = member.isCheckedPasswd(memberVO.getPasswd());
+				}
+				if(check) { //인증 성공
+					//자동 로그인 체크 시작//
+					//자동 로그인 체크 끝//
+					
+					//인증 성공, 로그인 처리
+					session.setAttribute("user", member);
+					
+					logger.debug("<<인증 성공>>");
+					logger.debug("<<id>> : " + member.getMem_id());
+					logger.debug("<<auth>> : " + member.getMem_auth());
+					/* logger.debug("<<au_id>> : " + member.getAu_id()); */
+					
+					if(member.getMem_auth() == 9) {
+						return "redirect:/main/admin.do";
+					}else {
+						return "redirect:/main/main.do";
+					}
+				}
+				//인증 실패
+				throw new AuthCheckException();
+				
+			}catch(AuthCheckException e) {
+				//인증 실패로 로그인폼 호출
+				if(member!=null && member.getMem_auth()==1) {
+					//정지회원 메시지 표시
+					result.reject("noAuthority");
+				}else {
+					result.reject("invalidIdOrPassword");
+				}
+				
+				logger.debug("<<인증 실패>>");
+				
+				return formLogin();
+			}
+		}
+
+	
+	/* 로그아웃 */
+	@RequestMapping("/member/logout.do")
+	public String logout(HttpSession session) {
+		//로그아웃
+		session.invalidate();
+		
+		//자동로그인 해제 시작//
+		//자동로그인 해제 끝//
+	
+		return "redirect:/main/main.do";
+	}
 }
