@@ -57,10 +57,11 @@ public class CommuController {
 		if(result.hasErrors()) {
 			return form();
 		}
-		
+		 
 		//회원 번호 세팅 (좀 길지만 한 번만 쓸거라 따로 변수 안 만들고 진행)
-		//세션에 저장해놓은 user를 MemberVO로 다운캐스팅, 거기서 mem_num을 가져와서 boardVO의 mem_num에 set
-		commuVO.setMem_num(((MemberVO)session.getAttribute("user")).getMem_num());
+		//세션에 저장해놓은 user를 MemberVO로 다운캐스팅, 거기서 mem_num을 가져와서 commuVO의 mem_num에 set
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		//commuVO.setMem_num(user.getMem_num());
 		
 		//IP 셋팅
 		commuVO.setCommu_ip(request.getRemoteAddr());
@@ -69,14 +70,14 @@ public class CommuController {
 		commuService.insertCommu(commuVO);
 		
 		model.addAttribute("message", "글쓰기가 완료되었습니다.");
-		model.addAttribute("url", request.getContextPath()+"/commu/list.do");
+		model.addAttribute("url", request.getContextPath()+"/commu/commuList.do");
 		
 		return "common/resultView";
 		
 	}
 	
 	/*=== 커뮤니티 목록 ===*/
-	@RequestMapping("/commu/list.do")
+	@RequestMapping("/commu/commuList.do")
 	public ModelAndView getList(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
 								@RequestParam(value="order", defaultValue="1") int order,
 								String keyfield, String keyword){
@@ -89,7 +90,7 @@ public class CommuController {
 		log.debug("<<count>> : " + count);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"list.do","&order="+order);
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"commuList.do","&order="+order);
 		
 		List<CommuVO> list = null;
 		if(count > 0) {
@@ -101,7 +102,7 @@ public class CommuController {
 		}
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("boardList");
+		mav.setViewName("commuList");
 		mav.addObject("count",count);
 		mav.addObject("list",list);
 		mav.addObject("page",page.getPage());
@@ -154,7 +155,7 @@ public class CommuController {
 		//글 삭제
 		commuService.deleteCommu(commu_num);
 		
-		return "redirect:/commu/list.do";
+		return "redirect:/commu/commuList.do";
 	}
 	
 	/*=== 커뮤니티 글 좋아요 ===*/

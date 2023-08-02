@@ -1,4 +1,4 @@
-package kr.spring.player.dao;
+package kr.spring.introduce.dao;
 
 public class PlayerMapper {
 

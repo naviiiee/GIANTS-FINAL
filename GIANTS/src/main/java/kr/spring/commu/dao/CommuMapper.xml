@@ -4,7 +4,7 @@
 
 	<!-- 글쓰기 -->
 	<insert id="insertCommu" parameterType="commuVO">
-		INSERT INTO commu(commu_num, commu_title, commu_content, commu_ip, mem_num) 
+		INSERT INTO commu (commu_num, commu_title, commu_content, commu_ip, mem_num) 
 		VALUES (commu_seq.nextval, #{commu_title}, #{commu_content}, #{commu_ip}, #{mem_num})
 	</insert>
 	

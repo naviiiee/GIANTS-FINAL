@@ -9,7 +9,7 @@ CREATE TABLE commu(
  commu_ip varchar(15),
  mem_num number not null,
  constraint commu_pk primary key (commu_num),
- constraint commu_fk foreign key (mem_num) references member(mem_num)
+ constraint commu_fk foreign key (mem_num) references member (mem_num)
 );
 
 CREATE SEQUENCE commu_seq;

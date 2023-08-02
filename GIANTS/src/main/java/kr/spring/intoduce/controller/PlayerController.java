@@ -1,4 +1,4 @@
-package kr.spring.player.controller;
+package kr.spring.intoduce.controller;
 
 public class PlayerController {
 
