@@ -25,7 +25,7 @@ public class TradingVO {
 	private int trade_status; //거래 상태(0:판매중, 1:거래완료)
 	//@NotEmpty
 	//private String trade_photo1; //첨부파일명1 
-	//@NotEmpty
+	//@NotEmpty 
 	//private String trade_photo2; //첨부파일명2
 	private String trade_ip; //ip주소
 	private int mem_num; //회원번호
