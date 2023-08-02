@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+/* --- 중고거래 게시판 글 상세 --- */
+ul.detail-info{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+ul.detail-info li{
+	margin: 0;
+	padding-top: 5px;
+	display: inline-block;
+}
+ul.detail-info li:last-child{
+	vertical-align: top;
+}
+.detail-img{
+	max-width: 500px;
+}
+.detail-content img{
+	max-width: 940px;
+}
+#output_bookmark{
+	cursor: pointer;
+}
+#output_bookmarkcnt{
+	width: 50px;
+	display: inline-block;
+}

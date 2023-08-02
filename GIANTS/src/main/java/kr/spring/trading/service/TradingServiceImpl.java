@@ -34,14 +34,12 @@ public class TradingServiceImpl implements TradingService{
 
 	@Override
 	public TradingVO selectTrading(Integer trade_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return tradingMapper.selectTrading(trade_num);
 	}
 
 	@Override
 	public void updateHit(Integer trade_num) {
-		// TODO Auto-generated method stub
-		
+		tradingMapper.updateHit(trade_num);
 	}
 
 	@Override

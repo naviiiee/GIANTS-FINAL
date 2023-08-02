@@ -30,7 +30,7 @@
 				<input type="search" name="keyword" mem_id="keyword" value="${param.keyword}">
 			</li>
 			<li>
-				<input type="submit" value="찾기">
+				<input type="submit" value="검색">
 				<input type="button" value="목록" onclick="location.href='tradingList.do'">
 			</li>
 		</ul>

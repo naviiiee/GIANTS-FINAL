@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.trading.vo.TradingVO;
 
@@ -14,6 +15,7 @@ public interface TradingMapper {
 	public int selectRowCount(Map<String,Object> map);
 	public void insertTrading(TradingVO trading);
 	public TradingVO selectTrading(Integer trade_num);
+	@Update("UPDATE trading SET hit=hit+1 WHERE trade_num=#{trade_num}")
 	public void updateHit(Integer trade_num);
 	public void updateStatus(Integer trade_num);
 	public void updateTrading(TradingVO trading);

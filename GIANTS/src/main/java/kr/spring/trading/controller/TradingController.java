@@ -23,6 +23,7 @@ import kr.spring.member.vo.MemberVO;
 import kr.spring.trading.service.TradingService;
 import kr.spring.trading.vo.TradingVO;
 import kr.spring.util.PagingUtil;
+import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -107,6 +108,29 @@ public class TradingController {
 		mav.addObject("page", page.getPage());
 		
 		return mav;
+	}
+	
+	/*=================
+	 * 게시판 글 상세
+	 * ===============*/
+	@RequestMapping("/trading/tradingDetail.do")
+	public ModelAndView getDetail(@RequestParam int trade_num) {
+		log.debug("<<글 상세 - trade_num>> : " + trade_num);
+		
+		//해당 글의 조회수 증가
+		tradingService.updateHit(trade_num);
+		
+		//글 상세
+		TradingVO trading = tradingService.selectTrading(trade_num);
+		
+		//제목에 태그를 허용하지 않음
+		trading.setTrade_title(StringUtil.useNoHtml(trading.getTrade_title()));
+		
+		//CKEditor를 사용하지 않을 경우, 내용에 태그 불허
+		//trading.setTrade_content(StringUtil.useBrNoHtml(trading.getTrade_content()));
+		
+								// 	뷰 이름     	 속성명     속성값
+		return new ModelAndView("tradingView", "trading", trading);
 	}
 	
 }
