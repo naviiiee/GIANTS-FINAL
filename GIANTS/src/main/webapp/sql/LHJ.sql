@@ -7,7 +7,7 @@ CREATE TABLE commu(
  commu_modifydate date,
  commu_hit number(8),
  commu_ip varchar(15),
- mem_num number not null
+ mem_num number not null,
  constraint commu_pk primary key (commu_num),
  constraint commu_fk foreign key (mem_num) references member(mem_num)
 );
