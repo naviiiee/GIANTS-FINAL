@@ -9,7 +9,7 @@ CREATE TABLE TRADING(
  trade_modifydate date,
  trade_status number(1) not null,
  -- trade_photo1 varchar2(300) not null,
- -- trade_photo2 varchar2(300) not null, 
+ -- trade_photo2 varchar2(300) not null,
  trade_ip varchar2(15) not null,
  mem_num number not null,
  constraint TRADING_PK primary key (trade_num),

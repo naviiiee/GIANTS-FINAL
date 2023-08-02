@@ -55,6 +55,6 @@ public class CommonController {
 		map.put("upload", true);
 		map.put("url", request.getContextPath() + "/image_upload/" + sub_path + "/" + str_filename);
 		
-		return map; 
+		return map;
 	}
 }

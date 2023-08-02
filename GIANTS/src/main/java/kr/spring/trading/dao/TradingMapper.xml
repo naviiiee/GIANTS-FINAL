@@ -21,7 +21,7 @@
 		 #{trade_price},
 		 <!-- 
 		 #{trade_photo1},
-		 #{trade_photo2}, 
+		 #{trade_photo2},
 		 -->
 		 #{trade_ip},
 		 #{mem_num}
