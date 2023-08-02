@@ -25,6 +25,19 @@
 			#{goods_status})
 	</insert>
 	
+	<!-- 상품 재고 등록 -->
+	<insert id="insertGoodsHasOption" parameterType="goodsVO"> 
+		INSERT INTO 
+			goods_option(
+				goods_num, 
+				goods_size, 
+				goods_stock) 
+		VALUES( 
+			#{goods_num}, 
+			#{goods_size}, 
+			#{goods_stock}) 
+	</insert>
+	
 	<!-- 상품 목록 -->
 	<sql id="goodsSearch">
 		<where>

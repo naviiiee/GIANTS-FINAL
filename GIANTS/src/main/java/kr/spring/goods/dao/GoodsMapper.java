@@ -23,7 +23,7 @@ public interface GoodsMapper {
 	public int selectGoodsNum();
 	public void insertGoods(GoodsVO goodsVO);
 	//상품 재고 등록
-	@Insert("INSERT INTO goods_option (goods_num, goods_size, goods_stock) VALUES(#{goods_num}, #{goods_size}, #{goods_stock})")
+	//@Insert("INSERT INTO goods_option (goods_num, goods_size, goods_stock) VALUES(#{goods_num}, #{goods_size}, #{goods_stock})")
 	public void insertGoodsOption(GoodsVO goodsVO);
 	//상품 상세
 	public GoodsVO selectGoods(Integer goods_num);
@@ -31,7 +31,7 @@ public interface GoodsMapper {
 	public void updateGoods(GoodsVO goods);
 	//상품 삭제
 	public void deleteGoods(Integer goods_num);
-	
+	/*
 	//=====상품 찜=====//
 	//상품 찜 목록
 	public GoodsFavVO selectGoodsFav(GoodsFavVO fav);
@@ -57,4 +57,5 @@ public interface GoodsMapper {
 	public void updateGoodsReview(GoodsReviewVO review);
 	//상품 후기 삭제
 	public void deleteGoodsReview(Integer review_num);
+	*/
 }

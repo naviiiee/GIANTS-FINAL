@@ -33,6 +33,9 @@
 			상태 :
 			<c:if test="${goods.goods_status == 1}">판매중</c:if>
 			<c:if test="${goods.goods_status == 2}">판매중지</c:if>
+			<br>
+			상품등록이미지
+			
 		</li>
 	</ul>
 	<hr size="1" width="97%">

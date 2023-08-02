@@ -64,6 +64,8 @@ public class GoodsController {
 		
 		model.addAttribute("accessMsg", "상품등록이 완료되었습니다.");
 		model.addAttribute("accessUrl", request.getContextPath() + "/goods/goodsList.do");
+		model.addAttribute("imageFile", goodsVO.getGoods_photo());
+		model.addAttribute("filename", goodsVO.getGoods_photoname());
 		
 		return "common/notice";
 	}
