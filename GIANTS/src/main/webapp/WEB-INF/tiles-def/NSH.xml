@@ -8,6 +8,23 @@
 		<put-attribute name="body" value="/WEB-INF/views/ticket/ticketInfo.jsp"/>
 	</definition>
 	
+	<!-- [Grade] -->
+	<definition name="gradeList" extends="main">
+		<put-attribute name="title" value="좌석관리"/>
+		<put-attribute name="body" value="/WEB-INF/views/ticket/gradeList.jsp"/>
+	</definition>
+	
+	<definition name="seatList" extends="main">
+		<put-attribute name="title" value="좌석상세"/>
+		<put-attribute name="body" value="/WEB-INF/views/ticket/seatList.jsp"/>
+	</definition>
+	
+	<definition name="gradeWrite" extends="main">
+		<put-attribute name="title" value="등급등록"/>
+		<put-attribute name="body" value="/WEB-INF/views/ticket/gradeWrite.jsp"/>
+	</definition>
+	
+	<!-- [Game] -->
 	<definition name="gameWrite" extends="main">
 		<put-attribute name="title" value="경기등록"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticket/gameWrite.jsp"/>

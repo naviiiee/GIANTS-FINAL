@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!-- 요금안내 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/NSH/ticket.css">
-<div class="ticket-body">
+<div class="page-main">
 	<div class="ticket-title">
-		<img src="${pageContext.request.contextPath}/images/title_icon.gif">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" width="50" height="6">
 		<h2>요금안내</h2>
 		<hr size="0.05" width="100%" noshade>
 	</div>
 	<div class="align-right">
+		<input type="button" value="좌석관리" onclick="location.href='gradeList.do'" class="admin-btn big">
 		<input type="button" value="티켓예매" onclick="location.href='gameList.do'" class="accept-btn big">
 	</div>
 	<div class="price-info">

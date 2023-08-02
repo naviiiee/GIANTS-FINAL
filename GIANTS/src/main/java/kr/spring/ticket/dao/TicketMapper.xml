@@ -2,15 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.ticket.dao.TicketMapper">
 
-	<!-- [경기정보]등록 -->
+	<!-- [경기]등록 -->
 	<insert id="insertGame" parameterType="gameVO">
 		INSERT INTO tgame (game_num, game_date, game_time, game_team)
 			   VALUES (tgame_seq.nextval, #{game_date}, #{game_time}, #{game_team})
 	</insert>
 	
-	<!-- [좌석정보]등록 -->
+	<!-- [좌석]등록 -->
 	<insert id="insertGrade" parameterType="gradeVO">
-		INSERT INTO grade (grade_num, game_num, title, quantity, price_week, price_weekend)
-			   VALUES (grade_seq.nextval, #{game_num}, #{title}, #{quantity}, #{price_week}, #{price_weekend})
+		INSERT INTO grade (grade_num, title, price_week, price_weekend)
+			   VALUES (grade_seq.nextval, #{title}, #{price_week}, #{price_weekend})
 	</insert>
+	
 </mapper>

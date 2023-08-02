@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.ticket.dao.TicketMapper;
 import kr.spring.ticket.vo.GameVO;
+import kr.spring.ticket.vo.GradeVO;
 
 @Service
 @Transactional
@@ -16,6 +17,20 @@ public class TicketServiceImpl implements TicketService {
 	@Autowired
 	TicketMapper ticketMapper;
 	
+	/* GRADE */
+	@Override
+	public void insertGrade(GradeVO gradeVO) { ticketMapper.insertGrade(gradeVO); }
+	
+	@Override
+	public int selectGradeCount(GradeVO gradeVO) { return ticketMapper.selectGradeCount(gradeVO); }
+
+	@Override
+	public List<GradeVO> selectGradeList(GradeVO gradeVO) { return ticketMapper.selectGradeList(gradeVO); }
+	
+	@Override
+	public GradeVO selectGrade(Integer grade_num) { return ticketMapper.selectGrade(grade_num); }
+	
+	/* GAME */
 	@Override
 	public void insertGame(GameVO gameVO) { ticketMapper.insertGame(gameVO); }
 
@@ -30,6 +45,5 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public void updateGame(GameVO gameVO) { ticketMapper.updateGame(gameVO); }
-	
 }
  

@@ -7,8 +7,18 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.ticket.vo.GameVO;
+import kr.spring.ticket.vo.GradeVO;
 
 public interface TicketService {
+	/* 좌석등급 */
+	// 등록
+	public void insertGrade(GradeVO gradeVO);
+	// 목록
+	public int selectGradeCount(GradeVO gradeVO);
+	public List<GradeVO> selectGradeList(GradeVO gradeVO);
+	// 상세
+	public GradeVO selectGrade(Integer grade_num);
+	
 	/* 경기정보 */
 	// 등록
 	public void insertGame(GameVO gameVO);

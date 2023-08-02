@@ -1,8 +1,7 @@
 @charset "UTF-8";
 
-.ticket-body{ width:1200px; margin:0 auto; }
-.ticket-title{ margin:15px 0; }
-.ticket-title hr, #insert_game hr, #update_game hr{ margin:15px 0; }
+.ticket-title{ margin-bottom:18px; }
+hr{ margin:15px 0; }
 
 .error-color{ color:#dd032f; }
 
@@ -48,5 +47,5 @@
 .form-list input[type="radio"]{ accent-color:#dd032f; }
 
 /* 경기 목록 */
-#game_list{ width:800px; text-align:center; margin:0 auto; }
+#game_list, #grade_list, #seat_list{ width:800px; text-align:center; margin:0 auto; }
 
