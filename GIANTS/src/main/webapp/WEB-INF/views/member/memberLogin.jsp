@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 로그인폼시작 -->
-<div>
+<div class="page-main">
 	<h2>회원로그인</h2>
 	<form:form modelAttribute="memberVO" action="login.do" id="member_login">
 		<form:errors element="div" cssClass="error-color"/>

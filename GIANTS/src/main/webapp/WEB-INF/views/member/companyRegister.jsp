@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 회원가입 시작 -->
-<div>
+<div class="page-main">
 	<h2>기업회원가입</h2>
 	<div>자이언츠 기업회원가입입니다.</div>
 	<form:form modelAttribute="memberVO" action="registerCompany.do" id="company_register">
@@ -40,11 +40,6 @@
 				<form:errors path="passwd"/>
 			</li>
 			<li>
-				<form:label path="passwd">비밀번호(확인)</form:label>
-				<form:input path="passwd" placeholder="영문,숫자 4~12자"/>
-				<form:errors path="passwd"/>
-			</li>
-			<li>
 				<form:label path="companyDetailVO.comp_phone">연락처</form:label>
 				<form:input path="companyDetailVO.comp_phone" placeholder="숫자 11자"/>
 				<form:errors path="companyDetailVO.comp_phone"/>
@@ -70,11 +65,11 @@
 				<form:input path="companyDetailVO.comp_address2"/>
 				<form:errors path="companyDetailVO.comp_address2"/>
 			</li>
-			<li>
+			<%-- <li>
 				<form:label path="companyDetailVO.comp_photo">프로필사진</form:label>
 				<form:input path="companyDetailVO.comp_photo"/>
 				<form:errors path="companyDetailVO.comp_photo"/>
-			</li>
+			</li> --%>
 			<li>
 				<form:label path="companyDetailVO.comp_content">기업소개</form:label>
 				<form:input path="companyDetailVO.comp_content"/>
@@ -84,8 +79,7 @@
 		<div class="align-center">
 			<form:button>전송</form:button>
 			<input type="button" value="홈으로" 
-				   onclick="location.href='${pageContext.request.contextPath}/main/main.do'
-">
+				   onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
 		</div>
 	</form:form>
 </div>

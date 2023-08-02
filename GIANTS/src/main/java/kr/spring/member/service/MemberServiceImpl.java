@@ -22,14 +22,20 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
+	public void insertCompany(MemberVO member) {
+		member.setMem_num(memberMapper.selectMem_num());
+		memberMapper.insertCompany(member);
+		memberMapper.insertCompany_detail(member);
+	}
+	
+	@Override
 	public MemberVO selectCheckMember(String id) {
 		return memberMapper.selectCheckMember(id);
 	}
 
 	@Override
 	public MemberVO selectMember(Integer mem_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return memberMapper.selectMember(mem_num);
 	}
 
 	@Override

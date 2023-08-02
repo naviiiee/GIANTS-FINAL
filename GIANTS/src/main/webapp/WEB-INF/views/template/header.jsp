@@ -8,20 +8,19 @@
 			<ul class="float-right margin-zero">
 				<!-- 로그아웃상태 -->
 				<c:if test="${empty user}">
-					<li class="top-menu-login"><a href="#"><img src="${pageContext.request.contextPath}/images/로그인이미지.png">로그인</a></li>
+					<li class="top-menu-login"><a href="${pageContext.request.contextPath}/member/login.do"><img src="${pageContext.request.contextPath}/images/로그인이미지.png">로그인</a></li>
 					<li class="top-menu-register">
 						<a href="${pageContext.request.contextPath}/member/registerCommon.do"><img src="${pageContext.request.contextPath}/images/캐릭터.png">회원가입</a>
 					</li>
 				</c:if>
 				
 				<!-- 로그인상태 -->
-				<c:if test="${!empty user && mem_auth < 9}">
-					<li class="top-menu-loginout"><a href="#"><img src="${pageContext.request.contextPath}/images/로그아웃이미지.png">로그아웃</a></li>
-					<li class="top-menu-mypage"><a href="#"><img src="${pageContext.request.contextPath}/images/캐릭터.png">마이페이지</a></li>
+				<c:if test="${!empty user}">
+					<li class="top-menu-loginout"><a href="${pageContext.request.contextPath}/member/logout.do"><img src="${pageContext.request.contextPath}/images/로그아웃이미지.png">로그아웃</a></li>
+					<li class="top-menu-mypage"><a href="${pageContext.request.contextPath}/member/myPage.do"><img src="${pageContext.request.contextPath}/images/캐릭터.png">마이페이지</a></li>
 					<!-- 일반 회원인 경우 굿즈 장바구니 표시 -->
-					<c:if test="${mem_auth ==2 }">
-						<li class="top-menu-cart"><a href="#">장바구니</a></li>
-					</c:if>
+					<!-- 아직 mem_auth를 2로 인식못함 수정하겠음. -->
+					<li class="top-menu-cart"><a href="#">장바구니</a></li>
 				</c:if>
 				
 				<!-- 로그인 상태 (관리자)-->
