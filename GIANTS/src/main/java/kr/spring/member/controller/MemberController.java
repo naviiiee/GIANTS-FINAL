@@ -103,7 +103,7 @@ public class MemberController {
 	}
 	//기업회원가입 처리
 	@PostMapping("/member/registerCompany.do")
-	public String submitCompany(@Valid MemberVO memberVO, @Valid CompanyDetailVO companyDetailVO, BindingResult result, Model model) {
+	public String submitCompany(@Valid MemberVO memberVO, @Valid CompanyDetailVO companydetailVO, BindingResult result, Model model) {
 		logger.debug("<<기업회원가입>> : " + memberVO);
 		
 		//기업 회원 가입시 auth 값을 3
@@ -135,7 +135,7 @@ public class MemberController {
 			logger.debug("<<회원로그인>> : " + memberVO);
 			
 			//id와 passwd 필드만 유효성 체크 결과 오류가 있으면 폼 호출
-			if(result.hasFieldErrors("id") || result.hasFieldErrors("passwd")) {
+			if(result.hasFieldErrors("mem_id") || result.hasFieldErrors("passwd")) {
 				return formLogin();
 			}
 			//로그인 체크(id, 비밀번호 일치 여부 체크)
@@ -155,11 +155,12 @@ public class MemberController {
 					
 					//인증 성공, 로그인 처리
 					session.setAttribute("user", member);
+					//session.setAttribute("mem_auth", user.getMem_auth()")
 					
 					logger.debug("<<인증 성공>>");
-					logger.debug("<<id>> : " + member.getMem_id());
-					logger.debug("<<auth>> : " + member.getMem_auth());
-					logger.debug("<<au_id>> : " + member.getAuto());
+					logger.debug("<<Mem_id>> : " + member.getMem_id());
+					logger.debug("<<Mem_auth>> : " + member.getMem_auth());
+					logger.debug("<<Auto>> : " + member.getAuto());
 					
 					if(member.getMem_auth() == 9) {
 						return "redirect:/main/admin.do";
@@ -202,5 +203,9 @@ public class MemberController {
 	@RequestMapping("/member/myPage.do")
 	public String myPage() {
 		return "myPage";
+	}
+	@RequestMapping("/member/companyPage.do")
+	public String companyPage() {
+		return "companyPage";
 	}
 }

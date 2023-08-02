@@ -5,7 +5,7 @@ create table MEMBER(
 	mem_nickname varchar2(30),
 	mem_auth number(1) not null,
 	passwd varchar2(35) NOT null,
-
+	
 	constraint MEMBER_PK primary key (mem_num)
 );
 
@@ -28,14 +28,13 @@ create table MEMBER_DETAIL(
 	constraint MEMBER_DETAIL_pk primary key (mem_num),
 	constraint MEMBER_DETAIL_fk foreign key (mem_num) references MEMBER(mem_num)
 );
-create sequence MEMBER_DETAIL_seq;
 
 --기업 상세 정보 테이블
 create table COMPANY_DETAIL(
-	comp_num varchar2(40) NOT null,
+    mem_num number,
+	comp_num varchar2(40) unique NOT null,
 	comp_owner varchar2(30) NOT null,
-	comp_cate number(1),
-	mem_num number NOT null,
+	comp_cate number(1) NOT null,
 	comp_name varchar2(90) NOT null,
 	comp_cate number(1),
 	comp_phone varchar2(15) NOT null,
@@ -48,10 +47,9 @@ create table COMPANY_DETAIL(
 	comp_regdate date default sysdate NOT null,
 	comp_modifydate date,
 	comp_content varchar2(2000),
-	constraint COMPANY_DETAIL_pk primary key (comp_num),
+	constraint COMPANY_DETAIL_pk primary key (mem_num),
 	constraint COMPANY_DETAIL_fk foreign key (mem_num) references MEMBER(mem_num)
 );
-create sequence COMPANY_DETAIL_seq;
 
 --메일 인증 테이블
 create table MEMBER_CERT(

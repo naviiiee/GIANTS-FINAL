@@ -22,6 +22,10 @@
     </definition>
     <definition name="myPage" extends="main">
     	<put-attribute name="title" value="Mypage"/>
-    	<put-attribute name="body" value="/WEB-INF/views/template/layout_mypage.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/memberMypage.jsp"/>
+    </definition>
+    <definition name="companyPage" extends="main">
+    	<put-attribute name="title" value="Mypage"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/companyMypage.jsp"/>
     </definition>
 </tiles-definitions>

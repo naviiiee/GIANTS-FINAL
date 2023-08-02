@@ -17,14 +17,17 @@
 				<!-- 로그인상태 -->
 				<c:if test="${!empty user}">
 					<li class="top-menu-loginout"><a href="${pageContext.request.contextPath}/member/logout.do"><img src="${pageContext.request.contextPath}/images/로그아웃이미지.png">로그아웃</a></li>
+				</c:if>
+				<c:if test="${!empty user && user.mem_auth == 2}">
 					<li class="top-menu-mypage"><a href="${pageContext.request.contextPath}/member/myPage.do"><img src="${pageContext.request.contextPath}/images/캐릭터.png">마이페이지</a></li>
-					<!-- 일반 회원인 경우 굿즈 장바구니 표시 -->
-					<!-- 아직 mem_auth를 2로 인식못함 수정하겠음. -->
 					<li class="top-menu-cart"><a href="#">장바구니</a></li>
+				</c:if>
+				<c:if test="${!empty user && user.mem_auth == 3}">
+					<li class="top-menu-mypage"><a href="${pageContext.request.contextPath}/member/companyPage.do"><img src="${pageContext.request.contextPath}/images/캐릭터.png">기업페이지</a></li>
 				</c:if>
 				
 				<!-- 로그인 상태 (관리자)-->
-				<c:if test="${!empty user && mem_auth == 9}">	
+				<c:if test="${!empty user && user.mem_auth == 9}">	
 					<li class="top-menu-loginout"><a href="#"><img src="${pageContext.request.contextPath}/images/로그아웃이미지.png">로그아웃</a></li>
 					<li class="top-menu-adminpage"><a href="#"><img src="${pageContext.request.contextPath}/images/캐릭터.png">관리페이지</a></li>
 				</c:if>
@@ -32,7 +35,7 @@
 			</ul>
 		</div>
 		<div class="nav">
-			<h1><a href="#"><img src="${pageContext.request.contextPath}/images/Giantlogo.png"></a></h1>
+			<h1><a href="${pageContext.request.contextPath}/main/main.do"><img src="${pageContext.request.contextPath}/images/Giantlogo.png"></a></h1>
 			<div class="inner-nav">
 				<ul> 
 				   <li class="li_depth1"><a href="#" class="dep1_tit"><span>소개</span></a>
