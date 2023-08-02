@@ -8,7 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class CommuFavVO {
-	private int commu_like_num;  
+	private int commu_like_num;    
 	private int commu_num;
 	private int mem_num;
 }
