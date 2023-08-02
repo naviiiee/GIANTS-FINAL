@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.member.service.MemberService;
+import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.AuthCheckException;
@@ -79,24 +80,45 @@ public class MemberController {
 	//일반회원가입 처리
 	@PostMapping("/member/registerMember.do")
 	public String submit(@Valid MemberVO memberVO, @Valid MemberDetailVO memberdetailVO,BindingResult result, Model model) {
-		logger.debug("<<회원가입>> : " + memberVO);
+		logger.debug("<<일반회원가입>> : " + memberVO);
 		
-		//일반 회원 가입시 auth 값을 2,
-		//기업 회원 가입시 auth 값을 3
+		//일반 회원 가입시 auth 값을 2
 		memberVO.setMem_auth(2);
 		memberdetailVO.setMem_point(0);
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
-		/*
-		 * if(result.hasErrors()) { return formMember(); }
-		 */
+		//if(result.hasErrors()) { return formMember(); }
+		 
 		
 		//정상 처리 시 회원가입
 		memberService.insertMember(memberVO);
-		model.addAttribute("accessMsg","회원가입이 완료되었습니다.");
+		model.addAttribute("accessMsg","(일반)회원가입이 완료되었습니다.");
 		
 		return "common/notice";
 	}
+	//기업회원가입 폼 호출
+	@GetMapping("/member/registerCompany.do")
+	public String formCompany() {
+		return "companyRegister";
+	}
+	//기업회원가입 처리
+	@PostMapping("/member/registerCompany.do")
+	public String submitCompany(@Valid MemberVO memberVO, @Valid CompanyDetailVO companyDetailVO, BindingResult result, Model model) {
+		logger.debug("<<기업회원가입>> : " + memberVO);
+		
+		//기업 회원 가입시 auth 값을 3
+		memberVO.setMem_auth(3);
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		//if(result.hasErrors()) { return formCompany(); }
+		
+		//정상 처리 시 회원가입
+		memberService.insertCompany(memberVO);
+		model.addAttribute("accessMsg", "(기업)회원가입이 완료되었습니다.");
+		
+		return "common/notice";
+	}
+	
 	
 	/* === 로그인
 	=======================*/
@@ -137,7 +159,7 @@ public class MemberController {
 					logger.debug("<<인증 성공>>");
 					logger.debug("<<id>> : " + member.getMem_id());
 					logger.debug("<<auth>> : " + member.getMem_auth());
-					/* logger.debug("<<au_id>> : " + member.getAu_id()); */
+					logger.debug("<<au_id>> : " + member.getAuto());
 					
 					if(member.getMem_auth() == 9) {
 						return "redirect:/main/admin.do";
@@ -174,5 +196,11 @@ public class MemberController {
 		//자동로그인 해제 끝//
 	
 		return "redirect:/main/main.do";
+	}
+	/* === 마이페이지
+	=======================*/
+	@RequestMapping("/member/myPage.do")
+	public String myPage() {
+		return "myPage";
 	}
 }

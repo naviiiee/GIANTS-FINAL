@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 회원가입 시작 -->
 <%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/confirmId.js"></script> --%>
-<div>
+<div class="page-main">
 	<h2>회원가입</h2>
 	<div>자이언츠 일반회원가입입니다.</div>
 	<form:form modelAttribute="memberVO" action="registerMember.do" id="member_register">

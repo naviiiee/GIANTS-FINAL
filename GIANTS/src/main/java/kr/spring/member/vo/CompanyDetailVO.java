@@ -13,30 +13,30 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString 
+@ToString
 public class CompanyDetailVO {
-   // Comp_detail 테이블
-   @NotEmpty
-   private String comp_num;   //사업자번호(임시로등록)
-   @NotEmpty
-   private String comp_owner;   //사업자명
-   @NotEmpty
-   private String comp_name;   //기업명
-   private String comp_cate;   //기업카테고리
-   @NotEmpty
-   private String comp_phone;   //전화번호
-   @Email
-   @NotEmpty
-   private String comp_email;   //이메일
-   @Size(min = 5, max = 5)
-   private String comp_zipcode;//우편번호
-   @NotEmpty
-   private String comp_address1;//주소 
-   @NotEmpty
-   private String comp_address2;//상세주소
-   private byte[] comp_photo;   //프로필사진
-   private String comp_photoname;//프로필사진이름
-   private Date comp_regdate;//가입일
-   private Date comp_modifydate;//수정일
-   private String comp_content;//내용
+	// Comp_detail 테이블
+	@NotEmpty
+	private String comp_num; // 사업자번호(임시로등록)
+	@NotEmpty
+	private String comp_owner; // 사업자명
+	@NotEmpty
+	private String comp_name; // 기업명
+	private String comp_cate; // 기업카테고리
+	@NotEmpty
+	private String comp_phone; // 전화번호
+	@Email
+	@NotEmpty
+	private String comp_email; // 이메일
+	@Size(min = 5, max = 5)
+	private String comp_zipcode; // 우편번호
+	@NotEmpty
+	private String comp_address1;// 주소
+	@NotEmpty
+	private String comp_address2;// 상세주소
+	private byte[] comp_photo; // 프로필사진
+	private String comp_photoname;// 프로필사진이름
+	private Date comp_regdate; // 가입일
+	private Date comp_modifydate;// 수정일
+	private String comp_content; // 내용
 }

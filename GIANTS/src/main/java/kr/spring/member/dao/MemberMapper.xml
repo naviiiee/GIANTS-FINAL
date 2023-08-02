@@ -44,6 +44,36 @@
 		)
 	</insert>
 	
+	<!-- 기업회원가입 -->
+	<insert id="insertCompany_detail" parameterType="memberVO">
+	INSERT INTO COMPANY_DETAIL(
+		mem_num,
+		comp_owner,
+		comp_num,
+		comp_name,
+		comp_phone,
+		comp_cate,
+		comp_email,
+		comp_zipcode,
+		comp_address1,
+		comp_address2,
+		comp_content
+	)
+	VALUES(
+		#{mem_num},
+		#{companyDetailVO.comp_owner},
+		#{companyDetailVO.comp_num},
+		#{companyDetailVO.comp_name},
+		#{companyDetailVO.comp_phone},
+		#{companyDetailVO.comp_cate},
+		#{companyDetailVO.comp_email},
+		#{companyDetailVO.comp_zipcode},
+		#{companyDetailVO.comp_address1},
+		#{companyDetailVO.comp_address2},
+		#{companyDetailVO.comp_content}
+	)	
+	</insert>
+	
 	<!-- ID를 이용한 회원정보 체크 -->
 	<select id="selectCheckMember" parameterType="string" resultType="memberVO">
 		SELECT

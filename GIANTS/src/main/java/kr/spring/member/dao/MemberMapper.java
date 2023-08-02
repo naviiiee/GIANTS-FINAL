@@ -13,10 +13,15 @@ public interface MemberMapper {
 	@Select("SELECT MEMBER_DETAIL_seq.nextval FROM dual")
 	public int selectMem_num();
 	
-	//회원가입
+	//일반회원가입
 	@Insert("INSERT INTO MEMBER (mem_num,mem_id,passwd,mem_nickname,mem_auth) VALUES (#{mem_num},#{mem_id},#{passwd},#{mem_nickname},#{mem_auth})")
 	public void insertMember(MemberVO member);
 	public void insertMember_detail(MemberVO member);
+	
+	//기업회원가입
+	@Insert("INSERT INTO MEMBER (mem_num,mem_id,passwd,mem_auth) VALUES (#{mem_num},#{mem_id},#{passwd},#{mem_auth})")
+	public void insertCompany(MemberVO member);
+	public void insertCompany_detail(MemberVO member);
 	
 	//ID를 이용한 회원정보 체크
 	public MemberVO selectCheckMember(String id);
