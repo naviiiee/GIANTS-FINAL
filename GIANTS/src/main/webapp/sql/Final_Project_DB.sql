@@ -1,10 +1,10 @@
---2023-07-28 ¿ÀÈÄ 2½Ã
---ÇÁ·ÎÁ§Æ® ÅëÄõ¸®
---ÃÑ Å×ÀÌºí 34°³
+--2023-07-28 ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½
+--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+--ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ 34ï¿½ï¿½
 
 
-----------------------------------------------------------------------------------À±ÇöÁ¾ YHJ
---È¸¿ø Á¤º¸ Å×ÀÌºí
+----------------------------------------------------------------------------------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ YHJ
+--È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 create table MEMBER(
 	mem_num number,
 	mem_id varchar2(12) unique NOT null,
@@ -13,7 +13,7 @@ create table MEMBER(
 	constraint MEMBER_PK primary key (mem_num)
 );
 
---È¸¿ø »ó¼¼ Á¤º¸ Å×ÀÌºí
+--È¸ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 create table MEMBER_DETAIL(
 	mem_num number,
 	mem_auid varchar2(36) NOT null,
@@ -35,7 +35,7 @@ create table MEMBER_DETAIL(
 );
 
 
---±â¾÷ »ó¼¼ Á¤º¸ Å×ÀÌºí
+--ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 create table COMPANY_DETAIL(
 	comp_num varchar2(40) NOT null,
 	comp_owner varchar2(30) NOT null,
@@ -57,19 +57,19 @@ create table COMPANY_DETAIL(
 );
 
 
---¸ŞÀÏ ÀÎÁõ Å×ÀÌºí
+--ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 create table MEMBER_CERT(
 	mem_email varchar2(50) NOT null,
 	mem_authkey number
 );
 
-------------------------------½ÃÄö½º
+------------------------------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 create sequence COMPANY_DETAIL_seq;
 create sequence MEMBER_DETAIL_seq;
 
 
-----------------------------------------------------------------------------------ÀÓÈñÀç LHJ
---Ä¿¹Â´ÏÆ¼
+----------------------------------------------------------------------------------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ LHJ
+--Ä¿ï¿½Â´ï¿½Æ¼
 CREATE TABLE commu(
  commu_num number not null,
  commu_title varchar2(90) not null,
@@ -85,7 +85,7 @@ CREATE TABLE commu(
 
 
 
---Ä¿¹Â´ÏÆ¼ ÁÁ¾Æ¿ä
+--Ä¿ï¿½Â´ï¿½Æ¼ ï¿½ï¿½ï¿½Æ¿ï¿½
 CREATE TABLE commu_like(
  commu_like_num number not null,
  commu_num number not null,
@@ -97,7 +97,7 @@ CREATE TABLE commu_like(
 
 
 
---Ä¿¹Â´ÏÆ¼ ½È¾î¿ä
+--Ä¿ï¿½Â´ï¿½Æ¼ ï¿½È¾ï¿½ï¿½
 CREATE TABLE commu_dislike(
  commu_dislike_num number not null,
  commu_num number not null,
@@ -109,7 +109,7 @@ CREATE TABLE commu_dislike(
 
 
 
---Ä¿¹Â´ÏÆ¼ ½Å°í
+--Ä¿ï¿½Â´ï¿½Æ¼ ï¿½Å°ï¿½
 CREATE TABLE commu_report(
  repo_num number not null,
  repo_date date default SYSDATE not null,
@@ -125,7 +125,7 @@ CREATE TABLE commu_report(
 
 
 
---Ä¿¹Â´ÏÆ¼ ´ñ±Û
+--Ä¿ï¿½Â´ï¿½Æ¼ ï¿½ï¿½ï¿½
 CREATE TABLE commu_reply(
  re_num number not null,
  re_content clob not null,
@@ -139,7 +139,7 @@ CREATE TABLE commu_reply(
  constraint commu_reply_fk2 foreign key (mem_num) references member(mem_num)
 );
 
---Ä¿¹Â´ÏÆ¼ ´ñ±Û ½Å°í
+--Ä¿ï¿½Â´ï¿½Æ¼ ï¿½ï¿½ï¿½ ï¿½Å°ï¿½
 CREATE TABLE COMMU_REPLY_REPORT	(
  re_repo_num number not null,
  re_repo_date date default SYSDATE not null,
@@ -153,7 +153,7 @@ CREATE TABLE COMMU_REPLY_REPORT	(
  constraint commu_reply_report_fk2 foreign key (mem_num) references member(mem_num)
 );
 
---¼±¼ö ¼Ò°³
+--ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½
 CREATE TABLE player(
  player_num number not null,
  player_name varchar2(30) not null,
@@ -169,7 +169,7 @@ CREATE TABLE player(
 );
 
 
-------------------------------½ÃÄö½º
+------------------------------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 CREATE SEQUENCE commu_reply_report_seq;
 CREATE SEQUENCE commu_seq;
 CREATE SEQUENCE commu_like_seq;
@@ -180,9 +180,9 @@ CREATE SEQUENCE player_seq;
 
 
 
-----------------------------------------------------------------------------------±è¹Î¼­ KMS
+----------------------------------------------------------------------------------ï¿½ï¿½Î¼ï¿½ KMS
 
---Áß°í°Å·¡
+--ï¿½ß°ï¿½Å·ï¿½
 CREATE TABLE TRADING(
  trade_num number not null,
  trade_title varchar2(60) not null,
@@ -203,7 +203,7 @@ CREATE TABLE TRADING(
 
 
 
---ºÏ¸¶Å©
+--ï¿½Ï¸ï¿½Å©
 CREATE TABLE BOOKMARK(
  mark_num number not null,
  trade_num number not null,
@@ -215,7 +215,7 @@ CREATE TABLE BOOKMARK(
 
 
 
---Ã¤ÆÃ¹æ
+--Ã¤ï¿½Ã¹ï¿½
 CREATE TABLE CHATROOM(
  chatroom_num number not null,
  trade_num number not null,
@@ -229,7 +229,7 @@ CREATE TABLE CHATROOM(
 
 
 
---Ã¤ÆÃ »ó¼¼ 
+--Ã¤ï¿½ï¿½ ï¿½ï¿½ 
 CREATE TABLE CHAT(
  chat_num number not null,
  chatroom_num number not null,
@@ -243,34 +243,34 @@ CREATE TABLE CHAT(
 );
 
 
-------------------------------½ÃÄö½º
+------------------------------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 CREATE SEQUENCE trading_seq;
 CREATE SEQUENCE bookmark_seq;
 CREATE SEQUENCE chatroom_seq;
 CREATE SEQUENCE chat_seq;
 
-----------------------------------------------------------------------------------±Ç¿ÀÀ± KOY
--- »óÇ°Á¤º¸
+----------------------------------------------------------------------------------ï¿½Ç¿ï¿½ï¿½ï¿½ KOY
+-- ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
 create table goods(
    goods_num number,
    goods_name varchar2(600) not null,
-   goods_category number(1) not null, -- 1:À¯´ÏÆû/2:¸ğÀÚ/3:ÀÀ¿øµµ±¸/4:±âÅ¸
+   goods_category number(1) not null, -- 1:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/2:ï¿½ï¿½ï¿½ï¿½/3:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/4:ï¿½ï¿½Å¸
    goods_quantity number(2) not null,
    goods_price number(9) not null,
    goods_disc number(3) default 0 not null,
-   goods_dprice number(9) not null, -- »óÇ°°¡°İ * (1-ÇÒÀÎÀ²)
+   goods_dprice number(9) not null, -- ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ * (1-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
    goods_content clob not null,
    goods_photo blob not null,
    goods_photoname varchar2(100) not null,
    goods_regdate date default sysdate not null,
    goods_mdate date,
-   goods_status number(1) default 2 not null, -- 1:¹ÌÇ¥½Ã, 2:Ç¥½Ã
+   goods_status number(1) default 2 not null, -- 1:ï¿½ï¿½Ç¥ï¿½ï¿½, 2:Ç¥ï¿½ï¿½
    constraint goods_pk primary key (goods_num) 
 );
 
 
 
--- »óÇ°¿É¼Ç
+-- ï¿½ï¿½Ç°ï¿½É¼ï¿½
 create table goods_option(
    opt_num number,
    goods_num number not null,
@@ -282,7 +282,7 @@ create table goods_option(
 
 
 
--- »óÇ°ÈÄ±â
+-- ï¿½ï¿½Ç°ï¿½Ä±ï¿½
 create table goods_review(
    review_num number,
    mem_num number not null,
@@ -300,7 +300,7 @@ create table goods_review(
 
 
 
--- »óÇ° Âò
+-- ï¿½ï¿½Ç° ï¿½ï¿½
 create table goods_fav(
    fav_num number,
    mem_num number not null,
@@ -312,7 +312,7 @@ create table goods_fav(
 
 
 
--- ±¸´Ü ´º½º
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 create table news(
    news_num number,
    news_title varchar2(100) not null,
@@ -327,23 +327,23 @@ create table news(
 
 
 
--- °æ±â ÀÏÁ¤
+-- ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 create table game(
    game_num number,
    game_date date,
-   game_opp number(1) not null, -- 1:SSG/2:Å°¿ò/3:LG/4:KT/5:±â¾Æ/6:NC/7:»ï¼º/8:µÎ»ê/9:ÇÑÈ­
-   game_hw number(1) not null, -- 1:È¨/2:¾î¿şÀÌ
-   game_location number(2) not null, -- 1:»çÁ÷/2:ÀÎÃµ/3:Àá½Ç/4:°íÃ´/5:¼ö¿ø/6:´ëÀü/7:´ë±¸/8:±¤ÁÖ/9:Ã¢¿ø/10:¿ï»ê/11:Æ÷Ç×
-   game_time number(1) not null, -- 1:18½Ã30ºĞ/2:14½Ã/3:17½Ã/4:18½Ã
+   game_opp number(1) not null, -- 1:SSG/2:Å°ï¿½ï¿½/3:LG/4:KT/5:ï¿½ï¿½ï¿½/6:NC/7:ï¿½ï¼º/8:ï¿½Î»ï¿½/9:ï¿½ï¿½È­
+   game_hw number(1) not null, -- 1:È¨/2:ï¿½ï¿½ï¿½ï¿½ï¿½
+   game_location number(2) not null, -- 1:ï¿½ï¿½ï¿½ï¿½/2:ï¿½ï¿½Ãµ/3:ï¿½ï¿½ï¿½/4:ï¿½ï¿½Ã´/5:ï¿½ï¿½ï¿½ï¿½/6:ï¿½ï¿½ï¿½ï¿½/7:ï¿½ë±¸/8:ï¿½ï¿½ï¿½ï¿½/9:Ã¢ï¿½ï¿½/10:ï¿½ï¿½ï¿½/11:ï¿½ï¿½ï¿½ï¿½
+   game_time number(1) not null, -- 1:18ï¿½ï¿½30ï¿½ï¿½/2:14ï¿½ï¿½/3:17ï¿½ï¿½/4:18ï¿½ï¿½
    game_score varchar2(60) not null,
-   game_result number(1) default 4 not null, -- 1:½Â/2:ÆĞ/3:¹«/4:°æ±âÀü/5:Ãë¼Ò
+   game_result number(1) default 4 not null, -- 1:ï¿½ï¿½/2:ï¿½ï¿½/3:ï¿½ï¿½/4:ï¿½ï¿½ï¿½ï¿½ï¿½/5:ï¿½ï¿½ï¿½
    mem_num number not null,
    constraint game_pk primary key (game_num),
    constraint game_fk1 foreign key (mem_num) references member (mem_num)
 );
 
 
-------------------------------½ÃÄö½º
+------------------------------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 create sequence game_seq;
 create sequence goods_seq;
 create sequence goods_opt_seq;
@@ -352,43 +352,43 @@ create sequence goods_fav_seq;
 create sequence news_seq;
 
 
----------------------------------------------------------------------------------- ÀÌ¿µÁÖ LYJ
---ÁÖ¹® Å×ÀÌºí
+---------------------------------------------------------------------------------- ï¿½Ì¿ï¿½ï¿½ï¿½ LYJ
+--ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 create table G_ORDER(
-	order_num number primary key, --ÁÖ¹® ½Äº° ¹øÈ£
-	mem_num number not null, --È¸¿ø¹øÈ£
-	goods_name varchar2(600) not null, --»óÇ°ÀÌ¸§
-	order_payment number(1) not null, --°áÁ¦ ¹æ¹ı(0:¹«ÅëÀå, 1:Ä«µå)
-	order_status number(1) not null, --¹è¼Û»óÅÂ(0:°áÁ¦¿Ï·á, 1:¹è¼ÛÁØºñ, 2:¹è¼ÛÁß, 3:¹è¼Û¿Ï·á)
-	order_regdate date default SYSDATE not null, --ÁÖ¹®³¯Â¥
-	order_modifydate date, --¹è¼Û»óÅÂ ¼öÁ¤ÀÏ
-	order_name varchar2(30) not null, --¼ö·ÉÀÚ¸í
-	order_zipcode varchar2(5) not null, --¿ìÆí¹øÈ£
-	order_address1 varchar2(50) not null, --ÁÖ¼Ò
-	order_address2 varchar2(50) not null, --»ó¼¼ÁÖ¼Ò
-	mem_phone varchar2(15) not null, --¼ö·ÉÀÚ ÀüÈ­¹øÈ£
-	order_message varchar2(1300),  --¹è¼Û ¸Ş¼¼Áö
-	order_total number(9) not null, --ÃÑ ÁÖ¹® °¡°İ
-	order_quantity number(9) not null, --ÁÖ¹® ¼ö·®
-	merchant_uid number not null, --°¡¸ÍÁ¡ ÁÖ¹®¹øÈ£API
+	order_num number primary key, --ï¿½Ö¹ï¿½ ï¿½Äºï¿½ ï¿½ï¿½È£
+	mem_num number not null, --È¸ï¿½ï¿½ï¿½ï¿½È£
+	goods_name varchar2(600) not null, --ï¿½ï¿½Ç°ï¿½Ì¸ï¿½
+	order_payment number(1) not null, --ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(0:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, 1:Ä«ï¿½ï¿½)
+	order_status number(1) not null, --ï¿½ï¿½Û»ï¿½ï¿½ï¿½(0:ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½, 1:ï¿½ï¿½ï¿½ï¿½Øºï¿½, 2:ï¿½ï¿½ï¿½ï¿½ï¿½, 3:ï¿½ï¿½Û¿Ï·ï¿½)
+	order_regdate date default SYSDATE not null, --ï¿½Ö¹ï¿½ï¿½ï¿½Â¥
+	order_modifydate date, --ï¿½ï¿½Û»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	order_name varchar2(30) not null, --ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½
+	order_zipcode varchar2(5) not null, --ï¿½ï¿½ï¿½ï¿½ï¿½È£
+	order_address1 varchar2(50) not null, --ï¿½Ö¼ï¿½
+	order_address2 varchar2(50) not null, --ï¿½ï¿½ï¿½Ö¼ï¿½
+	mem_phone varchar2(15) not null, --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½È£
+	order_message varchar2(1300),  --ï¿½ï¿½ï¿½ ï¿½Ş¼ï¿½ï¿½ï¿½
+	order_total number(9) not null, --ï¿½ï¿½ ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½
+	order_quantity number(9) not null, --ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½
+	merchant_uid number not null, --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¹ï¿½ï¿½ï¿½È£API
 	CONSTRAINT G_ORDER_FK1 foreign key (mem_num) references member (mem_num)
 );
 
 
---ÁÖ¹® »ó¼¼ Å×ÀÌºí
+--ï¿½Ö¹ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 create table G_ORDER_DETAIL(
-	detail_num number primary key, --ÁÖ¹® »ó¼¼ ½Äº° ¹øÈ£
-	mem_num number not null, --È¸¿ø¹øÈ£
-	order_num number not null, -- ÁÖ¹®¹øÈ£
-	order_quantity number(5) not null, --ÁÖ¹®°³¼ö
-	order_point number(5) not null, --»óÇ° 1°³ ´ç Àû¸³¿¹Á¤ Æ÷ÀÎÆ®(°áÁ¦ ±İ¾×ÀÇ 2%) 
-	order_dcost number default 3000 not null, --¹è¼Ûºñ
-	goods_num number not null, --»óÇ° ½Äº° ¹øÈ£
-	goods_name varchar2(600) not null, --»óÇ°¸í
-	goods_price number(9) not null, --»óÇ° ±İ¾×
-	goods_dprice number(9) not null, --ÇÒÀÎµÈ °¡°İ(»óÇ°°¡°İ*(1-ÇÒÀÎÀ²))
-	goods_total number(9) not null, --ÃÑ »óÇ°±İ¾×(µ¿ÀÏ »óÇ° ÇÕ»ê ±İ¾×)
-	mem_point number default 0 not null, --È¸¿ø º¸À¯ Æ÷ÀÎÆ®
+	detail_num number primary key, --ï¿½Ö¹ï¿½ ï¿½ï¿½ ï¿½Äºï¿½ ï¿½ï¿½È£
+	mem_num number not null, --È¸ï¿½ï¿½ï¿½ï¿½È£
+	order_num number not null, -- ï¿½Ö¹ï¿½ï¿½ï¿½È£
+	order_quantity number(5) not null, --ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½
+	order_point number(5) not null, --ï¿½ï¿½Ç° 1ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®(ï¿½ï¿½ï¿½ï¿½ ï¿½İ¾ï¿½ï¿½ï¿½ 2%) 
+	order_dcost number default 3000 not null, --ï¿½ï¿½Ûºï¿½
+	goods_num number not null, --ï¿½ï¿½Ç° ï¿½Äºï¿½ ï¿½ï¿½È£
+	goods_name varchar2(600) not null, --ï¿½ï¿½Ç°ï¿½ï¿½
+	goods_price number(9) not null, --ï¿½ï¿½Ç° ï¿½İ¾ï¿½
+	goods_dprice number(9) not null, --ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½*(1-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½))
+	goods_total number(9) not null, --ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½İ¾ï¿½(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç° ï¿½Õ»ï¿½ ï¿½İ¾ï¿½)
+	mem_point number default 0 not null, --È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	CONSTRAINT G_ORDER_DETAIL_FK2 foreign key(mem_num) references member(mem_num), 
 	CONSTRAINT G_ORDER_DETAIL_FK1 foreign key(order_num) references g_order(order_num),
 	CONSTRAINT G_ORDER_DETAIL_FK3 foreign key(goods_num) references goods(goods_num) 
@@ -396,50 +396,48 @@ create table G_ORDER_DETAIL(
 
 
 
---Àå¹Ù±¸´Ï Å×ÀÌºí
+--ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 create table G_CART(
-	cart_num number primary key, --Àå¹Ù±¸´Ï ½Äº° ¹øÈ£
-	goods_num number not null, --»óÇ° ½Äº° ¹øÈ£
-	mem_num number not null, --È¸¿ø ½Äº° ¹øÈ£
-	order_quantity number(5) not null, --ÁÖ¹®¼ö·®
-	reg_date date default SYSDATE not null, --Àå¹Ù±¸´Ï¿¡ ³ÖÀº ³¯Â¥
+	cart_num number primary key, --ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½Äºï¿½ ï¿½ï¿½È£
+	goods_num number not null, --ï¿½ï¿½Ç° ï¿½Äºï¿½ ï¿½ï¿½È£
+	mem_num number not null, --È¸ï¿½ï¿½ ï¿½Äºï¿½ ï¿½ï¿½È£
+	order_quantity number(5) not null, --ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½
+	reg_date date default SYSDATE not null, --ï¿½ï¿½Ù±ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥
 	CONSTRAINT G_CART_FK1 foreign key(goods_num) references goods(goods_num),
 	CONSTRAINT G_CART_FK2 foreign key(mem_num) references member(mem_num)
 );
 
 
-------------------------------½ÃÄö½º
+------------------------------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 CREATE SEQUENCE G_CART_SEQ;
 CREATE SEQUENCE G_ORDER_SEQ;
 CREATE SEQUENCE G_ORDER_DETAIL_SEQ;
 
 
-----------------------------------------------------------------------------------³²¼ÒÈñ NSH
--- °æ±âÁ¤º¸
+----------------------------------------------------------------------------------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ NSH
+-- ê²½ê¸°ì •ë³´
 CREATE TABLE tgame(
 	game_num NUMBER,
+	grade_num NUMBER,
 	game_date VARCHAR2(30) NOT NULL,
 	game_time VARCHAR2(20) NOT NULL,
 	game_team VARCHAR2(15) NOT NULL,
-	game_state NUMBER(1) DEFAULT 0 NOT NULL,	-- 0:¿¹¸Å°¡´É, 1:°æ±âÃë¼Ò, 2:¸ÅÁø
-	CONSTRAINT tgame_pk PRIMARY KEY (game_num)
+	game_state NUMBER(1) DEFAULT 0 NOT NULL,	-- 0:ì˜ˆë§¤ëŒ€ê¸°, 1:ì˜ˆë§¤ê°€ëŠ¥, 2:ë§¤ì§„, 3:ê²½ê¸°ì·¨ì†Œ
+	CONSTRAINT tgame_pk PRIMARY KEY (game_num),
+	CONSTRAINT tgame_fk FOREIGN KEY (grade_num) REFERENCES grade (grade_num)
 );
 
-
--- ÁÂ¼®µî±Ş
+-- ì¢Œì„ë“±ê¸‰
 CREATE TABLE grade(
 	grade_num NUMBER,
-    game_num NUMBER,
 	title VARCHAR2(30) NOT NULL,
 	quantity NUMBER(5) NOT NULL,
 	price_week NUMBER(9) NOT NULL,
 	price_weekend NUMBER(9) NOT NULL,
-	CONSTRAINT grade_pk PRIMARY KEY (grade_num),
-	CONSTRAINT grade_fk FOREIGN KEY (game_num) REFERENCES tgame (game_num)
+	CONSTRAINT grade_pk PRIMARY KEY (grade_num)
 );
 
-
--- ÁÂ¼®Á¤º¸
+-- ì¢Œì„ì •ë³´
 CREATE TABLE seat(
 	seat_num NUMBER,
     grade_num NUMBER,
@@ -450,21 +448,19 @@ CREATE TABLE seat(
 	CONSTRAINT seat_fk FOREIGN KEY (grade_num) REFERENCES grade (grade_num)
 );
 
-
--- ÁÂ¼®»óÅÂ
+-- ì¢Œì„ìƒíƒœ
 CREATE TABLE seat_status(
 	status_num NUMBER,
     seat_num NUMBER,
 	seat_row VARCHAR2(30) NOT NULL,
 	seat_col VARCHAR2(30) NOT NULL,
 	seat_date VARCHAR2(30) NOT NULL,
-	seat_auth NUMBER(20) NOT NULL,	-- 1:¿¹¸Å¿Ï·á, 2:¿¹¸ÅºÒ°¡
+	seat_auth NUMBER(20) NOT NULL,	-- 1:ì˜ˆë§¤ì™„ë£Œ, 2:ì˜ˆë§¤ë¶ˆê°€
 	CONSTRAINT seat_status_pk PRIMARY KEY (status_num),
 	CONSTRAINT seat_status_fk FOREIGN KEY (seat_num) REFERENCES seat (seat_num)
 );
 
-
--- ÁÖ¹®Á¤º¸
+-- ì£¼ë¬¸ì •ë³´
 CREATE TABLE ticket(
 	ticket_num VARCHAR2(20),
     mem_num NUMBER,
@@ -484,42 +480,43 @@ CREATE TABLE ticket(
 	CONSTRAINT ticket_fk3 FOREIGN KEY (seat_num) REFERENCES seat (seat_num)
 );
 
-------------------------------½ÃÄö½º
-CREATE SEQUENCE game_seq;
+-- sequence
+CREATE SEQUENCE tgame_seq;
 CREATE SEQUENCE grade_seq;
 CREATE SEQUENCE seat_seq;
 CREATE SEQUENCE seat_status_seq;
 
----------------------------------------------------------------------------------- ¿À¼¼Áø OSJ
 
---Çªµå Å×ÀÌºí
+---------------------------------------------------------------------------------- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ OSJ
+
+--Çªï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 CREATE TABLE FOOD(
-  food_num number not null,						--½ÄÇ°¹øÈ£
-  food_name varchar2(200) not null,				--½ÄÇ° »óÇ°¸í
-  food_price number(9) not null,				--½ÄÇ° °¡°İ
-  food_quantity number(9) not null,				--½ÄÇ° Àç°í ¼ö·®
-  food_content clob,							--½ÄÇ° »ó¼¼¼³¸í ÅØ½ºÆ®
-  food_photo1 blob not null,					--½ÄÇ° ¸ŞÀÎ ÆäÀÌÁö¿ë
-  food_photo1_name varchar2(100) not null,		--¸ŞÀÎÀÌ¹ÌÁö ÀÌ¸§
-  food_photo2 blob,								--½ÄÇ° »ó¼¼ ÆäÀÌÁö¿ë
-  food_photo2_name varchar2(100),				--»ó¼¼ÀÌ¹ÌÁö ÀÌ¸§
-  food_regDate date DEFAULT SYSDATE not null,	--½ÄÇ° Á¤º¸ µî·Ï³¯Â¥
-  food_modifyDate date,							--½ÄÇ° Á¤º¸ ¼öÁ¤³¯Â¥
-  food_status number DEFAULT 1 not null,		--½ÄÇ° ÆÇ¸Å»óÅÂ È®ÀÎ¿©ºÎ¿ë(±âº»°ª : 1)
-  comp_num varchar2(40) not null,						--½ÄÇ° ÆÇ¸ÅÀÚ Á¤º¸ ½Äº° ¹øÈ£
+  food_num number not null,						--ï¿½ï¿½Ç°ï¿½ï¿½È£
+  food_name varchar2(200) not null,				--ï¿½ï¿½Ç° ï¿½ï¿½Ç°ï¿½ï¿½
+  food_price number(9) not null,				--ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½
+  food_quantity number(9) not null,				--ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+  food_content clob,							--ï¿½ï¿½Ç° ï¿½ó¼¼¼ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ®
+  food_photo1 blob not null,					--ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+  food_photo1_name varchar2(100) not null,		--ï¿½ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
+  food_photo2 blob,								--ï¿½ï¿½Ç° ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+  food_photo2_name varchar2(100),				--ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
+  food_regDate date DEFAULT SYSDATE not null,	--ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï³ï¿½Â¥
+  food_modifyDate date,							--ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¥
+  food_status number DEFAULT 1 not null,		--ï¿½ï¿½Ç° ï¿½Ç¸Å»ï¿½ï¿½ï¿½ È®ï¿½Î¿ï¿½ï¿½Î¿ï¿½(ï¿½âº»ï¿½ï¿½ : 1)
+  comp_num varchar2(40) not null,						--ï¿½ï¿½Ç° ï¿½Ç¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Äºï¿½ ï¿½ï¿½È£
   CONSTRAINT food_pk PRIMARY KEY (food_num),
   CONSTRAINT food_fk1 FOREIGN KEY (comp_num) references COMPANY_DETAIL (comp_num)
 );
 
 
 
---½ÄÇ° Àå¹Ù±¸´Ï Å×ÀÌºí
+--ï¿½ï¿½Ç° ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 CREATE TABLE F_CART(
-  cart_num number not null,					--½ÄÇ° Àå¹Ù±¸´Ï ½Äº° ¹øÈ£
-  food_num number not null,                 --½ÄÇ° Á¤º¸ ½Äº° ¹øÈ£
-  mem_num number not null,                  --±¸¸ÅÀÚ ½Äº° ¹øÈ£
-  f_cart_quantity number(9) not null,       --½ÄÇ° ±¸¸Å¼ö·®
-  f_cart_price number(9) not null,          --½ÄÇ° Àå¹Ù±¸´Ï ÃÑ °¡°İ
+  cart_num number not null,					--ï¿½ï¿½Ç° ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½Äºï¿½ ï¿½ï¿½È£
+  food_num number not null,                 --ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ ï¿½Äºï¿½ ï¿½ï¿½È£
+  mem_num number not null,                  --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Äºï¿½ ï¿½ï¿½È£
+  f_cart_quantity number(9) not null,       --ï¿½ï¿½Ç° ï¿½ï¿½ï¿½Å¼ï¿½ï¿½ï¿½
+  f_cart_price number(9) not null,          --ï¿½ï¿½Ç° ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
   CONSTRAINT f_cart_pk PRIMARY KEY (cart_num),
   CONSTRAINT f_cart_fk1 FOREIGN KEY (food_num) references FOOD (food_num),
   CONSTRAINT f_cart_fk2 FOREIGN KEY (mem_num) references MEMBER (mem_num)
@@ -527,37 +524,37 @@ CREATE TABLE F_CART(
 
 
 
---½ÄÇ° ÁÖ¹®Á¤º¸ Å×ÀÌºí
+--ï¿½ï¿½Ç° ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 CREATE TABLE F_ORDER(
   f_order_num varchar2(20) not null,
-  food_num number not null,                 		--½ÄÇ° Á¤º¸ ½Äº° ¹øÈ£
-  mem_num number not null,                  		--±¸¸ÅÀÚ ½Äº° ¹øÈ£
-  comp_num varchar2(40) not null,					--±â¾÷ Á¤º¸ ½Äº° ¹øÈ£
-  f_order_regDate date DEFAULT SYSDATE not null,    --½ÄÇ° ÁÖ¹® µî·Ï³¯Â¥
-  f_order_expireDate date not null,                 --½ÄÇ° ÁÖ¹® À¯È¿±â°£
-  f_order_status number DEFAULT 1 not null,         --QR »ç¿ë ¿©ºÎ È®ÀÎ¿ë
-  f_order_qrlink clob not null,                     --QR ÀÌ¹ÌÁö»ı¼ºÈÄ ¸µÅ© ÀúÀå¿ë
-  pg varchar2(30) not null,                         --PG»ç ±¸ºĞ ÄÚµå
-  pay_method varchar2(30) not null,                 --°áÁ¦¼ö´Ü ±¸ºĞ ÄÚµå
+  food_num number not null,                 		--ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ ï¿½Äºï¿½ ï¿½ï¿½È£
+  mem_num number not null,                  		--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Äºï¿½ ï¿½ï¿½È£
+  comp_num varchar2(40) not null,					--ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Äºï¿½ ï¿½ï¿½È£
+  f_order_regDate date DEFAULT SYSDATE not null,    --ï¿½ï¿½Ç° ï¿½Ö¹ï¿½ ï¿½ï¿½Ï³ï¿½Â¥
+  f_order_expireDate date not null,                 --ï¿½ï¿½Ç° ï¿½Ö¹ï¿½ ï¿½ï¿½È¿ï¿½â°£
+  f_order_status number DEFAULT 1 not null,         --QR ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½Î¿ï¿½
+  f_order_qrlink clob not null,                     --QR ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½ï¿½
+  pg varchar2(30) not null,                         --PGï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½
+  pay_method varchar2(30) not null,                 --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½
   CONSTRAINT f_order_pk PRIMARY KEY (f_order_num),
   CONSTRAINT f_order_fk1 FOREIGN KEY (food_num) references FOOD (food_num),
   CONSTRAINT f_order_fk2 FOREIGN KEY (mem_num) references MEMBER (mem_num),
   CONSTRAINT f_order_fk3 FOREIGN KEY (comp_num) references COMPANY_DETAIL (comp_num)
 );
 
---½ÄÇ° ÁÖ¹®Á¤º¸ ½Äº° ¹øÈ£ ½ÃÄö½º
---±ÂÁî, ½ÄÇ°, Æ¼ÄÏ ¸ğµÎ ½ÃÄö½º¸¦ °øÀ¯ÇÏ¿© »ç¿ëÇÔ.
+--ï¿½ï¿½Ç° ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Äºï¿½ ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+--ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Ç°, Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
 
 
---½ÄÇ° ÁÖ¹® »ó¼¼Á¤º¸ Å×ÀÌºí
+--ï¿½ï¿½Ç° ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 CREATE TABLE F_ORDER_DETAIL(
-  f_detail_num number not null,						--½ÄÇ° ÁÖ¹®»ó¼¼Á¤º¸ ½Äº° ¹øÈ£
-  food_num number not null,                         --½ÄÇ° Á¤º¸ ½Äº° ¹øÈ£
-  f_order_num varchar2(20) not null,                --½ÄÇ° ÁÖ¹®Á¤º¸ ½Äº° ¹øÈ£
-  order_quantity number(5) not null,                --ÁÖ¹® °³¼ö
-  food_name varchar2(200),                          --½ÄÇ° »óÇ°¸í
-  food_price number(9),                             --½ÄÇ° °¡°İ
-  food_total number(9),                             --µ¿ÀÏ»óÇ° ÇÕ»ê ±İ¾×
+  f_detail_num number not null,						--ï¿½ï¿½Ç° ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Äºï¿½ ï¿½ï¿½È£
+  food_num number not null,                         --ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ ï¿½Äºï¿½ ï¿½ï¿½È£
+  f_order_num varchar2(20) not null,                --ï¿½ï¿½Ç° ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Äºï¿½ ï¿½ï¿½È£
+  order_quantity number(5) not null,                --ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½
+  food_name varchar2(200),                          --ï¿½ï¿½Ç° ï¿½ï¿½Ç°ï¿½ï¿½
+  food_price number(9),                             --ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½
+  food_total number(9),                             --ï¿½ï¿½ï¿½Ï»ï¿½Ç° ï¿½Õ»ï¿½ ï¿½İ¾ï¿½
   CONSTRAINT f_order_detail_pk PRIMARY KEY (f_detail_num),
   CONSTRAINT f_order_detail_fk1 FOREIGN KEY (food_num) references FOOD (food_num),
   CONSTRAINT f_order_detail_fk2 FOREIGN KEY (f_order_num) references F_ORDER (f_order_num)
@@ -566,16 +563,16 @@ CREATE TABLE F_ORDER_DETAIL(
 
 
 
---½ÄÇ° ¸ÅÀå ÈÄ±â Å×ÀÌºí
+--ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ ï¿½Ä±ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 CREATE TABLE FOOD_REVIEW(
-  review_num number not null,                         --»óÇ° ÈÄ±â ½Äº°¹øÈ£
-  mem_num number not null,                            --È¸¿ø ½Äº° ¹øÈ£
-  comp_num varchar2(40) NOT null,                           --±â¾÷ ½Äº° ¹øÈ£
-  comp_score number(1) not null,                      --¸ÅÀå º°Á¡ Æò±ÕÁ¡¼ö
-  review_title varchar2(100) not null,                     --È¸¿øÀÛ¼º ÈÄ±â Á¦¸ñ
-  review_content clob not null,                       --È¸¿øÀÛ¼º ÈÄ±â ³»¿ë
-  review_regdate date DEFAULT SYSDATE not null,       --È¸¿øÈÄ±â ÀÛ¼ºÀÏ(default: SYSDATE)
-  review_mdate date,                                  --È¸¿øÈÄ±â ¼öÁ¤ÀÏ
+  review_num number not null,                         --ï¿½ï¿½Ç° ï¿½Ä±ï¿½ ï¿½Äºï¿½ï¿½ï¿½È£
+  mem_num number not null,                            --È¸ï¿½ï¿½ ï¿½Äºï¿½ ï¿½ï¿½È£
+  comp_num varchar2(40) NOT null,                           --ï¿½ï¿½ï¿½ ï¿½Äºï¿½ ï¿½ï¿½È£
+  comp_score number(1) not null,                      --ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+  review_title varchar2(100) not null,                     --È¸ï¿½ï¿½ï¿½Û¼ï¿½ ï¿½Ä±ï¿½ ï¿½ï¿½ï¿½ï¿½
+  review_content clob not null,                       --È¸ï¿½ï¿½ï¿½Û¼ï¿½ ï¿½Ä±ï¿½ ï¿½ï¿½ï¿½ï¿½
+  review_regdate date DEFAULT SYSDATE not null,       --È¸ï¿½ï¿½ï¿½Ä±ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½(default: SYSDATE)
+  review_mdate date,                                  --È¸ï¿½ï¿½ï¿½Ä±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   CONSTRAINT food_review_pk PRIMARY KEY (review_num),
   CONSTRAINT food_review_fk1 FOREIGN KEY (mem_num) references MEMBER (mem_num),
   CONSTRAINT food_review_fk2 FOREIGN KEY (comp_num) references COMPANY_DETAIL (comp_num)
@@ -584,25 +581,25 @@ CREATE TABLE FOOD_REVIEW(
 
 
 
-------------------------------½ÃÄö½º
---½ÄÇ° ½Äº° ¹øÈ£ ½ÃÄö½º
+------------------------------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+--ï¿½ï¿½Ç° ï¿½Äºï¿½ ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 CREATE SEQUENCE food_seq;
---½ÄÇ° Àå¹Ù±¸´Ï ½Äº° ¹øÈ£ ½ÃÄö½º
+--ï¿½ï¿½Ç° ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½Äºï¿½ ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 CREATE SEQUENCE f_cart_seq;
---½ÄÇ° ÁÖ¹® »ó¼¼Á¤º¸ ½ÃÄö½º
+--ï¿½ï¿½Ç° ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 CREATE SEQUENCE f_order_detail_seq;
---½ÄÇ° ¸ÅÀå ÈÄ±â ½ÃÄö½º
+--ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ ï¿½Ä±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 CREATE SEQUENCE food_review_seq;
 
 
 
 
---ÅëÇÕ ÁÖ¹® ½ÃÄö½º ¹øÈ£  (±ÂÁî, ½ÄÇ°, Æ¼ÄÏ ¿¡¼­ È°¿ëÁß)
+--ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£  (ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Ç°, Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½ï¿½ï¿½)
 create sequence order_seq;
 
 ----------------------------------------------------------------------------------
 
---Å×ÀÌºí »èÁ¦ Äõ¸®
+--ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 drop table BOOKMARK cascade constraints; 
 drop table CHAT cascade constraints; 
 drop table CHATROOM cascade constraints; 
@@ -638,7 +635,7 @@ drop table COMPANY_DETAIL cascade constraints;
 drop table MEMBER_DETAIL cascade constraints; 
 drop table MEMBER cascade constraints; 
 
---½ÃÄö½º »èÁ¦ Äõ¸®
+--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 drop sequence BOOKMARK_SEQ;
 drop sequence CHAT_SEQ;
