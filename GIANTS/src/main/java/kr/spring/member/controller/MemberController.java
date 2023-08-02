@@ -162,11 +162,7 @@ public class MemberController {
 					logger.debug("<<Mem_auth>> : " + member.getMem_auth());
 					logger.debug("<<Auto>> : " + member.getAuto());
 					
-					if(member.getMem_auth() == 9) {
-						return "redirect:/main/admin.do";
-					}else {
-						return "redirect:/main/main.do";
-					}
+					return "redirect:/main/main.do";
 				}
 				//인증 실패
 				throw new AuthCheckException();
@@ -207,5 +203,9 @@ public class MemberController {
 	@RequestMapping("/member/companyPage.do")
 	public String companyPage() {
 		return "companyPage";
+	}
+	@RequestMapping("/member/adminPage.do")
+	public String adminPage() {
+		return "adminPage";
 	}
 }

@@ -28,4 +28,8 @@
     	<put-attribute name="title" value="Mypage"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/companyMypage.jsp"/>
     </definition>
+    <definition name="adminPage" extends="main">
+    	<put-attribute name="title" value="Mypage"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/adminMypage.jsp"/>
+    </definition>
 </tiles-definitions>
