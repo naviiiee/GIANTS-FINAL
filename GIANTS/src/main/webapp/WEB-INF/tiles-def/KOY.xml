@@ -4,6 +4,8 @@
 
 <tiles-definitions>
 	<!-- 아래 설정을 상황에 맞게 수정해서 사용하세요 -->
+	
+	<!-- 굿즈 -->
 	<definition name="goodsList" extends="main">
 		<put-attribute name="title" value="굿즈목록"/>
 		<put-attribute name="body" value="/WEB-INF/views/goods/goodsList.jsp"/>
@@ -17,6 +19,12 @@
 	<definition name="goodsView" extends="main">
 		<put-attribute name="title" value="굿즈싱세페이지"/>
 		<put-attribute name="body" value="/WEB-INF/views/goods/goodsView.jsp"/>
+	</definition>
+	
+	<!-- 구단뉴스 -->
+	<definition name="newsList" extends="main">
+		<put-attribute name="title" value="자이언츠 뉴스 목록"/>
+		<put-attribute name="body" value="/WEB-INF/views/news/newsList.jsp"/>
 	</definition>
 	
 </tiles-definitions>
