@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
+import kr.spring.ticket.vo.SeatVO;
 
 @Mapper
 public interface TicketMapper {
@@ -43,4 +44,8 @@ public interface TicketMapper {
 	public GradeVO selectGrade(Integer grade_num);
 	// 수정
 	// 삭제
+	
+	/* 좌석정보 */
+	// 등록
+	public void insertSeat(SeatVO seatVO);
 }

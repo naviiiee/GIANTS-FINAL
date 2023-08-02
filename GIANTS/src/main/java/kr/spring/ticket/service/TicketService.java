@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Update;
 
 import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
+import kr.spring.ticket.vo.SeatVO;
 
 public interface TicketService {
 	/* 좌석등급 */
@@ -18,6 +19,10 @@ public interface TicketService {
 	public List<GradeVO> selectGradeList(GradeVO gradeVO);
 	// 상세
 	public GradeVO selectGrade(Integer grade_num);
+	
+	/* 좌석정보 */
+	// 등록
+	public void insertSeat(SeatVO seatVO);
 	
 	/* 경기정보 */
 	// 등록

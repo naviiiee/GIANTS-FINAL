@@ -8,10 +8,16 @@
 			   VALUES (tgame_seq.nextval, #{game_date}, #{game_time}, #{game_team})
 	</insert>
 	
-	<!-- [좌석]등록 -->
+	<!-- [등급]등록 -->
 	<insert id="insertGrade" parameterType="gradeVO">
 		INSERT INTO grade (grade_num, title, price_week, price_weekend)
 			   VALUES (grade_seq.nextval, #{title}, #{price_week}, #{price_weekend})
+	</insert>
+	
+	<!-- [좌석]등록 -->
+	<insert id="insertSeat" parameterType="seatVO">
+		INSERT INTO seat (seat_num, grade_num, seat_block, seat_row, seat_col)
+			   VALUES (seat_seq.nextval, #{grade_num}, #{seat_block}, #{seat_row}, #{seat_col})
 	</insert>
 	
 </mapper>

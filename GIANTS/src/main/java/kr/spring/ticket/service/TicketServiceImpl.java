@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.spring.ticket.dao.TicketMapper;
 import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
+import kr.spring.ticket.vo.SeatVO;
 
 @Service
 @Transactional
@@ -29,6 +30,10 @@ public class TicketServiceImpl implements TicketService {
 	
 	@Override
 	public GradeVO selectGrade(Integer grade_num) { return ticketMapper.selectGrade(grade_num); }
+	
+	/* SEAT */
+	@Override
+	public void insertSeat(SeatVO seatVO) {}
 	
 	/* GAME */
 	@Override

@@ -5,12 +5,12 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/NSH/ticket.css">
 <div class="page-main">
-	<div class="ticket-title">
-		<img src="${pageContext.request.contextPath}/images/title_icon.gif" width="50" height="6">
+	<div class="main-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>경기등록</h2>
 		<hr size="0.05" width="100%" noshade>
 	</div>
-	<form:form action="gameWrite.do" id="insert_game" modelAttribute="gameVO">
+	<form:form action="gameWrite.do" id="insert_game" method="post" modelAttribute="gameVO">
 		<div class="form-list">
 		<ul>
 			<li>

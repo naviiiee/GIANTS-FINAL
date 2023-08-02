@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.ticket.service.TicketService;
 import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
+import kr.spring.ticket.vo.SeatVO;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,10 +33,13 @@ public class TicketController {
 	
 	// javaBean(VO) 초기화
 	@ModelAttribute
-	public GameVO initCommand() { return new GameVO(); }
+	public GameVO initGame() { return new GameVO(); }
 	
 	@ModelAttribute
-	public GradeVO initCommad() { return new GradeVO(); }
+	public GradeVO initGrade() { return new GradeVO(); }
+
+	@ModelAttribute
+	public SeatVO initSeat() { return new SeatVO(); }
 	
 	/* ----- [Ticket] 메인(요금안내 및 티켓예매 버튼 활성화) -----*/
 	@RequestMapping("/ticket/ticketInfo.do")
@@ -81,6 +85,17 @@ public class TicketController {
 		return new ModelAndView("seatList", "grade", grade);
 	}
 	
+	/* [Seat] 좌석정보 등록 */
+	@PostMapping("/ticket/seatWrite.do")
+	public String seatSubmit(@Valid SeatVO seatVO, BindingResult result) {
+		log.debug("<<좌석정보등록>> : " + seatVO);
+		
+		if(result.hasErrors()) { return "seatList"; }
+		
+		ticketService.insertSeat(seatVO);
+		
+		return "redirect:/ticket/seatList.do";
+	}
 	
 	/* ----- [Game] 경기목록 -----*/
 	@RequestMapping("/ticket/gameList.do")

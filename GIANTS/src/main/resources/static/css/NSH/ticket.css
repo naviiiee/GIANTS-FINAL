@@ -42,9 +42,14 @@ hr{ margin:15px 0; }
 .form-list{ width:50%; margin:0 auto; text-align:center; }
 .form-list ul li{ clear:both; margin:25px 0; }
 .form-list label{ width:100px; float:left; font-weight:bold; }
-.form-list input[type="text"]{ width:400px; height:30px; }
+.form-list input[type="text"], .form-list input[type="number"]{ width:400px; height:30px; }
 .form-list input[type="radio"]{ accent-color:#dd032f; }
 
 /* 경기 목록 */
 #game_list, #grade_list, #seat_list{ width:800px; text-align:center; margin:0 auto; }
 
+/* 좌석 등록 */
+#seat_write{ width:60%; margin:0 auto; text-align:center; }
+#seat_write ul li{ float:left; margin:0 10px; }
+#seat_write input[type="number"]{ width:50px; text-align:center; }
+#seat_write input[type="checkbox"]{ accent-color:#dd032f; }
