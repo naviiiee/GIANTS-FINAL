@@ -23,13 +23,13 @@
 					<li class="top-menu-cart"><a href="#">장바구니</a></li>
 				</c:if>
 				<c:if test="${!empty user && user.mem_auth == 3}">
-					<li class="top-menu-mypage"><a href="${pageContext.request.contextPath}/member/companyPage.do"><img src="${pageContext.request.contextPath}/images/캐릭터.png">기업페이지</a></li>
+					<li class="top-menu-mypage"><a href="${pageContext.request.contextPath}/member/myPage.do"><img src="${pageContext.request.contextPath}/images/캐릭터.png">기업페이지</a></li>
 				</c:if>
 				
 				<!-- 로그인 상태 (관리자)-->
 				<c:if test="${!empty user && user.mem_auth == 9}">	
 					<li class="top-menu-loginout"><a href="${pageContext.request.contextPath}/member/logout.do"><img src="${pageContext.request.contextPath}/images/로그아웃이미지.png">로그아웃</a></li>
-					<li class="top-menu-mypage"><a href="${pageContext.request.contextPath}/member/adminPage.do"><img src="${pageContext.request.contextPath}/images/캐릭터.png">관리페이지</a></li>
+					<li class="top-menu-mypage"><a href="${pageContext.request.contextPath}/member/myPage.do"><img src="${pageContext.request.contextPath}/images/캐릭터.png">관리페이지</a></li>
 				</c:if>
 				
 			</ul>
