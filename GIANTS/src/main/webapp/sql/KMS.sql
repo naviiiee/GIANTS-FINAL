@@ -7,7 +7,7 @@ CREATE TABLE TRADING(
  trade_hit number(8) default 0 not null,
  trade_date date default SYSDATE not null,
  trade_modifydate date,
- trade_status number(1) not null,
+ trade_status number(1) default 0 not null,
  -- trade_photo1 varchar2(300) not null,
  -- trade_photo2 varchar2(300) not null, 
  trade_ip varchar2(15) not null,

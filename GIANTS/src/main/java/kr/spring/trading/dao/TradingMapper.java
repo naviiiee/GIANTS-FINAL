@@ -12,8 +12,8 @@ public interface TradingMapper {
 	//부모글
 	public List<TradingVO> selectList(Map<String,Object> map);
 	public int selectRowCount(Map<String,Object> map);
-	public void insertBoard(TradingVO trading);
-	public TradingVO selectBoard(Integer trade_num);
+	public void insertTrading(TradingVO trading);
+	public TradingVO selectTrading(Integer trade_num);
 	public void updateHit(Integer trade_num);
 	public void updateStatus(Integer trade_num);
 	public void updateTrading(TradingVO trading);

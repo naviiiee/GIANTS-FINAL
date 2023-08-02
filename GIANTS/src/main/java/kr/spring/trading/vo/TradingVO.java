@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Range;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,7 +19,7 @@ public class TradingVO {
 	private String trade_title; //제목
 	@NotEmpty
 	private String trade_content; //내용
-	@NotEmpty
+	@Range(min=1, max=99999999)
 	private int trade_price; //거래물품 가격
 	private int trade_hit; //조회수
 	private Date trade_date; //등록일
@@ -29,4 +31,7 @@ public class TradingVO {
 	//private String trade_photo2; //첨부파일명2
 	private String trade_ip; //ip주소
 	private int mem_num; //회원번호
+
+	private String mem_id; //아이디
+	private String mem_nickname; //닉네임
 }

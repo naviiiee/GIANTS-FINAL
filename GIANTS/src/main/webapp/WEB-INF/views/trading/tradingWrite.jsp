@@ -16,7 +16,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
 	<h2>글쓰기</h2>
-	<form:form modelAttribute="tradingVO" action="write.do" id="register_form">
+	<form:form modelAttribute="tradingVO" action="tradingWrite.do" id="register_form">
 		<form:errors element="div" cssClass="error-color"/>
 			<ul>
 				<li>
@@ -24,7 +24,11 @@
 				<form:input path="trade_title"/>
 				<form:errors path="trade_title" cssClass="error-color"/>
 				</li>
-				<li>가격 : <fmt:formatNumber value="${trading.trade_price}" type="number"/>원</li> 
+				<li>
+				<form:label path="trade_price">가격</form:label>
+				<form:input path="trade_price" type="number"/>원
+				<form:errors path="trade_price" cssClass="error-color"/>
+				</li>
 				<li>내용</li>
 				<li>
 					<form:textarea path="trade_content"/>

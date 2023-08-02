@@ -15,7 +15,7 @@
 		 trade_ip,
 		 mem_num)
 		VALUES(
-		 spboard_seq.nextval,
+		 trading_seq.nextval,
 		 #{trade_title},
 		 #{trade_content},
 		 #{trade_price},
@@ -27,4 +27,52 @@
 		 #{mem_num}
 		)
 	</insert>
+	
+	<!-- 게시판 목록 -->
+	<sql id="tradingSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<if test="keyfield == 1">
+					t.trade_title LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 2">
+					m.mem_id LIKE '%' || #{keyword} || '%' or
+					m.mem_nickname LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 3">
+					t.trade_content LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 4">
+					t.trade_title LIKE '%' || #{keyword} || '%' or
+					t.trade_content LIKE '%' || #{keyword} || '%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="tradingOrder">
+		<if test="order == 1">
+			ORDER BY t.trade_num DESC
+		</if>
+		<if test="order == 2">
+			ORDER BY t.trade_hit DESC
+		</if>
+	</sql>
+	
+	<!-- 전체/검색 레코드 수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT COUNT(*) FROM trading t JOIN member m ON t.mem_num = m.mem_num
+		<include refid="tradingSearch"></include>
+	</select>
+	
+	<!-- 전체/검색 목록 -->
+	<select id="selectList" parameterType="map" resultType="tradingVO">
+		SELECT * FROM (SELECT a.*, rownum rnum FROM(SELECT * FROM trading t JOIN member m ON t.mem_num = m.mem_num
+		<include refid="tradingSearch"></include>
+		<include refid="tradingOrder"></include>)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
 </mapper> 

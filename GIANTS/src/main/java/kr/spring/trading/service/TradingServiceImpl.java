@@ -19,24 +19,21 @@ public class TradingServiceImpl implements TradingService{
 	
 	@Override
 	public List<TradingVO> selectList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return tradingMapper.selectList(map);
 	}
 
 	@Override
 	public int selectRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		return tradingMapper.selectRowCount(map);
 	}
 
 	@Override
-	public void insertBoard(TradingVO trading) {
-		// TODO Auto-generated method stub
-		
+	public void insertTrading(TradingVO trading) {
+		tradingMapper.insertTrading(trading);
 	}
 
 	@Override
-	public TradingVO selectBoard(Integer trade_num) {
+	public TradingVO selectTrading(Integer trade_num) {
 		// TODO Auto-generated method stub
 		return null;
 	}
