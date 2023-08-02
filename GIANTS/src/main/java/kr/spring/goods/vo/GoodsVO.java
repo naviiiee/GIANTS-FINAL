@@ -3,10 +3,9 @@ package kr.spring.goods.vo;
 import java.io.IOException;
 import java.sql.Date;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Range;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Getter;
@@ -15,16 +14,15 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude="goods_photo")
 public class GoodsVO {
 	private int goods_num; //상품번호
 	@NotEmpty
 	private String goods_name; //상품명
 	private int goods_category; //카테고리 - 1:유니폼/2:모자/3:응원도구/4:기타
-	@Min(value=0)
+	@Range(min=0, max=99999999)
 	private int goods_price; //상품가격
-	@Min(value=0)
-	@Max(value=99)
+	@Range(min=0, max=100)
 	private int goods_disc; //할인율
 	private int goods_dprice; //판매가 = 상품가격 * (1-할인율)
 	@NotEmpty
@@ -36,8 +34,7 @@ public class GoodsVO {
 	private int goods_status; //1:미표시, 2:표시
 	
 	private int goods_size; //상품 사이즈
-	@Min(value=0)
-	@Max(value=1000)
+	@Range(min=0, max=9999999)
 	private int goods_stock; //상품 재고수량
 	
 	//======이미지를 byte[]로 변환하는 메서드(BLOB 처리)=====//
