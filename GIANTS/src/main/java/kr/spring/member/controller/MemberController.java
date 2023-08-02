@@ -128,59 +128,58 @@ public class MemberController {
 		return "memberLogin";
 	}
 	//로그인 데이터 처리
-		@PostMapping("/member/login.do")
-		public String submitLogin(@Valid MemberVO memberVO,
-								  BindingResult result,
-								  HttpSession session) {
-			logger.debug("<<회원로그인>> : " + memberVO);
-			
-			//id와 passwd 필드만 유효성 체크 결과 오류가 있으면 폼 호출
-			if(result.hasFieldErrors("mem_id") || result.hasFieldErrors("passwd")) {
-				return formLogin();
-			}
-			//로그인 체크(id, 비밀번호 일치 여부 체크)
-			MemberVO member= null;
-			try {
-				member = memberService.selectCheckMember(memberVO.getMem_id());
-				
-				boolean check = false;
-				
-				if(member!=null) {
-					//비밀번호 일치 여부 체크
-					check = member.isCheckedPasswd(memberVO.getPasswd());
-				}
-				if(check) { //인증 성공
-					//자동 로그인 체크 시작//
-					//자동 로그인 체크 끝//
-					
-					//인증 성공, 로그인 처리
-					session.setAttribute("user", member);
-					//session.setAttribute("mem_auth", user.getMem_auth()")
-					
-					logger.debug("<<인증 성공>>");
-					logger.debug("<<Mem_id>> : " + member.getMem_id());
-					logger.debug("<<Mem_auth>> : " + member.getMem_auth());
-					logger.debug("<<Auto>> : " + member.getAuto());
-					
-					return "redirect:/main/main.do";
-				}
-				//인증 실패
-				throw new AuthCheckException();
-				
-			}catch(AuthCheckException e) {
-				//인증 실패로 로그인폼 호출
-				if(member!=null && member.getMem_auth()==1) {
-					//정지회원 메시지 표시
-					result.reject("noAuthority");
-				}else {
-					result.reject("invalidIdOrPassword");
-				}
-				
-				logger.debug("<<인증 실패>>");
-				
-				return formLogin();
-			}
+	@PostMapping("/member/login.do")
+	public String submitLogin(@Valid MemberVO memberVO,
+							  BindingResult result,
+							  HttpSession session) {
+		logger.debug("<<회원로그인>> : " + memberVO);
+		
+		//id와 passwd 필드만 유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasFieldErrors("mem_id") || result.hasFieldErrors("passwd")) {
+			return formLogin();
 		}
+		//로그인 체크(id, 비밀번호 일치 여부 체크)
+		MemberVO member= null;
+		try {
+			member = memberService.selectCheckMember(memberVO.getMem_id());
+			
+			boolean check = false;
+			
+			if(member!=null) {
+				//비밀번호 일치 여부 체크
+				check = member.isCheckedPasswd(memberVO.getPasswd());
+			}
+			if(check) { //인증 성공
+				//자동 로그인 체크 시작//
+				//자동 로그인 체크 끝//
+				
+				//인증 성공, 로그인 처리
+				session.setAttribute("user", member);
+				
+				logger.debug("<<인증 성공>>");
+				logger.debug("<<Mem_id>> : " + member.getMem_id());
+				logger.debug("<<Mem_auth>> : " + member.getMem_auth());
+				logger.debug("<<Auto>> : " + member.getAuto());
+				
+				return "redirect:/main/main.do";
+			}
+			//인증 실패
+			throw new AuthCheckException();
+			
+		}catch(AuthCheckException e) {
+			//인증 실패로 로그인폼 호출
+			if(member!=null && member.getMem_auth()==1) {
+				//정지회원 메시지 표시
+				result.reject("noAuthority");
+			}else {
+				result.reject("invalidIdOrPassword");
+			}
+			
+			logger.debug("<<인증 실패>>");
+			
+			return formLogin();
+		}
+	}
 
 	
 	/* 로그아웃 */
@@ -200,12 +199,11 @@ public class MemberController {
 	public String myPage() {
 		return "myPage";
 	}
-	@RequestMapping("/member/companyPage.do")
-	public String companyPage() {
-		return "companyPage";
-	}
-	@RequestMapping("/member/adminPage.do")
-	public String adminPage() {
-		return "adminPage";
-	}
+	/*
+	 * @RequestMapping("/member/companyPage.do") public String companyPage() {
+	 * return "companyPage"; }
+	 * 
+	 * @RequestMapping("/member/adminPage.do") public String adminPage() { return
+	 * "adminPage"; }
+	 */
 }
