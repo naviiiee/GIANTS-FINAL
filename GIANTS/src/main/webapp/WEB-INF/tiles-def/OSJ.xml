@@ -14,4 +14,9 @@
 		<put-attribute name="title" value="식품 - 매장상세정보"/>
 		<put-attribute name="body" value="/WEB-INF/views/food/foodCompDetail.jsp"/>
 	</definition>
+	
+	<definition name="fixCompFoodList" extends="main">
+		<put-attribute name="title" value="식품 - 매장 - 식품목록수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/food/fixCompFoodList.jsp"/>
+	</definition>
 </tiles-definitions>

@@ -28,9 +28,12 @@ a { margin: 0; padding: 0; border: 0; font-size: 100%; }
 
 /* 페이지 기본 레이아웃
 ------------------------*/
-.page-main {
+.main-container{
 	width: 1200px;
-	margin: 0 auto;
+	margin:0 auto;
+	padding-top:50px;
+	padding-bottom:50px;
+	min-height: 400px;
 }
 /* =====<a>태그 속성 =====
 ========================*/

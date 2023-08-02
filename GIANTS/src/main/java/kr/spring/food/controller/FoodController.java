@@ -17,4 +17,9 @@ public class FoodController {
 	public String foodCompDetail() {
 		return "foodCompDetail";
 	}
+	
+	@RequestMapping("/food/fixCompFoodList.do")
+	public String foodFixCompDetail() {
+		return "fixCompFoodList";
+	} 
 }

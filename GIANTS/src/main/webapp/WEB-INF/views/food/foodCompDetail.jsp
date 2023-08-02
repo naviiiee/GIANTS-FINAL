@@ -19,7 +19,7 @@
 		</ul>
 		<!-- 관리자 접속시 수정 버튼 생성 -->
 		<div class="float-right">
-			<input type="button" class="adminBtn" value="수정하기" onclick='location.href="/food/foodFixCompDetail.do"'>
+			<input type="button" class="adminBtn" value="수정하기" onclick='location.href="/food/fixCompFoodList.do"'>
 		</div>
 	</div>
 	<div class="clear"></div>

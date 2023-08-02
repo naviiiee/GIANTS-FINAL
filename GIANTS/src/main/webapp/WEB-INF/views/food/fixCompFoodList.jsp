@@ -2,6 +2,7 @@
 
 <!-- 매장 수정 페이지 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OSJ/food.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/foodCss.js"></script>
 <div class="main-container">
 	<div class="inner-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif">
@@ -10,13 +11,6 @@
 	<hr noshade="noshade">
 	<!-- 카테고리 시작 -->
 	<div class="food-category">
-		<ul class="float-left">
-			<li><div id="food_c1" class="food-cbox-on">치 킨</div></li><!--
-		--><li><div id="food_c2">술/안주</div></li><!--
-		--><li><div id="food_c3">분 식</div></li><!--
-		--><li><div id="food_c4">간 식</div></li><!--
-		--><li><div id="food_c5">패스트푸드</div></li>
-		</ul>
 		<!-- 우측 수정, 취소 버튼 -->
 		<div class="float-right">
 			<input type="submit" class="adminBtn" value="수정">
@@ -34,12 +28,14 @@
 				<p>안녕하세요. <br>네네치킨 부산 롯데 사직야구장점 입니다.<br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>
 			</div>
 		</div>
-		<!-- 메뉴보기, 리뷰보기 -->	
-		<div class="comp-menu">
-			<div id="showMenu" class=".food-cbox-on">메뉴 보기</div>
-			<div id="showReview">리뷰 보기</div>
+		<!-- 새 상품 추가하기 시작 -->	
+		<div class="compFood-list">
+			<a href="#" class="">
+				<img src="${pageContext.request.contextPath}/images/plus.png">
+				<span>새 상품 추가하기</span>
+			</a>
 		</div>
-		<!-- 메뉴보기, 리뷰보기 내용-->
+		<!-- 새 상품 추가하기 끝-->
 		<div id="compMenu_content">
 			<table id="menu_tb">
 				<tr>
