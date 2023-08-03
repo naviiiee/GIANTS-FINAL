@@ -37,6 +37,11 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO selectMember(Integer mem_num) {
 		return memberMapper.selectMember(mem_num);
 	}
+	
+	@Override
+	public MemberVO selectCompany(Integer mem_num) {
+		return memberMapper.selectCompany(mem_num);
+	}
 
 	@Override
 	public void updateMember(MemberVO member) {

@@ -28,10 +28,12 @@ public interface MemberMapper {
 	
 	//회원번호를 이용한 회원정보 구하기
 	public MemberVO selectMember(Integer mem_num);
+	public MemberVO selectCompany(Integer mem_num);
 	
 	
 	//회원정보수정
 	//비밀번호수정
 	//회원탈퇴
+	//@Update("UPDATE MEMBER SET mem_auth=0 WHERE ")
 	//자동로그인
 }
