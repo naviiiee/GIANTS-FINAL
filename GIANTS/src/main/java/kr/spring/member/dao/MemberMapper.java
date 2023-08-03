@@ -8,7 +8,7 @@ import kr.spring.member.vo.MemberVO;
 
 @Mapper
 public interface MemberMapper {
-	//회원관리 - 일반회원
+	//회원관리 - 일반회원 
 	//회원번호생성
 	@Select("SELECT MEMBER_DETAIL_seq.nextval FROM dual")
 	public int selectMem_num();
@@ -28,10 +28,12 @@ public interface MemberMapper {
 	
 	//회원번호를 이용한 회원정보 구하기
 	public MemberVO selectMember(Integer mem_num);
+	public MemberVO selectCompany(Integer mem_num);
 	
 	
 	//회원정보수정
 	//비밀번호수정
 	//회원탈퇴
+	//@Update("UPDATE MEMBER SET mem_auth=0 WHERE ")
 	//자동로그인
 }

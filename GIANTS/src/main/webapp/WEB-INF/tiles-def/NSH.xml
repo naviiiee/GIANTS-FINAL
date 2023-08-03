@@ -10,18 +10,23 @@
 	
 	<!-- [Grade] -->
 	<definition name="gradeList" extends="main">
-		<put-attribute name="title" value="좌석관리"/>
+		<put-attribute name="title" value="등급관리"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticket/gradeList.jsp"/>
 	</definition>
 	
 	<definition name="seatList" extends="main">
-		<put-attribute name="title" value="좌석상세"/>
+		<put-attribute name="title" value="등급상세"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticket/seatList.jsp"/>
 	</definition>
 	
 	<definition name="gradeWrite" extends="main">
 		<put-attribute name="title" value="등급등록"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticket/gradeWrite.jsp"/>
+	</definition>
+	
+	<definition name="gradeUpdate" extends="main">
+		<put-attribute name="title" value="등급수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/ticket/gradeUpdate.jsp"/>
 	</definition>
 	
 	<!-- [Game] -->

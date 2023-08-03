@@ -29,9 +29,9 @@ hr{ margin:15px 0; }
 .color-red{ border:2px solid #dd032f; margin:15px 0; }
 
 .info-left table, .info-right table{ width:90%; margin:0 auto; text-align:center; border-collapse:collapse; font-size:15px; }
-.info-left table tr, .info-right table tr{ border-bottom:2px solid #999; }
-.info-left table th, .info-right table th{ background:#999; padding:5px; }
-.info-left table td, .info-right table td{ padding:5px; }
+.info-left table tr, .info-right table tr, #grade_list tr{ border-bottom:2px solid #999; }
+.info-left table th, .info-right table th, #seat_list th, #grade_list th{ background:#999; padding:5px; }
+.info-left table td, .info-right table td, #seat_list td, #grade_list td{ padding:5px; }
 
 .info-list{ margin-top:15px; }
 .info-list li, .refunt-info li{ margin:10px 0; }
@@ -45,11 +45,13 @@ hr{ margin:15px 0; }
 .form-list input[type="text"], .form-list input[type="number"]{ width:400px; height:30px; }
 .form-list input[type="radio"]{ accent-color:#dd032f; }
 
-/* 경기 목록 */
-#game_list, #grade_list, #seat_list{ width:800px; text-align:center; margin:0 auto; }
+/* 목록 */
+#game_list, #grade_list, #seat_list{ width:800px; text-align:center; margin:0 auto; border-collapse:collapse; font-size:15px; }
+#grade_list a:hover{ color:#052345; font-weight:bold; }
 
 /* 좌석 등록 */
-#seat_write{ width:60%; margin:0 auto; text-align:center; }
-#seat_write ul li{ float:left; margin:0 10px; }
+#seat_write{ width:30%; margin:0 auto; text-align:center; }
+#seat_write ul li{ margin:10px 0; }
+#seat_write ul li label{ width:100px; float:left; font-weight:bold; }
 #seat_write input[type="number"]{ width:50px; text-align:center; }
 #seat_write input[type="checkbox"]{ accent-color:#dd032f; }
