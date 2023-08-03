@@ -63,8 +63,8 @@
 	<div>
 		<c:forEach var="goods" items="${list}">
 		<div class="horizontal-area">
-			<a href="${pageContext.request.contextPath}/goods/goods_detail.do?item_num=${goods.goods_num}">
-				<img src="${pageContext.request.contextPath}/item/imageView.do?item_num=${goods.goods_num}">
+			<a href="${pageContext.request.contextPath}/goods/goodsDetail.do?goods_num=${goods.goods_num}">
+				<img src="${pageContext.request.contextPath}/item/imageView.do?goods_num=${goods.goods_num}">
 				<span>${goods.goods_name}</span>
 				<br>
 				<b><fmt:formatNumber value="${goods.goods_price}"/>원</b>

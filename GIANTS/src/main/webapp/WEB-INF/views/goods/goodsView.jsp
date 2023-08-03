@@ -7,7 +7,7 @@
 	<h2>${goods.goods_name}</h2>
 	<hr size="1" width="97%">
 	<div>
-		<input type="button" value="수정" onclick="location.href='goodsUpdate.do?goods_num=${goods.goods_num}'">
+		<input type="button" value="수정" onclick="location.href='admin_goodsModify.do?goods_num=${goods.goods_num}'">
 		<input type="button" value="삭제">
 	</div>
 	<hr size="1" width="97%">
