@@ -19,6 +19,8 @@ public interface TicketService {
 	public List<GradeVO> selectGradeList(GradeVO gradeVO);
 	// 상세
 	public GradeVO selectGrade(Integer grade_num);
+	// 수정
+	public void updateGrade(GradeVO gradeVO);
 	
 	/* 좌석정보 */
 	// 등록

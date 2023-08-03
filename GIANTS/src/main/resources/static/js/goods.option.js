@@ -3,13 +3,15 @@ $(function(){
 	$('#goods_category').click(function(){
 		if($('#goods_category').val() == 1){
 			$('.hasSize').show();
-			$('.hasNoSize').hide();
+			$('.hasNoSize').remove();
 		} else if($('#goods_category').val() > 1){
-			$('.hasSize').hide();
+			$('.hasSize').remove();
 			$('.hasNoSize').show();
 		} else if($('#goods_category').val() < 1){
 			$('.hasSize').hide();
 			$('.hasNoSize').hide();
 		}
 	}); //end of goods_category click
+
+	
 });

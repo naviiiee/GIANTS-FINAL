@@ -19,12 +19,15 @@ create sequence goods_seq;
 
 -- 상품옵션
 create table goods_option(
+   opt_num number not null,
    goods_num number not null,
-   goods_size number(1) not null, -- 1:85/2:90/3:95/4:100/5:105/6:110/7:옵션없음
+   goods_size varchar2(20) not null, -- 1:85/2:90/3:95/4:100/5:105/6:110/7:옵션없음
    goods_stock number(9) not null, 
-   constraint goods_opt_pk primary key (goods_num),
+   constraint goods_opt_pk primary key (opt_num),
    constraint goods_opt_fk1 foreign key (goods_num) references goods (goods_num)
 );
+
+create sequence goods_opt_seq;
 
 -- 상품후기
 create table goods_review(

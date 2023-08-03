@@ -9,16 +9,17 @@
 <!-- include ckdeitor js -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
-
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods.option.js"></script>
 <script type="text/javascript">
-				$(function(){
-					$('#goods_price').keyup(function(){
-						let dprice = $('#goods_price').val() - $('#goods_disc').val() / 100;
-						$('#goods_dprice').val(dprice);
-					});
-				});
-			</script>
+$(function(){
+	$('#goods_price').keyup(function(){
+		let dprice = $('#goods_price').val();
+		let disc = $('#goods_disc').val() / 100;
+		dprice = dprice * (1 - disc);
+		$('#goods_dprice').val(dprice);
+	});
+});
+</script>
 <style>
 .ck-editor__editable_inline{
 	min-height:250px;
@@ -29,6 +30,14 @@
 	<form:form modelAttribute="goodsVO" action="registerGoods.do" id="register_form">
 		<form:errors element="div" cssColor="error-color"/>
 		<ul>
+			<li>
+				<%-- <img src="${pageContext.request.contextPath}/goods/goodsPhotoView.do" width="200" height="200">
+				<form:label path="goods_photo">상품 썸네일 사진</form:label>
+				
+				<input type="file" id="upload" accept="image/gif,image/png,image/jpeg">
+				--%>
+				<input type="file" name="goods_photo" id="goods_photo">
+			</li>
 			<li> 
 				<form:label path="goods_name">상품명</form:label>
 				<form:input path="goods_name"/>
@@ -46,64 +55,48 @@
 			</li>
 			<li class="hasSize" style="display:none;">
 				<div>
-					<form:hidden path="goods_size" value="1"/>
-					<form:label path="goods_stock">85</form:label>
-					<form:input path="goods_stock" type="number"/>
-					<form:errors path="goods_stock"/>
+					<form:hidden path="goods_sizes" value="85"/>
+					<form:label path="goods_stocks">85</form:label>
+					<form:input path="goods_stocks" type="number"/>
+					<form:errors path="goods_stocks"/>
 				</div>
 				<div>
-					<form:hidden path="goods_size" value="2"/>
-					<form:label path="goods_stock">90</form:label>
-					<form:input path="goods_stock" type="number"/>
-					<form:errors path="goods_stock"/>
+					<form:hidden path="goods_sizes" value="90"/>
+					<form:label path="goods_stocks">90</form:label>
+					<form:input path="goods_stocks" type="number"/>
+					<form:errors path="goods_stocks"/>
 				</div>
 				<div>
-					<form:label path="goods_stock">95</form:label>
-					<form:input path="goods_stock" type="number"/>
-					<form:errors path="goods_stock"/>
+					<form:hidden path="goods_sizes" value="95"/>
+					<form:label path="goods_stocks">95</form:label>
+					<form:input path="goods_stocks" type="number"/>
+					<form:errors path="goods_stocks"/>
 				</div>
 				<div>
-					<form:label path="goods_stock">100</form:label>
-					<form:input path="goods_stock" type="number"/>
-					<form:errors path="goods_stock"/>
+				    <form:hidden path="goods_sizes" value="100"/>
+					<form:label path="goods_stocks">100</form:label>
+					<form:input path="goods_stocks" type="number"/>
+					<form:errors path="goods_stocks"/>
 				</div>
 				<div>
-					<form:label path="goods_stock">105</form:label>
-					<form:input path="goods_stock" type="number"/>
-					<form:errors path="goods_stock"/>
+					<form:hidden path="goods_sizes" value="105"/>
+					<form:label path="goods_stocks">105</form:label>
+					<form:input path="goods_stocks" type="number"/>
+					<form:errors path="goods_stocks"/>
 				</div>
 				<div>
-					옵션 : 110
-					<form:input path="goods_stock" type="number"/>
-					<form:errors path="goods_stock"/>
+					<form:hidden path="goods_sizes" value="110"/>
+					<form:label path="goods_stocks">110</form:label>
+					<form:input path="goods_stocks" type="number"/>
+					<form:errors path="goods_stocks"/>
 				</div>
 			</li>
 			<li class="hasNoSize" style="display:none;">
-				옵션 : 옵션없음
-				<form:input path="goods_stock" type="number"/>
-				<form:errors path="goods_stock"/>
+				<form:hidden path="goods_sizes" value="옵션없음"/>
+				<form:label path="goods_stocks">옵션없음</form:label>
+				<form:input path="goods_stocks" type="number"/>
+				<form:errors path="goods_stocks"/>
 			</li>
-						
-			<%-- 
-			<li id="gsize" style="display:none;">
-				<form:label path="goods_size">사이즈</form:label>
-				<form:select path="goods_size" id="goods_size">
-					<form:option value="1">85</form:option>
-					<form:option value="2">90</form:option>
-					<form:option value="3">95</form:option>
-					<form:option value="4">100</form:option>
-					<form:option value="5">105</form:option>
-					<form:option value="6">110</form:option>
-					<form:option value="7">옵션없음</form:option>
-				</form:select>
-			</li>
-			
-			<li>
-				<form:label path="goods_stock">재고수량</form:label>
-				<form:input path="goods_stock" type="number"/>
-				<form:errors path="goods_price" cssClass="error-color"/>
-			</li>
-			--%>
 			<li>
 				<form:label path="goods_price">상품가격</form:label>
 				<form:input path="goods_price" type="number"/>
@@ -113,6 +106,11 @@
 				<form:label path="goods_disc">할인율</form:label>
 				<form:input path="goods_disc" type="number"/>
 				<form:errors path="goods_disc" cssClass="error-color"/>
+			</li>
+			<li>
+				<form:label path="goods_dprice">판매가격</form:label>
+				<form:input path="goods_dprice" type="number" readonly="true"/>
+				<form:errors path="goods_dprice" cssClass="error-color"/>
 			</li>
 			<li>상품설명</li>
 			<li>
@@ -142,13 +140,7 @@
 				<form:radiobutton path="goods_status" value="2"/>판매중단
 				<form:errors path="goods_content" cssClass="error-color"/>
 			</li>
-			<li>
-				<form:label path="goods_photo">상품 썸네일 사진</form:label>
-				<%-- 
-				<input type="file" id="upload" accept="image/gif,image/png,image/jpeg">
-				--%>
-				<input type="file" name="goods_photo" id="goods_photo">
-			</li>
+			
 		</ul>
 		<div class="align-center">
 			<form:button class="default-btn">전송</form:button>

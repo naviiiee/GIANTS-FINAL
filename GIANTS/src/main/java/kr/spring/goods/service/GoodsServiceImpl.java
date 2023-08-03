@@ -1,5 +1,6 @@
 package kr.spring.goods.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,31 +18,38 @@ import kr.spring.goods.vo.GoodsVO;
 public class GoodsServiceImpl implements GoodsService{
 	
 	@Autowired
-	GoodsMapper goodsmapper;
+	GoodsMapper goodsMapper;
  
 	@Override
 	public List<GoodsVO> selectGoodsList(Map<String, Object> map) {
-		return goodsmapper.selectGoodsList(map);
+		return goodsMapper.selectGoodsList(map);
 	}
 
 	@Override
 	public int selectGoodsRowCount(Map<String, Object> map) {
-		return goodsmapper.selectGoodsRowCount(map);
+		return goodsMapper.selectGoodsRowCount(map);
 	}
 
 	@Override
 	public void insertGoods(GoodsVO goodsVO) {
 		//상품번호 생성해서 자바빈에 저장
-		goodsVO.setGoods_num(goodsmapper.selectGoodsNum());
+		goodsVO.setGoods_num(goodsMapper.selectGoodsNum());
+		
 		//상품 정보 저장
-		goodsmapper.insertGoods(goodsVO);
-		//상품 옵션 재고 저장
-		goodsmapper.insertGoodsOption(goodsVO);
+		goodsMapper.insertGoods(goodsVO);
+		
+		for(int i=0; i < (goodsVO.getGoods_stocks()).length; i++) {
+			String goods_size = goodsVO.getGoods_sizes()[i];
+			int goods_stock = goodsVO.getGoods_stocks()[i];
+			
+			goodsMapper.insertGoodsOption(goodsVO.getGoods_num(), goods_size, goods_stock);
+		}
+		
 	}
 
 	@Override
 	public GoodsVO selectGoods(Integer goods_num) {
-		return goodsmapper.selectGoods(goods_num);
+		return goodsMapper.selectGoods(goods_num);
 	}
 
 	@Override

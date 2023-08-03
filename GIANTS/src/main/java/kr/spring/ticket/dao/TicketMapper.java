@@ -43,6 +43,8 @@ public interface TicketMapper {
 	@Select("SELECT * FROM grade WHERE grade_num = #{grade_num}")
 	public GradeVO selectGrade(Integer grade_num);
 	// 수정
+	@Update("UPDATE grade SET title = #{title}, price_week = #{price_week}, price_weekend = #{price_weekend} WHERE grade_num = #{grade_num}")
+	public void updateGrade(GradeVO gradeVO);
 	// 삭제
 	
 	/* 좌석정보 */

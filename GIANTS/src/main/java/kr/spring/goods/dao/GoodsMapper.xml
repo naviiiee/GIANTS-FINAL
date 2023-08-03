@@ -26,19 +26,21 @@
 	</insert>
 	
 	<!-- 상품 재고 등록 -->
-	<insert id="insertGoodsHasOption" parameterType="goodsVO"> 
+	<insert id="insertGoodsOption" parameterType="goodsOptionVO">
 		INSERT INTO 
 			goods_option(
+				opt_num,
 				goods_num, 
 				goods_size, 
 				goods_stock) 
-		VALUES( 
-			#{goods_num}, 
-			#{goods_size}, 
-			#{goods_stock}) 
+		VALUES(
+				goods_opt_seq.nextval,
+      			#{goods_num}, 
+      			#{goods_size}, 
+      			#{goods_stock})
 	</insert>
 	
-	<!-- 상품 목록 -->
+	<!-- 상품 목록 
 	<sql id="goodsSearch">
 		<where>
 			<if test="keyfield != null and keyword != ''">
@@ -52,6 +54,20 @@
 				</if>
 			</if>
 		</where>
+	</sql>-->
+	
+	<sql id="goodsSearch">
+		<if test="keyword != null and keyword != ''">
+			<if test="keyfield == 1">
+				AND goods_name LIKE '%' || #{keyword} | '%'
+			</if>
+			<if test="keyfield == 2">
+				AND goods_content LIKE '%' || #{keyword} | '%'
+			</if>
+			<if test="keyfield == 3">
+				AND (goods_name LIKE '%' || #{keyword} | '%' OR goods_content LIKE '%' || #{keyword} | '%') 
+			</if>
+		</if>
 	</sql>
 	
 	<sql id="goodsOrder">
@@ -62,7 +78,7 @@
 			ORDER BY fav_cnt DESC
 		</if>
 		<if test="order == 3">
-			ORDER BY re_cnt DESC
+			ORDER BY review_cnt DESC
 		</if>
 	</sql>
 	  
@@ -83,8 +99,7 @@
 				rownum rnum
 			  FROM(SELECT
 			  			*
-			  	   FROM goods g JOIN goods_option o
-			  	   USING(goods_num)
+			  	   FROM goods g
 			  	   <include refid="goodsSearch"></include>
 			  	   <include refid="goodsOrder"></include>
 			  	   )a)
@@ -97,9 +112,8 @@
 	<select id="selectGoods" parameterType="integer">
 		SELECT
 			*
-		FROM goods g JOIN goods_option o 
-		ON g.goods_num=o.goods_num
-		WHERE g.goods_num=#{goods_num}
+		FROM goods
+		WHERE goods_num=#{goods_num}
 	</select>
 	
 </mapper>

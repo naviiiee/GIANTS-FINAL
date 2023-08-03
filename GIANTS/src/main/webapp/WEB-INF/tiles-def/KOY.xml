@@ -11,13 +11,18 @@
 		<put-attribute name="body" value="/WEB-INF/views/goods/goodsList.jsp"/>
 	</definition>
 	
+	<definition name="adminList" extends="main">
+		<put-attribute name="title" value="[관리자]굿즈목록"/>
+		<put-attribute name="body" value="/WEB-INF/views/goods/admin_goodsList.jsp"/>
+	</definition>
+	
 	<definition name="goodsRegister" extends="main">
 		<put-attribute name="title" value="굿즈등록"/>
 		<put-attribute name="body" value="/WEB-INF/views/goods/goodsRegister.jsp"/>
 	</definition>
 	
 	<definition name="goodsView" extends="main">
-		<put-attribute name="title" value="굿즈싱세페이지"/>
+		<put-attribute name="title" value="굿즈상세페이지"/>
 		<put-attribute name="body" value="/WEB-INF/views/goods/goodsView.jsp"/>
 	</definition>
 	
@@ -25,6 +30,11 @@
 	<definition name="newsList" extends="main">
 		<put-attribute name="title" value="자이언츠 뉴스 목록"/>
 		<put-attribute name="body" value="/WEB-INF/views/news/newsList.jsp"/>
+	</definition>
+	
+	<definition name="newsWrite" extends="main">
+		<put-attribute name="title" value="뉴스 등록"/>
+		<put-attribute name="body" value="/WEB-INF/views/news/newsWrite.jsp"/>
 	</definition>
 	
 </tiles-definitions>

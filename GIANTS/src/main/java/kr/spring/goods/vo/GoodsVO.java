@@ -33,9 +33,8 @@ public class GoodsVO {
 	private Date goods_mdate; //상품 최근수정일
 	private int goods_status; //1:미표시, 2:표시
 	
-	private int goods_size; //상품 사이즈
-	@Range(min=0, max=9999999)
-	private int goods_stock; //상품 재고수량
+	private String[] goods_sizes; //상품 사이즈
+	private int[] goods_stocks; //상품 재고수량
 	
 	//======이미지를 byte[]로 변환하는 메서드(BLOB 처리)=====//
 	public void setUpload(MultipartFile upload) throws IOException{
