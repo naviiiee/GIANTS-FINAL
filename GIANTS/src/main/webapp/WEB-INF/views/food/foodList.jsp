@@ -2,9 +2,9 @@
 
 <!-- 매장리스트 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OSJ/food.css">
-<div class="main-container">
-	<div class="inner-title">
-		<img src="${pageContext.request.contextPath}/images/title_icon.gif">
+<div class="page-main">
+	<div class="main-title">
+		<img class="title-img" src="${pageContext.request.contextPath}/images/title_icon.gif">
 		<h2> 푸드 | <a href="/food/foodList.do">매장</a></h2>
 	</div>
 	<hr noshade="noshade">

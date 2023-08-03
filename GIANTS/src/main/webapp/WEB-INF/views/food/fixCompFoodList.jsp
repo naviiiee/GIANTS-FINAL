@@ -2,10 +2,10 @@
 
 <!-- 매장 수정 페이지 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OSJ/food.css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/foodCss.js"></script>
-<div class="main-container">
-	<div class="inner-title">
-		<img src="${pageContext.request.contextPath}/images/title_icon.gif">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/foodJS/foodCss.js"></script>
+<div class="page-main">
+	<div class="main-title">
+		<img class="title-img" src="${pageContext.request.contextPath}/images/title_icon.gif">
 		<h2> 푸드 | <a href="/food/foodList.do">매장</a> | <a href="/food/food_CompDetail.do">상호명</a></h2>
 	</div>
 	<hr noshade="noshade">
@@ -30,7 +30,7 @@
 		</div>
 		<!-- 새 상품 추가하기 시작 -->	
 		<div class="compFood-list">
-			<a href="#" class="">
+			<a href="${pageContext.request.contextPath}/food/addNewFood.do">
 				<img src="${pageContext.request.contextPath}/images/plus.png">
 				<span>새 상품 추가하기</span>
 			</a>

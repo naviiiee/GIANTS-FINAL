@@ -6,13 +6,13 @@
 }
 /*===== 푸드 공용
 ==========================*/
-.main-container{
+/* .page-main{
 	width: 1200px;
 	margin:0 auto;
 	padding-top:50px;
 	padding-bottom:50px;
 	min-height: 400px;
-}
+} */
 .main-container hr{
 	size: 1px;
 }
@@ -24,15 +24,8 @@
 }
 
 /* 상단 타이틀 시작 */
-.inner-title{
-	width: 100%;
-	margin-bottom: 10px;
-}
-.inner-title img{
-	height: 6px;
-	width: 50z	px;
-}
-.inner-title h2{
+
+.main-title h2{
 	line-height: 35px;
 }
 /*상단 타이틀 끝------------*/
@@ -187,7 +180,6 @@
 	font-weight:bold;
 	text-align: center;
 	vertical-align: middle;
-	border: 2px solid gray;
 }
 
 .comp-container .comp-menu div:first-child{
@@ -267,3 +259,9 @@
 	vertical-align: top;
 }
 
+/*  ===================================
+	=========== addNewFood ============
+	=================================== */
+.tbox{
+	background-color: blue;
+}
