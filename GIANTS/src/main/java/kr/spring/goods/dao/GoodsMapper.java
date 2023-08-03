@@ -5,9 +5,11 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import kr.spring.goods.vo.GoodsFavVO;
+import kr.spring.goods.vo.GoodsOptionVO;
 import kr.spring.goods.vo.GoodsReviewVO;
 import kr.spring.goods.vo.GoodsVO;
 
@@ -18,13 +20,16 @@ public interface GoodsMapper {
 	public List<GoodsVO> selectGoodsList(Map<String, Object> map);
 	//전체|검색 상품 레코드수
 	public int selectGoodsRowCount(Map<String, Object> map);
+	
 	//상품 정보 등록 
 	@Select("SELECT goods_seq.nextval FROM dual")
 	public int selectGoodsNum();
 	public void insertGoods(GoodsVO goodsVO);
 	//상품 재고 등록
-	//@Insert("INSERT INTO goods_option (goods_num, goods_size, goods_stock) VALUES(#{goods_num}, #{goods_size}, #{goods_stock})")
-	public void insertGoodsOption(GoodsVO goodsVO);
+	public void insertGoodsOption(@Param(value="goods_num") Integer goods_num, 
+								@Param(value="goods_size") String goods_size, 
+								@Param(value="goods_stock") Integer goods_stock);
+	
 	//상품 상세
 	public GoodsVO selectGoods(Integer goods_num);
 	//상품 정보 수정

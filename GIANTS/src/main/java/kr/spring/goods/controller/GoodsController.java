@@ -64,8 +64,8 @@ public class GoodsController {
 		
 		model.addAttribute("accessMsg", "상품등록이 완료되었습니다.");
 		model.addAttribute("accessUrl", request.getContextPath() + "/goods/goodsList.do");
-		model.addAttribute("imageFile", goodsVO.getGoods_photo());
-		model.addAttribute("filename", goodsVO.getGoods_photoname());
+		//model.addAttribute("imageFile", goodsVO.getGoods_photo());
+		//model.addAttribute("filename", goodsVO.getGoods_photoname());
 		
 		return "common/notice";
 	}
@@ -84,6 +84,40 @@ public class GoodsController {
 		
 		return mapJson;
 	}
+	
+	/*==========================
+	 * [관리자] 굿즈 목록
+	 *==========================*/
+	@RequestMapping("/goods/admin_goodsList.do")
+	public ModelAndView process(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
+								String keyfield, String keyword) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		//전체|검색 레코드 수
+		int count = goodsService.selectGoodsRowCount(map);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 20, 10, "admin_goodsList.do");
+		
+		List<GoodsVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = goodsService.selectGoodsList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("adminList");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
+	}
+	
 	
 	/*==========================
 	 * 굿즈 목록

@@ -13,6 +13,9 @@
 	<hr size="1" width="97%">
 	<ul>
 		<li>
+			상품이미지
+		</li>
+		<li>
 			카테고리 : 
 			<c:if test="${goods.goods_category == 1}">유니폼</c:if>
 			<c:if test="${goods.goods_category == 2}">모자</c:if>
@@ -33,9 +36,6 @@
 			상태 :
 			<c:if test="${goods.goods_status == 1}">판매중</c:if>
 			<c:if test="${goods.goods_status == 2}">판매중지</c:if>
-			<br>
-			상품등록이미지
-			
 		</li>
 	</ul>
 	<hr size="1" width="97%">

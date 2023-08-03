@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 상품목록 시작 -->
 <script type="text/javascript">
 	$(function(){
@@ -18,6 +18,7 @@
 <div class="page-main">
 	<h2>상품 목록</h2>
 	<input type="button" value="굿즈등록" onclick="location.href='registerGoods.do'">
+	<input type="button" value="관리자-상품목록" onclick="location.href='admin_goodsList.do'">
 	<form action="goodsList.do" id="search_form" method="get">
 		<ul>
 			<li>
@@ -59,34 +60,19 @@
 	<div>표시할 게시물이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-	<table>
-		<tr>
-			<th>상품번호</th>
-			<th>카테고리</th>
-			<th>상품명</th>
-			<th>옵션</th>
-			<th>재고수량</th>
-			<th>상품가격</th>
-			<th>할인율</th>
-			<th>판매가격</th>
-			<th>등록일</th>
-			<th>상태</th> 
-		</tr>
+	<div>
 		<c:forEach var="goods" items="${list}">
-		<tr>
-			<td>${goods.goods_num}</td>
-			<td>${goods.goods_category}</td>
-			<td><a href="goodsDetail.do?goods_num=${goods.goods_num}">${goods.goods_name}</a></td>
-			<td>${goods.goods_size}</td>
-			<td>${goods.goods_stock}</td>
-			<td>${goods.goods_price}</td>
-			<td>${goods.goods_disc}</td>
-			<td>${goods.goods_dprice}</td>
-			<td>${goods.goods_regdate}</td>
-			<td>${goods.goods_status}</td>
-		</tr>
+		<div class="horizontal-area">
+			<a href="${pageContext.request.contextPath}/goods/goods_detail.do?item_num=${goods.goods_num}">
+				<img src="${pageContext.request.contextPath}/item/imageView.do?item_num=${goods.goods_num}">
+				<span>${goods.goods_name}</span>
+				<br>
+				<b><fmt:formatNumber value="${goods.goods_price}"/>원</b>
+			</a>
+		</div>
 		</c:forEach>
-	</table>
+		<hr width="100%" size="1" noshade="noshade" class="float-clear">
+	</div>
 	<div class="align-center">${page}</div>
 	</c:if>
 </div>
