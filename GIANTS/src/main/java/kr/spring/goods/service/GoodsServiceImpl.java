@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.goods.dao.GoodsMapper;
 import kr.spring.goods.vo.GoodsFavVO;
+import kr.spring.goods.vo.GoodsOptionVO;
 import kr.spring.goods.vo.GoodsReviewVO;
 import kr.spring.goods.vo.GoodsVO;
 
@@ -44,12 +45,18 @@ public class GoodsServiceImpl implements GoodsService{
 			
 			goodsMapper.insertGoodsOption(goodsVO.getGoods_num(), goods_size, goods_stock);
 		}
-		
+		 
 	}
 
 	@Override
 	public GoodsVO selectGoods(Integer goods_num) {
 		return goodsMapper.selectGoods(goods_num);
+	}
+	
+
+	@Override
+	public GoodsOptionVO selectGoodsOption(Integer goods_num) {
+		return goodsMapper.selectGoodsOption(goods_num);
 	}
 
 	@Override
@@ -129,5 +136,6 @@ public class GoodsServiceImpl implements GoodsService{
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

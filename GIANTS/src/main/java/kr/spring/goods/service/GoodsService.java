@@ -3,7 +3,10 @@ package kr.spring.goods.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Select;
+
 import kr.spring.goods.vo.GoodsFavVO;
+import kr.spring.goods.vo.GoodsOptionVO;
 import kr.spring.goods.vo.GoodsReviewVO;
 import kr.spring.goods.vo.GoodsVO;
 
@@ -17,6 +20,9 @@ public interface GoodsService {
 	public void insertGoods(GoodsVO goods);
 	//상품 상세
 	public GoodsVO selectGoods(Integer goods_num);
+	//상품 재고 상세
+	public GoodsOptionVO selectGoodsOption(Integer goods_num);
+	
 	//상품 정보 수정
 	public void updateGoods(GoodsVO goods);
 	//상품 삭제
@@ -34,7 +40,7 @@ public interface GoodsService {
 	//상품삭제시 상품 찜 취소
 	public void deleteGoodsFavByGoodsNum(Integer goods_num);
 	
-	//=====상품 후기=====//
+	//=====상품 후기=====// 
 	//전체|검색 상품 후기 목록
 	public GoodsReviewVO selectGoodsReview(Map<String, Object> map);
 	//전체|검색 상품 후기 레코드 수
