@@ -11,7 +11,7 @@ import kr.spring.food.vo.Food_reviewVO;
 
 @Mapper
 public interface FoodMapper {
-	//(관리자)
+	//(관리자, 기업)
 	//식품등록
 	public void insertFood(FoodVO food);
 	//식품수정

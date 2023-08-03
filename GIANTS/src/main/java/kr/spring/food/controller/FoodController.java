@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.food.service.FoodService;
 import kr.spring.food.vo.FoodVO;
+import kr.spring.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -78,29 +79,33 @@ public class FoodController {
 	public String submitAddNewFood(@Valid FoodVO vo, BindingResult result,
 									Model model, HttpServletRequest request,
 									HttpSession session) {
+		log.debug("<< 식품 추가/등록 POST 작동 >> : " + vo);
+		
+		
 		//상품 이미지 유효성 체크
 		//MultipartFIle -> byte[]로 변환한 경우, 파일을 업로드 하지 않으면
 		//byte[]은 생성되고 length는 0이 됨. 즉, null이 아니다.
 		if (vo.getFood_photo1().length == 0) 
-			result.rejectValue("photo1", "required");
+			result.rejectValue("food_photo1", "required");
 		if (vo.getFood_photo2().length == 0) 
-			result.rejectValue("photo1", "required");
+			result.rejectValue("food_photo2", "required");
 		
 		if(vo.getFood_photo1().length >= 10*1024*1024) 
-			result.rejectValue("photo1", "limitUploadSize", new Object[] {"10MB"}, null);
+			result.rejectValue("food_photo1", "limitUploadSize", new Object[] {"10MB"}, null);
 		if(vo.getFood_photo2().length >= 10*1024*1024) 
-			result.rejectValue("photo2", "limitUploadSize", new Object[] {"10MB"}, null);
+			result.rejectValue("food_photo2", "limitUploadSize", new Object[] {"10MB"}, null);
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if (result.hasErrors()) {
 			return formAddNewFood();
 		}
 		
+		//사업자 등록 번호 VO에 세팅
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		vo.setComp_num(user.getCompanyDetailVO().getComp_num());
+		
 		//상품 등록 sql 시작
-		
-		
-		
-		//상품 등록 sql 끝
+		foodService.insertFood(vo);
 		
 		//View에 표시할 메세지
 		model.addAttribute("message", "새 식품등록이 완료되었습니다.");

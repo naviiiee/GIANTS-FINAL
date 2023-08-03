@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.food.dao.FoodMapper">
-
+	
+	<!-- 기업 식품 등록 -->
+	<insert id="insertFood" parameterType="foodVO">
+		INSERT INTO food(
+			food_num,
+			comp_num,
+			food_name,
+			food_price,
+			food_quantity,
+			food_content,
+			food_photo1,
+			food_photo1_name,
+			food_photo2,
+			food_photo2_name,
+			food_status)
+		VALUES(
+			food_seq.nextval,
+			#{comp_num},
+			#{food_name},
+			#{food_price},
+			#{food_quantity},
+			#{food_content},
+			#{food_photo1},
+			#{food_photo1_name},
+			#{food_photo2},
+			#{food_photo2_name},
+			#{food_regdate},
+			#{food_modifydate},
+			#{food_status}
+		)
+	</insert>
 </mapper>
