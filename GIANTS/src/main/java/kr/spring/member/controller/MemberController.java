@@ -1,9 +1,11 @@
 package kr.spring.member.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.CompanyDetailVO;
@@ -79,17 +82,18 @@ public class MemberController {
 	}
 	//일반회원가입 처리
 	@PostMapping("/member/registerMember.do")
-	public String submit(@Valid MemberVO memberVO, @Valid MemberDetailVO memberdetailVO,BindingResult result, Model model) {
+	public String submit(@Valid MemberVO memberVO, @Valid MemberDetailVO memberdetailVO,BindingResult result, 
+													Model model,HttpServletRequest request, HttpSession session) {
 		logger.debug("<<일반회원가입>> : " + memberVO);
 		
 		//일반 회원 가입시 auth 값을 2
 		memberVO.setMem_auth(2);
 		memberdetailVO.setMem_point(0);
+		logger.debug("<<Mem_photo>> : " + memberdetailVO);
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		//if(result.hasErrors()) { return formMember(); }
-		 
-		
+
 		//정상 처리 시 회원가입
 		memberService.insertMember(memberVO);
 		model.addAttribute("accessMsg","(일반)회원가입이 완료되었습니다.");
@@ -108,6 +112,12 @@ public class MemberController {
 		
 		//기업 회원 가입시 auth 값을 3
 		memberVO.setMem_auth(3);
+		
+		/*
+		String comp_num = companydetailVO.getComp_num_1() + companydetailVO.getComp_num_2()
+						+ companydetailVO.getComp_num_3();
+		companydetailVO.setComp_num(comp_num);
+		*/
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		//if(result.hasErrors()) { return formCompany(); }
@@ -182,7 +192,8 @@ public class MemberController {
 	}
 
 	
-	/* 로그아웃 */
+	/* === 로그아웃
+	=======================*/
 	@RequestMapping("/member/logout.do")
 	public String logout(HttpSession session) {
 		//로그아웃
@@ -193,17 +204,15 @@ public class MemberController {
 	
 		return "redirect:/main/main.do";
 	}
+	
 	/* === 마이페이지
 	=======================*/
 	@RequestMapping("/member/myPage.do")
 	public String myPage() {
 		return "myPage";
 	}
-	/*
-	 * @RequestMapping("/member/companyPage.do") public String companyPage() {
-	 * return "companyPage"; }
-	 * 
-	 * @RequestMapping("/member/adminPage.do") public String adminPage() { return
-	 * "adminPage"; }
-	 */
+	
+	/* === 회원탈퇴
+	=======================*/
+	
 }

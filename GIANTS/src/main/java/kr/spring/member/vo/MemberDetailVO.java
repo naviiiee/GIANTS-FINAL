@@ -1,15 +1,17 @@
 package kr.spring.member.vo;
 
+import java.io.IOException;
 import java.sql.Date;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
-import lombok.ToString;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -36,4 +38,11 @@ public class MemberDetailVO {
 	private int mem_point; // 적립금
 	private Date mem_regdate; // 가입일
 	private Date mem_modifydate; // 수정일
+	
+	//파일 업로드 처리
+	public void setUpload(MultipartFile upload) throws IOException{
+		setMem_photo(upload.getBytes());
+		setMem_photoname(upload.getOriginalFilename());
+	}
+
 }

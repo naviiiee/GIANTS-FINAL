@@ -14,10 +14,19 @@
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_num">사업자등록번호</form:label>
-				<form:input path="companyDetailVO.comp_num" placeholder="숫자 10자"/>
+				<form:input path="companyDetailVO.comp_num" placeholder="숫자 10자" type="text"/>
 				<form:errors path="companyDetailVO.comp_num"/>
 			</li>
-			<li>
+			<%-- 
+			<li><form:label path="companyDetailVO.comp_num_1">사업자등록번호</form:label>
+				<form:input path="companyDetailVO.comp_num_1" placeholder="3자" type="text" />
+				<form:label path="companyDetailVO.comp_num_2">-</form:label>
+				<form:input path="companyDetailVO.comp_num_2" placeholder="2자" type="text" />
+				<form:label path="companyDetailVO.comp_num_3">-</form:label>
+				<form:input path="companyDetailVO.comp_num_3" placeholder="5자" type="text" />
+			</li>
+			 --%>
+			 <li>
 				<form:label path="companyDetailVO.comp_name">기업명</form:label>
 				<form:input path="companyDetailVO.comp_name"/>
 				<form:errors path="companyDetailVO.comp_name"/>
@@ -79,8 +88,7 @@
 		<div class="align-center">
 			<form:button>전송</form:button>
 			<input type="button" value="홈으로" 
-				   onclick="location.href='${pageContext.request.contextPath}/main/main.do'
-">
+				   onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
 		</div>
 	</form:form>
 </div>

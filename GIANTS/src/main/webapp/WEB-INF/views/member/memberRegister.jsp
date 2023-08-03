@@ -2,11 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 회원가입 시작 -->
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/confirmId.js"></script> --%>
 <div class="page-main">
 	<h2>회원가입</h2>
 	<div>자이언츠 일반회원가입입니다.</div>
-	<form:form modelAttribute="memberVO" action="registerMember.do" id="member_register">
+	<form:form modelAttribute="memberVO" action="registerMember.do" id="member_register" enctype="multipart/form-data">
 		<ul>
 			<li>
 				<form:label path="memberDetailVO.mem_name">이름(한글)</form:label>
@@ -16,8 +15,6 @@
 			<li>
 				<form:label path="mem_id">아이디</form:label>
 				<form:input path="mem_id" placeholder="영문, 숫자 4~12자" autocomplete="off"/>
-				<!-- <input type="button" id="confirmId" value="ID중복체크">
-				<span id="message_id"></span> -->
 				<form:errors path="mem_id" cssClass="error-color"/>
  			</li>
 			<li>
@@ -55,11 +52,6 @@
 				<form:label path="memberDetailVO.mem_address2">상세주소</form:label>
 				<form:input path="memberDetailVO.mem_address2"/>
 				<form:errors path="memberDetailVO.mem_address2"/>
-			</li>
-
-			<li>
-				프로필사진
-				<%-- <form:label path="id">프로필사진</form:label> --%>
 			</li>
 			<li>
 				<form:label path="mem_nickname">닉네임</form:label>
