@@ -20,7 +20,7 @@
 				</c:if>
 				<c:if test="${!empty user && user.mem_auth == 2}">
 					<li class="top-menu-mypage"><a href="${pageContext.request.contextPath}/member/myPage.do"><img src="${pageContext.request.contextPath}/images/캐릭터.png">마이페이지</a></li>
-					<li class="top-menu-cart"><a href="#">장바구니</a></li>
+					<li class="top-menu-cart"><a href="${pageContext.request.contextPath}/gorder/goods_cart.do">장바구니</a></li>
 				</c:if>
 				<c:if test="${!empty user && user.mem_auth == 3}">
 					<li class="top-menu-mypage"><a href="${pageContext.request.contextPath}/member/myPage.do"><img src="${pageContext.request.contextPath}/images/캐릭터.png">기업페이지</a></li>
