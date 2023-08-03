@@ -1,14 +1,16 @@
 package kr.spring.member.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.member.vo.MemberVO;
 
 @Mapper
-public interface MemberMapper {
-	//회원관리 - 일반회원
+public interface MemberMapper { 
+	//회원관리 - 일반회원 
 	//회원번호생성
 	@Select("SELECT MEMBER_DETAIL_seq.nextval FROM dual")
 	public int selectMem_num();
@@ -28,10 +30,15 @@ public interface MemberMapper {
 	
 	//회원번호를 이용한 회원정보 구하기
 	public MemberVO selectMember(Integer mem_num);
+	public MemberVO selectCompany(Integer mem_num);
 	
 	
 	//회원정보수정
 	//비밀번호수정
 	//회원탈퇴
+	@Update("UPDATE MEMBER SET mem_auth=0 WHERE mem_num=#{mem_num}")
+	public void deleteMember(Integer mem_num);
+	@Delete("DELETE FROM MEMBER_DETAIL WHERE mem_num=#{mem_num}")
+	public void deleteMember_detail(Integer mem_num);
 	//자동로그인
 }

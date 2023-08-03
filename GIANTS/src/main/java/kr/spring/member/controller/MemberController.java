@@ -28,7 +28,9 @@ import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.AuthCheckException;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 public class MemberController {	
 	// 로그 대상 지정
@@ -162,7 +164,9 @@ public class MemberController {
 			if(check) { //인증 성공
 				//자동 로그인 체크 시작//
 				//자동 로그인 체크 끝//
-				
+				if(member.getMem_auth() == 3) {
+					member = memberService.selectCompany(member.getMem_num());
+				}
 				//인증 성공, 로그인 처리
 				session.setAttribute("user", member);
 				
@@ -214,5 +218,49 @@ public class MemberController {
 	
 	/* === 회원탈퇴
 	=======================*/
-	
+	//회원탈퇴 폼 호출
+	@GetMapping("/member/deleteMember.do")
+	public String formDeleteMember() {
+		return "memberDelete";
+	}
+	//전송된 데이터 처리
+	@PostMapping("/member/deleteMember.do")
+	public String submitDeleteMember(@Valid MemberVO memberVO,
+									 BindingResult result,
+									 HttpSession session,
+									 Model model) {
+		log.debug("<<회원탈퇴>> : " + memberVO);
+		
+		//id와 passwd 필드만 유효성 체크
+		//유효성 체크 결과 오류가 있으면폼 호출
+		if(result.hasFieldErrors("id") || result.hasFieldErrors("passwd")) {
+			return formDeleteMember();
+		}
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		MemberVO db_member = memberService.selectMember(user.getMem_num());
+		
+		boolean check = false;
+		
+		//아이디 비밀번호 일치 여부 체크
+		try {
+			if(db_member != null && db_member.getMem_id().equals(memberVO.getMem_id())) {
+				//비밀번호 일치 여부 체크
+				check = db_member.isCheckedPasswd(memberVO.getPasswd());
+			}
+			if(check){
+				//인증성공, 회원정보 삭제
+				memberService.deleteMember(user.getMem_num());
+				//로그아웃
+				session.invalidate();
+				model.addAttribute("accessMsg", "회원탈퇴를 완료했습니다.");
+				return "common/notice";
+			}
+			//인증실패
+			throw new AuthCheckException();
+		}catch(AuthCheckException e) {
+			result.reject("invalidIdOrPassword");
+			return formDeleteMember();
+		}
+	}
 }

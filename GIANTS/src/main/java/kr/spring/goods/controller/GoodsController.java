@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.goods.service.GoodsService;
+import kr.spring.goods.vo.GoodsOptionVO;
 import kr.spring.goods.vo.GoodsVO;
 import kr.spring.util.PagingUtil;
 import kr.spring.util.StringUtil;
@@ -120,7 +121,7 @@ public class GoodsController {
 	
 	
 	/*==========================
-	 * 굿즈 목록
+	 * [일반회원] 굿즈 목록
 	 *==========================*/
 	@RequestMapping("/goods/goodsList.do")
 	public ModelAndView getGoodsList(@RequestParam(value="pageNum", defaultValue="1") int currentPage, 
@@ -173,6 +174,29 @@ public class GoodsController {
 		return new ModelAndView("goodsView", "goods", goods);
 	}
 
+	/*==========================
+	 * [관리자] 굿즈 정보 수정
+	 *==========================*/
+	//수정 폼 호출
+	@GetMapping("/goods/goodsUpdate.do")
+	public String formUpdate(@RequestParam int goods_num, Model model) {
+		 
+		GoodsVO goodsVO = goodsService.selectGoods(goods_num);
+		GoodsOptionVO optionVO = goodsService.selectGoodsOption(goods_num);
+		
+		model.addAttribute("goodsVO", goodsVO);
+		model.addAttribute("goodsOptionVO", optionVO);
+		
+		return "goodsModify";	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
