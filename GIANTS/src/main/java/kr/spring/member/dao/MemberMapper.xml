@@ -32,7 +32,7 @@
 		<result property="companyDetailVO.comp_content" column="comp_content" />
 	</resultMap>
 	
-	<!-- 일반 회원가입 -->
+	<!-- 일반 회원가입 --> 
 	<insert id="insertMember_detail" parameterType="memberVO">
 		INSERT INTO MEMBER_DETAIL(
 			mem_num,
