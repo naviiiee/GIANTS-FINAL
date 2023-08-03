@@ -41,7 +41,7 @@
 		<h2>${grade.title} | 좌석</h2>
 		<hr size="0.05" width="100%" noshade>
 	</div>
-	<div>
+	<div> 
 		<div class="align-right">
 			<input type="button" value="+" id="open_seatForm" class="admin-btn small">
 			<input type="button" value="목록" onclick="location.href='gradeList.do'" class="default-btn small">

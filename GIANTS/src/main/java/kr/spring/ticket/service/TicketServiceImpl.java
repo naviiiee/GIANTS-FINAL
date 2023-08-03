@@ -14,7 +14,7 @@ import kr.spring.ticket.vo.SeatVO;
 
 @Service
 @Transactional
-public class TicketServiceImpl implements TicketService {
+public class TicketServiceImpl implements TicketService { 
 	@Autowired
 	TicketMapper ticketMapper;
 	

@@ -94,7 +94,7 @@ public class TicketAdminController {
 		model.addAttribute("message", "수정 완료");
 		model.addAttribute("url", request.getContextPath() + "/ticket/gradeList.do");
 		
-		return "common/resultView";
+		return "common/resultView"; 
 	}
 	
 	/* [Seat] 좌석정보 등록 */

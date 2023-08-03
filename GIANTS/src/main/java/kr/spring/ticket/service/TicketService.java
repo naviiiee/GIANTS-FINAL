@@ -10,7 +10,7 @@ import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
 import kr.spring.ticket.vo.SeatVO;
 
-public interface TicketService {
+public interface TicketService { 
 	/* 좌석등급 */
 	// 등록
 	public void insertGrade(GradeVO gradeVO);
