@@ -105,7 +105,7 @@
 	</select>
 	<!-- 기업번호를 이용한 회원정보 구하기 -->
 	<select id="selectCompany" parameterType="string" resultMap="memberMap">
-		SELECT
+		SELECT 
 			*
 		FROM
 			MEMBER m JOIN COMPANY_DETAIL c

@@ -17,7 +17,7 @@ public interface MemberService {
 	//회원정보 수정
 	public void updateMember(MemberVO member);
 	
-	//비밀번호 수정
+	//비밀번호 수정 
 	public void updatePassword(MemberVO member);
 	
 	//회원탈퇴

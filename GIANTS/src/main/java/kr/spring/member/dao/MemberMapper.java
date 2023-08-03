@@ -8,7 +8,7 @@ import kr.spring.member.vo.MemberVO;
 
 @Mapper
 public interface MemberMapper {
-	//회원관리 - 일반회원
+	//회원관리 - 일반회원 
 	//회원번호생성
 	@Select("SELECT MEMBER_DETAIL_seq.nextval FROM dual")
 	public int selectMem_num();
