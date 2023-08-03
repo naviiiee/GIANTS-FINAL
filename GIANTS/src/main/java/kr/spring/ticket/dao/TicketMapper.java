@@ -50,4 +50,10 @@ public interface TicketMapper {
 	/* 좌석정보 */
 	// 등록
 	public void insertSeat(SeatVO seatVO);
+	// 목록
+	@Select("SELECT COUNT(*) FROM seat")
+	public int selectSeatCount(SeatVO seatVO);
+	@Select("SELECT * FROM seat ORDER BY seat_num ASC")
+	public List<SeatVO> selectSeatList(SeatVO seatVO);
+	
 }

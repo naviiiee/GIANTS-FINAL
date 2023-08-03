@@ -10,6 +10,7 @@ $(function() {
 		location.reload();
 	})
 	
+	// 좌석정보 등록
 	$('#seat_write').submit(function(event) {
 		// 유효성 검사
 		if($('#seat_block').val().trim() == '0' || $('#seat_block').val().trim() == '') {

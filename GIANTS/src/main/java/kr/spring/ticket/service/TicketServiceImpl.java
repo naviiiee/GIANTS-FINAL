@@ -38,6 +38,12 @@ public class TicketServiceImpl implements TicketService {
 	@Override
 	public void insertSeat(SeatVO seatVO) { ticketMapper.insertSeat(seatVO); }
 	
+	@Override
+	public int selectSeatCount(SeatVO seatVO) { return ticketMapper.selectSeatCount(seatVO); }
+
+	@Override
+	public List<SeatVO> selectSeatList(SeatVO seatVO) { return ticketMapper.selectSeatList(seatVO); }
+	
 	/* GAME */
 	@Override
 	public void insertGame(GameVO gameVO) { ticketMapper.insertGame(gameVO); }
@@ -53,7 +59,6 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public void updateGame(GameVO gameVO) { ticketMapper.updateGame(gameVO); }
-
 	
 }
  

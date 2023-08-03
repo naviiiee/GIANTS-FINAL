@@ -25,6 +25,9 @@ public interface TicketService {
 	/* 좌석정보 */
 	// 등록
 	public void insertSeat(SeatVO seatVO);
+	// 목록
+	public int selectSeatCount(SeatVO seatVO);
+	public List<SeatVO> selectSeatList(SeatVO seatVO);
 	
 	/* 경기정보 */
 	// 등록
