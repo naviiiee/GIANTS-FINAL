@@ -1,6 +1,7 @@
 package kr.spring.trading.controller;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -131,6 +132,52 @@ public class TradingController {
 		
 								// 	뷰 이름     	 속성명     속성값
 		return new ModelAndView("tradingView", "trading", trading);
+	}
+	
+	/*=================
+	 * 게시판 글 수정
+	 * ===============*/
+	//수정 폼 호출
+	@GetMapping("/trading/tradingUpdate.do")
+	public String formUpdate(@RequestParam int trade_num, Model model) {
+		TradingVO tradingVO = tradingService.selectTrading(trade_num);
+		model.addAttribute("tradingVO", tradingVO);
+		
+		return "tradingModify";
+	}
+	//전송된 데이터 처리
+	@PostMapping("/trading/tradingUpdate.do")
+	public String submitUpdate(@Valid TradingVO tradingVO, BindingResult result, HttpServletRequest request, Model model) {
+		log.debug("<<글 수정>> - TradingVO: " + tradingVO);
+		
+		//유효성 체크 결과, 오류가 있을 시 form 호출
+		if(result.hasErrors()) {
+			return "tradingModify";
+		}
+		
+		//ip 세팅
+		tradingVO.setTrade_ip(request.getRemoteAddr());
+		//글 수정
+		tradingService.updateTrading(tradingVO);
+		
+		//View에 표시할 메시지
+		model.addAttribute("message", "글 수정 완료!");
+		model.addAttribute("url", request.getContextPath()+"/trading/tradingDetail.do?trade_num=" + tradingVO.getTrade_num());
+		
+		return "common/resultView";
+	}
+	
+	/*=================
+	 * 게시판 글 삭제
+	 * ===============*/
+	@RequestMapping("/trading/tradingDelete.do")
+	public String submitDelete(@RequestParam int trade_num) {
+		log.debug("<<글 삭제 - trade_num>> : " + trade_num);
+		
+		//글 삭제
+		tradingService.deleteTrading(trade_num);
+		
+		return "redirect:/trading/tradingList.do";
 	}
 	
 }

@@ -16,4 +16,8 @@
        <put-attribute name="title" value="상세정보"/>
        <put-attribute name="body" value="/WEB-INF/views/trading/tradingView.jsp"/>
     </definition>
+    <definition name="tradingModify" extends="main">
+       <put-attribute name="title" value="글 수정"/>
+       <put-attribute name="body" value="/WEB-INF/views/trading/tradingModify.jsp"/>
+    </definition>
 </tiles-definitions>

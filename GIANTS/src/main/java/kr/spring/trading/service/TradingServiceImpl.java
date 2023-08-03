@@ -50,14 +50,12 @@ public class TradingServiceImpl implements TradingService{
 
 	@Override
 	public void updateTrading(TradingVO trading) {
-		// TODO Auto-generated method stub
-		
+		tradingMapper.updateTrading(trading);
 	}
 
 	@Override
 	public void deleteTrading(Integer trade_num) {
-		// TODO Auto-generated method stub
-		
+		tradingMapper.deleteTrading(trade_num);
 	}
 	
 } 

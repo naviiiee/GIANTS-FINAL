@@ -75,4 +75,9 @@
 		]]>
 	</select>
 	
-</mapper> 
+	<!-- 게시글 상세 -->
+	<select id="selectTrading" parameterType="integer">
+		SELECT * FROM trading t JOIN member m USING(mem_num) WHERE t.trade_num=#{trade_num}
+	</select>
+	
+</mapper>

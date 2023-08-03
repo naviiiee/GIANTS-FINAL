@@ -2,24 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 중고거래 게시판 목록 시작 -->
+<script type="text/javascript">
+	$(function() {
+		//검색 유효성 체크
+		$('#search_form').submit(function() {
+			if ($('#keyword').val().trim() == '') {
+				alert('검색어를 입력하세요!');
+				$('#keyword').val('').focus();
+				return false;
+			}
+		});
+	});
+</script>
 <div class="page-main">
 	<h2>중고거래 게시판 목록</h2>
-		<script type="text/javascript">
-		$(function(){
-			//검색 유효성 체크
-			$('#search_form').submit(function(){
-				if($('#keyword').val().trim() == ''){
-					alert('검색어를 입력하세요!');
-					$('#keyword').val('').focus();
-					return false;
-				}
-			});
-		});
-		</script>
-		<form action="tradingList.do" mem_id="search_form" method="get">
+		<form action="tradingList.do" id="search_form" method="get">
 		<ul class="search">
 			<li>
-				<select name="keyfield" mem_id="keyfield">
+				<select name="keyfield" id="keyfield">
 					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
 					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>아이디+닉네임</option>
 					<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>
@@ -27,7 +27,7 @@
 				</select>
 			</li>
 			<li>
-				<input type="search" name="keyword" mem_id="keyword" value="${param.keyword}">
+				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
 			</li>
 			<li>
 				<input type="submit" value="검색">
@@ -35,7 +35,7 @@
 			</li>
 		</ul>
 		<div class="align-right">
-			<select mem_id="order" name="order">
+			<select id="order" name="order">
 				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>
 				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
 			</select>
@@ -64,8 +64,8 @@
 		</tr>
 		<c:forEach var="trading" items="${list}">
 		<tr>
-			<td class="align-center" wmem_idth="400">
-				<a href="detail.do?trade_num=${trading.trade_num}">${trading.trade_title}</a>
+			<td class="align-center" width="400">
+				<a href="tradingDetail.do?trade_num=${trading.trade_num}">${trading.trade_title}</a>
 			</td>
 			<td class="align-center">
 				<c:if test="${empty trading.mem_nickname}">${trading.mem_id}</c:if>

@@ -5,7 +5,7 @@
 <div class="page-main">
 	<h2>${trading.trade_title}</h2>
 	<ul class="detail-info">
-		<li>
+		<li style="float: left; margin-right: 5px;">
 			<img src="${pageContext.request.contextPath}/member/viewProfile.do?mem_num=${trading.mem_num}" width="40" height="40" class="my-photo">
 		</li>
 		<li>
@@ -34,7 +34,7 @@
 	<hr size="1" width="100%">
 	<div class="align-right">
 		<c:if test="${!empty user && user.mem_num == trading.mem_num}"> <!-- 로그인한 회원번호와 작성자 회원번호가 같을 시 -->
-		<input type="button" value="수정" onclick="location.href='update.do?trade_num=${trading.trade_num}'">
+		<input type="button" value="수정" onclick="location.href='tradingUpdate.do?trade_num=${trading.trade_num}'">
 		<input type="button" value="삭제" id="delete_btn">
 		<script type="text/javascript">
 			let delete_btn = document.getElementById('delete_btn');
@@ -42,7 +42,7 @@
 				let choice = confirm('삭제하시겠습니까?');
 				if(choice){
 					//히스토리 정보 삭제
-					location.replace('delete.do?trade_num=${trading.trade_num}');
+					location.replace('tradingDelete.do?trade_num=${trading.trade_num}');
 				}
 			};
 		</script>
