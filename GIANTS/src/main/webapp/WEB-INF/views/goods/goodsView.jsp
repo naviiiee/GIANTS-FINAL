@@ -46,7 +46,7 @@
 	</div>
 	<br>
 	<div>
-		<input type="button" value="목록">
+		<input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/goods/goodsList.do'">
 	</div>
 </div>
 <!-- 상품 상세 끝 -->
