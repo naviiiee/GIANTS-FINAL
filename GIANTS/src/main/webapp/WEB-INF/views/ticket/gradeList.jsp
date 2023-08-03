@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!-- 좌석등급 목록 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
@@ -11,7 +12,7 @@
 		<hr size="0.05" width="100%" noshade>
 	</div>
 	<div class="align-right">
-		<input type="button" value="+" onclick="location.href='gradeWrite.do'" class="admin-btn">
+		<input type="button" value="+" onclick="location.href='gradeWrite.do'" class="admin-btn small">
 	</div>
 	<c:if test="${count == 0}">
 	<div class="result-display">등록된 좌석등급 無</div>
@@ -29,9 +30,9 @@
 		<tr>
 			<td>${grade.grade_num}</td>
 			<td><a href="seatList.do?grade_num=${grade.grade_num}">${grade.title}</a></td>
-			<td>${grade.price_week}</td>
-			<td>${grade.price_weekend}</td>
-			<td><input type="button" value="수정" onclick="location.href='gradeUpdate.do'" class="admin-btn small"></td>
+			<td><fmt:formatNumber value="${grade.price_week}"/>원</td>
+			<td><fmt:formatNumber value="${grade.price_weekend}"/>원</td>
+			<td><input type="button" value="수정" onclick="location.href='gradeUpdate.do?grade_num=${grade.grade_num}'" class="admin-btn small"></td>
 		</tr>
 		</c:forEach>
 	</table>
