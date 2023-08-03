@@ -9,7 +9,7 @@
 			<li><input type="button" class="menu-btn" value="회원정보수정"
 				onclick="#"></li>
 			<li><input type="button" class="menu-btn" value="회원탈퇴"
-				onclick="#"></li>
+				onclick=""></li>
 			<li><b>구매내역</b></li>
 			<li><input type="button" class="menu-btn" value="Ticket"
 				onclick="#"></li>
@@ -26,7 +26,7 @@
 			<li><input type="button" class="menu-btn" value="회원정보수정"
 				onclick="#"></li>
 			<li><input type="button" class="menu-btn" value="회원탈퇴"
-				onclick="#"></li>
+				onclick="location.href='${pageContext.request.contextPath}/member/delete.do'"></li>
 			<li><b>FOOD</b></li>
 			<li><input type="button" class="menu-btn" value="푸드목록"
 				onclick="#"></li>

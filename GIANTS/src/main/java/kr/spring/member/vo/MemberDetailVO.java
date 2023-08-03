@@ -39,7 +39,7 @@ public class MemberDetailVO {
 	private Date mem_regdate; // 가입일
 	private Date mem_modifydate; // 수정일
 	
-	//파일 업로드 처리
+	//파일 업로드처리
 	public void setUpload(MultipartFile upload) throws IOException{
 		setMem_photo(upload.getBytes());
 		setMem_photoname(upload.getOriginalFilename());

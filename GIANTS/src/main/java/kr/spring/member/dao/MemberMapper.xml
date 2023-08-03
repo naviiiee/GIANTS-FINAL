@@ -16,6 +16,8 @@
 		<result property="memberDetailVO.mem_point" column="mem_point" />
 		<result property="memberDetailVO.mem_regdate" column="mem_regdate" />
 		<result property="memberDetailVO.mem_modifydate" column="mem_modifydate" />
+	</resultMap>
+	<resultMap type="memberVO" id="companyMap">
 		<result property="companyDetailVO.comp_num" column="comp_num" />
 		<result property="companyDetailVO.comp_owner" column="comp_owner" />
 		<result property="companyDetailVO.comp_name" column="comp_name" />
@@ -31,7 +33,6 @@
 		<result property="companyDetailVO.comp_modifydate" column="comp_modifydate" />
 		<result property="companyDetailVO.comp_content" column="comp_content" />
 	</resultMap>
-	
 	<!-- 일반 회원가입 --> 
 	<insert id="insertMember_detail" parameterType="memberVO">
 		INSERT INTO MEMBER_DETAIL(
@@ -94,10 +95,8 @@
 			m.mem_num,
 			m.mem_id,
 			m.mem_auth,
-			d.mem_auid,
 			m.passwd,
-			m.mem_nickname,
-			d.mem_email
+			m.mem_nickname
 		FROM
 			MEMBER m LEFT OUTER JOIN MEMBER_DETAIL d
 		ON
@@ -106,24 +105,6 @@
 			m.mem_id=#{mem_id}
 	</select>
 	
-	<!-- ID를 이용한 기업회원정보 체크 -->
-	<!-- 
-	<select id="selectCheckMember" parameterType="string" resultType="memberVO">
-		SELECT
-			m.mem_num,
-			m.mem_id,
-			m.mem_auth,
-			m.passwd,
-			m.mem_nickname,
-			c.comp_email
-		FROM
-			MEMBER m LEFT OUTER JOIN COMPANY_DETAIL c
-		ON
-			m.mem_num = c.mem_num
-		WHERE
-			m.mem_id=#{mem_id}
-	</select>
-	 -->
 	<!-- 회원번호를 이용한 회원정보 구하기 -->
 	<select id="selectMember" parameterType="string" resultMap="memberMap">
 		SELECT
@@ -135,9 +116,9 @@
 		WHERE
 			m.mem_num=#{mem_num}
 	</select>
+	
 	<!-- 기업번호를 이용한 회원정보 구하기 -->
-	<!-- 
-	<select id="selectCompany" parameterType="string" resultMap="memberMap">
+	<select id="selectCompany" parameterType="string" resultMap="companyMap">
 		SELECT 
 			*
 		FROM
@@ -147,5 +128,4 @@
 		WHERE
 			m.mem_num=#{mem_num}
 	</select>
-	 -->
 </mapper>

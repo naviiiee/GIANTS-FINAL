@@ -32,6 +32,11 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO selectCheckMember(String id) {
 		return memberMapper.selectCheckMember(id);
 	}
+	
+	@Override
+	public MemberVO selectCheckCompany(String id) {
+		return memberMapper.selectCheckCompany(id);
+	}
 
 	@Override
 	public MemberVO selectMember(Integer mem_num) {
@@ -78,4 +83,5 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		
 	}
+
 }

@@ -154,7 +154,7 @@ public class MemberController {
 		MemberVO member= null;
 		try {
 			member = memberService.selectCheckMember(memberVO.getMem_id());
-			
+			logger.debug("<<MemberVO>> : " + member);
 			boolean check = false;
 			
 			if(member!=null) {
@@ -164,9 +164,7 @@ public class MemberController {
 			if(check) { //인증 성공
 				//자동 로그인 체크 시작//
 				//자동 로그인 체크 끝//
-				if(member.getMem_auth() == 3) {
-					member = memberService.selectCompany(member.getMem_num());
-				}
+				
 				//인증 성공, 로그인 처리
 				session.setAttribute("user", member);
 				
