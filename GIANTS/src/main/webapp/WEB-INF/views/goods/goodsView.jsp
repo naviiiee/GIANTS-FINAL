@@ -11,7 +11,7 @@
 		<input type="button" value="삭제">
 	</div>
 	<hr size="1" width="97%">
-	<ul>
+	<ul> 
 		<li>
 			상품이미지
 		</li>

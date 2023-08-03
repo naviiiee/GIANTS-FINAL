@@ -45,7 +45,7 @@ public class GoodsServiceImpl implements GoodsService{
 			
 			goodsMapper.insertGoodsOption(goodsVO.getGoods_num(), goods_size, goods_stock);
 		}
-		
+		 
 	}
 
 	@Override

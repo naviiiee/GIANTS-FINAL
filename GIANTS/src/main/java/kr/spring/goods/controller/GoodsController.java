@@ -180,7 +180,7 @@ public class GoodsController {
 	//수정 폼 호출
 	@GetMapping("/goods/goodsUpdate.do")
 	public String formUpdate(@RequestParam int goods_num, Model model) {
-		
+		 
 		GoodsVO goodsVO = goodsService.selectGoods(goods_num);
 		GoodsOptionVO optionVO = goodsService.selectGoodsOption(goods_num);
 		

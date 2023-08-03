@@ -40,7 +40,7 @@ public interface GoodsService {
 	//상품삭제시 상품 찜 취소
 	public void deleteGoodsFavByGoodsNum(Integer goods_num);
 	
-	//=====상품 후기=====//
+	//=====상품 후기=====// 
 	//전체|검색 상품 후기 목록
 	public GoodsReviewVO selectGoodsReview(Map<String, Object> map);
 	//전체|검색 상품 후기 레코드 수
