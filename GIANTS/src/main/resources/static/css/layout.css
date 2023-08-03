@@ -16,7 +16,7 @@
 =========================*/
 * { margin:0; padding:0; }
 html{ width:100%; height:100%}
-body{ width:100%; margin:0; background-color: white; font-size:13px; font-family: 'NanumSquare', 'NotoSans';}
+body{ width:100%; margin:0; background-color: white; font-size:13px; font-family: "NotoSans", "Giants";}
 body,div,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,p,form,fieldset,input,table,tr,th,td{ margin:0; padding:0}
 ul,ol,li{ list-style:none; margin:0px; padding:0px; }
 a { margin: 0; padding: 0; border: 0; font-size: 100%; }
