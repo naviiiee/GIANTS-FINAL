@@ -33,7 +33,7 @@ public class TicketServiceImpl implements TicketService {
 	
 	/* SEAT */
 	@Override
-	public void insertSeat(SeatVO seatVO) {}
+	public void insertSeat(SeatVO seatVO) { ticketMapper.insertSeat(seatVO); }
 	
 	/* GAME */
 	@Override

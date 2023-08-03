@@ -28,6 +28,7 @@
 			<input type="button" value="+" id="open_seatForm" class="admin-btn">
 		</div>
 		<form:form action="seatWrite.do" id="seat_write" method="post" modelAttribute="seatVO">
+			<input type="hidden" name="grade_num" id="grade_num" value="${grade.grade_num}">
 			<ul>
 				<li>
 					<form:label path="seat_block">블럭번호</form:label>

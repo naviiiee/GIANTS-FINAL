@@ -87,14 +87,16 @@ public class TicketController {
 	
 	/* [Seat] 좌석정보 등록 */
 	@PostMapping("/ticket/seatWrite.do")
-	public String seatSubmit(@Valid SeatVO seatVO, BindingResult result) {
+	public String seatSubmit(@Valid SeatVO seatVO, BindingResult result, @RequestParam int grade_num) {
 		log.debug("<<좌석정보등록>> : " + seatVO);
 		
-		if(result.hasErrors()) { return "seatList"; }
+		if(result.hasErrors()) { return "gradeList"; }
+		
+		seatVO.setGrade_num(grade_num);
 		
 		ticketService.insertSeat(seatVO);
 		
-		return "redirect:/ticket/seatList.do";
+		return "redirect:/ticket/seatList.do?grade_num=" + grade_num;
 	}
 	
 	/* ----- [Game] 경기목록 -----*/
