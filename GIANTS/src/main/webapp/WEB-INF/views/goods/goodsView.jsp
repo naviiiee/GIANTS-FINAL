@@ -33,7 +33,7 @@
 			상품등록일 : ${goods.goods_regdate}
 			<c:if test="${!empty goods.goods_mdate}"><br>${goods.goods_mdate}</c:if>
 			<br>
-			상태 :
+			상태 : 
 			<c:if test="${goods.goods_status == 1}">판매중</c:if>
 			<c:if test="${goods.goods_status == 2}">판매중지</c:if>
 		</li>
