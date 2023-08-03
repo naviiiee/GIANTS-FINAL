@@ -16,10 +16,6 @@
 		<result property="memberDetailVO.mem_point" column="mem_point" />
 		<result property="memberDetailVO.mem_regdate" column="mem_regdate" />
 		<result property="memberDetailVO.mem_modifydate" column="mem_modifydate" />
-	</resultMap>
-	
-	<!-- 수동 매핑 지정 (일반) -->
-	<resultMap type="memberVO" id="memberMap">
 		<result property="companyDetailVO.comp_num" column="comp_num" />
 		<result property="companyDetailVO.comp_owner" column="comp_owner" />
 		<result property="companyDetailVO.comp_name" column="comp_name" />
@@ -35,6 +31,7 @@
 		<result property="companyDetailVO.comp_modifydate" column="comp_modifydate" />
 		<result property="companyDetailVO.comp_content" column="comp_content" />
 	</resultMap>
+	
 	<!-- 일반 회원가입 -->
 	<insert id="insertMember_detail" parameterType="memberVO">
 		INSERT INTO MEMBER_DETAIL(
@@ -110,6 +107,7 @@
 	</select>
 	
 	<!-- ID를 이용한 기업회원정보 체크 -->
+	<!-- 
 	<select id="selectCheckMember" parameterType="string" resultType="memberVO">
 		SELECT
 			m.mem_num,
@@ -125,7 +123,7 @@
 		WHERE
 			m.mem_id=#{mem_id}
 	</select>
-	
+	 -->
 	<!-- 회원번호를 이용한 회원정보 구하기 -->
 	<select id="selectMember" parameterType="string" resultMap="memberMap">
 		SELECT
@@ -138,6 +136,7 @@
 			m.mem_num=#{mem_num}
 	</select>
 	<!-- 기업번호를 이용한 회원정보 구하기 -->
+	<!-- 
 	<select id="selectCompany" parameterType="string" resultMap="memberMap">
 		SELECT 
 			*
@@ -148,4 +147,5 @@
 		WHERE
 			m.mem_num=#{mem_num}
 	</select>
+	 -->
 </mapper>
