@@ -17,6 +17,7 @@ public class GorderDetailVO {
 	private int goods_price;
 	private int goods_dprice; // 할인된 가격 : 상품가격*(1-할인율)
 	private int goods_total; // 총 상품 금액(동일 상품 합산금액)
+	private int goods_size;
 	private int mem_point; // 회원 보유 포인트(기본값은 0)
 
 }

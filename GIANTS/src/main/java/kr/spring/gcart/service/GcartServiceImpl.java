@@ -23,7 +23,7 @@ public class GcartServiceImpl implements GcartService{
 
 	@Override
 	public int getTotalByMem_num(int mem_num) {
-		return cartMapper.getTotalByMem_num(mem_num);
+		return 1;/*cartMapper.getTotalByMem_num(mem_num);*/
 	}
 
 	@Override

@@ -2,16 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
+<!DOCTYPE html>   
 <html>
 <head>
 <meta charset="UTF-8">
 <title>장바구니</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_order.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 </head>
-<!-- all_total, list(g_order_detail) 받아옴 -->
+<!-- all_total, list(g_order_detail), lpoint받아옴 -->
 <body>
 <div class = "page-main">
 	<!-- 내용 시작 -->
@@ -24,7 +23,7 @@
 		</c:if>
 		<c:if test = "${!empty list}">
 		<!-- 장바구니 화면 -->
-		<form id = "cart_order" action = "goods_cart.do" method = "post">
+		<form id = "cart_order" action = "/gorder/goods_cart.do" method = "post">
 			<table>
 				<tr>
 					<th>사진</th>
@@ -44,29 +43,32 @@
 					</td>
 					<!-- 상품 정보(사이즈 괄호 안으로 옵션) -->
 					<td class = "align-center">
-						<%-- 상품 판매 가능 여부 : 미표시 or 상품 재고 < 주문할 상품의 수량 --%>
-						<c:if test="${cart.goodsVO.goods_status==1 or cart.itemVO.item_stock < cart.order_quantity}">[판매중지된 상품입니다]</c:if>
-						<%-- 상품 판매 가능 여부 : 표시 or 상품 재고 >= 주문할 상품의 수량 --%>
-						<c:if test="${cart.goodsVO.goods_status==2 and cart.itemVO.item_stock >= cart.order_quantity}"> <!-- 수량 옵션 -->
-							<input type = "number" name = "order_quantity" min = "1" max = "${cart.itemVO.item_stock}" autocomplete = "off" value = "${cart.order_quantity}">
+						<%-- 상품 판매 가능 여부 : 미표시 or 상품 재고 < 주문할 상품의 수량 
+						<c:if test="${cart.goodsVO.goods_status==1 or cart.goodsVO.item_stock < cart.order_quantity}">[판매중지된 상품입니다]</c:if>
+						<%-- 상품 판매 가능 여부 : 표시 or 상품 재고 >= 주문할 상품의 수량 
+						<c:if test="${cart.goodsVO.goods_status==2 and cart.goodsVO.goods_stock >= cart.order_quantity}"> <!-- 수량 옵션 -->
+							<input type = "number" name = "order_quantity" min = "1" max = "${cart.goodsVO.item_stock}" autocomplete = "off" value = "${cart.order_quantity}">
 							<br>
 							<input type = "button" value = "변경" class = "cart-modify" data-cartnum = "${cart.cart_num}" data-itemnum = "${cart.goods_num}">
-						</c:if>
+						</c:if>--%> ${cart.goodsVO.goods_name}
 					</td>
 					<!-- 적립금 -->
 					<td>
-						<!-- 판매가 * 2% -->
-						${cart.goodsVO.goods_dprice}*0.98 원 <!-- 계산... -->
+						${lpoint}point <!-- 예상 적립금 - Controller에서 계산 -->
 					</td>
 					<!-- 판매가 -->
 					<td class = "align-center">
-						<fmt:formatNumber value = "${cart.goodsVO.goods_dprice}"/>원
+						<fmt:formatNumber value = "${cart.goodsVO.goods_price}"/>원
 					</td>
 					<!-- 수량 -->
 					<td class = "align-center">
-						<fmt:formatNumber value = "${cart.sub_total}"/>원 <!-- sub_total vo에 없음 -->
+						수량처리
 						<br>
-						<input type = "button" value = "삭제" class = "cart-del" data-cartnum = "${cart.cart_num}">
+						<input type = "button" value = "삭제" class = "cart-del" data-cartnum = "${cart.cart_num}"> <!-- 개별 상품 삭제 가능 -->
+					</td>
+					<!-- 합계 -->
+					<td>
+						<fmt:formatNumber value = "${cart.sub_total}"/>원 <!-- sub_total vo에 없음 -->
 					</td>
 				</tr>
 				</c:forEach>
@@ -81,7 +83,7 @@
 			<div class = "buttons">
 				<input type="button" value="쇼핑 계속하기" onclick="location.href='#'">
 				<input type = "submit" value = "주문하기">
-				<input type="button" value="장바구니 비우기" id="deleteCartAll"> <!-- 버튼 처리 -->
+				<input type="button" value="장바구니 비우기" class="deleteCartAll"> <!-- js click 처리 -->
 			</div>
 			
 		</form>
