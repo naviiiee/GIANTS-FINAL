@@ -26,8 +26,8 @@
 	}
 	
 	function checkselectBlock() {
-		let checkboxes = document.getElementsByName('seat_block');	// 전체 체크박스
-		let checked = document.querySelectorAll('input[name="seat_block"]:checked');	// 선택된 체크박스
+		let checkboxes = document.getElementsByName('seat_num');	// 전체 체크박스
+		let checked = document.querySelectorAll('input[name="seat_num"]:checked');	// 선택된 체크박스
 		let selectBlock = document.querySelector('input[value="selectBlock"]');	// 전체 선택 체크박스
 		
 		if(checkboxes.length === checked.length) { selectBlock.checked = true; }
@@ -45,7 +45,7 @@
 	}
 	
 	function selectBlock(selectAll) {
-		let checkboxes = document.getElementsByName('seat_block');
+		let checkboxes = document.getElementsByName('seat_num');
 		checkboxes.forEach((checkbox) => { checkbox.checked = selectAll.checked; });
 	}
 </script>
@@ -101,21 +101,22 @@
 		<div class="seat-list">
 			<table>
 				<tr>
-					<th><input type="checkbox" value="selectBlock" onclick="selectBlock(this)"></th>
 					<th>블록번호</th>
 					<th>행</th>
 					<th>열</th>
+					<th></th>
 				</tr>
 				<c:forEach var="seat" items="${list}">
 				<tr>
-					<td><input type="checkbox" name="seat_block" value="${seat.seat_block}" onclick='checkselectBlock()'></td>
 					<td>${seat.seat_block}</td>
 					<td>${seat.seat_row}</td>
 					<td>${seat.seat_col}</td>
+					<td><input type="button" value="수정" data-seatblock="${seat.seat_block}" class="seat-update admin-btn small"></td>
 				</tr>
 				</c:forEach>
 			</table>
 		</div>
+		<div class="seatform-update"></div>
 		</c:if>
 	</div>
 </div>

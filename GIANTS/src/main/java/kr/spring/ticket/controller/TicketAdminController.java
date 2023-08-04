@@ -87,6 +87,16 @@ public class TicketAdminController {
 		return "common/resultView"; 
 	}
 	
+	/* ----- [Grade] 좌석등급 삭제 -----*/
+	@RequestMapping("/ticket/gradeDelete.do")
+	public String gradeDelete(@RequestParam int grade_num) {
+		log.debug("<<등급 삭제>> : " + grade_num);
+		
+		ticketService.deleteGrade(grade_num);
+		
+		return "redirect:/ticket/gradeList.do";
+	}
+	
 	/* ----- [Seat] 좌석정보 등록 ----- */
 	@PostMapping("/ticket/seatWrite.do")
 	public String seatSubmit(SeatVO seatVO, @RequestParam int grade_num) {
@@ -99,7 +109,7 @@ public class TicketAdminController {
 		return "redirect:/ticket/seatList.do?grade_num=" + grade_num;
 	}
 	
-	/* ----- [Seat] 좌석등급 상세 -----*/
+	/* ----- [Seat] 좌석정보 상세 -----*/
 	@RequestMapping("/ticket/seatList.do")
 	public ModelAndView seatList(@RequestParam int grade_num, SeatVO seatVO) {
 		log.debug("<<등급상세>> : " + grade_num);
@@ -117,6 +127,16 @@ public class TicketAdminController {
 		mav.addObject("list", list);
 		
 		return mav;
+	}
+	
+	/* ----- [Seat] 좌석정보 수정 -----*/
+	@PostMapping("/ticket/seatUpdate.do")
+	public String seatUpdateSubmit(SeatVO seatVO, @RequestParam int seat_num, @RequestParam int grade_num) {
+		log.debug("<<좌석정보 수정>> : " + seatVO);
+		
+		ticketService.updateSeat(seatVO);
+		
+		return "redirect:/ticket/seatList.do?grade_num=" + grade_num;
 	}
 	
 	/* ----- [Game] 경기 등록 -----*/
