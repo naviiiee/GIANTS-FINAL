@@ -43,7 +43,6 @@ hr{ margin:15px 0; }
 .form-list ul li{ clear:both; margin:25px 0; }
 .form-list label{ width:100px; float:left; font-weight:bold; }
 .form-list input[type="text"], .form-list input[type="number"]{ width:400px; height:30px; }
-.form-list input[type="radio"]{ accent-color:#dd032f; }
 
 /* 목록 */
 #game_list, #grade_list, #seat_list{ width:800px; text-align:center; margin:0 auto; border-collapse:collapse; font-size:15px; }
@@ -54,4 +53,4 @@ hr{ margin:15px 0; }
 #seat_write ul li{ margin:10px 0; }
 #seat_write ul li label{ width:100px; float:left; font-weight:bold; }
 #seat_write input[type="number"]{ width:50px; text-align:center; }
-#seat_write input[type="checkbox"]{ accent-color:#dd032f; }
+input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }

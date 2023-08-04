@@ -62,16 +62,6 @@ public class TicketAdminController {
 		return "redirect:/ticket/gradeList.do";
 	}
 	
-	/* ----- [Grade] 좌석등급 상세 -----*/
-	@RequestMapping("/ticket/seatList.do")
-	public ModelAndView seatList(@RequestParam int grade_num) {
-		log.debug("<<등급상세>> : " + grade_num);
-		
-		GradeVO grade = ticketService.selectGrade(grade_num);
-		
-		return new ModelAndView("seatList", "grade", grade);
-	}
-	
 	/* ----- [Grade] 좌석등급 수정 -----*/
 	// 수정 form
 	@GetMapping("/ticket/gradeUpdate.do")
@@ -97,7 +87,7 @@ public class TicketAdminController {
 		return "common/resultView"; 
 	}
 	
-	/* [Seat] 좌석정보 등록 */
+	/* ----- [Seat] 좌석정보 등록 ----- */
 	@PostMapping("/ticket/seatWrite.do")
 	public String seatSubmit(SeatVO seatVO, @RequestParam int grade_num) {
 		log.debug("<<좌석정보등록>> : " + seatVO);
@@ -107,6 +97,26 @@ public class TicketAdminController {
 		ticketService.insertSeat(seatVO);
 		
 		return "redirect:/ticket/seatList.do?grade_num=" + grade_num;
+	}
+	
+	/* ----- [Seat] 좌석등급 상세 -----*/
+	@RequestMapping("/ticket/seatList.do")
+	public ModelAndView seatList(@RequestParam int grade_num, SeatVO seatVO) {
+		log.debug("<<등급상세>> : " + grade_num);
+		
+		GradeVO grade = ticketService.selectGrade(grade_num);
+		
+		int count = ticketService.selectSeatCount(seatVO);
+		
+		List<SeatVO> list = ticketService.selectSeatList(seatVO);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("seatList");
+		mav.addObject("grade", grade);
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		
+		return mav;
 	}
 	
 	/* ----- [Game] 경기 등록 -----*/
