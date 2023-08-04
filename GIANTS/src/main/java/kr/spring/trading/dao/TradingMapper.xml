@@ -8,10 +8,8 @@
 		 trade_title,
 		 trade_content,
 		 trade_price,
-		 <!-- 
-		 trade_photo1, 
-		 trade_photo2,
-		 -->
+		 trade_photo,
+		 trade_photoname, 
 		 trade_ip,
 		 mem_num)
 		VALUES(
@@ -19,10 +17,8 @@
 		 #{trade_title},
 		 #{trade_content},
 		 #{trade_price},
-		 <!-- 
-		 #{trade_photo1},
-		 #{trade_photo2}, 
-		 -->
+		 #{trade_photo},
+		 #{trade_photoname},
 		 #{trade_ip},
 		 #{mem_num}
 		)

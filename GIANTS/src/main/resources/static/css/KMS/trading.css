@@ -1,5 +1,43 @@
 @charset "UTF-8";
 
+/* --- 공통 메시지 및 버튼 --- */
+.result-display{
+	width: 400px;
+	height: 200px;
+	margin: 50px auto;
+	border: 1px solid #000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+hr{ 
+	margin:15px 0; 
+}
+.error-color{
+	color: #ff0000;
+}
+
+.classic-btn{ 
+	width:110px; height:40px; border-radius:5px; color:white; font-weight:bold; cursor:pointer; 
+}
+.classic-btn:hover{ 
+	background-color:transparent; transition:0.2s ease-out; 
+}
+.classic-btn{ 
+	border:1px #052345 solid; background-color:#052345; 
+}
+.classic-btn:hover{ 
+	color:#052345; 
+}
+
+/* 부트스트랩 */
+.btn-outline-success{ 
+	border:1px #053B44 solid; color:#052345; 
+}
+.btn-outline-success:hover{ 
+	background:#052345; color:white; 
+}
+
 /* --- 중고거래 게시판 글 상세 --- */
 ul.detail-info{
 	list-style: none;
@@ -26,4 +64,30 @@ ul.detail-info li:last-child{
 #output_bookmarkcnt{
 	width: 50px;
 	display: inline-block;
+}
+ul.trading_search li{
+	float: left;
+}
+.trading_right{
+	margin-left: 500px;
+}
+
+table.striped-table{
+	border: 1px #FFF solid;
+	font-size: 15px;
+	width: 100%;
+	border-collapse: collapse;
+	margin: 7px 0;
+}
+table.striped-table td, table.striped-table th{
+	padding: .7em .5em;
+	vertical-align: middle;
+	text-align: center;
+}
+table.striped-table th{
+	font-weight: bold;
+	background: #E1E1E1;
+}
+table.striped-table td{
+	border-bottom: 1px solid rgba(0,0,0,.1)
 }

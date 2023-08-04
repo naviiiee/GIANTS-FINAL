@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 중고거래 게시판 글 수정 시작 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KMS/trading.css">
 <!-- include libraries (jquery, bootstrap) -> CKEditor를 사용하기 위해 필요한 라이브러리 -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style>
@@ -15,19 +17,24 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
 	<h2>글 수정</h2>
-	<form:form modelAttribute="tradingVO" action="tradingUpdate.do" id="modify_form">
+	<form:form modelAttribute="tradingVO" action="tradingUpdate.do" id="modify_form" enctype="multipart/form-data">
 		<form:hidden path="trade_num"/>
 		<form:errors element="div" cssClass="error-color"/>
 			<ul>
 				<li>
-				<form:label path="trade_title">제목</form:label>
-				<form:input path="trade_title"/>
-				<form:errors path="trade_title" cssClass="error-color"/>
+					<form:label path="trade_title">제목</form:label>
+					<form:input path="trade_title"/>
+					<form:errors path="trade_title" cssClass="error-color"/>
 				</li>
 				<li>
-				<form:label path="trade_price">가격</form:label>
-				<form:input path="trade_price" type="number"/>원
-				<form:errors path="trade_price" cssClass="error-color"/>
+					<form:label path="trade_price">가격</form:label>
+					<form:input path="trade_price" type="number"/>원
+					<form:errors path="trade_price" cssClass="error-color"/>
+				</li>
+				<li>
+					<label for="upload">상품 이미지</label>
+					<input type="file" name="upload" id="upload" accept="image/gif,image/png,image/jpeg">
+					<form:errors path="trade_photo" cssClass="error-color"/>
 				</li>
 				<li>내용</li>
 				<li>
