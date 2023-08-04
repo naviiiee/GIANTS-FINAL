@@ -12,6 +12,15 @@ $(function(){
 			$('.hasNoSize').hide();
 		}
 	}); //end of goods_category click
-
+	
+	$('#goods_price').on('keyup mouseup', function(){
+		$('#goods_dprice').val($('#goods_price').val());
+		$('#goods_disc').val(0);
+	}); //end of goods_price
+	
+	$('#goods_disc').on('keyup mouseup', function(){
+		let dprice = $('#goods_price').val() * (1 - $('#goods_disc').val()/100);
+		$('#goods_dprice').val(dprice);
+	}); //end of goods_price
 	
 });

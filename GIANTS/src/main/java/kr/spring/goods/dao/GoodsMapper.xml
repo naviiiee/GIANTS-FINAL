@@ -12,6 +12,7 @@
 			goods_dprice,
 			goods_content,
 			goods_photo,
+			goods_photoname,
 			goods_status)
 		VALUES(
 			#{goods_num},
@@ -22,6 +23,7 @@
 			#{goods_dprice},
 			#{goods_content},
 			#{goods_photo},
+			#{goods_photoname},
 			#{goods_status})
 	</insert>
 	

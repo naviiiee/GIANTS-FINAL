@@ -52,10 +52,18 @@ public class GoodsController {
 	
 	//전송된 데이터 처리
 	@PostMapping("/goods/registerGoods.do")
-	public String submit(@Valid GoodsVO goodsVO, BindingResult result, 
-							HttpServletRequest request, HttpSession session, Model model) {
+	public String submit(@Valid GoodsVO goodsVO, BindingResult result, Model model,
+							HttpServletRequest request, HttpSession session) {
 		log.debug("<<상품등록>> : " + goodsVO);
-
+		log.debug("<<goods_photo().length>> : " + goodsVO.getGoods_photo().length);
+		
+		if(goodsVO.getGoods_photo().length == 0) {
+			result.rejectValue("goods_photo", "required");
+		}
+		if(goodsVO.getGoods_photo().length >= 5*1024*1024) {//5MB
+			result.rejectValue("goods_photo", "limitUploadSize", new Object[] {"5MB"}, null);
+		}
+		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			return form();
@@ -63,29 +71,29 @@ public class GoodsController {
 		
 		goodsService.insertGoods(goodsVO);
 		
-		model.addAttribute("accessMsg", "상품등록이 완료되었습니다.");
-		model.addAttribute("accessUrl", request.getContextPath() + "/goods/goodsList.do");
-		//model.addAttribute("imageFile", goodsVO.getGoods_photo());
-		//model.addAttribute("filename", goodsVO.getGoods_photoname());
-		
-		return "common/notice";
+		model.addAttribute("message", "상품등록이 완료되었습니다.");
+		model.addAttribute("url", request.getContextPath() + "/goods/admin_goodsList.do");
+
+		return "common/resultView";
 	}
 	
 	/*==========================
-	 * 굿즈 이미지
+	 * 이미지 출력
 	 *==========================*/
-	//이미지 등록
-	@RequestMapping("/goods/updateGoodsPhoto.do")
-	@ResponseBody
-	public Map<String, String> updateGoodsPhoto(GoodsVO goodsVO){
-		Map<String, String> mapJson = new HashMap<String, String>();
+	@RequestMapping("/goods/imageView.do")
+	public ModelAndView viewImage(@RequestParam int goods_num) {
 		
-		goodsService.updateGoods(goodsVO);
-		mapJson.put("result", "success");
+		GoodsVO goodsVO = goodsService.selectGoods(goods_num);
 		
-		return mapJson;
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+		
+		mav.addObject("imageFile", goodsVO.getGoods_photo());
+		mav.addObject("filename", goodsVO.getGoods_photoname());
+		
+		return mav;
 	}
-	
+		
 	/*==========================
 	 * [관리자] 굿즈 목록
 	 *==========================*/
@@ -130,11 +138,10 @@ public class GoodsController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
+		map.put("status", 0); //status가 0이면 판매중(1), 판매중지(2) 모두 체크
 		
 		//전체|검색 레코드 수
 		int count = goodsService.selectGoodsRowCount(map);
-		
-		log.debug("<<Goods - count>> : " + count);
 		
 		//페이지 처리
 		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 20, 10, "goodsList.do");

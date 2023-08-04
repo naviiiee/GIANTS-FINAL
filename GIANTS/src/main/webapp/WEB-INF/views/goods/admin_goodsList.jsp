@@ -16,7 +16,11 @@
 	});
 </script>
 <div class="page-main">
-	<h2>[관리자] 상품목록</h2>
+	<div class="main-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+		<h2>[관리자] 상품목록</h2>
+		<hr size="0.05" width="100%" noshade>
+	</div>
 	<form action="admin_goodsList.do" id="search_form" method="get">
 		<div class="align-right">
 			<input type="button" value="상품등록" onclick="location.href='registerGoods.do'">

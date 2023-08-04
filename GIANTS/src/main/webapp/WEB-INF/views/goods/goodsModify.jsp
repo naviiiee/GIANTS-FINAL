@@ -18,10 +18,11 @@
 <div class="page-main">
 		<div class="main-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
-		<h2>[관리자] 상품등록</h2>
+		<h2>[관리자] 상품수정</h2>
 		<hr size="0.05" width="100%" noshade>
 	</div>
-	<form:form modelAttribute="goodsVO" action="registerGoods.do" id="register_form" enctype="multipart/form-data">
+	<form:form modelAttribute="goodsVO" action="goodsUpdate.do" id="update_form" enctype="multipart/form-data">
+		<form:hidden path="goods_num"/>
 		<form:errors element="div" cssColor="error-color"/>
 		<ul>
 			<li>
@@ -30,6 +31,12 @@
 				<br> --%>
 				<label for="upload">상품 썸네일 사진</label>
 				<input type="file" id="upload" name="upload" accept="image/gif,image/png,image/jpeg">
+				<c:if test="${!empty goodsVO.goods_photo}">
+					<div id="file_detail">
+						(${goods_photoname})파일이 등록되어 있습니다.
+						<input type="button" value="파일삭제" id="file_del">
+					</div>
+				</c:if>
 				<form:errors path="goods_photo" cssColor="error-color"/>
 			</li>
 			<li> 
@@ -137,7 +144,7 @@
 			
 		</ul>
 		<div class="align-center">
-			<form:button class="default-btn">전송</form:button>
+			<form:button class="default-btn">수정</form:button>
 			<input type="button" value="목록" onclick="location.href='goodsList.do'">
 		</div>
 	</form:form>

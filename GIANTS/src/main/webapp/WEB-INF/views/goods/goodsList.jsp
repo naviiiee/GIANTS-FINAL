@@ -15,9 +15,15 @@
 		});
 	});
 </script>
+<style>
+.horizontal-area img{ width:175px; height:175px;}
+</style>
 <div class="page-main">
-	<h2>상품 목록</h2>
-	<input type="button" value="굿즈등록" onclick="location.href='registerGoods.do'">
+		<div class="main-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+		<h2>상품목록</h2>
+		<hr size="0.05" width="100%" noshade>
+	</div>
 	<input type="button" value="관리자-상품목록" onclick="location.href='admin_goodsList.do'">
 	<form action="goodsList.do" id="search_form" method="get">
 		<ul>
@@ -51,20 +57,20 @@
 					});
 				});
 			</script>
-			<c:if test="${!empty user}">
+			<c:if test="${!empty user && user.mem_auth == 9}">
 				<input type="button" value="상품등록" onclick="location.href='registerGoods.do'">
 			</c:if>
 		</div>
 	</form>
 	<c:if test="${count == 0}">
-	<div>표시할 게시물이 없습니다.</div>
+	<div>표시할 상품이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
 	<div>
 		<c:forEach var="goods" items="${list}">
 		<div class="horizontal-area">
 			<a href="${pageContext.request.contextPath}/goods/goodsDetail.do?goods_num=${goods.goods_num}">
-				<img src="${pageContext.request.contextPath}/item/imageView.do?goods_num=${goods.goods_num}">
+				<img src="${pageContext.request.contextPath}/goods/imageView.do?goods_num=${goods.goods_num}">
 				<span>${goods.goods_name}</span>
 				<br>
 				<b><fmt:formatNumber value="${goods.goods_price}"/>원</b>
