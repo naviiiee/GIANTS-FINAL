@@ -33,8 +33,16 @@
 		</div>
 		<hr size="0.05" width="100%" noshade>
 		<div class="align-center">
-			<input type="button" value="이전" onclick="location.href='gradeList.do'" class="default-btn">
+			<input type="button" value="삭제" id="grade_delete" class="accept-btn">
+			<input type="button" value="목록" onclick="location.href='gradeList.do'" class="default-btn">
 			<form:button class="admin-btn">수정</form:button>
 		</div>
+		<script type="text/javascript">
+		let delete_btn = document.getElementById('grade_delete');
+		delete_btn.onclick = function() {
+			let choice = confirm('DELETE?');
+			if(choice) { location.replace('gradeDelete.do?grade_num=${gradeVO.grade_num}'); }
+		};
+		</script>
 	</form:form>
 </div>

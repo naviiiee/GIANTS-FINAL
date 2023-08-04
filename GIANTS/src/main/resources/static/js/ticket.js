@@ -8,7 +8,14 @@ $(function() {
 	$('#close_seatForm').click(function() {
 		$('#seat_write').hide();
 		location.reload();
-	})
+	});
+	
+	$(document).on('click', '.closeForm', function() {
+		$('.seatUpdate').hide();
+		location.reload();
+	});
+	
+	
 	
 	// 좌석정보 등록
 	$('#seat_write').submit(function(event) {
@@ -28,5 +35,49 @@ $(function() {
 		}
 		
 		event.prevenDefault();
+	});
+	
+	// 좌석 수정 UI
+	$(document).on('click', '.seat-update', function() {
+		$('#seat_write').hide();
+		$('.seatform-update').empty();
+		
+		let seat_num = $('#seatNum').val();
+		
+		let output = '<form action="seatUpdate.do" class="seatUpdate" method="post">';
+		output += '<input type="hidden" name="seat_num" id="seat_num" value="' + seat_num + '">';
+		output += '<input type="hidden" name="grade_num" id="gradeNum" value="' + $('#grade_num').val() + '">';
+		output += '<ul>';
+		output += '<li>';
+		output += '<label for="seat_block">블럭번호</label>';
+		output += '<input type="number" name="seat_block" id="seat_block" value="'+$(this).attr('data-seatblock')+'">';
+		output += '<span id="block_error" class="error-color"></span>';
+		output += '</li>';
+		output += '<li>';
+		output += '<label for="seat_row">좌석행</label>';
+		output += '<input type="checkbox" value="selectRow" onclick="selectRow(this)">All';
+		output += '<input type="checkbox" name="seat_row" value="A" onclick="checkselectRow()">A';
+		output += '<input type="checkbox" name="seat_row" value="B" onclick="checkselectRow()">B';
+		output += '<input type="checkbox" name="seat_row" value="C" onclick="checkselectRow()">C';
+		output += '<input type="checkbox" name="seat_row" value="D" onclick="checkselectRow()">D';
+		output += '<input type="checkbox" name="seat_row" value="E" onclick="checkselectRow()">E';
+		output += '</li>';
+		output += '<li>';
+		output += '<label for="seat_col">좌석열</label>';
+		output += '<input type="checkbox" value="selectCol" onclick="selectCol(this)">All';
+		output += '<input type="checkbox" name="seat_col" value="1" onclick="checkselectCol()">1';
+		output += '<input type="checkbox" name="seat_col" value="2" onclick="checkselectCol()">2';
+		output += '<input type="checkbox" name="seat_col" value="3" onclick="checkselectCol()">3';
+		output += '<input type="checkbox" name="seat_col" value="4" onclick="checkselectCol()">4';
+		output += '<input type="checkbox" name="seat_col" value="5" onclick="checkselectCol()">5';
+		output += '</li>';
+		output += '<li>';
+		output += '<input type="submit" value="수정" class="admin-btn small">';
+		output += ' <input type="button" value="취소" class="closeForm default-btn small">';
+		output += '</li>';
+		output += '</ul>';
+		output += '</form>';
+		
+		$('.seatform-update').append(output);
 	});
 });

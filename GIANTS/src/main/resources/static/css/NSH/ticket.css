@@ -49,8 +49,11 @@ hr{ margin:15px 0; }
 #grade_list a:hover{ color:#052345; font-weight:bold; }
 
 /* 좌석 등록 */
-#seat_write{ width:30%; margin:0 auto; text-align:center; }
-#seat_write ul li{ margin:10px 0; }
-#seat_write ul li label{ width:100px; float:left; font-weight:bold; }
-#seat_write input[type="number"]{ width:50px; text-align:center; }
+#seat_write, .seatform-update{ width:30%; margin:0 auto; text-align:center; }
+#seat_write ul li, .seatform-update ul li{ margin:10px 0; }
+#seat_write ul li label, .seatform-update ul li label{ width:100px; float:left; font-weight:bold; }
+#seat_write input[type="number"], .seatform-update input[type="number"]{ width:50px; text-align:center; }
+
+.seat-list table{ width:800px; margin:0 auto; text-align:center; }
+
 input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }

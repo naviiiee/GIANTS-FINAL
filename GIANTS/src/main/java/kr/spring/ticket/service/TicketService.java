@@ -3,6 +3,7 @@ package kr.spring.ticket.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -21,6 +22,8 @@ public interface TicketService {
 	public GradeVO selectGrade(Integer grade_num);
 	// 수정
 	public void updateGrade(GradeVO gradeVO);
+	//삭제
+	public void deleteGrade(Integer grade_num);
 	
 	/* 좌석정보 */
 	// 등록
@@ -28,6 +31,8 @@ public interface TicketService {
 	// 목록
 	public int selectSeatCount(SeatVO seatVO);
 	public List<SeatVO> selectSeatList(SeatVO seatVO);
+	// 수정
+	public void updateSeat(SeatVO seatVO);
 	
 	/* 경기정보 */
 	// 등록

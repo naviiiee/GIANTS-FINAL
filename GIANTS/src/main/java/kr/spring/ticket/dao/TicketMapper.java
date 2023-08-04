@@ -3,6 +3,7 @@ package kr.spring.ticket.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -46,14 +47,21 @@ public interface TicketMapper {
 	@Update("UPDATE grade SET title = #{title}, price_week = #{price_week}, price_weekend = #{price_weekend} WHERE grade_num = #{grade_num}")
 	public void updateGrade(GradeVO gradeVO);
 	// 삭제
+	@Delete("DELETE FROM grade WHERE grade_num = #{grade_num}")
+	public void deleteGrade(Integer grade_num);
 	
 	/* 좌석정보 */
 	// 등록
 	public void insertSeat(SeatVO seatVO);
 	// 목록
-	@Select("SELECT COUNT(*) FROM seat")
+	@Select("SELECT COUNT(*) FROM seat WHERE grade_num = #{grade_num}")
 	public int selectSeatCount(SeatVO seatVO);
-	@Select("SELECT * FROM seat ORDER BY seat_num ASC")
+	@Select("SELECT * FROM seat WHERE grade_num = #{grade_num} ORDER BY seat_num ASC")
 	public List<SeatVO> selectSeatList(SeatVO seatVO);
-	
+	// 수정
+	@Update("UPDATE seat SET seat_block = #{seat_block}, seat_row = #{seat_row}, seat_col = #{seat_col} WHERE seat_num = #{seat_num}")
+	public void updateSeat(SeatVO seatVO);
+	// 삭제
+	@Delete("DELETE FROM seat WHERE grade_num = #{grade_num}")
+	public void deleteSeat(Integer grade_num);
 }
