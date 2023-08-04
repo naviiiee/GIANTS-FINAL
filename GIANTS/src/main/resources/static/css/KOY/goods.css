@@ -1,0 +1,7 @@
+@charset "UTF-8";
+/*
+------------*/
+.goods-detail .goods-photo img{
+	width:175px;
+	height:175px;
+}
