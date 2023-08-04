@@ -38,5 +38,11 @@ public class TicketController {
 		model.addAttribute("list", list);
 		
 		return "gameList";
-	}	
+	}
+	
+	/* ----- [Ticket] 예매메인 -----*/
+	@RequestMapping("/ticket/ticketMain.do")
+	public String ticketMain() {
+		return "ticketMain";
+	}
 }

@@ -45,4 +45,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/ticket/gameUpdate.jsp"/>
 	</definition>
 	
+	<!-- [Ticket] -->
+	<definition name="ticketMain" extends="main">
+		<put-attribute name="title" value="경기수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/ticket/ticketMain.jsp"/>
+	</definition>
+	
 </tiles-definitions>

@@ -57,3 +57,7 @@ hr{ margin:15px 0; }
 .seat-list table{ width:800px; margin:0 auto; text-align:center; }
 
 input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }
+
+/* 좌석 선택 */
+.select-ticket{ width:100%; display:flex; justify-content:center; }
+.select-left, .select-right{ width:50%; margin:0 auto; }
