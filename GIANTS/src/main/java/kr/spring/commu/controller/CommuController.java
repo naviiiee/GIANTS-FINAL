@@ -1,5 +1,6 @@
 package kr.spring.commu.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import kr.spring.commu.service.CommuService;
 import kr.spring.commu.vo.CommuFavVO;
+import kr.spring.commu.vo.CommuReplyVO;
 import kr.spring.commu.vo.CommuVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
@@ -221,17 +224,128 @@ public class CommuController {
 		}
 		
 		/*=== 댓글 등록 ===*/
+
+		@RequestMapping("/commu/writeReply.do")
+		@ResponseBody
+		public Map<String,String> writeReply(CommuReplyVO commuReplyVO,
+											 HttpSession session,
+											 HttpServletRequest request){
+			log.debug("<<댓글 등록>> : " + commuReplyVO);
+			
+			Map<String,String> mapJson = new HashMap<String,String>();
+			
+			MemberVO user = (MemberVO)session.getAttribute("user");
+			if(user == null) { //로그인 X
+				mapJson.put("result", "logout");
+			}else { //로그인 O
+				//회원번호 등록
+				commuReplyVO.setMem_num(user.getMem_num());
+				//ip 등록
+				commuReplyVO.setRe_ip(request.getRemoteAddr());
+				//댓글 등록
+				
+				commuService.insertReply(commuReplyVO);
+				mapJson.put("result", "success");
+			}
+			
+			return mapJson;
+		}
+		
 		
 		
 		/*=== 댓글 목록 ===*/
+		@RequestMapping("/commu/listReply.do")
+		@ResponseBody
+		public Map<String,Object> getList(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+										  @RequestParam(value="rowCount",defaultValue="10") int rowCount,
+										  @RequestParam int commu_num,
+										  HttpSession session){
+			log.debug("<<currentPage>> : " + currentPage);
+			log.debug("<<board_num>> : " + commu_num);
+			
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("board_num", commu_num);
+			
+			MemberVO user = (MemberVO)session.getAttribute("user");
+			
+			//전체 레코드 수
+			int count = commuService.selectRowCountReply(map);
+			
+			//페이지 처리
+			PagingUtil page = new PagingUtil(currentPage,count,rowCount,1,null);
+			
+			List<CommuReplyVO> list = null;
+			if(count > 0) {
+				map.put("start", page.getStartRow());
+				map.put("end", page.getEndRow());
+				list = commuService.selectListReply(map);
+			}else {
+				list = Collections.emptyList(); //빈 배열을 만들어 전달
+			}
+			
+			Map<String,Object> mapJson = new HashMap<String,Object>();
+			mapJson.put("count", count);
+			mapJson.put("list", list);
+			
+			//로그인한 회원 정보 세팅
+			if(user != null) {
+				mapJson.put("user_num",user.getMem_num());
+			}
+			
+			return mapJson;
+		}
 		
 		
 		/*=== 댓글 삭제 ===*/
+		@RequestMapping("/commu/deleteReply.do")
+		@ResponseBody //성공했는지 실패했는지 json문자열로 보여주기 위해 설정
+		public Map<String,String> deleteReply(@RequestParam int re_num,
+											  HttpSession session){
+			log.debug("<<re_num>> : " + re_num);
+			
+			Map<String,String> mapJson = new HashMap<String,String>();
+			
+			MemberVO user = (MemberVO)session.getAttribute("user");
+			CommuReplyVO db_reply = commuService.selectReply(re_num); //작성자 회원 번호를 알기 위해서
+			if(user == null) { //로그인 X
+				mapJson.put("result", "logout");
+			}else if(user != null && user.getMem_num() == db_reply.getMem_num()) { //작성자 본인일 시
+				commuService.deleteReply(re_num);
+				mapJson.put("result", "success");
+			}else { //로그인은 되어있으나 작성자가 아닐 시
+				mapJson.put("result", "wrongAccess");
+			}
+			
+			return mapJson;
+		}
+		
 		
 		
 		/*=== 댓글 수정 ===*/
+		@RequestMapping("/commu/updateReply.do")
+		@ResponseBody
+		public Map<String,String> modifyReply(CommuReplyVO commuReplyVO,
+											  HttpSession session,
+											  HttpServletRequest request){
+			log.debug("<<BoardReplyVO>> : " + commuReplyVO);
+			
+			Map<String,String> mapJson = new HashMap<String,String>();
+			
+			MemberVO user = (MemberVO)session.getAttribute("user");
+			CommuReplyVO db_reply = commuService.selectReply(commuReplyVO.getRe_num());
+			if(user == null) { //로그인 X
+				mapJson.put("result", "logout");
+			}else if(user != null && user.getMem_num() == db_reply.getMem_num()) { //작성자 본인일 시
+				//ip 등록
+				commuReplyVO.setRe_ip(request.getRemoteAddr());
+				//댓글 수정 처리
+				commuService.updateReply(commuReplyVO);
+				mapJson.put("result", "success");
+			}else { //로그인은 되어있으나 작성자가 아닐 시
+				mapJson.put("result", "wrongAccess");
+			}
+			
+			return mapJson;
+		}
 		
-		
-		
-	
 }

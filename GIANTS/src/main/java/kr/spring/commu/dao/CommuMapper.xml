@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.commu.dao.CommuMapper">
 
-	<!-- 글쓰기 -->
+	<!-- 커뮤니티 글 쓰기 -->
 	<insert id="insertCommu" parameterType="commuVO">
 		INSERT INTO commu (commu_num, commu_title, commu_content, commu_ip, mem_num) 
 		VALUES (commu_seq.nextval, #{commu_title}, #{commu_content}, #{commu_ip}, #{mem_num})
@@ -32,7 +32,7 @@
 		<if test="order == 2"> <!-- 커뮤 글 조회수 순서 -->
 			ORDER BY c.commu_hit DESC
 		</if>
-		<if test="order == 3"> <!-- 커뮤 글 ㄴ좋아요 수 순서 -->
+		<if test="order == 3"> <!-- 커뮤 글 좋아요 수 순서 -->
 			ORDER BY fav_cnt DESC
 		</if>
 		<if test="order == 4"> <!-- 커뮤 글 댓글수 순서 -->
@@ -66,7 +66,7 @@
                               ON c.mem_num = m.mem_num 
                              LEFT OUTER JOIN (SELECT COUNT(*) re_cnt, commu_num 
                                             FROM commu_reply GROUP BY commu_num)r 
-                              ON c.commu_num = r.board_num  
+                              ON c.commu_num = r.commu_num  
                              LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, commu_num 
                                           FROM commu_fav GROUP BY commu_num)f 
                               ON c.commu_num = f.commu_num 
@@ -76,39 +76,53 @@
       ]]>
 	</select>
 	
+	
 	<!-- 커뮤니티 글 상세 -->
 	<select id="selectCommu" parameterType="integer">
-		SELECT *
-		FROM commu b JOIN member m USING(mem_num)
+		SELECT * 
+		FROM commu c JOIN member m USING(mem_num) 
 		WHERE c.commu_num = #{commu_num}
 	</select>
 	
 	<!-- 댓글 등록 -->
 	<insert id="insertReply" parameterType="commuReplyVO">
-		INSERT INTO commu_reply(re_num,re_content,re_ip,board_num,mem_num) 
-		VALUES(reply_seq.nextval,#{re_content},#{re_ip},#{commu_num},#{mem_num})
+		INSERT INTO commu_reply(
+			re_num,
+			re_content,
+			re_ip,
+			commu_num,
+			mem_num		
+			)
+		VALUES(
+			spreply_seq.nextval,
+			#{re_content},
+			#{re_ip},
+			#{commu_num},
+			#{mem_num}
+			)
 	</insert>
 	
 	<!-- 댓글 목록 -->
 	<select id="selectListReply" parameterType="map" resultType="commuReplyVO">
-		SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT re_num,
+		SELECT * 
+		FROM (SELECT a.*, rownum rnum 
+			  FROM (SELECT re_num,
+			  			   <![CDATA[ 
+			  			   REPLACE(REPLACE(re_content,'<','&lt;'),'>','&gt;') re_content,
+			  			   ]]> 
+			  			   re_date,
+			  			   re_modifydate,
+			  			   commu_num,
+			  			   mem_num,
+			  			   mem_id,
+			  			   mem_nickname 
+			  		FROM commu_reply JOIN member USING(mem_num) 
+			  		WHERE commu_num = #{commu_num} 
+			  		ORDER BY re_num DESC)a) 
 		<![CDATA[
-		REPLACE(REPLACE(re_content, '<' , '&lt;'),'>','&gt;') re_content,
-		]]> 
-		re_date, re_modifydate, commu_num ,mem_num, mem_id, mem_nickname 
-		FROM commu_reply JOIN member USING(mem_num) 
-		WHERE commu_num=#{commu_num} ORDER BY re_num DESC)a) 
-		<![CDATA[
-		WHERE rnum >= #{start} AND rnum <= #{end} 
+		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
-	
-	<!-- 게시글 상세 -->
-	
-	<!-- 댓글 등록 -->
-	
-	<!-- 댓글 목록 -->
-	
 </mapper>	
 
 

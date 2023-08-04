@@ -22,7 +22,7 @@ li{
 		$('#search_form').submit(function(){
 			if($('#keyword').val().trim() == ''){
 				alert('검색어를 입력하세요!');
-				#('#keyword').val('').focus();
+				$('#keyword').val('').focus();
 				return false;
 			}
 		});
@@ -43,10 +43,10 @@ li{
 				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
 			</li>
 			<li>
-				<input type="submit" value="검색" class="default-btn">
+				<input type="submit" value="검색">
+				<input type="button" value="목록" onclick="location.href='commuList.do'">
 			</li>
 		</ul>
-	
 	
 	
 		<!-- 정렬 -->
@@ -70,13 +70,11 @@ li{
 					});
 				});
 			</script>
-			<input type="button" value="글쓰기" onclick="location.href='write.do'">
 			
-			<!--  
 			<c:if test="${!empty user}">
 			<input type="button" value="글쓰기" onclick="location.href='write.do'">
 			</c:if>
-			-->
+			
 		</div>
 	</form>
 	
@@ -98,16 +96,19 @@ li{
 				<tr>
 					<td class="align-center">${commu.commu_num}</td>
 					<td class="align-center" width="500">
-						<a href="detail.do?commu_num=${commu.commu_num}">${commu.commu_title}</a>
+						<a href="detail.do?commu_num=${commu.commu_num}">${commu.commu_title} (${commu.re_cnt})</a>
 					</td>
-					<td class="align-center">${member.mem_nickname}</td>
+					<td class="align-center">
+						<c:if test="${empty commu.mem_nickname}">${commu.mem_id}</c:if>
+						<c:if test="${!empty commu.mem_nickname}">${commu.commu_nick_name}</c:if>
+					</td>
 					<td class="align-center">${commu.commu_date}</td>
 					<td class="align-center">${commu.commu_hit}</td>
-					<td class="align-center">${commu.commu_regdate}</td>
 					<td class="align-center">${commu.fav_cnt}</td>
 				</tr>
 			</c:forEach>
 		</table>
+		<!-- 페이지 -->
 		<div class="align-center">${page}</div>
 	</c:if>
 </div>

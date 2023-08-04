@@ -1,7 +1,14 @@
 package kr.spring.commu.vo;
 
 import kr.spring.util.DurationFromNow;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+
+@Getter
+@Setter
+@ToString
 public class CommuReplyVO {
 	private int re_num; //댓글 번호
 	private String re_content; //내용
