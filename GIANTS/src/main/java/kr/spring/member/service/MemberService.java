@@ -1,5 +1,6 @@
 package kr.spring.member.service;
 
+import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberVO;
 
 public interface MemberService {
@@ -9,7 +10,7 @@ public interface MemberService {
 	
 	//ID를 이용한 회원정보 체크
 	public MemberVO selectCheckMember(String id);
-	public MemberVO selectCheckCompany(String id);
+	//public MemberVO selectCheckCompany(String id);
 	
 	//회원번호를 이용한 회원정보 구하기
 	public MemberVO selectMember(Integer mem_num);
