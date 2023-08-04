@@ -167,9 +167,11 @@ public class MemberController {
             if (member.getMem_auth() == 3) {
                //기업일때 기업정보 세팅
                member = memberService.selectCompany(member.getMem_num());
+               log.debug("<<로그인member>> : " + member);
             }else {
                //기업이 아닌 회원정보 세팅 (정지, 일반, 관리자)
                member = memberService.selectMember(member.getMem_num());
+               log.debug("<<member>> : " + member);
             }
             //인증 성공, 로그인 처리
             session.setAttribute("user", member);
