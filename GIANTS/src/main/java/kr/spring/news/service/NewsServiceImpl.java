@@ -16,7 +16,7 @@ public class NewsServiceImpl implements NewsService{
 	
 	@Autowired
 	NewsMapper newsMapper;
-	
+	 
 	@Override
 	public List<NewsVO> selectNewsList(Map<String, Object> map) {
 		return newsMapper.selectNewsList(map);

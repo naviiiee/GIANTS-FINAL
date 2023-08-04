@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 public class NewsController {
 	@Autowired
 	private NewsService newsService;
-	
+	 
 	//자바빈(VO) 초기화
 	@ModelAttribute
 	public NewsVO initCommand() {

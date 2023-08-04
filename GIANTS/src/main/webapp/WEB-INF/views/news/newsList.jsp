@@ -11,7 +11,7 @@
 				$('#keyword').val('').focus();
 				return false;
 			}
-		});
+		}); 
 	});
 </script>
 <div class="page-main">

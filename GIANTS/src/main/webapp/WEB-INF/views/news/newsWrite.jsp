@@ -9,7 +9,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <style>
-.ck-editor__editable_inline{
+.ck-editor__editable_inline{ 
 	min-height:250px;
 }
 </style>

@@ -7,7 +7,7 @@
 			news_num,
 			news_title,
 			news_content,
-			mem_num)
+			mem_num) 
 		VALUES(
 			news_seq.nextval,
 			#{news_title},
