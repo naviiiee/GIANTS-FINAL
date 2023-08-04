@@ -11,6 +11,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class GameVO {
+	private int grade_num;
 	private int game_num;		// 경기구분번호
 	@Pattern(regexp="^(202[34])-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$")
 	private String game_date;	// 경기일자
@@ -20,4 +21,6 @@ public class GameVO {
 	private String game_team;	// 상태팀이름
 	private int game_state;		// 경기예매가능여부
 	
+	private GradeVO gradeVO;
+	private SeatVO seatVO;
 }

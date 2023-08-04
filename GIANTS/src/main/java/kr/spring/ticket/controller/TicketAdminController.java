@@ -30,6 +30,8 @@ public class TicketAdminController {
 	
 	// javaBean(VO) 초기화
 	@ModelAttribute
+	public GameVO initGame() { return new GameVO(); }
+	@ModelAttribute
 	public GradeVO initGrade() { return new GradeVO(); }
 	
 	/* ----- [Grade] 좌석등급 목록 -----*/

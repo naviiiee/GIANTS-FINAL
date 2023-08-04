@@ -21,7 +21,7 @@
 		<tr>
 			<th>날짜</th>
 			<th>시간</th>
-			<th>경기</th>
+			<th>VS</th>
 			<th>구장</th>
 			<th>예매</th>
 			<th>관리자</th>
@@ -31,7 +31,6 @@
 			<td>${game.game_date}</td>
 			<td>${game.game_time}</td>
 			<td>
-				${game.game_team}<br>
 				<img src="${pageContext.request.contextPath}/images/${game.game_team}.png">
 			</td>
 			<td>사직야구장</td>
@@ -40,7 +39,7 @@
 				<input type="button" value="준비중" class="default-btn" readonly="readonly">
 				</c:if>
 				<c:if test="${game.game_state == 1}">
-				<input type="button" value="예매" onclick="location.href='#.do?game_num=${game.game_num}'" class="accept-btn">
+				<input type="button" value="예매" onclick="location.href='ticketMain.do?game_num=${game.game_num}'" class="accept-btn">
 				</c:if>
 				<c:if test="${game.game_state == 2}">
 				<input type="button" value="매진" class="default-btn" readonly="readonly">
@@ -51,7 +50,6 @@
 			</td>
 			<td>
 				<input type="button" value="수정" onclick="location.href='gameUpdate.do?game_num=${game.game_num}'" class="admin-btn small">
-				<input type="button" value="좌석" onclick="location.href='gradeWrite.do?game_num=${game.game_num}'" class="admin-btn small">
 			</td>
 		</tr>
 		</c:forEach>
