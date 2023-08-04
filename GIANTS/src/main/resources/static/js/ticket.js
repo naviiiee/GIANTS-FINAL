@@ -37,6 +37,26 @@ $(function() {
 		event.prevenDefault();
 	});
 	
+	// 좌석정보 수정
+	$(document).on('submit', '.seatUpdate', function(event) {
+		// 유효성 검사
+		if($('.seat-block').val().trim() == '0' || $('.seat-block').val().trim() == '') {
+			$('.block-error').text('1부터 935이하의 값 입력');
+			$('.seat-block').val('').focus();
+			return false;
+		}
+		if($('input[name="seat_row"]:checked').length == 0) {
+			$('.row-error').text('좌석행 선택 필수');
+			return false;
+		}
+		if($('input[name="seat_col"]:checked').length == 0) {
+			$('.col-error').text('좌석열 선택 필수');
+			return false;
+		}
+		
+		event.prevenDefault();
+	});
+	
 	// 좌석 수정 UI
 	$(document).on('click', '.seat-update', function() {
 		$('#seat_write').hide();
@@ -50,8 +70,8 @@ $(function() {
 		output += '<ul>';
 		output += '<li>';
 		output += '<label for="seat_block">블럭번호</label>';
-		output += '<input type="number" name="seat_block" id="seat_block" value="'+$(this).attr('data-seatblock')+'">';
-		output += '<span id="block_error" class="error-color"></span>';
+		output += '<input type="number" name="seat_block" class="seat-block" value="'+$(this).attr('data-seatblock')+'">';
+		output += '<span class="block-error error-color"></span>';
 		output += '</li>';
 		output += '<li>';
 		output += '<label for="seat_row">좌석행</label>';
@@ -61,6 +81,7 @@ $(function() {
 		output += '<input type="checkbox" name="seat_row" value="C" onclick="checkselectRow()">C';
 		output += '<input type="checkbox" name="seat_row" value="D" onclick="checkselectRow()">D';
 		output += '<input type="checkbox" name="seat_row" value="E" onclick="checkselectRow()">E';
+		output += '<span class="row-error error-color"></span>';
 		output += '</li>';
 		output += '<li>';
 		output += '<label for="seat_col">좌석열</label>';
@@ -70,6 +91,7 @@ $(function() {
 		output += '<input type="checkbox" name="seat_col" value="3" onclick="checkselectCol()">3';
 		output += '<input type="checkbox" name="seat_col" value="4" onclick="checkselectCol()">4';
 		output += '<input type="checkbox" name="seat_col" value="5" onclick="checkselectCol()">5';
+		output += '<span class="col-error error-color"></span>';
 		output += '</li>';
 		output += '<li>';
 		output += '<input type="submit" value="수정" class="admin-btn small">';

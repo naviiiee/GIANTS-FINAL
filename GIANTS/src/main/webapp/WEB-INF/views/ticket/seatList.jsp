@@ -111,7 +111,10 @@
 					<td>${seat.seat_block}</td>
 					<td>${seat.seat_row}</td>
 					<td>${seat.seat_col}</td>
-					<td><input type="button" value="수정" data-seatblock="${seat.seat_block}" class="seat-update admin-btn small"></td>
+					<td>
+						<input type="hidden" name="seat_num" value="${seat.seat_num}" id="seatNum">
+						<input type="button" value="수정" data-seatblock="${seat.seat_block}" class="seat-update admin-btn small">
+					</td>
 				</tr>
 				</c:forEach>
 			</table>
