@@ -19,20 +19,17 @@ public class NewsServiceImpl implements NewsService{
 	
 	@Override
 	public List<NewsVO> selectNewsList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return newsMapper.selectNewsList(map);
 	}
 
 	@Override
 	public int selectNewsCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		return newsMapper.selectNewsCount(map);
 	}
 
 	@Override
 	public void insertNews(NewsVO news) {
-		// TODO Auto-generated method stub
-		
+		newsMapper.insertNews(news);
 	}
 
 	@Override
