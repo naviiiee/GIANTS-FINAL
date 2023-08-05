@@ -3,6 +3,7 @@ package kr.spring.goods.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -41,19 +42,23 @@ public interface GoodsMapper {
 	public void updateGoods(GoodsVO goods);
 	//상품 삭제
 	public void deleteGoods(Integer goods_num);
-	/*
+	
 	//=====상품 찜=====//
-	//상품 찜 목록
+	//상품 찜 정보 읽어오기
+	@Select("SELECT * FROM goods_fav WHERE goods_num=#{goods_num} AND mem_num=#{mem_num}")
 	public GoodsFavVO selectGoodsFav(GoodsFavVO fav);
 	//상품 찜 레코드 수
+	@Select("SELECT count(*) FROM goods_fav WHERE goods_num=#{goods_num}")
 	public int selectGoodsFavCount(Integer goods_num);
 	//상품 찜 등록
+	@Insert("INSERT INTO goods_fav(fav_num, goods_num, mem_num) VALUES(goods_fav_seq.nextval, #{goods_num}, #{mem_num})")
 	public void insertGoodsFav(GoodsFavVO fav);
 	//상품 찜 취소
+	@Delete("DELETE FROM goods_fav WHERE fav_num=#{fav_num}")
 	public void deleteGoodsFav(Integer fav_num);
 	//상품삭제시 상품 찜 취소
 	public void deleteGoodsFavByGoodsNum(Integer goods_num);
-	
+	/*
 	//=====상품 후기=====//
 	//전체|검색 상품 후기 목록
 	public GoodsReviewVO selectGoodsReview(Map<String, Object> map);

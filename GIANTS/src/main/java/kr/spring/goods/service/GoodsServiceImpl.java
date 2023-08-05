@@ -73,32 +73,22 @@ public class GoodsServiceImpl implements GoodsService{
 
 	@Override
 	public GoodsFavVO selectGoodsFav(GoodsFavVO fav) {
-		// TODO Auto-generated method stub
-		return null;
+		return goodsMapper.selectGoodsFav(fav);
 	}
 
 	@Override
 	public int selectGoodsFavCount(Integer goods_num) {
-		// TODO Auto-generated method stub
-		return 0;
+		return goodsMapper.selectGoodsFavCount(goods_num);
 	}
 
 	@Override
 	public void insertGoodsFav(GoodsFavVO fav) {
-		// TODO Auto-generated method stub
-		
+		goodsMapper.insertGoodsFav(fav);
 	}
 
 	@Override
 	public void deleteGoodsFav(Integer fav_num) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteGoodsFavByGoodsNum(Integer goods_num) {
-		// TODO Auto-generated method stub
-		
+		goodsMapper.deleteGoodsFav(fav_num);
 	}
 
 	@Override

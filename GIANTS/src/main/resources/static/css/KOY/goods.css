@@ -1,7 +1,123 @@
 @charset "UTF-8";
-/*
-------------*/
-.goods-detail .goods-photo img{
+/* 상품 목록
+----------------*/
+.goods-space .horizontal-area{
+	margin:2px;
+	padding:3px;
+	width:180px;
+	height:230px;
+	float:left;
+	text-align:center;
+	overflow:hidden;
+}
+.goods-space .horizontal-area img{
 	width:175px;
 	height:175px;
 }
+.goods-space .horizontal-area span{
+	padding:5px;
+	margin:5px;
+}
+.goods-space .float-clear{
+	clear:both;
+}
+
+/* 상품 상세페이지
+----------------*/
+.goods-photo{
+	width:40%;
+	margin:0;
+	float:left;
+	height:400px;
+}
+.goods-photo img{
+	width:400px;
+	height:400px;
+}
+.goods-info{
+	float:right;
+	width:60%;
+	height:400px;
+}
+.goods-name{
+	margin:0;
+	padding:0;
+	width:930px;
+	color:#807f7e;
+}
+.goods-info li{
+	padding:0 0 5px 0;
+}
+.goods-info .goods-name{
+	font-size:22pt;
+}
+.goods-info form{
+	border:none;
+	width:700px;
+	float:left;
+	margin:0;
+}
+.goods-btns{
+	padding:24px 0 0 0;
+	align-items:center;
+	cursor:pointer;
+	display:inline-block;
+}
+.goods-btns div{
+	width:170px;
+	height:67.8px;
+	border:1px solid #000;
+	display:inline-block;
+	text-align:center;
+	line-height:67.8px;
+	font-size:17px;
+}
+img#fav_btn, img#cart_btn, img#pay_btn{
+	width:21.6px;
+	margin:0;
+}
+span#output_fcount{
+	color:#6cace4;
+	font-weight:bold;
+}
+div#goods_cart{
+	background-color:gray;
+	color:#FFF;
+}
+div#goods_pay{
+	background-color:#000;
+	color:#FFF;
+}
+.goods-subinfo{
+	padding:10px;
+	margin-left:5px;
+	width:100%;
+}
+figure.image{
+	text-align:center;
+}
+figure.image img{
+	width:500px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

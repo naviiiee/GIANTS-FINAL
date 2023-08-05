@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.goods.service.GoodsService;
+import kr.spring.goods.vo.GoodsFavVO;
 import kr.spring.goods.vo.GoodsOptionVO;
 import kr.spring.goods.vo.GoodsVO;
+import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
 import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -197,10 +199,65 @@ public class GoodsController {
 		return "goodsModify";	
 	}
 	
+	/*======굿즈 찜하기=======*/
+	//굿즈 좋아요 읽기
+	@RequestMapping("/goods/getFav.do")
+	@ResponseBody
+	public Map<String, Object> getFav(GoodsFavVO fav, HttpSession session){
+		
+		log.debug("<<상품 찜하기 읽기>> : " + fav);
+		
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user == null) { //로그인 되지 않은 상태
+			mapJson.put("status", "noFav");
+		}else { //로그인 된 상태
+			//로그인 된 회원번호 셋팅
+			fav.setMem_num(user.getMem_num());
+			
+			GoodsFavVO goodsFav = goodsService.selectGoodsFav(fav);
+			if(goodsFav != null) {
+				mapJson.put("status", "yesFav");
+			}else {
+				mapJson.put("status", "noFav");
+			}
+			mapJson.put("count", goodsService.selectGoodsFavCount(fav.getGoods_num()));			
+		}
+		return mapJson;
+	}
 	
-	
-	
-	
+	//굿즈 찜하기 등록|취소
+	@RequestMapping("/goods/writeFav.do")
+	@ResponseBody
+	public Map<String, Object> writeFav(GoodsFavVO fav, HttpSession session){
+		log.debug("<<상품 찜하기 등록/삭제 - GoodsFavVO>> : " + fav);
+		
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user == null) {
+			mapJson.put("result", "logout");
+		}else {
+			//로그인 된 회원번호 셋팅
+			fav.setMem_num(user.getMem_num());
+			
+			GoodsFavVO goodsFav = goodsService.selectGoodsFav(fav);
+			if(goodsFav != null) { //등록한 찜하기가 있으면 삭제
+				goodsService.deleteGoodsFav(goodsFav.getFav_num());
+				
+				mapJson.put("result", "success");
+				mapJson.put("status", "noFav");
+			}else { //등록한 찜하기가 없으면 등록
+				goodsService.insertGoodsFav(fav);
+				
+				mapJson.put("result", "success");
+				mapJson.put("status", "yesFav");
+			}
+			mapJson.put("count", goodsService.selectGoodsFavCount(fav.getGoods_num()));
+		}
+		return mapJson;
+	}
 	
 	
 	
