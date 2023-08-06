@@ -76,7 +76,7 @@
 				<img src="${pageContext.request.contextPath}/goods/imageView.do?goods_num=${goods.goods_num}">
 				<span>${goods.goods_name}</span>
 				<br>
-				<b><fmt:formatNumber value="${goods.goods_price}"/>원</b>
+				<b><fmt:formatNumber value="${goods.goods_dprice}"/>원</b>
 			</a>
 		</div>
 		</c:forEach>

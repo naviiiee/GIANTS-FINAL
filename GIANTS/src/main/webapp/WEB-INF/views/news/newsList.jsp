@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 뉴스 목록 시작 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/news.css">
 <script type="text/javascript">
 	$(function(){
 		//검색 유효성 체크
@@ -11,7 +12,21 @@
 				$('#keyword').val('').focus();
 				return false;
 			}
-		}); 
+		});
+		
+		$(document).ready(function() {
+		    var tdElement = $(".news-hit-result"); // td 요소 선택
+		    
+		    // td 요소에서 내용 가져오기
+		    var dateTimeString = tdElement.text().trim();
+		    
+		    // 시분초를 제외하고 날짜 정보만 출력
+		    var datePart = dateTimeString.split(" ")[0];
+		    
+		    // 결과를 화면에 출력
+		    $(".news-hit-result").text(datePart);
+		});
+		
 	});
 </script>
 <div class="page-main">
@@ -60,25 +75,29 @@
 		<div>표시할 뉴스가 없습니다.</div>
 		</c:if>
 		<c:if test="${count > 0}">
-		<table>
-			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성일</th>
-				<th>조회수</th>
-			</tr>
-			<c:forEach var="news" items="${list}">
-			<tr>
-				<td>${news.news_num}</td>
-				<td>
-					<a href="newsDetail.do?news_num=${news.news_num}">${news.news_title}</a>
-				</td>
-				<td>${news.news_regdate}</td>
-				<td>${news.news_hit}</td>
-			</tr>
-			</c:forEach>
-		</table>
-		<div>${page}</div>
+		<div class="news-list">
+			<table>
+				<tr>
+					<th style="width:5%;">번호</th>
+					<th>제목</th>
+					<th style="width:10%;">작성일</th>
+					<th style="width:5%;">조회수</th>
+				</tr>
+				<c:forEach var="news" items="${list}">
+				<tr>
+					<td>${news.news_num}</td>
+					<td>
+						<a href="newsDetail.do?news_num=${news.news_num}">${news.news_title}</a>
+					</td>
+					<td class="news-hit-result">
+						${news.news_regdate}
+					</td>
+					<td>${news.news_hit}</td>
+				</tr>
+				</c:forEach>
+			</table>
+		</div>
+		<div class="align-center">${page}</div>
 		</c:if>
 </div>
 <!-- 뉴스 목록 끝 -->
