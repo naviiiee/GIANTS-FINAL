@@ -22,7 +22,7 @@ public class CompanyCheckInterceptor implements HandlerInterceptor{
 		HttpSession session = request.getSession();
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		//기업은 권한 레벨이 3 이다.
-		if(user == null || user.getMem_auth() != 3 || user.getMem_auth() != 9) {
+		if(user == null || (user.getMem_auth() != 3 && user.getMem_auth() != 9)) {
 			//기업 권한이 아닐 때
 			RequestDispatcher dispatcher = 
 					request.getRequestDispatcher(
