@@ -30,25 +30,21 @@ public class FoodServiceImpl implements FoodService{
 
 	@Override
 	public void deleteFood(Integer food_num) {
-		// TODO Auto-generated method stub
-		
+		foodMapper.deleteFood(food_num);
 	}
 
 	@Override
 	public List<FoodVO> selectList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return foodMapper.selectList(map);
 	}
 
 	@Override
-	public int selectRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int selectRowCount(String comp_num) {
+		return foodMapper.selectRowCount(comp_num);
 	}
 
 	@Override
-	public FoodVO selectFood(FoodVO food) {
-		// TODO Auto-generated method stub
-		return null;
+	public FoodVO selectFood(int food_num) {
+		return foodMapper.selectFood(food_num);
 	}
 }

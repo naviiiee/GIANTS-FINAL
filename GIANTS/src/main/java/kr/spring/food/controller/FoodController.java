@@ -1,6 +1,7 @@
 package kr.spring.food.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.food.service.FoodService;
 import kr.spring.food.vo.FoodVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -63,8 +65,31 @@ public class FoodController {
 	 *		기업 상세 -> 기업 수정 페이지 
 	 * 	========================================*/
 	@RequestMapping("/food/fixCompFoodList.do")
-	public String foodFixCompDetail() {
-		return "fixCompFoodList";
+	public ModelAndView foodFixCompDetail(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
+										  HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		MemberVO comp = (MemberVO)session.getAttribute("user");
+		int count = foodService.selectRowCount(comp.getCompanyDetailVO().getComp_num());
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(currentPage, count, 5, 5, "fixCompFoodList.do");
+		
+		List<FoodVO> list = null;
+		if (count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = foodService.selectList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("fixCompFoodList");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
 	}
 	
 	/*	==========================
@@ -100,9 +125,12 @@ public class FoodController {
 			return formAddNewFood();
 		}
 		
+		log.debug("<< 사업자 등록번호 세팅 전 >>");
 		//사업자 등록 번호 VO에 세팅
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		vo.setComp_num(user.getCompanyDetailVO().getComp_num());
+		
+		log.debug("<< 사업자 등록번호 완료 상품 등록 시작 >>");
 		
 		//상품 등록 sql 시작
 		foodService.insertFood(vo);
@@ -114,9 +142,57 @@ public class FoodController {
 		return "common/resultView";
 	}
 	
+	/*	==========================
+	 *		식품 수정 페이지
+	 * 	==========================*/
+	@GetMapping("/food/fixFood.do")
+	public String formFixFood(@RequestParam int food_num, Model model) {
+		
+		FoodVO foodVO = foodService.selectFood(food_num);
+		model.addAttribute("foodVO", foodVO);
+		
+		return "fixFood";
+	}
+	@PostMapping("/food/fixFood.do")
+	public String submitFixFood(@Valid FoodVO vo, BindingResult result,
+								 Model model, HttpServletRequest request,
+								 HttpSession session) {
+		
+		if (vo.getFood_photo1().length == 0) 
+			result.rejectValue("food_photo1", "required");
+		if (vo.getFood_photo2().length == 0) 
+			result.rejectValue("food_photo2", "required");
+		
+		if(vo.getFood_photo1().length >= 10*1024*1024) 
+			result.rejectValue("food_photo1", "limitUploadSize", new Object[] {"10MB"}, null);
+		if(vo.getFood_photo2().length >= 10*1024*1024) 
+			result.rejectValue("food_photo2", "limitUploadSize", new Object[] {"10MB"}, null);
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if (result.hasErrors()) {
+			return formFixFood(vo.getFood_num(), model);
+		}
+		
+		//View에 표시할 메세지
+		model.addAttribute("message", "수정이 완료되었습니다.");
+		model.addAttribute("url", request.getContextPath() + "/food/fixCompFoodList.do");
+				
+				
+		return "common/resultView";
+	}
 	
-	
-	
+	/*	==========================
+	 *		식품 삭제 페이지
+	 * 	==========================*/
+	@PostMapping("/food/deleteFood.do")
+	public String submitDeleteFood(@RequestParam int food_num) {
+		log.debug("<< 식품 삭제 수행중 >> : " + food_num);
+		
+		//식품 삭제
+		foodService.deleteFood(food_num);
+		
+		return "redirect:/food/fixCompFoodList.do";
+	}
 	
 	
 	

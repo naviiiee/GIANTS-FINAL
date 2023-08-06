@@ -3,7 +3,9 @@ package kr.spring.food.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import kr.spring.food.vo.F_orderVO;
 import kr.spring.food.vo.FoodVO;
@@ -17,15 +19,17 @@ public interface FoodMapper {
 	//식품수정
 	public void fixFood(FoodVO food);
 	//식품삭제
+	@Delete("DELETE FROM food WHERE food_num=#{food_num}")
 	public void deleteFood(Integer food_num);
 	
 	//---------------------------------------------------------
-	//(유저)
+	//(공용)
 	//식품 리스트 페이징
 	public List<FoodVO> selectList(Map<String, Object> map);
-	public int selectRowCount(Map<String,Object> map);
+	public int selectRowCount(String comp_num);
 	//식품 상세정보
-	public FoodVO selectFood(FoodVO food);
+	@Select("SELECT * FROM food WHERE food_num=#{food_num}")
+	public FoodVO selectFood(int food_num);
 	
 	//식품 매장후기
 	public List<Food_reviewVO> selectReviewList(Map<String, Object> map);

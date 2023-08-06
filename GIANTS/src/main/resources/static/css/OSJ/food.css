@@ -259,6 +259,49 @@
 	vertical-align: top;
 }
 
+#fix_compMenu{
+	min-height: 600px;
+}
+
+/* 매장수정 상품목록 테이블 */
+#fix_menuList{
+	border-collapse: collapse;
+	width: 100%;
+	font-size: 1.7em;
+}
+#fix_menuList tr{
+	height:60px;
+	border-top: 1px solid black;
+}
+#fix_menuList tr:last-child{
+	border-bottom: 1px solid black;
+}
+#fix_menuList tr th{
+	padding: 10px 0px;
+}
+#fix_menuList tr td{
+	padding: 10px 0px;
+	text-align: center;
+}
+#fix_menuList tr td form{
+	display: inline-block;
+}
+
+#fix_menuList tr td input[type="button"],
+#fix_menuList tr td input[type="submit"]{
+	border-radius: 15px;
+	background-color:white;
+	padding: 3px;
+	font-size: 1em;
+	font-weight: bold;
+}
+#fix_menuList tr td input[type="button"]:hover,
+#fix_menuList tr td input[type="submit"]:hover{
+	color:white;
+	background-color:gray;
+}
+
+
 /*  ===================================
 	=========== addNewFood ============
 	=================================== */

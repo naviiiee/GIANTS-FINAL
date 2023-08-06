@@ -18,7 +18,7 @@ public interface FoodService {
 	//(유저)
 	//식품 리스트 페이징
 	public List<FoodVO> selectList(Map<String, Object> map);
-	public int selectRowCount(Map<String,Object> map);
+	public int selectRowCount(String comp_num);
 	//식품 상세정보
-	public FoodVO selectFood(FoodVO food);
+	public FoodVO selectFood(int food_num);
 }

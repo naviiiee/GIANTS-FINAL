@@ -8,9 +8,57 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
+import kr.spring.interceptor.AdminCheckInterceptor;
+import kr.spring.interceptor.CompanyCheckInterceptor;
+import kr.spring.interceptor.LoginCheckInterceptor;
+
 // Java Code 기반 설정 Class
 @Configuration
 public class AppConfig implements WebMvcConfigurer {
+	private LoginCheckInterceptor loginCheck;
+	private CompanyCheckInterceptor compCheck;
+	private AdminCheckInterceptor adminCheck;
+	
+	
+	@Bean
+	public LoginCheckInterceptor interceptor1() {
+		loginCheck = new LoginCheckInterceptor();
+		return loginCheck;
+	}
+	
+	@Bean
+	public CompanyCheckInterceptor interceptor2() {
+		compCheck = new CompanyCheckInterceptor();
+		return compCheck;
+	}
+	
+	@Bean
+	public AdminCheckInterceptor interceptor3() {
+		adminCheck = new AdminCheckInterceptor();
+		return adminCheck;
+	}
+	
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		//Login(로그인) 인터셉터 설정
+		registry.addInterceptor(loginCheck)
+				//오세진 - Food
+				.addPathPatterns("/food/foodCompDetail.do")
+				.addPathPatterns("/food/fixCompFoodList.do")
+				.addPathPatterns("/food/addNewFood.do")
+				.addPathPatterns("/food/fixFood.do")
+				.addPathPatterns("/food/deleteFood.do");
+		
+		//Comp(기업) 인터셉터 설정
+		registry.addInterceptor(compCheck)
+		//오세진 - Food
+				.addPathPatterns("/food/fixCompFoodList.do")
+				.addPathPatterns("/food/addNewFood.do")
+				.addPathPatterns("/food/fixFood.do")
+				.addPathPatterns("/food/deleteFood.do");
+		
+		//Admin(관리자) 인터셉터 설정
+	}
 
 	@Bean
 	public TilesConfigurer tilesConfigurer() {

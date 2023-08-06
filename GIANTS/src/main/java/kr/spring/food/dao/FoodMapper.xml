@@ -15,6 +15,7 @@
 			food_photo1_name,
 			food_photo2,
 			food_photo2_name,
+			food_regdate,
 			food_status)
 		VALUES(
 			food_seq.nextval,
@@ -27,9 +28,51 @@
 			#{food_photo1_name},
 			#{food_photo2},
 			#{food_photo2_name},
-			#{food_regdate},
-			#{food_modifydate},
+			sysdate,
 			#{food_status}
 		)
 	</insert>
+	
+	<!-- 식품목록 레코드수 쿼리 -->
+	<select id="selectRowCount" parameterType="string" resultType="integer">
+		SELECT
+		  COUNT(*)
+		FROM food
+		WHERE comp_num=#{comp_num}
+	</select>
+	
+	<!-- 식품목록 리스트 페이징 쿼리 -->
+	<select id="selectList" parameterType="map" resultType="foodVO">
+		SELECT
+		  *
+		FROM (SELECT
+				a.*,
+				rownum rnum
+			  FROM (SELECT
+			  		  *
+			  		FROM food
+			  		ORDER BY food_num DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
