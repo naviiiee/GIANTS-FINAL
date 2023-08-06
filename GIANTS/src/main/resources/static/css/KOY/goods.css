@@ -28,7 +28,7 @@
 	width:40%;
 	margin:0;
 	float:left;
-	height:400px;
+	height:500px;
 }
 .goods-photo img{
 	width:400px;
@@ -37,16 +37,17 @@
 .goods-info{
 	float:right;
 	width:60%;
-	height:400px;
+	height:500px;
+	margin:0;
 }
 .goods-name{
 	margin:0;
 	padding:0;
-	width:930px;
 	color:#807f7e;
 }
-.goods-info li{
+.goods-info li:not(span){
 	padding:0 0 5px 0;
+	font-size:20px;
 }
 .goods-info .goods-name{
 	font-size:22pt;
@@ -57,14 +58,17 @@
 	float:left;
 	margin:0;
 }
+form#goods_cart{
+	padding:10px;
+}
 .goods-btns{
-	padding:24px 0 0 0;
-	align-items:center;
 	cursor:pointer;
-	display:inline-block;
+	display: flex;
+	justify-content: center;
 }
 .goods-btns div{
-	width:170px;
+	margin:5px;
+	width:230px;
 	height:67.8px;
 	border:1px solid #000;
 	display:inline-block;
@@ -88,10 +92,11 @@ div#goods_pay{
 	background-color:#000;
 	color:#FFF;
 }
-.goods-subinfo{
+.goods-subinfo, div#goods_delivery li{
 	padding:10px;
-	margin-left:5px;
+	margin:0 5px;
 	width:100%;
+	font-size:17px;
 }
 figure.image{
 	text-align:center;
@@ -99,16 +104,59 @@ figure.image{
 figure.image img{
 	width:500px;
 }
-
-
-
-
-
-
-
-
-
-
+div.medium-nav{
+	cursor:pointer;
+	width:100%;
+	display:inline-block;
+	text-align:center;
+}
+div.medium-nav ul li{
+	width:24%;
+	background-color:#FFF;
+	line-height:30px;
+	text-align:center;
+	display:inline-block;
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	border-right:1px solid #ccc;
+}
+div.medium-nav ul li:first-child{
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	border-right:1px solid #ccc;
+	border-left:1px solid #ccc;
+}
+div.medium-nav ul li.selected{
+	border-top:1px solid #000;
+	border-bottom:1px solid #ccc;
+	border-right:1px solid #ccc;
+}
+div.medium-nav a{
+	text-decoration:none;
+	display:block;
+	color:#000;
+}
+div.medium-nav ul li.selected a{
+	font-weight:bold;
+}
+h3.del-title{
+	font-size:20px;
+	margin:10px 20px;
+	padding:5px;
+}
+div.deli-sub{
+	width:50%;
+	min-height:300px;
+	float:left;
+}
+div#goods_delivery ul{
+	margin-left:50px;
+}
+div#goods_delivery ul li{
+	list-style-type:square;
+	margin:0;
+	padding:5px;
+}
 
 
 
