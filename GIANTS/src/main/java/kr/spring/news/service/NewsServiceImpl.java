@@ -34,14 +34,12 @@ public class NewsServiceImpl implements NewsService{
 
 	@Override
 	public NewsVO selectNews(Integer news_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return newsMapper.selectNews(news_num);
 	}
 
 	@Override
 	public void updateHit(Integer news_num) {
-		// TODO Auto-generated method stub
-		
+		newsMapper.updateHit(news_num);
 	}
 
 	@Override

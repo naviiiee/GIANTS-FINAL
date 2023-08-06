@@ -75,6 +75,12 @@
 		]]>
 	</select>
 	
-	
+	<!-- 뉴스 상세 -->
+	<select id="selectNews" parameterType="integer">
+		SELECT
+			*
+		FROM news n JOIN member m USING(mem_num)
+		WHERE news_num=#{news_num}
+	</select>
 	
 </mapper>

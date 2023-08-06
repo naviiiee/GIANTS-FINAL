@@ -20,5 +20,6 @@ public class NewsVO {
 	private int news_hit;
 	private int mem_num;
 	
-	private int id;
+	private String mem_id;
+	private String mem_nickname;
 }

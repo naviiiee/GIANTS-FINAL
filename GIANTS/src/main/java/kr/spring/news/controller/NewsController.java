@@ -23,6 +23,7 @@ import kr.spring.member.vo.MemberVO;
 import kr.spring.news.service.NewsService;
 import kr.spring.news.vo.NewsVO;
 import kr.spring.util.PagingUtil;
+import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -107,9 +108,21 @@ public class NewsController {
 		return "common/resultView";
 	}
 
-	
-	
-	
+	/*==================
+	 * 뉴스 상세페이지
+	 *==================*/
+	@RequestMapping("/news/newsDetail.do")
+	public ModelAndView getDetail(@RequestParam int news_num) {
+		log.debug("<<뉴스 상세페이지>>" + news_num);
+		
+		newsService.updateHit(news_num);
+		
+		//뉴스 상세
+		NewsVO news = newsService.selectNews(news_num);
+		news.setNews_title(StringUtil.useNoHtml(news.getNews_title()));
+				
+		return new ModelAndView("newsView", "news", news);
+	}
 	
 	
 	

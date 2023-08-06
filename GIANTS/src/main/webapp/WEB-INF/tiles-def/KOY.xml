@@ -42,4 +42,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/news/newsWrite.jsp"/>
 	</definition>
 	
+	<definition name="newsView" extends="main">
+		<put-attribute name="title" value="뉴스상세"/>
+		<put-attribute name="body" value="/WEB-INF/views/news/newsView.jsp"/>
+	</definition>
+	
 </tiles-definitions>
