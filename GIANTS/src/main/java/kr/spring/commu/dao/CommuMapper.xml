@@ -9,6 +9,7 @@
 	</insert>
 	
 	<!-- 커뮤니티 글 목록 -->
+	<!-- 커뮤니티 글 검색 -->
 	<sql id="commuSearch">
 		<where>
 			<if test="keyword != null and keyword != ''">
@@ -19,12 +20,13 @@
 					c.mem_nickname LIKE '%' || #{keyword} || '%'
 				</if>
 				<if test="keyfield == 3"> <!-- 검색 : 내용 -->
-				
+					c.commu_content LIKE '%' || #{keyword} || '%'
 				</if>
 			</if>
 		</where>
 	</sql>
 	
+	<!-- 글 조회 순서 -->
 	<sql id="commuOrder">
 		<if test="order == 1"> <!-- 커뮤 글 번호 순서 -->
 			ORDER BY c.commu_num DESC 
@@ -43,7 +45,7 @@
 	
 	<!-- 전체/검색 레코드 수 -->
 	<select id="selectRowCount" parameterType="map" resultType="integer">
-		SELECT COUNT(*) FROM commu c JOIN member m on c.mem_num = m.mem_num
+		SELECT COUNT(*) FROM commu c JOIN member m ON c.mem_num = m.mem_num
 		<include refid="commuSearch"></include>
 	</select>
 	
@@ -77,6 +79,10 @@
 	</select>
 	
 	
+	
+	
+	
+
 	<!-- 커뮤니티 글 상세 -->
 	<select id="selectCommu" parameterType="integer">
 		SELECT * 

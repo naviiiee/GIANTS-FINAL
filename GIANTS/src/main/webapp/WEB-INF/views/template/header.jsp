@@ -38,7 +38,7 @@
 			<h1><a href="${pageContext.request.contextPath}/main/main.do"><img src="${pageContext.request.contextPath}/images/Giantlogo.png"></a></h1>
 			<div class="inner-nav">
 				<ul> 
-				   <li class="li_depth1"><a href="#" class="dep1_tit"><span>소개</span></a>
+				    <li class="li_depth1"><a href="${pageContext.request.contextPath}/introduce/stadium.do" class="dep1_tit"><span>소개</span></a>
 				   <li class="li_depth1"><a href="${pageContext.request.contextPath}/news/newsList.do" class="dep1_tit"><span>NEWS</span></a>
 				   <li class="li_depth1"><a href="${pageContext.request.contextPath}/goods/goodsList.do" class="dep1_tit"><span>굿즈</span></a>
 				   <li class="li_depth1"><a href="${pageContext.request.contextPath}/ticket/ticketInfo.do" class="dep1_tit"><span>티켓</span></a>

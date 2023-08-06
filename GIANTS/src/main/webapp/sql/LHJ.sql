@@ -1,6 +1,6 @@
 --커뮤니티
 CREATE TABLE commu(
- commu_num number not null,
+ commu_num number,
  commu_title varchar2(90) not null,
  commu_content clob not null,
  commu_date date default SYSDATE not null,

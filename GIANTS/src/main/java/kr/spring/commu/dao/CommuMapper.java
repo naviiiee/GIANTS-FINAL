@@ -18,7 +18,7 @@ public interface CommuMapper {
 	//부모글
 	public List<CommuVO> selectList(Map<String,Object> map);
 	
-	public int selectRowCount (Map<String,Object> map);
+	public int selectRowCount(Map<String,Object> map);
 	
 	public void insertCommu(CommuVO commu);
 	
