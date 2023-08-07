@@ -124,12 +124,51 @@ public class NewsController {
 		return new ModelAndView("newsView", "news", news);
 	}
 	
+	/*==================
+	 * 뉴스 수정
+	 *==================*/
+	//수정 폼 호출 
+	@GetMapping("/news/newsUpdate.do")
+	public String formUpdate(@RequestParam int news_num, Model model) {
+		
+		NewsVO newsVO = newsService.selectNews(news_num);
+		
+		model.addAttribute("newsVO", newsVO);
+		
+		return "newsModify";
+	}
 	
+	//전송된 데이터 처리
+	@PostMapping("/news/newsUpdate.do")
+	public String submitUpdate(@Valid NewsVO newsVO, BindingResult result,
+								HttpServletRequest request, Model model) {
+		log.debug("<<뉴스 수정 - NewsVO>> : " + newsVO);
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			return "newsModify";
+		}
+		
+		//뉴스 수정
+		newsService.updateNews(newsVO);
+		
+		model.addAttribute("message", "뉴스 수정 완료!");
+		model.addAttribute("url", request.getContextPath() + "/news/newsDetail.do?news_num=" + newsVO.getNews_num());
+		
+		return "common/resultView";
+	}
 	
-	
-	
-	
-	
-	
+	/*==================
+	 * 뉴스 삭제
+	 *==================*/
+	@RequestMapping("/news/newsDelete.do")
+	public String submitDelete(@RequestParam int news_num) {
+		log.debug("<<뉴스 삭제 - news_num>>" + news_num);
+		
+		//뉴스 삭제
+		newsService.deleteNews(news_num);
+		
+		return "redirect:/news/newsList.do";
+	}
 	
 }

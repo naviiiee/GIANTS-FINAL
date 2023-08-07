@@ -43,15 +43,13 @@ public class NewsServiceImpl implements NewsService{
 	}
 
 	@Override
-	public void udpateNews(NewsVO news) {
-		// TODO Auto-generated method stub
-		
+	public void updateNews(NewsVO news) {
+		newsMapper.updateNews(news); 
 	}
 
 	@Override
 	public void deleteNews(Integer news_num) {
-		// TODO Auto-generated method stub
-		
+		newsMapper.deleteNews(news_num);
 	}
 
 }

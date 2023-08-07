@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- [관리자] 상품 목록 시작 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goods.css">
 <script type="text/javascript">
 	$(function(){
 		//검색 유효성 체크
@@ -46,31 +47,33 @@
 	<div>표시할 상품이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-	<table class="striped-table">
-		<tr>
-			<th>번호</th>
-			<th>상품명</th>
-			<th>가격</th>
-			<th>등록일</th>
-			<th>상태</th>
-		</tr>
-		<c:forEach var="goods" items="${list}">
-		<tr>
-			<td class="align-center">${goods.goods_num}</td>
-			<td>
-				<a href="admin_modify.do?goods_num=${goods.goods_num}">${goods.goods_name}</a>
-			</td>
-			<td class="align-center">
-				<fmt:formatNumber value="${goods.goods_price}"/>원
-			</td>
-			<td>${goods.goods_regdate}</td>
-			<td class="align-center">
-				<c:if test="${goods.goods_status == 1}">판매중</c:if>
-				<c:if test="${goods.goods_status == 2}">판매중지</c:if>
-			</td>
-		</tr>
-		</c:forEach>
-	</table>
+	<div class="goods-list">
+		<table>
+			<tr>
+				<th style="width:5%;">번호</th>
+				<th>상품명</th>
+				<th style="width:12%;">가격</th>
+				<th style="width:10%;">등록일</th>
+				<th style="width:7%;">상태</th>
+			</tr>
+			<c:forEach var="goods" items="${list}">
+			<tr>
+				<td class="align-center">${goods.goods_num}</td>
+				<td>
+					<a href="admin_modify.do?goods_num=${goods.goods_num}">${goods.goods_name}</a>
+				</td>
+				<td class="align-center">
+					<fmt:formatNumber value="${goods.goods_price}"/>원
+				</td>
+				<td>${goods.goods_regdate}</td>
+				<td>
+					<c:if test="${goods.goods_status == 1}">판매중</c:if>
+					<c:if test="${goods.goods_status == 2}">판매중지</c:if>
+				</td>
+			</tr>
+			</c:forEach>
+		</table>
+	</div>
 	<div class="align-center">${page}</div>
 	</c:if>
 </div>
