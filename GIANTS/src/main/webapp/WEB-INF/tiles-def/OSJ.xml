@@ -4,8 +4,29 @@
 
 <tiles-definitions>
 	<!-- 아래 설정을 상황에 맞게 수정해서 사용하세요 -->
-	<definition name="a2" extends="main">
-		<put-attribute name="title" value="SpringPage"/>
-		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
+	
+	<definition name="foodList" extends="main">
+		<put-attribute name="title" value="식품 - 매장리스트"/>
+		<put-attribute name="body" value="/WEB-INF/views/food/foodList.jsp"/>
+	</definition>
+	
+	<definition name="foodCompDetail" extends="main">
+		<put-attribute name="title" value="식품 - 매장상세정보"/>
+		<put-attribute name="body" value="/WEB-INF/views/food/foodCompDetail.jsp"/>
+	</definition>
+	
+	<definition name="fixCompFoodList" extends="main">
+		<put-attribute name="title" value="식품 - 매장 - 수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/food/fixCompFoodList.jsp"/>
+	</definition>
+	
+	<definition name="addNewFood" extends="main">
+		<put-attribute name="title" value="식품 - 매장 - 메뉴/식품 등록"/>
+		<put-attribute name="body" value="/WEB-INF/views/food/addNewFood.jsp"/>
+	</definition>
+	
+	<definition name="fixFood" extends="main">
+		<put-attribute name="title" value="식품 - 매장 - 메뉴/식품 수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/food/fixFood.jsp"/>
 	</definition>
 </tiles-definitions>

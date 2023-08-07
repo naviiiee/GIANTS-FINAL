@@ -4,8 +4,15 @@
 
 <tiles-definitions>
 	<!-- 아래 설정을 상황에 맞게 수정해서 사용하세요 -->
-	<definition name="a2" extends="main">
-		<put-attribute name="title" value="SpringPage"/>
-		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
+	
+	<definition name="goods_cart" extends="main">
+		<put-attribute name="title" value="굿즈 - 장바구니"/>
+		<put-attribute name="body" value="/WEB-INF/views/gorder/goods_cart.jsp"/>
 	</definition>
+	
+	<definition name="user_orderForm">
+		<put-attribute name="title" value="굿즈 - 주문폼"/>
+		<put-attribute name="body" value="/WEB-INF/views/gorder/user_orderForm.jsp"/>
+	</definition>
+	
 </tiles-definitions>

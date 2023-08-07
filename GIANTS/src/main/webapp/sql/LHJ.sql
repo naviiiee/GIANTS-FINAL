@@ -1,15 +1,15 @@
 --커뮤니티
 CREATE TABLE commu(
- commu_num number not null,
+ commu_num number,
  commu_title varchar2(90) not null,
  commu_content clob not null,
  commu_date date default SYSDATE not null,
  commu_modifydate date,
  commu_hit number(8),
  commu_ip varchar(15),
- mem_num number not null
+ mem_num number not null,
  constraint commu_pk primary key (commu_num),
- constraint commu_fk foreign key (mem_num) references member(mem_num)
+ constraint commu_fk foreign key (mem_num) references member (mem_num)
 );
 
 CREATE SEQUENCE commu_seq;

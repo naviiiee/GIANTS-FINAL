@@ -1,35 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<style>
-#footer{
-	width:750px;
-	margin:30px auto;
-	position:relative;
-}
-.footer-top img{ margin-right:5px; }
-.footer-top li{
-	float:left;
-	margin:0 15px 10px 15px;
-}
-.footer-address{
-	clear:both;
-    background:url(../images/ico_foot_loc.png) 0 4px no-repeat;
-    margin-left:15px;
-    padding-left:23px;
-}
-.footer-address span {
-    padding-right:12px;
-}
-.footer-address strong {
-    font-weight:600;
-    color:#dd0330;
-    display:inline-block;
-    background:#fff;
-    padding:0 10px;
-    border-radius:3px;
-}
-</style>
-
 <div id="footer">
 	<div class="footer-top">
 		<ul>

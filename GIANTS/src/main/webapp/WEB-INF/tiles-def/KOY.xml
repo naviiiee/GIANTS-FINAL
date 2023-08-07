@@ -4,8 +4,47 @@
 
 <tiles-definitions>
 	<!-- 아래 설정을 상황에 맞게 수정해서 사용하세요 -->
-	<definition name="a7" extends="main">
-		<put-attribute name="title" value="SpringPage"/>
-		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
+	
+	<!-- 굿즈 -->
+	<definition name="goodsList" extends="main">
+		<put-attribute name="title" value="굿즈목록"/>
+		<put-attribute name="body" value="/WEB-INF/views/goods/goodsList.jsp"/>
 	</definition>
+	
+	<definition name="adminList" extends="main">
+		<put-attribute name="title" value="[관리자]굿즈목록"/>
+		<put-attribute name="body" value="/WEB-INF/views/goods/admin_goodsList.jsp"/>
+	</definition>
+	
+	<definition name="goodsRegister" extends="main">
+		<put-attribute name="title" value="굿즈등록"/>
+		<put-attribute name="body" value="/WEB-INF/views/goods/goodsRegister.jsp"/>
+	</definition>
+	
+	<definition name="goodsView" extends="main">
+		<put-attribute name="title" value="굿즈상세페이지"/>
+		<put-attribute name="body" value="/WEB-INF/views/goods/goodsView.jsp"/>
+	</definition>
+	
+	<definition name="goodsModify" extends="main">
+		<put-attribute name="title" value="굿즈수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/goods/goodsModify.jsp"/>
+	</definition>
+	
+	<!-- 구단뉴스 -->
+	<definition name="newsList" extends="main">
+		<put-attribute name="title" value="자이언츠 뉴스 목록"/>
+		<put-attribute name="body" value="/WEB-INF/views/news/newsList.jsp"/>
+	</definition>
+	
+	<definition name="newsWrite" extends="main">
+		<put-attribute name="title" value="뉴스 등록"/>
+		<put-attribute name="body" value="/WEB-INF/views/news/newsWrite.jsp"/>
+	</definition>
+	
+	<definition name="newsView" extends="main">
+		<put-attribute name="title" value="뉴스상세"/>
+		<put-attribute name="body" value="/WEB-INF/views/news/newsView.jsp"/>
+	</definition>
+	
 </tiles-definitions>

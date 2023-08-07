@@ -1,0 +1,333 @@
+@charset "UTF-8";
+
+
+.bdr{
+	border: 1px solid black;
+}
+/*===== 푸드 공용
+==========================*/
+/* .page-main{
+	width: 1200px;
+	margin:0 auto;
+	padding-top:50px;
+	padding-bottom:50px;
+	min-height: 400px;
+} */
+.main-container hr{
+	size: 1px;
+}
+
+.comp-profileImg{
+	border: 1px solid red;
+	width: 250px;
+	height: 250px; 
+}
+
+/* 상단 타이틀 시작 */
+
+.main-title h2{
+	line-height: 35px;
+}
+/*상단 타이틀 끝------------*/
+
+/* 카테고리 */
+.food-category{
+	width: 100%;
+	height:44px;
+	border-bottom: 2px solid gray;
+	border-collapse:collapse;
+}
+
+.food-category ul {
+	list-style: none;
+	/* border: 1px solid gray; */
+	border-radius: 3px;
+}
+
+.food-category ul.float-left li{
+	display: inline-block;
+	width:120px;
+	height:44px;
+	line-height:44px;
+	font-size: 14pt;
+	font-weight: 600;
+	text-align: center;
+	background-color: white;
+}
+
+.food-category ul.float-left li div{
+	height: 100%;
+}
+.food-category ul.float-left li div:hover{
+	cursor: pointer;
+}
+
+.food-cbox-on{
+	background-color: #46c8f0;
+}
+
+/* 목록 */
+.food-list{
+	width: 100%;
+}
+.food-list .f-list{
+	position:relative;
+	width: 100%;
+	height: 250px;
+	margin-top:30px;
+	border-bottom: 1px solid gray;
+}
+
+.food-list .f-list:hover{
+	cursor: pointer;
+}
+
+.f-img{
+	display: inline-block;
+	width:250px;
+	height:250px;
+	text-align: center;
+	line-height: 250px;
+}
+.food-main-img{
+	width: 220px;
+	height: 220px;
+	margin: 0 auto;
+	border-radius: 30px;
+	vertical-align: middle;
+}
+
+.comp-title{
+	display:inline-block;
+	width:900px;
+	height:50px;
+	font-size: 28pt;
+	position: absolute;
+	top:0;
+	left: 300px;
+}
+
+.comp-score{
+	display:inline-block;
+	width:900px;
+	font-size: 13pt;
+	position: absolute;
+	top: 80px;
+	left: 300px;
+}
+
+.comp-content{
+	display:inline-block;
+	width:900px;
+	height:117px;
+	font-size: 11pt;
+	position: absolute;
+	top: 133px;
+	left: 300px;
+}
+
+/* 맨하단 페이징 */
+.paging{
+	margin: auto;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	font-size: 1.5em;
+	font-weight: 700;
+}
+
+/*  ===================================
+	============ CompDetail ==============
+	=================================== */
+.adminBtn{
+	width: 100px;
+	height: 34px; 
+	margin: 5px 10px 0px 0px;
+	font-size: 1.2em;
+	font-weight: bold;
+	color:red;
+	background-color: white;
+	border-radius: 5px; 
+}
+.adminBtn:hover{
+	cursor: pointer;
+	background-color: lightgray;
+}
+	
+.comp-container{
+	padding-top: 30px;
+	width: 100%;
+}
+.comp-container .comp-detail{
+	position:relative;
+	width: 100%;
+	height: 250px;
+	padding-bottom: 30px;
+	border-bottom: 2px solid gray;
+}
+/* <!-- 메뉴보기, 리뷰보기 타이틀 -->	*/
+.comp-container .comp-menu{
+	position:relative;
+	height: 50px;
+	line-height: 50px;
+}
+
+.comp-container .comp-menu div{
+	position: absolute;
+	display:inline-block;
+	width:596px;
+	height:100%;
+	font-size:2em;
+	font-weight:bold;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.comp-container .comp-menu div:first-child{
+	width: 598px;
+	border-right: none;
+}
+
+#showMenu{
+	top:0px;
+}
+
+#showReview{
+	top:0px;
+	left:600px;
+}
+
+/* 내용 */
+#compMenu_content{
+	min-height: 600px;
+	padding-top:5px;
+	border: 1px solid black;
+}
+
+#menu_tb{
+	margin: 50px auto;
+	width: 80%;
+	height: 90%;
+}
+#menu_tb td{
+	padding: 20px 30px;
+}
+
+.food-mainImg{
+	border: 1px solid blue;
+	border-radius:20px;
+	width: 210px;
+	height: 210px; 
+	margin-bottom: 10px;
+}
+
+#menu_tb td p{
+	display:inline-block;
+	font-size: 1.4em;
+}
+
+/*  ===================================
+	========= fixCompFoodList =========
+	=================================== */
+	
+.compFood-list{
+	width: 100%;
+	height: 60px;
+	text-align: center;
+	padding: 10px 0px;
+}
+.compFood-list a{
+	display:inline-block;
+	width: 400px;
+	height: 60px;
+	line-height: 60px;
+	font-size: 2.5em;
+	color: gray;
+}
+
+.compFood-list a img{
+	display:inline-block;
+	width:58px;
+	vertical-align: top;
+}
+
+.compFood-list a span{
+	display: inline-block;
+	height: 60px;
+	width: 265px;
+	margin-left: 30px;
+	font-weight: bold;
+	vertical-align: top;
+}
+
+#fix_compMenu{
+	min-height: 600px;
+}
+
+/* 매장수정 상품목록 테이블 */
+#fix_menuList{
+	border-collapse: collapse;
+	width: 100%;
+	font-size: 1.7em;
+}
+#fix_menuList tr{
+	height:60px;
+	border-top: 1px solid black;
+}
+#fix_menuList tr:last-child{
+	border-bottom: 1px solid black;
+}
+#fix_menuList tr th{
+	padding: 10px 0px;
+}
+#fix_menuList tr td{
+	padding: 10px 0px;
+	text-align: center;
+}
+#fix_menuList tr td form{
+	display: inline-block;
+}
+
+#fix_menuList tr td input[type="button"],
+#fix_menuList tr td input[type="submit"]{
+	border-radius: 15px;
+	background-color:white;
+	padding: 3px;
+	font-size: 1em;
+	font-weight: bold;
+}
+#fix_menuList tr td input[type="button"]:hover,
+#fix_menuList tr td input[type="submit"]:hover{
+	color:white;
+	background-color:gray;
+}
+
+
+/*  ===================================
+	=========== addNewFood ============
+	=================================== */
+.tbox{
+	background-color: lightgray;
+}
+.comp-container h2{
+	padding-left: 10px;
+	color:black;
+}
+.inner-top,
+.inner-bottom{
+	padding: 0px 30px;
+}
+.inner-top li{
+	margin-top: 10px;
+}
+
+.inner-top li .label-wid{
+	display: inline-block;
+	width: 80px;
+}
+
+/*  ===================================
+	=========== fixFood ============
+	=================================== */
+#upload1_name, #upload2_name{
+	font-family: "NotoSans";
+}

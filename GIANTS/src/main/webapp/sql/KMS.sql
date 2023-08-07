@@ -43,7 +43,7 @@ CREATE TABLE CHATROOM(
 );
 
 CREATE SEQUENCE chatroom_seq;
-      
+
 --채팅 상세  
 CREATE TABLE CHAT(
  chat_num number not null,
@@ -57,4 +57,4 @@ CREATE TABLE CHAT(
  constraint CHAT_FK2 foreign key (mem_num) references CHATROOM(mem_num)
 );
 
-CREATE SEQUENCE chat_seq; 
+CREATE SEQUENCE chat_seq;

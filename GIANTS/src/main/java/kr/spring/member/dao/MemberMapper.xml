@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.member.dao.MemberMapper">
+	<!-- 수동 매핑 지정 (일반) --> 
+	<resultMap type="memberVO" id="memberMap">
+		<result property="memberDetailVO.mem_auid" column="mem_auid" />
+		<result property="memberDetailVO.mem_name" column="mem_name" />
+		<result property="memberDetailVO.mem_public" column="mem_public" />
+		<result property="memberDetailVO.mem_phone" column="mem_phone" />
+		<result property="memberDetailVO.mem_email" column="mem_email" />
+		<result property="memberDetailVO.mem_zipcode" column="mem_zipcode" />
+		<result property="memberDetailVO.mem_address1" column="mem_address1" />
+		<result property="memberDetailVO.mem_address2" column="mem_address2" />
+		<result property="memberDetailVO.mem_photo" column="mem_photo" />
+		<result property="memberDetailVO.mem_photoname" column="mem_photoname" />
+		<result property="memberDetailVO.mem_point" column="mem_point" />
+		<result property="memberDetailVO.mem_regdate" column="mem_regdate" />
+		<result property="memberDetailVO.mem_modifydate" column="mem_modifydate" />
+	</resultMap>
+	<resultMap type="memberVO" id="companyMap">
+		<result property="companyDetailVO.comp_num" column="comp_num" />
+		<result property="companyDetailVO.comp_owner" column="comp_owner" />
+		<result property="companyDetailVO.comp_name" column="comp_name" />
+		<result property="companyDetailVO.comp_cate" column="comp_cate" />
+		<result property="companyDetailVO.comp_phone" column="comp_phone" />
+		<result property="companyDetailVO.comp_email" column="comp_email" />
+		<result property="companyDetailVO.comp_zipcode" column="comp_zipcode" />
+		<result property="companyDetailVO.comp_address1" column="comp_address1" />
+		<result property="companyDetailVO.comp_address2" column="comp_address2" />
+		<result property="companyDetailVO.comp_photo" column="comp_photo" />
+		<result property="companyDetailVO.comp_photoname" column="comp_photoname" />
+		<result property="companyDetailVO.comp_regdate" column="comp_regdate" />
+		<result property="companyDetailVO.comp_modifydate" column="comp_modifydate" />
+		<result property="companyDetailVO.comp_content" column="comp_content" />
+	</resultMap>
+	<!-- 일반 회원가입 --> 
+	<insert id="insertMember_detail" parameterType="memberVO">
+		INSERT INTO MEMBER_DETAIL(
+			mem_num,
+			mem_name,
+			mem_public,
+			mem_phone,
+			mem_email,
+			mem_zipcode,
+			mem_address1,
+			mem_address2,
+			mem_point
+		)
+		VALUES(
+			#{mem_num},
+			#{memberDetailVO.mem_name},
+			#{memberDetailVO.mem_public},
+			#{memberDetailVO.mem_phone},
+			#{memberDetailVO.mem_email},
+			#{memberDetailVO.mem_zipcode},
+			#{memberDetailVO.mem_address1},
+			#{memberDetailVO.mem_address2},
+			#{memberDetailVO.mem_point}
+		)
+	</insert>
+	
+	<!-- 기업회원가입 -->
+	<insert id="insertCompany_detail" parameterType="memberVO">
+	INSERT INTO COMPANY_DETAIL(
+		mem_num,
+		comp_owner,
+		comp_num,
+		comp_name,
+		comp_phone,
+		comp_cate,
+		comp_email,
+		comp_zipcode,
+		comp_address1,
+		comp_address2,
+		comp_content
+	)
+	VALUES(
+		#{mem_num},
+		#{companyDetailVO.comp_owner},
+		#{companyDetailVO.comp_num},
+		#{companyDetailVO.comp_name},
+		#{companyDetailVO.comp_phone},
+		#{companyDetailVO.comp_cate},
+		#{companyDetailVO.comp_email},
+		#{companyDetailVO.comp_zipcode},
+		#{companyDetailVO.comp_address1},
+		#{companyDetailVO.comp_address2},
+		#{companyDetailVO.comp_content}
+	)	
+	</insert>
+	
+	<!-- ID를 이용한 일반회원정보 체크 -->
+	<select id="selectCheckMember" parameterType="string" resultType="memberVO">
+		SELECT
+			mem_num,
+			mem_id,
+			mem_auth,
+			passwd,
+			mem_nickname
+		FROM
+			MEMBER
+		WHERE
+			mem_id=#{mem_id}
+	</select>
+	
+	<!-- 회원번호를 이용한 회원정보 구하기 -->
+	<select id="selectMember" parameterType="integer" resultMap="memberMap">
+		SELECT
+			*
+		FROM
+			MEMBER m JOIN MEMBER_DETAIL d
+		ON
+			m.mem_num=d.mem_num
+		WHERE
+			m.mem_num=#{mem_num}
+	</select>
+	
+	<!-- 기업번호를 이용한 회원정보 구하기 -->
+	<select id="selectCompany" parameterType="integer" resultMap="companyMap">
+		SELECT 
+			*
+		FROM
+			MEMBER m JOIN COMPANY_DETAIL c
+		ON
+			m.mem_num=c.mem_num
+		WHERE
+			m.mem_num=#{mem_num}
+	</select>
+	<!-- 회원정보수정 -->
+	<update id="updateMember_detail" parameterType="memberVO">
+		UPDATE
+			MEMBER_DETAIL
+		SET
+			mem_name=#{memberDetailVO.mem_name},
+			mem_public=#{memberDetailVO.mem_public},
+			mem_phone=#{memberDetailVO.mem_phone},
+			mem_email=#{memberDetailVO.mem_email},
+			mem_zipcode=#{memberDetailVO.mem_zipcode},
+			mem_address1=#{memberDetailVO.mem_address1},
+			mem_address2=#{memberDetailVO.mem_address2},
+			mem_modifydate=sysdate
+		WHERE
+			mem_num=#{mem_num}
+	</update>
+	<!-- 기업정보수정 -->
+	<update id="updateCompany_detail" parameterType="memberVO">
+		UPDATE
+			COMPANY_DETAIL
+		SET
+			comp_owner=#{companyDetailVO.comp_owner},
+			comp_name=#{companyDetailVO.comp_name},
+			comp_cate=#{companyDetailVO.comp_cate},
+			comp_phone=#{companyDetailVO.comp_phone},
+			comp_email=#{companyDetailVO.comp_email},
+			comp_zipcode=#{companyDetailVO.comp_zipcode},
+			comp_address1=#{companyDetailVO.comp_address1},
+			comp_address2=#{companyDetailVO.comp_address2},
+			comp_content=#{companyDetailVO.comp_content},
+			comp_modifydate=sysdate
+		WHERE
+			mem_num=#{mem_num}
+	</update>
+</mapper>

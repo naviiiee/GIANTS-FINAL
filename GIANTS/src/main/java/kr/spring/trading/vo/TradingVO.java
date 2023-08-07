@@ -17,13 +17,17 @@ import lombok.ToString;
 @ToString
 public class TradingVO {
 	private int trade_num; //중고거래 게시글 번호
+	@NotEmpty
 	private String trade_title; //제목
+	@NotEmpty
 	private String trade_content; //내용
+	@Range(min=1, max=99999999)
 	private int trade_price; //거래물품 가격
 	private int trade_hit; //조회수
 	private Date trade_date; //등록일
 	private Date trade_modifydate; //수정일
 	private int trade_status; //거래 상태(0:판매중, 1:거래완료)
+	@NotEmpty
 	private byte[] trade_photo; //대표이미지
 	private String trade_photoname; //대표이미지 파일명
 	private String trade_ip; //ip주소
