@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.food.dao.FoodMapper">
+
+	<!-- 매장목록 리스트를 위한 memberVO
+	<resultMap type="memberVO" id="compMap">
+		<result property="companyDetailVO.comp_num" column="comp_num" />
+		<result property="companyDetailVO.comp_name" column="comp_name" />
+		<result property="companyDetailVO.comp_cate" column="comp_cate" />
+		<result property="companyDetailVO.comp_photo" column="comp_photo" />
+		<result property="companyDetailVO.comp_photoname" column="comp_photoname" />
+		<result property="companyDetailVO.comp_content" column="comp_content" />
+		<result property="companyDetailVO.comp_score" column="comp_score" />
+	</resultMap> 
+	-->
 	
 	<!-- 기업 식품 등록 -->
 	<insert id="insertFood" parameterType="foodVO">
@@ -56,6 +68,51 @@
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
+	
+	<!-- 매장목록 레코드수 쿼리 -->
+	<select id="selectCompRowCount" parameterType="map" resultType="integer">
+		SELECT 
+		  COUNT(*)
+		FROM 
+			company_detail
+		WHERE comp_cate=#{comp_cate}
+	</select>
+	
+	<!-- 매장목록 리스트 페이징 쿼리 -->
+	<select id="selectCompList" parameterType="map" resultType="companyDetailVO">
+		SELECT
+    		*
+		FROM (SELECT 
+      		  	a.*,
+	  		  	rownum rnum
+      		  FROM(SELECT 
+	      		  		c.comp_num, 
+	      		  		comp_name, 
+	      		  		comp_photo, 
+	      		  		comp_photoname, 
+	      		  		comp_content, 
+	      		  		comp_cate, 
+	      		  		comp_score
+           		   FROM company_detail c
+           		   LEFT OUTER JOIN (SELECT c.comp_num as comp_num, round(avg(comp_score),2) as comp_score
+                            		FROM company_detail c JOIN food_review r
+                            		ON c.comp_num=r.comp_num
+                            		WHERE c.comp_cate=#{comp_cate}
+                            		GROUP BY c.comp_num) r
+          		   ON c.comp_num=r.comp_num
+          		   <if test="sort == '1'">
+           		   ORDER BY comp_score ASC
+           		   </if>
+           		   <if test="sort == '2'">
+           		   ORDER BY comp_score DESC
+           		   </if>
+           		   )a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+	
 </mapper>
 
 

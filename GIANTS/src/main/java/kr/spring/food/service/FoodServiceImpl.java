@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.food.dao.FoodMapper;
 import kr.spring.food.vo.FoodVO;
+import kr.spring.member.vo.CompanyDetailVO;
 
 @Service
 @Transactional
@@ -46,5 +47,15 @@ public class FoodServiceImpl implements FoodService{
 	@Override
 	public FoodVO selectFood(int food_num) {
 		return foodMapper.selectFood(food_num);
+	}
+
+	@Override
+	public List<CompanyDetailVO> selectCompList(Map<String, Object> map) {
+		return foodMapper.selectCompList(map);
+	}
+
+	@Override
+	public int selectCompRowCount(Map<String, Object> map) {
+		return foodMapper.selectCompRowCount(map);
 	}
 }

@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.food.service.FoodService;
 import kr.spring.food.vo.FoodVO;
+import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -39,21 +39,37 @@ public class FoodController {
 	}
 	
 	/*	====================
-	 *		목록 페이지 
+	 *		매장 목록 페이지 
 	 * 	====================*/
 	@RequestMapping("/food/foodList.do")
 	public ModelAndView foodList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
-			 						String keyfield, String keyword) {
+								 @RequestParam(value = "comp_cate", defaultValue = "1") int comp_cate,
+								 @RequestParam(value = "sort", defaultValue = "1") String sort) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("keyfield", keyfield);
-		map.put("keyword", keyword);
 		
-		//매장 목록 리스트를 불러와야 함
-		//foodService.selectCompList(map);
+		map.put("comp_cate", comp_cate);
+		map.put("sort", sort);
+		int count = foodService.selectCompRowCount(map);
 		
+		log.debug("매장 목록페이지 진입 >> : comp_cate : " + comp_cate + " sort : " + sort);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(currentPage, count, 5, 5, "foodList.do");
+		
+		List<CompanyDetailVO> list = null;
+		if (count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = foodService.selectCompList(map);
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("foodList");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		mav.addObject("sort");
 		return mav;
 	}
 	
