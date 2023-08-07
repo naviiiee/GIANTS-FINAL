@@ -11,7 +11,9 @@
 		<hr size="0.05" width="100%" noshade>
 	</div>
 	<div class="align-right">
+		<c:if test="${user.mem_auth == 9}">
 		<input type="button" value="좌석관리" onclick="location.href='gradeList.do'" class="admin-btn big">
+		</c:if>
 		<input type="button" value="티켓예매" onclick="location.href='gameList.do'" class="accept-btn big">
 	</div>
 	<div class="price-info">

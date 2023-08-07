@@ -10,9 +10,11 @@
 		<h2>경기선택</h2>
 		<hr size="0.05" width="100%" noshade>
 	</div>
+	<c:if test="${user.mem_auth == 9}">
 	<div class="align-right">
 		<input type="button" value="경기등록" onclick="location.href='gameWrite.do'" class="admin-btn">
 	</div>
+	</c:if>
 	<c:if test="${count == 0}">
 	<div class="result-display">예매중인 경기가 없습니다.</div>
 	</c:if>
@@ -24,7 +26,9 @@
 			<th>VS</th>
 			<th>구장</th>
 			<th>예매</th>
+			<c:if test="${user.mem_auth == 9}">
 			<th>관리자</th>
+			</c:if>
 		</tr>
 		<c:forEach var="game" items="${list}">
 		<tr>
@@ -48,9 +52,11 @@
 				<input type="button" value="취소" class="default-btn" readonly="readonly">
 				</c:if>
 			</td>
+			<c:if test="${user.mem_auth == 9}">
 			<td>
 				<input type="button" value="수정" onclick="location.href='gameUpdate.do?game_num=${game.game_num}'" class="admin-btn small">
 			</td>
+			</c:if>
 		</tr>
 		</c:forEach>
 	</table>
