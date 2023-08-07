@@ -34,6 +34,7 @@ public interface TicketService {
 	// 수정
 	public void updateSeat(SeatVO seatVO);
 	
+	
 	/* 경기정보 */
 	// 등록
 	public void insertGame(GameVO gameVO);

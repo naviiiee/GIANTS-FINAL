@@ -133,6 +133,7 @@ public class TicketAdminController {
 		return mav;
 	}
 	
+	
 	/* ----- [Seat] 좌석정보 수정 -----*/
 	@PostMapping("/ticket/seatUpdate.do")
 	public String seatUpdateSubmit(SeatVO seatVO, @RequestParam int seat_num, @RequestParam int grade_num) {

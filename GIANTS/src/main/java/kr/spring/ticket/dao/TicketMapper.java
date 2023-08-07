@@ -64,4 +64,5 @@ public interface TicketMapper {
 	// 삭제
 	@Delete("DELETE FROM seat WHERE grade_num = #{grade_num}")
 	public void deleteSeat(Integer grade_num);
+	
 }

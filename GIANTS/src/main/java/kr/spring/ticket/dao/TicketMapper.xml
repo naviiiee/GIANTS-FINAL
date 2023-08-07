@@ -19,8 +19,8 @@
 	
 	<!-- [좌석]등록 -->
 	<insert id="insertSeat" parameterType="seatVO">
-		INSERT INTO seat (seat_num, grade_num, seat_block, seat_row, seat_col)
-			   VALUES (seat_seq.nextval, #{grade_num}, #{seat_block}, #{seat_row}, #{seat_col})
+		INSERT INTO seat (seat_num, grade_num, seat_block, seat_row, seat_col, seat_quantity)
+			   VALUES (seat_seq.nextval, #{grade_num}, #{seat_block}, #{seat_row}, #{seat_col}, #{seat_quantity})
 	</insert>
 	
 </mapper>

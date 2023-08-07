@@ -27,6 +27,7 @@ CREATE TABLE seat(
 	seat_block NUMBER(3) NOT NULL,
 	seat_row VARCHAR2(30) NOT NULL,
 	seat_col VARCHAR2(30) NOT NULL,
+	seat_quantity NUMBER(5) NOT NULL,
 	CONSTRAINT seat_pk PRIMARY KEY (seat_num),
 	CONSTRAINT seat_fk FOREIGN KEY (grade_num) REFERENCES grade (grade_num)
 );
