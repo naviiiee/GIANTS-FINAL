@@ -22,6 +22,8 @@ public interface GoodsService {
 	public GoodsVO selectGoods(Integer goods_num);
 	//상품 재고 상세
 	public GoodsOptionVO selectGoodsOption(Integer goods_num);
+	//상품 재고 목록
+	public List<GoodsOptionVO> selectOptionList(Integer goods_num);
 	
 	//상품 정보 수정
 	public void updateGoods(GoodsVO goods);

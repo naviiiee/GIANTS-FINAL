@@ -30,7 +30,7 @@ public class GoodsServiceImpl implements GoodsService{
 	public int selectGoodsRowCount(Map<String, Object> map) {
 		return goodsMapper.selectGoodsRowCount(map);
 	}
-
+	
 	@Override
 	public void insertGoods(GoodsVO goodsVO) {
 		//상품번호 생성해서 자바빈에 저장
@@ -57,6 +57,11 @@ public class GoodsServiceImpl implements GoodsService{
 	@Override
 	public GoodsOptionVO selectGoodsOption(Integer goods_num) {
 		return goodsMapper.selectGoodsOption(goods_num);
+	}
+	
+	@Override
+	public List<GoodsOptionVO> selectOptionList(Integer goods_num) {
+		return goodsMapper.selectOptionList(goods_num);
 	}
 
 	@Override
@@ -126,6 +131,8 @@ public class GoodsServiceImpl implements GoodsService{
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 
 }

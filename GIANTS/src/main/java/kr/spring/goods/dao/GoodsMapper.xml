@@ -110,5 +110,12 @@
 		]]>
 	</select>
 	
+	<!-- 상품 재고 목록 -->
+	<select id="selectOptionList" parameterType="integer" resultType="goodsOptionVO">
+		SELECT
+			*
+		FROM goods_option
+		WHERE goods_num=#{goods_num}
+	</select>
 	
 </mapper>

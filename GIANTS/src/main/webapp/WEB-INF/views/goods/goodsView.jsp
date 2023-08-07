@@ -52,22 +52,23 @@
 					<li>
 						판매가 : <s><fmt:formatNumber value="${goods.goods_price}" type="number"/>원</s>
 						 (<fmt:formatNumber value="${goods.goods_disc}" type="number"/>% 할인)
-						<span style="font-size:20px;">
+						<span style="font-size:30px;">
 							<fmt:formatNumber value="${goods.goods_dprice}" type="number"/>원
 						</span>
 					</li>
 					<li>
 						평점 : 별표이미지 (숫자표시)
 					</li>
-					<%-- 
+					
 					<li>
-						옵션
+						옵션 : 
 						<select>
-							<c:forEach var="option" items="goodsOptionVO">
-							<option value="${option.goods_size}">${option.goods_size}[재고 : ${option.goods_stock}]</option>
+							<c:forEach var="option" items="${option}">
+							<option value="${option.goods_size}">${option.goods_size} [재고 : ${option.goods_stock}]</option>
 							</c:forEach>
 						</select>
 					</li>
+					<%-- 
 					<li>
 						마킹리스트
 						<select>

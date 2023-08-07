@@ -176,11 +176,20 @@ public class GoodsController {
 		
 		//상품 상세
 		GoodsVO goods = goodsService.selectGoods(goods_num);
+		//GoodsOptionVO option = goodsService.selectGoodsOption(goods_num);
+		
+		List<GoodsOptionVO> list = null;
+		list = goodsService.selectOptionList(goods_num);
 		
 		//상품명에 태그를 허용하지 않음
 		goods.setGoods_name(StringUtil.useNoHtml(goods.getGoods_name()));
 		
-		return new ModelAndView("goodsView", "goods", goods);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("goodsView");
+		mav.addObject("goods", goods);
+		mav.addObject("option", list);
+		
+		return mav;
 	}
 
 	/*==========================
