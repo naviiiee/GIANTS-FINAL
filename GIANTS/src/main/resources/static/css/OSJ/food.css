@@ -62,6 +62,21 @@
 	cursor: pointer;
 }
 
+.food-category div.float-right{
+	height: 100%;
+	line-height:44px;
+}
+.food-category div.float-right select{
+	height:43px;
+	size:44px;
+	font-size: 15pt;
+	font-weight: 600;
+	text-align: center;
+	border: 2px solid gray;
+	border-top: none !important;
+	border-bottom: none !important;
+}
+
 .food-cbox-on{
 	background-color: #46c8f0;
 }

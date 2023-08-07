@@ -28,9 +28,9 @@
 	<div class=comp-container>
 		<div class="comp-detail"><!-- 상세페이지 링크는 스크립트로 해결해야함. -->
 			<div class="f-img"><img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-main-img"></div>
-			<div class="comp-title bdr"><b>네네치킨(부산 롯데 사직야구장점)</b></div>
-			<div class="comp-score bdr"><b>별점 (3.00)</b></div>
-			<div class="comp-content bdr">
+			<div class="comp-title"><b>네네치킨(부산 롯데 사직야구장점)</b></div>
+			<div class="comp-score"><b>별점 (3.00)</b></div>
+			<div class="comp-content">
 				<p>안녕하세요. <br>네네치킨 부산 롯데 사직야구장점 입니다.<br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>
 			</div>
 		</div>
@@ -79,7 +79,7 @@
 					</td>
 				</tr>
 			</table>
-			<div class="paging align-center">${page}1 2 3 4</div>
+			<div class="paging align-center">${page}</div>
 		</div>
 		<!-- 메뉴보기, 리뷰보기 내용 끝-->
 	</div>
