@@ -93,4 +93,4 @@
 	<div class="align-center">${page}</div>
 	</c:if>
 </div>
-<!-- 중고거래 게시판 목록 끝 -->
+<!-- 중고거래 게시판 목록 끝 --> 

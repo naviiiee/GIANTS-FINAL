@@ -107,7 +107,7 @@ ul.detail-info li:last-child{
 	cursor: pointer;
 }
 
-/* --- 중고거래 게시판 글 작성 --- */
+/* --- 중고거래 게시판 글 작성 --- */ 
 #price_form{
 	width: 70px;
 }

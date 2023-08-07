@@ -122,7 +122,7 @@ public class TradingController {
 		return mav;
 	}
 	
-	//이미지 출력
+	//이미지 출력 
 	@RequestMapping("/trading/imageView.do")
 	public ModelAndView viewImage(@RequestParam int trade_num) {
 		
