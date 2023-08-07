@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 매장리스트 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OSJ/food.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/foodJS/foodList.js"></script>
 <div class="page-main">
 	<div class="main-title">
 		<img class="title-img" src="${pageContext.request.contextPath}/images/title_icon.gif">
