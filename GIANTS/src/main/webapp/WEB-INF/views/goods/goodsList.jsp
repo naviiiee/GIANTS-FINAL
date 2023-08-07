@@ -26,7 +26,10 @@
 		<hr size="0.05" width="100%" noshade>
 	</div>
 	<c:if test="${!empty user && user.mem_auth == 9}">
-	<input type="button" value="관리자-상품목록" onclick="location.href='admin_goodsList.do'">
+	<div class="align-right">
+		<input type="button" value="관리자-상품목록" onclick="location.href='admin_goodsList.do'" id="admin_btn">
+		<input type="button" value="전체목록" onclick="location.href='goodsList.do'">
+	</div>
 	</c:if>
 	<form action="goodsList.do" id="search_form" method="get">
 		<ul>
@@ -44,7 +47,6 @@
 			</li>
 			<li>
 				<input type="submit" value="검색">
-				<input type="button" value="전체목록" onclick="location.href='goodsList.do'">
 			</li>
 		</ul>
 		<div class="align-right">

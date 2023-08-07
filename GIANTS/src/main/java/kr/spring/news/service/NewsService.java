@@ -11,6 +11,6 @@ public interface NewsService {
 	public void insertNews(NewsVO news);
 	public NewsVO selectNews(Integer news_num);
 	public void updateHit(Integer news_num);
-	public void udpateNews(NewsVO news);
+	public void updateNews(NewsVO news); 
 	public void deleteNews(Integer news_num);
 }

@@ -40,4 +40,6 @@ public class CompanyDetailVO {
 	private Date comp_regdate; // 가입일
 	private Date comp_modifydate;// 수정일
 	private String comp_content; // 내용
+	
+	private float comp_score;		//평점
 }

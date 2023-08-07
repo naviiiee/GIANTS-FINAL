@@ -2,3 +2,86 @@
 .error-color{
 	color:#ff0000;
 }
+.mypage-top{
+	display: flex;
+    position: relative;
+    border-bottom: 1px solid #BBB;
+    padding: 25px 0;
+    height: 40px;
+    z-index: 19;
+    margin:0 auto 30px auto;
+    width:1200px;
+}
+.mypage-top-title .h2{
+	display: inline-block;
+	font-size: 29px;
+	line-height: 30px;
+	padding-top: 10px;
+	background: url(../_Img/Common/ico_mtit.gif) no-repeat 0 0;
+	margin-right: 25px;
+}
+.mypage-top-title .p{
+	display: inline-block;
+	font-size: 13px;
+}
+
+#mypage_body{
+	margin:0 auto;
+	width:1213px;
+	min-height:500px;
+}
+#mypage_body .mypage-nav{
+	background-color:yellow;
+	width:150px;
+	float:left;
+}
+#mypage_body .mypage-body{
+	width:1000px;
+	float:right;
+}
+/* 로그인창 
+=================*/
+/* 아이디 비밀번호 로그인 */
+.login-main{
+	margin-bottom: 20px;
+    border: 5px solid #dfdfdf;
+    padding: 30px 50px;
+    position: relative;
+    overflow: hidden;
+    width:1000px;
+    margin:0 auto;
+}
+.login-form{
+	background: url(../_Img/members/login_form_bg.png) no-repeat 0 0;
+    padding-top: 30px;
+    width: 550px;
+    float: left;
+    position: relative;
+    margin: auto;
+}
+.login{
+    margin: 30px 0 0 7px;
+    position: relative;	
+}
+.login-btn{
+	position: absolute;
+    top: 0;
+    right: 60px;
+    background-color:red;
+    color:#FFF;
+    width:150px;
+    height:70px;    
+}
+/* 회원가입 아이디/비밀번호찾기 */
+.login-sub{
+    float: right;
+    border-left: 1px solid #ddd;
+    padding: 10px 150px 10px 40px;
+    width: 240px;
+}
+.login-sub li{
+	margin-bottom:20px;
+}
+.login-sub-btn{
+	margin-top:10px;
+}

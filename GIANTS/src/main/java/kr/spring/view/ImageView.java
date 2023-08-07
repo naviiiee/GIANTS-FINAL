@@ -15,7 +15,7 @@ import org.springframework.web.servlet.view.AbstractView;
 @Component
 public class ImageView extends AbstractView {
 
-	@Override
+	@Override 
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		byte[] file = (byte[]) model.get("imageFile");
 		String filename = (String) model.get("filename");

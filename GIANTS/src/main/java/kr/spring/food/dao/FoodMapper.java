@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import kr.spring.food.vo.F_orderVO;
 import kr.spring.food.vo.FoodVO;
 import kr.spring.food.vo.Food_reviewVO;
+import kr.spring.member.vo.CompanyDetailVO;
 
 @Mapper
 public interface FoodMapper {
@@ -27,6 +28,10 @@ public interface FoodMapper {
 	//식품 리스트 페이징
 	public List<FoodVO> selectList(Map<String, Object> map);
 	public int selectRowCount(String comp_num);
+	//매장 리스트 페이징
+	public List<CompanyDetailVO> selectCompList(Map<String, Object> map);
+	public int selectCompRowCount(Map<String, Object> map);
+	
 	//식품 상세정보
 	@Select("SELECT * FROM food WHERE food_num=#{food_num}")
 	public FoodVO selectFood(int food_num);

@@ -1,9 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
+<div class="mypage-top">
+	<div class="mypage-top-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+		<h2>(기업)회원정보수정</h2>
+		<p>자이언츠 회원정보수정 입니다.</p>
+	</div>
+</div>
 <!-- 기업정보 폼 시작 -->
 <div>
-	<h2>기업회원가입</h2>
 	<form:form modelAttribute="memberVO" action="updateCompany.do" id="company_modify">
 		<ul>
 			<li>

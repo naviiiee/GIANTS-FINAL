@@ -1,6 +1,16 @@
 @charset "UTF-8";
-/* 상품 목록
+/* 공통 버튼
 ----------------*/
+input[type="button"]{
+	width:60px;
+	height:30px;
+	background-color:#dd032f;
+	color:#FFF;
+	border:none;
+	cursor:pointer;
+}
+/* [일반회원] 굿즈 목록
+----------------------*/
 .goods-space .horizontal-area{
 	margin:2px;
 	padding:3px;
@@ -21,8 +31,32 @@
 .goods-space .float-clear{
 	clear:both;
 }
+input[type="button"]#admin_btn{
+	width:110px;
+	height:30px;
+	background-color:#dd032f;
+	color:#FFF;
+	border:none;
+	cursor:pointer;
+}
+/* [관리자] 굿즈 목록
+----------------------*/
+div.goods-list table{
+	margin:0;
+	padding:0;
+	width:100%;
+}
+div.goods-list table,
+div.goods-list table th,
+div.goods-list table td{
+	border:1px solid #ccc;
+	border-collapse : collapse;
+	text-align:center;
+	font-size:11pt;
+}
 
-/* 상품 상세페이지
+
+/* 굿즈 상세페이지
 ----------------*/
 .goods-photo{
 	width:40%;

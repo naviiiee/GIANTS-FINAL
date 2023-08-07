@@ -37,6 +37,8 @@ public interface GoodsMapper {
 	//상품 재고 상세
 	@Select("SELECT * FROM goods_option WHERE goods_num=#{goods_num}")
 	public GoodsOptionVO selectGoodsOption(Integer goods_num);
+	//상품 재고 목록
+	public List<GoodsOptionVO> selectOptionList(Integer goods_num);
 	 
 	//상품 정보 수정
 	public void updateGoods(GoodsVO goods);

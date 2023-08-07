@@ -1,10 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/confirmId.js"></script>
+<div class="mypage-top">
+	<div class="mypage-top-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+		<h2>일반회원가입</h2>
+		<p>자이언츠 일반 회원가입 입니다.</p>
+	</div>
+</div>
 <!-- 회원가입 시작 -->
 <div class="page-main">
-	<h2>회원가입</h2>
-	<div>자이언츠 일반회원가입입니다.</div>
 	<form:form modelAttribute="memberVO" action="registerMember.do" id="member_register" enctype="multipart/form-data">
 		<ul>
 			<li>
@@ -15,11 +23,13 @@
 			<li>
 				<form:label path="mem_id">아이디</form:label>
 				<form:input path="mem_id" placeholder="영문, 숫자 4~12자" autocomplete="off"/>
+				<input type="button" id="confirmId" value="ID중복체크" class="default-btn">
+				<span id="message_id"></span>
 				<form:errors path="mem_id" cssClass="error-color"/>
  			</li>
 			<li>
 				<form:label path="passwd">비밀번호</form:label>
-				<form:input path="passwd" placeholder="영문,숫자 4~12자"/>
+				<form:password path="passwd" placeholder="영문,숫자 4~12자"/>
 				<form:errors path="passwd" cssClass="error-color"/>
 			</li>
 			<li>

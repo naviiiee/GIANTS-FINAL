@@ -34,7 +34,7 @@
 			<li>
 				<select name="keyfield" id="keyfield" class="form-select">
 					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
-					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>아이디+닉네임</option>
+					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>작성자</option>
 					<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>
 					<option value="4" <c:if test="${param.keyfield == 4}">selected</c:if>>제목+내용</option>
 				</select>
@@ -66,27 +66,25 @@
 	<c:if test="${count > 0}">
 	<table class="striped-table">
 		<tr>
-			<th></th>
 			<th>제목</th>
 			<th>작성자</th>
+			<th>가격</th>
 			<th>작성일</th>
 			<th>조회수</th>
 		</tr>
 		<c:forEach var="trading" items="${list}">
 		<tr>
-			<td>
-				<a href="tradingDetail.do?trade_num=${trading.trade_num}">
-				<img src="${pageContext.request.contextPath}/image_upload/${trading.trade_photo}" width="150" class="list-thumbnail">
-				</a>			
-			</td>
 			<td class="align-center" width="400">
+				<a href="tradingDetail.do?trade_num=${trading.trade_num}">
+				<img src="${pageContext.request.contextPath}/trading/imageView.do?trade_num=${trading.trade_num}" width="150" class="list-thumbnail">
+				</a>			
 				<a href="tradingDetail.do?trade_num=${trading.trade_num}">${trading.trade_title}</a>
-				${trading.trade_content}
 			</td>
 			<td class="align-center">
 				<c:if test="${empty trading.mem_nickname}">${trading.mem_id}</c:if>
 				<c:if test="${!empty trading.mem_nickname}">${trading.mem_nickname}</c:if>
 			</td>
+			<td class="align-center">${trading.trade_price}원</td>
 			<td class="align-center">${trading.trade_date}</td>
 			<td class="align-center">${trading.trade_hit}</td>
 		</tr>
@@ -95,4 +93,4 @@
 	<div class="align-center">${page}</div>
 	</c:if>
 </div>
-<!-- 중고거래 게시판 목록 끝 -->
+<!-- 중고거래 게시판 목록 끝 --> 
