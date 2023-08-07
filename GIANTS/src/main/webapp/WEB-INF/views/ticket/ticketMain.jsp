@@ -14,7 +14,25 @@
 				<img src="${pageContext.request.contextPath}/images/groundInfo.png" width="450" height="450">
 			</div>
 			<div class="select-right">
-				DDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+				<div class="selected-info">
+					<div class="selected-left">
+						<img src="${pageContext.request.contextPath}/images/nochoice.png">
+						예매불가
+					</div>
+					<div class="selected-right">
+						<img src="${pageContext.request.contextPath}/images/selected.png">
+						선택한 좌석
+					</div>
+				</div>
+				<div class="select-grade">
+					<hr width="100%" class="color-red" noshade>
+					<table class="grade-table">
+						<tr>
+							<th>좌석등급</th>
+							<th>잔여석</th>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
