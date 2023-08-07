@@ -1,9 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
+<div class="mypage-top">
+	<div class="mypage-top-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+		<h2>(기업)회원탈퇴</h2>
+		<p>자이언츠 기업 회원탈퇴 입니다.</p>
+	</div>
+</div>
 <!-- 회원탈퇴 폼 시작 -->
 <div class="page-main">
-	<h2>기업회원탈퇴</h2>
 	<form:form modelAttribute="memberVO" action="deleteCompany.do" id="company_delete">
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>

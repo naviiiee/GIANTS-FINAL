@@ -1,6 +1,5 @@
 package kr.spring.member.service;
 
-import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberVO;
 
 public interface MemberService {

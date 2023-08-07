@@ -43,11 +43,18 @@ public class MemberController {
 		return new MemberVO();
 	}
 
-	// 아이디 중복 체크
-	@RequestMapping("/member/confimId.do")
+	/* === 회원가입 
+	=======================*/
+	// 회원등급 선택 호출
+	@RequestMapping("/member/registerCommon.do")
+	public String form() {
+		return "commonRegister";
+	}
+
+	@RequestMapping("/member/confirmId.do")
 	@ResponseBody
-	public Map<String, String> confimId(@RequestParam String mem_id) {
-		logger.debug("<<아이디 중복 체크>> : " + mem_id);
+	public Map<String, String> confirmId(@RequestParam String mem_id) {
+		log.debug("<<아이디 중복 체크>> : " + mem_id);
 
 		Map<String, String> mapAjax = new HashMap<String, String>();
 		MemberVO member = memberService.selectCheckMember(mem_id);
@@ -56,7 +63,7 @@ public class MemberController {
 			mapAjax.put("result", "idDuplicated");
 		} else {
 			if (!Pattern.matches("^[A-Za-z0-9]{4,12}$", mem_id)) {
-				// 패턴 불일치
+				// 패턴불일치
 				mapAjax.put("result", "notMatchPattern");
 			} else {
 				// 패턴 일치하면서 아이디 미중복
@@ -66,35 +73,24 @@ public class MemberController {
 
 		return mapAjax;
 	}
-
-	/* === 회원가입 
-	=======================*/
-	// 회원등급 선택 호출
-	@RequestMapping("/member/registerCommon.do")
-	public String form() {
-		return "commonRegister";
-	}
-
+	
 	// 일반회원가입 폼 호출
 	@GetMapping("/member/registerMember.do")
 	public String formMember() {
 		return "memberRegister";
 	}
-
+	
 	// 일반회원가입 처리
 	@PostMapping("/member/registerMember.do")
-	public String submit(@Valid MemberVO memberVO, @Valid MemberDetailVO memberdetailVO, BindingResult result,
+	public String submit(@Valid MemberVO memberVO, BindingResult result,
 			Model model, HttpServletRequest request, HttpSession session) {
-		// logger.debug("<<일반회원가입>> : " + memberVO);
-
+		logger.debug("<<일반회원가입>> : " + memberVO);
 		// 일반 회원 가입시 auth 값을 2
 		memberVO.setMem_auth(2);
-		memberdetailVO.setMem_point(0);
-		// logger.debug("<<Mem_photo>> : " + memberdetailVO);
+		memberVO.getMemberDetailVO().setMem_point(0);
 
 		// 유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) { return formMember(); }
-
 		// 정상 처리 시 회원가입
 		memberService.insertMember(memberVO);
 		model.addAttribute("accessMsg", "(일반)회원가입이 완료되었습니다.");
@@ -110,8 +106,8 @@ public class MemberController {
 
 	// 기업회원가입 처리
 	@PostMapping("/member/registerCompany.do")
-	public String submitCompany(@Valid MemberVO memberVO, @Valid CompanyDetailVO companydetailVO, BindingResult result,
-			Model model) {
+	public String submitCompany(@Valid MemberVO memberVO, BindingResult result,
+								Model model) {
 		// logger.debug("<<기업회원가입>> : " + memberVO);
 
 		// 기업 회원 가입시 auth 값을 3
@@ -365,7 +361,7 @@ public class MemberController {
 			// 인증실패
 			throw new AuthCheckException();
 		} catch (AuthCheckException e) {
-			result.reject("invalidIdOrPassword");
+			result.reject("invalidId	OrPassword");
 			return formDeleteCompany();
 		}
 	}
@@ -408,5 +404,32 @@ public class MemberController {
 	public String companyMypageOrderList(HttpSession session, Model model) {
 		
 		return "companyMypageOrderList";
+	}
+	
+	/* === 마이페이지 : 관리자
+	=======================*/
+	//회원관리
+	@RequestMapping("/member/adminMypageMember.do")
+	public String adminMypageMember(HttpSession session, Model model) {
+		
+		return "adminMypageMember";
+	}
+	//티켓관리
+	@RequestMapping("/member/adminMypageTicket.do")
+	public String adminMypageTicket(HttpSession session, Model model) {
+		
+		return "adminMypageTicket";
+	}
+	//굿즈관리
+	@RequestMapping("/member/adminMypageGoods.do")
+	public String adminMypageGoods(HttpSession session, Model model) {
+		
+		return "adminMypageGoods";
+	}
+	//매출관리
+	@RequestMapping("/member/adminMypageSaleManage.do")
+	public String adminMypageSaleManage(HttpSession session, Model model) {
+		
+		return "adminMypageSaleManage";
 	}
 }

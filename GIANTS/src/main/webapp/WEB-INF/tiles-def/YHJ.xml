@@ -3,23 +3,32 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<!-- 아래 설정을 상황에 맞게 수정해서 사용하세요 -->
+
+	<!-- 회원가입 목록 -->
 	<definition name="commonRegister" extends="main">
 		<put-attribute name="title" value="회원가입"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/commonRegister.jsp"/>
 	</definition>
+	
 	<definition name="memberRegister" extends="main">
 		<put-attribute name="title" value="일반회원가입"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/memberRegister.jsp"/>
 	</definition>
+	
 	<definition name="companyRegister" extends="main">
 		<put-attribute name="title" value="기업회원가입"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/companyRegister.jsp"/>
 	</definition>
+	
+	
+	<!-- 로그인 -->
 	<definition name="memberLogin" extends="main"> 
     	<put-attribute name="title" value="회원로그인"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/memberLogin.jsp"/>
     </definition>
+    
+    
+    <!-- 마이페이지 -->
     <definition name="myPage" template="/WEB-INF/views/template/layout_mypage.jsp">
 		<put-attribute name="title" value="마이페이지"/>
 		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
@@ -27,52 +36,85 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/memberView.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
 	</definition>
-	<!-- 회원관리 -->
+	
+	
+	<!-- 회원정보수정 -->
 	<definition name="memberModify" extends="myPage"> 
-    	<put-attribute name="title" value="회원정보수정"/>
+    	<put-attribute name="title" value="일반회원정보수정"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/memberModify.jsp"/>
     </definition>
+    
     <definition name="companyModify" extends="myPage"> 
     	<put-attribute name="title" value="기업회원정보수정"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/companyModify.jsp"/>
     </definition>
+    
+    
+    <!-- 회원탈퇴 -->
 	<definition name="memberDelete" extends="myPage"> 
     	<put-attribute name="title" value="일반회원탈퇴"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/memberDelete.jsp"/>
     </definition>
+    
     <definition name="companyDelete" extends="myPage"> 
     	<put-attribute name="title" value="기업회원탈퇴"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/companyDelete.jsp"/>
     </definition>
-    <definition name="companyDelete" extends="myPage"> 
-    	<put-attribute name="title" value="기업회원탈퇴"/>
-    	<put-attribute name="body" value="/WEB-INF/views/member/memberTicketList.jsp"/>
-    </definition>
+    
+    
     <!-- 일반 : 구매내역 -->
     <definition name="memberMypageTicketList" extends="myPage"> 
     	<put-attribute name="title" value="회원티켓내역"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/memberMypageTicketList.jsp"/>
     </definition>
+    
     <definition name="memberMypageFoodList" extends="myPage"> 
     	<put-attribute name="title" value="회원푸드내역"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/memberMypageFoodList.jsp"/>
     </definition>
+    
     <definition name="memberMypageGoodList" extends="myPage"> 
     	<put-attribute name="title" value="회원굿즈내역"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/memberMypageGoodList.jsp"/>
     </definition>
+    
+    
     <!-- 기업 : FOOD -->
     <definition name="companyMypageFoodList" extends="myPage"> 
     	<put-attribute name="title" value="기업푸드목록"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/companyMypageFoodList.jsp"/>
     </definition>
+    
     <definition name="companyMypageSaleManage" extends="myPage"> 
     	<put-attribute name="title" value="기업매출관리"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/companyMypageSaleManage.jsp"/>
     </definition>
+    
     <definition name="companyMypageOrderList" extends="myPage"> 
     	<put-attribute name="title" value="기업주문내역"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/companyMypageOrderList.jsp"/>
+    </definition>
+    
+    
+    <!-- 관리자 : MENU -->
+     <definition name="adminMypageMember" extends="myPage"> 
+    	<put-attribute name="title" value="회원관리"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/adminMypageMember.jsp"/>
+    </definition>
+    
+    <definition name="adminMypageTicket" extends="myPage"> 
+    	<put-attribute name="title" value="티켓관리"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/adminMypageTicket.jsp"/>
+    </definition>
+    
+    <definition name="adminMypageGoods" extends="myPage"> 
+    	<put-attribute name="title" value="굿즈관리"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/adminMypageGoods.jsp"/>
+    </definition>
+    
+     <definition name="adminMypageSaleManage" extends="myPage"> 
+    	<put-attribute name="title" value="매출관리"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/adminMypageSaleManage.jsp"/>
     </definition>
     
 </tiles-definitions>
