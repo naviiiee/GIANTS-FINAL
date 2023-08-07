@@ -2,6 +2,7 @@ package kr.spring.trading.controller;
 
 import java.util.HashMap;
 
+
 import java.util.List;
 import java.util.Map;
 
@@ -70,8 +71,8 @@ public class TradingController {
 		}
 		
 		//회원번호 세팅
+						//다운캐스팅
 		MemberVO user = (MemberVO)session.getAttribute("user");
-						      //다운캐스팅
 		tradingVO.setMem_num(user.getMem_num());
 		//IP 세팅
 		tradingVO.setTrade_ip(request.getRemoteAddr());
@@ -117,6 +118,21 @@ public class TradingController {
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());
+		
+		return mav;
+	}
+	
+	//이미지 출력
+	@RequestMapping("/trading/imageView.do")
+	public ModelAndView viewImage(@RequestParam int trade_num) {
+		
+		TradingVO tradingVO = tradingService.selectTrading(trade_num);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+
+		mav.addObject("imageFile", tradingVO.getTrade_photo());
+		mav.addObject("filename", tradingVO.getTrade_photoname());
 		
 		return mav;
 	}

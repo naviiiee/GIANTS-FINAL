@@ -17,7 +17,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
-	<h2>글쓰기</h2>
+	<h2>게시글 작성</h2>
+	<br>
 	<form:form modelAttribute="tradingVO" action="tradingWrite.do" id="register_form" enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
 			<ul>
@@ -28,7 +29,7 @@
 				</li>
 				<li>
 					<form:label path="trade_price">가격</form:label>
-					<form:input path="trade_price" type="number"/>원
+					<form:input path="trade_price" type="number" id="price_form"/>원
 					<form:errors path="trade_price" cssClass="error-color"/>
 				</li>
 				<li>
@@ -36,7 +37,7 @@
 					<input type="file" name="upload" id="upload" accept="image/gif,image/png,image/jpeg">
 					<form:errors path="trade_photo" cssClass="error-color"/>
 				</li>
-				<li>내용</li>
+				<br>
 				<li>
 					<form:textarea path="trade_content"/>
 					<form:errors path="trade_content" cssClass="error-color"/>
@@ -59,9 +60,10 @@
 					</script>
 				</li>
 			</ul>
+			<br>
 			<div class="align-center">
-				<form:button>전송</form:button>
-				<input type="button" value="목록" onclick="location.href='tradingList.do'">
+				<form:button class="classic-btn small">전송</form:button>
+				<input type="button" value="목록" onclick="location.href='tradingList.do'" class="classic-btn small">
 			</div>
 	</form:form>
 </div>

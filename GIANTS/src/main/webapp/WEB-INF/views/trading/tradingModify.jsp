@@ -17,6 +17,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
 	<h2>글 수정</h2>
+	<br>
 	<form:form modelAttribute="tradingVO" action="tradingUpdate.do" id="modify_form" enctype="multipart/form-data">
 		<form:hidden path="trade_num"/>
 		<form:errors element="div" cssClass="error-color"/>
@@ -28,7 +29,7 @@
 				</li>
 				<li>
 					<form:label path="trade_price">가격</form:label>
-					<form:input path="trade_price" type="number"/>원
+					<form:input path="trade_price" type="number" id="price_form"/>원
 					<form:errors path="trade_price" cssClass="error-color"/>
 				</li>
 				<li>
@@ -36,6 +37,7 @@
 					<input type="file" name="upload" id="upload" accept="image/gif,image/png,image/jpeg">
 					<form:errors path="trade_photo" cssClass="error-color"/>
 				</li>
+				<br>
 				<li>내용</li>
 				<li>
 					<form:textarea path="trade_content"/>
@@ -59,9 +61,10 @@
 					</script>
 				</li>
 			</ul>
+			<br>
 			<div class="align-center">
-				<form:button>수정</form:button>
-				<input type="button" value="목록" onclick="location.href='tradingList.do'">
+				<form:button class="classic-btn small">수정</form:button>
+				<input type="button" value="목록" onclick="location.href='tradingList.do'" class="classic-btn small">
 			</div>
 	</form:form>
 </div>

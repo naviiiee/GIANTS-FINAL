@@ -14,7 +14,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "trade_photo")
 public class TradingVO {
 	private int trade_num; //중고거래 게시글 번호
 	@NotEmpty
