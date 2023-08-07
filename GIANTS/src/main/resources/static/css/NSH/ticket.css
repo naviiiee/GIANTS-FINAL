@@ -62,11 +62,10 @@ input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }
 .select-ticket{ width:100%; display:flex; justify-content:center; }
 .select-left, .select-right{ width:50%; margin:0 auto; }
 
-.selected-info{ width:50%; margin:20px auto; text-align:center; border:1px solid #999; }
-.selected-left, .selected-right{ width:50%; float:left; }
-
+.selected-info{ width:50%; margin:20px auto; padding:10px 0; text-align:center; border:1px solid #999; }
 
 .select-grade{ width:75%; margin:20px auto; }
-.select-grade hr{ margin:0; }
+.select-grade hr{ margin:0 auto; }
+.select-grade th{ font-weight:bold; font-size:16px; }
 
 .grade-table{ width:100%; text-align:center; }

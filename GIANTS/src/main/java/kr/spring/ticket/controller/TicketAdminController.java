@@ -40,7 +40,7 @@ public class TicketAdminController {
 		int count = ticketService.selectGradeCount(gradeVO);
 		
 		List<GradeVO> list = ticketService.selectGradeList(gradeVO);
-		
+				
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		
@@ -121,6 +121,8 @@ public class TicketAdminController {
 		int count = ticketService.selectSeatCount(seatVO);
 		
 		List<SeatVO> list = ticketService.selectSeatList(seatVO);
+		
+		log.debug("<<seatVO>>" + seatVO);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("seatList");

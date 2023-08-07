@@ -13,17 +13,14 @@
 			<div class="select-left">
 				<img src="${pageContext.request.contextPath}/images/groundInfo.png" width="450" height="450">
 			</div>
+			<%-- 오른쪽 절반 --%>
 			<div class="select-right">
+				<%-- 상단 div --%>
 				<div class="selected-info">
-					<div class="selected-left">
-						<img src="${pageContext.request.contextPath}/images/nochoice.png">
-						예매불가
-					</div>
-					<div class="selected-right">
-						<img src="${pageContext.request.contextPath}/images/selected.png">
-						선택한 좌석
-					</div>
+					<img src="${pageContext.request.contextPath}/images/nochoice.png"> 예매불가
+					<img src="${pageContext.request.contextPath}/images/selected.png"> 선택한 좌석
 				</div>
+				<%-- 등급선택 div --%>
 				<div class="select-grade">
 					<hr width="100%" class="color-red" noshade>
 					<table class="grade-table">

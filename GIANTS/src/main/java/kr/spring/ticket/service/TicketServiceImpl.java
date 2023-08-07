@@ -18,7 +18,7 @@ public class TicketServiceImpl implements TicketService {
 	@Autowired
 	TicketMapper ticketMapper;
 	
-	/* GRADE */
+	/* GRADE */	
 	@Override
 	public void insertGrade(GradeVO gradeVO) { ticketMapper.insertGrade(gradeVO); }
 	
@@ -68,7 +68,5 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public void updateGame(GameVO gameVO) { ticketMapper.updateGame(gameVO); }
-
-	
 }
  
