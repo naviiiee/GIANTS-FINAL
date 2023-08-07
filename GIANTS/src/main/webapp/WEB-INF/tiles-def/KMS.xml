@@ -3,9 +3,21 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<!-- 아래 설정을 상황에 맞게 수정해서 사용하세요 -->
-	<definition name="a1" extends="main">
-		<put-attribute name="title" value="SpringPage"/>
-		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
+	<!-- 중고거래 게시판 목록 -->
+	<definition name="tradingList" extends="main">
+		<put-attribute name="title" value="중고거래 게시판 목록"/>
+		<put-attribute name="body" value="/WEB-INF/views/trading/tradingList.jsp"/>
 	</definition>
+	<definition name="tradingWrite" extends="main">
+       <put-attribute name="title" value="글쓰기"/>
+       <put-attribute name="body" value="/WEB-INF/views/trading/tradingWrite.jsp"/>
+    </definition>
+    <definition name="tradingView" extends="main">
+       <put-attribute name="title" value="상세정보"/>
+       <put-attribute name="body" value="/WEB-INF/views/trading/tradingView.jsp"/>
+    </definition>
+    <definition name="tradingModify" extends="main">
+       <put-attribute name="title" value="글 수정"/>
+       <put-attribute name="body" value="/WEB-INF/views/trading/tradingModify.jsp"/>
+    </definition>
 </tiles-definitions>
