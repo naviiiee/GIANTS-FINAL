@@ -7,6 +7,7 @@ input[type="button"]{
 	background-color:#dd032f;
 	color:#FFF;
 	border:none;
+	cursor:pointer;
 }
 div.news-content{
 	min-height:300px;
