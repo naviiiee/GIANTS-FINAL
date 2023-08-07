@@ -7,16 +7,16 @@
 		<ul>
 			<li><b>회원정보</b></li>
 			<li><input type="button" class="menu-btn" value="회원정보수정"
-				onclick="#"></li>
+				onclick="location.href='${pageContext.request.contextPath}/member/updateMember.do'"></li>
 			<li><input type="button" class="menu-btn" value="회원탈퇴"
 				onclick="location.href='${pageContext.request.contextPath}/member/deleteMember.do'"></li>
 			<li><b>구매내역</b></li>
 			<li><input type="button" class="menu-btn" value="Ticket"
-				onclick="#"></li>
+				onclick="location.href='${pageContext.request.contextPath}/member/memberMypageTicketList.do'"></li>
 			<li><input type="button" class="menu-btn" value="Foods"
-				onclick="#"></li>
+				onclick="location.href='${pageContext.request.contextPath}/member/memberMypageFoodList.do'"></li>
 			<li><input type="button" class="menu-btn" value="Goods"
-				onclick="#"></li>
+				onclick="location.href='${pageContext.request.contextPath}/member/memberMypageGoodList.do'"></li>
 		</ul>
 	</c:if>
 	<!-- 기업회원일때 NAV -->
@@ -24,16 +24,16 @@
 		<ul>
 			<li><b>회원정보</b></li>
 			<li><input type="button" class="menu-btn" value="회원정보수정"
-				onclick="#"></li>
+				onclick="location.href='${pageContext.request.contextPath}/member/updateCompany.do'"></li>
 			<li><input type="button" class="menu-btn" value="회원탈퇴"
-				onclick="location.href='${pageContext.request.contextPath}/member/deleteMember.do'"></li>
+				onclick="location.href='${pageContext.request.contextPath}/member/deleteCompany.do'"></li>
 			<li><b>FOOD</b></li>
 			<li><input type="button" class="menu-btn" value="푸드목록"
-				onclick="#"></li>
+				onclick="location.href='${pageContext.request.contextPath}/member/companyMypageFoodList.do'"></li>
 			<li><input type="button" class="menu-btn" value="매출관리"
-				onclick="#"></li>
+				onclick="location.href='${pageContext.request.contextPath}/member/companyMypageSaleManage.do'"></li>
 			<li><input type="button" class="menu-btn" value="주문내역"
-				onclick="#"></li>
+				onclick="location.href='${pageContext.request.contextPath}/member/companyMypageOrderList.do'"></li>
 		</ul>
 	</c:if>
 	<!-- 관리자일때 NAV -->

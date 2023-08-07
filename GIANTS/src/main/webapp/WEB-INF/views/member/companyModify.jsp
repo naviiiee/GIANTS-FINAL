@@ -1,70 +1,66 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!-- 회원가입 시작 -->
-<div class="page-main">
-	<h2>회원가입</h2>
-	<div>자이언츠 일반회원가입입니다.</div>
-	<form:form modelAttribute="memberVO" action="registerMember.do" id="member_register" enctype="multipart/form-data">
+<!-- 기업정보 폼 시작 -->
+<div>
+	<h2>기업회원가입</h2>
+	<form:form modelAttribute="memberVO" action="updateCompany.do" id="company_modify">
 		<ul>
 			<li>
-				<form:label path="memberDetailVO.mem_name">이름(한글)</form:label>
-				<form:input path="memberDetailVO.mem_name"/>
-				<form:errors path="memberDetailVO.mem_name" cssClass="error-color"/>
+				<form:label path="companyDetailVO.comp_owner">사업자명</form:label>
+				<form:input path="companyDetailVO.comp_owner"/>
+				<form:errors path="companyDetailVO.comp_owner"/>
 			</li>
 			<li>
-				<form:label path="mem_id">아이디</form:label>
-				<form:input path="mem_id" placeholder="영문, 숫자 4~12자" autocomplete="off"/>
-				<form:errors path="mem_id" cssClass="error-color"/>
- 			</li>
-			<li>
-				<form:label path="passwd">비밀번호</form:label>
-				<form:input path="passwd" placeholder="영문,숫자 4~12자"/>
-				<form:errors path="passwd" cssClass="error-color"/>
+				<form:label path="companyDetailVO.comp_name">기업명</form:label>
+				<form:input path="companyDetailVO.comp_name"/>
+				<form:errors path="companyDetailVO.comp_name"/>
 			</li>
 			<li>
-				<form:label path="memberDetailVO.mem_public">생년월일</form:label>
-				<form:input path="memberDetailVO.mem_public" placeholder="숫자 6자"/>
-				<form:errors path="memberDetailVO.mem_public"/>
+				<form:label path="companyDetailVO.comp_cate">카테고리</form:label>
+				<form:input path="companyDetailVO.comp_cate"/>
+				<form:errors path="companyDetailVO.comp_cate"/>
 			</li>
 			<li>
-				<form:label path="memberDetailVO.mem_phone">연락처</form:label>
-				<form:input path="memberDetailVO.mem_phone" placeholder="숫자 11자"/>
-				<form:errors path="memberDetailVO.mem_phone" cssClass="error-color"/>
+				<form:label path="companyDetailVO.comp_phone">연락처</form:label>
+				<form:input path="companyDetailVO.comp_phone" placeholder="숫자 11자"/>
+				<form:errors path="companyDetailVO.comp_phone"/>
 			</li>
 			<li>
-				<form:label path="memberDetailVO.mem_email">이메일</form:label>
-				<form:input path="memberDetailVO.mem_email"/>
-				<form:errors path="memberDetailVO.mem_email" cssClass="error-color"/>
+				<form:label path="companyDetailVO.comp_email">이메일</form:label>
+				<form:input path="companyDetailVO.comp_email"/>
+				<form:errors path="companyDetailVO.comp_email"/>
 			</li>
 			<li>
-				<form:label path="memberDetailVO.mem_zipcode">우편번호</form:label>
-				<form:input path="memberDetailVO.mem_zipcode"/>
+				<form:label path="companyDetailVO.comp_zipcode">우편번호</form:label>
+				<form:input path="companyDetailVO.comp_zipcode"/>
 				<input type="button" onclick="execDaumPostcode()" value="우편번호찾기">
-				<form:errors path="memberDetailVO.mem_zipcode" cssClass="error-color"/>
+				<form:errors path="companyDetailVO.comp_zipcode"/>
 			</li>
 			<li>
-				<form:label path="memberDetailVO.mem_address1">주소</form:label>
-				<form:input path="memberDetailVO.mem_address1"/>
-				<form:errors path="memberDetailVO.mem_address1" cssClass="error-color"/>
+				<form:label path="companyDetailVO.comp_address1">주소</form:label>
+				<form:input path="companyDetailVO.comp_address1"/>
+				<form:errors path="companyDetailVO.comp_address1"/>
 			</li>
 			<li>
-				<form:label path="memberDetailVO.mem_address2">상세주소</form:label>
-				<form:input path="memberDetailVO.mem_address2"/>
-				<form:errors path="memberDetailVO.mem_address2" cssClass="error-color"/>
+				<form:label path="companyDetailVO.comp_address2">상세주소</form:label>
+				<form:input path="companyDetailVO.comp_address2"/>
+				<form:errors path="companyDetailVO.comp_address2"/>
 			</li>
 			<li>
-				<form:label path="mem_nickname">닉네임</form:label>
-				<form:input path="mem_nickname"/>
+				<form:label path="companyDetailVO.comp_content">기업소개</form:label>
+				<form:input path="companyDetailVO.comp_content"/>
+				<form:errors path="companyDetailVO.comp_content"/>
 			</li>
 		</ul>
 		<div class="align-center">
 			<form:button>전송</form:button>
-			<input type="button" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
+			<input type="button" value="홈으로" 
+				   onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
 		</div>
 	</form:form>
 </div>
-<!-- 회원가입 끝 -->
+<!-- 기업정보 폼 끝 -->
 <!-- 우편번호 검색 시작 -->
 	<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 	<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
@@ -123,11 +119,11 @@
 	                //(수정) }
 	
 	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-	                document.getElementById('memberDetailVO.mem_zipcode').value = data.zonecode;
+	                document.getElementById('companyDetailVO.comp_zipcode').value = data.zonecode;
 	                //(수정) + extraAddr를 추가해서 address1에 참고항목이 보여지도록 수정
-	                document.getElementById("memberDetailVO.mem_address1").value = addr + extraAddr;
+	                document.getElementById("companyDetailVO.comp_address1").value = addr + extraAddr;
 	                // 커서를 상세주소 필드로 이동한다.
-	                document.getElementById("memberDetailVO.mem_address2").focus();
+	                document.getElementById("companyDetailVO.comp_address2").focus();
 	
 	                // iframe을 넣은 element를 안보이게 한다.
 	                // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)

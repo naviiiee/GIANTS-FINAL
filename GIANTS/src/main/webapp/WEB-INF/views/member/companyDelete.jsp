@@ -3,8 +3,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 회원탈퇴 폼 시작 -->
 <div class="page-main">
-	<h2>일반회원탈퇴</h2>
-	<form:form modelAttribute="memberVO" action="deleteMember.do" id="member_delete">
+	<h2>기업회원탈퇴</h2>
+	<form:form modelAttribute="memberVO" action="deleteCompany.do" id="company_delete">
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 			<li>

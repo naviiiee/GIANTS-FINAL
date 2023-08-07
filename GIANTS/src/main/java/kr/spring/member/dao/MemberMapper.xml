@@ -126,5 +126,38 @@
 		WHERE
 			m.mem_num=#{mem_num}
 	</select>
-	
+	<!-- 회원정보수정 -->
+	<update id="updateMember_detail" parameterType="memberVO">
+		UPDATE
+			MEMBER_DETAIL
+		SET
+			mem_name=#{memberDetailVO.mem_name},
+			mem_public=#{memberDetailVO.mem_public},
+			mem_phone=#{memberDetailVO.mem_phone},
+			mem_email=#{memberDetailVO.mem_email},
+			mem_zipcode=#{memberDetailVO.mem_zipcode},
+			mem_address1=#{memberDetailVO.mem_address1},
+			mem_address2=#{memberDetailVO.mem_address2},
+			mem_modifydate=sysdate
+		WHERE
+			mem_num=#{mem_num}
+	</update>
+	<!-- 기업정보수정 -->
+	<update id="updateCompany_detail" parameterType="memberVO">
+		UPDATE
+			COMPANY_DETAIL
+		SET
+			comp_owner=#{companyDetailVO.comp_owner},
+			comp_name=#{companyDetailVO.comp_name},
+			comp_cate=#{companyDetailVO.comp_cate},
+			comp_phone=#{companyDetailVO.comp_phone},
+			comp_email=#{companyDetailVO.comp_email},
+			comp_zipcode=#{companyDetailVO.comp_zipcode},
+			comp_address1=#{companyDetailVO.comp_address1},
+			comp_address2=#{companyDetailVO.comp_address2},
+			comp_content=#{companyDetailVO.comp_content},
+			comp_modifydate=sysdate
+		WHERE
+			mem_num=#{mem_num}
+	</update>
 </mapper>
