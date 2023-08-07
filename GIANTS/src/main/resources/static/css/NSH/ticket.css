@@ -26,7 +26,7 @@ hr{ margin:15px 0; }
 .refunt-info{ font-size:16px; margin:0 2%; }
 
 .info-left, .info-right{ width:90%; margin:0 auto; }
-.color-red{ border:2px solid #dd032f; margin:15px 0; }
+.color-red{ border:2px solid #dd032f; }
 
 .info-left table, .info-right table{ width:90%; margin:0 auto; text-align:center; border-collapse:collapse; font-size:15px; }
 .info-left table tr, .info-right table tr, #grade_list tr{ border-bottom:2px solid #999; }
@@ -61,3 +61,12 @@ input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }
 /* 좌석 선택 */
 .select-ticket{ width:100%; display:flex; justify-content:center; }
 .select-left, .select-right{ width:50%; margin:0 auto; }
+
+.selected-info{ width:50%; margin:20px auto; text-align:center; border:1px solid #999; }
+.selected-left, .selected-right{ width:50%; float:left; }
+
+
+.select-grade{ width:75%; margin:20px auto; }
+.select-grade hr{ margin:0; }
+
+.grade-table{ width:100%; text-align:center; }
