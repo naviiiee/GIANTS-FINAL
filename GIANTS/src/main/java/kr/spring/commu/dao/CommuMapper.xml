@@ -52,37 +52,35 @@
 	<!-- 전체or검색 목록 -->
 	<select id="selectList" parameterType="map" resultType="commuVO">
 		SELECT * 
-      FROM (SELECT a.*, rownum rnum 
-           FROM (SELECT c.commu_num,
-                      <![CDATA[
-                       REPLACE(REPLACE(c.commu_title,'<','&lt;'),'>','&gt;') commu_title,
-                       ]]>
-                       c.commu_hit,
-                       c.commu_date,
-                       c.mem_num,
-                       m.mem_id,
-                       m.mem_nickname,
-                       r.re_cnt,
-                       f.fav_cnt 
-                 FROM commu c JOIN member m 
-                              ON c.mem_num = m.mem_num 
-                             LEFT OUTER JOIN (SELECT COUNT(*) re_cnt, commu_num 
-                                            FROM commu_reply GROUP BY commu_num)r 
-                              ON c.commu_num = r.commu_num  
-                             LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, commu_num 
-                                          FROM commu_fav GROUP BY commu_num)f 
-                              ON c.commu_num = f.commu_num 
-                 <include refid="commuSearch"></include>)a)
-      <![CDATA[
-      WHERE rnum >= #{start} AND rnum <= #{end}
-      ]]>
+		FROM (SELECT a.*, rownum rnum 
+			  FROM (SELECT c.commu_num, 
+			  			  <![CDATA[
+			  			   REPLACE(REPLACE(c.commu_title,'<','&lt;'),'>','&gt;') commu_title,
+			  				]]>
+			  			   c.commu_hit,
+			  			   c.commu_date,
+			  			   c.mem_num,
+			  			   m.mem_id,
+			  			   m.mem_nickname,
+			  			   r.re_cnt,
+			  			   f.fav_cnt 
+			  		FROM commu c JOIN member m 
+			  					    ON c.mem_num = m.mem_num 
+			  					   LEFT OUTER JOIN (SELECT COUNT(*) re_cnt, commu_num 
+			  					   					FROM commu_reply GROUP BY commu_num)r 
+			  					    ON c.commu_num = r.commu_num  
+			  					   LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, commu_num 
+			  									    FROM commu_like GROUP BY commu_num)f 
+			  					    ON c.commu_num = f.commu_num 
+			  		<include refid="commuSearch"></include>
+			  		<include refid="commuOrder"></include>)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
 	</select>
 	
 	
 	
-	
-	
-
 	<!-- 커뮤니티 글 상세 -->
 	<select id="selectCommu" parameterType="integer">
 		SELECT * 
@@ -100,7 +98,7 @@
 			mem_num		
 			)
 		VALUES(
-			spreply_seq.nextval,
+			commu_reply_seq.nextval,
 			#{re_content},
 			#{re_ip},
 			#{commu_num},
@@ -129,6 +127,61 @@
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 커뮤니티 신고 글 등록 -->
+	<insert id="insertCommuRepo" parameterType="commuReportVO">
+		INSERT INTO commu__report (repo_num,repo_content,repo_ip,repo_category,mem_num,post_num) 
+		VALUES (commu_report_seq.nextval, #{repo_content} , #{repo_ip}, #{repo_category}, #{mem_num}, #{post_num})
+	</insert>
+	
+	
+	<!-- 커뮤니티 신고 목록 -->
+	<select id="selectListReport" parameterType="map" resultType="commuReportVO">
+		SELECT * 
+		FROM (SELECT a.*, rownum rnum 
+			  FROM (SELECT repo_num,
+			  			   <![CDATA[ 
+			  			   REPLACE(REPLACE(repo_content,'<','&lt;'),'>','&gt;') repo_content,
+			  			   ]]> 
+			  			   repo_date,
+			  			   repo_category,
+			  			   commu_num,
+			  			   mem_num,
+			  			   mem_id,
+			  			   mem_nickname 
+			  		FROM commu_report JOIN member USING(mem_num) 
+			  		WHERE commu_num = #{commu_num} 
+			  		ORDER BY re_num DESC)a) 
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>	
 
 

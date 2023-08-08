@@ -5,6 +5,7 @@ import java.util.Map;
 
 import kr.spring.commu.vo.CommuFavVO;
 import kr.spring.commu.vo.CommuReplyVO;
+import kr.spring.commu.vo.CommuReportVO;
 import kr.spring.commu.vo.CommuVO;
 
 public interface CommuService {
@@ -30,5 +31,12 @@ public interface CommuService {
 	public void insertReply(CommuReplyVO commuReply);
 	public void updateReply(CommuReplyVO commuReply);
 	public void deleteReply(Integer re_num);
+	
+	//신고
+	public List<CommuReportVO> selectListReport (Map<String,Object> map);
+	public int selectRowCountReort(Map<String,Object> map);
+	public CommuReplyVO selectReport (Integer repo_num);
+	public void insertReport(CommuReportVO commuReport);
+	public void deleteReport(Integer repo_num);
 	
 }

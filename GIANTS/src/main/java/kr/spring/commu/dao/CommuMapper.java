@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 
 import kr.spring.commu.vo.CommuFavVO;
 import kr.spring.commu.vo.CommuReplyVO;
+import kr.spring.commu.vo.CommuReportVO;
 import kr.spring.commu.vo.CommuVO;
 
 @Mapper
@@ -60,7 +61,7 @@ public interface CommuMapper {
 	
 	public void insertReply(CommuReplyVO commuReply);
 	
-	@Update("UPDATE board_reply SET re_content=#{re_content},re_ip=#{re_ip},re_mdate=SYSDATE WHERE re_num=#{re_num}")
+	@Update("UPDATE commu_reply SET re_content=#{re_content},re_ip=#{re_ip},re_modifydate=SYSDATE WHERE re_num=#{re_num}")
 	public void updateReply(CommuReplyVO commuReply);		
 	
 	@Delete("DELETE FROM commu_reply WHERE re_num=#{re_num}")
@@ -69,4 +70,21 @@ public interface CommuMapper {
 	//부모글 삭제 시 댓글이 존재하면, 부모글이 삭제되기 전 댓글을 먼저 삭제
 	@Delete("DELETE FROM commu_reply WHERE commu_num=#{commu_num}")
 	public void deleteReplyByCommuNum(Integer commu_num);
+	
+	
+	
+	//신고
+	public List<CommuReportVO> selectListReport (Map<String,Object> map);
+	
+	@Select("SELECT COUNT(*) FROM commu_report WHERE repo_num=#{repo_num}")
+	public int selectRowCountReort(Map<String,Object> map);
+	
+	@Select("SELECT * FROM commu_report WHERE repo_num=#{repo_num}")
+	public CommuReplyVO selectReport (Integer repo_num);
+	public void insertReport(CommuReportVO commuReport);
+	
+	@Delete("DELETE FROM commu_report WHERE repo_num=#{repo_num}")
+	public void deleteReport(Integer repo_num);
+	
+	
 }

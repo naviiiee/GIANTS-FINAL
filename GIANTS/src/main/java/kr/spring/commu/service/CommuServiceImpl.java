@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.spring.commu.dao.CommuMapper;
 import kr.spring.commu.vo.CommuFavVO;
 import kr.spring.commu.vo.CommuReplyVO;
+import kr.spring.commu.vo.CommuReportVO;
 import kr.spring.commu.vo.CommuVO;
 
 @Service
@@ -124,5 +125,40 @@ public class CommuServiceImpl implements CommuService{
 	public void deleteReply(Integer re_num) {
 
 		commuMapper.deleteReply(re_num);
+	}
+
+	@Override
+	public List<CommuReportVO> selectListReport(Map<String, Object> map) {
+		
+		return commuMapper.selectListReport(map);
+	}
+
+	@Override
+	public int selectRowCountReort(Map<String, Object> map) {
+		
+		return commuMapper.selectRowCountReort(map);
+	}
+
+	@Override
+	public CommuReplyVO selectReport(Integer repo_num) {
+		
+		return commuMapper.selectReport(repo_num);
+	}
+
+	@Override
+	public void insertReport(CommuReportVO commuReport) {
+		
+		commuMapper.insertReport(commuReport);
+		
+	}
+
+	
+
+	@Override
+	public void deleteReport(Integer repo_num) {
+		
+		commuMapper.deleteReport(repo_num);
+		
+		
 	}
 }

@@ -14,8 +14,15 @@ li{
 	align-items:center;
 	justify-content:center;
 }
+
+
+.title01{
+	display:flex;
+}
+
 </style>
 <!-- 커뮤니티 목록 시작 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LHJ/commu.css">
 <script type="text/javascript">
 	$(function(){
 		//검색 유효성 체크
@@ -29,7 +36,14 @@ li{
 	});
 </script>
 <div class="page-main">
-	<h2>커뮤니티 목록</h2>
+	<div class="main-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+		<div class="title01">
+			<h2 style="margin-right:5%">커뮤니티</h2>
+			<p>자이언츠의 커뮤니티 공간입니다.</p>
+		</div>
+	</div>
+	<hr size="0.05" width="100%" noshade style="margin-bottom:3%">
 	<form action="commuList.do" id="search_form" method="get">
 		<ul class="search align-center">
 			<li>
@@ -83,7 +97,7 @@ li{
 		<div class="result-display">표시할 게시물이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-		<table>
+		<table class="striped-table">
 			<tr>
 				<th>번호</th>
 				<th>제목</th>
@@ -100,7 +114,7 @@ li{
 					</td>
 					<td class="align-center">
 						<c:if test="${empty commu.mem_nickname}">${commu.mem_id}</c:if>
-						<c:if test="${!empty commu.mem_nickname}">${commu.commu_nick_name}</c:if>
+						<c:if test="${!empty commu.mem_nickname}">${commu.mem_nickname}</c:if>
 					</td>
 					<td class="align-center">${commu.commu_date}</td>
 					<td class="align-center">${commu.commu_hit}</td>

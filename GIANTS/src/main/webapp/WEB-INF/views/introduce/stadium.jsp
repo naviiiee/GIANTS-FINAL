@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LHJ/commu.css">
 <style>
 .intoduce-title p{
 	display: inline-block;
@@ -58,7 +59,7 @@ dl {
 }
 
 hr{
-	margin-top:5%
+	margin-top:1%;
 }
 
 </style>  
@@ -90,10 +91,9 @@ hr{
 				<dd>관람석 22,990석</dd>
 				<hr size="0.03" width="140%" noshade>
 			</dl>
+			<img src="${pageContext.request.contextPath}/images/사직야구장.png" class="sazik" width="700" height="500">
 		</div>
-		<div id="photo1">
-				<img src="${pageContext.request.contextPath}/images/사직야구장1.jpg" class="sazik">
-		</div>
+		
 	</div>
 	
 </div>
