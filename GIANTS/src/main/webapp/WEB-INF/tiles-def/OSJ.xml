@@ -12,13 +12,13 @@
 	
 	<!-- 매장상세(메뉴) -->
 	<definition name="foodCompDetailMenu" extends="main">
-		<put-attribute name="title" value="식품 - 매장상세정보"/>
+		<put-attribute name="title" value="식품 - 매장상세정보 - 메뉴"/>
 		<put-attribute name="body" value="/WEB-INF/views/food/foodCompDetailMenu.jsp"/>
 	</definition>
 	
 	<!-- 매장상세(리뷰) -->
 	<definition name="foodCompDetailReview" extends="main">
-		<put-attribute name="title" value="식품 - 매장상세정보"/>
+		<put-attribute name="title" value="식품 - 매장상세정보 - 리뷰"/>
 		<put-attribute name="body" value="/WEB-INF/views/food/foodCompDetailReview.jsp"/>
 	</definition>
 	
@@ -35,5 +35,11 @@
 	<definition name="fixFood" extends="main">
 		<put-attribute name="title" value="식품 - 매장 - 메뉴/식품 수정"/>
 		<put-attribute name="body" value="/WEB-INF/views/food/fixFood.jsp"/>
+	</definition>
+	
+	<!-- 식품 상세보기 -->
+	<definition name="foodDetail" extends="main">
+		<put-attribute name="title" value="식품 - 매장 - 식품상세정보"/>
+		<put-attribute name="body" value="/WEB-INF/views/food/foodDetail.jsp"/>
 	</definition>
 </tiles-definitions>

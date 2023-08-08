@@ -34,17 +34,17 @@
 			<div class="inner-top">
 				<ul>
 					<li>
-						<form:label path="food_name">식품명</form:label>
+						<form:label path="food_name" class="label-wid">식품명</form:label>
 						<form:input path="food_name" placeholder="최대20자" autocomplete="off"/>
 						<form:errors path="food_name"/>
 					</li>
 					<li>
-						<form:label path="food_price">식품가격</form:label>
+						<form:label path="food_price" class="label-wid">식품가격</form:label>
 						<form:input path="food_price" type="number" placeholder="최대9자리숫자" autocomplete="off"/>
 						<form:errors path="food_price"/>
 					</li>
 					<li>
-						<form:label path="food_quantity">재고수량</form:label>
+						<form:label path="food_quantity" class="label-wid">재고수량</form:label>
 						<form:input path="food_quantity" type="number" placeholder="최대9자리숫자" autocomplete="off"/>
 						<form:errors path="food_quantity"/>
 					</li>
@@ -77,7 +77,7 @@
 			<div class="inner-bottom">
 				<ul>
 					<li>
-						<label for="upload1">식품 메인 이미지</label>
+						<label for="upload1" class="label-wid">식품 메인 이미지</label>
 						<input type="file" name="upload1" id="upload1" accept="image/gif,image/png,image/jpeg"></input>
 						<span id="upload1_name">
 							<c:if test="${empty foodVO.food_photo1}"></c:if>
@@ -85,7 +85,7 @@
 						</span>
 					</li>
 					<li>
-						<label for="upload2">식품 상세 이미지</label>
+						<label for="upload2" class="label-wid">식품 상세 이미지</label>
 						<input type="file" name="upload2" id="upload2" accept="image/gif,image/png,image/jpeg"></input>
 						<span id="upload2_name">
 							<c:if test="${empty foodVO.food_photo2}"></c:if>
@@ -93,9 +93,9 @@
 						</span>
 					</li>
 					<li>
-						<label>표시 여부</label>
-						<form:radiobutton path="food_status" value="1" id="food_status1"/>비활성화
-						<form:radiobutton path="food_status" value="2" id="food_status2"/>활성화
+						<label class="label-wid">표시 여부</label>
+						<form:radiobutton path="food_status" value="1" id="food_status1"/> 비활성화
+						<form:radiobutton path="food_status" value="2" id="food_status2"/> 활성화
 					</li>
 				</ul>
 			</div>

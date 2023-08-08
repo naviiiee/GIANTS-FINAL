@@ -40,8 +40,31 @@ public class FoodController {
 	}
 	
 	/*	====================
-	 *		매장 목록 페이지 
+	 *		이미지 출력
 	 * 	====================*/
+	@RequestMapping("/food/imageView.do")
+	public ModelAndView viewImage(@RequestParam int food_num,
+			                      @RequestParam int food_type) {
+		
+		FoodVO foodVO = 
+				foodService.selectFood(food_num);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+		
+		if(food_type==1) {//photo1
+			mav.addObject("imageFile", foodVO.getFood_photo1());
+			mav.addObject("filename", foodVO.getFood_photo1_name());
+		}else if(food_type==2) {//photo2
+			mav.addObject("imageFile", foodVO.getFood_photo2());
+			mav.addObject("filename", foodVO.getFood_photo2_name());
+		}
+		return mav;
+	}
+	
+	/*	=======================
+	 *		매장 목록 페이지 
+	 * 	=======================*/
 	@RequestMapping("/food/foodList.do")
 	@ResponseBody
 	public ModelAndView foodList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
@@ -81,8 +104,11 @@ public class FoodController {
 	 * 	============================*/
 	@RequestMapping("/food/foodCompDetailMenu.do")
 	public ModelAndView foodCompDetail(@RequestParam String comp_num,
-									   @RequestParam(value = "pageNum", defaultValue = "1") int currentPage) {
+									   @RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
+									   HttpSession session) {
 		//log.debug("기업상세 페이지 진입 >>> comp_num : " + comp_num);
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		log.debug("유저 정보 에서 기업정보 추출 >> : "+ user);
 		
 		CompanyDetailVO comp = foodService.selectComp(comp_num);
 		int count = foodService.selectRowCount(comp_num);
@@ -144,8 +170,9 @@ public class FoodController {
 	public ModelAndView foodFixCompDetail(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
 										  HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		MemberVO comp = (MemberVO)session.getAttribute("user");
-		int count = foodService.selectRowCount(comp.getCompanyDetailVO().getComp_num());
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		CompanyDetailVO comp = foodService.selectComp(user.getCompanyDetailVO().getComp_num());
+		int count = foodService.selectRowCount(comp.getComp_num());
 		
 		//페이지 처리
 		PagingUtil page = new PagingUtil(currentPage, count, 5, 5, "fixCompFoodList.do");
@@ -161,6 +188,7 @@ public class FoodController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.setViewName("fixCompFoodList");
+		mav.addObject("comp", comp);
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());
@@ -283,8 +311,18 @@ public class FoodController {
 	}
 	
 	
-	
-	
+	/*	==========================
+	 *		식품 상세 페이지
+	 * 	==========================*/
+	@RequestMapping("/food/foodDetail.do")
+	public String foodDetail(@RequestParam int food_num,
+							 @RequestParam String comp_num,
+							 Model model) {
+		FoodVO foodVO = foodService.selectFood(food_num);
+		model.addAttribute("foodVO", foodVO);
+		
+		return "foodDetail";
+	}
 	
 	
 	

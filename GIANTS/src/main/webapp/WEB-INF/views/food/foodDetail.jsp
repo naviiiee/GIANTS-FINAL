@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!-- 매장 상세보기 페이지 -->
+<!-- 식품 상세 페이지 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OSJ/food.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/foodJS/food.public.js"></script>
 <div class="page-main">
@@ -31,7 +31,7 @@
 		</c:if>
 	</div>
 	<div class="clear"></div>
-	<!-- 매장 상세정보 시작 -->
+	<!-- 식품 상세정보 시작 -->
 	<div class=comp-container>
 		<div class="comp-detail"><!-- 상세페이지 링크는 스크립트로 해결해야함. -->
 			<div class="f-img"><img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-main-img"></div>
@@ -68,9 +68,6 @@
 					<div class="food-textBox"></div>
 				</div>
 			</c:forEach>
-			<form action="">
-				<input type="hidden" name="" value="">
-			</form>
 				<div class="paging align-center">${page}</div>
 			</c:if>
 			</div>
@@ -80,4 +77,4 @@
 	
 	<!-- 목록 끝 -->
 </div>
-<!-- 매장 상세보기 페이지 끝-->
+<!-- 식품 상세보기 페이지 끝-->

@@ -8,7 +8,7 @@
 <div class="page-main">
 	<div class="main-title">
 		<img class="title-img" src="${pageContext.request.contextPath}/images/title_icon.gif">
-		<h2> 푸드 | <a href="/food/foodList.do">매장</a> | <a href="/food/food_CompDetail.do">상호명</a></h2>
+		<h2> 푸드 | <a href="/food/foodList.do">매장</a> | <a href="/food/foodCompDetail.do?comp_num=${comp.comp_num}">${comp.comp_name}</a></h2>
 	</div>
 	<hr noshade="noshade">
 	<!-- 카테고리 시작 -->
@@ -16,7 +16,7 @@
 		<!-- 우측 수정, 취소 버튼 -->
 		<div class="float-right">
 			<input type="submit" class="adminBtn" value="수정">
-			<input type="button" class="adminBtn" value="취소" onclick='location.href="/food/foodCompDetail.do"'>
+			<input type="button" class="adminBtn" value="뒤로가기" onclick='location.href="/food/foodCompDetailMenu.do?comp_num=${comp.comp_num}"'>
 		</div>
 	</div>
 	<div class="clear"></div>
@@ -24,10 +24,10 @@
 	<div class=comp-container>
 		<div class="comp-detail"><!-- 상세페이지 링크는 스크립트로 해결해야함. -->
 			<div class="f-img"><img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-main-img"></div>
-			<div class="comp-title"><b>네네치킨(부산 롯데 사직야구장점)</b></div>
-			<div class="comp-score"><b>별점 (3.00)</b></div>
+			<div class="comp-title"><b>매장명 - ${comp.comp_name}</b></div>
+			<div class="comp-score"><b>별점 - ${comp.comp_score}</b></div>
 			<div class="comp-content">
-				<p>안녕하세요. <br>네네치킨 부산 롯데 사직야구장점 입니다.<br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>
+				${comp.comp_content}
 			</div>
 		</div>
 		<!-- 새 상품 추가하기 시작 -->	

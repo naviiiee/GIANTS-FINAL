@@ -219,11 +219,15 @@
 }
 
 #menu_tb{
-	margin: 50px auto;
-	width: 80%;
+	width: 1150px;
 	height: 90%;
+	margin: 50px auto;
+	text-align: center;
+	vertical-align: top;
 }
-#menu_tb td{
+#menu_tb .food-info{
+	display:inline-block;
+	width: 210px;
 	padding: 20px 30px;
 }
 
@@ -235,7 +239,13 @@
 	margin-bottom: 10px;
 }
 
-#menu_tb td p{
+.food-textBox{
+	display: inline-block;
+	width: 100%;
+	height: 17px;
+}
+
+.food-info p{
 	display:inline-block;
 	font-size: 1.4em;
 }
@@ -327,17 +337,47 @@
 	padding-left: 10px;
 	color:black;
 }
+.inner-top{
+	margin-bottom: 20px;
+}
 .inner-top,
 .inner-bottom{
+	font-size:11pt;
+	color:black;
 	padding: 0px 30px;
 }
-.inner-top li{
+.inner-top li,
+.inner-bottom li{
 	margin-top: 10px;
+}
+.inner-top li input,
+.inner-bottom li input{
+	height: 100%;
+	width: 300px;
+}
+
+.inner-bottom li:last-child input{
+	width: 13px;
 }
 
 .inner-top li .label-wid{
 	display: inline-block;
 	width: 80px;
+}
+.inner-bottom li .label-wid{
+	display: inline-block; 
+	width: 120px;
+}
+.comp-container div.align-center{
+	padding: 20px 0px;
+}
+.comp-container div.align-center button,
+.comp-container div.align-center input{
+	height: 30px;
+	padding: 3px 8px;
+	margin: 0px 5px;
+	font-size: 11pt;
+	font-weight: bold;
 }
 
 /*  ===================================
