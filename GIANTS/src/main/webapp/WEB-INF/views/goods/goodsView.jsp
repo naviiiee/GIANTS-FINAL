@@ -20,7 +20,7 @@
 		<div class="goods-info" ><br><br>
 			<h3 class="goods-name">${goods.goods_name}</h3>
 			<hr size="2" width="97%">
-			<form id="goods_cart" action="${pageContext.request.contextPath}/gorder/goods_cart.do" method="post" th:object="${cartVO}">
+			<form id="goods_cart" method="post" th:object="${cartVO}">
 				<input type="hidden" name="goods_num" value="${goods.goods_num}" id="goods_num">
 				<input type="hidden" name="goods_dprice" value="${goods.goods_price}" id="goods_price">
 				<%-- <input type="hidden" name="goods_stock" value="${goods.goods_stock}" id="goods_stock"> 수량--%>
