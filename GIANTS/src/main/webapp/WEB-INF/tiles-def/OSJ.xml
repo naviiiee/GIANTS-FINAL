@@ -10,9 +10,16 @@
 		<put-attribute name="body" value="/WEB-INF/views/food/foodList.jsp"/>
 	</definition>
 	
-	<definition name="foodCompDetail" extends="main">
+	<!-- 매장상세(메뉴) -->
+	<definition name="foodCompDetailMenu" extends="main">
 		<put-attribute name="title" value="식품 - 매장상세정보"/>
-		<put-attribute name="body" value="/WEB-INF/views/food/foodCompDetail.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/food/foodCompDetailMenu.jsp"/>
+	</definition>
+	
+	<!-- 매장상세(리뷰) -->
+	<definition name="foodCompDetailReview" extends="main">
+		<put-attribute name="title" value="식품 - 매장상세정보"/>
+		<put-attribute name="body" value="/WEB-INF/views/food/foodCompDetailReview.jsp"/>
 	</definition>
 	
 	<definition name="fixCompFoodList" extends="main">
