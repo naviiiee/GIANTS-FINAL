@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 상품 등록폼 시작 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goods.css">
 <!-- include libraries (jquery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -137,7 +138,7 @@
 			
 		</ul>
 		<div class="align-center">
-			<form:button class="default-btn">전송</form:button>
+			<form:button class="default-btn">등록</form:button>
 			<input type="button" value="목록" onclick="location.href='goodsList.do'">
 		</div>
 	</form:form>

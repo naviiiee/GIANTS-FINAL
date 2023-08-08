@@ -39,7 +39,7 @@
 			</li>
 			<li>
 				<input type="submit" value="찾기">
-				<input type="button" value="목록" onclick="location.href='admin_goodsList.do'">
+				<input type="button" value="목록" onclick="location.href='goodsUpdate.do'">
 			</li>
 		</ul>
 	</form>
@@ -60,7 +60,7 @@
 			<tr>
 				<td class="align-center">${goods.goods_num}</td>
 				<td>
-					<a href="admin_modify.do?goods_num=${goods.goods_num}">${goods.goods_name}</a>
+					<a href="goodsUpdate.do?goods_num=${goods.goods_num}">${goods.goods_name}</a>
 				</td>
 				<td class="align-center">
 					<fmt:formatNumber value="${goods.goods_price}"/>원

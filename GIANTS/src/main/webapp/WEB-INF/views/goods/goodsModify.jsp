@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!-- 상품 등록폼 시작 -->
+<!-- 상품 수정폼 시작 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goods.css">
 <!-- include libraries (jquery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -33,8 +34,7 @@
 				<input type="file" id="upload" name="upload" accept="image/gif,image/png,image/jpeg">
 				<c:if test="${!empty goodsVO.goods_photo}">
 					<div id="file_detail">
-						(${goods_photoname})파일이 등록되어 있습니다.
-						<input type="button" value="파일삭제" id="file_del">
+						(${goodsVO.goods_photoname})파일이 등록되어 있습니다.
 					</div>
 				</c:if>
 				<form:errors path="goods_photo" cssColor="error-color"/>
@@ -149,4 +149,4 @@
 		</div>
 	</form:form>
 </div>
-<!-- 상품 등록폼 시작 -->
+<!-- 상품 수정폼 시작 -->

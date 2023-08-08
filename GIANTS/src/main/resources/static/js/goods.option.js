@@ -23,4 +23,19 @@ $(function(){
 		$('#goods_dprice').val(dprice);
 	}); //end of goods_price
 	
+	function getCategory(){
+		if($('#goods_category').val() == 1){
+			$('.hasSize').show();
+			$('.hasNoSize').remove();
+		} else if($('#goods_category').val() > 1){
+			$('.hasSize').remove();
+			$('.hasNoSize').show();
+		} else if($('#goods_category').val() < 1){
+			$('.hasSize').hide();
+			$('.hasNoSize').hide();
+		}
+	}
+	
+	getCategory();
+	
 });

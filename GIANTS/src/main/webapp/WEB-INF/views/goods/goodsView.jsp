@@ -9,21 +9,11 @@
 <div class="page-main">
 	<div class="content-main">
 		<c:if test="${!empty user && user.mem_auth == 9}">
-		<div>
+		<div class="align-right">
 			<input type="button" value="수정" onclick="location.href='goodsUpdate.do?goods_num=${goods.goods_num}'">
 			<input type="button" value="삭제">
 		</div>
-		</c:if>
-		<c:if test="${goods.goods_status == 2}">
-		<div class="result-display">
-			<div class="align-center">
-				판매 중지 상품
-				<p>
-				<input type="button" value="판매상품 보기" onclick="location.href='goodsList.do'">
-			</div>
-		</div>
-		</c:if>
-		<c:if test="${goods.goods_status == 1}">
+		</c:if>		
 		<div class="goods-photo">
 			<img src="${pageContext.request.contextPath}/goods/imageView.do?goods_num=${goods.goods_num}">
 		</div>
@@ -59,10 +49,11 @@
 					<li>
 						평점 : 별표이미지 (숫자표시)
 					</li>
-					
+				<c:if test="${goods.goods_status == 1}">
 					<li>
 						옵션 : 
 						<select>
+							<option value="" class="align-center">===선택안함===</option>
 							<c:forEach var="option" items="${option}">
 							<option value="${option.goods_size}">${option.goods_size} [재고 : ${option.goods_stock}]</option>
 							</c:forEach>
@@ -94,7 +85,7 @@
 					<div id="goods_fav">
 						<img id="fav_btn" data-num="${goods.goods_num}" src="${pageContext.request.contextPath}/images/nofav.png">
 						<span>찜하기</span>
-						<c:if test="">[<span id="output_fcount"></span>]</c:if>
+						<c:if test="${!empty user}">[<span id="output_fcount"></span>]</c:if>
 						<c:if test="${empty user}"></c:if>
 					</div>
 					<div id="goods_cart">
@@ -106,6 +97,14 @@
 						<span>바로구매</span>
 					</div>
 				</div>
+			</c:if>
+			<c:if test="${goods.goods_status == 2}">
+			<div>
+				<div style="background-color:#000; color:#FFF;">
+					SOLD OUT
+				</div>
+			</div>
+			</c:if>
 				<%-- 
 				<ul>	
 					<li id="goods_content">
@@ -223,7 +222,6 @@
 			</nav>
 		</div>
 		<div id="goods_qna">상품문의=============</div>
-		</c:if>
 	</div> <%-- end of content-main --%>
 </div>
 <!-- 상품 상세 페이지 끝 -->

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.goods.vo.GoodsFavVO;
 import kr.spring.goods.vo.GoodsOptionVO;
@@ -34,14 +35,15 @@ public interface GoodsMapper {
 	//상품 상세
 	@Select("SELECT * FROM goods WHERE goods_num=#{goods_num}")
 	public GoodsVO selectGoods(Integer goods_num);
-	//상품 재고 상세
-	@Select("SELECT * FROM goods_option WHERE goods_num=#{goods_num}")
-	public GoodsOptionVO selectGoodsOption(Integer goods_num);
 	//상품 재고 목록
 	public List<GoodsOptionVO> selectOptionList(Integer goods_num);
 	 
 	//상품 정보 수정
 	public void updateGoods(GoodsVO goods);
+	//상품 재고 수정
+	public void updateOption(@Param(value="goods_num") Integer goods_num, 
+							@Param(value="goods_size") String goods_size, 
+							@Param(value="goods_stock") Integer goods_stock);
 	//상품 삭제
 	public void deleteGoods(Integer goods_num);
 	

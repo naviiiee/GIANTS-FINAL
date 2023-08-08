@@ -53,12 +53,6 @@ public class GoodsServiceImpl implements GoodsService{
 		return goodsMapper.selectGoods(goods_num);
 	}
 	
-
-	@Override
-	public GoodsOptionVO selectGoodsOption(Integer goods_num) {
-		return goodsMapper.selectGoodsOption(goods_num);
-	}
-	
 	@Override
 	public List<GoodsOptionVO> selectOptionList(Integer goods_num) {
 		return goodsMapper.selectOptionList(goods_num);
@@ -66,10 +60,17 @@ public class GoodsServiceImpl implements GoodsService{
 
 	@Override
 	public void updateGoods(GoodsVO goods) {
-		// TODO Auto-generated method stub
+		//상품 정보 업데이트
+		goodsMapper.updateGoods(goods);
 		
+		for(int i=0; i < (goods.getGoods_stocks()).length; i++) {
+			String goods_size = goods.getGoods_sizes()[i];
+			int goods_stock = goods.getGoods_stocks()[i];
+			
+			goodsMapper.updateOption(goods.getGoods_num(), goods_size, goods_stock);
+		}
 	}
-
+	
 	@Override
 	public void deleteGoods(Integer goods_num) {
 		// TODO Auto-generated method stub
@@ -131,8 +132,5 @@ public class GoodsServiceImpl implements GoodsService{
 		// TODO Auto-generated method stub
 		
 	}
-
-
-
 
 }

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* 공통 버튼
 ----------------*/
-input[type="button"]{
+input[type="button"], button[type="submit"]{
 	width:60px;
 	height:30px;
 	background-color:#dd032f;
@@ -9,6 +9,27 @@ input[type="button"]{
 	border:none;
 	cursor:pointer;
 }
+
+/* 굿즈 등록, 수정
+----------------*/
+button[type="submit"].default-btn{
+	width:60px;
+	height:30px;
+	background-color:#FFF;
+	color:#dd032f;
+	border:1px solid #dd032f;
+	cursor:pointer;
+}
+
+button[type="submit"].default-btn:hover{
+	width:60px;
+	height:30px;
+	background-color:#dd032f;
+	color:#FFF;
+	cursor:pointer;
+}
+
+
 /* [일반회원] 굿즈 목록
 ----------------------*/
 .goods-space .horizontal-area{
@@ -54,7 +75,9 @@ div.goods-list table td{
 	text-align:center;
 	font-size:11pt;
 }
-
+div.goods-list table tr{
+	height:30px;
+}
 
 /* 굿즈 상세페이지
 ----------------*/

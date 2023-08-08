@@ -118,4 +118,30 @@
 		WHERE goods_num=#{goods_num}
 	</select>
 	
+	<!-- 상품 정보 수정 -->
+	<update id="updateGoods" parameterType="goodsVO">
+		UPDATE 
+			goods
+		SET
+			goods_name=#{goods_name},
+			goods_price=#{goods_price},
+			goods_disc=#{goods_disc},
+			goods_dprice=#{goods_dprice},
+			goods_content=#{goods_content},
+			goods_photo=#{goods_photo},
+			goods_photoname=#{goods_photoname},
+			goods_mdate=sysdate,
+			goods_status=#{goods_status}
+		WHERE goods_num=#{goods_num}
+	</update>
+	
+	<!-- 상품 재고 수정 -->
+	<update id="updateOption" parameterType="goodsOptionVO">
+		UPDATE 
+			goods_option
+		SET
+			goods_stock=#{goods_stock}
+		WHERE goods_num=#{goods_num} AND goods_size=#{goods_size}
+	</update>
+	
 </mapper>

@@ -1,5 +1,6 @@
 package kr.spring.goods.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -176,7 +177,6 @@ public class GoodsController {
 		
 		//상품 상세
 		GoodsVO goods = goodsService.selectGoods(goods_num);
-		//GoodsOptionVO option = goodsService.selectGoodsOption(goods_num);
 		
 		List<GoodsOptionVO> list = null;
 		list = goodsService.selectOptionList(goods_num);
@@ -200,12 +200,45 @@ public class GoodsController {
 	public String formUpdate(@RequestParam int goods_num, Model model) {
 		 
 		GoodsVO goodsVO = goodsService.selectGoods(goods_num);
-		GoodsOptionVO optionVO = goodsService.selectGoodsOption(goods_num);
 		
+		List<GoodsOptionVO> list = goodsService.selectOptionList(goods_num);
+	
+		Map<String, Object> tmp = new HashMap<String, Object>();
+		int list_size = list.size();
+		int[] tmp_stock = new int[list_size];
+		
+		for(int i=0; i < list.size(); i++) {
+			tmp_stock[i] = list.get(i).getGoods_stock();
+		}
+		
+		goodsVO.setGoods_stocks(tmp_stock);
+						
 		model.addAttribute("goodsVO", goodsVO);
-		model.addAttribute("goodsOptionVO", optionVO);
+		
+		log.debug("<<로그찍기>> : " + model);
 		
 		return "goodsModify";	
+	}
+	
+	//전송된 데이터 처리
+	@PostMapping("/goods/goodsUpdate.do")
+	public String submitUpdate(@Valid GoodsVO goodsVO, @Valid GoodsOptionVO goodsOptionVO,
+								BindingResult result, HttpServletRequest request, Model model)	{
+		log.debug("<<상품 정보 수정 - GoodsVO>> : " + goodsVO);
+		log.debug("<<상품 재고 수정 - GoodsOptionVO>> : " + goodsOptionVO);
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			return "goodsModify";
+		}
+		
+		//상품 정보 수정
+		goodsService.updateGoods(goodsVO);
+		
+		model.addAttribute("message", "상품 수정 완료!");
+		model.addAttribute("url", request.getContextPath() + "/goods/goodsDetail.do?goods_num=" + goodsVO.getGoods_num());
+		
+		return "common/resultView";
 	}
 	
 	/*======굿즈 찜하기=======*/
