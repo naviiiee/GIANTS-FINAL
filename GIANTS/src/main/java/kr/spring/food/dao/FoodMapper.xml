@@ -69,6 +69,26 @@
 		]]>
 	</select>
 	
+	<!-- 매장 상세정보 쿼리 -->
+	<select id="selectComp" parameterType="string" resultType="companyDetailVO">
+		SELECT 
+		  c.comp_num, 
+		  comp_name, 
+		  comp_photo, 
+		  comp_photoname, 
+		  comp_content, 
+		  comp_cate, 
+		  comp_score
+        FROM company_detail c
+        LEFT OUTER JOIN (SELECT c.comp_num as comp_num, round(avg(comp_score),2) as comp_score
+                         FROM company_detail c JOIN food_review r
+                         ON c.comp_num=r.comp_num
+                         WHERE c.comp_num=#{comp_num}
+                         GROUP BY c.comp_num) r
+        ON c.comp_num=r.comp_num
+        WHERE c.comp_num=#{comp_num}
+	</select>
+	
 	<!-- 매장목록 레코드수 쿼리 -->
 	<select id="selectCompRowCount" parameterType="map" resultType="integer">
 		SELECT 
@@ -100,11 +120,11 @@
                             		WHERE c.comp_cate=#{comp_cate}
                             		GROUP BY c.comp_num) r
           		   ON c.comp_num=r.comp_num
-          		   <if test="sort == '1'">
-           		   ORDER BY comp_score ASC
-           		   </if>
-           		   <if test="sort == '2'">
+          		   <if test="sort == 1">
            		   ORDER BY comp_score DESC
+           		   </if>
+           		   <if test="sort == 2">
+           		   ORDER BY comp_score ASC
            		   </if>
            		   )a)
 		<![CDATA[

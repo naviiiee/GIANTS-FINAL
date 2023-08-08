@@ -58,4 +58,9 @@ public class FoodServiceImpl implements FoodService{
 	public int selectCompRowCount(Map<String, Object> map) {
 		return foodMapper.selectCompRowCount(map);
 	}
+
+	@Override
+	public CompanyDetailVO selectComp(String comp_num) {
+		return foodMapper.selectComp(comp_num);
+	}
 }

@@ -12,16 +12,16 @@
 	<!-- 카테고리 시작 -->
 	<div class="food-category">
 		<ul class="float-left">
-			<li><div id="food_c1" class="food-cbox-on">치 킨</div></li><!--
-		--><li><div id="food_c2">술/안주</div></li><!--
-		--><li><div id="food_c3">분 식</div></li><!--
-		--><li><div id="food_c4">간 식</div></li><!--
-		--><li><div id="food_c5">패스트푸드</div></li>
+			<li><div class="food-cbox" data-comp_cate="1">치 킨</div></li><!--
+		--><li><div class="food-cbox" data-comp_cate="2">술/안주</div></li><!--
+		--><li><div class="food-cbox" data-comp_cate="3">분 식</div></li><!--
+		--><li><div class="food-cbox" data-comp_cate="4">간 식</div></li><!--
+		--><li><div class="food-cbox" data-comp_cate="5">패스트푸드</div></li>
 		</ul>
 		<div class="float-right">
 		<form id="foodList_sort" action="foodList.do" method="get">
-			<input type="hidden" name=comp_cate id="comp_cate" value="1">
-			<select name="sort">
+			<input type="hidden" name=comp_cate id="comp_cate" value="${comp_cate}">
+			<select id="sort_select" name="sort">
 				<option value="1" <c:if test="${sort == 1}">selected</c:if>>별점 높은순</option>
 				<option value="2" <c:if test="${sort == 2}">selected</c:if>>별점 낮은순</option>
 			</select>
@@ -44,6 +44,9 @@
 		<div class="food-list">
 			<c:forEach var="comp" items="${list}">
 				<div class="f-list"><!-- 상세페이지 링크는 스크립트로 해결해야함. -->
+					<form action="foodCompDetail.do" method="get">
+						<input type="hidden" name=comp_num value="${comp.comp_num}" >
+					</form>
 					<div class="f-img"><img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-main-img"></div>
 					<div class="comp-title"><b>매장명 - ${comp.comp_name}</b></div>
 					<div class="comp-score"><b>별점 - ${comp.comp_score}</b></div>
@@ -52,19 +55,9 @@
 					</div>
 				</div>
 			</c:forEach>
-			
 		</div>
 	</c:if>
 	<!-- 목록 끝 -->
 	<div class="paging align-center">${page}</div>
 </div>
-
-
-<script type="text/javascript">
-	$(function(){
-		$(document).on('click','.f-list',function(){
-			location.href="/food/foodCompDetail.do";
-		});
-	});
-</script>
 <!-- 매장리스트 끝-->

@@ -1,39 +1,40 @@
 $(function(){
-	let count;
-	$('#food_c1').click(function(){
-		for(let i=1; i<6; i++){
-			let fName = '#food_c'+i;
-			$(fName).attr('class','');
-			$(this).attr('class','food-cbox-on');
+	let form = $('#foodList_sort');
+	
+	//초기화
+	let cboxes = $('.food-cbox');
+	for(let i=0; i<cboxes.length; i++){
+		if($('#comp_cate').val()==(i+1)){
+			$(cboxes[i]).attr('class','food-cbox food-cbox-on');
 		}
+	}
+	
+	//상단 카테고리 작동 시작
+	$(document).on('click','.food-cbox',function(){
+		$('.food-cbox').attr('class','food-cbox');
+		$(this).attr('class','food-cbox food-cbox-on');
+		$('#comp_cate').val($(this).attr('data-comp_cate'))
+		categoryListform(form);
 	});
-	$('#food_c2').click(function(){
-		for(let i=1; i<6; i++){
-			let fName = '#food_c'+i;
-			$(fName).attr('class','');
-			$(this).attr('class','food-cbox-on');
-		}
+	//상단 카테고리 작동 끝
+	
+	function categoryListform(form){
+		$(form).submit();
+	}
+	
+	//별점 정렬
+	$(document).on('change','#sort_select',function(){
+		categoryListform(form);
 	});
-	$('#food_c3').click(function(){
-		for(let i=1; i<6; i++){
-			let fName = '#food_c'+i;
-			$(fName).attr('class','');
-			$(this).attr('class','food-cbox-on');
-		}
+	
+	//매장 상세정보 폼 호출
+	$(function(){
+		$(document).on('click','.f-list',function(){
+			let comp_form = $(this).find('form');
+			comp_form.submit();
+		});
 	});
-	$('#food_c4').click(function(){
-		for(let i=1; i<6; i++){
-			let fName = '#food_c'+i;
-			$(fName).attr('class','');
-			$(this).attr('class','food-cbox-on');
-		}
-	});
-	$('#food_c5').click(function(){
-		for(let i=1; i<6; i++){
-			let fName = '#food_c'+i;
-			$(fName).attr('class','');
-			$(this).attr('class','food-cbox-on');
-		}
-	});
+	
+	
 	
 });

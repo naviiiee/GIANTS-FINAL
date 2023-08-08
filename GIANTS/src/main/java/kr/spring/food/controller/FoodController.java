@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.food.service.FoodService;
@@ -42,6 +43,7 @@ public class FoodController {
 	 *		매장 목록 페이지 
 	 * 	====================*/
 	@RequestMapping("/food/foodList.do")
+	@ResponseBody
 	public ModelAndView foodList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
 								 @RequestParam(value = "comp_cate", defaultValue = "1") int comp_cate,
 								 @RequestParam(value = "sort", defaultValue = "1") String sort) {
@@ -69,7 +71,8 @@ public class FoodController {
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());
-		mav.addObject("sort");
+		mav.addObject("sort", sort);
+		mav.addObject("comp_cate", comp_cate);
 		return mav;
 	}
 	
@@ -77,8 +80,32 @@ public class FoodController {
 	 *		기업 상세페이지
 	 * 	====================*/
 	@RequestMapping("/food/foodCompDetail.do")
-	public String foodCompDetail() {
-		return "foodCompDetail";
+	public ModelAndView foodCompDetail(@RequestParam String comp_num,
+									   @RequestParam(value = "pageNum", defaultValue = "1") int currentPage) {
+		log.debug("기업상세 페이지 진입 >>> comp_num : " + comp_num);
+		
+		CompanyDetailVO comp = foodService.selectComp(comp_num);
+		int count = foodService.selectRowCount(comp_num);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		PagingUtil page = new PagingUtil(currentPage, count, 8, 5, "foodCompDetail.do");
+		
+		List<FoodVO> list = null;
+		if (count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = foodService.selectList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("foodCompDetail");
+		mav.addObject("comp", comp);
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		return mav;
 	}
 	
 	/*	========================================
