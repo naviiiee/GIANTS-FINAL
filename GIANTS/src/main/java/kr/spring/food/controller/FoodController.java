@@ -76,20 +76,20 @@ public class FoodController {
 		return mav;
 	}
 	
-	/*	====================
-	 *		기업 상세페이지
-	 * 	====================*/
-	@RequestMapping("/food/foodCompDetail.do")
+	/*	============================
+	 *		기업 상세페이지 - 식품 메뉴
+	 * 	============================*/
+	@RequestMapping("/food/foodCompDetailMenu.do")
 	public ModelAndView foodCompDetail(@RequestParam String comp_num,
 									   @RequestParam(value = "pageNum", defaultValue = "1") int currentPage) {
-		log.debug("기업상세 페이지 진입 >>> comp_num : " + comp_num);
+		//log.debug("기업상세 페이지 진입 >>> comp_num : " + comp_num);
 		
 		CompanyDetailVO comp = foodService.selectComp(comp_num);
 		int count = foodService.selectRowCount(comp_num);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		PagingUtil page = new PagingUtil(currentPage, count, 8, 5, "foodCompDetail.do");
+		PagingUtil page = new PagingUtil(currentPage, count, 8, 5, "foodCompDetailMenu.do");
 		
 		List<FoodVO> list = null;
 		if (count > 0) {
@@ -100,7 +100,36 @@ public class FoodController {
 		}
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("foodCompDetail");
+		mav.setViewName("foodCompDetailMenu");
+		mav.addObject("comp", comp);
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		return mav;
+	}
+	
+	/*	============================
+	 *		기업 상세페이지 - 기업 리뷰
+	 * 	============================*/
+	@RequestMapping("/food/foodCompDetailReview.do")
+	public ModelAndView foodCompDetailReview(@RequestParam String comp_num,
+									   @RequestParam(value = "pageNum", defaultValue = "1") int currentPage) {
+		//log.debug("기업상세 페이지 진입 >>> comp_num : " + comp_num);
+		CompanyDetailVO comp = foodService.selectComp(comp_num);
+		int count = foodService.selectRowCount(comp_num);
+		
+		PagingUtil page = new PagingUtil(currentPage, count, 5, 5, "foodCompDetailReview.do");
+		
+		List<FoodVO> list = null;
+		if (count > 0) {
+			//map.put("start", page.getStartRow());
+			//map.put("end", page.getEndRow());
+			
+			//list = foodService.selectList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("foodCompDetailReview");
 		mav.addObject("comp", comp);
 		mav.addObject("count", count);
 		mav.addObject("list", list);
@@ -151,7 +180,7 @@ public class FoodController {
 	public String submitAddNewFood(@Valid FoodVO vo, BindingResult result,
 									Model model, HttpServletRequest request,
 									HttpSession session) {
-		log.debug("<< 식품 추가/등록 POST 작동 >> : " + vo);
+		//log.debug("<< 식품 추가/등록 POST 작동 >> : " + vo);
 		
 		
 		//상품 이미지 유효성 체크
@@ -172,12 +201,12 @@ public class FoodController {
 			return formAddNewFood();
 		}
 		
-		log.debug("<< 사업자 등록번호 세팅 전 >>");
+		//log.debug("<< 사업자 등록번호 세팅 전 >>");
 		//사업자 등록 번호 VO에 세팅
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		vo.setComp_num(user.getCompanyDetailVO().getComp_num());
 		
-		log.debug("<< 사업자 등록번호 완료 상품 등록 시작 >>");
+		//log.debug("<< 사업자 등록번호 완료 상품 등록 시작 >>");
 		
 		//상품 등록 sql 시작
 		foodService.insertFood(vo);
@@ -245,7 +274,7 @@ public class FoodController {
 	 * 	==========================*/
 	@PostMapping("/food/deleteFood.do")
 	public String submitDeleteFood(@RequestParam int food_num) {
-		log.debug("<< 식품 삭제 수행중 >> : " + food_num);
+		//log.debug("<< 식품 삭제 수행중 >> : " + food_num);
 		
 		//식품 삭제
 		foodService.deleteFood(food_num);

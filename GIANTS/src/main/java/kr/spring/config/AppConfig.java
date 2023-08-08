@@ -43,7 +43,8 @@ public class AppConfig implements WebMvcConfigurer {
 		//Login(로그인) 인터셉터 설정
 		registry.addInterceptor(loginCheck)
 				//오세진 - Food
-				.addPathPatterns("/food/foodCompDetail.do")
+				.addPathPatterns("/food/foodCompDetailMenu.do")
+				.addPathPatterns("/food/foodCompDetailReview.do")
 				.addPathPatterns("/food/fixCompFoodList.do")
 				.addPathPatterns("/food/addNewFood.do")
 				.addPathPatterns("/food/fixFood.do")

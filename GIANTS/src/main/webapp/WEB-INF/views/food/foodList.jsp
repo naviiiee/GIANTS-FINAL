@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 매장리스트 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OSJ/food.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/foodJS/food.public.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/foodJS/foodList.js"></script>
 <div class="page-main">
 	<div class="main-title">
@@ -44,7 +45,7 @@
 		<div class="food-list">
 			<c:forEach var="comp" items="${list}">
 				<div class="f-list"><!-- 상세페이지 링크는 스크립트로 해결해야함. -->
-					<form action="foodCompDetail.do" method="get">
+					<form action="foodCompDetailMenu.do" method="get">
 						<input type="hidden" name=comp_num value="${comp.comp_num}" >
 					</form>
 					<div class="f-img"><img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-main-img"></div>
