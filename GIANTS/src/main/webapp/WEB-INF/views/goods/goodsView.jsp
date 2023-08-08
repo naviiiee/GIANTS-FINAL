@@ -80,7 +80,9 @@
 						상품등록일 : ${goods.goods_regdate}
 						<c:if test="${!empty goods.goods_mdate}"><br>최근수정일 : ${goods.goods_mdate}</c:if>
 					</li>
+				</c:if>
 				</ul>
+				
 				<div class="goods-btns">
 					<div id="goods_fav">
 						<img id="fav_btn" data-num="${goods.goods_num}" src="${pageContext.request.contextPath}/images/nofav.png">
@@ -88,6 +90,7 @@
 						<c:if test="${!empty user}">[<span id="output_fcount"></span>]</c:if>
 						<c:if test="${empty user}"></c:if>
 					</div>
+					<c:if test="${goods.goods_status == 1}">
 					<div id="goods_cart">
 						<img id="cart_btn" data-num="${goods.goods_num}" src="${pageContext.request.contextPath}/images/cart.png" width="20">
 						<span>장바구니</span>
@@ -96,15 +99,13 @@
 						<img id="pay_btn" data-num="${goods.goods_num}" src="${pageContext.request.contextPath}/images/card.png" width="20">
 						<span>바로구매</span>
 					</div>
+					</c:if>
+					<c:if test="${goods.goods_status == 2}">
+					<div id="sold-out">
+						<span>SOLD OUT</span>
+					</div>
+					</c:if>
 				</div>
-			</c:if>
-			<c:if test="${goods.goods_status == 2}">
-			<div>
-				<div style="background-color:#000; color:#FFF;">
-					SOLD OUT
-				</div>
-			</div>
-			</c:if>
 				<%-- 
 				<ul>	
 					<li id="goods_content">

@@ -130,7 +130,6 @@ public class GoodsController {
 		return mav;
 	}
 	
-	
 	/*==========================
 	 * [일반회원] 굿즈 목록
 	 *==========================*/
@@ -202,20 +201,9 @@ public class GoodsController {
 		GoodsVO goodsVO = goodsService.selectGoods(goods_num);
 		
 		List<GoodsOptionVO> list = goodsService.selectOptionList(goods_num);
-	
-		Map<String, Object> tmp = new HashMap<String, Object>();
-		int list_size = list.size();
-		int[] tmp_stock = new int[list_size];
 		
-		for(int i=0; i < list.size(); i++) {
-			tmp_stock[i] = list.get(i).getGoods_stock();
-		}
-		
-		goodsVO.setGoods_stocks(tmp_stock);
-						
 		model.addAttribute("goodsVO", goodsVO);
-		
-		log.debug("<<로그찍기>> : " + model);
+		model.addAttribute("list", list);
 		
 		return "goodsModify";	
 	}
@@ -226,11 +214,21 @@ public class GoodsController {
 								BindingResult result, HttpServletRequest request, Model model)	{
 		log.debug("<<상품 정보 수정 - GoodsVO>> : " + goodsVO);
 		log.debug("<<상품 재고 수정 - GoodsOptionVO>> : " + goodsOptionVO);
-		
+			
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			return "goodsModify";
 		}
+		
+		GoodsVO db_goods = goodsService.selectGoods(goodsVO.getGoods_num());
+		
+		if(goodsVO.getGoods_photoname().isEmpty()) {
+			goodsVO.setGoods_photo(db_goods.getGoods_photo());
+		 	goodsVO.setGoods_photoname(db_goods.getGoods_photoname()); 
+		 }
+		
+		log.debug("<<로그찍기 - goodsVO.getGoods_photo()>> : " + goodsVO.getGoods_photo());
+		log.debug("<<로그찍기 - goodsVO.getGoods_photoname()>> : " + goodsVO.getGoods_photoname());
 		
 		//상품 정보 수정
 		goodsService.updateGoods(goodsVO);

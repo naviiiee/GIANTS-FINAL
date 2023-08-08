@@ -55,48 +55,20 @@
 				</form:select>
 			</li>
 			<li class="hasSize" style="display:none;">
+				<c:forEach var="goodsOptionVO" items="${list}" varStatus="status">
 				<div>
-					<form:hidden path="goods_sizes" value="85"/>
-					<form:label path="goods_stocks">85</form:label>
-					<form:input path="goods_stocks" type="number" placeholder="재고수량 입력"/>
-					<form:errors path="goods_stocks"/>
+					<label for="goods_stocks${status.count}">${goodsOptionVO.goods_size}</label>
+					<input name="goods_stocks" id="goods_stocks${status.count}" type="number" value="${goodsOptionVO.goods_stock}" placeholder="재고수량 입력"/>
 				</div>
-				<div>
-					<form:hidden path="goods_sizes" value="90"/>
-					<form:label path="goods_stocks">90</form:label>
-					<form:input path="goods_stocks" type="number" placeholder="재고수량 입력"/>
-					<form:errors path="goods_stocks"/>
-				</div>
-				<div>
-					<form:hidden path="goods_sizes" value="95"/>
-					<form:label path="goods_stocks">95</form:label>
-					<form:input path="goods_stocks" type="number" placeholder="재고수량 입력"/>
-					<form:errors path="goods_stocks"/>
-				</div>
-				<div>
-				    <form:hidden path="goods_sizes" value="100"/>
-					<form:label path="goods_stocks">100</form:label>
-					<form:input path="goods_stocks" type="number" placeholder="재고수량 입력"/>
-					<form:errors path="goods_stocks"/>
-				</div>
-				<div>
-					<form:hidden path="goods_sizes" value="105"/>
-					<form:label path="goods_stocks">105</form:label>
-					<form:input path="goods_stocks" type="number" placeholder="재고수량 입력"/>
-					<form:errors path="goods_stocks"/>
-				</div>
-				<div>
-					<form:hidden path="goods_sizes" value="110"/>
-					<form:label path="goods_stocks">110</form:label>
-					<form:input path="goods_stocks" type="number" placeholder="재고수량 입력"/>
-					<form:errors path="goods_stocks"/>
-				</div>
+				</c:forEach>
 			</li>
 			<li class="hasNoSize" style="display:none;">
-				<form:hidden path="goods_sizes" value="옵션없음"/>
-				<form:label path="goods_stocks">옵션없음</form:label>
-				<form:input path="goods_stocks" type="number" placeholder="재고수량 입력"/>
-				<form:errors path="goods_stocks"/>
+				<c:forEach var="goodsOptionVO" items="${list}" varStatus="status">
+				<div>
+					<label for="goods_stocks7">${goodsOptionVO.goods_size}</label>
+					<input name="goods_stocks" id="goods_stocks7" type="number" value="${goodsOptionVO.goods_stock}" placeholder="재고수량 입력"/>
+				</div>
+				</c:forEach>
 			</li>
 			<li>
 				<form:label path="goods_price">상품가격</form:label>
