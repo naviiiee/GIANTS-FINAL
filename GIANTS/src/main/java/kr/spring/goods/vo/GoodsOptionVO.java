@@ -8,6 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class GoodsOptionVO {
+	private int opt_num;
 	private int goods_num;
 	private String goods_size;
 	private int goods_stock;
