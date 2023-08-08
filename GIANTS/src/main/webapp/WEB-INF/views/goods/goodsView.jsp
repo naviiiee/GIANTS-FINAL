@@ -5,7 +5,7 @@
 <!-- 상품 상세 페이지 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goods.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods.fav.js"></script>
-<script type="text/javascript" src = "${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_order.js"></script>
 <div class="page-main">
 	<div class="content-main">
 		<c:if test="${!empty user && user.mem_auth == 9}">
@@ -20,9 +20,11 @@
 		<div class="goods-info" ><br><br>
 			<h3 class="goods-name">${goods.goods_name}</h3>
 			<hr size="2" width="97%">
-			<form id="goods_cart" method="post" th:object="${cartVO}">
+			<form id="goods_cart" method="post">
 				<input type="hidden" name="goods_num" value="${goods.goods_num}" id="goods_num">
 				<input type="hidden" name="goods_dprice" value="${goods.goods_price}" id="goods_price">
+				
+				<!--  <input type="hidden" name="goods_stock" id="goods_stock" value="${goods.goodsOptionVO.goods_stock }">-->
 				<%-- <input type="hidden" name="goods_stock" value="${goods.goods_stock}" id="goods_stock"> 수량--%>
 				<ul> <%-- <c:if test="${goods.goods_stock > 0}"> 수량 --%>
 					<%-- <li>남은 수량 : <span><fmt:formatNumber value="${goods.goods_stock}"/></span></li> 수량--%>
@@ -58,6 +60,7 @@
 							<option value="${option.goods_size}">${option.goods_size} [재고 : ${option.goods_stock}]</option>
 							</c:forEach>
 						</select>
+						
 					</li>
 					<%-- 
 					<li>
@@ -71,7 +74,7 @@
 					--%>
 					<li>
 						수량 : 
-						<input type="number">
+						<input type="number" name="order_quantity" id="order_quantity">
 						<img>
 						<img>
 					</li>
