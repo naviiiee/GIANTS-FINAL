@@ -48,9 +48,12 @@ create table G_CART(
 	goods_num number not null, --상품 식별 번호
 	mem_num number not null, --회원 식별 번호
 	order_quantity number(5) not null, --주문수량
+	opt_num number not null, --옵션 식별 번호
 	reg_date date default SYSDATE not null, --장바구니에 넣은 날짜
 	CONSTRAINT G_CART_FK1 foreign key(goods_num) references goods(goods_num),
-	CONSTRAINT G_CART_FK2 foreign key(mem_num) references member(mem_num)
+	CONSTRAINT G_CART_FK2 foreign key(mem_num) references member(mem_num),
+	CONSTRAINT G_CART_FK3 foreign key(opt_num) references goods_option(opt_num)
+	
 );
 
 CREATE SEQUENCE G_CART_SEQ;

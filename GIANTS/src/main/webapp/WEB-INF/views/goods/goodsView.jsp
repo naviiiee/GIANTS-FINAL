@@ -53,14 +53,43 @@
 					</li>
 				<c:if test="${goods.goods_status == 1}">
 					<li>
-						옵션 : 
-						<select>
-							<option value="" class="align-center">===선택안함===</option>
-							<c:forEach var="option" items="${option}">
-							<option value="${option.goods_size}">${option.goods_size} [재고 : ${option.goods_stock}]</option>
-							</c:forEach>
-						</select>
+						<li>
+						    옵션 : 
+						    <select id="optionSelect">
+						        <option value="" class="align-center">===선택안함===</option>
+						        <c:forEach var="option" items="${option}">
+						            <option value="${option.goods_size}" data-stock="${option.goods_stock}">
+						                ${option.goods_size} [재고 : ${option.goods_stock}]
+						            </option>
+						        
+						        
+						    </select>
+						    <input type="hidden" name="opt_num" id="opt_num" value="${option.opt_num }">
+						    <input type="hidden" name="goods_size" id="goods_size" value="${option.goods_size }">
+						    </c:forEach>
+						</li>
+
+						<script>
+						    // 옵션 선택이 변경되었을 때 호출되는 함수
+						    function updateHiddenInput() {
+						        var optionSelect = document.getElementById("optionSelect");
+						        var optNumInput = document.getElementById("opt_num");
+						        
+						        var selectedOption = optionSelect.options[optionSelect.selectedIndex];
+						        var optNumValue = selectedOption.getAttribute("data-stock");
+						        
+						        optNumInput.value = optNumValue;
+						    }
 						
+						    // 옵션 선택 변경 이벤트에 함수 연결
+						    var optionSelect = document.getElementById("optionSelect");
+						    optionSelect.addEventListener("change", updateHiddenInput);
+						    
+						    // 페이지 로드 시에도 최초 값 설정
+						    updateHiddenInput();
+						</script>
+						
+						<!--  -->
 					</li>
 					<%-- 
 					<li>
