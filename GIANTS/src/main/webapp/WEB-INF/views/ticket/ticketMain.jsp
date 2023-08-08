@@ -32,8 +32,8 @@
 						<c:forEach var="grade" items="${list}">
 						<tr>
 							<td>
-								<input type="hidden" value="${grade.grade_num}">
-								<input type="button" value="${grade.title}" id="grade_title">
+								<input type="hidden">
+								<input type="button" value="${grade.title}" data-grade="${grade.grade_num}" class="grade_title">
 							</td>
 							<td>${grade.quantity}</td>
 						</tr>
