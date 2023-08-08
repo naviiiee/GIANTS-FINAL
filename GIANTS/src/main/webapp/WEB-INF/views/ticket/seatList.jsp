@@ -89,6 +89,10 @@
 					<span id="col_error" class="error-color"></span>
 				</li>
 				<li>
+					<label for="seat_quantity">좌석개수</label>
+					<input type="number" name="seat_quantity" id="seat_quantity" value="">
+				</li>
+				<li>
 					<input type="submit" value="등록" class="admin-btn small">
 					<input type="button" value="취소" id="close_seatForm" class="default-btn small">
 				</li>

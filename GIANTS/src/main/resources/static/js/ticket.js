@@ -15,7 +15,11 @@ $(function() {
 		location.reload();
 	});
 	
-	
+	$('input[name="seat_row"]:checked && input[name="seat_col"]:checked').each(function() {
+		let seat_row = $('input[name="seat_row"]:checked').length;
+		let seat_col = $('input[name="seat_col"]:checked').length;
+		let quantity = seat_row * seat_col;
+	});
 	
 	// 좌석정보 등록
 	$('#seat_write').submit(function(event) {
