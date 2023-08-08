@@ -61,6 +61,9 @@ public interface TicketMapper {
 	public int selectSeatCount(SeatVO seatVO);
 	@Select("SELECT * FROM seat WHERE grade_num = #{grade_num} ORDER BY seat_num DESC")
 	public List<SeatVO> selectSeatList(SeatVO seatVO);
+	// 상세
+	@Select("SELECT * FROM seat WHERE grade_num = #{grade_num}")
+	public SeatVO selectSeat(Integer grade_num);
 	// 수정
 	@Update("UPDATE seat SET seat_block = #{seat_block}, seat_row = #{seat_row}, seat_col = #{seat_col}, seat_quantity = #{seat_quantity} WHERE seat_num = #{seat_num}")
 	public void updateSeat(SeatVO seatVO);

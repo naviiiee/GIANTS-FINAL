@@ -48,9 +48,9 @@ public class AppConfig implements WebMvcConfigurer {
 				.addPathPatterns("/food/fixCompFoodList.do")
 				.addPathPatterns("/food/addNewFood.do")
 				.addPathPatterns("/food/fixFood.do")
-				.addPathPatterns("/food/deleteFood.do")
+				.addPathPatterns("/food/deleteFood.do");
 				// Ticket
-				.addPathPatterns("/ticket/ticketMain.do");
+				//.addPathPatterns("/ticket/ticketMain.do"); 
 		
 		//Comp(기업) 인터셉터 설정
 		registry.addInterceptor(compCheck)

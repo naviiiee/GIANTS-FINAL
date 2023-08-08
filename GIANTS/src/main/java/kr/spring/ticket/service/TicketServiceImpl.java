@@ -59,6 +59,8 @@ public class TicketServiceImpl implements TicketService {
 	@Override
 	public Integer selectSeatQuantity(Integer grade_num) { return ticketMapper.selectSeatQuantity(grade_num); }
 	
+	@Override
+	public SeatVO selectSeat(Integer grade_num) { return ticketMapper.selectSeat(grade_num); }
 	
 	/* GAME */
 	@Override
