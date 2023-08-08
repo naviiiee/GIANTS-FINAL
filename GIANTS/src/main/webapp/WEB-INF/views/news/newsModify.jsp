@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 뉴스 수정 시작 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/news.css">
 <!-- include libraries (jquery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -28,7 +29,7 @@
 				<form:input path="news_title"/>
 				<form:errors path="news_title" cssColor="error-color"/>
 			</li>
-			<li><b>내용</b></li>
+			<li><label>내용</label></li>
 			<li>
 				<form:textarea path="news_content"/>
 				<form:errors path="news_content" cssColor="error-color"/>
