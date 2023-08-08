@@ -3,6 +3,7 @@ package kr.spring.trading.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.spring.trading.vo.TradingMarkVO;
 import kr.spring.trading.vo.TradingVO;
 
 public interface TradingService {
@@ -15,4 +16,10 @@ public interface TradingService {
 	public void updateStatus(Integer trade_num);
 	public void updateTrading(TradingVO trading);
 	public void deleteTrading(Integer trade_num);
+	
+	//북마크
+	public TradingMarkVO selectMark(TradingMarkVO mark);
+	public int selectMarkCount(Integer trade_num);
+	public void insertMark(TradingMarkVO mark);
+	public void deleteMark(Integer mark_num);
 }

@@ -2,16 +2,21 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 게시글 상세 시작 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KMS/trading.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/trading.mark.js"></script>
 <div class="page-main">
 	<h2>${trading.trade_title}</h2>
 	<div class="align-right">
 		<%-- 북마크 --%>
-		<img id="bookmark" data-num="${trading.trade_num}" src="${pageContext.request.contextPath}/images/bookmark.png" width="40">
-		<%-- <img id="bookmark" data-num="${trading.trade_num}" src="${pageContext.request.contextPath}/images/bookmark_full.png" width="40"> --%>
-		<img id="chat" data-num="${trading.trade_num}" src="${pageContext.request.contextPath}/images/bubble.png" width="40"> <%-- onclick 속성 추가 --%>
+		<img id="output_mark" data-num="${trading.trade_num}" src="${pageContext.request.contextPath}/images/bookmark1.png" width="40">
+		<span id="output_markcnt"></span>	
+		<%-- 채팅 --%>
+		<a href="${pageContext.request.contextPath}/chat/chatRoomWrite.do"><img id="chat" data-num="${trading.trade_num}" src="${pageContext.request.contextPath}/images/bubble_speech.png" width="40"></a>
 	</div>
 	<ul class="detail-info">
 		<li>

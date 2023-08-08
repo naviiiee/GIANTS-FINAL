@@ -2,7 +2,6 @@ package kr.spring.trading.controller;
 
 import java.util.HashMap;
 
-
 import java.util.List;
 import java.util.Map;
 
@@ -19,10 +18,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.vo.MemberVO;
 import kr.spring.trading.service.TradingService;
+import kr.spring.trading.vo.TradingMarkVO;
 import kr.spring.trading.vo.TradingVO;
 import kr.spring.util.PagingUtil;
 import kr.spring.util.StringUtil;
@@ -206,4 +207,65 @@ public class TradingController {
 		return "redirect:/trading/tradingList.do";
 	}
 	
+	/*=================
+	 * 게시판 북마크
+	 * ===============*/
+	//부모글 북마크 읽기
+	@RequestMapping("/trading/getMark.do")
+	@ResponseBody //ajax 통신
+	public Map<String, Object> getMark(TradingMarkVO mark, HttpSession session){
+		log.debug("<<게시판 북마크 읽기 = TradingMarkVO>> : " + mark);
+		
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user == null) { //로그인이 되지 않은 상태
+			mapJson.put("status", "noMark");
+		} else { //로그인된 회원번호 세팅
+			mark.setMem_num(user.getMem_num());
+			
+			TradingMarkVO tradingMark = tradingService.selectMark(mark);
+			if(tradingMark != null) {
+				mapJson.put("status", "yesMark");
+			} else {
+				mapJson.put("status", "noMark");
+			}		
+		}
+		mapJson.put("count", tradingService.selectMarkCount(mark.getTrade_num()));
+		
+		return mapJson;
+	}
+	
+	//부모글 북마크 등록/삭제 (toggle 형태)
+	@RequestMapping("/trading/writeMark.do")
+	@ResponseBody
+	public Map<String, Object> writeMark(TradingMarkVO mark, HttpSession session){
+		log.debug("<<게시판 북마크 등록/삭제 - TradingMarkVO>> : " + mark);
+		
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user == null) {
+			mapJson.put("result", "logout");
+		} else {
+			//로그인된 회원번호 세팅
+			mark.setMem_num(user.getMem_num());
+			
+			TradingMarkVO tradingMark = tradingService.selectMark(mark);
+			if(tradingMark != null) {
+				tradingService.deleteMark(tradingMark.getMark_num());
+				
+				mapJson.put("result", "success");
+				mapJson.put("status", "noMark");
+			} else { //등록된 북마크가 없으면 등록
+				tradingService.insertMark(mark);
+				
+				mapJson.put("result", "success");
+				mapJson.put("status", "yesMark");
+			}
+			mapJson.put("count", tradingService.selectMarkCount(mark.getTrade_num()));
+		}
+		
+		return mapJson;
+	}
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.trading.dao.TradingMapper;
+import kr.spring.trading.vo.TradingMarkVO;
 import kr.spring.trading.vo.TradingVO;
 
 @Service
@@ -56,6 +57,27 @@ public class TradingServiceImpl implements TradingService{
 	@Override
 	public void deleteTrading(Integer trade_num) {
 		tradingMapper.deleteTrading(trade_num);
+	}
+
+	@Override
+	public TradingMarkVO selectMark(TradingMarkVO mark) {
+		return tradingMapper.selectMark(mark);
+	}
+
+	@Override
+	public int selectMarkCount(Integer trade_num) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void insertMark(TradingMarkVO mark) {
+		tradingMapper.insertMark(mark);
+	}
+
+	@Override
+	public void deleteMark(Integer mark_num) {
+		tradingMapper.deleteMark(mark_num);
 	}
 	
 } 
