@@ -20,4 +20,6 @@ public class GradeVO {
 	private int price_week;		// 주중 가격
 	@Range(min=0, max=999999)
 	private int price_weekend;	// 주말 가격
+	
+	private int quantity;
 }

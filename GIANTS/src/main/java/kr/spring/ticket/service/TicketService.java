@@ -24,6 +24,8 @@ public interface TicketService {
 	public void updateGrade(GradeVO gradeVO);
 	//삭제
 	public void deleteGrade(Integer grade_num);
+	// 등급별 총 좌석개수
+	public void updateGradeQuantity(Integer grade_num);
 	
 	/* 좌석정보 */
 	// 등록
@@ -33,6 +35,8 @@ public interface TicketService {
 	public List<SeatVO> selectSeatList(SeatVO seatVO);
 	// 수정
 	public void updateSeat(SeatVO seatVO);
+	// 등급별 좌석개수
+	public Integer selectSeatQuantity(Integer grade_num);
 	
 	
 	/* 경기정보 */

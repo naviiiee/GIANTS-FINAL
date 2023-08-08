@@ -26,7 +26,7 @@ public class TicketServiceImpl implements TicketService {
 	public int selectGradeCount(GradeVO gradeVO) { return ticketMapper.selectGradeCount(gradeVO); }
 
 	@Override
-	public List<GradeVO> selectGradeList(GradeVO gradeVO) { return ticketMapper.selectGradeList(gradeVO); }
+	public List<GradeVO> selectGradeList(GradeVO gradeVO) {return ticketMapper.selectGradeList(gradeVO);}
 	
 	@Override
 	public GradeVO selectGrade(Integer grade_num) { return ticketMapper.selectGrade(grade_num); }
@@ -40,6 +40,9 @@ public class TicketServiceImpl implements TicketService {
 		ticketMapper.deleteGrade(grade_num);
 	}
 	
+	@Override
+	public void updateGradeQuantity(Integer grade_num) { ticketMapper.updateGradeQuantity(grade_num); }
+	
 	/* SEAT */
 	@Override
 	public void insertSeat(SeatVO seatVO) { ticketMapper.insertSeat(seatVO); }
@@ -52,6 +55,9 @@ public class TicketServiceImpl implements TicketService {
 	
 	@Override
 	public void updateSeat(SeatVO seatVO) { ticketMapper.updateSeat(seatVO); }
+	
+	@Override
+	public Integer selectSeatQuantity(Integer grade_num) { return ticketMapper.selectSeatQuantity(grade_num); }
 	
 	
 	/* GAME */

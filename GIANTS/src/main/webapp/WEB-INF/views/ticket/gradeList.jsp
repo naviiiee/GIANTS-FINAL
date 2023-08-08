@@ -24,6 +24,7 @@
 			<th>등급명</th>
 			<th>주중가격</th>
 			<th>주말가격</th>
+			<th>좌석개수</th>
 			<th></th>
 		</tr>
 		<c:forEach var="grade" items="${list}">
@@ -32,6 +33,7 @@
 			<td><a href="seatList.do?grade_num=${grade.grade_num}">${grade.title}</a></td>
 			<td><fmt:formatNumber value="${grade.price_week}"/>원</td>
 			<td><fmt:formatNumber value="${grade.price_weekend}"/>원</td>
+			<td><fmt:formatNumber value="${grade.quantity}"/>개</td>
 			<td><input type="button" value="수정" onclick="location.href='gradeUpdate.do?grade_num=${grade.grade_num}'" class="admin-btn small"></td>
 		</tr>
 		</c:forEach>

@@ -22,4 +22,6 @@ public class SeatVO {
 	private String seat_col;// 좌석 열 배열
 	@NotEmpty
 	private int seat_quantity;
+	
+	private int quantity;
 }

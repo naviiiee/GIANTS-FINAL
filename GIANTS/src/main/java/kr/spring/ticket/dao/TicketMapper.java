@@ -49,6 +49,9 @@ public interface TicketMapper {
 	// 삭제
 	@Delete("DELETE FROM grade WHERE grade_num = #{grade_num}")
 	public void deleteGrade(Integer grade_num);
+	// 등급별 총 좌석개수
+	@Update("UPDATE grade SET quantity = (SELECT SUM(seat_quantity) FROM seat WHERE grade_num = #{grade_num}) WHERE grade_num = #{grade_num}")
+	public void updateGradeQuantity(Integer grade_num);
 	
 	/* 좌석정보 */
 	// 등록
@@ -59,10 +62,12 @@ public interface TicketMapper {
 	@Select("SELECT * FROM seat WHERE grade_num = #{grade_num} ORDER BY seat_num DESC")
 	public List<SeatVO> selectSeatList(SeatVO seatVO);
 	// 수정
-	@Update("UPDATE seat SET seat_block = #{seat_block}, seat_row = #{seat_row}, seat_col = #{seat_col} WHERE seat_num = #{seat_num}")
+	@Update("UPDATE seat SET seat_block = #{seat_block}, seat_row = #{seat_row}, seat_col = #{seat_col}, seat_quantity = #{seat_quantity} WHERE seat_num = #{seat_num}")
 	public void updateSeat(SeatVO seatVO);
 	// 삭제
 	@Delete("DELETE FROM seat WHERE grade_num = #{grade_num}")
 	public void deleteSeat(Integer grade_num);
-	
+	// 등급별 좌석개수
+	@Select("SELECT SUM(seat_quantity) FROM seat WHERE grade_num = #{grade_num}")
+	public Integer selectSeatQuantity(Integer grade_num);
 }

@@ -37,7 +37,7 @@ public class TicketAdminController {
 	/* ----- [Grade] 좌석등급 목록 -----*/
 	@RequestMapping("/ticket/gradeList.do")
 	public String gradeList(GradeVO gradeVO, Model model) {
-		int count = ticketService.selectGradeCount(gradeVO);
+		int count = ticketService.selectGradeCount(gradeVO);		
 		
 		List<GradeVO> list = ticketService.selectGradeList(gradeVO);
 				
@@ -107,6 +107,7 @@ public class TicketAdminController {
 		seatVO.setGrade_num(grade_num);
 		
 		ticketService.insertSeat(seatVO);
+		ticketService.updateGradeQuantity(grade_num);
 		
 		return "redirect:/ticket/seatList.do?grade_num=" + grade_num;
 	}
@@ -119,6 +120,7 @@ public class TicketAdminController {
 		GradeVO grade = ticketService.selectGrade(grade_num);
 		
 		int count = ticketService.selectSeatCount(seatVO);
+		//int quantity = ticketService.selectSeatQuantity(grade_num);
 		
 		List<SeatVO> list = ticketService.selectSeatList(seatVO);
 		
@@ -129,6 +131,7 @@ public class TicketAdminController {
 		mav.addObject("grade", grade);
 		mav.addObject("count", count);
 		mav.addObject("list", list);
+		//mav.addObject("quantity", quantity);
 		
 		return mav;
 	}
@@ -140,6 +143,7 @@ public class TicketAdminController {
 		log.debug("<<좌석정보 수정>> : " + seatVO);
 		
 		ticketService.updateSeat(seatVO);
+		ticketService.updateGradeQuantity(grade_num);
 		
 		return "redirect:/ticket/seatList.do?grade_num=" + grade_num;
 	}

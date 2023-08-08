@@ -5,50 +5,7 @@
 <!-- 등급상세 및 좌석목록 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/NSH/ticket.css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/ticket.js"></script>
-<script type="text/javascript">
-	function checkselectRow() {
-		let checkboxes = document.getElementsByName('seat_row');	// 전체 체크박스
-		let checked = document.querySelectorAll('input[name="seat_row"]:checked');	// 선택된 체크박스
-		let selectRow = document.querySelector('input[value="selectRow"]');	// 전체 선택 체크박스
-		
-		if(checkboxes.length === checked.length) { selectRow.checked = true; }
-		else { selectRow.checked = false; }
-	}
-	
-	function checkselectCol() {
-		let checkboxes = document.getElementsByName('seat_col');	// 전체 체크박스
-		let checked = document.querySelectorAll('input[name="seat_col"]:checked');	// 선택된 체크박스
-		let selectCol = document.querySelector('input[value="selectCol"]');	// 전체 선택 체크박스
-		
-		if(checkboxes.length === checked.length) { selectCol.checked = true; }
-		else { selectCol.checked = false; }
-	}
-	
-	function checkselectBlock() {
-		let checkboxes = document.getElementsByName('seat_num');	// 전체 체크박스
-		let checked = document.querySelectorAll('input[name="seat_num"]:checked');	// 선택된 체크박스
-		let selectBlock = document.querySelector('input[value="selectBlock"]');	// 전체 선택 체크박스
-		
-		if(checkboxes.length === checked.length) { selectBlock.checked = true; }
-		else { selectBlock.checked = false; }
-	}
-	
-	function selectRow(selectRow) {
-		let checkboxes = document.getElementsByName('seat_row');
-		checkboxes.forEach((checkbox) => { checkbox.checked = selectRow.checked; });
-	}
-	
-	function selectCol(selectAll) {
-		let checkboxes = document.getElementsByName('seat_col');
-		checkboxes.forEach((checkbox) => { checkbox.checked = selectAll.checked; });
-	}
-	
-	function selectBlock(selectAll) {
-		let checkboxes = document.getElementsByName('seat_num');
-		checkboxes.forEach((checkbox) => { checkbox.checked = selectAll.checked; });
-	}
-</script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/seat.js"></script>
 <div class="page-main">
 	<div class="main-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
@@ -70,22 +27,22 @@
 				</li>
 				<li>
 					<label for="seat_row">좌석행</label>
-					<input type="checkbox" value="selectRow" onclick="selectRow(this)">All
-					<input type="checkbox" name="seat_row" value="A" onclick='checkselectRow()'>A
-					<input type="checkbox" name="seat_row" value="B" onclick='checkselectRow()'>B
-					<input type="checkbox" name="seat_row" value="C" onclick='checkselectRow()'>C
-					<input type="checkbox" name="seat_row" value="D" onclick='checkselectRow()'>D
-					<input type="checkbox" name="seat_row" value="E" onclick='checkselectRow()'>E
+					<input type="checkbox" value="selectRow" id="check_row">All
+					<input type="checkbox" name="seat_row" value="A" class="seat-row">A
+					<input type="checkbox" name="seat_row" value="B" class="seat-row">B
+					<input type="checkbox" name="seat_row" value="C" class="seat-row">C
+					<input type="checkbox" name="seat_row" value="D" class="seat-row">D
+					<input type="checkbox" name="seat_row" value="E" class="seat-row">E
 					<span id="row_error" class="error-color"></span>
 				</li>
 				<li>
 					<label for="seat_col">좌석열</label>
-					<input type="checkbox" value="selectCol" onclick="selectCol(this)">All
-					<input type="checkbox" name="seat_col" value="1" onclick='checkselectCol()'>1
-					<input type="checkbox" name="seat_col" value="2" onclick='checkselectCol()'>2
-					<input type="checkbox" name="seat_col" value="3" onclick='checkselectCol()'>3
-					<input type="checkbox" name="seat_col" value="4" onclick='checkselectCol()'>4
-					<input type="checkbox" name="seat_col" value="5" onclick='checkselectCol()'>5
+					<input type="checkbox" value="selectCol" id="check_col">All
+					<input type="checkbox" name="seat_col" value="1" class="seat-col">1
+					<input type="checkbox" name="seat_col" value="2" class="seat-col">2
+					<input type="checkbox" name="seat_col" value="3" class="seat-col">3
+					<input type="checkbox" name="seat_col" value="4" class="seat-col">4
+					<input type="checkbox" name="seat_col" value="5" class="seat-col">5
 					<span id="col_error" class="error-color"></span>
 				</li>
 				<li>
@@ -117,7 +74,7 @@
 					<td>${seat.seat_col}</td>
 					<td>
 						<input type="hidden" name="seat_num" value="${seat.seat_num}" id="seatNum">
-						<input type="button" value="수정" data-seatblock="${seat.seat_block}" class="seat-update admin-btn small">
+						<input type="button" value="수정" data-seatblock="${seat.seat_block}" data-quantity="${seat.seat_quantity}" class="seat-update admin-btn small">
 					</td>
 				</tr>
 				</c:forEach>
