@@ -54,6 +54,9 @@ public class TicketServiceImpl implements TicketService {
 	public List<SeatVO> selectSeatList(SeatVO seatVO) { return ticketMapper.selectSeatList(seatVO); }
 	
 	@Override
+	public SeatVO selectSeat(Integer seat_num) { return ticketMapper.selectSeat(seat_num); }
+	
+	@Override
 	public void updateSeat(SeatVO seatVO) { ticketMapper.updateSeat(seatVO); }
 	
 	@Override

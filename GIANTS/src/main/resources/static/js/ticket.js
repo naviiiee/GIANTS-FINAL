@@ -38,6 +38,49 @@ $(function() {
 	   Block 클릭시 seat 정보 호출
 	------------------------- */
 	$(document).on('click', '.selected-block', function() {
-		
+		$.ajax({
+			url:'selectedBlock.do',
+			type:'post',
+			data:{seat_num:$(this).attr('data-seat')},
+			dataType:'json',
+			success:function(param) {
+				if(param.result == 'logout') { alert('Login 후 이용가능'); }
+				else if(param.result == 'success') {
+					$('.select-left').empty();
+					
+					let row = param.seat_row.split(',')
+					let col = param.seat_col.split(',')
+					
+					let row_length = row.length;
+					let col_length = col.length;
+					
+					/*
+					let test = [];
+					let selectedSeats = new Array();
+					let selectedSeatsMap = [];
+					const seatWrapper = document.querySelector(".seat-wrapper");
+					let clicked = '';
+					*/
+					
+					let seat_div = '<div class="seat-box">';
+					seat_div += '<div class="ground"><h2>그라운드 방향</h2></div>';
+					seat_div +=  '<div class="seat-check">';
+					
+					
+					for(let i = 0; i < row_length; i++) {
+						seat_div += row[i];
+						for(let j = 0; j < col_length; j++) {
+							seat_div += '<input type="button" value="'+col[j]+'" data-row="'+row[i]+'" data-col="'+col[j]+'" class="seat-btn">';
+						}
+						seat_div += '<br>';
+					}
+					
+					seat_div += '</div>';
+						
+					$('.select-left').append(seat_div);
+				} else { alert('좌석 선택 오류 발생'); }
+			},
+			error:function() { alert('Network 오류 발생'); }
+		});
 	});
 });

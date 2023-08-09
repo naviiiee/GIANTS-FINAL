@@ -74,6 +74,9 @@ input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }
 .group-btn{ width:75%; margin:0 auto; text-align:center; }
 .group-btn input{ margin:0 25px; }
 
+.seat-box{ background-color:#f1f1f1; width:500px; height:500px; margin:0 auto; }
+.ground{ background-color:#fff; width:50%; margin:0 auto; padding:10px 0; text-align:center; }
+
 /* 스크롤바 */
 .scrollBar::-webkit-scrollbar { width:10px;  /* 스크롤바의 너비 */ }
 .scrollBar::-webkit-scrollbar-thumb { height:30%; /* 스크롤바의 길이 */ background:#dd032f; /* 스크롤바의 색상 */ border-radius: 10px; }

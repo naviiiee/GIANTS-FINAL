@@ -83,4 +83,24 @@ public class TicketController {
 		
 		return mapJson;
 	}
+	
+	/* ----- [Ticket] 블록선택 후 좌석정보 출력 -----*/
+	@RequestMapping("/ticket/selectedBlock.do")
+	@ResponseBody
+	public Map<String, Object> selectedBlock(@RequestParam int seat_num, HttpSession session) {
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user == null) { mapJson.put("result", "logout"); }
+		else {
+			SeatVO seat =  ticketService.selectSeat(seat_num);
+			log.debug("<<seat>> : " + seat);
+			
+			mapJson.put("result", "success");
+			mapJson.put("seat_row", seat.getSeat_row());
+			mapJson.put("seat_col", seat.getSeat_col());
+		}
+		
+		return mapJson;
+	}
 }
