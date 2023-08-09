@@ -33,8 +33,6 @@ public interface TicketService {
 	// 목록
 	public int selectSeatCount(SeatVO seatVO);
 	public List<SeatVO> selectSeatList(SeatVO seatVO);
-	// 상세
-	public SeatVO selectSeat(Integer grade_num);
 	// 수정
 	public void updateSeat(SeatVO seatVO);
 	// 등급별 좌석개수

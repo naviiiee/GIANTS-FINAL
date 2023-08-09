@@ -1,5 +1,6 @@
 package kr.spring.ticket.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,9 +52,12 @@ public class TicketController {
 	
 	/* ----- [Ticket] 예매메인 -----*/
 	@RequestMapping("/ticket/ticketMain.do")
-	public String ticketMain(GradeVO gradeVO, Model model) {
+	public String ticketMain(@RequestParam int game_num, GradeVO gradeVO, Model model) {
+		log.debug("<<gradeVO : >>" + gradeVO);
+		
 		List<GradeVO> list = ticketService.selectGradeList(gradeVO);
 		
+		model.addAttribute("game_num", game_num);
 		model.addAttribute("list", list);
 		
 		return "ticketMain";
@@ -61,13 +66,20 @@ public class TicketController {
 	/* ----- [Ticket] 등급선택 후 블록정보 출력 -----*/
 	@RequestMapping("/ticket/selectedGrade.do")
 	@ResponseBody
-	public Map<String, Object> selectedGrade(@RequestParam int grade_num) {
+	public Map<String, Object> selectedGrade(@RequestParam int grade_num, SeatVO seatVO, HttpSession session) {
+		log.debug("<<grade_num>> : " + grade_num);
+		
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		
-		SeatVO seat =  ticketService.selectSeat(grade_num);
-		List<SeatVO> list = ticketService.selectSeatList(seat);
-		
-		mapJson.put("list", list);
+		List<SeatVO> list = null;
+			
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user == null) { mapJson.put("result", "logout"); }
+		else {
+			list = ticketService.selectSeatList(seatVO);
+			mapJson.put("result", "success");
+			mapJson.put("list", list);
+		}
 		
 		return mapJson;
 	}
