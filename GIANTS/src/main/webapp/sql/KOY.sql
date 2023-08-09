@@ -48,6 +48,23 @@ create table goods_review(
 
 create sequence goods_review_seq;
 
+-- 상품문의
+create table goods_qna(
+	qna_num number,
+	qna_title varchar2(100) not null,
+	qna_content clob not null,
+	qna_regdate date default sysdate not null,
+	qna_mdate date,
+	qna_status number(1) default 1 not null, -- 1:답변전, 2:답변완료
+	mem_num number not null,
+	goods_num number not null,
+	constraint goods_qna_pk primary key (qna_num),
+   	constraint goods_qna_fk1 foreign key (mem_num) references member (mem_num),
+   	constraint goods_qna_fk2 foreign key (goods_num) references goods (goods_num)
+);
+
+create sequence goods_qna_seq;
+
 -- 상품 찜
 create table goods_fav(
    fav_num number,
