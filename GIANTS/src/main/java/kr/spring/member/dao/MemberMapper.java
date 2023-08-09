@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberVO;
 
 @Mapper
@@ -33,6 +34,8 @@ public interface MemberMapper {
 	public MemberVO selectMember(Integer mem_num);
 	public MemberVO selectCompany(Integer mem_num);
 	
+	@Select("SELECT * FROM company_detail WHERE comp_num=#{comp_num}")
+	public CompanyDetailVO selectCompanyDetail(String comp_num);
 	
 	//회원정보수정
 	@Update("UPDATE MEMBER SET mem_nickname=#{mem_nickname} WHERE mem_num=#{mem_num}")
@@ -40,6 +43,10 @@ public interface MemberMapper {
 	public void updateMember_detail(MemberVO member);
 	
 	public void updateCompany_detail(MemberVO member);
+	
+	//프로필 이미지 업데이트
+	@Update("UPDATE MEMBER_DETAIL SET mem_photo=#{mem_photo},mem_photoname=#{mem_photoname} WHERE mem_num=#{mem_num}")
+	public void updateProfile(MemberVO member);
 	
 	//비밀번호수정
 	

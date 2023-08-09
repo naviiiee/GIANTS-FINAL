@@ -1,5 +1,6 @@
 package kr.spring.member.service;
 
+import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberVO;
 
 public interface MemberService {
@@ -14,9 +15,14 @@ public interface MemberService {
 	public MemberVO selectMember(Integer mem_num);
 	public MemberVO selectCompany(Integer mem_num);
 	
+	public CompanyDetailVO selectCompanyDetail(String comp_num);
+	
 	//회원정보 수정
 	public void updateMember(MemberVO member);
 	public void updateCompany(MemberVO member);
+	
+	//프로필 이미지 업데이트
+	public void updateProfile(MemberVO member);
 	
 	//비밀번호 수정 
 	public void updatePassword(MemberVO member);

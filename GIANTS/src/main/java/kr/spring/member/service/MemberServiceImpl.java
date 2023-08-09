@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.member.dao.MemberMapper;
+import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberVO;
 
 @Service
@@ -55,6 +56,11 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
+	public void updateProfile(MemberVO member) {
+		memberMapper.updateProfile(member);
+	}
+	
+	@Override
 	public void updatePassword(MemberVO member) {
 		// TODO Auto-generated method stub
 		
@@ -91,7 +97,9 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 
-	
-
+	@Override
+	public CompanyDetailVO selectCompanyDetail(String comp_num) {
+		return memberMapper.selectCompanyDetail(comp_num);
+	}
 
 }
