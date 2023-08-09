@@ -57,4 +57,18 @@ public class TicketController {
 		
 		return "ticketMain";
 	}
+	
+	/* ----- [Ticket] 등급선택 후 블록정보 출력 -----*/
+	@RequestMapping("/ticket/selectedGrade.do")
+	@ResponseBody
+	public Map<String, Object> selectedGrade(@RequestParam int grade_num) {
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		
+		SeatVO seat =  ticketService.selectSeat(grade_num);
+		List<SeatVO> list = ticketService.selectSeatList(seat);
+		
+		mapJson.put("list", list);
+		
+		return mapJson;
+	}
 }

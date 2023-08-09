@@ -15,20 +15,21 @@ import kr.spring.gcart.vo.GcartVO;
 public class GcartServiceImpl implements GcartService{
 	@Autowired
 	GcartMapper cartMapper;
-	
+
 	@Override
 	public void insertCart(GcartVO cart) {
 		cartMapper.insertCart(cart);
 	}
 
 	@Override
-	public int getTotalByMem_num(int mem_num) {
-		return 1;/*cartMapper.getTotalByMem_num(mem_num);*/
+	public int getTotalByMem_num(Map<String, Object> map) {
+		
+		return cartMapper.getTotalByMem_num(map);
 	}
 
 	@Override
-	public List<GcartVO> getListCart(int mem_num) {
-		return cartMapper.getListCart(mem_num);
+	public List<GcartVO> getListCart(Map<String, Object> map) {
+		return cartMapper.getListCart(map);
 	}
 
 	@Override
@@ -38,20 +39,28 @@ public class GcartServiceImpl implements GcartService{
 
 	@Override
 	public void updateCart(GcartVO cart) {
-		cartMapper.updateCart(cart);
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void updateCartByItem_num(GcartVO cart) {
-		cartMapper.updateCartByItem_num(cart);
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void deleteCart(int cart_num) {
-		cartMapper.deleteCart(cart_num);
+		// TODO Auto-generated method stub
+		
 	}
+
+	@Override
+	public int getStockByoption(int goods_num, int opt_num) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 
 	
 

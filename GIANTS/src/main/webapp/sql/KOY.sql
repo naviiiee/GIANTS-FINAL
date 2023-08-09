@@ -34,6 +34,7 @@ create table goods_review(
    review_num number,
    mem_num number not null,
    goods_num number not null,
+   review_title varchar2(100) not null,
    review_score number(1) not null,
    review_content clob not null,
    review_photo blob,

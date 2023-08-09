@@ -33,4 +33,10 @@
     	<put-attribute name="body" value="/WEB-INF/views/commu/commuModify.jsp"/>
     </definition>
     
+    <!-- 커뮤니티 신고 폼 -->
+    <definition name="commuRepo" extends="main">
+    	<put-attribute name="title" value="커뮤니티 글 신고"/>
+    	<put-attribute name="body" value="/WEB-INF/views/commu/commuRepo.jsp"/>
+    </definition>
+    
 </tiles-definitions>

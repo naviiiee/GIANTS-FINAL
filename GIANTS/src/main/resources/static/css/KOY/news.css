@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* 뉴스 상세
 -------------*/
-input[type="button"]{
+input[type="button"], button[type="submit"]{
 	width:60px;
 	height:30px;
 	background-color:#dd032f;
@@ -49,8 +49,18 @@ div.news-list table th{
 	text-align:center;
 	font-size:11pt;
 }
+div.news-list table tr{
+	height:30px;
+}
 
-
-
+/* 뉴스 등록, 수정
+-------------*/
+form#register_form ul li label,
+form#modify_form ul li label{
+	margin:0 0 5px 10px;
+	display:inline-block;
+	font-size:14pt;
+	width:200px;
+}
 
 

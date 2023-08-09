@@ -21,13 +21,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import kr.spring.commu.service.CommuService;
 import kr.spring.commu.vo.CommuFavVO;
 import kr.spring.commu.vo.CommuReplyVO;
+import kr.spring.commu.vo.CommuReportVO;
 import kr.spring.commu.vo.CommuVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
+import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -64,7 +65,7 @@ public class CommuController {
 		//회원 번호 세팅 (좀 길지만 한 번만 쓸거라 따로 변수 안 만들고 진행)
 		//세션에 저장해놓은 user를 MemberVO로 다운캐스팅, 거기서 mem_num을 가져와서 commuVO의 mem_num에 set
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		//commuVO.setMem_num(user.getMem_num());
+		commuVO.setMem_num(user.getMem_num());
 		
 		//IP 셋팅
 		commuVO.setCommu_ip(request.getRemoteAddr());
@@ -112,6 +113,25 @@ public class CommuController {
 	
 	return mav;
 	}
+	
+	
+	
+	/*=== 커뮤니티 상세 ===*/
+	@RequestMapping("/commu/detail.do")
+	public ModelAndView getDetail(@RequestParam int commu_num) {
+		log.debug("<<글 상세 - commu_num>> : " + commu_num);
+		//해당 글의 조회수 증가
+		commuService.updateHit(commu_num);
+		//글 상세
+		CommuVO commu = commuService.selectCommu(commu_num);
+		//제목에 태그를 허용하지 않음
+		commu.setCommu_title(StringUtil.useNoHtml(commu.getCommu_title()));
+		//CKEditor를 사용하지 않을 경우 내용에도 태그를 허용하지 않음
+		//board.setContent(StringUtil.useBrNoHtml(board.getContent()));
+								//뷰 이름	     속성명 	속성값
+		return new ModelAndView("commuView","commu",commu);
+	}
+	
 	
 	/*=== 커뮤니티 글 수정 ===*/
 	
@@ -224,7 +244,6 @@ public class CommuController {
 		}
 		
 		/*=== 댓글 등록 ===*/
-
 		@RequestMapping("/commu/writeReply.do")
 		@ResponseBody
 		public Map<String,String> writeReply(CommuReplyVO commuReplyVO,
@@ -243,7 +262,6 @@ public class CommuController {
 				//ip 등록
 				commuReplyVO.setRe_ip(request.getRemoteAddr());
 				//댓글 등록
-				
 				commuService.insertReply(commuReplyVO);
 				mapJson.put("result", "success");
 			}
@@ -347,5 +365,89 @@ public class CommuController {
 			
 			return mapJson;
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*=== 커뮤니티 신고 ===*/
+
+		
+		/*=== 자바빈 초기화 
+		@ModelAttribute
+		public CommuReportVO initCommand_repo() {
+			return new CommuReportVO();
+		}
+		===*/
+		
+		//등록 폼
+		@GetMapping("/commu/repo.do")
+		public String formRepo() {
+		
+			return "commuRepo";
+		}
+		
+		//전송된 데이터 처리
+		@PostMapping("/commu/repo.do")
+		public String submitRepo(@Valid CommuReportVO commuReportVO, BindingResult result, 
+							 HttpServletRequest request, HttpSession session, Model model) {
+			
+			log.debug("<<커뮤니티 신고>> : " + commuReportVO);
+			
+			
+			
+			//유효성 체크 결과 오류 발생 시 폼을 다시 호출
+			if(result.hasErrors()) {
+				return form();
+			}
+			 
+			//회원 번호 세팅 (좀 길지만 한 번만 쓸거라 따로 변수 안 만들고 진행)
+			//세션에 저장해놓은 user를 MemberVO로 다운캐스팅, 거기서 mem_num을 가져와서 commuVO의 mem_num에 set
+			MemberVO user = (MemberVO)session.getAttribute("user");
+			commuReportVO.setMem_num(user.getMem_num());
+			
+			//IP 셋팅
+			commuReportVO.setRepo_ip(request.getRemoteAddr());
+			
+			//글 등록 처리
+			commuService.insertReport(commuReportVO);
+			
+			
+			model.addAttribute("message", "해당 게시물 신고가 완료되었습니다.");
+			model.addAttribute("url", request.getContextPath()+"/commu/commuList.do");
+			
+			return "common/resultView";
+			
+		}
+		
+		/*=== 커뮤니티 신고글 삭제 ===*/
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*=== 커뮤니티 댓글 신고 ===*/
 		
 }

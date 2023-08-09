@@ -5,6 +5,7 @@
 <!-- 매장 상세보기 페이지 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OSJ/food.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/foodJS/food.public.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/foodJS/foodCompDetailMenu.js"></script>
 <div class="page-main">
 	<div class="main-title">
 		<img class="title-img" src="${pageContext.request.contextPath}/images/title_icon.gif">
@@ -55,7 +56,7 @@
 			
 			<c:if test="${count > 0}">
 			<c:forEach var="food" items="${list}">
-				<div class="food-info">
+				<div class="food-info y-food" data-food_num="${food.food_num}">
 					<img src="imageView.do?food_num=${food.food_num}&food_type=1" class="food-mainImg">
 					<div class="food-textBox">
 						<p class="float-left"><b>${food.food_name}</b></p><p class="float-right"><fmt:formatNumber value="${food.food_price}"/>원</p>
@@ -68,8 +69,9 @@
 					<div class="food-textBox"></div>
 				</div>
 			</c:forEach>
-			<form action="">
-				<input type="hidden" name="" value="">
+			<form id="frm_foodDetail" action="foodDetail.do" method="get">
+				<input type="hidden" name="food_num" value="" id="food_number">
+				<input type="hidden" name="comp_num" value="${comp.comp_num}" >
 			</form>
 				<div class="paging align-center">${page}</div>
 			</c:if>
