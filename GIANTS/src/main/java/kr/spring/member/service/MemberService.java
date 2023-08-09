@@ -23,9 +23,10 @@ public interface MemberService {
 	
 	//프로필 이미지 업데이트
 	public void updateProfile(MemberVO member);
+	public void updateComProfile(MemberVO member);
 	
 	//비밀번호 수정 
-	public void updatePassword(MemberVO member);
+	public void updatePasswd(MemberVO member);
 	
 	//회원탈퇴
 	public void deleteMember(Integer mem_num);
@@ -33,7 +34,6 @@ public interface MemberService {
 	
 	//자동 로그인
 	public void updateAu_id(String au_id, int mem_num);
-	public void selectAu_id(String au_id);
+	public MemberVO selectAu_id(String au_id);
 	public void deleteAu_id(int mem_num);
-
 }

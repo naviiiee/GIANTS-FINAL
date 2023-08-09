@@ -7,6 +7,7 @@
 		<ul class="mypage-nav">
 			<li><b>회원정보</b></li>
 			<li><a href="${pageContext.request.contextPath}/member/updateMember.do">회원정보수정</a></li>
+			<li><a href="${pageContext.request.contextPath}/member/changePasswd.do">비밀번호변경</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/deleteMember.do">회원탈퇴</a></li>
 			<li><b>구매내역</b></li>
 			<li><a href="${pageContext.request.contextPath}/member/memberMypageTicketList.do">Ticket</a></li>
@@ -19,6 +20,7 @@
 		<ul class="mypage-nav">
 			<li><b>회원정보</b></li>
 			<li><a href="${pageContext.request.contextPath}/member/updateCompany.do">회원정보수정</a></li>
+			<li><a href="${pageContext.request.contextPath}/member/changePasswd.do">비밀번호변경</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/deleteCompany.do">회원탈퇴</a></li>
 			<li><b>FOOD</b></li>
 			<li><a href="${pageContext.request.contextPath}/member/companyMypageFoodList.do">푸드목록</a></li>

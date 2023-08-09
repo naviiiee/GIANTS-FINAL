@@ -51,6 +51,22 @@
 	<!-- 기업회원 마이페이지 -->	
 	<c:if test="${!empty user && user.mem_auth == 3}">
 		<div class="member-mypage">
+		<ul>
+			<li>
+				<img src="${pageContext.request.contextPath}/member/photoView.do" 
+				     width="100" height="100" class="my-photo">
+				<div class="camera" id="photo_btn">
+					<img src="${pageContext.request.contextPath}/images/로그인로고.png" width="35">
+				</div>
+			</li>
+			<li>
+				<div id="photo_choice" style="display:none;">
+					<input type="file" id="upload"
+						   accept="image/gif,image/png,image/jpg"><br>
+				    <input type="button" value="전송" id="photo_submit">
+				    <input type="button" value="취소" id="photo_reset">
+				</div>
+			</li></ul>
 			<table class="mem-table">
 			<tr>
 				<td>아이디</td><td>${member.mem_id}</td>

@@ -95,6 +95,7 @@
 			mem_num,
 			mem_id,
 			mem_auth,
+			au_id,
 			passwd,
 			mem_nickname
 		FROM

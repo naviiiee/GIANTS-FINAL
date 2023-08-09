@@ -2,9 +2,12 @@ package kr.spring.member.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -140,7 +143,11 @@ public class MemberController {
 
 	// 로그인 데이터 처리
 	@PostMapping("/member/login.do")
-	public String submitLogin(@Valid MemberVO memberVO, BindingResult result, HttpSession session) {
+	public String submitLogin(@Valid MemberVO memberVO, 
+							   BindingResult result, 
+							   HttpSession session,
+							   Model model,
+						   	   HttpServletResponse response) {
 		// logger.debug("<<회원로그인>> : " + memberVO);
 
 		// id와 passwd 필드만 유효성 체크 결과 오류가 있으면 폼 호출
@@ -159,8 +166,28 @@ public class MemberController {
 				check = member.isCheckedPasswd(memberVO.getPasswd());
 			}
 			if (check) { // 인증 성공
+				
 				// 자동 로그인 체크 시작//
+				boolean autoLogin = memberVO.getAuto() != null && memberVO.getAuto().equals("on");
+				if (autoLogin) {
+					// 자동로그인 체크를 한 경우
+					String au_id = member.getAu_id();
+					if (au_id == null) {
+						// 자동로그인 체크 식별값 생성
+						au_id = UUID.randomUUID().toString();
+						log.debug("<<au_id>> : " + au_id);
+						memberService.updateAu_id(au_id, member.getMem_num());
+					}
+
+					// 쿠키 생성
+					Cookie auto_cookie = new Cookie("au-log", au_id);
+					auto_cookie.setMaxAge(60 * 60 * 24 * 7);// 쿠키 유효시간 1주일
+					auto_cookie.setPath("/");
+
+					response.addCookie(auto_cookie);
+				}
 				// 자동 로그인 체크 끝//
+				
 				if (member.getMem_auth() == 3) {
 					// 기업일때 기업정보 세팅
 					member = memberService.selectCompany(member.getMem_num());
@@ -204,6 +231,7 @@ public class MemberController {
 		return "redirect:/main/main.do";
 	}
 
+	
 	/* === 마이페이지 
 	=======================*/
 	@RequestMapping("/member/myPage.do")
@@ -281,6 +309,57 @@ public class MemberController {
 		return "redirect:/member/myPage.do";
 	}
 	
+	/* === 마이페이지 : 비밀번호변경
+	=======================*/
+	//비밀번호 변경 폼 호출
+	@GetMapping("/member/changePasswd.do")
+	public String formChangePasswd() {
+		return "memberChangePasswd";
+	}
+	//전송된 데이터 처리
+	@PostMapping("/member/changePasswd.do")
+	public String submitChangePasswd(@Valid MemberVO memberVO,
+									 BindingResult result,
+									 HttpSession session,
+									 HttpServletRequest request,
+									 Model model) {
+		//전송된 데이터 값 보기
+		logger.debug("<<비밀번호변경 처리>> : " + memberVO);
+		
+		//now_passwd와 passwd 유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasFieldErrors("now_passwd") || 
+				result.hasFieldErrors("passwd")) {
+			return formChangePasswd();
+		}
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		memberVO.setMem_num(user.getMem_num());
+		
+		MemberVO db_member = 
+				memberService.selectMember(memberVO.getMem_num());
+		
+		//폼에서 전송한 현재 비밀번호와 DB에서 받아온 비밀번호 일치 여부 체크
+		if(!db_member.getPasswd().equals(memberVO.getNow_passwd())) {
+			//DB에 등록된 비밀번호와 입력한 비밀번호가 불일치
+			result.rejectValue("now_passwd", "invalidPassword");
+			return formChangePasswd();
+		}
+		
+		//비밀번호 변경
+		memberService.updatePasswd(memberVO);
+		
+		/* 비밀번호 변경시 자동로그인 기능 해제 */
+		//설정되어 있는 자동로그인 기능 해제 ( 모든 브라우저에 설정된 자동로그인 해제 )
+		memberService.deleteAu_id(memberVO.getMem_num());
+		
+		//View에 표시할 메시지 처리
+		model.addAttribute("message", 
+				"비밀번호변경 완료(*재접속시 설정되어 있는 자동로그인 기능 해제)");
+		model.addAttribute("url", 
+				request.getContextPath() + "/member/myPage.do");
+		
+		return "common/resultView";
+	}	
 	
 	/* === 마이페이지 : 프로필사진
 	=======================*/
@@ -290,7 +369,7 @@ public class MemberController {
 							 HttpServletRequest request,
 							 Model model) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		log.debug("<<photoView>> : " + user);
+		log.debug("<<프로필 사진 출력>> : " + user);
 		if(user==null) { //로그인이 안된 경우
 			// 기본 이미지 읽기
 			byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("/image_bundle/face.png"));
@@ -298,7 +377,12 @@ public class MemberController {
 			model.addAttribute("imageFile", readbyte);
 			model.addAttribute("filename", "face.png");
 		}else { //로그인 된 경우
-			MemberVO memberVO = memberService.selectMember(user.getMem_num());
+			MemberVO memberVO;
+			if(user.getMem_auth()==3) {
+				memberVO = memberService.selectCompany(user.getMem_num());
+			}else{
+				memberVO = memberService.selectMember(user.getMem_num());
+			}
 			viewProfile(memberVO,request,model);
 		}
 		return "imageView";
@@ -310,7 +394,7 @@ public class MemberController {
 									  HttpServletRequest request,
 									  Model model) {
 		MemberVO memberVO = memberService.selectMember(mem_num);
-		log.debug("<<프로필사진출력>> : " + memberVO);
+		log.debug("<<프로필 사진 호출(회원번호지정) : >>" + memberVO);
 		viewProfile(memberVO, request, model);
 		
 		return "imageView";
@@ -318,38 +402,57 @@ public class MemberController {
 	
 	//프로필 사진 처리를 위한 공통 코드
 	public void viewProfile(MemberVO memberVO, HttpServletRequest request, Model model) {
-		if (memberVO == null || memberVO.getMemberDetailVO().getMem_photoname() == null) {
+		if (memberVO == null) {
 			// 업로드한 프로필 사진이 없는 경우
-
-			logger.debug("<<기본 이미지 호출>> : " + memberVO);
+			log.debug("<<기본 이미지 호출 if>> : " + memberVO);
+			
+			/*
+			MemberVO member = null;
+			logger.debug("<<member>> : " + member);
+			member = memberService.selectMember(member.getMem_num());
+			*/
+			
 			// 기본 이미지 읽기
 			byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("/image_bundle/face.png"));
 			// model을 이용한 전달
 			model.addAttribute("imageFile", readbyte);
 			model.addAttribute("filename", "face.png");
-
+		
 		} else { // 업로드한 프로필 사진이 있는 경우
-			model.addAttribute("imageFile", memberVO.getMemberDetailVO().getMem_photo());
-			model.addAttribute("filename", memberVO.getMemberDetailVO().getMem_photoname());
+			log.debug("<<업로드 이미지 호출 else>>");
+			if(memberVO.getMem_auth()==3) {
+				model.addAttribute("imageFile", memberVO.getCompanyDetailVO().getComp_photo());
+				model.addAttribute("filename", memberVO.getCompanyDetailVO().getComp_photoname());
+			}else {
+				model.addAttribute("imageFile", memberVO.getMemberDetailVO().getMem_photo());
+				model.addAttribute("filename", memberVO.getMemberDetailVO().getMem_photoname());
+			}
+			
 		}
 
 	}
-	//프로필 사진 업데이트
+	//프로필 사진 업데이트 private MemberDetailVO memberDetailVO;
 	@RequestMapping("/member/updateMyPhoto.do")
 	@ResponseBody
 	public Map<String,String> updateProfile(MemberVO memberVO,
 											HttpSession session){
-		/*
-		 * logger.debug("<<프로필 사진 업데이트>> : " +
-		 * memberVO.getMemberDetailVO().getMem_photo());
-		 */
+		//updateComProfile
+		logger.debug("<<프로필 사진 업데이트>> : " + memberVO);
 		Map<String,String> mapAjax = new HashMap<String,String>();
 		MemberVO user = (MemberVO)session.getAttribute("user");
+		
 		if(user==null) {
+			logger.debug("<<프로필 사진 업데이트 if>> : " + memberVO);
 			mapAjax.put("result", "logout");
+			
 		}else {
+			logger.debug("<<프로필 사진 업데이트 else>> : " + memberVO);
 			memberVO.setMem_num(user.getMem_num());
-			memberService.updateProfile(memberVO);
+			if (user.getMem_auth() == 2) {
+				memberService.updateProfile(memberVO);
+			}else if(user.getMem_auth() == 3) {
+				memberService.updateComProfile(memberVO);
+			}
 			
 			mapAjax.put("result", "success");
 		}
@@ -420,7 +523,7 @@ public class MemberController {
 
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		MemberVO db_member = memberService.selectCompany(user.getMem_num());
-
+		
 		boolean check = false;
 
 		// 아이디 비밀번호 일치 여부 체크

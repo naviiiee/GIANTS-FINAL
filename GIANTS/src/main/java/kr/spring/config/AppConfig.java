@@ -48,7 +48,10 @@ public class AppConfig implements WebMvcConfigurer {
 				.addPathPatterns("/food/fixCompFoodList.do")
 				.addPathPatterns("/food/addNewFood.do")
 				.addPathPatterns("/food/fixFood.do")
-				.addPathPatterns("/food/deleteFood.do");
+				.addPathPatterns("/food/deleteFood.do")
+				.addPathPatterns("/member/updateMember.do")
+				.addPathPatterns("/member/updateCompany.do")
+				.addPathPatterns("/member/changePassword.do");
 				// Ticket
 				//.addPathPatterns("/ticket/ticketMain.do"); 
 		

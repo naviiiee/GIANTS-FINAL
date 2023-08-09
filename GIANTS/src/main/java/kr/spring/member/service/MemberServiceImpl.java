@@ -54,6 +54,21 @@ public class MemberServiceImpl implements MemberService{
 	public void updateCompany(MemberVO member) {
 		memberMapper.updateCompany_detail(member);
 	}
+	
+	@Override
+	public void updateAu_id(String au_id, int mem_num) {
+		memberMapper.updateAu_id(au_id, mem_num);
+	}
+
+	@Override
+	public MemberVO selectAu_id(String au_id) {
+		return memberMapper.selectAu_id(au_id);
+	}
+
+	@Override
+	public void deleteAu_id(int mem_num) {
+		memberMapper.deleteAu_id(mem_num);
+	}
 
 	@Override
 	public void updateProfile(MemberVO member) {
@@ -61,9 +76,8 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public void updatePassword(MemberVO member) {
-		// TODO Auto-generated method stub
-		
+	public void updatePasswd(MemberVO member) {
+		memberMapper.updatepasswd(member);
 	}
 
 	@Override
@@ -80,26 +94,13 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void updateAu_id(String au_id, int mem_num) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void selectAu_id(String au_id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteAu_id(int mem_num) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public CompanyDetailVO selectCompanyDetail(String comp_num) {
 		return memberMapper.selectCompanyDetail(comp_num);
+	}
+
+	@Override
+	public void updateComProfile(MemberVO member) {
+		memberMapper.updateComProfile(member);
 	}
 
 }
