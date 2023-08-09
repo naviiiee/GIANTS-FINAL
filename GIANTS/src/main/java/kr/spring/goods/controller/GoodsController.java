@@ -337,6 +337,9 @@ public class GoodsController {
 		return mapJson;
 	}
 	
+	
+	/*===============// 굿즈 리뷰 //===============*/	
+	
 	/*==========================
 	 * 리뷰 등록
 	 *==========================*/	
@@ -383,10 +386,26 @@ public class GoodsController {
 		return "common/resultView";
 	}
 	
-	/*==========================
-	 * 리뷰 목록
-	 *==========================*/	
 	
+	/*===============// 굿즈 문의 //===============*/	
+	
+	/*==========================
+	 * 상품문의 등록
+	 *==========================*/	
+	//등록 폼 호출
+	@GetMapping("/goods/writeQna.do")
+	public String formQna(HttpSession session, Model model) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", 1);
+		map.put("end", 50);
+		map.put("status", 0);
+		
+		List<GoodsVO> goods_list = goodsService.selectGoodsList(map);
+		model.addAttribute("goods_list", goods_list);
+		
+		return "qnaWrite";
+	}
 	
 	
 	

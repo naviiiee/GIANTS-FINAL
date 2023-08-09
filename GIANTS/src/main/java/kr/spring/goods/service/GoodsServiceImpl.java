@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.spring.goods.dao.GoodsMapper;
 import kr.spring.goods.vo.GoodsFavVO;
 import kr.spring.goods.vo.GoodsOptionVO;
+import kr.spring.goods.vo.GoodsQnaVO;
 import kr.spring.goods.vo.GoodsReviewVO;
 import kr.spring.goods.vo.GoodsVO;
 import lombok.extern.slf4j.Slf4j;
@@ -139,6 +140,13 @@ public class GoodsServiceImpl implements GoodsService{
 	public void deleteGoodsReview(Integer review_num) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	//===== 상품문의 =====//
+	
+	@Override
+	public void insertGoodsQna(GoodsQnaVO qna) {
+		goodsMapper.insertGoodsQna(qna);
 	}
 
 }

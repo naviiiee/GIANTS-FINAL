@@ -38,7 +38,11 @@
 	</definition>
 	
 	
-	
+	<!-- 굿즈문의 -->
+	<definition name="qnaWrite" extends="main">
+		<put-attribute name="title" value="굿즈문의작성"/>
+		<put-attribute name="body" value="/WEB-INF/views/goods/qnaWrite.jsp"/>
+	</definition>
 	
 	
 	

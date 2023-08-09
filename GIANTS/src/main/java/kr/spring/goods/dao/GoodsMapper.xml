@@ -42,21 +42,7 @@
       			#{goods_stock})
 	</insert>
 	
-	<!-- 상품 목록 
-	<sql id="goodsSearch">
-		<where>
-			<if test="keyfield != null and keyword != ''">
-				<if test="keyfield == 1">
-					g.goods_category == 1 and 
-					g.goods_name LIKE '%' || #{keyword} || '%'
-				</if>
-				<if test="keyfield == 2">
-					g.goods_category == 2 and 
-					g.goods_name LIKE '%' || #{keyword} || '%'
-				</if>
-			</if>
-		</where>
-	</sql>-->
+	<!-- 상품 목록 -->
 	
 	<sql id="goodsSearch">
 		<if test="keyword != null and keyword != ''">
@@ -144,7 +130,7 @@
 		WHERE goods_num=#{goods_num} AND goods_size=#{goods_size}
 	</update>
 	
-	<!-- ======리뷰====== -->
+	<!-- //======리뷰======// -->
 	<!-- 리뷰 등록 -->
 	<insert id="insertGoodReview" parameterType="goodsReviewVO">
 		INSERT INTO 
@@ -193,5 +179,27 @@
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
+	
+	<!-- =====굿즈 문의===== -->
+	<!-- 문의 등록 -->
+	<insert id="insertGoodsQna" parameterType="goodsQnaVO">
+		INSERT INTO
+			goods_qna(
+				gna_num,
+				qna_title,
+				qna_content,
+				mem_num,
+				goods_num)
+		VALUES(
+			goods_qna_seq.nextval,
+			#{qna_title},
+			#{qna_content},
+			#{mem_num},
+			#{goods_num})
+	</insert>
+	
+	
+	
+	
 	
 </mapper>

@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Update;
 
 import kr.spring.goods.vo.GoodsFavVO;
 import kr.spring.goods.vo.GoodsOptionVO;
+import kr.spring.goods.vo.GoodsQnaVO;
 import kr.spring.goods.vo.GoodsReviewVO;
 import kr.spring.goods.vo.GoodsVO;
 
@@ -68,9 +69,9 @@ public interface GoodsMapper {
 	public void deleteGoodsFavByGoodsNum(Integer goods_num);
 	
 	//=====상품 후기=====//
-	//전체|검색 상품 후기 목록
+	//상품 후기 목록
 	public List<GoodsReviewVO> selectGoodsReviewList(Map<String, Object> map);
-	//전체|검색 상품 후기 레코드 수
+	//상품 후기 레코드 수
 	public int selectGreviewRowCount(Integer goods_num);
 	//상품 후기 등록
 	public void insertGoodReview(GoodsReviewVO review);
@@ -81,4 +82,12 @@ public interface GoodsMapper {
 	//상품 후기 삭제
 	public void deleteGoodsReview(Integer review_num);
 	
+	//=====상품 문의=====//
+	//전체 | 검색 상품 문의 목록
+	//전체 | 검색 상품 문의 레코드 수
+	//상품 문의 등록
+	public void insertGoodsQna(GoodsQnaVO qna);
+	//상품 문의 상세
+	//상품 문의 수정
+	//상품 문의 삭제
 }
