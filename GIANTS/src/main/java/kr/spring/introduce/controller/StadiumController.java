@@ -17,4 +17,10 @@ public class StadiumController {
 		return "stadium"; //tiles 설정
 	}
 	
+	
+	//구장 오시는길  소개 폼
+		@GetMapping("/introduce/map.do")
+		public String formMap() {
+			return "map"; //tiles 설정
+		}
 }

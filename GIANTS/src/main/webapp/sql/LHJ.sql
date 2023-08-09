@@ -5,7 +5,7 @@ CREATE TABLE commu(
  commu_content clob not null,
  commu_date date default SYSDATE not null,
  commu_modifydate date,
- commu_hit number(8),
+ commu_hit number(8) default 0 not null,
  commu_ip varchar(15),
  mem_num number not null,
  constraint commu_pk primary key (commu_num),

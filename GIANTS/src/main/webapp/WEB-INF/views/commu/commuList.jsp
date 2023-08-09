@@ -20,6 +20,8 @@ li{
 	display:flex;
 }
 
+
+
 </style>
 <!-- 커뮤니티 목록 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LHJ/commu.css">
@@ -44,7 +46,7 @@ li{
 		</div>
 	</div>
 	<hr size="0.05" width="100%" noshade style="margin-bottom:3%">
-	<form action="commuList.do" id="search_form" method="get">
+	<form action="commuList.do" id="search_form" method="get"  style="padding-bottom: 24px;">
 		<ul class="search align-center">
 			<li>
 				<select name="keyfield" id="keyfield">
@@ -54,18 +56,17 @@ li{
 				</select>
 			</li>
 			<li>
-				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
+				<input type="search" name="keyword" id="keyword" value="${param.keyword}" style="height:30px;">
 			</li>
 			<li>
-				<input type="submit" value="검색">
-				<input type="button" value="목록" onclick="location.href='commuList.do'">
+				<input type="submit" value="검색" style="height:30px;"  class="accept-btn">
 			</li>
 		</ul>
 	
 	
 		<!-- 정렬 -->
-		<div class="align-right">
-			<select id="order" name="order">
+		<div class="align-right" >
+			<select id="order" name="order" style="height:30px;">
 				<option value="1" 
 				  <c:if test="${param.order == 1}">selected</c:if>>최신글</option>
 				<option value="2" 
@@ -86,7 +87,7 @@ li{
 			</script>
 			
 			<c:if test="${!empty user}">
-			<input type="button" value="글쓰기" onclick="location.href='write.do'">
+			<input type="button" value="글쓰기" onclick="location.href='write.do'" class="accept-btn">
 			</c:if>
 			
 		</div>

@@ -380,12 +380,12 @@ public class CommuController {
 		/*=== 커뮤니티 신고 ===*/
 
 		
-		/*=== 자바빈 초기화 
+		
 		@ModelAttribute
 		public CommuReportVO initCommand_repo() {
 			return new CommuReportVO();
 		}
-		===*/
+		
 		
 		//등록 폼
 		@GetMapping("/commu/repo.do")

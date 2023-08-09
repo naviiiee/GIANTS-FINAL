@@ -21,6 +21,12 @@
     	<put-attribute name="body" value="/WEB-INF/views/introduce/stadium.jsp"/>
     </definition> 
     
+    <!-- 야구장 오시는길 폼 -->
+    <definition name="map" extends="main">
+    	<put-attribute name="title" value="구장소개"/>
+    	<put-attribute name="body" value="/WEB-INF/views/introduce/map.jsp"/>
+    </definition> 
+    
     <!-- 글 상세 -->
     <definition name="commuView" extends="main">
     	<put-attribute name="title" value="상세정보"/>

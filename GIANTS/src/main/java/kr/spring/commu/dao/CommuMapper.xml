@@ -17,7 +17,7 @@
 					c.commu_title LIKE '%' || #{keyword} || '%'
 				</if>
 				<if test="keyfield == 2"> <!-- 검색 : 작성자 -->
-					c.mem_nickname LIKE '%' || #{keyword} || '%'
+					m.mem_nickname LIKE '%' || #{keyword} || '%'
 				</if>
 				<if test="keyfield == 3"> <!-- 검색 : 내용 -->
 					c.commu_content LIKE '%' || #{keyword} || '%'
