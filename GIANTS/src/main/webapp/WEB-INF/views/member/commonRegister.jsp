@@ -9,9 +9,16 @@
 		<p>자이언츠 회원가입 입니다.</p>
 	</div>
 </div>
-<div class="page-main">
+<div class="common-register">
 	<ul>
-		<li><a href="${pageContext.request.contextPath}/member/registerMember.do">일반회원가입</a></li>
-		<li><a href="${pageContext.request.contextPath}/member/registerCompany.do">기업회원가입</a></li>
+		<li>
+			<button class="m-register" 
+			onclick="location.href='${pageContext.request.contextPath}/member/registerMember.do'"><b>일반 회원<br>가입하기</b></button>
+		</li>
+		
+		<li>
+			<button class="c-register" 
+			onclick="location.href='${pageContext.request.contextPath}/member/registerCompany.do'"><b>기업 회원<br>가입하기</b></button>
+		</li>
 	</ul>
 </div>

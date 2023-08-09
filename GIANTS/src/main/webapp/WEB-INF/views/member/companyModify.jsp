@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
-<div class="mypage-top">
+<div class="mypage-top2">
 	<div class="mypage-top-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>(기업)회원정보수정</h2>
@@ -11,7 +11,7 @@
 	</div>
 </div>
 <!-- 기업정보 폼 시작 -->
-<div>
+<div class="mypage-form">
 	<form:form modelAttribute="memberVO" action="updateCompany.do" id="company_modify">
 		<ul>
 			<li>
@@ -37,12 +37,13 @@
 			<li>
 				<form:label path="companyDetailVO.comp_email">이메일</form:label>
 				<form:input path="companyDetailVO.comp_email"/>
+				<input type="button" id="#" value="이메일인증" class="default-btn">
 				<form:errors path="companyDetailVO.comp_email"/>
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_zipcode">우편번호</form:label>
 				<form:input path="companyDetailVO.comp_zipcode"/>
-				<input type="button" onclick="execDaumPostcode()" value="우편번호찾기">
+				<input type="button" onclick="execDaumPostcode()" value="우편번호찾기" class="default-btn">
 				<form:errors path="companyDetailVO.comp_zipcode"/>
 			</li>
 			<li>
@@ -61,9 +62,9 @@
 				<form:errors path="companyDetailVO.comp_content"/>
 			</li>
 		</ul>
-		<div class="align-center">
-			<form:button>전송</form:button>
-			<input type="button" value="홈으로" 
+		<div class="mypage-bottom">
+			<form:button class="bottom-btn">전송</form:button>
+			<input type="button" value="홈으로" class="bottom-btn"
 				   onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
 		</div>
 	</form:form>

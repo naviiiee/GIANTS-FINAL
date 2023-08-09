@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
-<div class="mypage-top">
+<div class="mypage-top2">
 	<div class="mypage-top-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>(기업)회원탈퇴</h2>
@@ -11,7 +11,7 @@
 	</div>
 </div>
 <!-- 회원탈퇴 폼 시작 -->
-<div class="page-main">
+<div class="mypage-form">
 	<form:form modelAttribute="memberVO" action="deleteCompany.do" id="company_delete">
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
@@ -26,9 +26,9 @@
 			</li>
 			<li>
 		</ul>
-		<div class="align-center">
-			<form:button>전송</form:button>
-			<input type="button" value="MY페이지"
+		<div class="mypage-bottom">
+			<form:button class="bottom-btn">전송</form:button>
+			<input type="button" value="마이페이지" class="bottom-btn"
 				   onclick="location.href='myPage.do'">
 		</div>
 	</form:form>

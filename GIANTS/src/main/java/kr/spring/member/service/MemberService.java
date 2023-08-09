@@ -15,7 +15,7 @@ public interface MemberService {
 	public MemberVO selectMember(Integer mem_num);
 	public MemberVO selectCompany(Integer mem_num);
 	
-	public CompanyDetailVO selectCompanyDetail(String comp_num);
+	public CompanyDetailVO selectCompanyDetail(String comp_num); 
 	
 	//회원정보 수정
 	public void updateMember(MemberVO member);

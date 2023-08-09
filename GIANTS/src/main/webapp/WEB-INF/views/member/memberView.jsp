@@ -3,26 +3,68 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
-<div class="mypage-top">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/profile.js"></script>
+<div class="mypage-top2">
 	<div class="mypage-top-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
-		<h2>회원상세정보</h2>
-		<p>자이언츠 회원상세정보 입니다.</p>
+		<h2>마이페이지</h2>
+		<p>자이언츠 마이페이지 입니다.</p>
 	</div>
 </div>
 <div>
+	<!-- 일반회원 마이페이지 -->
 	<c:if test="${!empty user && user.mem_auth == 2}">
-		아이디 : ${member.mem_id}<br>
-		이름 : ${member.memberDetailVO.mem_name}<br>
-		회원분류 : 일반회원<br>
-		회원가입일 : ${member.memberDetailVO.mem_regdate}<br>
-		프로필사진 : <br>
+		<ul>
+			<li>
+				<img src="${pageContext.request.contextPath}/member/photoView.do" 
+				     width="100" height="100" class="my-photo">
+				<div class="camera" id="photo_btn">
+					<img src="${pageContext.request.contextPath}/images/로그인로고.png" width="35">
+				</div>
+			</li>
+			<li>
+				<div id="photo_choice" style="display:none;">
+					<input type="file" id="upload"
+						   accept="image/gif,image/png,image/jpg"><br>
+				    <input type="button" value="전송" id="photo_submit">
+				    <input type="button" value="취소" id="photo_reset">
+				</div>
+			</li>
+		</ul>
+		<div class="member-mypage">
+			<table class="mem-table">
+			<tr>
+				<td>아이디</td><td>${member.mem_id}</td>
+			</tr>
+			<tr>
+				<td>이름</td><td>${member.memberDetailVO.mem_name}</td>
+			</tr>
+			<tr>
+				<td>회원분류</td><td>일반회원</td>
+			</tr>
+			<tr>
+				<td>회원가입일</td><td>${member.memberDetailVO.mem_regdate}</td>
+			</tr>
+			</table>
+		</div>
 	</c:if>
+	<!-- 기업회원 마이페이지 -->	
 	<c:if test="${!empty user && user.mem_auth == 3}">
-		아이디 : ${company.mem_id}<br>
-		이름 : ${company.companyDetailVO.comp_owner}<br>
-		회원분류 : 기업회원<br>
-		회원가입일 : ${company.companyDetailVO.comp_regdate}<br>
-		프로필사진:<br>
+		<div class="member-mypage">
+			<table class="mem-table">
+			<tr>
+				<td>아이디</td><td>${member.mem_id}</td>
+			</tr>
+			<tr>
+				<td>사업자명</td><td>${company.companyDetailVO.comp_owner}</td>
+			</tr>
+			<tr>
+				<td>회원분류</td><td>기업회원</td>
+			</tr>
+			<tr>
+				<td>회원가입일</td><td>${company.companyDetailVO.comp_regdate}</td>
+			</tr>
+			</table>
+		</div>
 	</c:if>
 </div>

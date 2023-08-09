@@ -12,6 +12,16 @@
     margin:0 auto 30px auto;
     width:1200px;
 }
+.mypage-top2{
+	display: flex;
+    position: relative;
+    border-bottom: 1px solid #BBB;
+    padding: 25px 0;
+    height: 40px;
+    z-index: 19;
+    margin:0 auto 30px auto;
+    width:1000px;
+}
 .mypage-top-title .h2{
 	display: inline-block;
 	font-size: 29px;
@@ -28,10 +38,12 @@
 #mypage_body{
 	margin:0 auto;
 	width:1213px;
-	min-height:500px;
+	min-height:700px;
 }
 #mypage_body .mypage-nav{
-	background-color:yellow;
+	background-color:red;
+	color:#fff;
+	font-size:15pt;
 	width:150px;
 	float:left;
 }
@@ -41,7 +53,7 @@
 }
 /* 로그인창 
 =================*/
-/* 아이디 비밀번호 로그인 */
+/* 아이디 비밀번호 */
 .login-main{
 	margin-bottom: 20px;
     border: 5px solid #dfdfdf;
@@ -53,11 +65,31 @@
 }
 .login-form{
 	background: url(../_Img/members/login_form_bg.png) no-repeat 0 0;
-    padding-top: 30px;
+    padding-top: 10px;
     width: 550px;
     float: left;
     position: relative;
     margin: auto;
+}
+.login-form img{
+	float:left;
+}
+.login-form li{
+	padding-top:10px;
+}
+.login-form input,
+.login-form password{
+	float:right;
+	margin:0 260px 0 0;
+	width:180px;
+	height:20px;
+}
+.login-form #auto{
+	width:80px;
+	margin: 0 392px 0 0;
+}
+.login-form p{
+	padding:15px 0 0 90px;
 }
 .login{
     margin: 30px 0 0 7px;
@@ -72,7 +104,7 @@
     width:150px;
     height:70px;    
 }
-/* 회원가입 아이디/비밀번호찾기 */
+/* 회원가입 아이디 비밀번호찾기 */
 .login-sub{
     float: right;
     border-left: 1px solid #ddd;
@@ -84,4 +116,172 @@
 }
 .login-sub-btn{
 	margin-top:10px;
+}
+/* 회원등급
+=================*/
+.common-register,
+.member-mypage,
+.company-mypage{
+	margin-bottom: 20px;
+    border: 5px solid #dfdfdf;
+    padding: 30px 50px;
+    position: relative;
+    overflow: hidden;
+    width:1000px;
+    margin:0 auto;
+}
+.member-mypage,
+.company-mypage{
+	width:800px;
+}
+.common-register ul li button{
+	list-style:none;
+	float:left;
+}
+/* 회원등급 : 일반회원 */
+.common-register .m-register{
+	/* background-color: rgba(5,35,69,0.75); */
+	background-color:red;
+	color: white;
+	width:250px;
+	height:150px;
+	font-size:20px;
+	border:none;
+	border-radius: 20px;
+	margin:0 125px 0 125px;
+}
+/* 회원등급 : 기업회원 */
+.common-register .c-register{
+	/* background-color: rgba(5,35,69,0.75); */
+	background-color:red;
+	color: white;
+	width:250px;
+	height:150px;
+	font-size:20px;
+	border:none;
+	border-radius: 20px;
+	margin:0 125px 0 125px;
+}
+/* 회원가입
+=================*/
+.register-box{
+	width:500px;
+	margin:0 auto;
+}
+.register-box li{
+	text-align:left;
+	padding-bottom:20px;
+	margin:0 auto;
+}
+#member_register label,
+#company_register label,
+#member_modify label,
+#company_modify label,
+#member_delete label,
+#company_delete label{
+	display:inline-block;
+	padding-right:10px;
+	font-size:1.2em;
+	width:110px;
+	text-align: left;
+}
+#member_register input[id="memberDetailVO.mem_name"],
+#member_register input[id="mem_id"],
+#member_register input[id="memberDetailVO.mem_email"],
+#member_register input[id="memberDetailVO.mem_zipcode"],
+#member_register input[id="passwd"],
+#member_register input[id="memberDetailVO.mem_public"],
+#member_register input[id="memberDetailVO.mem_phone"],
+#member_register input[id="memberDetailVO.mem_address1"],
+#member_register input[id="memberDetailVO.mem_address2"],
+#member_register input[id="mem_nickname"],
+#company_register input[id="companyDetailVO.comp_owner"],
+#company_register input[id="companyDetailVO.comp_num"],
+#company_register input[id="companyDetailVO.comp_name"],
+#company_register input[id="companyDetailVO.comp_cate"],
+#company_register input[id="mem_id"],
+#company_register input[id="companyDetailVO.comp_email"],
+#company_register input[id="companyDetailVO.comp_zipcode"],
+#company_register input[id="passwd"],
+#company_register input[id="companyDetailVO.comp_phone"],
+#company_register input[id="companyDetailVO.comp_address1"],
+#company_register input[id="companyDetailVO.comp_address2"],
+#company_register input[id="companyDetailVO.comp_content"],
+#member_modify input[id="memberDetailVO.mem_name"],
+#member_modify input[id="memberDetailVO.mem_public"],
+#member_modify input[id="memberDetailVO.mem_phone"],
+#member_modify input[id="memberDetailVO.mem_email"],
+#member_modify input[id="memberDetailVO.mem_zipcode"],
+#member_modify input[id="memberDetailVO.mem_address1"],
+#member_modify input[id="memberDetailVO.mem_address2"],
+#member_modify input[id="mem_nickname"],
+#company_modify input[id="companyDetailVO.comp_owner"],
+#company_modify input[id="companyDetailVO.comp_name"],
+#company_modify input[id="companyDetailVO.comp_cate"],
+#company_modify input[id="companyDetailVO.comp_phone"],
+#company_modify input[id="companyDetailVO.comp_email"],
+#company_modify input[id="companyDetailVO.comp_zipcode"],
+#company_modify input[id="companyDetailVO.comp_address1"],
+#company_modify input[id="companyDetailVO.comp_address2"],
+#company_modify input[id="companyDetailVO.comp_content"],
+#member_delete input[id="mem_id"],
+#member_delete input[id="passwd"],
+#company_delete input[id="mem_id"],
+#company_delete input[id="passwd"]{
+	width:264px;
+	height:35px;
+	text-align: left;
+}
+/* ID중복체크, 이메일인증, 우편번호 */
+#member_register .default-btn,
+#company_register .default-btn,
+#member_modify .default-btn,
+#company_modify .default-btn{
+	width:100px;
+	height:35px;
+	border-radius: 5px;
+	background-color:red;
+	color:#fff;
+}
+/* 전송,홈으로 */
+.bottom-btn{
+	margin:20px 10px 0 0;
+	width:60px;
+	height:35px;
+	border-radius: 5px;
+	background-color:red;
+	color:#fff;
+}
+/* 마이페이지
+=================*/
+/* 마이페이지 */
+.mem-table td{
+	width:100px;
+	padding-bottom:10px;
+}
+/* 회원정보 수정*/
+.mypage-form{
+	margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    width:1000px;
+}
+.mypage-form li{
+	padding-bottom:10px;
+	width:500px;
+	margin:0 auto;
+}
+.mypage-bottom{
+	text-align:center;
+	margin:0 auto;
+}
+.my-btn{
+	margin:20px 10px 0 0;
+	width:80px;
+	text-align:center;
+	margin:0 auto;
+	height:35px;
+	border-radius: 5px;
+	background-color:red;
+	color:#fff;
 }

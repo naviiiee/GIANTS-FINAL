@@ -22,10 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.member.service.MemberService;
-import kr.spring.member.vo.CompanyDetailVO;
-import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.AuthCheckException;
+import kr.spring.util.FileUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -43,6 +42,7 @@ public class MemberController {
 		return new MemberVO();
 	}
 
+	
 	/* === 회원가입 
 	=======================*/
 	// 회원등급 선택 호출
@@ -128,6 +128,7 @@ public class MemberController {
 
 		return "common/notice";
 	}
+	
 
 	/* === 로그인 
 	=======================*/
@@ -188,6 +189,7 @@ public class MemberController {
 			return formLogin();
 		}
 	}
+	
 
 	/* === 로그아웃 
 	=======================*/
@@ -220,7 +222,7 @@ public class MemberController {
 		return "myPage";
 	}
 	
-	/* === 회원정보수정
+	/* === 마이페이지 : 회원정보수정
 	=======================*/
 	//일반회원 수정 폼 호출
 	@GetMapping("/member/updateMember.do")
@@ -278,6 +280,83 @@ public class MemberController {
 		
 		return "redirect:/member/myPage.do";
 	}
+	
+	
+	/* === 마이페이지 : 프로필사진
+	=======================*/
+	//프로필 사진 출력(로그인 전용)
+	@RequestMapping("/member/photoView.do")
+	public String getProfile(HttpSession session,
+							 HttpServletRequest request,
+							 Model model) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		log.debug("<<photoView>> : " + user);
+		if(user==null) { //로그인이 안된 경우
+			// 기본 이미지 읽기
+			byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("/image_bundle/face.png"));
+			// model을 이용한 전달
+			model.addAttribute("imageFile", readbyte);
+			model.addAttribute("filename", "face.png");
+		}else { //로그인 된 경우
+			MemberVO memberVO = memberService.selectMember(user.getMem_num());
+			viewProfile(memberVO,request,model);
+		}
+		return "imageView";
+	}
+	
+	//프로필 사진 출력 (회원번호 지정)
+	@RequestMapping("/member/viewProfile.do")
+	public String getProfileByMem_num(@RequestParam int mem_num,
+									  HttpServletRequest request,
+									  Model model) {
+		MemberVO memberVO = memberService.selectMember(mem_num);
+		log.debug("<<프로필사진출력>> : " + memberVO);
+		viewProfile(memberVO, request, model);
+		
+		return "imageView";
+	}
+	
+	//프로필 사진 처리를 위한 공통 코드
+	public void viewProfile(MemberVO memberVO, HttpServletRequest request, Model model) {
+		if (memberVO == null || memberVO.getMemberDetailVO().getMem_photoname() == null) {
+			// 업로드한 프로필 사진이 없는 경우
+
+			logger.debug("<<기본 이미지 호출>> : " + memberVO);
+			// 기본 이미지 읽기
+			byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("/image_bundle/face.png"));
+			// model을 이용한 전달
+			model.addAttribute("imageFile", readbyte);
+			model.addAttribute("filename", "face.png");
+
+		} else { // 업로드한 프로필 사진이 있는 경우
+			model.addAttribute("imageFile", memberVO.getMemberDetailVO().getMem_photo());
+			model.addAttribute("filename", memberVO.getMemberDetailVO().getMem_photoname());
+		}
+
+	}
+	//프로필 사진 업데이트
+	@RequestMapping("/member/updateMyPhoto.do")
+	@ResponseBody
+	public Map<String,String> updateProfile(MemberVO memberVO,
+											HttpSession session){
+		/*
+		 * logger.debug("<<프로필 사진 업데이트>> : " +
+		 * memberVO.getMemberDetailVO().getMem_photo());
+		 */
+		Map<String,String> mapAjax = new HashMap<String,String>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			mapAjax.put("result", "logout");
+		}else {
+			memberVO.setMem_num(user.getMem_num());
+			memberService.updateProfile(memberVO);
+			
+			mapAjax.put("result", "success");
+		}
+		
+		return mapAjax;
+	}
+
 	
 	/* === 회원탈퇴 
 	=======================*/
@@ -365,6 +444,8 @@ public class MemberController {
 			return formDeleteCompany();
 		}
 	}
+	
+	
 	/* === 마이페이지 : 일반
 	=======================*/
 	//Ticket 내역
@@ -385,6 +466,8 @@ public class MemberController {
 		
 		return "memberMypageGoodList";
 	}
+	
+	
 	/* === 마이페이지 : 기업
 	=======================*/
 	//푸드목록
@@ -405,6 +488,7 @@ public class MemberController {
 		
 		return "companyMypageOrderList";
 	}
+	
 	
 	/* === 마이페이지 : 관리자
 	=======================*/

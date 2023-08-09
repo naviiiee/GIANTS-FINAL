@@ -12,8 +12,9 @@
 	</div>
 </div>
 <!-- 회원가입 시작 -->
-<div>
+<div class="page-main">
 	<form:form modelAttribute="memberVO" action="registerCompany.do" id="company_register">
+		<div class="register-box">
 		<ul>
 			<li>
 				<form:label path="companyDetailVO.comp_owner">사업자명</form:label>
@@ -25,15 +26,6 @@
 				<form:input path="companyDetailVO.comp_num" placeholder="숫자 10자" type="text"/>
 				<form:errors path="companyDetailVO.comp_num"/>
 			</li>
-			<%-- 
-			<li><form:label path="companyDetailVO.comp_num_1">사업자등록번호</form:label>
-				<form:input path="companyDetailVO.comp_num_1" placeholder="3자" type="text" />
-				<form:label path="companyDetailVO.comp_num_2">-</form:label>
-				<form:input path="companyDetailVO.comp_num_2" placeholder="2자" type="text" />
-				<form:label path="companyDetailVO.comp_num_3">-</form:label>
-				<form:input path="companyDetailVO.comp_num_3" placeholder="5자" type="text" />
-			</li>
-			 --%>
 			 <li>
 				<form:label path="companyDetailVO.comp_name">기업명</form:label>
 				<form:input path="companyDetailVO.comp_name"/>
@@ -64,12 +56,13 @@
 			<li>
 				<form:label path="companyDetailVO.comp_email">이메일</form:label>
 				<form:input path="companyDetailVO.comp_email"/>
+				<input type="button" id="#" value="이메일인증" class="default-btn">
 				<form:errors path="companyDetailVO.comp_email"/>
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_zipcode">우편번호</form:label>
 				<form:input path="companyDetailVO.comp_zipcode"/>
-				<input type="button" onclick="execDaumPostcode()" value="우편번호찾기">
+				<input type="button" onclick="execDaumPostcode()" value="우편번호찾기" class="default-btn">
 				<form:errors path="companyDetailVO.comp_zipcode"/>
 			</li>
 			<li>
@@ -83,19 +76,15 @@
 				<form:errors path="companyDetailVO.comp_address2"/>
 			</li>
 			<li>
-				<form:label path="companyDetailVO.comp_photo">프로필사진</form:label>
-				<form:input path="companyDetailVO.comp_photo"/>
-				<form:errors path="companyDetailVO.comp_photo"/>
-			</li>
-			<li>
 				<form:label path="companyDetailVO.comp_content">기업소개</form:label>
 				<form:input path="companyDetailVO.comp_content"/>
 				<form:errors path="companyDetailVO.comp_content"/>
 			</li>
 		</ul>
+		</div>
 		<div class="align-center">
-			<form:button>전송</form:button>
-			<input type="button" value="홈으로" 
+			<form:button class="bottom-btn">전송</form:button>
+			<input type="button" value="홈으로" class="bottom-btn"
 				   onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
 		</div>
 	</form:form>
@@ -199,3 +188,12 @@
 	    }
 	</script>
 <!-- 우편번호 검색 끝 -->
+<%-- 
+<li><form:label path="companyDetailVO.comp_num_1">사업자등록번호</form:label>
+	<form:input path="companyDetailVO.comp_num_1" placeholder="3자" type="text" />
+	<form:label path="companyDetailVO.comp_num_2">-</form:label>
+	<form:input path="companyDetailVO.comp_num_2" placeholder="2자" type="text" />
+	<form:label path="companyDetailVO.comp_num_3">-</form:label>
+	<form:input path="companyDetailVO.comp_num_3" placeholder="5자" type="text" />
+</li>
+ --%>

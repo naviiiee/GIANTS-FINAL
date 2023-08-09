@@ -15,7 +15,8 @@
 		<form:errors element="div" cssClass="error-color" />
 		<!-- 로그인폼 -->
 		<div class="login-form">
-			<p>로그인을 하시면 롯데자이언츠의 다양한 이벤트참여와 혜택을 누리실 수 있습니다.</p>
+			<img src="${pageContext.request.contextPath}/images/로그인로고.png">
+			<p>로그인을 하시면 롯데 자이언츠의<br>다양한 이벤트참여와 혜택을 누리실 수 있습니다.</p>
 			<div class="login">
 				<ul>
 					<li>
@@ -30,10 +31,10 @@
 			            <form:errors path="passwd" element="div" cssClass="error-color" />
 					</li>
 					<li>
-						<input type="checkbox" name="auto" id="auto">로그인상태유지
+						<input type="checkbox" name="auto" id="auto">로그인유지
 					</li>
 				</ul>
-				<div>
+				<div class="autologin">
 					<form:button class="login-btn">로그인</form:button>
 				</div>
 			</div>
@@ -44,7 +45,7 @@
 				<li>
 					아직 롯데자이언츠 회원이 아니신가요?
 					<input type="button" value="회원가입" class="login-sub-btn"
-							onclick="${pageContext.request.contextPath}/member/registerCommon.do">
+							onclick="location.href='${pageContext.request.contextPath}/member/registerCommon.do'">
 				</li>
 				<li><hr size="0.05" width="100%" noshade></li>
 				<li>

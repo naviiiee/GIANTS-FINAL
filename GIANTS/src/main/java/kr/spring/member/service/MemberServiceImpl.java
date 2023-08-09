@@ -75,7 +75,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void deleteCompany(Integer mem_num) {
 		memberMapper.deleteCompany(mem_num);
-		memberMapper.deleteCompany_detail(mem_num);
+		memberMapper.deleteCompany_detail(mem_num); 
 		
 	}
 

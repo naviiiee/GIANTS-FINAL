@@ -36,7 +36,7 @@ public interface MemberMapper {
 	
 	@Select("SELECT * FROM company_detail WHERE comp_num=#{comp_num}")
 	public CompanyDetailVO selectCompanyDetail(String comp_num);
-	
+	 
 	//회원정보수정
 	@Update("UPDATE MEMBER SET mem_nickname=#{mem_nickname} WHERE mem_num=#{mem_num}")
 	public void updateMember(MemberVO member);

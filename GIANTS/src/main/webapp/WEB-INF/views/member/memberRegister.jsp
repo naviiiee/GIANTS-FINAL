@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/confirmId.js"></script>
-<div class="mypage-top">
+<div class="mypage-top2">
 	<div class="mypage-top-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>일반회원가입</h2>
@@ -14,6 +14,7 @@
 <!-- 회원가입 시작 -->
 <div class="page-main">
 	<form:form modelAttribute="memberVO" action="registerMember.do" id="member_register" enctype="multipart/form-data">
+		<div class="register-box">
 		<ul>
 			<li>
 				<form:label path="memberDetailVO.mem_name">이름(한글)</form:label>
@@ -45,12 +46,13 @@
 			<li>
 				<form:label path="memberDetailVO.mem_email">이메일</form:label>
 				<form:input path="memberDetailVO.mem_email"/>
+				<input type="button" id="#" value="이메일인증" class="default-btn">
 				<form:errors path="memberDetailVO.mem_email" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="memberDetailVO.mem_zipcode">우편번호</form:label>
 				<form:input path="memberDetailVO.mem_zipcode"/>
-				<input type="button" onclick="execDaumPostcode()" value="우편번호찾기">
+				<input type="button" onclick="execDaumPostcode()" value="우편번호찾기" class="default-btn">
 				<form:errors path="memberDetailVO.mem_zipcode" cssClass="error-color"/>
 			</li>
 			<li>
@@ -68,9 +70,11 @@
 				<form:input path="mem_nickname"/>
 			</li>
 		</ul>
+		</div>
 		<div class="align-center">
-			<form:button>전송</form:button>
-			<input type="button" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
+			<form:button class="bottom-btn">전송</form:button>
+			<input type="button" value="홈으로" class="bottom-btn"
+			       onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
 		</div>
 	</form:form>
 </div>

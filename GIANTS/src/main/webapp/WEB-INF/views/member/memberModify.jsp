@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
-<div class="mypage-top">
+<div class="mypage-top2">
 	<div class="mypage-top-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>(일반)회원정보수정</h2>
@@ -11,56 +11,57 @@
 	</div>
 </div>
 <!-- 회원정보 폼 시작 -->
-<div class="page-main">
+<div class="mypage-form">
 	<form:form modelAttribute="memberVO" action="updateMember.do" id="member_modify">
 		<form:errors element="div" cssClass="error-color"/>
-		<ul>
-			<li>
-				<form:label path="memberDetailVO.mem_name">이름(한글)</form:label>
-				<form:input path="memberDetailVO.mem_name"/>
-				<form:errors path="memberDetailVO.mem_name"/>
-			</li>
-			<li>
-				<form:label path="memberDetailVO.mem_public">생년월일</form:label>
-				<form:input path="memberDetailVO.mem_public" placeholder="숫자 6자"/>
-				<form:errors path="memberDetailVO.mem_public"/>
-			</li>
-			<li>
-				<form:label path="memberDetailVO.mem_phone">연락처</form:label>
-				<form:input path="memberDetailVO.mem_phone" placeholder="숫자 11자"/>
-				<form:errors path="memberDetailVO.mem_phone"/>
-			</li>
-			<li>
-				<form:label path="memberDetailVO.mem_email">이메일</form:label>
-				<form:input path="memberDetailVO.mem_email"/>
-				<form:errors path="memberDetailVO.mem_email"/>
-			</li>
-			<li>
-				<form:label path="memberDetailVO.mem_zipcode">우편번호</form:label>
-				<form:input path="memberDetailVO.mem_zipcode"/>
-				<input type="button" onclick="execDaumPostcode()" value="우편번호찾기">
-				<form:errors path="memberDetailVO.mem_zipcode"/>
-			</li>
-			<li>
-				<form:label path="memberDetailVO.mem_address1">주소</form:label>
-				<form:input path="memberDetailVO.mem_address1"/>
-				<form:errors path="memberDetailVO.mem_address1"/>
-			</li>
-			<li>
-				<form:label path="memberDetailVO.mem_address2">상세주소</form:label>
-				<form:input path="memberDetailVO.mem_address2"/>
-				<form:errors path="memberDetailVO.mem_address2"/>
-			</li>
-			<li>
-				<form:label path="mem_nickname">닉네임</form:label>
-				<form:input path="mem_nickname"/>
-			</li>
-		</ul>
-		<div class="align-center">
-			<form:button class="default-btn">수정</form:button>
-			<input type="button" value="홈으로" class="default-btn"
-				   onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
-		</div>
+			<ul>
+				<li>
+					<form:label path="memberDetailVO.mem_name">이름(한글)</form:label>
+					<form:input path="memberDetailVO.mem_name"/>
+					<form:errors path="memberDetailVO.mem_name"/>
+				</li>
+				<li>
+					<form:label path="memberDetailVO.mem_public">생년월일</form:label>
+					<form:input path="memberDetailVO.mem_public" placeholder="숫자 6자"/>
+					<form:errors path="memberDetailVO.mem_public"/>
+				</li>
+				<li>
+					<form:label path="memberDetailVO.mem_phone">연락처</form:label>
+					<form:input path="memberDetailVO.mem_phone" placeholder="숫자 11자"/>
+					<form:errors path="memberDetailVO.mem_phone"/>
+				</li>
+				<li>
+					<form:label path="memberDetailVO.mem_email">이메일</form:label>
+					<form:input path="memberDetailVO.mem_email"/>
+					<input type="button" id="#" value="이메일인증" class="default-btn">
+					<form:errors path="memberDetailVO.mem_email"/>
+				</li>
+				<li>
+					<form:label path="memberDetailVO.mem_zipcode">우편번호</form:label>
+					<form:input path="memberDetailVO.mem_zipcode"/>
+					<input type="button" onclick="execDaumPostcode()" value="우편번호찾기" class="default-btn">
+					<form:errors path="memberDetailVO.mem_zipcode"/>
+				</li>
+				<li>
+					<form:label path="memberDetailVO.mem_address1">주소</form:label>
+					<form:input path="memberDetailVO.mem_address1"/>
+					<form:errors path="memberDetailVO.mem_address1"/>
+				</li>
+				<li>
+					<form:label path="memberDetailVO.mem_address2">상세주소</form:label>
+					<form:input path="memberDetailVO.mem_address2"/>
+					<form:errors path="memberDetailVO.mem_address2"/>
+				</li>
+				<li>
+					<form:label path="mem_nickname">닉네임</form:label>
+					<form:input path="mem_nickname"/>
+				</li>
+			</ul>
+		<div class="mypage-bottom">
+					<form:button class="bottom-btn">수정</form:button>
+					<input type="button" value="홈으로" class="bottom-btn"
+						   onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
+		</div>	
 	</form:form>
 </div>
 <!-- 회원정보 폼 끝 -->
