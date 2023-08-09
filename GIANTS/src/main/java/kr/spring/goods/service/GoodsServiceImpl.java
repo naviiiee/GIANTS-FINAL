@@ -13,7 +13,9 @@ import kr.spring.goods.vo.GoodsFavVO;
 import kr.spring.goods.vo.GoodsOptionVO;
 import kr.spring.goods.vo.GoodsReviewVO;
 import kr.spring.goods.vo.GoodsVO;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @Transactional
 public class GoodsServiceImpl implements GoodsService{
@@ -63,9 +65,13 @@ public class GoodsServiceImpl implements GoodsService{
 		//상품 정보 업데이트
 		goodsMapper.updateGoods(goods);
 		
+		log.debug(">>" + goods);
+		
 		for(int i=0; i < (goods.getGoods_stocks()).length; i++) {
 			String goods_size = goods.getGoods_sizes()[i];
+			log.debug("<<goods.getGoods_sizes()[i]>> : " + goods.getGoods_sizes()[i]);
 			int goods_stock = goods.getGoods_stocks()[i];
+			log.debug("<<goods.getGoods_stocks()[i]>> : " + goods.getGoods_stocks()[i]);
 			
 			goodsMapper.updateOption(goods.getGoods_num(), goods_size, goods_stock);
 		}
@@ -73,7 +79,12 @@ public class GoodsServiceImpl implements GoodsService{
 	
 	@Override
 	public void deleteGoods(Integer goods_num) {
-		// TODO Auto-generated method stub
+		//장바구니에서 삭제
+		//찜하기 목록에서 삭제
+		//굿즈 옵션 삭제
+		goodsMapper.deleteOption(goods_num);
+		//굿즈목록에서 삭제
+		goodsMapper.deleteGoods(goods_num);
 		
 	}
 
@@ -98,21 +109,18 @@ public class GoodsServiceImpl implements GoodsService{
 	}
 
 	@Override
-	public GoodsReviewVO selectGoodsReview(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<GoodsReviewVO> selectGoodsReviewList(Map<String, Object> map) {
+		return goodsMapper.selectGoodsReviewList(map);
 	}
 
 	@Override
-	public int selectGreviewRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int selectGreviewRowCount(Integer goods_num) {
+		return goodsMapper.selectGreviewRowCount(goods_num);
 	}
 
 	@Override
 	public void insertGoodReview(GoodsReviewVO review) {
-		// TODO Auto-generated method stub
-		
+		goodsMapper.insertGoodReview(review);
 	}
 
 	@Override

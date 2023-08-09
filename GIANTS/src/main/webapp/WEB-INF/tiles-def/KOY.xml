@@ -31,6 +31,17 @@
 		<put-attribute name="body" value="/WEB-INF/views/goods/goodsModify.jsp"/>
 	</definition>
 	
+	<!-- 굿즈리뷰 -->
+	<definition name="reviewWrite" extends="main">
+		<put-attribute name="title" value="굿즈리뷰작성"/>
+		<put-attribute name="body" value="/WEB-INF/views/goods/reviewWrite.jsp"/>
+	</definition>
+	
+	
+	
+	
+	
+	
 	<!-- 구단뉴스 -->
 	<definition name="newsList" extends="main">
 		<put-attribute name="title" value="자이언츠 뉴스 목록"/>

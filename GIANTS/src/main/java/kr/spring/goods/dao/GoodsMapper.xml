@@ -144,4 +144,54 @@
 		WHERE goods_num=#{goods_num} AND goods_size=#{goods_size}
 	</update>
 	
+	<!-- ======리뷰====== -->
+	<!-- 리뷰 등록 -->
+	<insert id="insertGoodReview" parameterType="goodsReviewVO">
+		INSERT INTO 
+			goods_review(
+				review_num,
+				mem_num,
+				goods_num,
+				review_title,
+				review_score,
+				review_content,
+				review_photo,
+				review_photoname)
+		VALUES(
+			goods_review_seq.nextval,
+			#{mem_num},
+			#{goods_num},
+			#{review_title},
+			#{review_score},
+			#{review_content},
+			#{review_photo},
+			#{review_photoname})
+	</insert>
+	
+	<!-- 리뷰 레코드 수 -->
+	<select id="selectGreviewRowCount" parameterType="integer" resultType="integer">
+		SELECT 
+			count(*) 
+		FROM 
+			goods_review
+		WHERE goods_num=#{goods_num}
+	</select>
+	
+	<!-- 리뷰 목록 -->
+	<select id="selectGoodsReviewList" parameterType="map" resultType="goodsReviewVO">
+		SELECT 
+			*
+		FROM(SELECT
+				a.*,
+				rownum rnum
+			 FROM(SELECT
+			 		*
+			 	  FROM goods_review g JOIN member m
+			 	  ON g.mem_num=m.mem_num
+			 	  ORDER BY goods_regdate DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
 </mapper>

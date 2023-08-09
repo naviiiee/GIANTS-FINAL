@@ -41,9 +41,9 @@ public interface GoodsService {
 	
 	//=====상품 후기=====// 
 	//전체|검색 상품 후기 목록
-	public GoodsReviewVO selectGoodsReview(Map<String, Object> map);
+	public List<GoodsReviewVO> selectGoodsReviewList(Map<String, Object> map);
 	//전체|검색 상품 후기 레코드 수
-	public int selectGreviewRowCount(Map<String, Object> map);
+	public int selectGreviewRowCount(Integer goods_num);
 	//상품 후기 등록
 	public void insertGoodReview(GoodsReviewVO review);
 	//상품 후기 상세

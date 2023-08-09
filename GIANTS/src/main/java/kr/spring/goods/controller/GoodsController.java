@@ -1,6 +1,5 @@
 package kr.spring.goods.controller;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.goods.service.GoodsService;
 import kr.spring.goods.vo.GoodsFavVO;
 import kr.spring.goods.vo.GoodsOptionVO;
+import kr.spring.goods.vo.GoodsReviewVO;
 import kr.spring.goods.vo.GoodsVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
@@ -42,6 +42,11 @@ public class GoodsController {
 	@ModelAttribute
 	public GoodsVO initCommand() {
 		return new GoodsVO();
+	}
+	
+	@ModelAttribute
+	public GoodsReviewVO initCommand2() {
+		return new GoodsReviewVO();
 	}
 	
 	/*==========================
@@ -183,10 +188,25 @@ public class GoodsController {
 		//상품명에 태그를 허용하지 않음
 		goods.setGoods_name(StringUtil.useNoHtml(goods.getGoods_name()));
 		
+		//===== 리뷰 목록 =====//
+		Map<String , Object> map = new HashMap<String, Object>();
+		
+		int count = goodsService.selectGreviewRowCount(goods_num);
+		PagingUtil page = new PagingUtil(1, count, 5, 5, "reviewList.do");
+		List<GoodsReviewVO> review = null;
+		
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			review = goodsService.selectGoodsReviewList(map);
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("goodsView");
 		mav.addObject("goods", goods);
 		mav.addObject("option", list);
+		mav.addObject("review", review);
 		
 		return mav;
 	}
@@ -235,6 +255,24 @@ public class GoodsController {
 		
 		model.addAttribute("message", "상품 수정 완료!");
 		model.addAttribute("url", request.getContextPath() + "/goods/goodsDetail.do?goods_num=" + goodsVO.getGoods_num());
+		
+		return "common/resultView";
+	}
+	
+	/*==========================
+	 * [관리자] 굿즈 삭제
+	 *==========================*/
+	@RequestMapping("/goods/goodsDelete.do")
+	public String submitDelete(@RequestParam int goods_num, HttpServletRequest request ,Model model) {
+		
+		log.debug("<<굿즈 삭제 - goods_num>> : " + goods_num);
+		
+		//굿즈 삭제
+		goodsService.deleteGoods(goods_num);
+		
+		
+		model.addAttribute("message", "상품 삭제 완료!");
+		model.addAttribute("url", request.getContextPath() + "/goods/admin_goodsList.do");
 		
 		return "common/resultView";
 	}
@@ -298,6 +336,63 @@ public class GoodsController {
 		}
 		return mapJson;
 	}
+	
+	/*==========================
+	 * 리뷰 등록
+	 *==========================*/	
+	//등록 폼 호출
+	@GetMapping("/goods/writeReview.do")
+	public String formReview(HttpSession session, Model model) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", 1);
+		map.put("end", 50);
+		map.put("status", 0);
+		
+		List<GoodsVO> goods_list = goodsService.selectGoodsList(map);
+		model.addAttribute("goods_list", goods_list);
+		log.debug("<<goods_list>> : " +goods_list);
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		model.addAttribute("memberVO", user);
+		
+		log.debug("<<user>> : " +user);
+		
+		return "reviewWrite";
+	}
+	
+	//전송된 데이터 처리
+	@PostMapping("/goods/writeReview.do")
+	public String submitReview(@Valid GoodsReviewVO reviewVO, BindingResult result, 
+				HttpServletRequest request, HttpSession session, Model model) {
+		log.debug("<<리뷰등록>> : " + reviewVO);
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			return "reviewWrite";
+		}
+		
+		//회원번호 셋팅
+		reviewVO.setMem_num(((MemberVO)session.getAttribute("user")).getMem_num());
+		
+		//리뷰 등록
+		goodsService.insertGoodReview(reviewVO);
+		
+		model.addAttribute("message", "리뷰등록이 완료되었습니다");
+		model.addAttribute("url", request.getContextPath() + "/goods/goodsList.do");
+		
+		return "common/resultView";
+	}
+	
+	/*==========================
+	 * 리뷰 목록
+	 *==========================*/	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

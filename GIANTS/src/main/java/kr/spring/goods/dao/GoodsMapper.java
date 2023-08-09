@@ -45,7 +45,11 @@ public interface GoodsMapper {
 							@Param(value="goods_size") String goods_size, 
 							@Param(value="goods_stock") Integer goods_stock);
 	//상품 삭제
+	@Delete("DELETE FROM goods WHERE goods_num=#{goods_num}")
 	public void deleteGoods(Integer goods_num);
+	//상품 옵션 삭제
+	@Delete("DELETE FROM goods_option WHERE goods_num=#{goods_num}")
+	public void deleteOption(Integer goods_num);
 	
 	//=====상품 찜=====//
 	//상품 찜 정보 읽어오기
@@ -62,12 +66,12 @@ public interface GoodsMapper {
 	public void deleteGoodsFav(Integer fav_num);
 	//상품삭제시 상품 찜 취소
 	public void deleteGoodsFavByGoodsNum(Integer goods_num);
-	/*
+	
 	//=====상품 후기=====//
 	//전체|검색 상품 후기 목록
-	public GoodsReviewVO selectGoodsReview(Map<String, Object> map);
+	public List<GoodsReviewVO> selectGoodsReviewList(Map<String, Object> map);
 	//전체|검색 상품 후기 레코드 수
-	public int selectGreviewRowCount(Map<String, Object> map);
+	public int selectGreviewRowCount(Integer goods_num);
 	//상품 후기 등록
 	public void insertGoodReview(GoodsReviewVO review);
 	//상품 후기 상세
@@ -76,5 +80,5 @@ public interface GoodsMapper {
 	public void updateGoodsReview(GoodsReviewVO review);
 	//상품 후기 삭제
 	public void deleteGoodsReview(Integer review_num);
-	*/
+	
 }
