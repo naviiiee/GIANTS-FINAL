@@ -21,7 +21,7 @@ $(function(){
 		$.ajax({
 			url:'writeMark.do',
 			type:'post',
-			data:{board_num:$('#output_mark').attr('data-num')},
+			data:{trade_num:$('#output_mark').attr('data-num')},
 			dataType:'json', 
 			success:function(param){
 				if(param.result == 'logout'){

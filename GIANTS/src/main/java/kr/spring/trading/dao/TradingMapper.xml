@@ -11,6 +11,7 @@
 		 trade_photo,
 		 trade_photoname, 
 		 trade_ip,
+		 trade_status,
 		 mem_num)
 		VALUES(
 		 trading_seq.nextval,
@@ -20,6 +21,7 @@
 		 #{trade_photo},
 		 #{trade_photoname},
 		 #{trade_ip},
+		 #{trade_status},
 		 #{mem_num}
 		)
 	</insert>

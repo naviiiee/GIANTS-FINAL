@@ -59,6 +59,11 @@
 									 });			
 					</script>
 				</li>
+				<li>
+					<label>거래 상태</label>
+					<form:radiobutton path="trade_status" value="0" id="status1"/>판매중
+					<form:radiobutton path="trade_status" value="1" id="status2"/>거래 완료
+				</li>
 			</ul>
 			<br>
 			<div class="align-center">

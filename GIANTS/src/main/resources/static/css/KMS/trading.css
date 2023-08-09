@@ -82,6 +82,10 @@ table.striped-table td{
 .d-flex {
     margin-top: 20px;
 }
+.list-thumbnail{
+	width: 80px; 
+	height: 80px;
+}
 
 /* --- 중고거래 게시판 글 상세 --- */
 ul.detail-info{

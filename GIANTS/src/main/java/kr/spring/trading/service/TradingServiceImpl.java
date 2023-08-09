@@ -66,8 +66,7 @@ public class TradingServiceImpl implements TradingService{
 
 	@Override
 	public int selectMarkCount(Integer trade_num) {
-		// TODO Auto-generated method stub
-		return 0;
+		return tradingMapper.selectMarkCount(trade_num);
 	}
 
 	@Override

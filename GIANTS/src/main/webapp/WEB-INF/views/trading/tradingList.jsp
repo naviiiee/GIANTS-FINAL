@@ -69,6 +69,7 @@
 			<th>제목</th>
 			<th>작성자</th>
 			<th>가격</th>
+			<th>판매 상태</th>
 			<th>작성일</th>
 			<th>조회수</th>
 		</tr>
@@ -76,7 +77,7 @@
 		<tr>
 			<td class="align-center" width="400">
 				<a href="tradingDetail.do?trade_num=${trading.trade_num}">
-				<img src="${pageContext.request.contextPath}/trading/imageView.do?trade_num=${trading.trade_num}" width="150" class="list-thumbnail">
+				<img src="${pageContext.request.contextPath}/trading/imageView.do?trade_num=${trading.trade_num}" class="list-thumbnail">
 				</a>			
 				<a href="tradingDetail.do?trade_num=${trading.trade_num}">${trading.trade_title}</a>
 			</td>
@@ -85,6 +86,10 @@
 				<c:if test="${!empty trading.mem_nickname}">${trading.mem_nickname}</c:if>
 			</td>
 			<td class="align-center">${trading.trade_price}원</td>
+			<td class="align-center">
+				<c:if test="${trading.trade_status == 0}">판매중</c:if>
+				<c:if test="${trading.trade_status == 1}">거래 완료</c:if>
+			</td>
 			<td class="align-center">${trading.trade_date}</td>
 			<td class="align-center">${trading.trade_hit}</td>
 		</tr>
