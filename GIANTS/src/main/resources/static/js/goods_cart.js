@@ -53,9 +53,6 @@ $(function(){
 			$('.goods-price').text(function(){
 				return Number($(this).attr('data-price')).toLocaleString()+'원';
 			});
-			$('.delivery-fee').text(function(){
-				return Number($(this).attr('data-fee')).toLocaleString()+'원';
-			});
 			$('.sub-total').show();
 			//모두 선택하면 총구매 금액을 원래 총구매 금액으로 환원
 			$('.all-total').attr('data-alltotal',cart_sum);
@@ -68,7 +65,6 @@ $(function(){
 			$('.order-quantity').before('<span class="goods-setting">0</span>');
 			$('.order-quantity').hide();
 			$('.goods-price').text('0원');
-			$('.delivery-fee').text('0원');
 			$('.sub-total').before('<span class="goods-setting">0원</span>');
 			$('.sub-total').hide();
 			$('.all-total').text('0원');
@@ -96,15 +92,12 @@ $(function(){
 			//체크하면 수량,가격,배송비,개별 상품 합계가 정확하게 표시
 			$(this).parents('tr').find('.goods-setting').remove();
 			$(this).parents('tr').find('.order-quantity').show();
-			$(this).parents('tr').find('.goods-price').text(Number($(this).parents('tr').find('.goods-price').attr('data-price')).toLocaleString()+'원');
-			$(this).parents('tr').find('.delivery-fee').text(Number($(this).parents('tr').find('.delivery-fee').attr('data-fee')).toLocaleString()+'원');
 			$(this).parents('tr').find('.sub-total').show();
 		}else{
 			//체크를 해제하면 수량,가격,배송비,개별 상품 합계가 모두 0으로 표시
 			$(this).parents('tr').find('.order-quantity').before('<span class="goods-setting">0</span');
 			$(this).parents('tr').find('.order-quantity').hide();
 			$(this).parents('tr').find('.goods-price').text('0원');
-			$(this).parents('tr').find('.delivery-fee').text('0원');
 			$(this).parents('tr').find('.sub-total').before('<span class="goods-setting">0원</span>');
 			$(this).parents('tr').find('.sub-total').hide();
 		}
@@ -161,7 +154,7 @@ $(function(){
 		
 		//서버와 통신
 		$.ajax({
-			url:'modifyCart.do',
+			url:'../cart/modifyCart.do',
 			type:'post',
 			data:{cart_num:$(this).attr('data-cartnum'),goods_num:$(this).attr('data-goodsnum'),order_quantity:input_quantity.val()},
 			dataType:'json',
@@ -194,7 +187,7 @@ $(function(){
 	$('.cart-del').on('click',function(){
 		//서버와 통신
 		$.ajax({
-			url:'deleteCart.do',
+			url:'../cart/deleteCart.do',
 			type:'post',
 			data:{cart_num:$(this).attr('data-cartnum')},
 			dataType:'json',

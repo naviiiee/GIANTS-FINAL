@@ -5,7 +5,7 @@
 <!-- 상품 상세 페이지 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goods.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods.fav.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_order.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_cart.js"></script>
 <div class="page-main">
 	<div class="content-main">
 		<c:if test="${!empty user && user.mem_auth == 9}">
@@ -27,6 +27,7 @@
 				<input type="hidden" name="goods_num" value="${goods.goods_num}" id="goods_num">
 				<input type="hidden" name="goods_dprice" value="${goods.goods_price}" id="goods_price">
 				
+				
 				<%--  <input type="hidden" name="goods_stock" id="goods_stock" value="${goods.goodsOptionVO.goods_stock }"> --%>
 				<%-- <input type="hidden" name="goods_stock" value="${goods.goods_stock}" id="goods_stock"> 수량--%>
 				<ul> <%-- <c:if test="${goods.goods_stock > 0}"> 수량 --%>
@@ -36,6 +37,7 @@
 						상태 :  
 						<c:if test="${goods.goods_status == 1}">판매중</c:if>
 						<c:if test="${goods.goods_status == 2}">판매중지</c:if>
+						<input type="hidden" name="goods_status" value="${goods.goods_status}" id="goods_status">
 					</li>
 					<li>
 						카테고리 : 
@@ -63,14 +65,15 @@
 						        <c:forEach var="option" items="${option}">
 						            <option value="${option.goods_size}" data-stock="${option.goods_stock}">
 						                ${option.goods_size} [재고 : ${option.goods_stock}]
+						                
 						            </option>
-						        
-						        
+						            <input type="hidden" name="goods_size" id="goods_size" value="${option.goods_size }">
+						    <input type="hidden" name="goods_stock" id="goods_stock" value="${option.goods_stock}">
+						        </c:forEach>
 						    </select>
-						    <input type="hidden" name="opt_num" id="opt_num" value="${option.opt_num }">
-						    <input type="hidden" name="goods_size" id="goods_size" value="${option.goods_size }">
-						    </c:forEach>
+						    
 						</li>
+
 
 						<script>
 						    // 옵션 선택이 변경되었을 때 호출되는 함수

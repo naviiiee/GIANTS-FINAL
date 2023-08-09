@@ -23,7 +23,6 @@ public class GcartServiceImpl implements GcartService{
 
 	@Override
 	public int getTotalByMem_num(Map<String, Object> map) {
-		
 		return cartMapper.getTotalByMem_num(map);
 	}
 
@@ -39,26 +38,24 @@ public class GcartServiceImpl implements GcartService{
 
 	@Override
 	public void updateCart(GcartVO cart) {
-		// TODO Auto-generated method stub
+		cartMapper.updateCart(cart);
 		
 	}
 
 	@Override
 	public void updateCartByItem_num(GcartVO cart) {
-		// TODO Auto-generated method stub
-		
+		cartMapper.updateCartByItem_num(cart);
 	}
 
 	@Override
 	public void deleteCart(int cart_num) {
-		// TODO Auto-generated method stub
+		cartMapper.deleteCart(cart_num);
 		
 	}
 
 	@Override
 	public int getStockByoption(int goods_num, int opt_num) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cartMapper.getStockByoption(goods_num, opt_num);
 	}
 	
 

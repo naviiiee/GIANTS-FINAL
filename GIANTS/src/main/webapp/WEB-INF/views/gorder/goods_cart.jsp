@@ -81,11 +81,14 @@ input[type="submit"]:hover, input[type="button"]:hover {
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_order.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_cart.js"></script>
 <!-- all_total, list(g_order_detail) - 사이즈 포함 -->
 <!-- 장바구니 시작 -->
 <div class="page-main">
 	<h2>장바구니</h2>
+	<br>
+	<hr size="1">
+	<br>
 	<c:if test="${empty list}">
 	<div class="result-display">
 		장바구니에 담은 상품이 없습니다.
@@ -115,8 +118,8 @@ input[type="submit"]:hover, input[type="button"]:hover {
 					</td>
 					<!-- 2. 사진  -->
 					<td>
-						<a href="${pageContext.request.contextPath}/goods/goodsView.do?goods_num=${cart.goods_num}">
-							<img src="${pageContext.request.contextPath}/goods/imageView.do?goods_num=${cart.goodsVO.goods_num}" width="80" height="80">
+						<a href="${pageContext.request.contextPath}/goods/goodsDetail.do?goods_num=${cart.goods_num}">
+							<img src="${pageContext.request.contextPath}/goods/imageView.do?goods_num=${cart.goods_num}" width="80" height="80">
 						</a>
 					</td>
 					<!-- 3. 상품정보 -->
@@ -132,11 +135,12 @@ input[type="submit"]:hover, input[type="button"]:hover {
 						<span class="goods-price" data-price="${cart.goodsVO.goods_dprice}"><fmt:formatNumber value="${cart.goodsVO.goods_dprice}"/>원</span>
 					</td>
 					
-					<!-- 5. 수량 -->
+					<!-- 5. 수량 및 상태 체크 -->
 					<td class = "align-center">
-						<c:if test="${cart.goodsVO.goods_status==1 or cart.goodsOptionVO.goods_stock < cart.order_quantity}">[판매중지]</c:if>
-						<c:if test="${cart.goodsVO.goods_status==2 and cart.goodsOptionVO.goods_stock >= cart.order_quantity}">
-							<input type="number" name="order_quantity" min="1" max="${option.goods_stock}" autocomplete = "off" value = "${cart.order_quantity}">
+						<c:if test="${cart.goodsVO.goods_status==2 or cart.goodsOptionVO.goods_stock < cart.order_quantity}">[판매중지]</c:if>
+						<c:if test="${cart.goodsVO.goods_status==1 and cart.goodsOptionVO.goods_stock >= cart.order_quantity}">
+							<input type="number" name="order_quantity" min="1" max="${cart.goodsOptionVO.goods_stock}" autocomplete = "off" value = "${cart.order_quantity}">
+							<br>
 							<br>
 							<input type = "button" value = "변경" class = "cart-modify" data-cartnum = "${cart.cart_num}" data-goodsnum = "${cart.goods_num}">
 						</c:if>
@@ -152,16 +156,13 @@ input[type="submit"]:hover, input[type="button"]:hover {
 					</td>					
 					<!-- 옵션 처리 -->
 					<c:if test="${cart.goods_size != '옵션없음'}">
-							<tr>
-								<td colspan="6">
-									<img src="${pageContext.request.contextPath}/images/btn_order_option.gif" alt="옵션" title="옵션">
-									 사이즈 : ${cart.goods_size}
-								</td>	
-							</tr>
-							</c:if>
-					
-					
-					
+						<tr>
+							<td colspan="6">
+								<img src="${pageContext.request.contextPath}/images/btn_order_option.gif" alt="옵션" title="옵션">
+								 사이즈 : ${cart.goods_size}
+							</td>	
+						</tr>
+					</c:if>
 				</tr>
 			</c:forEach>
 				<tr>

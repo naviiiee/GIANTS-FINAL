@@ -26,7 +26,7 @@ public interface GcartMapper {
 	@Select("SELECT * FROM g_cart WHERE goods_num=#{goods_num} AND mem_num=#{mem_num}")
 	public GcartVO getCart(GcartVO cart);
 
-	// 장바구니 수정(개별 상품 수량 설정)
+	//장바구니 수정 (개별 상품 수량 수정)
 	@Update("UPDATE g_cart SET order_quantity=#{order_quantity} WHERE cart_num=#{cart_num}")
 	public void updateCart(GcartVO cart);
 
