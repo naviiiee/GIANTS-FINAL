@@ -33,9 +33,9 @@
 				<label for="upload">상품 썸네일 사진</label>
 				<input type="file" id="upload" name="upload" accept="image/gif,image/png,image/jpeg">
 				<c:if test="${!empty goodsVO.goods_photo}">
-					<div id="file_detail">
-						(${goodsVO.goods_photoname})파일이 등록되어 있습니다.
-					</div>
+				<div id="file_detail">
+				<span>(${goodsVO.goods_photoname})파일이 등록되어 있습니다.</span>
+				</div>
 				</c:if>
 				<form:errors path="goods_photo" cssColor="error-color"/>
 			</li>
@@ -54,17 +54,25 @@
 					<form:option value="4">기타</form:option>
 				</form:select>
 			</li>
+			<li>
+				<form:label path="goods_status">상태</form:label>
+				<form:radiobutton path="goods_status" value="1"/><span class="radio-status">판매중</span>
+				<form:radiobutton path="goods_status" value="2"/><span class="radio-status">판매중지</span>
+				<form:errors path="goods_content" cssClass="error-color"/>
+			</li>
 			<li class="hasSize" style="display:none;">
 				<c:forEach var="goodsOptionVO" items="${list}" varStatus="status">
 				<div>
-					<label for="goods_stocks${status.count}">${goodsOptionVO.goods_size}</label>
-					<input name="goods_stocks" id="goods_stocks${status.count}" type="number" value="${goodsOptionVO.goods_stock}" placeholder="재고수량 입력"/>
+					<input type="hidden" name="goods_sizes" value="${goodsOptionVO.goods_size}">
+					<label for="goods_stock${status.count}">${goodsOptionVO.goods_size}</label>
+					<input id="goods_stock${status.count}" name="goods_stocks" type="number" value="${goodsOptionVO.goods_stock}" placeholder="재고수량 입력"/>
 				</div>
 				</c:forEach>
 			</li>
 			<li class="hasNoSize" style="display:none;">
 				<c:forEach var="goodsOptionVO" items="${list}" varStatus="status">
 				<div>
+					<input type="hidden" name="goods_sizes" value="${goodsOptionVO.goods_size}">
 					<label for="goods_stocks7">${goodsOptionVO.goods_size}</label>
 					<input name="goods_stocks" id="goods_stocks7" type="number" value="${goodsOptionVO.goods_stock}" placeholder="재고수량 입력"/>
 				</div>
@@ -107,13 +115,6 @@
 								 });
 				</script>
 			</li>
-			<li>
-				<form:label path="goods_status">상태</form:label>
-				<form:radiobutton path="goods_status" value="1"/>판매중
-				<form:radiobutton path="goods_status" value="2"/>판매중지
-				<form:errors path="goods_content" cssClass="error-color"/>
-			</li>
-			
 		</ul>
 		<div class="align-center">
 			<form:button class="default-btn">수정</form:button>

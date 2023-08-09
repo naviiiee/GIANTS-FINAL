@@ -24,7 +24,7 @@
 	</div>
 	<form action="admin_goodsList.do" id="search_form" method="get">
 		<div class="align-right">
-			<input type="button" value="상품등록" onclick="location.href='registerGoods.do'">
+			<input type="button" value="상품등록" onclick="location.href='registerGoods.do'" id="reg_btn">
 		</div>
 		<ul class="search">
 			<li>
@@ -51,14 +51,23 @@
 		<table>
 			<tr>
 				<th style="width:5%;">번호</th>
+				<th style="width:8%;">카테고리</th>
 				<th>상품명</th>
 				<th style="width:12%;">가격</th>
 				<th style="width:10%;">등록일</th>
 				<th style="width:7%;">상태</th>
+				<th style="width:7%;">수정</th>
+				<th style="width:7%;">삭제</th>
 			</tr>
 			<c:forEach var="goods" items="${list}">
 			<tr>
 				<td class="align-center">${goods.goods_num}</td>
+				<td>
+					<c:if test="${goods.goods_category == 1}">유니폼</c:if>
+					<c:if test="${goods.goods_category == 2}">모자</c:if>
+					<c:if test="${goods.goods_category == 3}">응원도구</c:if>
+					<c:if test="${goods.goods_category == 4}">기타</c:if>
+				</td>
 				<td>
 					<a href="goodsUpdate.do?goods_num=${goods.goods_num}">${goods.goods_name}</a>
 				</td>
@@ -68,7 +77,13 @@
 				<td>${goods.goods_regdate}</td>
 				<td>
 					<c:if test="${goods.goods_status == 1}">판매중</c:if>
-					<c:if test="${goods.goods_status == 2}">판매중지</c:if>
+					<c:if test="${goods.goods_status == 2}"><b style="color:#0000FF;">판매중지</b></c:if>
+				</td>
+				<td class="list-btn">
+					<input type="button" value="수정" onclick="location.href='goodsUpdate.do?goods_num=${goods.goods_num}'">
+				</td>
+				<td class="list-btn">
+					<input type="button" value="삭제" onclick="location.href='goodsDelete.do?goods_num=${goods.goods_num}'">
 				</td>
 			</tr>
 			</c:forEach>

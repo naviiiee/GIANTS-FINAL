@@ -25,14 +25,22 @@
 		<h2>상품목록</h2>
 		<hr size="0.05" width="100%" noshade>
 	</div>
+	<div class="cate-filter">
+		<input type="button" value="전체">
+		<input type="button" value="유니폼"> 
+		<input type="button" value="모자"> 
+		<input type="button" value="응원도구"> 
+		<input type="button" value="기타"> 
+	</div>
+	<hr size="1" width="100%" noshade>
 	<c:if test="${!empty user && user.mem_auth == 9}">
-	<div class="align-right">
+	<div class="align-right list-btns">
 		<input type="button" value="관리자-상품목록" onclick="location.href='admin_goodsList.do'" id="admin_btn">
 		<input type="button" value="전체목록" onclick="location.href='goodsList.do'">
 	</div>
 	</c:if>
 	<form action="goodsList.do" id="search_form" method="get">
-		<ul>
+		<ul class="search">
 			<li>
 				<select name="keyfield" id="keyfield">
 					<option>==선택==</option>

@@ -48,6 +48,12 @@
 					<form:option value="4">기타</form:option>
 				</form:select>
 			</li>
+			<li>
+				<form:label path="goods_status">상태</form:label>
+				<form:radiobutton path="goods_status" value="1"/><span class="radio-status">판매중</span>
+				<form:radiobutton path="goods_status" value="2"/><span class="radio-status">판매중지</span>
+				<form:errors path="goods_content" cssClass="error-color"/>
+			</li>
 			<li class="hasSize" style="display:none;">
 				<div>
 					<form:hidden path="goods_sizes" value="85"/>
@@ -93,20 +99,20 @@
 			</li>
 			<li>
 				<form:label path="goods_price">상품가격</form:label>
-				<form:input path="goods_price" type="number"/>
+				<form:input path="goods_price" type="number"/> 원
 				<form:errors path="goods_price" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="goods_disc">할인율</form:label>
-				<form:input path="goods_disc" type="number"/>
+				<form:input path="goods_disc" type="number"/> %
 				<form:errors path="goods_disc" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="goods_dprice">판매가격</form:label>
-				<form:input path="goods_dprice" type="number" readonly="true"/>
+				<form:input path="goods_dprice" type="number" readonly="true"/> 원
 				<form:errors path="goods_dprice" cssClass="error-color"/>
 			</li>
-			<li>상품설명</li>
+			<li><label>상품설명</label></li>
 			<li>
 				<form:textarea path="goods_content"/>
 				<form:errors path="goods_content" cssClass="error-color"/>
@@ -128,13 +134,6 @@
 								 });
 				</script>
 			</li>
-			<li>
-				<form:label path="goods_status">상태</form:label>
-				<form:radiobutton path="goods_status" value="1"/>판매중
-				<form:radiobutton path="goods_status" value="2"/>판매중지
-				<form:errors path="goods_content" cssClass="error-color"/>
-			</li>
-			
 		</ul>
 		<div class="align-center">
 			<form:button class="default-btn">등록</form:button>
