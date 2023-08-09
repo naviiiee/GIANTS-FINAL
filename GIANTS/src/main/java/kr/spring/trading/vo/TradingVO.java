@@ -36,6 +36,8 @@ public class TradingVO {
 	private String mem_id; //아이디
 	private String mem_nickname; //닉네임
 	
+	private int mark_cnt; //북마크 개수
+	
 	//======이미지를 byte[]로 변환하는 메서드(BLOB 처리)=====//
 	public void setUpload(MultipartFile upload) throws IOException{
 		setTrade_photo(upload.getBytes()); //MultipartFile -> byte[]

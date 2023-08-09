@@ -50,6 +50,8 @@
 			<select id="order" name="order" class="form-select">
 				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>
 				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
+				<option value="3" <c:if test="${param.order == 3}">selected</c:if>>관심수</option>
+				<option value="4" <c:if test="${param.order == 4}">selected</c:if>>판매중</option>
 			</select>
 			<script type="text/javascript">
 				$(function(){
@@ -66,7 +68,7 @@
 	<c:if test="${count > 0}">
 	<table class="striped-table">
 		<tr>
-			<th>제목</th>
+			<th colspan="2">제목</th>
 			<th>작성자</th>
 			<th>가격</th>
 			<th>판매 상태</th>
@@ -75,10 +77,12 @@
 		</tr>
 		<c:forEach var="trading" items="${list}">
 		<tr>
-			<td class="align-center" width="400">
+			<td class="list-photo">
 				<a href="tradingDetail.do?trade_num=${trading.trade_num}">
 				<img src="${pageContext.request.contextPath}/trading/imageView.do?trade_num=${trading.trade_num}" class="list-thumbnail">
-				</a>			
+				</a>
+			</td>
+			<td>			
 				<a href="tradingDetail.do?trade_num=${trading.trade_num}">${trading.trade_title}</a>
 			</td>
 			<td class="align-center">
