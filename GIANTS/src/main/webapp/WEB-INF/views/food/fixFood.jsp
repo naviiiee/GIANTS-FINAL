@@ -36,22 +36,22 @@
 					<li>
 						<form:label path="food_name" class="label-wid">식품명</form:label>
 						<form:input path="food_name" placeholder="최대20자" autocomplete="off"/>
-						<form:errors path="food_name"/>
+						<form:errors path="food_name" cssClass="error-color"/>
 					</li>
 					<li>
 						<form:label path="food_price" class="label-wid">식품가격</form:label>
 						<form:input path="food_price" type="number" placeholder="최대9자리숫자" autocomplete="off"/>
-						<form:errors path="food_price"/>
+						<form:errors path="food_price" cssClass="error-color"/>
 					</li>
 					<li>
 						<form:label path="food_quantity" class="label-wid">재고수량</form:label>
 						<form:input path="food_quantity" type="number" placeholder="최대9자리숫자" autocomplete="off"/>
-						<form:errors path="food_quantity"/>
+						<form:errors path="food_quantity" cssClass="error-color"/>
 					</li>
 					<li><b>상품설명</b></li>
 					<li>
 						<form:textarea path="food_content"/>
-						<form:errors path="food_content"/>
+						<form:errors path="food_content" cssClass="error-color"/>
 						<script>
 							function MyCustomUploadAdapterPlugin(editor){
 								editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
@@ -79,6 +79,7 @@
 					<li>
 						<label for="upload1" class="label-wid">식품 메인 이미지</label>
 						<input type="file" name="upload1" id="upload1" accept="image/gif,image/png,image/jpeg"></input>
+						<form:errors path="food_photo1" cssClass="error-color"/>
 						<span id="upload1_name">
 							<c:if test="${empty foodVO.food_photo1}"></c:if>
 							<c:if test="${!empty foodVO.food_photo1}">현재 등록된 이미지 - ${foodVO.food_photo1_name}</c:if>
@@ -87,6 +88,7 @@
 					<li>
 						<label for="upload2" class="label-wid">식품 상세 이미지</label>
 						<input type="file" name="upload2" id="upload2" accept="image/gif,image/png,image/jpeg"></input>
+						<form:errors path="food_photo2" cssClass="error-color"/>
 						<span id="upload2_name">
 							<c:if test="${empty foodVO.food_photo2}"></c:if>
 							<c:if test="${!empty foodVO.food_photo2}">현재 등록된 이미지 - ${foodVO.food_photo2_name}</c:if>

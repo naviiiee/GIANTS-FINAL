@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.food.service.FoodService;
 import kr.spring.food.vo.FoodVO;
+import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
@@ -33,6 +34,10 @@ public class FoodController {
 	
 	@Autowired
 	private FoodService foodService;
+	
+	@Autowired
+	private MemberService memberService;
+	
 	
 	@ModelAttribute
 	public FoodVO initCommand() {
@@ -287,12 +292,12 @@ public class FoodController {
 			vo.setFood_photo2_name(db_foodVO.getFood_photo1_name());
 		}
 		
-		
+		log.debug("푸드 업데이트 수행");
+		foodService.fixFood(vo);
 		
 		//View에 표시할 메세지
 		model.addAttribute("message", "수정이 완료되었습니다.");
 		model.addAttribute("url", request.getContextPath() + "/food/fixCompFoodList.do");
-				
 				
 		return "common/resultView";
 	}
@@ -314,12 +319,15 @@ public class FoodController {
 	/*	==========================
 	 *		식품 상세 페이지
 	 * 	==========================*/
+	//폼 호출
 	@RequestMapping("/food/foodDetail.do")
-	public String foodDetail(@RequestParam int food_num,
+	public String formFoodDetail(@RequestParam int food_num,
 							 @RequestParam String comp_num,
 							 Model model) {
-		FoodVO foodVO = foodService.selectFood(food_num);
-		model.addAttribute("foodVO", foodVO);
+		FoodVO food = foodService.selectFood(food_num);
+		CompanyDetailVO comp = memberService.selectCompanyDetail(comp_num);
+		model.addAttribute("food", food);
+		model.addAttribute("comp", comp);
 		
 		return "foodDetail";
 	}

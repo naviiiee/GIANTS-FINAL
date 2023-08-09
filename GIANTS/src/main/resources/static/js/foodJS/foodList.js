@@ -1,8 +1,7 @@
 $(function(){
-	
 	//별점 정렬
 	$(document).on('change','#sort_select',function(){
-		categoryListform(form);
+		categoryListform($('#foodList_sort'));
 	});
 	
 	//매장 상세정보 폼 호출
@@ -12,4 +11,9 @@ $(function(){
 			comp_form.submit();
 		});
 	});
+	
+	function categoryListform(form){
+		$(form).submit();
+	}
+	
 });

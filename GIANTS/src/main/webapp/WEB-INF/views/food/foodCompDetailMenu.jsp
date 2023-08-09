@@ -56,10 +56,17 @@
 			
 			<c:if test="${count > 0}">
 			<c:forEach var="food" items="${list}">
-				<div class="food-info y-food" data-food_num="${food.food_num}">
+				<div class="food-info <c:if test='${food.food_status == 2}'>y-food</c:if>" data-food_num="${food.food_num}">
 					<img src="imageView.do?food_num=${food.food_num}&food_type=1" class="food-mainImg">
 					<div class="food-textBox">
-						<p class="float-left"><b>${food.food_name}</b></p><p class="float-right"><fmt:formatNumber value="${food.food_price}"/>원</p>
+						<!-- 활성화(판매중) 일 경우 -->
+						<c:if test="${food.food_status == 2}">
+							<p class="float-left"><b>${food.food_name}</b></p><p class="float-right"><fmt:formatNumber value="${food.food_price}"/>원</p>
+						</c:if>
+						<!-- 비활성화(판매중지) 일 경우 -->
+						<c:if test="${food.food_status != 2}">
+							<p class="no-sell"><b>판매중지</b></p>
+						</c:if>
 					</div>
 				</div>
 			</c:forEach>

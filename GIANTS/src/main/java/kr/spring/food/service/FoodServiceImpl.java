@@ -25,8 +25,7 @@ public class FoodServiceImpl implements FoodService{
 
 	@Override
 	public void fixFood(FoodVO food) {
-		// TODO Auto-generated method stub
-		
+		foodMapper.fixFood(food);
 	}
 
 	@Override

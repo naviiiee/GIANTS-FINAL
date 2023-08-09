@@ -44,6 +44,23 @@
 			#{food_status}
 		)
 	</insert>
+	<!-- 기업 식품 수정 -->
+	<update id="">
+		UPDATE 
+			FOOD 
+		SET 
+			food_name=#{food_name}, 
+			food_price=#{food_price},
+			food_quantity=#{food_quantity},
+			food_content=#{food_content},
+			food_photo1=#{food_photo1},
+			food_photo1_name=#{food_photo1_name},
+			food_photo2=#{food_photo2},
+			food_photo2_name=#{food_photo2_name},
+			food_modify_Date=sysdate,
+			food_status=#{food_status}
+		WHERE food_num=#{food_num}
+	</update>
 	
 	<!-- 식품목록 레코드수 쿼리 -->
 	<select id="selectRowCount" parameterType="string" resultType="integer">

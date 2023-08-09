@@ -5,6 +5,7 @@
 <!-- 식품 상세 페이지 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OSJ/food.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/foodJS/food.public.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/foodJS/foodDetail.js"></script>
 <div class="page-main">
 	<div class="main-title">
 		<img class="title-img" src="${pageContext.request.contextPath}/images/title_icon.gif">
@@ -24,57 +25,53 @@
 			<input type="hidden" name=comp_cate id="comp_cate" value="${comp.comp_cate}">
 		</form>
 		<!-- 관리자 접속시 수정 버튼 생성 -->
-		<c:if test="${!empty user.mem_auth && user.mem_auth > 2 && comp.comp_num == user.companyDetailVO.comp_num || user.mem_auth == 9}">
+		<c:if test="${!empty user.mem_auth && user.mem_auth > 2 && food.comp_num == user.companyDetailVO.comp_num || user.mem_auth == 9}">
 			<div class="float-right">
-				<input type="button" class="adminBtn" value="수정하기" onclick='location.href="/food/fixCompFoodList.do?comp_num=${comp.comp_num}"'>
+				<input type="button" class="adminBtn" value="수정하기" onclick="location.href='${pageContext.request.contextPath}/food/fixFood.do?food_num=${food.food_num}'">
 			</div>
 		</c:if>
 	</div>
 	<div class="clear"></div>
 	<!-- 식품 상세정보 시작 -->
 	<div class=comp-container>
-		<div class="comp-detail"><!-- 상세페이지 링크는 스크립트로 해결해야함. -->
-			<div class="f-img"><img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-main-img"></div>
-			<div class="comp-title"><b>매장명 - ${comp.comp_name}</b></div>
-			<div class="comp-score"><b>별점 - ${comp.comp_score}</b></div>
-			<div class="comp-content">
-				${comp.comp_content}
+		<div class="food-detail"><!-- 상세페이지 링크는 스크립트로 해결해야함. -->
+			<div class="f-line"></div>
+			<div class="f-img"><img src="${pageContext.request.contextPath}/food/imageView.do?food_num=${food.food_num}&food_type=1" class="food-main-img"></div>
+			<div class="food-title"><b>식품명 - ${food.food_name}</b></div>
+			<div class="food-price align-right" data-price="${food.food_price}"><b><fmt:formatNumber value="${food.food_price}"/>원</b></div>
+			<div class="food-quantity align-right">
+				<input type="number" id="food_quantity" min="1" max="999" value="1"><b> 개</b> 
+			</div>
+			<div class="food-total align-right"><b>총 상품 금액</b><br><span id="food_total">원</span></div>
+			<div class="food-btn">
+				<input type="button" id="food_order_btn" value="주문하기"><br>
+				<input type="button" id="food_cart_btn" value="장바구니">
 			</div>
 		</div>
-		<!-- 메뉴보기, 리뷰보기 -->	
-		<div class="comp-menu">
-			<div id="showMenu" class="food-cbox-on">메뉴 보기</div>
-			<div id="showReview">리뷰 보기</div>
-		</div>
-		<!-- 메뉴 -->
-		<div id="compMenu_content">
-			<div id="menu_tb">
-			<c:if test="${count == 0}">
-				<h1 class="align-center">표시할 상품이 없습니다.</h1>
-			</c:if>
-			
-			<c:if test="${count > 0}">
-			<c:forEach var="food" items="${list}">
-				<div class="food-info">
-					<img src="imageView.do?food_num=${food.food_num}&food_type=1" class="food-mainImg">
-					<div class="food-textBox">
-						<p class="float-left"><b>${food.food_name}</b></p><p class="float-right"><fmt:formatNumber value="${food.food_price}"/>원</p>
-					</div>
-				</div>
-			</c:forEach>
-			<c:forEach begin="0" end="${7 - fn:length(list)}" step="1" varStatus="stat">
-				<div class="food-info">
-					<img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-mainImg">
-					<div class="food-textBox"></div>
-				</div>
-			</c:forEach>
-				<div class="paging align-center">${page}</div>
-			</c:if>
+		<!-- 장바구니용 폼 -->
+		<form id="frm_cart" method="post">
+			<input type="hidden" name="food_num" value="${food.food_num}">
+			<input type="hidden" name="f_cart_quantity" class="fd-quantity">
+			<input type="hidden" name="f_cart_price" class="fd-total">
+		</form>
+		<!-- 주문하기용 폼 -->
+		<form id="frm_order" method="post">
+			<input type="hidden" name="food_num" value="${food.food_num}">
+			<input type="hidden" name="order_quantity" class="fd-quantity">
+			<input type="hidden" name="food_name" value="${food.food_name}">
+			<input type="hidden" name="food_price" value="${food.food_price}">
+			<input type="hidden" name="food_total" class="fd-total">
+		</form>
+		<!-- 식품 상세시작 -->	
+		<div id="food_detailContent">
+			<img class="detail-img" src="${pageContext.request.contextPath}/food/imageView.do?food_num=${food.food_num}&food_type=2">
+			<hr>
+			<div class="food-content">
+				${food.food_content}
 			</div>
 		</div>
 		<!-- 메뉴보기 내용 끝-->
 	</div>
-	
 	<!-- 목록 끝 -->
 </div>
 <!-- 식품 상세보기 페이지 끝-->

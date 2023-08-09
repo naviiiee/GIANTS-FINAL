@@ -33,7 +33,7 @@ public class FoodVO {						//논리명					키 분류
 	private Date food_regDate;              //식품 등록날짜
 	private Date food_modifyDate;           //식품 수정날짜
 	@NotEmpty
-	private String food_status;             //식품 판매상태 ex) 1:판매중, 0:판매중지(상품준비중)
+	private String food_status;             //식품 판매상태 ex) 2:판매중, 1:판매중지(상품준비중)
 	
 	//업로드 파일 처리 - 메인
 	public void setUpload1(MultipartFile upload1)throws IOException{
