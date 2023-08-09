@@ -11,7 +11,7 @@ input[type="button"], button[type="submit"]{
 }
 
 /* 굿즈 등록, 수정
-----------------*/
+----------------*/ 
 button[type="submit"].default-btn{
 	width:60px;
 	height:30px;
@@ -28,10 +28,61 @@ button[type="submit"].default-btn:hover{
 	color:#FFF;
 	cursor:pointer;
 }
-
+form#register_form ul li label,
+form#update_form ul li label{
+	margin:0 0 5px 10px;
+	display:inline-block;
+	font-size:14pt;
+	width:200px;
+}
+form#register_form input[type="text"],
+form#update_form input[type="text"]{
+	width:50%;
+	height:25px;
+}
+form#register_form select,
+form#update_form select{
+	width:100px;
+	height:25px;
+}
+form#register_form input[type="number"],
+form#update_form input[type="number"]{
+	width:130px;
+	height:25px;
+}
+form#register_form span.radio-status,
+form#update_form span.radio-status{
+	margin:0 10px;
+	height:30px;
+}
+div#file_detail span{
+	margin:0 0 20px 10px;
+}
 
 /* [일반회원] 굿즈 목록
 ----------------------*/
+div.cate-filter{
+	margin-bottom:10px;
+}
+div.cate-filter input{
+	width:60px;
+	height:30px;
+	background-color:#6cace4;
+	color:#FFF;
+	border:none;
+	cursor:pointer;
+	font-weight:bold;
+	text-align:center;
+}
+div.list-btns{
+	margin-top:5px;
+}
+ul.search li select{
+	height:30px;
+}
+form#search_form #order{
+	height:32px;
+}
 .goods-space .horizontal-area{
 	margin:2px;
 	padding:3px;
@@ -60,6 +111,15 @@ input[type="button"]#admin_btn{
 	border:none;
 	cursor:pointer;
 }
+td.list-btn input{
+	width:110px;
+	height:30px;
+	background:none;
+	color:#dd032f;
+	font-weight:bold;
+	border:none;
+	cursor:pointer;
+}
 /* [관리자] 굿즈 목록
 ----------------------*/
 div.goods-list table{
@@ -77,6 +137,9 @@ div.goods-list table td{
 }
 div.goods-list table tr{
 	height:30px;
+}
+input#reg_btn{
+	 width:100px;
 }
 
 /* 굿즈 상세페이지
@@ -225,6 +288,7 @@ div#sold-out{
 div#sold-out > span{
 	display:inline-block;
 }
+
 
 
 

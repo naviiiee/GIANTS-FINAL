@@ -13,7 +13,10 @@
 			<input type="button" value="수정" onclick="location.href='goodsUpdate.do?goods_num=${goods.goods_num}'">
 			<input type="button" value="삭제">
 		</div>
-		</c:if>		
+		</c:if>
+		<div>
+			<input type="button" value="임시버튼-리뷰" onclick="location.href='writeReview.do'">
+		</div>
 		<div class="goods-photo">
 			<img src="${pageContext.request.contextPath}/goods/imageView.do?goods_num=${goods.goods_num}">
 		</div>
@@ -24,7 +27,7 @@
 				<input type="hidden" name="goods_num" value="${goods.goods_num}" id="goods_num">
 				<input type="hidden" name="goods_dprice" value="${goods.goods_price}" id="goods_price">
 				
-				<!--  <input type="hidden" name="goods_stock" id="goods_stock" value="${goods.goodsOptionVO.goods_stock }">-->
+				<%--  <input type="hidden" name="goods_stock" id="goods_stock" value="${goods.goodsOptionVO.goods_stock }"> --%>
 				<%-- <input type="hidden" name="goods_stock" value="${goods.goods_stock}" id="goods_stock"> 수량--%>
 				<ul> <%-- <c:if test="${goods.goods_stock > 0}"> 수량 --%>
 					<%-- <li>남은 수량 : <span><fmt:formatNumber value="${goods.goods_stock}"/></span></li> 수량--%>
