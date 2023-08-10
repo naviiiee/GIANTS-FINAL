@@ -7,14 +7,13 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods.fav.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_cart.js"></script>
 <script type="text/javascript">
-	function doDisplay(){
-		let con = document.getElementById('content1');
-		if(con.style.display == 'none'){
-			con.style.display='block';
-		}else{
-			con.style.display='none';
-		}
-	} //end of doDisplay
+	$(function(){
+		$('.re-content').hide();
+		$('.re-title').click(function(){
+			$('.re-content').show();
+			$('.re-title').css('background-color', 'yellow');
+		}); //end of re-title click
+	});
 </script>
 <div class="page-main">
 	<div class="content-main">

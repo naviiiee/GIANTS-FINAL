@@ -209,8 +209,10 @@ public class GoodsController {
 			review = goodsService.selectGoodsReviewList(map);
 		}
 		
-		int avg_score = goodsService.getAvgScore(goods_num);
-		log.debug("<<로그찍기 - review>>" + review);
+		//Integer avg_score = goodsService.getAvgScore(goods_num);
+		
+		//log.debug("<<로그찍기 - avg_score>>" + avg_score);
+		
 		
 		//===== 상품문의 목록 =====//
 		Map<String, Object> map2 = new HashMap<String, Object>();
@@ -239,7 +241,7 @@ public class GoodsController {
 		mav.addObject("qna", qna);
 		mav.addObject("qna_cnt", qna_cnt);
 		mav.addObject("qna_page", page2.getPage());
-		mav.addObject("avg_score", avg_score);
+		//mav.addObject("avg_score", avg_score);
 		
 		return mav;
 	}
