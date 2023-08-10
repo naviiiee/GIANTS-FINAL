@@ -9,7 +9,7 @@
 <div class="page-main">
 	<div class="main-title">
 		<img class="title-img" src="${pageContext.request.contextPath}/images/title_icon.gif">
-		<h2> 푸드 | <a href="/food/foodList.do">매장</a> | <a href="/food/foodCompDetail.do?comp_num=${comp.comp_num}">${comp.comp_name}</a></h2>
+		<h2> 푸드 | <a href="/food/foodList.do">매장</a> | <a href="/food/foodCompDetailMenu.do?comp_num=${comp.comp_num}">${comp.comp_name}</a></h2>
 	</div>
 	<hr noshade="noshade">
 	<!-- 카테고리 시작 -->
@@ -53,6 +53,7 @@
 			<input type="hidden" name="food_num" value="${food.food_num}">
 			<input type="hidden" name="f_cart_quantity" class="fd-quantity">
 			<input type="hidden" name="f_cart_price" class="fd-total">
+			<input type="hidden" name="comp_num" value="${food.comp_num}" id="comp_number">
 		</form>
 		<!-- 주문하기용 폼 -->
 		<form id="frm_order" method="post">

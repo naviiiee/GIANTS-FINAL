@@ -6,7 +6,9 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
+import kr.spring.food.vo.F_cartVO;
 import kr.spring.food.vo.F_orderVO;
 import kr.spring.food.vo.FoodVO;
 import kr.spring.food.vo.Food_reviewVO;
@@ -48,8 +50,23 @@ public interface FoodMapper {
 	
 	//매장후기 상세정보
 	public Food_reviewVO selectFood_Review(Food_reviewVO fr);
-	
+
+	//---------------식품 장바구니 --------------------------------
+	//장바구니 목록 조회
+	public List<F_cartVO> selectF_cartList(int mem_num);
+	//장바구니 조회(식품 코드를 이용)
+	@Select("SELECT * FROM f_cart WHERE food_num=#{food_num} AND mem_num=#{mem_num}")
+	public F_cartVO selectF_cart(F_cartVO f_cartVO);
+	//장바구니 상품 등록
+	public void insertF_cart(F_cartVO f_cartVO);
+	//장바구니 모두 비우기
+	@Delete("DELETE FROM f_cart WHERE mem_num=#{mem_num}")
+	public void deleteF_cart(Integer mem_num);
+	//장바구니 상품 업데이트(추가등록)
+	@Update("UPDATE f_cart SET f_cart_quantity=#{f_cart_quantity} WHERE food_num=#{food_num} AND mem_num=#{mem_num}")
+	public void updateF_cartByFood_num(F_cartVO f_cartVO);
 	//---------------식품 주문 --------------------------------
+
 	//식품 주문(영수증)목록
 	public List<F_orderVO> selectOrderList(Map<String, Object> map);
 	public int selectOrderRowCount(Map<String,Object> map);

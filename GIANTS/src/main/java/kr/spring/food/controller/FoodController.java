@@ -1,5 +1,6 @@
 package kr.spring.food.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.food.service.FoodService;
+import kr.spring.food.vo.F_cartVO;
 import kr.spring.food.vo.FoodVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.CompanyDetailVO;
@@ -332,8 +334,106 @@ public class FoodController {
 		return "foodDetail";
 	}
 	
-	
-	
+	/*	==========================
+	 *		장바구니 페이지
+	 * 	==========================*/
+	//장바구니 아이템 체크
+	@RequestMapping("/food/foodCartCheck.do")
+	@ResponseBody
+	public Map<String,Object> foodCartCheck(@RequestParam int food_num,
+											@RequestParam String comp_num,
+											HttpSession session){
+		log.debug("<< 장바구니 아이템 체크 동작중 >> ");
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else {
+			List<F_cartVO> db_cart = new ArrayList<F_cartVO>();
+			boolean check = false;
+			//1.현재 로그인한 회원의 장바구니에 아이템이 존재하는지 조회
+			db_cart = foodService.selectF_cartList(user.getMem_num());
+			if (!db_cart.isEmpty()) {
+				//  2.장바구니에 아이템이 있으면 해당 아이템의 comp_num이 
+				//	  현재 등록해야 하는 식품의 comp_num과 다른지 확인
+				for (F_cartVO cart : db_cart) {
+					//장바구니에 담겨있는 아이템들과 현재 넣을 아이템의 매장번호가 다를경우
+					if (cart.getFoodVO().getComp_num()!=comp_num) {
+						check = true;
+						break;
+					}
+				}// end of for()----
+			}
+			if (check) {
+				//장바구니 안에 다른 매장의 아이템이 있음을 알림
+				mapJson.put("result", "MismatchCompany");
+			}else {
+				//장바구니가 비워져 있음을 알림
+				mapJson.put("result", "Empty");
+			}
+		}
+		return mapJson;
+	}
+	//장바구니 모두 비우기
+	@RequestMapping("/food/foodEmptyCart.do")
+	@ResponseBody
+	public Map<String,Object> foodEmptyCart(HttpSession session){
+		log.debug("<< 장바구니 모두 비우기 동작중 >> ");
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else {
+			//모두 비우기 진행
+			foodService.deleteF_cart(user.getMem_num());
+			mapJson.put("result", "success");
+		}
+		return mapJson;
+	}
+	//장바구니 아이템 추가
+	@RequestMapping("/food/foodAddCart.do")
+	@ResponseBody
+	public Map<String,Object> foodAddCart(F_cartVO f_cartVO,
+										  //@RequestParam String comp_num,
+										  HttpSession session){
+		log.debug("<< 장바구니 아이템 추가 동작중 >> :" + f_cartVO);
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else {
+			f_cartVO.setMem_num(user.getMem_num());
+			F_cartVO db_cart = foodService.selectF_cart(f_cartVO);
+			
+			if (db_cart==null) {
+				//등록된 동일 상품이 없는 경우
+				//장바구니에 상품 등록
+				foodService.insertF_cart(f_cartVO);
+				mapJson.put("result", "success");
+			}else {
+				//등록된 동일 상품이 있음
+				//재고수를 구하기 위해서 상품 정보 호출
+				FoodVO db_food = foodService.selectFood(db_cart.getFood_num());
+				
+				//구매수량 합산
+				int order_quantity = db_cart.getF_cart_quantity() + f_cartVO.getF_cart_quantity();
+				
+				if (db_food.getFood_quantity() < order_quantity) {
+					//재고 수량보다 장바구니에 담을 수량이 더 많을 경우
+					mapJson.put("result", "overquantity");
+				}else {
+					//기존 장바구니 상품 업데이트
+					f_cartVO.setF_cart_quantity(order_quantity);
+					foodService.updateF_cartByFood_num(f_cartVO);
+					mapJson.put("result", "success");
+				}
+			}
+		}
+		return mapJson;
+	}
 	
 	
 	

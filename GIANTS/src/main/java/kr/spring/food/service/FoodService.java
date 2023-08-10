@@ -3,6 +3,7 @@ package kr.spring.food.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.spring.food.vo.F_cartVO;
 import kr.spring.food.vo.FoodVO;
 import kr.spring.member.vo.CompanyDetailVO;
 
@@ -32,4 +33,16 @@ public interface FoodService {
 	
 	//매장 상세정보
 	public CompanyDetailVO selectComp(String comp_num);
+	
+	//------------ 장바구니 ----------------------------------
+	//회원의 장바구니 목록 조회
+	public List<F_cartVO> selectF_cartList(int mem_num);
+	//회원의 장바구니 조회(식품코드를 통해)
+	public F_cartVO selectF_cart(F_cartVO f_cartVO);
+	//장바구니 상품 등록
+	public void insertF_cart(F_cartVO f_cartVO);
+	//장바구니 모두 비우기
+	public void deleteF_cart(Integer mem_num);
+	//장바구니 상품 업데이트(추가등록)
+	public void updateF_cartByFood_num(F_cartVO f_cartVO);
 }

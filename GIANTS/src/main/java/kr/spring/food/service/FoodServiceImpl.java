@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.food.dao.FoodMapper;
+import kr.spring.food.vo.F_cartVO;
 import kr.spring.food.vo.FoodVO;
 import kr.spring.member.vo.CompanyDetailVO;
 
@@ -62,4 +63,33 @@ public class FoodServiceImpl implements FoodService{
 	public CompanyDetailVO selectComp(String comp_num) {
 		return foodMapper.selectComp(comp_num);
 	}
+
+	//=================장바구니============================
+	@Override
+	public List<F_cartVO> selectF_cartList(int mem_num) {
+		return foodMapper.selectF_cartList(mem_num);
+	}
+
+	@Override
+	public F_cartVO selectF_cart(F_cartVO f_cartVO) {
+		return foodMapper.selectF_cart(f_cartVO);
+	}
+	
+	@Override
+	public void insertF_cart(F_cartVO f_cartVO) {
+		foodMapper.insertF_cart(f_cartVO);
+	}
+
+	@Override
+	public void deleteF_cart(Integer mem_num) {
+		foodMapper.deleteF_cart(mem_num);
+	}
+
+	@Override
+	public void updateF_cartByFood_num(F_cartVO f_cartVO) {
+		foodMapper.updateF_cartByFood_num(f_cartVO);
+	}
+
+	
+
 }
