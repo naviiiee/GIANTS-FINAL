@@ -20,9 +20,9 @@ public class MemberDetailVO {
 	private String mem_auid; // 자동로그인
 	@NotEmpty
 	private String mem_name; // 일반회원명
-	@NotEmpty
+	@Size(min = 6, max = 6)
 	private String mem_public; // 생년월일
-	@NotEmpty
+	@Size(min = 11, max = 11)
 	private String mem_phone; // 전화번호
 	@Email
 	@NotEmpty

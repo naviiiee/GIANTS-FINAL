@@ -19,66 +19,66 @@
 			<li>
 				<form:label path="companyDetailVO.comp_owner">사업자명</form:label>
 				<form:input path="companyDetailVO.comp_owner"/>
-				<form:errors path="companyDetailVO.comp_owner"/>
+				<br><form:errors path="companyDetailVO.comp_owner" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_num">사업자등록번호</form:label>
 				<form:input path="companyDetailVO.comp_num" placeholder="숫자 10자" type="text"/>
-				<form:errors path="companyDetailVO.comp_num"/>
+				<br><form:errors path="companyDetailVO.comp_num" cssClass="error-color"/>
 			</li>
 			 <li>
 				<form:label path="companyDetailVO.comp_name">기업명</form:label>
 				<form:input path="companyDetailVO.comp_name"/>
-				<form:errors path="companyDetailVO.comp_name"/>
+				<br><form:errors path="companyDetailVO.comp_name" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_cate">카테고리</form:label>
 				<form:input path="companyDetailVO.comp_cate"/>
-				<form:errors path="companyDetailVO.comp_cate"/>
+				<br><form:errors path="companyDetailVO.comp_cate" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="mem_id">아이디</form:label>
 				<form:input path="mem_id" placeholder="영문, 숫자 4~12자" autocomplete="off"/>
 				<input type="button" id="confirmId" value="ID중복체크" class="default-btn"> 
 				<span id="message_id"></span>
-				<form:errors path="mem_id" cssClass="error-color"/>
+				<br><form:errors path="mem_id" cssClass="error-color"/>
  			</li>
 			<li>
 				<form:label path="passwd">비밀번호</form:label>
-				<form:password path="passwd" placeholder="영문,숫자 4~12자"/>
-				<form:errors path="passwd"/>
+				<form:password path="passwd" placeholder="영문, 숫자 4~12자"/>
+				<br><form:errors path="passwd" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_phone">연락처</form:label>
-				<form:input path="companyDetailVO.comp_phone" placeholder="숫자 11자"/>
-				<form:errors path="companyDetailVO.comp_phone"/>
+				<form:input path="companyDetailVO.comp_phone" placeholder="' - ' 제외 11자"/>
+				<br><form:errors path="companyDetailVO.comp_phone" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_email">이메일</form:label>
-				<form:input path="companyDetailVO.comp_email"/>
+				<form:input path="companyDetailVO.comp_email" placeholder="test@test.com"/>
 				<input type="button" id="#" value="이메일인증" class="default-btn">
-				<form:errors path="companyDetailVO.comp_email"/>
+				<br><form:errors path="companyDetailVO.comp_email" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_zipcode">우편번호</form:label>
-				<form:input path="companyDetailVO.comp_zipcode"/>
+				<form:input path="companyDetailVO.comp_zipcode" placeholder="숫자 5자리"/>
 				<input type="button" onclick="execDaumPostcode()" value="우편번호찾기" class="default-btn">
-				<form:errors path="companyDetailVO.comp_zipcode"/>
+				<br><form:errors path="companyDetailVO.comp_zipcode" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_address1">주소</form:label>
 				<form:input path="companyDetailVO.comp_address1"/>
-				<form:errors path="companyDetailVO.comp_address1"/>
+				<br><form:errors path="companyDetailVO.comp_address1" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_address2">상세주소</form:label>
 				<form:input path="companyDetailVO.comp_address2"/>
-				<form:errors path="companyDetailVO.comp_address2"/>
+			<br>	<form:errors path="companyDetailVO.comp_address2" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_content">기업소개</form:label>
 				<form:input path="companyDetailVO.comp_content"/>
-				<form:errors path="companyDetailVO.comp_content"/>
+				<br><form:errors path="companyDetailVO.comp_content" cssClass="error-color"/>
 			</li>
 		</ul>
 		</div>

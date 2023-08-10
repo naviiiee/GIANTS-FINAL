@@ -18,51 +18,51 @@
 		<ul>
 			<li>
 				<form:label path="memberDetailVO.mem_name">이름(한글)</form:label>
-				<form:input path="memberDetailVO.mem_name"/>
+				<form:input path="memberDetailVO.mem_name"/><br>
 				<form:errors path="memberDetailVO.mem_name" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="mem_id">아이디</form:label>
 				<form:input path="mem_id" placeholder="영문, 숫자 4~12자" autocomplete="off"/>
 				<input type="button" id="confirmId" value="ID중복체크" class="default-btn">
-				<span id="message_id"></span>
+				<span id="message_id"></span><br>
 				<form:errors path="mem_id" cssClass="error-color"/>
  			</li>
 			<li>
 				<form:label path="passwd">비밀번호</form:label>
-				<form:password path="passwd" placeholder="영문,숫자 4~12자"/>
+				<form:password path="passwd" placeholder="영문,숫자 4~12자"/><br>
 				<form:errors path="passwd" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="memberDetailVO.mem_public">생년월일</form:label>
-				<form:input path="memberDetailVO.mem_public" placeholder="숫자 6자"/>
-				<form:errors path="memberDetailVO.mem_public"/>
+				<form:input path="memberDetailVO.mem_public" placeholder="숫자 6자"/><br>
+				<form:errors path="memberDetailVO.mem_public" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="memberDetailVO.mem_phone">연락처</form:label>
-				<form:input path="memberDetailVO.mem_phone" placeholder="숫자 11자"/>
+				<form:input path="memberDetailVO.mem_phone" placeholder="숫자 11자"/><br>
 				<form:errors path="memberDetailVO.mem_phone" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="memberDetailVO.mem_email">이메일</form:label>
-				<form:input path="memberDetailVO.mem_email"/>
-				<input type="button" id="#" value="이메일인증" class="default-btn">
+				<form:input path="memberDetailVO.mem_email" placeholder="test@test.com"/>
+				<input type="button" id="#" value="이메일인증" class="default-btn"><br>
 				<form:errors path="memberDetailVO.mem_email" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="memberDetailVO.mem_zipcode">우편번호</form:label>
-				<form:input path="memberDetailVO.mem_zipcode"/>
-				<input type="button" onclick="execDaumPostcode()" value="우편번호찾기" class="default-btn">
+				<form:input path="memberDetailVO.mem_zipcode" placeholder="숫자 5자"/>
+				<input type="button" onclick="execDaumPostcode()" value="우편번호찾기" class="default-btn"><br>
 				<form:errors path="memberDetailVO.mem_zipcode" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="memberDetailVO.mem_address1">주소</form:label>
-				<form:input path="memberDetailVO.mem_address1"/>
+				<form:input path="memberDetailVO.mem_address1"/><br>
 				<form:errors path="memberDetailVO.mem_address1" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="memberDetailVO.mem_address2">상세주소</form:label>
-				<form:input path="memberDetailVO.mem_address2"/>
+				<form:input path="memberDetailVO.mem_address2"/><br>
 				<form:errors path="memberDetailVO.mem_address2" cssClass="error-color"/>
 			</li>
 			<li>

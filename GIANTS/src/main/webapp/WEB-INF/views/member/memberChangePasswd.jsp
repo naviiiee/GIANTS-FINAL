@@ -12,10 +12,9 @@
 	</div>
 </div>
 <!-- 비밀번호변경 시작 -->
-<div class="page-main">
+<div class="mypage-form">
 	<h2>비밀번호변경</h2>
-	<form:form modelAttribute="memberVO" action="changePasswd.do"
-			   id="member_change">
+	<form:form modelAttribute="memberVO" action="changePasswd.do" id="member_change">
 		<form:errors element="div" cssClass="error-color"/>   
 		<ul>
 			<li>

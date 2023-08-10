@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.Getter;
@@ -15,6 +16,7 @@ import lombok.ToString;
 @ToString
 public class CompanyDetailVO {
 	// Comp_detail 테이블
+	@Size(min = 10, max = 10)
 	private String comp_num; // 사업자번호(임시로등록)
 	private String comp_num_1;
 	private String comp_num_2;
@@ -23,8 +25,9 @@ public class CompanyDetailVO {
 	private String comp_owner; // 사업자명
 	@NotEmpty
 	private String comp_name; // 기업명
-	private String comp_cate; // 기업카테고리
 	@NotEmpty
+	private String comp_cate; // 기업카테고리
+	@Size(min = 11, max = 11)
 	private String comp_phone; // 전화번호
 	@Email
 	@NotEmpty

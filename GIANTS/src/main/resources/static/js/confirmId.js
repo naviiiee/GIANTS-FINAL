@@ -23,7 +23,7 @@ $(function(){
 					$('#mem_id').val('').focus();
 					checkId = 0;
 				}else if(param.result == 'notMatchPattern'){
-					$('#message_id').css('color','red').text('영문,숫자 4자이상 12자이하 입력');
+					$('#message_id').css('color','red').text('영문,숫자 4자~12자 입력');
 					$('#mem_id').val('').focus();
 					checkId = 0;
 				}else{

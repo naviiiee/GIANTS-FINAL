@@ -185,6 +185,13 @@
 	width:110px;
 	text-align: left;
 }
+#member_change label{
+	display:inline-block;
+	padding-right:10px;
+	font-size:1.2em;
+	width:130px;
+	text-align: left;	
+}
 #member_register input[id="memberDetailVO.mem_name"],
 #member_register input[id="mem_id"],
 #member_register input[id="memberDetailVO.mem_email"],
@@ -224,6 +231,9 @@
 #company_modify input[id="companyDetailVO.comp_address1"],
 #company_modify input[id="companyDetailVO.comp_address2"],
 #company_modify input[id="companyDetailVO.comp_content"],
+#member_change input[id="now_passwd"],
+#member_change input[id="passwd"],
+#member_change input[id="confirm_passwd"],
 #member_delete input[id="mem_id"],
 #member_delete input[id="passwd"],
 #company_delete input[id="mem_id"],
@@ -236,7 +246,8 @@
 #member_register .default-btn,
 #company_register .default-btn,
 #member_modify .default-btn,
-#company_modify .default-btn{
+#company_modify .default-btn,
+#member_change .default-btn{
 	width:100px;
 	height:35px;
 	border-radius: 5px;
@@ -269,6 +280,11 @@
 .mypage-form li{
 	padding-bottom:10px;
 	width:500px;
+	margin:0 auto;
+}
+.mypage-form #member_change li{
+	padding-bottom:10px;
+	width:620px;
 	margin:0 auto;
 }
 .mypage-bottom{

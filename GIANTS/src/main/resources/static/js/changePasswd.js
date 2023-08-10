@@ -18,6 +18,8 @@ $(function(){
 			$('#message_id').text('비밀번호 일치').css('color','#000');
 		}
 	})
+	
+	/* 비어있을 때 */
 	$('#member_change').submit(function(){
 		if($('#now_passwd').val().trim()==''){
 			alert('현재 비밀번호를 입력하세요.');

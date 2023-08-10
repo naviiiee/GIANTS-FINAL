@@ -24,11 +24,10 @@
 				<form:label path="passwd">비밀번호</form:label>
 	            <form:input path="passwd"/>
 			</li>
-			<li>
 		</ul>
 		<div class="mypage-bottom">
 			<form:button class="bottom-btn">전송</form:button>
-			<input type="button" value="마이페이지" class="bottom-btn"
+			<input type="button" value="마이페이지" class="my-btn"
 				   onclick="location.href='myPage.do'">
 		</div>
 	</form:form>

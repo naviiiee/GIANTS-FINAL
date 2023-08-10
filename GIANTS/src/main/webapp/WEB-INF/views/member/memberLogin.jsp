@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/login.js"></script>
+
 <div class="mypage-top">
 	<div class="mypage-top-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
@@ -12,12 +14,12 @@
 <!-- 로그인폼시작 -->
 <div class="login-main">
 	<form:form modelAttribute="memberVO" action="login.do" id="member_login">
-		<form:errors element="div" cssClass="error-color" />
 		<!-- 로그인폼 -->
 		<div class="login-form">
 			<img src="${pageContext.request.contextPath}/images/로그인로고.png">
 			<p>로그인을 하시면 롯데 자이언츠의<br>다양한 이벤트참여와 혜택을 누리실 수 있습니다.</p>
 			<div class="login">
+				<form:errors element="div" cssClass="error-color" />
 				<ul>
 					<li>
 						<form:label path="mem_id">아이디</form:label>

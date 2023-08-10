@@ -14,23 +14,6 @@
 <div>
 	<!-- 일반회원 마이페이지 -->
 	<c:if test="${!empty user && user.mem_auth == 2}">
-		<ul>
-			<li>
-				<img src="${pageContext.request.contextPath}/member/photoView.do" 
-				     width="100" height="100" class="my-photo">
-				<div class="camera" id="photo_btn">
-					<img src="${pageContext.request.contextPath}/images/로그인로고.png" width="35">
-				</div>
-			</li>
-			<li>
-				<div id="photo_choice" style="display:none;">
-					<input type="file" id="upload"
-						   accept="image/gif,image/png,image/jpg"><br>
-				    <input type="button" value="전송" id="photo_submit">
-				    <input type="button" value="취소" id="photo_reset">
-				</div>
-			</li>
-		</ul>
 		<div class="member-mypage">
 			<table class="mem-table">
 			<tr>
@@ -45,28 +28,31 @@
 			<tr>
 				<td>회원가입일</td><td>${member.memberDetailVO.mem_regdate}</td>
 			</tr>
+			<tr>
+				<td>프로필사진</td>
+				<td>
+					<div class="camera" id="photo_btn">
+						<input type="button" value="변경하기">
+					</div>
+					<div id="photo_choice" style="display:none;">
+						<input type="file" id="upload" accept="image/gif,image/png,image/jpg">
+						<input type="button" value="전송" id="photo_submit">	
+					    <input type="button" value="취소" id="photo_reset">   
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<img src="${pageContext.request.contextPath}/member/photoView.do" 
+				     width="100" height="100" class="my-photo">
+				</td>
+			</tr>
 			</table>
 		</div>
 	</c:if>
 	<!-- 기업회원 마이페이지 -->	
 	<c:if test="${!empty user && user.mem_auth == 3}">
 		<div class="member-mypage">
-		<ul>
-			<li>
-				<img src="${pageContext.request.contextPath}/member/photoView.do" 
-				     width="100" height="100" class="my-photo">
-				<div class="camera" id="photo_btn">
-					<img src="${pageContext.request.contextPath}/images/로그인로고.png" width="35">
-				</div>
-			</li>
-			<li>
-				<div id="photo_choice" style="display:none;">
-					<input type="file" id="upload"
-						   accept="image/gif,image/png,image/jpg"><br>
-				    <input type="button" value="전송" id="photo_submit">
-				    <input type="button" value="취소" id="photo_reset">
-				</div>
-			</li></ul>
 			<table class="mem-table">
 			<tr>
 				<td>아이디</td><td>${member.mem_id}</td>
@@ -79,6 +65,43 @@
 			</tr>
 			<tr>
 				<td>회원가입일</td><td>${company.companyDetailVO.comp_regdate}</td>
+			</tr>
+			<tr>
+			<td>프로필사진</td>
+				<td>
+					<div class="camera" id="photo_btn">
+						<input type="button" value="변경하기">
+					</div>
+					<div id="photo_choice" style="display:none;">
+						<input type="file" id="upload" accept="image/gif,image/png,image/jpg">
+						<input type="button" value="전송" id="photo_submit">	
+					    <input type="button" value="취소" id="photo_reset">   
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<img src="${pageContext.request.contextPath}/member/photoView.do" 
+				     width="100" height="100" class="my-photo">
+				</td>
+			</tr>
+			</table>
+		</div>
+	</c:if>
+	<c:if test="${!empty user && user.mem_auth == 9}">
+		<div class="member-mypage">
+			<table class="mem-table">
+			<tr>
+				<td>아이디</td><td>${member.mem_id}</td>
+			</tr>
+			<tr>
+				<td>이름</td><td>${member.memberDetailVO.mem_name}</td>
+			</tr>
+			<tr>
+				<td>회원분류</td><td>관리자</td>
+			</tr>
+			<tr>
+				<td>회원가입일</td><td>${member.memberDetailVO.mem_regdate}</td>
 			</tr>
 			</table>
 		</div>

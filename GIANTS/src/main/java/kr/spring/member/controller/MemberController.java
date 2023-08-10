@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.member.service.MemberService;
+import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.FileUtil;
@@ -347,9 +348,7 @@ public class MemberController {
 		}else {
 			MemberVO db_member = memberService.selectMember(memberVO.getMem_num());
 			
-			//폼에서 전송한 현재 비밀번호와 DB에서 받아온 비밀번호 일치 여부 체크
 			if(!db_member.getPasswd().equals(memberVO.getNow_passwd())) {
-				//DB에 등록된 비밀번호와 입력한 비밀번호가 불일치
 				result.rejectValue("now_passwd", "invalidPassword");
 				return formChangePasswd();
 			}
