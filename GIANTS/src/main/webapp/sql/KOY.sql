@@ -41,6 +41,7 @@ create table goods_review(
    review_photoname varchar2(100),
    review_regdate date default sysdate not null,
    review_mdate date,
+   review_ip varchar2(50) not null,
    constraint goods_review_pk primary key (review_num),
    constraint goods_review_fk1 foreign key (mem_num) references member (mem_num),
    constraint goods_review_fk2 foreign key (goods_num) references goods (goods_num)
@@ -57,6 +58,7 @@ create table goods_qna(
 	qna_mdate date,
 	qna_status number(1) default 1 not null, -- 1:답변전, 2:답변완료
 	mem_num number not null,
+	qna_ip varchar2(50) not null,
 	goods_num number not null,
 	constraint goods_qna_pk primary key (qna_num),
    	constraint goods_qna_fk1 foreign key (mem_num) references member (mem_num),

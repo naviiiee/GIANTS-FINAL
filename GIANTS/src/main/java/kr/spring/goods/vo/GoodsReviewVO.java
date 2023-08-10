@@ -5,6 +5,7 @@ import java.sql.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.spring.member.vo.MemberVO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,11 +24,12 @@ public class GoodsReviewVO {
 	private String review_photoname; //후기 사진 파일명
 	private Date review_regdate; //후기등록일
 	private Date review_mdate; //후기 최근 수정일
+	private String review_ip;
 	
 	private String id;
 	private String mem_nickname;
 	private String goods_name;
-	
+		
 	//======이미지를 byte[]로 변환하는 메서드(BLOB 처리)=====//
 	public void setUpload(MultipartFile upload) throws IOException{
 		setReview_photo(upload.getBytes()); //MultipartFile -> byte[]

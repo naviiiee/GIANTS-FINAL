@@ -18,6 +18,7 @@ public class GoodsQnaVO {
 	private int qna_status; //1:답변전, 2:답변완료
 	private int mem_num;
 	private int goods_num;
+	private String qna_ip;
 	
 	private String id;
 	private String goods_name;
