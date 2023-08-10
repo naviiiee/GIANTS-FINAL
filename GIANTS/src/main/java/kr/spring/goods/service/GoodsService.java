@@ -53,10 +53,14 @@ public interface GoodsService {
 	public void updateGoodsReview(GoodsReviewVO review);
 	//상품 후기 삭제
 	public void deleteGoodsReview(Integer review_num);
+	//평균 별점 표시
+	public int getAvgScore(Integer goods_num);
 	
 	//=====상품 문의=====//
 	//전체 | 검색 상품 문의 목록
+	public List<GoodsQnaVO> selectGoodsQnaList(Map<String, Object> map);
 	//전체 | 검색 상품 문의 레코드 수
+	public int selectGoodsQnaCount(Integer goods_num);
 	//상품 문의 등록
 	public void insertGoodsQna(GoodsQnaVO qna);
 	//상품 문의 상세

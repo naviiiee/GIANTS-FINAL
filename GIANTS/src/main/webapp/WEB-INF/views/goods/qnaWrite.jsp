@@ -15,7 +15,7 @@
 		<ul>
 			<li>
 				<label>작성자</label>
-				<span>${memberVO.mem_id}</span>
+				<span>${user.mem_id}</span>
 			</li>
 			<li>
 				<label>문의할 상품</label>

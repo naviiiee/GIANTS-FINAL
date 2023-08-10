@@ -3,9 +3,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 상품 상세 페이지 시작 -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goods.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goodsDetail.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods.fav.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_cart.js"></script>
+<script type="text/javascript">
+	function doDisplay(){
+		let con = document.getElementById('content1');
+		if(con.style.display == 'none'){
+			con.style.display='block';
+		}else{
+			con.style.display='none';
+		}
+	} //end of doDisplay
+</script>
 <div class="page-main">
 	<div class="content-main">
 		<c:if test="${!empty user && user.mem_auth == 9}">
@@ -15,7 +25,8 @@
 		</div>
 		</c:if>
 		<div>
-			<input type="button" value="임시버튼-리뷰" onclick="location.href='writeReview.do'">
+			<input type="button" value="임시리뷰" onclick="location.href='writeReview.do'">
+			<input type="button" value="임시문의" onclick="location.href='writeQna.do'">
 		</div>
 		<div class="goods-photo">
 			<img src="${pageContext.request.contextPath}/goods/imageView.do?goods_num=${goods.goods_num}">
@@ -54,7 +65,8 @@
 						</span>
 					</li>
 					<li>
-						평점 : 별표이미지 (숫자표시)
+						평점 : 
+						<span id="avg_star">★</span> (<span id="output_score">${avg_score}</span>) 소수점으로 표시해야됨
 					</li>
 				<c:if test="${goods.goods_status == 1}">
 					<li>
@@ -144,13 +156,6 @@
 					</div>
 					</c:if>
 				</div>
-				<%-- 
-				<ul>	
-					<li id="goods_content">
-						상품설명 ${goods.goods_content}
-					</li>
-				</ul>
-				<hr size="1" width="97%"> --%>
 				<ul>
 					<li class="list-cart-btn">
 						<input class="btn btn-cart" type="submit" value="장바구니">
@@ -249,7 +254,45 @@
 				</ul>
 			</nav>
 		</div>
-		<div id="goods_review">상품후기=============</div>
+		<div id="goods_review">
+			<div class="align-right" style="margin:10px 23px 0 0;">
+				<input type="button" value="리뷰작성" onclick="location.href='writeReview.do'">
+			</div>
+		<c:if test="${review_cnt == 0}">
+		<span>작성된 리뷰가 없습니다.</span>
+		</c:if>
+		<c:if test="${review_cnt > 0}">
+			<table class="detail-tb align-center">
+				<tr>
+					<th style="width:10%;">별점</th>
+					<th>제목</th>
+					<th style="width:13%;">작성자ID</th>
+					<th style="width:12%;">등록일</th>
+				</tr>
+				<c:forEach var="review" items="${review}" varStatus="status">
+				<tr>
+					<td>
+						<c:if test="${review.review_score == 5}">★★★★★(5)</c:if>
+						<c:if test="${review.review_score == 4}">★★★★(4)</c:if>
+						<c:if test="${review.review_score == 3}">★★★(3)</c:if>
+						<c:if test="${review.review_score == 2}">★★(2)</c:if>
+						<c:if test="${review.review_score == 1}">★(1)</c:if>
+					</td>
+					<td class="re-title" id="title${status.count}">
+						<a href="javaScript:doDisplay()">${review.review_title}</a>
+					</td>
+					<td>${review.id}</td>
+					<td>${review.review_regdate}</td>
+				</tr>
+				<tr style="display:none;">
+					<td colspan="5" id="content${status.count}">${review.review_content}</td>
+				</tr>
+				<%-- <div class="re-content">${review.review_content}</div> --%>
+				</c:forEach>
+			</table>
+			<div>${review_page}</div>
+		</c:if>
+		</div>
 		<div class="medium-nav">
 			<nav>
 				<ul>
@@ -260,7 +303,38 @@
 				</ul>
 			</nav>
 		</div>
-		<div id="goods_qna">상품문의=============</div>
+		<div id="goods_qna">
+			<div class="align-right" style="margin:10px 23px 0 0;">
+				<input type="button" value="상품문의" onclick="location.href='writeQna.do'">
+			</div>
+		<c:if test="${qna_cnt == 0}">
+		<span>등록된 문의사항이 없습니다.</span>
+		</c:if>
+		<c:if test="${qna_cnt > 0}">
+			<table class="detail-tb align-center">
+				<tr>
+					<th style="width:10%;">번호</th>
+					<th>제목</th>
+					<th style="width:13%;">작성자ID</th>
+					<th style="width:10%;">등록일</th>
+					<th style="width:13%;">처리상태</th>
+				</tr>
+				<c:forEach var="qna" items="${qna}">
+				<tr>
+					<td>${qna.qna_num}</td>
+					<td>${qna.qna_title}</td>
+					<td>${qna.id}</td>
+					<td>${qna.qna_regdate}</td>
+					<td>
+						<c:if test="${qna.qna_status == 1}">처리전</c:if>
+						<c:if test="${qna.qna_status == 2}">답변완료</c:if>
+					</td>
+				</tr>
+				</c:forEach>
+			</table>
+			<div>${qna_page}</div>
+		</c:if>
+		</div>
 	</div> <%-- end of content-main --%>
 </div>
 <!-- 상품 상세 페이지 끝 -->

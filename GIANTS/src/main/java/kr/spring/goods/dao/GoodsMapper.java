@@ -34,7 +34,7 @@ public interface GoodsMapper {
 								@Param(value="goods_stock") Integer goods_stock);
 	
 	//상품 상세
-	@Select("SELECT * FROM goods WHERE goods_num=#{goods_num}")
+	@Select("SELECT * FROM goods JOIN goods_option USING (goods_num) WHERE goods_num=#{goods_num}")
 	public GoodsVO selectGoods(Integer goods_num);
 	//상품 재고 목록
 	public List<GoodsOptionVO> selectOptionList(Integer goods_num);
@@ -82,9 +82,16 @@ public interface GoodsMapper {
 	//상품 후기 삭제
 	public void deleteGoodsReview(Integer review_num);
 	
+	//평균 별점 표시
+	@Select("SELECT avg(review_score) FROM goods_review WHERE goods_num=#{goods_num}")
+	public int getAvgScore(Integer goods_num);
+	
 	//=====상품 문의=====//
 	//전체 | 검색 상품 문의 목록
+	public List<GoodsQnaVO> selectGoodsQnaList(Map<String, Object> map);
 	//전체 | 검색 상품 문의 레코드 수
+	@Select("SELECT count(*) FROM goods_qna WHERE goods_num=#{goods_num}")
+	public int selectGoodsQnaCount(Integer goods_num);
 	//상품 문의 등록
 	public void insertGoodsQna(GoodsQnaVO qna);
 	//상품 문의 상세

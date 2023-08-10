@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.goods.service.GoodsService;
 import kr.spring.goods.vo.GoodsFavVO;
 import kr.spring.goods.vo.GoodsOptionVO;
+import kr.spring.goods.vo.GoodsQnaVO;
 import kr.spring.goods.vo.GoodsReviewVO;
 import kr.spring.goods.vo.GoodsVO;
 import kr.spring.member.vo.MemberVO;
@@ -47,6 +48,11 @@ public class GoodsController {
 	@ModelAttribute
 	public GoodsReviewVO initCommand2() {
 		return new GoodsReviewVO();
+	}
+	
+	@ModelAttribute
+	public GoodsQnaVO initCommand3() {
+		return new GoodsQnaVO();
 	}
 	
 	/*==========================
@@ -151,7 +157,7 @@ public class GoodsController {
 		int count = goodsService.selectGoodsRowCount(map);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 20, 10, "goodsList.do");
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 12, 10, "goodsList.do");
 		 
 		List<GoodsVO> list = null;
 		if(count > 0) {
@@ -191,22 +197,49 @@ public class GoodsController {
 		//===== 리뷰 목록 =====//
 		Map<String , Object> map = new HashMap<String, Object>();
 		
-		int count = goodsService.selectGreviewRowCount(goods_num);
-		PagingUtil page = new PagingUtil(1, count, 5, 5, "reviewList.do");
+		int review_cnt = goodsService.selectGreviewRowCount(goods_num);
+		PagingUtil page = new PagingUtil(1, review_cnt, 5, 5, "reviewList.do");
 		List<GoodsReviewVO> review = null;
 		
-		if(count > 0) {
+		if(review_cnt > 0) {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
+			map.put("goods_num", goods_num);
 			
 			review = goodsService.selectGoodsReviewList(map);
 		}
+		
+		int avg_score = goodsService.getAvgScore(goods_num);
+		log.debug("<<로그찍기 - review>>" + review);
+		
+		//===== 상품문의 목록 =====//
+		Map<String, Object> map2 = new HashMap<String, Object>();
+		
+		int qna_cnt = goodsService.selectGoodsQnaCount(goods_num);
+		PagingUtil page2 = new PagingUtil(1, qna_cnt, 5, 5, "qnaList.do");
+		List<GoodsQnaVO> qna = null;
+		
+		if(qna_cnt > 0) {
+			map2.put("start", page2.getStartRow());
+			map2.put("end", page2.getEndRow());
+			map2.put("goods_num", goods_num);
+			
+			qna = goodsService.selectGoodsQnaList(map2);
+		}
+		
+		log.debug("<<로그찍기 - qna>>" + qna);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("goodsView");
 		mav.addObject("goods", goods);
 		mav.addObject("option", list);
 		mav.addObject("review", review);
+		mav.addObject("review_cnt", review_cnt);
+		mav.addObject("review_page", page.getPage());
+		mav.addObject("qna", qna);
+		mav.addObject("qna_cnt", qna_cnt);
+		mav.addObject("qna_page", page2.getPage());
+		mav.addObject("avg_score", avg_score);
 		
 		return mav;
 	}
@@ -376,6 +409,8 @@ public class GoodsController {
 		
 		//회원번호 셋팅
 		reviewVO.setMem_num(((MemberVO)session.getAttribute("user")).getMem_num());
+		//IP 셋팅
+		reviewVO.setReview_ip(request.getRemoteAddr());
 		
 		//리뷰 등록
 		goodsService.insertGoodReview(reviewVO);
@@ -403,12 +438,37 @@ public class GoodsController {
 		
 		List<GoodsVO> goods_list = goodsService.selectGoodsList(map);
 		model.addAttribute("goods_list", goods_list);
+		model.addAttribute("user", (MemberVO)session.getAttribute("user"));
 		
 		return "qnaWrite";
 	}
 	
-	
-	
+	//전송된 데이터 처리
+	@PostMapping("/goods/writeQna.do")
+	public String submitQna(@Valid GoodsQnaVO qnaVO, BindingResult result,
+							HttpServletRequest request, HttpSession session, Model model) {
+		
+		
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			return formQna(session, model);
+		}
+		
+		//회원번호 셋팅
+		qnaVO.setMem_num(((MemberVO)session.getAttribute("user")).getMem_num());
+		//IP 셋팅
+		qnaVO.setQna_ip(request.getRemoteAddr());
+		
+		goodsService.insertGoodsQna(qnaVO);
+		
+		log.debug("<<상품문의 등록>> : " + qnaVO);
+		
+		model.addAttribute("message", "상품문의가 완료되었습니다.");
+		model.addAttribute("url", request.getContextPath() + "/goods/goodsList.do");
+		
+		return "common/resultView";
+	}
 	
 	
 	

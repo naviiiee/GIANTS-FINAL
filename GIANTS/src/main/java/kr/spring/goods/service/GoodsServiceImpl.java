@@ -141,12 +141,28 @@ public class GoodsServiceImpl implements GoodsService{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public int getAvgScore(Integer goods_num) {
+		return goodsMapper.getAvgScore(goods_num);
+	}
 
 	//===== 상품문의 =====//
-	
 	@Override
 	public void insertGoodsQna(GoodsQnaVO qna) {
 		goodsMapper.insertGoodsQna(qna);
 	}
+
+	@Override
+	public List<GoodsQnaVO> selectGoodsQnaList(Map<String, Object> map) {
+		return goodsMapper.selectGoodsQnaList(map);
+	}
+
+	@Override
+	public int selectGoodsQnaCount(Integer goods_num) {
+		return goodsMapper.selectGoodsQnaCount(goods_num);
+	}
+
+
 
 }

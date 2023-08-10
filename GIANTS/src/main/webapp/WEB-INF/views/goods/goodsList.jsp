@@ -30,7 +30,7 @@
 		<input type="button" value="유니폼"> 
 		<input type="button" value="모자"> 
 		<input type="button" value="응원도구"> 
-		<input type="button" value="기타"> 
+		<input type="button" value="기타">
 	</div>
 	<hr size="1" width="100%" noshade>
 	<c:if test="${!empty user && user.mem_auth == 9}">
@@ -95,4 +95,4 @@
 	<div class="align-center">${page}</div>
 	</c:if>
 </div>
-<!-- 상품목록 시작 -->
+<!-- 상품목록 끝 -->

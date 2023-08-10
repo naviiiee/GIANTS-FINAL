@@ -142,7 +142,8 @@
 				review_score,
 				review_content,
 				review_photo,
-				review_photoname)
+				review_photoname,
+				review_ip)
 		VALUES(
 			goods_review_seq.nextval,
 			#{mem_num},
@@ -151,7 +152,8 @@
 			#{review_score},
 			#{review_content},
 			#{review_photo},
-			#{review_photoname})
+			#{review_photoname},
+			#{review_ip})
 	</insert>
 	
 	<!-- 리뷰 레코드 수 -->
@@ -174,7 +176,8 @@
 			 		*
 			 	  FROM goods_review g JOIN member m
 			 	  ON g.mem_num=m.mem_num
-			 	  ORDER BY goods_regdate DESC)a)
+			 	  WHERE goods_num=#{goods_num}
+			 	  ORDER BY review_regdate DESC)a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
@@ -185,19 +188,37 @@
 	<insert id="insertGoodsQna" parameterType="goodsQnaVO">
 		INSERT INTO
 			goods_qna(
-				gna_num,
+				qna_num,
 				qna_title,
 				qna_content,
 				mem_num,
-				goods_num)
+				goods_num,
+				qna_ip)
 		VALUES(
 			goods_qna_seq.nextval,
 			#{qna_title},
 			#{qna_content},
 			#{mem_num},
-			#{goods_num})
+			#{goods_num},
+			#{qna_ip})
 	</insert>
 	
+	<!-- 문의 목록 -->
+	<select id="selectGoodsQnaList" parameterType="map" resultType="goodsQnaVO">
+		SELECT
+			*
+		FROM(SELECT
+				a.*,
+				rownum rnum
+			 FROM(SELECT
+			 		*
+			 	  FROM goods_qna q JOIN member m
+			 	  ON q.mem_num=m.mem_num
+			 	  WHERE goods_num=#{goods_num})a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
 	
 	
 	
