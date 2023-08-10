@@ -34,7 +34,7 @@ public interface GoodsMapper {
 								@Param(value="goods_stock") Integer goods_stock);
 	
 	//상품 상세
-	@Select("SELECT * FROM goods JOIN goods_option USING (goods_num) WHERE goods_num=#{goods_num}")
+	@Select("SELECT * FROM goods WHERE goods_num=#{goods_num}")
 	public GoodsVO selectGoods(Integer goods_num);
 	//상품 재고 목록
 	public List<GoodsOptionVO> selectOptionList(Integer goods_num);

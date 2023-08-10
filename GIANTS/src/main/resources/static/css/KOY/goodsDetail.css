@@ -160,7 +160,8 @@ div#sold-out > span{
 div#goods_review, div#goods_qna{
 	width:100%;
 	text-align:center;
-	height:200px;
+	max-height:300px;
+	margin-bottom:20px;
 }
 div#goods_review > span, div#goods_qna > span{
 	font-size:15pt;

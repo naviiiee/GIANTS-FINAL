@@ -6,15 +6,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goodsDetail.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods.fav.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_cart.js"></script>
-<script type="text/javascript">
-	$(function(){
-		$('.re-content').hide();
-		$('.re-title').click(function(){
-			$('.re-content').show();
-			$('.re-title').css('background-color', 'yellow');
-		}); //end of re-title click
-	});
-</script>
+
 <div class="page-main">
 	<div class="content-main">
 		<c:if test="${!empty user && user.mem_auth == 9}">
@@ -283,8 +275,10 @@
 					<td>${review.id}</td>
 					<td>${review.review_regdate}</td>
 				</tr>
-				<tr style="display:none;">
-					<td colspan="5" id="content${status.count}">${review.review_content}</td>
+				<tr class="re-content" id="content${status.count}" style="display:none;">
+					<td colspan="5">
+						<div class="align-left" style="height:100px;">${review.review_content}</div>
+					</td>
 				</tr>
 				<%-- <div class="re-content">${review.review_content}</div> --%>
 				</c:forEach>
@@ -292,6 +286,20 @@
 			<div>${review_page}</div>
 		</c:if>
 		</div>
+		<script type="text/javascript">
+			$(function(){
+				$('.re-content').hide();
+						
+				$('.re-title').click(function(){
+					let num = $('.re-title').attr('id').substring(5);
+					if($('#content' + num).is(':visible')){
+						$('#content' + num).slideUp();
+					}else{
+						$('#content' + num).slideDown();
+					}
+				}); //end of re-title click
+			});
+		</script>
 		<div class="medium-nav">
 			<nav>
 				<ul>
