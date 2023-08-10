@@ -66,13 +66,13 @@ $(function() {
 					seat_div += '<div class="ground"><h2>그라운드 방향</h2></div>';
 					seat_div +=  '<div class="seat-check">';
 					
-					
 					for(let i = 0; i < row_length; i++) {
-						seat_div += row[i];
+						seat_div += '<div class="row-div">';
+						seat_div += '<span>' + row[i] + '</span>';
 						for(let j = 0; j < col_length; j++) {
-							seat_div += '<input type="button" value="'+col[j]+'" data-row="'+row[i]+'" data-col="'+col[j]+'" class="seat-btn">';
+							seat_div += '<input type="button" value="" data-row="'+row[i]+'" data-col="'+col[j]+'" class="seat-btn gn'+param.grade_num+'">';
 						}
-						seat_div += '<br>';
+						seat_div += '</div>';
 					}
 					
 					seat_div += '</div>';

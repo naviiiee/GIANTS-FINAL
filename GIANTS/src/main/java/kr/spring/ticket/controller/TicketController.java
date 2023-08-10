@@ -97,6 +97,7 @@ public class TicketController {
 			log.debug("<<seat>> : " + seat);
 			
 			mapJson.put("result", "success");
+			mapJson.put("grade_num", seat.getGrade_num());
 			mapJson.put("seat_row", seat.getSeat_row());
 			mapJson.put("seat_col", seat.getSeat_col());
 		}

@@ -33,10 +33,16 @@
 							<th>잔여석</th>
 						</tr>
 						<c:forEach var="grade" items="${list}">
+						<c:if test="${grade.quantity > 0}">
 						<tr data-grade="${grade.grade_num}" class="grade_title">
-							<td>${grade.title}</td>
+							<td>
+								<img src="${pageContext.request.contextPath}/images/grade${grade.grade_num}.png">
+								${grade.title}
+							</td>
+							
 							<td>${grade.quantity}</td>
 						</tr>
+						</c:if>
 						</c:forEach>
 					</table>
 				</div>
