@@ -47,7 +47,7 @@
 	
 	<!-- [Ticket] -->
 	<definition name="ticketMain" extends="main">
-		<put-attribute name="title" value="경기수정"/>
+		<put-attribute name="title" value="좌석선택"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticket/ticketMain.jsp"/>
 	</definition>
 	

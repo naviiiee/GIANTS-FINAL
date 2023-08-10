@@ -78,9 +78,13 @@ input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }
 .ground{ background-color:#fff; width:50%; margin:0 auto; padding:10px 0; text-align:center; }
 .seat-check{ width:80%; margin:0 auto; text-align:center; }
 
+.row-div span{ color:#999; }
+
 .seat-btn{ width:30px; height:30px; border:none; background-color:#fff; margin:10px 10px; }
 .seat-btn:hover{ cursor:pointer; }
+.clicked{ background:#fff; }
 .gn1{ background:#627833; }
+.gn63{ background:#D77783; }
 
 /* 스크롤바 */
 .scrollBar::-webkit-scrollbar { width:10px;  /* 스크롤바의 너비 */ }
