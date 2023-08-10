@@ -30,56 +30,46 @@
 			<li id="item2"class="sidebar-item"><a href="#" >NEWS</a></li>
 			<li id="item3"class="sidebar-item"><a href="#">굿즈</a></li>
 			<li id="item4"class="sidebar-item"><a href="#">티켓</a></li>
-			<li id="item5"class="sidebar-item"><a href="#">먹거리</a></li>
+			<li id="item5"class="sidebar-item"><a href="#">푸드</a></li>
 			<li id="item6"class="sidebar-item"><a href="#">중고거래</a></li>
 		</ul>
 	</div>
 	<div id="sub_item1" class="sidebar-right hide">
 		<ul class="sidebar-list">
-			<li class="sidebar-item-sub"><a href="#">감독</a></li>
-			<li class="sidebar-item-sub"><a href="#">코치</a></li>
-			<li class="sidebar-item-sub"><a href="#">선수</a></li>
-			<li class="sidebar-item-sub"><a href="#">시설</a></li>
+			<li class="sidebar-item-sub"><a href="${pageContext.request.contextPath}/introduce/stadium.do">소개</a></li>
 		</ul>
 	</div>
 	<div id="sub_item2" class="sidebar-right hide">
 		<ul class="sidebar-list">
-			<li class="sidebar-item-sub"><a href="#">ㅇㅇ</a></li>
-			<li class="sidebar-item-sub"><a href="#">ㅇㅇ</a></li>
-			<li class="sidebar-item-sub"><a href="#">ㅇㅇ</a></li>
-			<li class="sidebar-item-sub"><a href="#">ㅇㅇ</a></li>
+			<li class="sidebar-item-sub"><a href="${pageContext.request.contextPath}/news/newsList.do">자이언츠 뉴스</a></li>
 		</ul>
 	</div>
 	<div id="sub_item3" class="sidebar-right hide">
 		<ul class="sidebar-list">
-			<li class="sidebar-item-sub"><a href="#">@@</a></li>
-			<li class="sidebar-item-sub"><a href="#">@@</a></li>
-			<li class="sidebar-item-sub"><a href="#">@@</a></li>
-			<li class="sidebar-item-sub"><a href="#">@@</a></li>
+			<li class="sidebar-item-sub"><a href="${pageContext.request.contextPath}/goods/goodsList.do">상품목록</a></li>
+			<c:if test="${!empty user && user.mem_auth == 2}">
+				<li class="sidebar-item-sub"><a href="#">장바구니(굿즈)</a></li>
+				<li class="sidebar-item-sub"><a href="#">주문목록(굿즈)</a></li>
+			</c:if>
 		</ul>
 	</div>
 	<div id="sub_item4" class="sidebar-right hide">
 		<ul class="sidebar-list">
-			<li class="sidebar-item-sub"><a href="#">감독</a></li>
-			<li class="sidebar-item-sub"><a href="#">코치</a></li>
-			<li class="sidebar-item-sub"><a href="#">선수</a></li>
-			<li class="sidebar-item-sub"><a href="#">시설</a></li>
+			<li class="sidebar-item-sub"><a href="${pageContext.request.contextPath}/ticket/ticketInfo.do">티켓</a></li>
 		</ul>
 	</div>
 	<div id="sub_item5" class="sidebar-right hide">
 		<ul class="sidebar-list">
-			<li class="sidebar-item-sub"><a href="#">감독</a></li>
-			<li class="sidebar-item-sub"><a href="#">코치</a></li>
-			<li class="sidebar-item-sub"><a href="#">선수</a></li>
-			<li class="sidebar-item-sub"><a href="#">시설</a></li>
+			<li class="sidebar-item-sub"><a href="${pageContext.request.contextPath}/food/foodList.do">매장목록</a></li>
+			<c:if test="${!empty user && user.mem_auth == 2}">
+				<li class="sidebar-item-sub"><a href="#">장바구니(푸드)</a></li>
+				<li class="sidebar-item-sub"><a href="#">주문목록(푸드)</a></li>
+			</c:if>
 		</ul>
 	</div>
 	<div id="sub_item6" class="sidebar-right hide">
 		<ul class="sidebar-list">
-			<li class="sidebar-item-sub"><a href="#">감독</a></li>
-			<li class="sidebar-item-sub"><a href="#">코치</a></li>
-			<li class="sidebar-item-sub"><a href="#">선수</a></li>
-			<li class="sidebar-item-sub"><a href="#">시설</a></li>
+			<li class="sidebar-item-sub"><a href="${pageContext.request.contextPath}/trading/tradingList.do">중고거래</a></li>
 		</ul>
 	</div>
 </div>

@@ -20,6 +20,7 @@
 				</c:if>
 				<c:if test="${!empty user && user.mem_auth == 2}">
 					<li class="top-menu-mypage"><a href="${pageContext.request.contextPath}/member/myPage.do"><img src="${pageContext.request.contextPath}/images/캐릭터.png">마이페이지</a></li>
+					<li class="top-menu-food-cart"><a href="${pageContext.request.contextPath}/food/foodCart.do">장바구니(푸드)</a></li>
 					<li class="top-menu-cart"><a href="${pageContext.request.contextPath}/gorder/goods_cart.do">장바구니</a></li>
 				</c:if>
 				<c:if test="${!empty user && user.mem_auth == 3}">
@@ -51,42 +52,6 @@
 	</div>
 </div>
 
-<%--
-<div>
-	<!-- 소개 -->
-	<ul>
-		<li><a href="#"></a>감독</li>
-		<li><a href="#"></a>코치</li>
-		<li><a href="#"></a>선수</li>
-		<li><a href="#"></a>시설</li>
-	</ul>
-	<!-- NEWS -->
-	<ul>
-		<li><a href="#"></a>자이언츠 뉴스</li>
-		<li><a href="#"></a>경기일정</li>
-		<li><a href="#"></a>사직야구장 날씨</li>
-	</ul>
-	<!-- 굿즈 -->
-	<ul>
-		<li><a href="#"></a>유니폼</li>
-		<li><a href="#"></a>모자</li>
-		<li><a href="#"></a>응원도구</li>
-		<li><a href="#"></a>기타</li>
-	</ul>
-	<!-- 티켓 -->
-	<ul>
-		<li><a href="#"></a></li>
-	</ul>
-	<!-- 먹거리 -->
-	<ul>
-		<li><a href="#"></a></li>
-	</ul>
-	<!-- 중고거래 -->
-	<ul>
-		<li><a href="#"></a></li>
-	</ul>
-</div>
---%>
 
 
 

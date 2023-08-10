@@ -516,6 +516,7 @@
 	margin-bottom: 50px;
 }
 .food-content{
+	min-height: 600px;
 	padding: 30px 50px;
 }
 .food-content img{
