@@ -37,6 +37,10 @@ public interface GcartMapper {
 	// 장바구니 삭제
 	@Delete("DELETE FROM g_cart WHERE cart_num=#{cart_num}")
 	public void deleteCart(int cart_num);
+	
+	//장바구니 전체 삭제
+	@Delete("DELETE FROM g_cart WHERE mem_num=#{mem_num}")
+	public void deleteCartAll(int mem_num);
 
 	// 옵션과 상품 번호로 재고 가져오기 - 굿즈쪽으로 나중에 보내기
 	@Select("SELECT goods_stock FROM goods_option WHERE goods_num=#{goods_num} AND opt_num=#{opt_num}")

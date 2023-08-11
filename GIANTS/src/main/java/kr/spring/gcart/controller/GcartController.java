@@ -195,5 +195,20 @@ public class GcartController {
 		}
 		return mapJson;
 	}
+	
+	@RequestMapping("/cart/deleteCartAll.do")
+	@ResponseBody
+	public Map<String, String> deleteAll(HttpSession session) {
+		Map<String, String> mapJson = new HashMap<String, String>();
+
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		if (user == null) {
+			mapJson.put("result", "logout");
+		} else {
+			cartService.deleteCartAll(user.getMem_num());
+			mapJson.put("result", "success");
+		}
+		return mapJson;
+	}
 
 }// end Controller

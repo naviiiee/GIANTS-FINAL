@@ -29,8 +29,11 @@ public interface GcartService {
 	// 장바구니 상품 번호와 회원번호 별 수정
 	public void updateCartByItem_num(GcartVO cart);
 
-	// 장바구니 삭제
+	// 장바구니 선택 삭제
 	public void deleteCart(int cart_num);
+	
+	// 장바구니 전체 삭제
+	public void deleteCartAll(int mem_num);
 
 	// 옵션과 상품 번호로 재고 가져오기 - 굿즈쪽으로 나중에 보내기
 	public int getStockByoption(int goods_num, int opt_num);

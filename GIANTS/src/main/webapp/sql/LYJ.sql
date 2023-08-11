@@ -4,7 +4,7 @@ create table G_ORDER(
 	mem_num number not null, --회원번호
 	goods_name varchar2(600) not null, --상품이름
 	order_payment number(1) not null, --결제 방법(0:무통장, 1:카드)
-	order_status number(1) not null, --배송상태(0:결제완료, 1:배송준비, 2:배송중, 3:배송완료)
+	order_status number(1) default 0 not null, --배송상태(0:결제완료, 1:배송준비, 2:배송중, 3:배송완료)
 	order_regdate date default SYSDATE not null, --주문날짜
 	order_modifydate date, --배송상태 수정일
 	order_name varchar2(30) not null, --수령자명
@@ -14,7 +14,6 @@ create table G_ORDER(
 	mem_phone varchar2(15) not null, --수령자 전화번호
 	order_message varchar2(1300),  --배송 메세지
 	order_total number(9) not null, --총 주문 가격
-	order_quantity number(9) not null, --주문 수량
 	merchant_uid number not null, --가맹점 주문번호API
 	CONSTRAINT G_ORDER_FK1 foreign key (mem_num) references member (mem_num)
 );
@@ -25,13 +24,11 @@ create table G_ORDER_DETAIL(
 	detail_num number primary key, --주문 상세 식별 번호
 	mem_num number not null, --회원번호
 	order_num number not null, -- 주문번호
-	order_quantity number(5) not null, --주문개수
 	order_point number(5) not null, --상품 1개 당 적립예정 포인트(결제 금액의 2%)   
 	order_dcost number default 3000 not null, --배송비
 	goods_num number not null, --상품 식별 번호
 	goods_name varchar2(600) not null, --상품명
-	goods_price number(9) not null, --상품 금액
-	goods_dprice number(9) not null, --할인된 가격(상품가격*(1-할인율))
+	goods_dprice number(9) not null, --상품 금액
 	goods_total number(9) not null, --총 상품금액(동일 상품 합산 금액)
 	goods_size number(1) not null, --상품 옵션
 	mem_point number default 0 not null, --회원 보유 포인트

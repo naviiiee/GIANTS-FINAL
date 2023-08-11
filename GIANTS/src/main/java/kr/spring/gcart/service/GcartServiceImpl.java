@@ -57,6 +57,12 @@ public class GcartServiceImpl implements GcartService{
 	public int getStockByoption(int goods_num, int opt_num) {
 		return cartMapper.getStockByoption(goods_num, opt_num);
 	}
+
+	@Override
+	public void deleteCartAll(int mem_num) {
+		cartMapper.deleteCartAll(mem_num);
+		
+	}
 	
 
 	

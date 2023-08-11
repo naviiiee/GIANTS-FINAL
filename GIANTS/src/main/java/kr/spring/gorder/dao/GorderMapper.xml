@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.gorder.dao.GorderMapper">
+
+<!-- 상품 주문 -->
+	<insert id="insertOrder" parameterType="GorderVO">
+		INSERT INTO g_order(
+		  order_num,
+		  mem_num,
+		  goods_name,
+		  order_payment, 
+		  order_status,
+		  order_regdate,
+		  order_name,
+		  order_zipcode,
+		  order_address1,
+		  order_address2,
+		  mem_phone,
+		  order_message,
+		  order_total,
+		  merchant_uid		  
+		  )
+		VALUES(
+		  #{order_num},
+		  #{mem_num},
+		  #{goods_name},
+		  #{order_payment},
+		  #{order_status},
+		  #{order_regdate},
+		  #{order_name},
+		  #{order_zipcode},
+		  #{order_address1},
+		  #{order_address2},
+		  #{mem_phone},
+		  #{order_message},
+		  #{order_total},
+		  #{merchant_uid}
+		  )  
+	</insert>
+	
+	<!-- <insert id="insertOrderDetail" parameterType="orderDetailVO">
+		INSERT INTO sporder_detail(
+		  detail_num,
+		  mem_num,
+		  order_num,
+		  order_point,
+		  order_dcost,
+		  goods_num,
+		  goods_dprice,
+		  goods_total,
+		  goods_size,
+		  mem_point
+		  
+		  
+		  
+		  )
+		VALUES(
+		  sporder_detail_seq.nextval,
+		  #{item_num},
+		  #{item_name},
+		  #{item_price},
+		  #{item_delivery},
+		  #{item_total},
+		  #{order_quantity},
+		  #{order_num})  
+	</insert> -->
+	
+	<!-- 관리자 - 주문 목록 -->
+	<sql id="orderSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<if test="keyfield == 1">
+					order_num = #{keyword}
+				</if>
+				<if test="keyfield == 2">
+					id LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 3">
+					goods_name LIKE '%' || #{keyword} || '%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectOrderCount" parameterType="map" resultType="integer">
+		SELECT
+		  COUNT(*)
+		FROM g_order o JOIN member m
+		ON o.mem_num = m.mem_num
+		<include refid="orderSearch"></include>
+	</select>
+	
+	<select id="selectListOrder" parameterType="map" resultType="GorderVO">
+		SELECT
+		  *
+		FROM (SELECT
+		       a.*,
+		       rownum rnum
+		      FROM(SELECT
+		             *
+		           FROM g_order o JOIN member m
+		           ON o.mem_num = m.mem_num
+		           <include refid="orderSearch"></include>
+		           ORDER BY order_num DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

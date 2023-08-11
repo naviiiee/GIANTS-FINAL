@@ -3,84 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 
-<style>
-.content-main {
-	background-color: #ffffff; /* 배경색 */
-	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
-	padding: 20px;
-	padding-top: 10px;
-}
-h2 {
-	margin-top: 0;
-}
-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-bottom: 20px;
-}
-th, td {
-	padding: 10px;
-	border: 1px solid #ddd;
-	text-align: center;
-}
-.align-center {
-	text-align: center;
-}
-input[type="submit"], input[type="button"] {
-    padding: 8px 16px;
-    background-color: #052345;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 3px;
-    margin-right: 10px;
-    cursor: pointer;
-}
-input[type="submit"]:hover, input[type="button"]:hover {
-    background-color: #052345;
-}
-.result-display {
-	margin-bottom: 20px;
-	text-align: center;
-	font-style: italic;
-}
-.cart-modify, .cart-del {
-	padding: 5px 10px;
-	border: none;
-	background-color:#dd032f;
-	color: white;
-	cursor: pointer;
-}
-.cart-modify:hover, .cart-del:hover {
-	background-color: #35c5f0;
-}
-.cart-submit {
-	margin-top: 20px;
-}
-.header h1 {
-	margin: 0;
-}
-.content {
-	background-color: #052345;
-	padding: 20px;
-}
-
-.goods-link {
-	color: #052345;
-	text-decoration: none;
-}
-.goods-photo {
-	width: 80px;
-	margin-right: 10px;
-	vertical-align: middle;
-}
-
-#order-btn{
-	background-color: #dd032f;
-}
-</style>
-
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_cart.js"></script>
 <!-- all_total, list(g_order_detail) - 사이즈 포함 -->
 <!-- 장바구니 시작 -->
@@ -96,6 +20,7 @@ input[type="submit"]:hover, input[type="button"]:hover {
 	</c:if>
 	<c:if test="${!empty list}">
 	<form id="cart_order" action="${pageContext.request.contextPath}/gorder/orderForm.do" method="post">
+	<input type="hidden" id="mem_num">
 		<table class="basic-table">
 			<tr>
 				<!-- 1. 체크박스 -->
@@ -155,11 +80,11 @@ input[type="submit"]:hover, input[type="button"]:hover {
 						</div>
 					</td>					
 					<!-- 옵션 처리 -->
-					<c:if test="${cart.goods_size != '옵션없음'}">
+					<c:if test="${cart.goods_size!='옵션없음'}">
 						<tr>
 							<td colspan="6">
 								<img src="${pageContext.request.contextPath}/images/btn_order_option.gif" alt="옵션" title="옵션">
-								 사이즈 : ${cart.goods_size}
+								 사이즈 : ${cart.goods_size} 
 							</td>	
 						</tr>
 					</c:if>
@@ -173,7 +98,7 @@ input[type="submit"]:hover, input[type="button"]:hover {
 		
 		<div class = "buttons">
 				<input type="button" value="쇼핑 계속하기" onclick="location.href='${pageContext.request.contextPath}/goods/goodsList.do'">
-				<input type = "submit" value = "주문하기" onclick="location.href='${pageContext.request.contextPath}/gorder/user_orderForm.do'" id="order-btn">
+				<input type = "submit" value = "주문하기"  id="order-btn">
 				<input type="button" value="장바구니 비우기" class="deleteCartAll"> <!-- js click 처리 -->
 		</div>
 	</form>
