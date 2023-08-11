@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -97,13 +98,20 @@ public class TicketController {
 			log.debug("<<seat>> : " + seat);
 			
 			mapJson.put("result", "success");
-			mapJson.put("grade_num", seat.getGrade_num());
-			mapJson.put("seat_num", seat.getSeat_num());
-			mapJson.put("seat_block", seat.getSeat_block());
-			mapJson.put("seat_row", seat.getSeat_row());
-			mapJson.put("seat_col", seat.getSeat_col());
+			mapJson.put("seat", seat);
 		}
 		
 		return mapJson;
+	}
+	
+	/* ----- [Order] 티켓주문 -----*/
+	@PostMapping("/ticket/orderForm.do")
+	public String orderTicketForm(@RequestParam int game_num, SeatVO seatVO, HttpSession session, Model model) {
+		List<SeatVO> list = null;
+		list = ticketService.selectSeatList(seatVO);
+		
+		model.addAttribute("seatVO", seatVO);
+		
+		return "ticketOrderForm";
 	}
 }

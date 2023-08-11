@@ -9,8 +9,10 @@ $(function() {
 			data:{grade_num:$(this).attr('data-grade')},
 			dataType:'json',
 			success:function(param) {
-				if(param.result == 'logout') { alert('Login 후 이용가능'); }
-				else if(param.result == 'success') {
+				if(param.result == 'logout') {
+					alert('Login 후 이용가능');
+					location.href='../member/login.do';
+				} else if(param.result == 'success') {
 					$('.block-table').empty();
 					
 					let block_info = '<table class="block-table">';
@@ -45,12 +47,17 @@ $(function() {
 			data:{seat_num:$(this).attr('data-seat')},
 			dataType:'json',
 			success:function(param) {
-				if(param.result == 'logout') { alert('Login 후 이용가능'); }
-				else if(param.result == 'success') {
+				if(param.result == 'logout') {
+					alert('Login 후 이용가능');
+					location.href='../member/login.do';
+				} else if(param.result == 'success') {
 					$('.select-left').empty();
 					
-					let row = param.seat_row.split(',')
-					let col = param.seat_col.split(',')
+					let seat = $(this).attr('data-seat');
+					let grade = param.seat.grade_num
+					let block = param.seat.seat_block
+					let row = param.seat.seat_row.split(',')
+					let col = param.seat.seat_col.split(',')
 					
 					let row_length = row.length;
 					let col_length = col.length;
@@ -63,7 +70,8 @@ $(function() {
 						seat_div += '<div class="row-div">';
 						seat_div += '<span>' + row[i] + '</span>';
 						for(let j = 0; j < col_length; j++) {
-							seat_div += '<input type="button" value="'+row[i]+col[j]+'" data-block="'+param.seat_block+'" data-grade="'+param.grade_num+'" data-row="'+row[i]+'" data-col="'+col[j]+'" class="seat-btn gn'+param.grade_num+'">';
+							seat_div += '<input type="button" data-info="' + block + row[i] + col[j] + '" data-seatNum="' + seat + '" class="seat-btn gn' + grade
+														 + '" data-block="' + block + '" data-grade="' + grade + '" data-row="' + row[i] + '" data-col="' + col[j] + '">';
 						}
 						seat_div += '</div>';
 					}
@@ -77,37 +85,26 @@ $(function() {
 		});
 	});
 	
-	$(document).on('click', '.seat-btn', function(e) {
-		let seat_block = $(this).attr('data-block');
+	$(document).on('click', '.seat-btn', function() {
+		let check_num = $(this).attr('data-seatNum');
+		let check_block = $(this).attr('data-block');
 		let check_row = $(this).attr('data-row');
 		let check_col = $(this).attr('data-col');
-		
-		let info = seat_block + check_row + check_col;
-		
-		let selectedSeats = new Array();
-		let clicked = '';
-		
-		//중복방지 함수
-		selectedSeats = selectedSeats.filter((element, index) => selectedSeats.indexOf(element) != index);
+		let info = check_block + check_row + check_col;
 		
 		if($(this).hasClass('clicked')) {
 			$(this).removeClass('clicked');
 			$(this).addClass('gn'+$(this).attr('data-grade'));
-			
-			clicked = document.querySelectorAll('.clicked');
-			selectedSeats.splice(selectedSeats.indexOf(info), 1);
-			clicked.forEach((data) => { selectedSeats.push(data.value); });
+			$('#del'+$(this).attr('data-info')).remove();
 		} else {
 			$(this).removeClass('gn'+$(this).attr('data-grade'));
 			$(this).addClass('clicked');
-			
-			clicked = document.querySelectorAll('.clicked');
-			clicked.forEach((data) => { selectedSeats.push(data.value); });
 		
-			let seat_info = '<tr class="seat-leng"><td>' + seat_block + '블럭 ' + check_row + '행 ' + check_col + '열';
-			//seat_info += '<input type="hidden" name="seat_num" class="seatN" value="' + param.seat_num + '">';
-			seat_info += '<input type="hidden" name="seat_row" class="seatR" value="' + check_row + '">';
-			seat_info += '<input type="hidden" name="seat_col" class="seatC" value="' + check_col + '">';
+			let seat_info = '<tr class="seat-leng" id="del'+info+'"><td>';
+			seat_info += '<img src="../images/grade' + $(this).attr('data-grade') + '.png">' + check_block + '블럭 ' + check_row + '행 ' + check_col + '번';
+			seat_info += '<input type="hidden" name="seatB" class="seatB" value="' + check_block + '">';
+			seat_info += '<input type="hidden" name="seatR" class="seatR" value="' + check_row + '">';
+			seat_info += '<input type="hidden" name="seatC" class="seatC" value="' + check_col + '">';
 			seat_info += '</td></tr>';
 			
 			$('.seat-table').append(seat_info);

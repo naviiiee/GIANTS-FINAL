@@ -7,8 +7,8 @@
 
 	<!-- [경기]등록 -->
 	<insert id="insertGame" parameterType="gameVO">
-		INSERT INTO tgame (game_num, game_date, game_time, game_team)
-			   VALUES (tgame_seq.nextval, #{game_date}, #{game_time}, #{game_team})
+		INSERT INTO tgame (game_num, game_date, game_time, game_team, game_week)
+			   VALUES (tgame_seq.nextval, #{game_date}, #{game_time}, #{game_team}, #{game_week})
 	</insert>
 	
 	<!-- [등급]등록 -->

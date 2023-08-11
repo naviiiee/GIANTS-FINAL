@@ -31,7 +31,7 @@ hr{ margin:15px 0; }
 .info-left table, .info-right table, .select-grade table, .select-block table, .selected-seat table{ width:90%; margin:0 auto; text-align:center; border-collapse:collapse; font-size:15px; }
 .info-left table tr, .info-right table tr, #grade_list tr, .select-grade table tr, .select-block table tr, .selected-seat table tr{ border-bottom:1px solid #999; }
 .info-left table th, .info-right table th, #seat_list th, #grade_list th{ background:#999; padding:5px; }
-.info-left table td, .info-right table td, #seat_list td, #grade_list td, .select-grade table td, .select-block table td{ padding:5px; }
+.info-left table td, .info-right table td, #seat_list td, #grade_list td, .select-grade table td, .select-block table td, .selected-seat td{ padding:5px; }
 
 .info-list{ margin-top:15px; }
 .info-list li, .refunt-info li{ margin:10px 0; }
@@ -81,7 +81,7 @@ input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }
 .row-div span{ color:#999; }
 
 .seat-btn{ width:30px; height:30px; border:none; background-color:#fff; margin:10px 10px; }
-.seat-btn:hover{ cursor:pointer; }
+.seat-btn:hover{ cursor:pointer; background-color:transparent; transition:0.2s ease-out; border:1px solid #fff; }
 .clicked{ background:#fff; }
 .gn1{ background:#627833; }
 .gn63{ background:#D77783; }

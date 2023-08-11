@@ -11,7 +11,7 @@
 		<h2>좌석선택</h2>
 		<hr size="0.05" width="100%" noshade>
 	</div>
-	<form action="order.do" method="post">
+	<form action="orderForm.do" id="order_seat" method="post">
 		<input type="hidden" name="game_num" value="${game_num}">
 		<div class="select-ticket">
 			<div class="select-left">

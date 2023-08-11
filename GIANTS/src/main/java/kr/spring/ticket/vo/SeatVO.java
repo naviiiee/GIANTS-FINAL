@@ -22,4 +22,9 @@ public class SeatVO {
 	private String seat_col;// 좌석 열 배열
 	@NotEmpty
 	private int seat_quantity;
+	
+	private int seatB;	// 선택한 블럭 번호
+	private String seatR;	// 선택한 좌석 행
+	private String seatC;	// 선택한 좌석 열
+	
 }

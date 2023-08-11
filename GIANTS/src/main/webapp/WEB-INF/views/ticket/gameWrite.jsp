@@ -36,6 +36,11 @@
 				<form:radiobutton path="game_team" value="eagles"/>한화
 				<form:errors path="game_team" cssClass="error-color"/>
 			</li>
+			<li>
+				<form:label path="game_week">주중/주말</form:label>
+				<form:radiobutton path="game_week" value="0"/>주중
+				<form:radiobutton path="game_week" value="1"/>주말
+			</li>
 		</ul>
 		</div>
 		<hr size="0.05" width="100%" noshade>
