@@ -278,8 +278,17 @@
 					<td colspan="5">
 						<c:if test="${!empty user && user.mem_num == review.mem_num}">
 						<div class="align-right">
-							<input type="button" value="수정" onclick="">
-							<input type="button" value="삭제">
+							<input type="button" value="수정" onclick="location.href='updateReview.do?review_num=${review.review_num}'">
+							<input type="button" value="삭제" id="del_review">
+							<script type="text/javascript">
+								let del_review = document.getElementById('del_review');
+								del_review.onclick = function(){
+									let choice = confirm('리뷰를 삭제하시겠습니까?');
+									if(choice){
+										location.replace('deleteReview.do?review_num=${review.review_num}');
+									}
+								};
+							</script>
 						</div>
 						</c:if>
 						<div class="align-left">${review.review_content}</div>
@@ -294,7 +303,7 @@
 			$(function(){
 				$('.re-title').on('click', function(){
 					let num = $(this).attr('id').substring(5);
-					alert(num);
+
 					if($('#content' + num).attr('style', 'display:none;')){
 						$('#content' + num).show();
 					} else{
@@ -336,7 +345,7 @@
 					<td>
 						<a href="detailQna.do?qna_num=${qna.qna_num}">${qna.qna_title}</a>
 					</td>
-					<td>${qna.id}</td>
+					<td>${qna.mem_id}</td>
 					<td>${qna.qna_regdate}</td>
 					<td>
 						<c:if test="${qna.qna_status == 1}">처리전</c:if>

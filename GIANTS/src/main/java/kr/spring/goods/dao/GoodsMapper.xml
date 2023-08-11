@@ -183,6 +183,15 @@
 		]]>
 	</select>
 	
+	<!-- 리뷰 상세 -->
+	<select id="selectGoodsReview" parameterType="integer" resultType="goodsReviewVO">
+		SELECT
+			*
+		FROM goods_review r JOIN member m USING(mem_num)
+		JOIN goods g USING(goods_num)
+		WHERE review_num=#{review_num}
+	</select>
+		
 	<!-- =====굿즈 문의===== -->
 	<!-- 문의 등록 -->
 	<insert id="insertGoodsQna" parameterType="goodsQnaVO">
@@ -221,11 +230,11 @@
 	</select>
 	
 	<!-- 문의 상세페이지 -->
-	<select id="selectQna">
+	<select id="selectQna" parameterType="integer" resultType="goodsQnaVO">
 		SELECT
 			*
-		FROM goods_qna q JOIN member m
-		USING(mem_num)
+		FROM goods_qna q JOIN member m USING(mem_num)
+		JOIN goods g USING(goods_num)
 		WHERE q.qna_num=#{qna_num}
 	</select>
 	

@@ -126,20 +126,17 @@ public class GoodsServiceImpl implements GoodsService{
 
 	@Override
 	public GoodsReviewVO selectGoodsReview(Integer review_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return goodsMapper.selectGoodsReview(review_num);
 	}
 
 	@Override
 	public void updateGoodsReview(GoodsReviewVO review) {
-		// TODO Auto-generated method stub
-		
+		goodsMapper.updateGoodsReview(review);
 	}
 
 	@Override
 	public void deleteGoodsReview(Integer review_num) {
-		// TODO Auto-generated method stub
-		
+		goodsMapper.deleteGoodsReview(review_num);
 	}
 	
 	@Override
@@ -168,6 +165,14 @@ public class GoodsServiceImpl implements GoodsService{
 		return goodsMapper.selectQna(qna_num);
 	}
 
+	@Override
+	public void updateGoodsQna(GoodsQnaVO qna) {
+		goodsMapper.updateGoodsQna(qna);
+	}
 
+	@Override
+	public void deleteGoodsQna(Integer qna_num) {
+		goodsMapper.deleteGoodsQna(qna_num);
+	}
 
 }

@@ -3,23 +3,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 문의 수정 시작 -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goodsQna.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goods.css">
 <div class="page-main">
 	<div class="main-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>문의 수정</h2>
 		<hr size="0.05" width="100%" noshade>
 	</div>
-	<form:form modelAttribute="goodsQnaVO" action="writeQna.do" id="qna_register">
+	<form:form modelAttribute="goodsQnaVO" action="updateGoodsQna.do" id="qna_modify">
+		<form:hidden path="qna_num"/>
+		<form:hidden path="goods_num"/>
 		<form:errors element="div" cssColor="error-color"/>
 		<ul>
 			<li>
 				<label>작성자</label>
-				<span>${qnaVO.mem_num}</span>
+				<span>${qnaVO.mem_id}</span>
 			</li>
 			<li>
 				<label>문의할 상품</label>
-				${qnaVO.goods_num}
+				${qnaVO.goods_name}
 			</li>
 			<li>
 				<form:label path="qna_title">제목</form:label>
@@ -34,7 +36,7 @@
 		</ul>
 		<div class="align-center">
 			<form:button>수정</form:button>
-			<input type="button" value="이전" onclick="location.href='history(-1)'">
+			<input type="button" value="상세페이지" onclick="location.href='goodsDetail.do?goods_num=${qnaVO.goods_num}'">
 		</div>
 	</form:form>
 </div>

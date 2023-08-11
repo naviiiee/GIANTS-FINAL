@@ -20,6 +20,6 @@ public class GoodsQnaVO {
 	private int goods_num;
 	private String qna_ip;
 	
-	private String id;
+	private String mem_id;
 	private String goods_name;
 }

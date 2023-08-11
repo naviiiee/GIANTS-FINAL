@@ -418,9 +418,67 @@ public class GoodsController {
 		goodsService.insertGoodReview(reviewVO);
 		
 		model.addAttribute("message", "리뷰등록이 완료되었습니다");
-		model.addAttribute("url", request.getContextPath() + "/goods/goodsList.do");
+		model.addAttribute("url", request.getContextPath() + "/goods/goodsDetail.do?goods_num=" + reviewVO.getGoods_num() + "#goods_review");
 		
 		return "common/resultView";
+	}
+	
+	/*==========================
+	 * 리뷰 수정
+	 *==========================*/	
+	//수정 폼 호출
+	@GetMapping("/goods/updateReview.do")
+	public String formUpdateReview(@RequestParam int review_num, Model model) {
+				
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", 1);
+		map.put("end", 50);
+		map.put("status", 0);
+		
+		List<GoodsVO> goods_list = goodsService.selectGoodsList(map);
+		model.addAttribute("goods_list", goods_list);
+		
+		GoodsReviewVO reviewVO = goodsService.selectGoodsReview(review_num);
+		
+		model.addAttribute("goodsReviewVO", reviewVO);
+		
+		return "reviewModify";
+	}
+	
+	//전송된 데이터 처리
+	@PostMapping("/goods/updateReview.do")
+	public String submitUpdateReview(@Valid GoodsReviewVO reviewVO, BindingResult result, HttpServletRequest request, Model model) {
+		
+		log.debug("<<리뷰 수정 - GoodsReviewVO>> : " + reviewVO);
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			return "reviewModify";
+		}
+		
+		//ip 셋팅
+		reviewVO.setReview_ip(request.getRemoteAddr());
+		//리뷰 수정
+		goodsService.updateGoodsReview(reviewVO);
+		
+		model.addAttribute("message", "리뷰 수정 완료!");
+		model.addAttribute("url", request.getContextPath() + "/goods/goodsDetail.do?goods_num=" + reviewVO.getGoods_num() + "#goods_review");
+		
+		return "common/resultView";
+	}
+	
+	/*==========================
+	 * 리뷰 삭제
+	 *==========================*/	
+	@RequestMapping("/goods/deleteReview.do")
+	public String deleteReview(@RequestParam int review_num) {
+		
+		log.debug("<<리뷰 삭제 - review_num>> : " + review_num);
+		
+		//리뷰 삭제
+		goodsService.deleteGoodsReview(review_num);
+		
+		return "redirect:/goods/goodsList.do";
 	}
 	
 	
@@ -496,17 +554,49 @@ public class GoodsController {
 	 * 상품문의 수정
 	 *==========================*/	
 	//수정 폼 호출
-	@GetMapping("/goods/updateQna.do")
+	@GetMapping("/goods/updateGoodsQna.do")
 	public String formUpdateQna(@RequestParam int qna_num, Model model) {
 		
 		GoodsQnaVO qnaVO = goodsService.selectQna(qna_num);
 		
-		model.addAttribute("qnaVO", qnaVO);
-		log.debug("<<GoodsQnaVO>>" + qnaVO);
+		model.addAttribute("goodsQnaVO", qnaVO);
+
 		return "goodsQnaModify";
 	}
 	
-	
-	
+	//전송된 데이터 처리
+	@PostMapping("/goods/updateGoodsQna.do")
+	public String submitUpdateQna(@Valid GoodsQnaVO qnaVO, BindingResult result, HttpServletRequest request, Model model) {
+		
+		log.debug("<<상품문의 수정 - GoodsQnaVO>> : " + qnaVO);
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			return "goodsQnaModify";
+		}
+		
+		//ip 셋팅
+		qnaVO.setQna_ip(request.getRemoteAddr());
+		//상품문의 수정
+		goodsService.updateGoodsQna(qnaVO);
+		
+		model.addAttribute("message", "상품문의 수정 완료!");
+		model.addAttribute("url", request.getContextPath() + "/goods/goodsList.do");
+		
+		return "common/resultView";
+	}
+
+	/*==========================
+	 * 상품문의 삭제
+	 *==========================*/	
+	@RequestMapping("/goods/deleteGoodsQna.do")
+	public String submitDeleteQna(@RequestParam int qna_num) {
+		
+		goodsService.deleteGoodsQna(qna_num);
+		
+		log.debug("<<>>" + qna_num);
+		
+		return "redirect:/goods/goodsList.do";
+	}
 	
 }

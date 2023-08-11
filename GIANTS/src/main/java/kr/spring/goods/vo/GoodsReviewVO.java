@@ -26,7 +26,7 @@ public class GoodsReviewVO {
 	private Date review_mdate; //후기 최근 수정일
 	private String review_ip;
 	
-	private String id;
+	private String mem_id;
 	private String mem_nickname;
 	private String goods_name;
 		

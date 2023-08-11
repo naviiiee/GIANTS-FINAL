@@ -78,8 +78,10 @@ public interface GoodsMapper {
 	//상품 후기 상세
 	public GoodsReviewVO selectGoodsReview(Integer review_num);
 	//상품 후기 수정
+	@Update("UPDATE goods_review SET review_title=#{review_title}, review_content=#{review_content}, review_score=#{review_score}, review_photo=#{review_photo}, review_photoname=#{review_photoname}, review_mdate=sysdate, review_ip=#{review_ip} WHERE review_num=#{review_num}")
 	public void updateGoodsReview(GoodsReviewVO review);
 	//상품 후기 삭제
+	@Delete("DELETE FROM goods_review WHERE review_num=#{review_num}")
 	public void deleteGoodsReview(Integer review_num);
 	
 	//평균 별점 표시
@@ -97,5 +99,9 @@ public interface GoodsMapper {
 	//상품 문의 상세
 	public GoodsQnaVO selectQna(Integer qna_num);
 	//상품 문의 수정
+	@Update("UPDATE goods_qna SET qna_title=#{qna_title}, qna_content=#{qna_content}, qna_mdate=sysdate, qna_ip=#{qna_ip} WHERE qna_num=#{qna_num}")
+	public void updateGoodsQna(GoodsQnaVO qna);
 	//상품 문의 삭제
+	@Delete("DELETE FROM goods_qna WHERE qna_num=#{qna_num}")
+	public void deleteGoodsQna(Integer qna_num);
 }
