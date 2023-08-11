@@ -13,7 +13,7 @@ public class CommuReplyVO {
 	private int re_num; //댓글 번호
 	private String re_content; //내용
 	private String re_date; //등록일
-	private String re_modifydate; //수정일
+	private String re_mdate; //수정일
 	private String re_ip; //ip주소
 	private int commu_num; //부모글 번호
 	private int mem_num; //회원 번호
@@ -25,7 +25,7 @@ public class CommuReplyVO {
 	public void setRe_date(String re_date) {
 		this.re_date = DurationFromNow.getTimeDiffLabel(re_date);
 	}
-	public void setRe_mdate(String re_modifydate) {
-		this.re_modifydate = DurationFromNow.getTimeDiffLabel(re_modifydate);
+	public void setRe_mdate(String re_mdate) {
+		this.re_mdate = DurationFromNow.getTimeDiffLabel(re_mdate);
 	}
 }

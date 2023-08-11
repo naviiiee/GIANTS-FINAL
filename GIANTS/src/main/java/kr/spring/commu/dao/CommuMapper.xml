@@ -115,7 +115,7 @@
 			  			   REPLACE(REPLACE(re_content,'<','&lt;'),'>','&gt;') re_content,
 			  			   ]]> 
 			  			   re_date,
-			  			   re_modifydate,
+			  			   re_mdate,
 			  			   commu_num,
 			  			   mem_num,
 			  			   mem_id,

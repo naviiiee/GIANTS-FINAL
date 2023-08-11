@@ -74,15 +74,16 @@ CREATE SEQUENCE commu_reply_seq;
 CREATE TABLE player(
  player_num number not null,
  player_name varchar2(30) not null,
+ player_backnumber varchar2(3) not null,
  player_position varchar2(15) not null,
- player_photo varchar2(150) not null,
+ player_photo blob not null,
  player_birthday date not null,
- plyaer_height number(15) not null,
+ player_height number(15) not null,
  player_weight number(15) not null,
  player_toway varchar2(30) not null,
  player_join varchar2(30) not null,
- player_manager clob not null
- constraint player_num primary key (player_num)
+ player_career clob,
+ constraint player_pk primary key (player_num)
 );
 
 CREATE SEQUENCE player_seq; 

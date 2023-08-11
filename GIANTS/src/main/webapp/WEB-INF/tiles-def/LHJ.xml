@@ -45,4 +45,25 @@
     	<put-attribute name="body" value="/WEB-INF/views/commu/commuRepo.jsp"/>
     </definition>
     
+    <!-- 선수 소개 폼 -->
+    <definition name="player" extends="main">
+    	<put-attribute name="title" value="선수 소개"/>
+    	<put-attribute name="body" value="/WEB-INF/views/introduce/player.jsp"/>
+    </definition>
+    
+    <!-- 선수 등록 폼 -->
+    <definition name="admin_player" extends="main">
+    	<put-attribute name="title" value="선수 등록"/>
+    	<put-attribute name="body" value="/WEB-INF/views/introduce/admin_player.jsp"/>
+    </definition>
+    
+    
+    <!-- [관리자] 선수 목록 폼 -->
+    <!-- 
+    <definition name="admin_playerList" extends="main">
+    	<put-attribute name="title" value="선수 목록"/>
+    	<put-attribute name="body" value="/WEB-INF/views/introduce/admin_playerList.jsp"/>
+    </definition>
+     -->
+    
 </tiles-definitions>

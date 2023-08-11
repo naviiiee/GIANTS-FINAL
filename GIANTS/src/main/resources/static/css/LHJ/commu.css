@@ -219,3 +219,25 @@ div.commu-table table th{
 
 .accept-btn{ border:1px #dd032f solid; background-color:#dd032f; }
 .accept-btn:hover{ color:#dd032f; }
+
+/*선수 소개*/
+.player-space .horizontal-area{
+	margin:2px;
+	padding:3px;
+	width:180px;
+	height:230px;
+	float:left;
+	text-align:center;
+	overflow:hidden;
+}
+.player-space .horizontal-area img{
+	width:175px;
+	height:175px;
+}
+.player-space .horizontal-area span{
+	padding:5px;
+	margin:5px;
+}
+.player-space .float-clear{
+	clear:both;
+}

@@ -23,8 +23,8 @@ table {
 	</div>
 	<div class="align-right news-btn">
 		<c:if test="${!empty user && user.mem_auth == 9}">
-		<input type="button" value="수정">
-		<input type="button" value="삭제">
+		<input type="button" value="수정" class="default-btn">
+		<input type="button" value="삭제" class="accept-btn">
 		</c:if>
 	</div>
 	<div class="commu-table">
@@ -52,9 +52,35 @@ table {
 		${commu.commu_content}
 	</div>
 	<div class="align-right">
-		<input type="button" value="신고하기" onclick="location.href='repo.do'">
-		<input type="button" value="목록" onclick="location.href='commuList.do'">
+		<input type="button" value="신고하기" onclick="location.href='repo.do'" class="accept-btn">
+		<input type="button" value="목록" onclick="location.href='commuList.do'" class="default-btn">
+		<c:if test="${!empty user && user.mem_num==commu.mem_num}">
+		<input type="button" value="수정" onclick="location.href='update.do?commu_num=${commu.commu_num}'" class="accept-btn">
+		<input type="button" value="삭제" id="delete_btn" class="accept-btn">
+		<script type="text/javascript">
+			let delete_btn = document.getElementById('delete_btn');
+			delete_btn.onclick=function(){
+				let choice = confirm('삭제하시겠습니까?');
+				if(choice){
+					//히스토리를 지우면서 이동
+					location.replace('delete.do?commu_num=${commu.commu_num}');
+				}
+			};
+		</script>
+		</c:if>
 	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	<!--  
@@ -123,9 +149,53 @@ table {
 	
 	--> 
 	
+	
+	
+	
+	
+	
+	
+	
+	<div>
+		<%-- 좋아요 버튼 및 개수 --%>
+		<img id="output_fav" data-num="${commu.commu_num}" 
+			 src="${pageContext.request.contextPath}/images/fav01.gif" width="40">
+		<span id="output_fcount"></span>
+		
+	</div>
+	
+	<hr size="1" width="100%">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- 댓글 UI 시작 -->
 	<div id="reply_div">
 		<span class="re-title">커뮤니티 댓글</span>
+		<%-- 댓글 수 --%>
+		<b><span id="output_rcount" style="margin-left:36%;"></span></b>
+		
+		
 		<form id="re_form">
 			<input type="hidden" name="commu_num" value="${commu.commu_num}" id="commu_num">
 			<textarea rows="3" cols="50" name="re_content" id="re_content" class="rep-content"
@@ -137,7 +207,7 @@ table {
 				<span class="letter-count">300/300</span>
 			</div>
 			<div id="re_second" class="align-right">
-				<input type="submit" value="댓글 등록">
+				<input type="submit" value="댓글 등록" class="accept-btn">
 			</div>
 			</c:if>
 		</form>

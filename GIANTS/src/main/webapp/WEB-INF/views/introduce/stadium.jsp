@@ -19,7 +19,7 @@
     line-height: 100%;
     letter-spacing: -1px;
     text-transform: uppercase;
-    margin-right: 60%;
+    margin-right: 53%;
     margin-bottom:3%;
 }
 
@@ -136,6 +136,7 @@ hr{
 			<li style="margin-top:20%; display:flex;">
 				<a href="stadium.do" class="over">구장 소개</a>
 				<a href="map.do">오시는 길</a>
+				<a href="admin_player.do">선수 소개</a>
 			</li>
 		</ul>
 	</div>
@@ -165,5 +166,5 @@ hr{
 			</span>
 		</div>	
 	</div>
-	
+	</div>
 	

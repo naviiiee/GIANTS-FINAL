@@ -109,6 +109,8 @@ hr{
 
 .a-tab{
 	display:flex;
+	margin-left:70%;
+	margin-bottom:2%;
 	
 }
 .map{
@@ -130,6 +132,8 @@ ul, ol, li {
 
 </style>  
  
+ 
+ 
 <div class="page-main">
     <div class="introduce-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
@@ -142,11 +146,12 @@ ul, ol, li {
 	
 	
 	
-	<div class="a-tab align-right">
+ <div class="a-tab">
 		<ul>
 			<li style="margin-top:20%; display:flex;">
-				<a href="stadium.do">구장 소개</a>
+				<a href="stadium.do" >구장 소개</a>
 				<a href="map.do" class="over">오시는 길</a>
+				<a href="player.do">선수 소개</a>
 			</li>
 		</ul>
 	</div>

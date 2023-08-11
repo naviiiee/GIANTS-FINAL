@@ -279,10 +279,10 @@ public class CommuController {
 										  @RequestParam int commu_num,
 										  HttpSession session){
 			log.debug("<<currentPage>> : " + currentPage);
-			log.debug("<<board_num>> : " + commu_num);
+			log.debug("<<commu_num>> : " + commu_num);
 			
 			Map<String,Object> map = new HashMap<String,Object>();
-			map.put("board_num", commu_num);
+			map.put("commu_num", commu_num);
 			
 			MemberVO user = (MemberVO)session.getAttribute("user");
 			

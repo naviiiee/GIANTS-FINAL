@@ -31,10 +31,11 @@ public interface CommuMapper {
 	@Update("UPDATE commu SET commu_title = #{commu_title}, commu_content = #{commu_content}, commu_ip = #{commu_ip}, commu_modifydate = SYSDATE WHERE commu_num = #{commu_num}")
 	public void updateCommu(CommuVO commu);
 	
+	@Delete("DELETE FROM commu WHERE commu_num=#{commu_num}")
 	public void deleteCommu(Integer commu_num); 
 	
 	//좋아요
-	@Select("SELECT * FROM commu_like WHERE commu_num=#{commu_num} AND mem_num=#{mm_num}")
+	@Select("SELECT * FROM commu_like WHERE commu_num=#{commu_num} AND mem_num=#{mem_num}")
 	public CommuFavVO selectFav(CommuFavVO fav);
 	
 	@Select("SELECT COUNT(*) FROM commu_like")
@@ -47,8 +48,9 @@ public interface CommuMapper {
 	public void deleteFav(Integer fav_num);
 	
 	//부모글 삭제 시 좋아요가 존재하면, 부모글이 삭제되기 전 좋아요를 먼저 삭제
-	@Delete("DELETE FROM commu_fav WHERE commu_num=#{commu_num}")
+	@Delete("DELETE FROM commu_like  WHERE commu_num=#{commu_num}")
 	public void deleteFavByCommuNum(Integer commu_num);
+	
 	
 	//댓글
 	public List<CommuReplyVO> selectListReply(Map<String,Object> map);
@@ -61,7 +63,7 @@ public interface CommuMapper {
 	
 	public void insertReply(CommuReplyVO commuReply);
 	
-	@Update("UPDATE commu_reply SET re_content=#{re_content},re_ip=#{re_ip},re_modifydate=SYSDATE WHERE re_num=#{re_num}")
+	@Update("UPDATE commu_reply SET re_content=#{re_content},re_ip=#{re_ip},re_mdate=SYSDATE WHERE re_num=#{re_num}")
 	public void updateReply(CommuReplyVO commuReply);		
 	
 	@Delete("DELETE FROM commu_reply WHERE re_num=#{re_num}")
