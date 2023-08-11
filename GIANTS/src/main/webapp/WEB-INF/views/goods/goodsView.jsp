@@ -63,15 +63,14 @@
 					<li>
 						<li>
 						    옵션 : 
-						    <select id="optionSelect">
+						    <select id="optionSelect" name="opt_num">
 						        <option value="" class="align-center">===선택안함===</option>
 						        <c:forEach var="option" items="${option}">
-						            <option value="${option.goods_size}" data-stock="${option.goods_stock}">
+						            <option value="${option.opt_num}" data-stock="${option.goods_stock}">
 						                ${option.goods_size} [재고 : ${option.goods_stock}]
-						                
 						            </option>
-						            <input type="hidden" name="goods_size" id="goods_size" value="${option.goods_size }">
-						    <input type="hidden" name="goods_stock" id="goods_stock" value="${option.goods_stock}">
+						           <%--  <input type="hidden" name="goods_size" id="goods_size" value="${option.goods_size }">
+						    		<input type="hidden" name="goods_stock" id="goods_stock" value="${option.goods_stock}"> --%>
 						        </c:forEach>
 						    </select>
 						    
