@@ -42,4 +42,11 @@
 		<put-attribute name="title" value="식품 - 매장 - 식품상세정보"/>
 		<put-attribute name="body" value="/WEB-INF/views/food/foodDetail.jsp"/>
 	</definition>
+	
+	<!-- 장바구니 -->
+	<definition name="foodUserCartList" extends="main">
+		<put-attribute name="title" value="식품 - 내 장바구니"/>
+		<put-attribute name="body" value="/WEB-INF/views/food/fcart/foodUserCartList.jsp"/>
+	</definition>
+	
 </tiles-definitions>

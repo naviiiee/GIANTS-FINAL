@@ -6,17 +6,19 @@
 	<resultMap type="memberVO" id="compMap">
 		<result property="companyDetailVO.comp_num" column="comp_num" />
 		<result property="companyDetailVO.comp_name" column="comp_name" />
-		<result property="companyDetailVO.comp_cate" column="comp_cate" />
-		<result property="companyDetailVO.comp_photo" column="comp_photo" />
-		<result property="companyDetailVO.comp_photoname" column="comp_photoname" />
-		<result property="companyDetailVO.comp_content" column="comp_content" />
-		<result property="companyDetailVO.comp_score" column="comp_score" />
 	</resultMap> 
 	-->
 	
 	<!-- 장바구니 체크를 위한 f_cartVO -->
 	<resultMap type="f_cartVO" id="cartMap">
 		<result property="foodVO.comp_num" column="comp_num"/>
+		<result property="foodVO.food_num" column="food_num"/>
+		<result property="foodVO.food_name" column="food_name"/>
+		<result property="foodVO.food_price" column="food_price"/>
+		<result property="foodVO.food_quantity" column="food_quantity"/>
+		<result property="foodVO.food_photo1" column="food_photo1"/>
+		<result property="foodVO.food_photo1_name" column="food_photo1_name"/>
+		<result property="foodVO.food_status" column="food_status"/>
 	</resultMap>
 	
 	<!-- 기업 식품 등록 -->
@@ -85,6 +87,7 @@
 			  FROM (SELECT
 			  		  *
 			  		FROM food
+			  		WHERE comp_num=#{comp_num}
 			  		ORDER BY food_num DESC)a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
@@ -153,6 +156,8 @@
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
+	
+	
 	<!-- ================== 장바구니 ======================= -->
 	<!-- 장바구니 상품 등록 -->
 	<insert id="insertF_cart" parameterType="f_cartVO">
@@ -173,8 +178,10 @@
 	<select id="selectF_cartList" parameterType="integer" resultMap="cartMap">
 	SELECT 
 	  *
-	FROM (SELECT re.cart_num, re.food_num, re.mem_num, f.comp_num
-	  FROM (SELECT cart_num, food_num, mem_num
+	FROM (SELECT re.cart_num, re.f_cart_quantity, re.f_cart_price, re.food_num, re.mem_num, 
+				 f.comp_num, f.food_name, f.food_price, 
+				 f.food_quantity, f.food_photo1, f.food_photo1_name, f.food_status
+	  FROM (SELECT *
 		    FROM f_cart 
 		    WHERE mem_num=#{mem_num}
 		   ) re

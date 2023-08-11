@@ -30,6 +30,11 @@
 				<input type="button" class="adminBtn" value="수정하기" onclick="location.href='${pageContext.request.contextPath}/food/fixFood.do?food_num=${food.food_num}'">
 			</div>
 		</c:if>
+		<c:if test="${!empty user.mem_auth && user.mem_auth == 2 }">
+			<div class="float-right">
+				<input type="button" class="emptyCart" value="카트비우기" >
+			</div>
+		</c:if>
 	</div>
 	<div class="clear"></div>
 	<!-- 식품 상세정보 시작 -->
@@ -52,7 +57,7 @@
 		<form id="frm_cart" method="post">
 			<input type="hidden" name="food_num" value="${food.food_num}">
 			<input type="hidden" name="f_cart_quantity" class="fd-quantity">
-			<input type="hidden" name="f_cart_price" class="fd-total">
+			<input type="hidden" name="f_cart_price" value="${food.food_price}">
 			<input type="hidden" name="comp_num" value="${food.comp_num}" id="comp_number">
 		</form>
 		<!-- 주문하기용 폼 -->

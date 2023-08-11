@@ -20,5 +20,7 @@ public class F_cartVO {				//논리명					키 분류
 	
 	private int sub_total;			//동일상품의 총 가격
 	
+	
 	private FoodVO foodVO;
+	
 }

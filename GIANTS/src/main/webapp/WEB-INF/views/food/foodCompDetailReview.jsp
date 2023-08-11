@@ -6,7 +6,7 @@
 <div class="page-main">
 	<div class="main-title">
 		<img class="title-img" src="${pageContext.request.contextPath}/images/title_icon.gif">
-		<h2> 푸드 | <a href="/food/foodList.do">매장</a> | <a href="/food/foodCompDetail.do?comp_num=${comp.comp_num}">${comp.comp_name}</a></h2>
+		<h2> 푸드 | <a href="/food/foodList.do">매장</a> | <a href="/food/foodCompDetailMenu.do?comp_num=${comp.comp_num}">${comp.comp_name}</a></h2>
 	</div>
 	<hr noshade="noshade">
 	<!-- 카테고리 시작 -->

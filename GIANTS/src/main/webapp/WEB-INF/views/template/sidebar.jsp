@@ -62,7 +62,7 @@
 		<ul class="sidebar-list">
 			<li class="sidebar-item-sub"><a href="${pageContext.request.contextPath}/food/foodList.do">매장목록</a></li>
 			<c:if test="${!empty user && user.mem_auth == 2}">
-				<li class="sidebar-item-sub"><a href="#">장바구니(푸드)</a></li>
+				<li class="sidebar-item-sub"><a href="${pageContext.request.contextPath}/food/fcart/foodUserCartList.do">장바구니(푸드)</a></li>
 				<li class="sidebar-item-sub"><a href="#">주문목록(푸드)</a></li>
 			</c:if>
 		</ul>

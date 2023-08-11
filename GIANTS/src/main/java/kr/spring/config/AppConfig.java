@@ -49,6 +49,13 @@ public class AppConfig implements WebMvcConfigurer {
 				.addPathPatterns("/food/addNewFood.do")
 				.addPathPatterns("/food/fixFood.do")
 				.addPathPatterns("/food/deleteFood.do")
+				.addPathPatterns("/food/foodDetail.do")
+				.addPathPatterns("/food/foodCartCheck.do")
+				.addPathPatterns("/food/foodEmptyCart.do")
+				.addPathPatterns("/food/foodAddCart.do")
+				//오세진 - 푸드 장바구니
+				.addPathPatterns("/food/fcart/foodUserCartList.do")
+				//윤현종
 				.addPathPatterns("/member/updateMember.do")
 				.addPathPatterns("/member/updateCompany.do")
 				.addPathPatterns("/member/changePassword.do");

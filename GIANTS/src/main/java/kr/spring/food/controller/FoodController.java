@@ -128,6 +128,7 @@ public class FoodController {
 		if (count > 0) {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
+			map.put("comp_num", comp_num);
 			
 			list = foodService.selectList(map);
 		}
@@ -188,6 +189,7 @@ public class FoodController {
 		if (count > 0) {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
+			map.put("comp_num", comp.getComp_num());
 			
 			list = foodService.selectList(map);
 		}
@@ -335,7 +337,7 @@ public class FoodController {
 	}
 	
 	/*	==========================
-	 *		장바구니 페이지
+	 *		장바구니 담기 (foodDetail.js)스크립트
 	 * 	==========================*/
 	//장바구니 아이템 체크
 	@RequestMapping("/food/foodCartCheck.do")
@@ -354,12 +356,15 @@ public class FoodController {
 			boolean check = false;
 			//1.현재 로그인한 회원의 장바구니에 아이템이 존재하는지 조회
 			db_cart = foodService.selectF_cartList(user.getMem_num());
-			if (!db_cart.isEmpty()) {
+			log.debug("장바구니 리스트 크기"+db_cart.size());
+			if (db_cart.size() != 0) {
 				//  2.장바구니에 아이템이 있으면 해당 아이템의 comp_num이 
 				//	  현재 등록해야 하는 식품의 comp_num과 다른지 확인
 				for (F_cartVO cart : db_cart) {
 					//장바구니에 담겨있는 아이템들과 현재 넣을 아이템의 매장번호가 다를경우
-					if (cart.getFoodVO().getComp_num()!=comp_num) {
+					log.debug("DB내에 저장된 식품의 comp_num : " +cart.getFoodVO().getComp_num() + 
+							",\n     유저가 선택한 식품의 comp_num : " + comp_num);
+					if (!cart.getFoodVO().getComp_num().equals(comp_num)) {
 						check = true;
 						break;
 					}
@@ -369,7 +374,8 @@ public class FoodController {
 				//장바구니 안에 다른 매장의 아이템이 있음을 알림
 				mapJson.put("result", "MismatchCompany");
 			}else {
-				//장바구니가 비워져 있음을 알림
+				//장바구니가 비워져 있거나 동일상품임을 알림
+				log.debug("장바구니 체크 Empty 진입");
 				mapJson.put("result", "Empty");
 			}
 		}
@@ -427,6 +433,7 @@ public class FoodController {
 				}else {
 					//기존 장바구니 상품 업데이트
 					f_cartVO.setF_cart_quantity(order_quantity);
+					//기존 장바구니 업데이트
 					foodService.updateF_cartByFood_num(f_cartVO);
 					mapJson.put("result", "success");
 				}
@@ -435,7 +442,26 @@ public class FoodController {
 		return mapJson;
 	}
 	
-	
+	/*	==========================
+	 *		장바구니 페이지
+	 * 	==========================*/
+	//폼 호출
+	@RequestMapping("/food/fcart/foodUserCartList.do")
+	public ModelAndView formFoodUserCartList(HttpSession session,
+									   Model model) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		//카트 목록을 mem_num을 통해서 조회하여 담아 넘김
+		List<F_cartVO> list = null;
+		list = foodService.selectF_cartList(user.getMem_num());
+		
+		log.debug("내 장바구니 목록 확인하기 >>> " + list);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("foodUserCartList");
+		
+		return mav;
+	}
 	
 	
 	
