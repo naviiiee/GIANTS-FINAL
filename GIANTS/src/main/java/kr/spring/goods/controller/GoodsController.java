@@ -209,9 +209,9 @@ public class GoodsController {
 			review = goodsService.selectGoodsReviewList(map);
 		}
 		
-		//Integer avg_score = goodsService.getAvgScore(goods_num);
+		int avg_score = goodsService.getAvgScore(goods_num);
 		
-		//log.debug("<<로그찍기 - avg_score>>" + avg_score);
+		log.debug("<<로그찍기 - avg_score>>" + avg_score);
 		
 		
 		//===== 상품문의 목록 =====//
@@ -241,7 +241,7 @@ public class GoodsController {
 		mav.addObject("qna", qna);
 		mav.addObject("qna_cnt", qna_cnt);
 		mav.addObject("qna_page", page2.getPage());
-		//mav.addObject("avg_score", avg_score);
+		mav.addObject("avg_score", avg_score);
 		
 		return mav;
 	}
@@ -450,8 +450,6 @@ public class GoodsController {
 	public String submitQna(@Valid GoodsQnaVO qnaVO, BindingResult result,
 							HttpServletRequest request, HttpSession session, Model model) {
 		
-		
-		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			return formQna(session, model);
@@ -472,9 +470,41 @@ public class GoodsController {
 		return "common/resultView";
 	}
 	
+	/*==========================
+	 * 상품문의 상세
+	 *==========================*/	
+	@RequestMapping("/goods/detailQna.do")
+	public ModelAndView getDetailQna(@RequestParam int qna_num) {
+		
+		log.debug("<<상품문의상세 - qna_num>> : " + qna_num);
+		
+		//상품문의 상세
+		GoodsQnaVO qna = goodsService.selectQna(qna_num);
+		
+		//제목에 태그를 이용하지 않음
+		qna.setQna_title(StringUtil.useNoHtml(qna.getQna_title()));
+		
+		//내용에 태그 불허
+		qna.setQna_content(StringUtil.useBrNoHtml(qna.getQna_content()));
+		
+		log.debug("<<상품문의상세 - qna>> : " + qna);
+		
+		return new ModelAndView("goodsQnaView", "qna", qna);
+	}
 	
-	
-	
+	/*==========================
+	 * 상품문의 수정
+	 *==========================*/	
+	//수정 폼 호출
+	@GetMapping("/goods/updateQna.do")
+	public String formUpdateQna(@RequestParam int qna_num, Model model) {
+		
+		GoodsQnaVO qnaVO = goodsService.selectQna(qna_num);
+		
+		model.addAttribute("qnaVO", qnaVO);
+		log.debug("<<GoodsQnaVO>>" + qnaVO);
+		return "goodsQnaModify";
+	}
 	
 	
 	

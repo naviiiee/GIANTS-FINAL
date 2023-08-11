@@ -220,7 +220,13 @@
 		]]>
 	</select>
 	
-	
-	
+	<!-- 문의 상세페이지 -->
+	<select id="selectQna">
+		SELECT
+			*
+		FROM goods_qna q JOIN member m
+		USING(mem_num)
+		WHERE q.qna_num=#{qna_num}
+	</select>
 	
 </mapper>

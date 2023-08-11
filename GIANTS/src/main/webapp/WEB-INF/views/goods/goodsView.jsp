@@ -269,35 +269,40 @@
 						<c:if test="${review.review_score == 2}">★★(2)</c:if>
 						<c:if test="${review.review_score == 1}">★(1)</c:if>
 					</td>
-					<td class="re-title" id="title${status.count}">
-						<a href="javaScript:doDisplay()">${review.review_title}</a>
+					<td class="re-title" id="title${status.count}" style="cursor:pointer;">
+						${review.review_title}
 					</td>
-					<td>${review.id}</td>
+					<td>${review.mem_num}</td>
 					<td>${review.review_regdate}</td>
 				</tr>
 				<tr class="re-content" id="content${status.count}" style="display:none;">
 					<td colspan="5">
-						<div class="align-left" style="height:100px;">${review.review_content}</div>
+						<c:if test="${!empty user && user.mem_num == review.mem_num}">
+						<div class="align-right">
+							<input type="button" value="수정" onclick="">
+							<input type="button" value="삭제">
+						</div>
+						</c:if>
+						<div class="align-left">${review.review_content}</div>
 					</td>
 				</tr>
-				<%-- <div class="re-content">${review.review_content}</div> --%>
 				</c:forEach>
 			</table>
 			<div>${review_page}</div>
 		</c:if>
 		</div>
-		<script type="text/javascript">
+		<script>
 			$(function(){
-				$('.re-content').hide();
-						
-				$('.re-title').click(function(){
-					let num = $('.re-title').attr('id').substring(5);
-					if($('#content' + num).is(':visible')){
-						$('#content' + num).slideUp();
-					}else{
-						$('#content' + num).slideDown();
+				$('.re-title').on('click', function(){
+					let num = $(this).attr('id').substring(5);
+					alert(num);
+					if($('#content' + num).attr('style', 'display:none;')){
+						$('#content' + num).show();
+					} else{
+						//$('#content' + num).css('display','none');
+						$('#content' + num).hide();
 					}
-				}); //end of re-title click
+				});
 			});
 		</script>
 		<div class="medium-nav">
@@ -329,7 +334,9 @@
 				<c:forEach var="qna" items="${qna}">
 				<tr>
 					<td>${qna.qna_num}</td>
-					<td>${qna.qna_title}</td>
+					<td>
+						<a href="detailQna.do?qna_num=${qna.qna_num}">${qna.qna_title}</a>
+					</td>
 					<td>${qna.id}</td>
 					<td>${qna.qna_regdate}</td>
 					<td>

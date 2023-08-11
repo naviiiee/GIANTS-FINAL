@@ -163,6 +163,11 @@ public class GoodsServiceImpl implements GoodsService{
 		return goodsMapper.selectGoodsQnaCount(goods_num);
 	}
 
+	@Override
+	public GoodsQnaVO selectQna(Integer qna_num) {
+		return goodsMapper.selectQna(qna_num);
+	}
+
 
 
 }

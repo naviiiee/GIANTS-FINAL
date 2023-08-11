@@ -64,6 +64,7 @@ public interface GoodsService {
 	//상품 문의 등록
 	public void insertGoodsQna(GoodsQnaVO qna);
 	//상품 문의 상세
+	public GoodsQnaVO selectQna(Integer qna_num);
 	//상품 문의 수정
 	//상품 문의 삭제
 }

@@ -44,7 +44,15 @@
 		<put-attribute name="body" value="/WEB-INF/views/goods/qnaWrite.jsp"/>
 	</definition>
 	
+	<definition name="goodsQnaView" extends="main">
+		<put-attribute name="title" value="굿즈문의보기"/>
+		<put-attribute name="body" value="/WEB-INF/views/goods/goodsQnaView.jsp"/>
+	</definition>
 	
+	<definition name="goodsQnaModify" extends="main">
+		<put-attribute name="title" value="굿즈문의수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/goods/goodsQnaModify.jsp"/>
+	</definition>
 	
 	<!-- 구단뉴스 -->
 	<definition name="newsList" extends="main">
