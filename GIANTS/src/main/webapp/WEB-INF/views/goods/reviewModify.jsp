@@ -11,6 +11,8 @@
 		<hr size="0.05" width="100%" noshade>
 	</div>
 	<form:form modelAttribute="goodsReviewVO" action="updateReview.do" id="review_modify" enctype="multipart/form-data">
+		<form:hidden path="review_num"/>
+		<form:hidden path="goods_num"/>
 		<form:errors element="div" cssColor="error-color"/>
 		<ul>
 			<%-- 

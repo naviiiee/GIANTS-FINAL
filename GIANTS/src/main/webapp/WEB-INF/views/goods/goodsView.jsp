@@ -271,7 +271,7 @@
 					<td class="re-title" id="title${status.count}" style="cursor:pointer;">
 						${review.review_title}
 					</td>
-					<td>${review.mem_num}</td>
+					<td>${review.mem_id}</td>
 					<td>${review.review_regdate}</td>
 				</tr>
 				<tr class="re-content" id="content${status.count}" style="display:none;">

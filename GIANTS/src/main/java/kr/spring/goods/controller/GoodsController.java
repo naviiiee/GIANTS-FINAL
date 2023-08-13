@@ -441,13 +441,15 @@ public class GoodsController {
 		GoodsReviewVO reviewVO = goodsService.selectGoodsReview(review_num);
 		
 		model.addAttribute("goodsReviewVO", reviewVO);
+		log.debug("<<리뷰 수정 폼 - reviewVO>> : " + reviewVO);
 		
 		return "reviewModify";
 	}
 	
 	//전송된 데이터 처리
 	@PostMapping("/goods/updateReview.do")
-	public String submitUpdateReview(@Valid GoodsReviewVO reviewVO, BindingResult result, HttpServletRequest request, Model model) {
+	public String submitUpdateReview(@Valid GoodsReviewVO reviewVO, BindingResult result, 
+								HttpServletRequest request, Model model) {
 		
 		log.debug("<<리뷰 수정 - GoodsReviewVO>> : " + reviewVO);
 		
@@ -460,6 +462,8 @@ public class GoodsController {
 		reviewVO.setReview_ip(request.getRemoteAddr());
 		//리뷰 수정
 		goodsService.updateGoodsReview(reviewVO);
+		
+		log.debug("<<리뷰 수정2 - GoodsReviewVO>> : " + reviewVO);
 		
 		model.addAttribute("message", "리뷰 수정 완료!");
 		model.addAttribute("url", request.getContextPath() + "/goods/goodsDetail.do?goods_num=" + reviewVO.getGoods_num() + "#goods_review");
