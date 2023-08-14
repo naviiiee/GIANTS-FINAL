@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.ticket.dao.TicketMapper;
 import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
@@ -77,5 +78,8 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public void updateGame(GameVO gameVO) { ticketMapper.updateGame(gameVO); }
+
+	@Override
+	public MemberDetailVO selectMemberDetail(Integer mem_num) { return ticketMapper.selectMemberDetail(mem_num); }
 }
  

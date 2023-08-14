@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
 import kr.spring.ticket.vo.SeatVO;
@@ -39,6 +40,8 @@ public interface TicketService {
 	public void updateSeat(SeatVO seatVO);
 	// 등급별 좌석개수
 	public Integer selectSeatQuantity(Integer grade_num);
+	
+	public MemberDetailVO selectMemberDetail(Integer mem_num);
 	
 	
 	/* 경기정보 */

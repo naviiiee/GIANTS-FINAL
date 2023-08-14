@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
 import kr.spring.ticket.vo.SeatVO;
@@ -73,4 +74,6 @@ public interface TicketMapper {
 	// 등급별 좌석개수
 	@Select("SELECT SUM(seat_quantity) FROM seat WHERE grade_num = #{grade_num}")
 	public Integer selectSeatQuantity(Integer grade_num);
+	@Select("SELECT * FROM member_detail WHERE mem_num = #{mem_num}")
+	public MemberDetailVO selectMemberDetail(Integer mem_num);
 }

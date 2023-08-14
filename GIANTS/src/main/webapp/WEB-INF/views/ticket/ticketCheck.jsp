@@ -13,10 +13,11 @@
 	</div>
 	<form action="order.do" id="ticket_order" method="post">
 		<div>
+			<%-- 왼쪽 절반 --%>
 			<div class="select-left">
-				<c:forEach var="seatR" items="${seatVO.seatR}">
-				${SeatVO.seatB}블럭 ${seatR}행 ${seatVO.seatC}번<br>
-				</c:forEach>
+				${seatVO.detailVO.mem_name }
+				${seatVO.detailVO.mem_phone }
+				${seatVO.detailVO.mem_email }
 			</div>
 			<%-- 오른쪽 절반 --%>
 			<div class="select-right">

@@ -4,6 +4,8 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Range;
 
+import kr.spring.member.vo.MemberDetailVO;
+import kr.spring.member.vo.MemberVO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,8 +25,9 @@ public class SeatVO {
 	@NotEmpty
 	private int seat_quantity;
 	
+	private MemberDetailVO detailVO;
+	
 	private int seatB;	// 선택한 블럭 번호
 	private String seatR;	// 선택한 좌석 행
 	private String seatC;	// 선택한 좌석 열
-	
 }

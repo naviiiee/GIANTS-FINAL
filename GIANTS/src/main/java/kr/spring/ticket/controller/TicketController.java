@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.ticket.service.TicketService;
 import kr.spring.ticket.vo.GameVO;
@@ -29,6 +30,9 @@ import lombok.extern.slf4j.Slf4j;
 public class TicketController {
 	@Autowired
 	private TicketService ticketService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	// javaBean(VO) 초기화
 	@ModelAttribute
@@ -107,8 +111,9 @@ public class TicketController {
 	/* ----- [Order] 티켓주문 -----*/
 	@PostMapping("/ticket/orderForm.do")
 	public String orderTicketForm(@RequestParam int game_num, SeatVO seatVO, HttpSession session, Model model) {
-		List<SeatVO> list = null;
-		list = ticketService.selectSeatList(seatVO);
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		seatVO.setDetailVO(ticketService.selectMemberDetail(user.getMem_num()));
 		
 		model.addAttribute("seatVO", seatVO);
 		
