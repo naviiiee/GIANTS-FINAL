@@ -64,7 +64,7 @@ div#file_detail span{
 div.cate-filter{
 	margin-bottom:10px;
 }
-div.cate-filter input{
+div.cate-filter input[type="button"].off{
 	width:60px;
 	height:30px;
 	background-color:#6cace4;
@@ -74,6 +74,18 @@ div.cate-filter input{
 	font-weight:bold;
 	text-align:center;
 }
+
+div.cate-filter input[type="button"].on{
+	width:60px;
+	height:30px;
+	background-color:#FFF;
+	color:#6cace4;
+	border:1px solid #6cace4;
+	cursor:pointer;
+	font-weight:bold;
+	text-align:center;
+}
+
 div.list-btns{
 	margin-top:5px;
 }

@@ -33,6 +33,7 @@
 		<result property="companyDetailVO.comp_modifydate" column="comp_modifydate" />
 		<result property="companyDetailVO.comp_content" column="comp_content" />
 	</resultMap>
+	
 	<!-- 일반 회원가입 --> 
 	<insert id="insertMember_detail" parameterType="memberVO">
 		INSERT INTO MEMBER_DETAIL(
@@ -127,6 +128,7 @@
 		WHERE
 			m.mem_num=#{mem_num}
 	</select>
+	
 	<!-- 회원정보수정 -->
 	<update id="updateMember_detail" parameterType="memberVO">
 		UPDATE
@@ -143,6 +145,7 @@
 		WHERE
 			mem_num=#{mem_num}
 	</update>
+	
 	<!-- 기업정보수정 -->
 	<update id="updateCompany_detail" parameterType="memberVO">
 		UPDATE
@@ -161,4 +164,110 @@
 		WHERE
 			mem_num=#{mem_num}
 	</update>
+	
+	<!-- 관리자 회원목록 -->
+	<!-- sql태그와 include태그를 이용해서 SQL문을 재사용 -->
+	<sql id="memberSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<if test="keyfield == 1">
+					m.mem_id LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 2">
+					d.mem_name LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 3">
+					d.mem_email LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 4">
+					m.mem_id LIKE '%' || #{keyword} || '%' or
+					d.mem_name LIKE '%' || #{keyword} || '%' or
+					d.mem_email LIKE '%' || #{keyword} || '%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 전체/검색 레코드 수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM
+			MEMBER m 
+		LEFT OUTER JOIN MEMBER_DETAIL d
+		ON m.mem_num = d.mem_num
+		LEFT OUTER JOIN COMPANY_DETAIL c
+		ON m.mem_num = c.mem_num
+		<include refid="memberSearch"></include>
+	</select>
+	
+	<!-- 전체/검색 목록 -->
+	<select id="selectList" parameterType="map" resultType="memberVO">
+		SELECT
+			*
+		FROM
+			(SELECT 
+				a.*, rownum rnum
+			FROM
+				(SELECT
+					*
+				FROM
+					MEMBER m 
+				LEFT OUTER JOIN MEMBER_DETAIL d
+				ON m.mem_num = d.mem_num
+				LEFT OUTER JOIN COMPANY_DETAIL c
+				ON m.mem_num = c.mem_num
+				<include refid="memberSearch"></include>
+				ORDER BY
+					d.mem_regdate DESC NULLS LAST
+				)a
+			)
+		<![CDATA[
+		WHERE
+			rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+	<!-- 회원관리xml -->
+	<!-- <select id="" parameterType="integer" resultType="memberVO">
+	SELECT
+		m.mem_num,
+		m.mem_id,
+		m.mem_nickname,
+		m.mem_auth,
+		m.passwd,
+		d.mem_auid,
+		d.mem_name,
+		d.mem_public,
+		d.mem_phone,
+		d.mem_email,
+		d.mem_zipcode,
+		d.mem_address1,
+		d.mem_address2,
+		d.mem_photo,
+		d.mem_photoname,
+		d.mem_regdate,
+		d.mem_modifydate,
+		d.mem_point,
+		c.comp_num,
+		c.comp_owner,
+		c.comp_cate,
+		c.comp_name,
+		c.comp_cate,
+		c.comp_phone,
+		c.comp_email,
+		c.comp_zipcode,
+		c.comp_address1,
+		c.comp_address2,
+		c.comp_photo,
+		c.comp_photoname,
+		c.comp_regdate,
+		c.comp_modifydate,
+		c.comp_content
+	FROM 
+		m MEMBER
+	LEFT OUTER JOIN MEMBER_DETAIL ON m.mem_num = d.mem_num
+	LEFT OUTER JOIN COMPANY_DETAIL ON m.mem_num = c.mem_num
+	WHERE m.mem_num = #{mem_num}
+	</select> -->
 </mapper>

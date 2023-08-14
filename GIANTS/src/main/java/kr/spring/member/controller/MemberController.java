@@ -1,6 +1,7 @@
 package kr.spring.member.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -23,12 +24,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.FileUtil;
+import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -47,8 +50,9 @@ public class MemberController {
 	}
 
 	
-	/* === 회원가입 
-	=======================*/
+	/*=====================
+	 * 회원가입
+	 *=====================*/
 	// 회원등급 선택 호출
 	@RequestMapping("/member/registerCommon.do")
 	public String form() {
@@ -113,7 +117,7 @@ public class MemberController {
 	public String submitCompany(@Valid MemberVO memberVO, BindingResult result,
 								Model model) {
 		// logger.debug("<<기업회원가입>> : " + memberVO);
-
+		
 		// 기업 회원 가입시 auth 값을 3
 		memberVO.setMem_auth(3);
 
@@ -134,8 +138,9 @@ public class MemberController {
 	}
 	
 
-	/* === 로그인 
-	=======================*/
+	/*=====================
+	 * 로그인
+	 *=====================*/
 	// 로그인폼
 	@GetMapping("/member/login.do")
 	public String formLogin() {
@@ -219,8 +224,9 @@ public class MemberController {
 	}
 	
 
-	/* === 로그아웃 
-	=======================*/
+	/*=====================
+	 * 로그아웃
+	 *=====================*/
 	@RequestMapping("/member/logout.do")
 	public String logout(HttpSession session) {
 		// 로그아웃
@@ -233,8 +239,9 @@ public class MemberController {
 	}
 
 	
-	/* === 마이페이지 
-	=======================*/
+	/*=====================
+	 * 마이페이지
+	 *=====================*/
 	@RequestMapping("/member/myPage.do")
 	public String myPage(HttpSession session, Model model) {
 		
@@ -243,16 +250,19 @@ public class MemberController {
 		// 회원 정보 반환
 		MemberVO member = memberService.selectMember(user.getMem_num());
 		MemberVO company = memberService.selectCompany(user.getMem_num());
+		
 		log.debug("<<MypageMember>> : " + member);
 		log.debug("<<MypageCompany>> : " + company);
+		
 		model.addAttribute("member", member);
 		model.addAttribute("company", company);
 		
 		return "myPage";
 	}
 	
-	/* === 마이페이지 : 회원정보수정
-	=======================*/
+	/*=====================
+	 * 마이페이지 : 회원정보수정
+	 *=====================*/
 	//일반회원 수정 폼 호출
 	@GetMapping("/member/updateMember.do")
 	public String formUpdateMember(HttpSession session,
@@ -310,8 +320,9 @@ public class MemberController {
 		return "redirect:/member/myPage.do";
 	}
 	
-	/* === 마이페이지 : 비밀번호변경
-	=======================*/
+	/*=====================
+	 * 마이페이지 : 비밀번호변경
+	 *=====================*/
 	//비밀번호 변경 폼 호출
 	@GetMapping("/member/changePasswd.do")
 	public String formChangePasswd() {
@@ -370,8 +381,9 @@ public class MemberController {
 		return "common/resultView";
 	}	
 	
-	/* === 마이페이지 : 프로필사진
-	=======================*/
+	/*=====================
+	 * 마이페이지 : 프로필사진
+	 *=====================*/
 	//프로필 사진 출력(로그인 전용)
 	@RequestMapping("/member/photoView.do")
 	public String getProfile(HttpSession session,
@@ -470,8 +482,9 @@ public class MemberController {
 	}
 
 	
-	/* === 회원탈퇴 
-	=======================*/
+	/*=====================
+	 * 회원탈퇴
+	 *=====================*/
 	// 일반회원탈퇴 폼 호출
 	@GetMapping("/member/deleteMember.do")
 	public String formDeleteMember() {
@@ -558,8 +571,9 @@ public class MemberController {
 	}
 	
 	
-	/* === 마이페이지 : 일반
-	=======================*/
+	/*=====================
+	 * 마이페이지 : 일반
+	 *=====================*/
 	//Ticket 내역
 	@RequestMapping("/member/memberMypageTicketList.do")
 	public String memberTicketList(HttpSession session, Model model) {
@@ -580,8 +594,9 @@ public class MemberController {
 	}
 	
 	
-	/* === 마이페이지 : 기업
-	=======================*/
+	/*=====================
+	 * 마이페이지 : 기업
+	 *=====================*/
 	//푸드목록
 	@RequestMapping("/member/companyMypageFoodList.do")
 	public String companyMypageFoodList(HttpSession session, Model model) {
@@ -602,14 +617,9 @@ public class MemberController {
 	}
 	
 	
-	/* === 마이페이지 : 관리자
-	=======================*/
-	//회원관리
-	@RequestMapping("/member/adminMypageMember.do")
-	public String adminMypageMember(HttpSession session, Model model) {
-		
-		return "adminMypageMember";
-	}
+	/*=====================
+	 * 마이페이지 : 관리자
+	 *=====================*/
 	//티켓관리
 	@RequestMapping("/member/adminMypageTicket.do")
 	public String adminMypageTicket(HttpSession session, Model model) {
@@ -628,4 +638,5 @@ public class MemberController {
 		
 		return "adminMypageSaleManage";
 	}
+
 }

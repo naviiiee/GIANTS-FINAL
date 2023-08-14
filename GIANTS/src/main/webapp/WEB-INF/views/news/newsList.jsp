@@ -49,10 +49,9 @@
 				</li>
 				<li>
 					<input type="submit" value="찾기">
-					<input type="button" value="목록" onclick="location.href='newsList.do'">
 				</li>
 			</ul>
-			<div class="align-right">
+			<div class="align-left">
 				<select id="order" name="order">
 					<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신</option>
 					<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
@@ -66,7 +65,10 @@
 						});
 					});
 				</script>
+			</div>
+			<div class="align-right">
 				<c:if test="${!empty user}">
+					<input type="button" value="목록" onclick="location.href='newsList.do'">
 					<input type="button" value="글쓰기" onclick="location.href='newsWrite.do'">
 				</c:if>
 			</div>

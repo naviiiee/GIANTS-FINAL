@@ -54,7 +54,7 @@ public interface GoodsService {
 	//상품 후기 삭제
 	public void deleteGoodsReview(Integer review_num);
 	//평균 별점 표시
-	public int getAvgScore(Integer goods_num);
+	public float getAvgScore(Integer goods_num);
 	
 	//=====상품 문의=====//
 	//전체 | 검색 상품 문의 목록

@@ -15,14 +15,16 @@
 			<input type="button" value="삭제">
 		</div>
 		</c:if>
-		<div>
-			<input type="button" value="임시리뷰" onclick="location.href='writeReview.do'">
-			<input type="button" value="임시문의" onclick="location.href='writeQna.do'">
-		</div>
 		<div class="goods-photo">
 			<img src="${pageContext.request.contextPath}/goods/imageView.do?goods_num=${goods.goods_num}">
 		</div>
 		<div class="goods-info" ><br><br>
+			<div>
+				<c:if test="${goods.goods_category == 1}">유니폼</c:if>
+				<c:if test="${goods.goods_category == 2}">모자</c:if>
+				<c:if test="${goods.goods_category == 3}">응원도구</c:if>
+				<c:if test="${goods.goods_category == 4}">기타</c:if>
+			</div>
 			<h3 class="goods-name">${goods.goods_name}</h3>
 			<hr size="2" width="97%">
 			<form id="goods_cart" method="post">
@@ -57,7 +59,7 @@
 					</li>
 					<li>
 						평점 : 
-						<span id="avg_star">★</span> (<span id="output_score">${avg_score}</span>) 소수점으로 표시해야됨
+						<span id="avg_star">★</span> (<span id="output_score">${avg_score}</span>)
 					</li>
 				<c:if test="${goods.goods_status == 1}">
 					<li>
@@ -75,8 +77,6 @@
 						    </select>
 						    
 						</li>
-
-
 						<script>
 						    // 옵션 선택이 변경되었을 때 호출되는 함수
 						    function updateHiddenInput() {
@@ -97,7 +97,6 @@
 						    updateHiddenInput();
 						</script>
 						
-						<!--  -->
 					</li>
 					<%-- 
 					<li>

@@ -9,7 +9,7 @@ import kr.spring.introduce.vo.PlayerVO;
 public interface PlayerService {
 	//선수
 	public void insertPlayer(PlayerVO playerVO);
-	public int selectPlayerCount(Map<String,Object> map);
+	public int selectRowCount(Map<String,Object> map);
 	public List<PlayerVO> selectPlayerList(Map<String,Object> map);
 	public PlayerVO selectPlayer(Integer player_num);
 	public void updatePlayer(PlayerVO playerVO);

@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 상품목록 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goods.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/goods.filter.js"></script>
 <script type="text/javascript">
 	$(function(){
 		//검색 유효성 체크
@@ -26,11 +27,11 @@
 		<hr size="0.05" width="100%" noshade>
 	</div>
 	<div class="cate-filter">
-		<input type="button" value="전체">
-		<input type="button" value="유니폼"> 
-		<input type="button" value="모자"> 
-		<input type="button" value="응원도구"> 
-		<input type="button" value="기타">
+		<input name="category" type="button" value="전체" id="filter_all" class="on" onclick="location.href='goodsList.do'">
+		<input name="category" type="button" value="유니폼" id="filter_uniform" class="off" onclick="location.href='goodsList.do?category=1'"> 
+		<input name="category" type="button" value="모자" id="filter_cap" class="off" onclick="location.href='goodsList.do?category=2'"> 
+		<input name="category" type="button" value="응원도구" id="filter_cheering" class="off" onclick="location.href='goodsList.do?category=3'"> 
+		<input name="category" type="button" value="기타" id="filter_etc" class="off" onclick="location.href='goodsList.do?category=4'">
 	</div>
 	<hr size="1" width="100%" noshade>
 	<c:if test="${!empty user && user.mem_auth == 9}">
@@ -43,7 +44,7 @@
 		<ul class="search">
 			<li>
 				<select name="keyfield" id="keyfield">
-					<option>==선택==</option>
+					<option value="">==선택==</option>
 					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>유니폼</option>
 					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>모자</option>
 					<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>응원도구</option>
@@ -60,8 +61,8 @@
 		<div class="align-right">
 			<select id="order" name="order">
 				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신</option>
-				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>리뷰많은순</option>
-				<option value="3" <c:if test="${param.order == 3}">selected</c:if>>찜하기순</option>
+				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>찜하기순</option>
+				<option value="3" <c:if test="${param.order == 3}">selected</c:if>>리뷰많은순</option>
 			</select>
 			<script type="text/javascript">
 				$(function(){

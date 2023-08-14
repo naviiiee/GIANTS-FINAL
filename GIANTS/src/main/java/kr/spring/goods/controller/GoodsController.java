@@ -147,6 +147,7 @@ public class GoodsController {
 	@RequestMapping("/goods/goodsList.do")
 	public ModelAndView getGoodsList(@RequestParam(value="pageNum", defaultValue="1") int currentPage, 
 									 @RequestParam(value="order", defaultValue="1") int order,
+									 @RequestParam(value="category", defaultValue="0") int category,
 									 String keyfield, String keyword) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
@@ -157,11 +158,12 @@ public class GoodsController {
 		int count = goodsService.selectGoodsRowCount(map);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 12, 10, "goodsList.do");
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 12, 10, "goodsList.do", "&order=" + order + "&category=" + category);
 		 
 		List<GoodsVO> list = null;
 		if(count > 0) {
 			map.put("order", order);
+			map.put("category", category);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 			
@@ -209,7 +211,7 @@ public class GoodsController {
 			review = goodsService.selectGoodsReviewList(map);
 		}
 		
-		int avg_score = goodsService.getAvgScore(goods_num);
+		float avg_score = goodsService.getAvgScore(goods_num);
 		
 		log.debug("<<로그찍기 - avg_score>>" + avg_score);
 		

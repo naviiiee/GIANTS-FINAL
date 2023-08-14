@@ -30,4 +30,6 @@ public class SeatVO {
 	private int seatB;	// 선택한 블럭 번호
 	private String seatR;	// 선택한 좌석 행
 	private String seatC;	// 선택한 좌석 열
+	
+	private String seat;
 }

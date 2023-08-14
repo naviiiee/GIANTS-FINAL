@@ -25,8 +25,7 @@ CREATE TABLE seat(
 	seat_num NUMBER,
     grade_num NUMBER,
 	seat_block NUMBER(3) NOT NULL,
-	seat_row VARCHAR2(30) NOT NULL,
-	seat_col VARCHAR2(30) NOT NULL,
+	seat_info VARCHAR2(30) NOT NULL,	-- 블록+행+열(722A3 등과 같이 저장)
 	seat_quantity NUMBER(5) NOT NULL,
 	CONSTRAINT seat_pk PRIMARY KEY (seat_num),
 	CONSTRAINT seat_fk FOREIGN KEY (grade_num) REFERENCES grade (grade_num)

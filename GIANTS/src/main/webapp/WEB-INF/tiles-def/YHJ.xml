@@ -103,9 +103,19 @@
     
     
     <!-- 관리자 : MENU -->
-     <definition name="adminMypageMember" extends="myPage"> 
-    	<put-attribute name="title" value="회원관리"/>
-    	<put-attribute name="body" value="/WEB-INF/views/member/adminMypageMember.jsp"/>
+     <definition name="admin_memberList" extends="myPage"> 
+    	<put-attribute name="title" value="회원목록(관리자)"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/adminMemberList.jsp"/>
+    </definition>
+    
+    <definition name="admin_memberModify" extends="myPage"> 
+    	<put-attribute name="title" value="회원권한수정(일반)"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/adminModifyMember.jsp"/>
+    </definition>
+    
+    <definition name="admin_companyModify" extends="myPage"> 
+    	<put-attribute name="title" value="회원권한수정(기업)"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/adminModifyCompany.jsp"/>
     </definition>
     
     <definition name="adminMypageTicket" extends="myPage"> 
