@@ -63,37 +63,41 @@ $(function(){
 		event.preventDefault();		
 	});
 	
-	
-	
 	//장바구니에 담겨있는 상품의 총구매금액
 	let cart_sum = $('.all-total').attr('data-alltotal');
+	
 	/*============================
 	 * 장바구니 체크박스 제어
      *============================*/
 	//전체 선택/해제
 	$('#chk_all').on('click',function(){
-		if($('#chk_all').is(':checked')){//전체 선택
+		if($('#chk_all').is(':checked')){
+			//------------ 전체 선택 시작 ------------
 			$('.choice-btn').prop('checked',true);
 			$('#order_btn').prop('disabled',false);//구매 가능
 			
 			//개별 상품 정보를 모두 표시
 			$('.goods-setting').remove();
-			$('.order-quantity').show();
-			$('.goods-price').text(function(){
-				return Number($(this).attr('data-price')).toLocaleString()+'원';
+			//$('.order_quantity').show();
+			$('.goods_dprice').text(function(){
+				return Number($(this).attr('data-dprice')).toLocaleString()+'원';
 			});
+			$('.order_point').show();
 			$('.sub-total').show();
 			//모두 선택하면 총구매 금액을 원래 총구매 금액으로 환원
 			$('.all-total').attr('data-alltotal',cart_sum);
 			
-		}else{//전체 해제
+		}else{
+			//------------ 전체 해제 시작 ------------
 			$('.choice-btn').prop('checked',false);
 			$('#order_btn').prop('disabled',true);//구매 불가
 			
 			//개별 상품 정보를 모두 0표시
-			$('.order-quantity').before('<span class="goods-setting">0</span>');
-			$('.order-quantity').hide();
-			$('.goods-price').text('0원');
+			//$('.order_quantity').before('<span class="goods-setting">0</span>');
+			//$('.order_quantity').hide();
+			$('.goods_dprice').text('0원');
+			$('.order_point').before('<span class="goods-setting">0p</span>');
+			$('.order_point').hide();
 			$('.sub-total').before('<span class="goods-setting">0원</span>');
 			$('.sub-total').hide();
 			$('.all-total').text('0원');
@@ -120,13 +124,25 @@ $(function(){
 		if($(this).is(':checked')){
 			//체크하면 수량,가격,배송비,개별 상품 합계가 정확하게 표시
 			$(this).parents('tr').find('.goods-setting').remove();
-			$(this).parents('tr').find('.order-quantity').show();
+			//$(this).parents('tr').find('.goods_dprice').text(Number($(this).parents('tr').find('.goods_price').attr('data-dprice')).toLocaleString()+'원'); //NAN왜?!
+			$(this).parents('tr').find('.goods_dprice').show();
+			//$(this).parents('tr').find('.order_quantity').show();
+			$(this).parents('tr').find('.order_point').show();
 			$(this).parents('tr').find('.sub-total').show();
 		}else{
 			//체크를 해제하면 수량,가격,배송비,개별 상품 합계가 모두 0으로 표시
-			$(this).parents('tr').find('.order-quantity').before('<span class="goods-setting">0</span');
-			$(this).parents('tr').find('.order-quantity').hide();
-			$(this).parents('tr').find('.goods-price').text('0원');
+			//$(this).parents('tr').find('.order_quantity').before('<span class="goods-setting">0</span>');
+			//$(this).parents('tr').find('.order_quantity').hide();
+			
+			
+			$(this).parents('tr').find('.goods_dprice').before('<span class="goods-setting">0원</span>');
+			$(this).parents('tr').find('.goods_dprice').hide();
+			//$(this).parents('tr').find('.goods_dprice').text('0원');
+			
+			$(this).parents('tr').find('.order_point').before('<span class="goods-setting">0p</span>');
+			$(this).parents('tr').find('.order_point').hide();
+			
+			
 			$(this).parents('tr').find('.sub-total').before('<span class="goods-setting">0원</span>');
 			$(this).parents('tr').find('.sub-total').hide();
 		}
@@ -138,18 +154,15 @@ $(function(){
 			//총구매 금액을 선택과 미선택에 따라 다시 산출
 			if($(this).is(':checked')){//선택
 				$('.all-total').attr('data-alltotal',
-				     Number($('.all-total').attr('data-alltotal'))+
-                     Number($(this).parents('tr').find('.sub-total').attr('data-total')));
+				     Number($('.all-total').attr('data-alltotal'))+Number($(this).parents('tr').find('.sub-total').attr('data-total')));
 			}else{//선택 해제
 				$('.all-total').attr('data-alltotal',
-				     $('.all-total').attr('data-alltotal')-
-                     $(this).parents('tr').find('.sub-total').attr('data-total'));
+				     $('.all-total').attr('data-alltotal')- $(this).parents('tr').find('.sub-total').attr('data-total'));
 			}
 		}else{
 			$('#order_btn').prop('disabled',true);//구매 불가
 			$('.all-total').attr('data-alltotal',
-				     $('.all-total').attr('data-alltotal')-
-                     $(this).parents('tr').find('.sub-total').attr('data-total'));
+			$('.all-total').attr('data-alltotal')-$(this).parents('tr').find('.sub-total').attr('data-total'));
 		}
 		
 		//총구매 금액 표시
@@ -162,22 +175,22 @@ $(function(){
 	 * 장바구니 상품 주문 수량 변경
      *============================*/
 	$('.cart-modify').on('click',function(){
-		let input_quantity = $(this).parent().find('input[name="order_quantity"]');
-		if(input_quantity.val()==''){
+		let order_quantity = $(this).parent().find('input[name="order_quantity"]');
+		if(order_quantity.val()==''){
 			alert('수량을 입력하세요');
-			input_quantity.focus();
+			order_quantity.focus();
 			return;
 		}
 		
-		if(isNaN(input_quantity.val())){
-			                   //태그에 명시한 value값을 읽어옴
-			input_quantity.val(input_quantity.attr('value'));
+		if(isNaN(order_quantity.val())){
+			 //태그에 명시한 value값을 읽어옴
+			order_quantity.val(order_quantity.attr('value'));
 			return;
 		}
 		
-		if(input_quantity.val() < 1){
+		if(order_quantity.val() < 1){
 			alert('상품의 최소 수량은 1입니다.');
-			input_quantity.val(input_quantity.attr('value'));
+			order_quantity.val(order_quantity.attr('value'));
 			return;
 		}
 		
@@ -185,7 +198,7 @@ $(function(){
 		$.ajax({
 			url:'../cart/modifyCart.do',
 			type:'post',
-			data:{cart_num:$(this).attr('data-cartnum'),goods_num:$(this).attr('data-goodsnum'),order_quantity:input_quantity.val()},
+			data:{cart_num:$(this).attr('data-cartnum'),goods_num:$(this).attr('data-goodsnum'),order_quantity:order_quantity.val()},
 			dataType:'json',
 			success:function(param){
 				if(param.result == 'logout'){

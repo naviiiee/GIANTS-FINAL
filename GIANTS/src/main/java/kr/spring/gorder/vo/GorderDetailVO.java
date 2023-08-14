@@ -13,4 +13,13 @@ public class GorderDetailVO {
 	private int goods_total; //상품구매금액
 	private int order_quantity; //구매수량 
 	private int order_num;//주문번호   
+	
+	private int lpoint; //예상 적립 포인트(dprice*order_quantity*0.02)
+	public void initSaleTotal() {
+		this.lpoint = (int)(Math.floor(this.goods_dprice * this.order_quantity * 0.02));
+	}
+	
+	
+	
+	
 }

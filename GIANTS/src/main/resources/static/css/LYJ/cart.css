@@ -1,5 +1,24 @@
 @charset "UTF-8";
-<style>
+
+th{
+	background-color: #f5f5f5;
+}
+.option-tr{
+background-color: #f5f5f5;
+}
+
+
+.arrow-icon {
+    display: inline-block;
+    margin-right: 5px; /* 조정 가능한 여백 */
+    padding: 2px; /* 텍스트와 border 간의 여백 */
+}
+
+.option-icon{
+ margin-right: 300px;
+ text-align: center;
+}
+
 .content-main {
 	background-color: #ffffff; /* 배경색 */
 	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* 그림자 효과 */

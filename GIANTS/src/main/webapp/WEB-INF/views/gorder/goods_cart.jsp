@@ -6,6 +6,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_cart.js"></script>
+<style>
+
+
+</style>
 <!-- all_total, list(g_order_detail) - 사이즈 포함 -->
 <!-- 장바구니 시작 -->
 <div class="page-main">
@@ -33,6 +37,7 @@
 				<th>상품정보</th>
 				<th>판매가</th>
 				<th>수량</th>
+				<th>적립</th>
 				<th>합계</th>
 			</tr>
 			<c:forEach var="cart" items="${list}">
@@ -57,11 +62,13 @@
 					
 					<!-- 4. 판매가 -->
 					<td class="align-center">
-						<span class="goods-price" data-price="${cart.goodsVO.goods_dprice}"><fmt:formatNumber value="${cart.goodsVO.goods_dprice}"/>원</span>
+						<span class="goods_dprice" data-dprice="${cart.goodsVO.goods_dprice}"><fmt:formatNumber value="${cart.goodsVO.goods_dprice}"/>원</span>
+						<input type="hidden" name="goods_dprice">
 					</td>
 					
 					<!-- 5. 수량 및 상태 체크 -->
 					<td class = "align-center">
+					<%-- <div class="order_quantity> --%>
 						<c:if test="${cart.goodsVO.goods_status==2 or cart.goodsOptionVO.goods_stock < cart.order_quantity}">[판매중지]</c:if>
 						<c:if test="${cart.goodsVO.goods_status==1 and cart.goodsOptionVO.goods_stock >= cart.order_quantity}">
 							<input type="number" name="order_quantity" min="1" max="${cart.goodsOptionVO.goods_stock}" autocomplete = "off" value = "${cart.order_quantity}">
@@ -69,8 +76,15 @@
 							<br>
 							<input type = "button" value = "변경" class = "cart-modify" data-cartnum = "${cart.cart_num}" data-goodsnum = "${cart.goods_num}">
 						</c:if>
-						
+					<!-- </div> -->	
 					</td>
+					
+					<!-- 포인트 -->
+					<td class = "align-center">
+					<span class="order_point" value="${cart.order_point}">${cart.order_point}p</span>
+						<input type="hidden" name="order_point"> 
+					</td>
+					
 					<!-- 6. 합계 -->
 					<td class="align-center">
 						<div class="sub-total" data-total="${cart.sub_total}">
@@ -81,25 +95,30 @@
 					</td>					
 					<!-- 옵션 처리 -->
 					<c:if test="${cart.goods_size!='옵션없음'}">
-						<tr>
-							<td colspan="6">
-								<img src="${pageContext.request.contextPath}/images/btn_order_option.gif" alt="옵션" title="옵션">
-								 사이즈 : ${cart.goods_size} 
-							</td>	
+						<tr class="option-tr">
+						    <td colspan="7" class="option-td">
+						        <span class="option-icon">
+						            <span class="arrow-content">⤷</span>
+						        
+						        <img src="${pageContext.request.contextPath}/images/btn_order_option.gif" alt="옵션" title="옵션">
+						        사이즈 : ${cart.goods_size}
+						        </span>
+						    </td>
 						</tr>
+
 					</c:if>
 				</tr>
 			</c:forEach>
 				<tr>
-					<td colspan="5" class="align-right"><b>총구매금액</b></td>
+					<td colspan="6" class="align-right"><b>총구매금액</b></td>
 					<td class="align-center"><span class="all-total" data-alltotal="${all_total}"><fmt:formatNumber value="${all_total}"/>원</span></td>
 				</tr>
 		</table>
 		
 		<div class = "buttons">
-				<input type="button" value="쇼핑 계속하기" onclick="location.href='${pageContext.request.contextPath}/goods/goodsList.do'">
-				<input type = "submit" value = "주문하기"  id="order-btn">
-				<input type="button" value="장바구니 비우기" class="deleteCartAll"> <!-- js click 처리 -->
+			<input type="button" value="쇼핑 계속하기" onclick="location.href='${pageContext.request.contextPath}/goods/goodsList.do'">
+			<input type = "submit" value = "주문하기"  id="order-btn">
+			<input type="button" value="장바구니 비우기" class="deleteCartAll"> 
 		</div>
 	</form>
 	</c:if>
