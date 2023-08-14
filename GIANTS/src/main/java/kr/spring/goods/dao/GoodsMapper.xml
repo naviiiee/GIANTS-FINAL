@@ -43,7 +43,6 @@
 	</insert>
 	
 	<!-- 상품 목록 -->
-	
 	<sql id="goodsSearch">
 		<if test="keyword != null and keyword != ''">
 			<if test="keyfield == 1">
@@ -60,13 +59,31 @@
 	
 	<sql id="goodsOrder">
 		<if test="order == 1">
-			ORDER BY goods_num DESC
+			ORDER BY goods_regdate DESC
 		</if>
 		<if test="order == 2">
-			ORDER BY fav_cnt DESC
+			ORDER BY f.fav_cnt ASC
 		</if>
 		<if test="order == 3">
-			ORDER BY review_cnt DESC
+			ORDER BY r.re_cnt ASC
+		</if>
+	</sql>
+	
+	<sql id="goodsCategory">
+		<if test="category == 0">
+		
+		</if>
+		<if test="category == 1">
+			WHERE g.goods_category = 1
+		</if>
+		<if test="category == 2">
+			WHERE g.goods_category = 2
+		</if>
+		<if test="category == 3">
+			WHERE g.goods_category = 3
+		</if>
+		<if test="category == 4">
+			WHERE g.goods_category = 4
 		</if>
 	</sql>
 	  
@@ -86,8 +103,17 @@
 				a.*,
 				rownum rnum
 			  FROM(SELECT
-			  			*
+			  			g.goods_num,
+			  			g.goods_name,
+			  			g.goods_dprice,
+			  			f.fav_cnt,
+			  			r.re_cnt,
+			  			g.goods_category,
+			  			g.goods_regdate,
+			  			g.goods_status
 			  	   FROM goods g
+			  	   LEFT OUTER JOIN (SELECT count(*) fav_cnt, goods_num FROM goods_fav GROUP BY goods_num)f ON g.goods_num=f.goods_num
+			  	   LEFT OUTER JOIN (SELECT count(*) re_cnt, goods_num FROM goods_review GROUP BY goods_num)r ON g.goods_num=r.goods_num
 			  	   <include refid="goodsSearch"></include>
 			  	   <include refid="goodsOrder"></include>
 			  	   )a)

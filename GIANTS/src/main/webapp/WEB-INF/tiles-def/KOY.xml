@@ -80,4 +80,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/news/newsModify.jsp"/>
 	</definition>
 	
+	<!-- 경기 일정 -->
+
+	
 </tiles-definitions>

@@ -116,7 +116,7 @@
 				</script>
 			</li>
 		</ul>
-		<div class="align-center">
+		<div class="align-center" style="margin-top:5px;">
 			<form:button class="default-btn">수정</form:button>
 			<input type="button" value="목록" onclick="location.href='goodsList.do'">
 		</div>

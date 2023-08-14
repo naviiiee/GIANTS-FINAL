@@ -85,7 +85,7 @@ public interface GoodsMapper {
 	public void deleteGoodsReview(Integer review_num);
 	
 	//평균 별점 표시
-	@Select("SELECT ROUND(AVG(review_score),1) FROM goods_review WHERE goods_num=#{goods_num}")
+	@Select("SELECT NVL(ROUND(AVG(review_score),1),0) FROM goods_review WHERE goods_num=#{goods_num}")
 	public float getAvgScore(Integer goods_num);
 	
 	//=====상품 문의=====//
