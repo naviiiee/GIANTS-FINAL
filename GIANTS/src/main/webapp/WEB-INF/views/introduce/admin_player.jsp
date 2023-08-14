@@ -31,7 +31,7 @@
 				<form:errors path="player_photo" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="player_birthday">선수 생일</form:label>
+				<form:label path="player_birthday">선수 생년월일</form:label>
 				<form:input path="player_birthday"/>
 				<form:errors path="player_birthday" cssClass="error-color"/>
 			</li>

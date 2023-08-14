@@ -59,11 +59,9 @@
     
     
     <!-- [관리자] 선수 목록 폼 -->
-    <!-- 
     <definition name="admin_playerList" extends="main">
     	<put-attribute name="title" value="선수 목록"/>
     	<put-attribute name="body" value="/WEB-INF/views/introduce/admin_playerList.jsp"/>
     </definition>
-     -->
     
 </tiles-definitions>
