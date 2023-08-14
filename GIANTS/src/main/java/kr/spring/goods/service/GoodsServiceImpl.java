@@ -140,7 +140,7 @@ public class GoodsServiceImpl implements GoodsService{
 	}
 	
 	@Override
-	public int getAvgScore(Integer goods_num) {
+	public float getAvgScore(Integer goods_num) {
 		return goodsMapper.getAvgScore(goods_num);
 	}
 

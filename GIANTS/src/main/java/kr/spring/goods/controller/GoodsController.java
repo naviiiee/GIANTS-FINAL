@@ -209,7 +209,7 @@ public class GoodsController {
 			review = goodsService.selectGoodsReviewList(map);
 		}
 		
-		int avg_score = goodsService.getAvgScore(goods_num);
+		float avg_score = goodsService.getAvgScore(goods_num);
 		
 		log.debug("<<로그찍기 - avg_score>>" + avg_score);
 		
