@@ -59,10 +59,10 @@ hr{ margin:15px 0; }
 input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }
 
 /* 좌석 선택 */
-.select-ticket{ width:100%; display:flex; justify-content:center; }
+.select-ticket, .check-info{ width:100%; display:flex; justify-content:center; }
 .select-left, .select-right{ width:50%; margin:0 auto; }
 
-.selected-info{ width:50%; margin:20px auto; padding:10px 0; text-align:center; border:1px solid #999; }
+.selected-info, .game-logo{ width:50%; margin:20px auto; padding:10px 0; text-align:center; border:1px solid #999; }
 
 .select-grade, .select-block, .selected-seat{ width:75%; height:200px; margin:25px auto; overflow:auto; overflow-x: hidden; white-space:nowrap; }
 .select-grade hr, .select-block hr, .selected-seat hr{ margin:0 auto; }
@@ -72,7 +72,7 @@ input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }
 .grade_title:hover{ cursor:pointer; }
 
 .group-btn{ width:75%; margin:0 auto; text-align:center; }
-.group-btn input{ margin:0 25px; }
+.group-btn input{ margin:0 10px; }
 
 .seat-box{ background-color:#f1f1f1; width:500px; height:500px; margin:0 auto; }
 .ground{ background-color:#fff; width:50%; margin:0 auto; padding:10px 0; text-align:center; }
@@ -90,3 +90,9 @@ input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }
 .scrollBar::-webkit-scrollbar { width:10px;  /* 스크롤바의 너비 */ }
 .scrollBar::-webkit-scrollbar-thumb { height:30%; /* 스크롤바의 길이 */ background:#dd032f; /* 스크롤바의 색상 */ border-radius: 10px; }
 .scrollBar::-webkit-scrollbar-track { background:rgba(5, 59, 68, .1);  /*스크롤바 뒷 배경 색상*/ }
+
+/* 예매정보 확인 */
+.select-gameInfo{ width:80%; margin:0 auto; }
+.game-logo img{ width:50px; height:50px; }
+.left-no1, .left-no2, .left-no3{ width:90%; height:120px; margin:0 auto; }
+.back-white{ height:80px; background:#fff; font-size:15px; }

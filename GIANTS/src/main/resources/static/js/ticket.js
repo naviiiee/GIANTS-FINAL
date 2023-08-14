@@ -1,4 +1,4 @@
-$(function() {	
+$(function() {
 	/* --------------------
 	   등급 클릭시 Block 노출
 	-------------------- */
@@ -86,7 +86,6 @@ $(function() {
 	});
 	
 	$(document).on('click', '.seat-btn', function() {
-		let check_num = $(this).attr('data-seatNum');
 		let check_block = $(this).attr('data-block');
 		let check_row = $(this).attr('data-row');
 		let check_col = $(this).attr('data-col');
@@ -101,10 +100,14 @@ $(function() {
 			$(this).addClass('clicked');
 		
 			let seat_info = '<tr class="seat-leng" id="del'+info+'"><td>';
-			seat_info += '<img src="../images/grade' + $(this).attr('data-grade') + '.png">' + check_block + '블럭 ' + check_row + '행 ' + check_col + '번';
+			seat_info += '<img src="../images/grade' + $(this).attr('data-grade') + '.png"> ' + check_block + '블럭 ' + check_row + '행 ' + check_col + '번';
+			/*
 			seat_info += '<input type="hidden" name="seatB" class="seatB" value="' + check_block + '">';
 			seat_info += '<input type="hidden" name="seatR" class="seatR" value="' + check_row + '">';
 			seat_info += '<input type="hidden" name="seatC" class="seatC" value="' + check_col + '">';
+			*/
+			seat_info += '<input type="hidden" name="seat" value="' + check_block + '^' + check_row + '^' + check_col + '">';
+			seat_info += '<input type="hidden" name="grade_num" value="' + $(this).attr('data-grade') + '">';
 			seat_info += '</td></tr>';
 			
 			$('.seat-table').append(seat_info);
@@ -114,6 +117,43 @@ $(function() {
 				return;
 			}
 		}
+	});
+	
+	$('#order_seat').submit(function() {
+		if($('.seat-leng').length == 0) {
+			alert('구매할 좌석을 선택하세요');
+			return false;
+		}
+	});
+	
+	/* ---------------
+	   선택한 좌석정보
+	------------------ */
+	let seat = $('.seat-info').text();
+	let array = seat.split(' ');
+	let leng = array.length - 1;
+	let title = $('#grade_title').val();
+	
+	$('#seatInfo').empty();
+	
+	for(let i = 0; i < leng; i++) {
+		let seatArr = array[i].split('^');
 		
+		let output = title + ' ' + seatArr[0] + '블록 ';
+		output += seatArr[1] + '행 ';
+		output += seatArr[2] + '번<br>';
+		$('#seatInfo').append(output);
+	}
+	
+	// 선택좌석 금액
+	let price = $('.price-total>td:nth-child(2)').text();
+	$('.price-total>td:nth-child(2)').empty()
+	$('.price-total').append((price * leng).toLocaleString() + '원');
+	
+	$('#ticket_order').submit(function() {
+		if($('input[name=check_info]:checked').length != 2) {
+			alert('예매자 확인은 필수사항');
+			return false;
+		}
 	});
 });

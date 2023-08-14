@@ -23,7 +23,7 @@ public class GameVO {
 	private String game_team;	// 상태팀이름
 	private int game_state;		// 경기예매가능여부
 	@Range(min=0, max=1)
-	private int game_week;		// 주중 or 주말
+	private int game_week;		// 주중(0) or 주말(1)
 	
 	private GradeVO gradeVO;
 	private SeatVO seatVO;
