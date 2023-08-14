@@ -1,11 +1,15 @@
 package kr.spring.member.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.vo.CompanyDetailVO;
+import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.member.vo.MemberVO;
 
 @Service
@@ -101,6 +105,22 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void updateComProfile(MemberVO member) {
 		memberMapper.updateComProfile(member);
+	}
+
+	@Override
+	public int selectRowCount(Map<String, Object> map) {
+		return memberMapper.selectRowCount(map);
+	}
+
+	@Override
+	public List<MemberVO> selectList(Map<String, Object> map) {
+		return memberMapper.selectList(map);
+	}
+	
+
+	@Override
+	public void updateByAdmin(MemberVO memberVO) {
+		memberMapper.updateByAdmin(memberVO);
 	}
 
 }

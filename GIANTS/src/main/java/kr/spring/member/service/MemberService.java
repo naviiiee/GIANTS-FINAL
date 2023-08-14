@@ -1,5 +1,8 @@
 package kr.spring.member.service;
 
+import java.util.List;
+import java.util.Map;
+
 import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberVO;
 
@@ -36,4 +39,12 @@ public interface MemberService {
 	public void updateAu_id(String au_id, int mem_num);
 	public MemberVO selectAu_id(String au_id);
 	public void deleteAu_id(int mem_num);
+	
+	/*==============
+	 *   관리자
+	 *==============*/
+	//회원가입 - 관리자
+	public int selectRowCount(Map<String,Object> map);
+	public List<MemberVO> selectList(Map<String,Object> map);
+	public void updateByAdmin(MemberVO memberVO);
 }

@@ -1,5 +1,8 @@
 package kr.spring.member.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -8,10 +11,14 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.member.vo.CompanyDetailVO;
+import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.member.vo.MemberVO;
 
 @Mapper
 public interface MemberMapper { 
+	/*==============
+	 *   일반회원
+	 *==============*/
 	//회원번호생성
 	@Select("SELECT MEMBER_DETAIL_seq.nextval FROM dual")
 	public int selectMem_num();
@@ -73,4 +80,13 @@ public interface MemberMapper {
 	public MemberVO selectAu_id(String au_id);
 	@Update("UPDATE MEMBER SET au_id='' WHERE mem_num=#{mem_num}")
 	public void deleteAu_id(int mem_num);
+	
+	/*==============
+	 *   관리자
+	 *==============*/
+	//회원가입 - 관리자
+	public int selectRowCount(Map<String,Object> map);
+	public List<MemberVO> selectList(Map<String,Object> map);
+	@Update("UPDATE MEMBER SET mem_auth=#{mem_auth} WHERE mem_num=#{mem_num}")
+	public void updateByAdmin(MemberVO memberVO);
 }

@@ -31,13 +31,14 @@ public class MemberVO {
 	private CompanyDetailVO companyDetailVO;
 	@Valid
 	private MemberDetailVO memberDetailVO;
-
+	
 	// 비밀번호 변경시 현재 비밀번호를 저장하는 용도로 사용
 	@Pattern(regexp = "^[A-Za-z0-9]{4,12}$")
 	private String now_passwd; // 비밀번호변경
 	
 	private byte[] mem_photo;
 	private String mem_photoname;
+	private String name;
 
 	// =======비밀번호 일치 여부 체크======= //
 	public boolean isCheckedPasswd(String userPasswd) {
