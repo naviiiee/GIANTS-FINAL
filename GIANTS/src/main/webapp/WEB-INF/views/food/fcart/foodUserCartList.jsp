@@ -4,36 +4,62 @@
 <!-- 유저 장바구니(푸드) 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OSJ/food.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/foodJS/foodCss.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/foodJS/fixCompFoodList.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/foodJS/foodUserCartList.js"></script>
 <div class="page-main">
 	<div class="main-title">
 		<img class="title-img" src="${pageContext.request.contextPath}/images/title_icon.gif">
-		<h2> 푸드 | <a href="/food/foodList.do">장바구니</a></h2>
+		<h2> 푸드 | <a href="/food/fcart/foodUserCartList.do">장바구니</a></h2>
 	</div>
 	<hr noshade="noshade">
 	<!-- 내용물 시작 -->
 	<div class="cart-container">
 		<div class="cart-List">
+			<!-- 조건문 -->
 			<c:if test="${not empty list}">
-			<table>
+			<table id="cart_tb">
 				<tr>
 					<th><input type="checkbox" id="all_chk"><!-- 전체체크박스 --></th>
-					<th>식품명</th>
+					<th>이미지</th>
+					<th>상품정보</th>
 					<th>수량</th>
 					<th>가격</th>
-					<th>총 가격</th>
+					<th>합계</th>
+					<th>선택</th>
 				</tr>
 				<c:forEach var="cart" items="${list}">
 				<tr>
 					<td><input type="checkbox" class="food-chk"></td>
+					<td><img src="${pageContext.request.contextPath}/food/imageView.do?food_num=${cart.foodVO.food_num}&food_type=1" class="food-cart-img"></td>
 					<td>${cart.foodVO.food_name}</td>
-					<td><fmt:formatNumber value="${cart.f_cart_quantity}"/>개</td>
+					<td>
+						<input type="number" value="${cart.f_cart_quantity}"><br>
+						<button type="button" id="change_count">변경</button>
+					</td>
 					<td><fmt:formatNumber value="${cart.f_cart_price}"/>원</td>
 					<td><fmt:formatNumber value="${cart.f_cart_quantity * cart.f_cart_price}"/>원</td>
+					<td><button class="del-choice">X 삭제</button></td>
 				</tr>
 				</c:forEach>
+				<tr>
+					<td colspan="7" class="align-right">
+						<span id="total_is">총 구매금액 :</span><span id="total_price">80000</span>원
+					</td>
+				</tr>
 			</table>
 			</c:if>
+			<!-- 조건문 -->
+			<c:if test="${empty list}">
+			<div id="result_empty">
+				<p class="bdr">장바구니가 비어 있습니다.</p>
+			</div>
+			</c:if>
+		</div>
+		<!-- 하단 버튼들 -->
+		<div class="cart-buttons align-center">
+			<button id="all_order" class="order">전체상품주문</button>
+			<button id="sel_order" class="order">선택상품주문</button>
+			<button class="emptyCart float-right">장바구니 비우기</button>
+			<button id="go_foodList" class="float-right">쇼핑계속하기</button>
 		</div>
 	</div>
 	<!-- 내용물 끝 -->
