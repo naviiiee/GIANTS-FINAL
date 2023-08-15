@@ -58,8 +58,8 @@
 				</li>
 			</ul>
 		<div class="mypage-bottom">
-					<form:button class="bottom-btn">수정</form:button>
-					<input type="button" value="홈으로" class="bottom-btn"
+					<form:button class="default-btn">수정</form:button>
+					<input type="button" value="홈으로" class="default-btn"
 						   onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
 		</div>	
 	</form:form>

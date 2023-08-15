@@ -254,7 +254,7 @@
 	background-color:red;
 	color:#fff;
 }
-/* 전송,홈으로 */
+/* 전송, 홈으로 */
 .bottom-btn{
 	margin:20px 10px 0 0;
 	width:60px;
@@ -303,28 +303,38 @@
 }
 /* 관리자 회원목록 검색창 */
 form#search_form{
-	width:98%;
-	/* 아래 목록과 거리두기 */
+	width:100%;
 	padding-bottom:30px;
 	border:none;
 }
 ul.search{
-	width:380px;
+	width:410px;
 	list-style:none;
 	padding:0;
 	margin:0 auto;
 }
 ul.search li{
 	margin:0 0 9px 0;
-	padding:0;
+	padding-left:10px;
 	display:inline;
 }
 ul.search li select{
-	height:30px;
+	border-radius: 5px;
+	height:33px;
+	border:1px solid black;
 }
 ul.search li input{
 	margin-top:4px;
-	padding:5px;
+	border-radius: 5px;
+	padding:8px;
+	border:1px solid black;
+}
+.mypage-form .default-btn{
+	width:55px;
+	height:33px;
+	border-radius: 5px;
+	background-color:red;
+	color:#fff;
 }
 /* 관리자 회원목록 테이블 */
 .mypage-form #member_modify ul{
@@ -334,135 +344,31 @@ table.striped-table{
 	border-collapse: collapse;
 	width:90%;
 	font-size:15px;
+	margin:0 auto;
 }
 table.striped-table td, table.striped-table th {
 	padding:0.5em 0.4em;
 }
-/* 이메일 인증 관련 */
-h3 {
-	font-weight: normal;
+table.striped-table th{
+	background-color:rgba(5,35,69,0.75);
+	color: #FFF;	
 }
- 
-main {
-	width: 100%;
-	text-align: center;
-	min-height: calc(100vh - 341px);
+.admin-bot{
+	text-align:center;
 }
- 
-main input {
-	font-size: 1.5rem;
-}
- 
-main button {
-	background: #30DAD9;
-	color: #fff;
-	padding: 1px 5px;
-	border: none;
-	height: 30px;
+.mypage-form .default-btn,
+.admin-bot .admin-bot-btn{
+	width:55px;
+	height:38px;
 	border-radius: 5px;
+	background-color:red;
+	color:#fff;
 }
- 
-.find_info {
-	width: 350px;
-	max-width: 90%;
-	margin: 0 auto;
-	margin-top: 50px;
+.form-page{
+	text-align:center;
+	padding-top:30px;
+	padding-left:30px;
 }
- 
-.find_id_page .find_info input, .find_password_page .find_info input {
-	border-radius: 5px;
-	border: 1px solid #666;
-	width: 75%;
-	min-width: 150px;
-	height: 30px;
-	padding: 0 5px;
-}
- 
-.find_password {
-	text-align: left;
-	margin: 10px;
-}
- 
-.find_password a {
-	text-decoration: underline;
-}
- 
-.send_email {
-	margin-top: 50px;
-}
- 
-.send_email h2 {
-	display: inline;
-}
- 
-.find {
-	text-align: left;
-}
- 
-.find>div {
-	margin-bottom: 20px;
-}
- 
-.find input[type=radio]:checked ~ .auth {
-	display: block;
-}
- 
-.auth {
-	margin: 10px;
-	display: none;
-}
- 
-.auth input {
-	border: 1px solid #ddd;
-	padding: 0 5px;
-	height: 30px;
-	margin-bottom: 10px;
-}
- 
-.password_modify_page .find_info {
-	width: 450px;
-}
- 
-.password_modify_page h3 {
-	margin-bottom: 20px;
-}
- 
-.password_modify_page .box {
-	text-align: left;
-	margin-bottom: 5px;
-}
- 
-.password_modify_page .box span {
-	display: inline-block;
-	width: 120px;
-}
- 
-.password_modify_page .box input {
-	border: 1px solid #ddd;
-	padding: 0 5px;
-	height: 30px;
-	max-width: 250px;
-	width: 60%;
-}
- 
-.password_modify_page .modify_btn {
-	margin-top: 20px;
-}
- 
-.password_modify_page .password_check_msg {
-	text-align: center;
-}
- 
-@media ( max-width : 767px) {
-	body>div {
-		min-height: calc(100vh - 276px);
-		width: 90%;
-		margin: 0 auto;
-	}
-}
- 
-@media ( max-width : 480px) {
-	.password_modify_page .box span {
-		width: 90px;
-	}
+#member_modify li{
+	padding-bottom:10px;
 }

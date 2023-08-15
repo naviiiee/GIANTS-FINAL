@@ -1,6 +1,7 @@
 package kr.spring.member.vo;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -18,12 +19,10 @@ import lombok.ToString;
 public class MemberVO {
 	private int mem_num; // 회원번호
 	@Pattern(regexp = "^[A-Za-z0-9]{4,12}$")
-	@NotEmpty
 	private String mem_id; // 회원아이디
 	private String mem_nickname; // 회원닉네임
-	public int mem_auth; // 회원등급 ( 0:탈퇴 1:정지 2:일반 3:기업 9:관리 )
+	public int mem_auth; // 회원등급 ( 0:탈퇴 1:정지 2:일반 3:기업 5:일반정지 6: 기업정지 9:관리 )
 	@Pattern(regexp = "^[A-Za-z0-9]{4,12}$")
-	@NotEmpty
 	private String passwd; // 비밀번호
 	private String au_id; //자동로그인
 	private String auto;
@@ -38,7 +37,6 @@ public class MemberVO {
 	
 	private byte[] mem_photo;
 	private String mem_photoname;
-	private String name;
 
 	// =======비밀번호 일치 여부 체크======= //
 	public boolean isCheckedPasswd(String userPasswd) {
@@ -55,5 +53,14 @@ public class MemberVO {
 		setMem_photoname(upload.getOriginalFilename());
 	} //여기서 변환 작업 후 photo,photo_name에 저장 
 
+	//회원목록 불러오기
+	private String mem_name; // 일반회원명
+	private String mem_phone; // 전화번호
+	private String mem_email; // 이메일
+	private Date mem_regdate; // 가입일
 
+	private String comp_owner; // 사업자명
+	private String comp_phone; // 전화번호
+	private String comp_email; // 이메일
+	private Date comp_regdate; // 가입일
 }

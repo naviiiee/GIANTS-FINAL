@@ -65,23 +65,24 @@
 						<c:if test="${member.mem_auth == 0 || member.mem_auth == 1}">
 							${member.mem_id}</c:if>
 						<c:if test="${member.mem_auth == 2 || member.mem_auth == 5 || member.mem_auth == 9}">
-							<a href="admin_updateMem.do?mem_num=${member.mem_num}">${member.mem_id}</a></c:if>
+							${member.mem_id}</c:if>
 						<c:if test="${member.mem_auth == 3 || member.mem_auth == 6}">
-							<a href="admin_updateComp.do?mem_num=${member.mem_num}">${member.mem_id}</a></c:if>
+							${member.mem_id}</c:if>
 					</td>
 					
+					<!-- 안먹히는부분 -->
 					<c:if test="${member.mem_auth == 2}">
-						<td class="align-center">${member.memberDetailVO.mem_name}</td>
-						<td class="align-center">${member.memberDetailVO.mem_phone}</td>
-						<td class="align-center">${member.memberDetailVO.mem_email}</td>
-						<td class="align-center">${member.memberDetailVO.mem_regdate}</td>
+						<td class="align-center">${member.mem_name}</td>
+						<td class="align-center">${member.mem_phone}</td>
+						<td class="align-center">${member.mem_email}</td>
+						<td class="align-center">${member.mem_regdate}</td>
 					</c:if>
 					
 					<c:if test="${member.mem_auth == 3}">
-						<td class="align-center">${member.companyDetailVO.comp_owner}</td>
-						<td class="align-center">${member.companyDetailVO.comp_phone}</td>
-						<td class="align-center">${member.companyDetailVO.comp_email}</td>
-						<td class="align-center">${member.companyDetailVO.comp_regdate}</td>
+						<td class="align-center">${member.comp_owner}</td>
+						<td class="align-center">${member.comp_phone}</td>
+						<td class="align-center">${member.comp_email}</td>
+						<td class="align-center">${member.comp_regdate}</td>
 					</c:if>
 					
 					<c:if test="${member.mem_auth == 0 || member.mem_auth == 1 || member.mem_auth == 5 || member.mem_auth == 6 || member.mem_auth == 9}">
@@ -93,12 +94,12 @@
 					
 					<td class="align-center">
 						<c:if test="${member.mem_auth == 0}">탈퇴회원</c:if>
-						<c:if test="${member.mem_auth == 1}">정지회원</c:if>
-						<c:if test="${member.mem_auth == 2}">일반회원</c:if>
-						<c:if test="${member.mem_auth == 3}">기업회원</c:if>
-						<c:if test="${member.mem_auth == 5}">일반정지회원</c:if>
-						<c:if test="${member.mem_auth == 6}">기업정지회원</c:if>
-						<c:if test="${member.mem_auth == 9}">관리자</c:if>
+						<c:if test="${member.mem_auth == 1}"><a href="admin_updateComp.do?mem_num=${member.mem_num}">정지회원</a></c:if>
+						<c:if test="${member.mem_auth == 2}"><a href="admin_updateComp.do?mem_num=${member.mem_num}">일반회원</a></c:if>
+						<c:if test="${member.mem_auth == 3}"><a href="admin_updateComp.do?mem_num=${member.mem_num}">기업회원</a></c:if>
+						<c:if test="${member.mem_auth == 5}"><a href="admin_updateComp.do?mem_num=${member.mem_num}">일반정지회원</a></c:if>
+						<c:if test="${member.mem_auth == 6}"><a href="admin_updateComp.do?mem_num=${member.mem_num}">기업정지회원</a></c:if>
+						<c:if test="${member.mem_auth == 9}"><a href="admin_updateComp.do?mem_num=${member.mem_num}">관리자</a></c:if>
 					</td>
 				</tr>
 			</c:forEach>

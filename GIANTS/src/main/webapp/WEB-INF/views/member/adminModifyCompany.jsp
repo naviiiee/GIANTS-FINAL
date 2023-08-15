@@ -8,11 +8,11 @@
 	<div class="mypage-top-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>회원정보수정</h2>
-		<p>자이언츠 회원정보수정 입니다.</p>
+		<p>자이언츠 기업회원 권한수정 입니다.</p>
 	</div>
 </div>
 <!-- 회원권한 수정 - 관리자 시작 -->
-<div class="mypage-form">
+<div class="member-mypage">
 	<form:form modelAttribute="memberVO" action="admin_updateComp.do" id="member_modify">
 		<form:hidden path="mem_num"/>	   
 		<form:errors element="div" cssClass="error-color"/>   
@@ -51,11 +51,11 @@
 				<c:if test="${memberVO.mem_auth == 9}">관리자</c:if>
 			</li>
 		</ul>
-		<div class="align-center">
+		<div class="admin-bot">
 			<c:if test="${memberVO.mem_auth != 9}">
-				<form:button>전송</form:button>
+				<form:button class="admin-bot-btn">전송</form:button>
 			</c:if>
-			<input type="button" value="회원목록"
+			<input type="button" value="목록" class="admin-bot-btn"
 				   onclick="location.href='admin_list.do'">
 		</div>
 	</form:form>

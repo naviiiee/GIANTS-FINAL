@@ -174,15 +174,11 @@
 					m.mem_id LIKE '%' || #{keyword} || '%'
 				</if>
 				<if test="keyfield == 2">
-					d.mem_name LIKE '%' || #{keyword} || '%'
+					m.mem_nickname LIKE '%' || #{keyword} || '%'
 				</if>
-				<if test="keyfield == 3">
-					d.mem_email LIKE '%' || #{keyword} || '%'
-				</if>
-				<if test="keyfield == 4">
+				<if test="keyfield == 3">	
 					m.mem_id LIKE '%' || #{keyword} || '%' or
-					d.mem_name LIKE '%' || #{keyword} || '%' or
-					d.mem_email LIKE '%' || #{keyword} || '%'
+					m.mem_nickname LIKE '%' || #{keyword} || '%' or
 				</if>
 			</if>
 		</where>

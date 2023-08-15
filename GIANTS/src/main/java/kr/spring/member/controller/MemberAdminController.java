@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.service.MemberService;
+import kr.spring.member.vo.CompanyDetailVO;
+import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -49,9 +51,16 @@ public class MemberAdminController {
 		PagingUtil page =
 				new PagingUtil(keyfield,keyword,currentPage,
 							   count,10,10,"admin_list.do");
-		MemberVO user = (MemberVO)session.getAttribute("user");
+		MemberVO user1 = (MemberVO)session.getAttribute("user1");
+		MemberDetailVO user2 = (MemberDetailVO)session.getAttribute("user2");
+		CompanyDetailVO user3 = (CompanyDetailVO)session.getAttribute("user3");
+		
 		List<MemberVO> list = null;
-		log.debug("<<user 체크>> : " + user);
+		
+		log.debug("<<user 체크>> : " + user1);
+		log.debug("<<user 체크>> : " + user2);
+		log.debug("<<user 체크>> : " + user3);
+		
 		if(count > 0) {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());

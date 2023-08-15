@@ -30,21 +30,21 @@
 			</tr>
 			<tr>
 				<td>프로필사진</td>
-				<td>
-					<div class="camera" id="photo_btn">
-						<input type="button" value="변경하기">
-					</div>
-					<div id="photo_choice" style="display:none;">
-						<input type="file" id="upload" accept="image/gif,image/png,image/jpg">
-						<input type="button" value="전송" id="photo_submit">	
-					    <input type="button" value="취소" id="photo_reset">   
-					</div>
-				</td>
 			</tr>
 			<tr>
 				<td>
-				<img src="${pageContext.request.contextPath}/member/photoView.do" 
-				     width="100" height="100" class="my-photo">
+					<img src="${pageContext.request.contextPath}/member/photoView.do" 
+					     width="100" height="100" class="my-photo">
+				</td>
+				<td>
+					<div class="camera" id="photo_btn">
+						<input type="button" value="프로필수정">
+					</div>
+					<div id="photo_choice" style="display:none;">
+						<input type="file" id="upload" accept="image/gif,image/png,image/jpg">
+						<input type="button" value="수정" id="photo_submit">	
+					    <input type="button" value="취소" id="photo_reset">   
+					</div>
 				</td>
 			</tr>
 			</table>
@@ -70,11 +70,11 @@
 			<td>프로필사진</td>
 				<td>
 					<div class="camera" id="photo_btn">
-						<input type="button" value="변경하기">
+						<input type="button" value="프로필수정">
 					</div>
 					<div id="photo_choice" style="display:none;">
 						<input type="file" id="upload" accept="image/gif,image/png,image/jpg">
-						<input type="button" value="전송" id="photo_submit">	
+						<input type="button" value="수정" id="photo_submit">	
 					    <input type="button" value="취소" id="photo_reset">   
 					</div>
 				</td>
