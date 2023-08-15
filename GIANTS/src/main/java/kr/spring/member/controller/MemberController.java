@@ -402,7 +402,7 @@ public class MemberController {
 		}
 		return "imageView";
 	}
-	
+	 
 	//프로필 사진 출력 (회원번호 지정)
 	@RequestMapping("/member/viewProfile.do")
 	public String getProfileByMem_num(@RequestParam int mem_num,

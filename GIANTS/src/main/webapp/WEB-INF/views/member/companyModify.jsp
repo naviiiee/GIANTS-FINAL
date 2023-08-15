@@ -10,7 +10,7 @@
 		<p>자이언츠 회원정보수정 입니다.</p>
 	</div>
 </div>
-<!-- 기업정보 폼 시작 -->
+<!-- 기업 정보 폼 시작 -->
 <div class="mypage-form">
 	<form:form modelAttribute="memberVO" action="updateCompany.do" id="company_modify">
 		<ul>

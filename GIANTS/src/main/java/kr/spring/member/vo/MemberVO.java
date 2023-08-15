@@ -45,7 +45,7 @@ public class MemberVO {
 		}
 		return false;
 	}
-	
+	 
 	public void setUpload(MultipartFile upload)throws IOException{
 		//MultipartFile -> byte[]
 		setMem_photo(upload.getBytes());

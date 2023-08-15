@@ -13,7 +13,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
+@ToString 
 public class CompanyDetailVO {
 	// Comp_detail 테이블
 	@Size(min = 10, max = 10)

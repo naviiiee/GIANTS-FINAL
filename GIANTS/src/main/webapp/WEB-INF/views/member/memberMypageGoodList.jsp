@@ -9,7 +9,7 @@
 		<h2>Goods</h2>
 		<p>자이언츠 Goods 구매내역 입니다.</p>
 	</div>
-</div>
+</div> 
 <!-- 마이페이지 굿즈구매내역 시작 -->
 <div class="mypage-form">
 	<c:if test="${count == 0}">

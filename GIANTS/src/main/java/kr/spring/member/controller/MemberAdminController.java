@@ -132,4 +132,4 @@ public class MemberAdminController {
 		return "common/resultView";
 	}
 	
-}
+} 

@@ -28,7 +28,7 @@
 			<tr>
 				<td>회원가입일</td><td>${member.memberDetailVO.mem_regdate}</td>
 			</tr>
-			<tr>
+			<tr> 
 				<td>프로필사진</td>
 			</tr>
 			<tr>

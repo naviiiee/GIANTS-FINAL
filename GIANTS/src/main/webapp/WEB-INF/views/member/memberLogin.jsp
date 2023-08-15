@@ -10,7 +10,7 @@
 		<h2>로그인</h2>
 		<p>자이언츠 로그인 입니다.</p>
 	</div>
-</div>
+</div> 
 <!-- 로그인폼시작 -->
 <div class="login-main">
 	<form:form modelAttribute="memberVO" action="login.do" id="member_login">

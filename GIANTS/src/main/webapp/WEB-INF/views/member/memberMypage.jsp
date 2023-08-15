@@ -9,5 +9,5 @@
 	<li>Ticket</li>
 	<li>Foods</li>
 	<li>Goods</li>
-</ul>
+</ul> 
 </div>

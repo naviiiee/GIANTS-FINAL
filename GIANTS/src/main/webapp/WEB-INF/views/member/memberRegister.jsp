@@ -9,7 +9,7 @@
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>일반회원가입</h2>
 		<p>자이언츠 일반 회원가입 입니다.</p>
-	</div>
+	</div> 
 </div>
 <!-- 회원가입 시작 -->
 <div class="page-main">

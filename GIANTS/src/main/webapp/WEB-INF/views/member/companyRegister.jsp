@@ -10,7 +10,7 @@
 		<h2>기업 회원가입</h2>
 		<p>자이언츠 기업 회원가입 입니다.</p>
 	</div>
-</div>
+</div> 
 <!-- 회원가입 시작 -->
 <div class="page-main">
 	<form:form modelAttribute="memberVO" action="registerCompany.do" id="company_register">

@@ -9,7 +9,7 @@
 		<h2>(일반)회원정보수정</h2>
 		<p>자이언츠 회원정보수정 입니다.</p>
 	</div>
-</div>
+</div> 
 <!-- 회원정보 폼 시작 -->
 <div class="mypage-form">
 	<form:form modelAttribute="memberVO" action="updateMember.do" id="member_modify">

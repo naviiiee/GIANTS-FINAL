@@ -9,7 +9,7 @@
 		<h2>(기업)회원탈퇴</h2>
 		<p>자이언츠 기업 회원탈퇴 입니다.</p>
 	</div>
-</div>
+</div> 
 <!-- 회원탈퇴 폼 시작 -->
 <div class="mypage-form">
 	<form:form modelAttribute="memberVO" action="deleteCompany.do" id="company_delete">

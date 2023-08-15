@@ -26,7 +26,7 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.insertMember_detail(member);
 	}
 	
-	@Override
+	@Override 
 	public void insertCompany(MemberVO member) {
 		member.setMem_num(memberMapper.selectMem_num());
 		memberMapper.insertCompany(member);

@@ -8,7 +8,7 @@
 		<h2>Ticket</h2>
 		<p>자이언츠 Ticket 구매내역 입니다.</p>
 	</div>
-</div>
+</div> 
 <!-- 마이페이지 티켓구매내역 시작 -->
 <div class="mypage-form">
 	<c:if test="${count == 0}">

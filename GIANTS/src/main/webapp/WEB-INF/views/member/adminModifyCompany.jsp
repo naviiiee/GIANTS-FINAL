@@ -10,7 +10,7 @@
 		<h2>회원정보수정</h2>
 		<p>자이언츠 기업회원 권한수정 입니다.</p>
 	</div>
-</div>
+</div> 
 <!-- 회원권한 수정 - 관리자 시작 -->
 <div class="member-mypage">
 	<form:form modelAttribute="memberVO" action="admin_updateComp.do" id="member_modify">

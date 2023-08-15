@@ -7,5 +7,5 @@
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>주문내역</h2>
 		<p>자이언츠 (기업) 주문내역 입니다.</p>
-	</div>
+	</div> 
 </div>

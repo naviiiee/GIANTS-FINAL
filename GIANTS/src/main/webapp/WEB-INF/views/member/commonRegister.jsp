@@ -8,7 +8,7 @@
 		<h2>회원가입</h2>
 		<p>자이언츠 회원가입 입니다.</p>
 	</div>
-</div>
+</div> 
 <div class="common-register">
 	<ul>
 		<li>

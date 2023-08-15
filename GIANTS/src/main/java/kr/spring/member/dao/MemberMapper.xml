@@ -129,7 +129,7 @@
 			m.mem_num=#{mem_num}
 	</select>
 	
-	<!-- 회원정보수정 -->
+	<!-- 회원정보 수정 -->
 	<update id="updateMember_detail" parameterType="memberVO">
 		UPDATE
 			MEMBER_DETAIL

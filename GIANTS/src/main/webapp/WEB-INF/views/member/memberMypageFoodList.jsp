@@ -9,7 +9,7 @@
 		<h2>Foods</h2>
 		<p>자이언츠 Food 구매내역 입니다.</p>
 	</div>
-</div>
+</div> 
 <!-- 마이페이지 푸드구매내역 시작 -->
 <div class="mypage-form">
 	<c:if test="${count == 0}">

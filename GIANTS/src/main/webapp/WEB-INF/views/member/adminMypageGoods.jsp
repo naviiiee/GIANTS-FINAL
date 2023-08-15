@@ -9,7 +9,7 @@
 		<p>등록한 굿즈 목록</p>
 	</div>
 </div>
-
+ 
 <div class="mypage-top">
 	<div class="mypage-top-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">

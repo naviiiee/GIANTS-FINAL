@@ -9,7 +9,7 @@
 		<h2>회원탈퇴</h2>
 		<p>자이언츠 회원탈퇴 입니다.</p>
 	</div>
-</div>
+</div> 
 <!-- 회원탈퇴 폼 시작 -->
 <div class="mypage-form">
 	<form:form modelAttribute="memberVO" action="deleteMember.do" id="member_delete">

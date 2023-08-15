@@ -14,7 +14,7 @@ import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.member.vo.MemberVO;
 
-@Mapper
+@Mapper 
 public interface MemberMapper { 
 	/*==============
 	 *   일반회원
