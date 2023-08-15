@@ -110,12 +110,23 @@ public class TicketController {
 	
 	/* ----- [Order] 티켓주문 -----*/
 	@PostMapping("/ticket/orderForm.do")
-	public String orderTicketForm(@RequestParam int game_num, SeatVO seatVO, HttpSession session, Model model) {
+	public String orderTicketForm(@RequestParam int game_num, @RequestParam int grade_num, SeatVO seatVO, HttpSession session, Model model) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		if(user == null) { return "redirect:/member/login.do"; }
 		
 		seatVO.setDetailVO(ticketService.selectMemberDetail(user.getMem_num()));
 		
+		log.debug("<<game_num>> : " + game_num);
+		GameVO gameVO = ticketService.selectGame(game_num);
+		
+		log.debug("<<grade_num>> : " + grade_num);
+		GradeVO gradeVO = ticketService.selectGrade(grade_num);
+		log.debug("<<gradeVO.title>> : " + gradeVO.getTitle());
+		
 		model.addAttribute("seatVO", seatVO);
+		model.addAttribute("gameVO", gameVO);
+		model.addAttribute("gradeVO", gradeVO);
 		
 		return "ticketOrderForm";
 	}

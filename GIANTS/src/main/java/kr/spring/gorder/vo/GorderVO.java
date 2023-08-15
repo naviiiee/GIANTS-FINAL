@@ -32,6 +32,7 @@ public class GorderVO {
 	
 	
 	private int[] cart_numbers; //장바구니에서 선택한 상품의 번호들
-	private int lpoint; //예상 적립 포인트(dprice*order_quantity*0.02)
+	private GorderDetailVO gorderDetailVO;
+	
 	
 }

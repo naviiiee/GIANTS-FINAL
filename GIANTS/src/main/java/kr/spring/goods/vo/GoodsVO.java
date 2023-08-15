@@ -39,6 +39,9 @@ public class GoodsVO {
 	//굿즈 옵션
 	private GoodsOptionVO goodsOptionVO;
 	
+	private int fav_cnt;
+	private int re_cnt;
+	
 	//======이미지를 byte[]로 변환하는 메서드(BLOB 처리)=====//
 	public void setUpload(MultipartFile upload) throws IOException{
 		setGoods_photo(upload.getBytes()); //MultipartFile -> byte[]

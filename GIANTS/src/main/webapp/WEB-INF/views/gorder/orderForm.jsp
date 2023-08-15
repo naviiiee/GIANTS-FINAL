@@ -7,51 +7,16 @@
 <!-- list, all_total 가져옴 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/orderForm.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_order_form.js"></script>
 <style>
-input[type="text"]:focus {
-	outline: none !important;
-	border-color: #052345;
-	box-shadow: 0 0 10px #052345;
-}
-
-input[type="email"]:focus {
-	outline: none !important;
-	border-color: #052345;
-	box-shadow: 0 0 10px #052345;
-}
-
-form {
-	align-items: center;
-	justify-content: center;
-}
-
-form ul li {
-	clear: both;
-}
-
-ul {
-	list-style: none;
-}
-.order-info {
-    display: flex; /* Flexbox를 사용하여 가로 정렬 설정 */
-    justify-content: space-between; /* 요소들을 공간을 최대한 활용하여 가로로 배치 */
-    align-items: center; /* 요소들을 수직으로 중앙 정렬 */
-    text-align: center;
-    border:3px solid; 
-    padding:10px; 
-  }
-
-#operator{
-	margin-left: 50px;
-}
 
 </style>
 <div class="page-main">
 	
 	<form:form modelAttribute="orderVO" action="order.do" id="order_register">
 	
-		<h3>주문자 정보</h3>
+		<h3>주문자 정보</h3> <!-- 굳이 넣어야할까? -->
 		<hr size="1">
 		<ul>
 			<li>
@@ -67,8 +32,12 @@ ul {
 			</li>
 		</ul>
 		<br>
+		<br>
+		<br>
+		
 		<h3>배송정보</h3>
 		<hr size="1">
+		<br>
 		<ul>
 			<li>
 				<form:label path="order_name">받는 사람</form:label>
@@ -106,21 +75,26 @@ ul {
 			
 		</ul>	
 		<br>
-		
+		<br>
+		<br>
 		<h3>포인트적용</h3><span>포인트는 100점 이상부터 사용가능합니다</span>
 		<hr size="1">
-			잔여포인트 : <input type="button" value="전액사용" id="point-btn">
+			잔여포인트 : p   <input type="button" value="전액사용" id="point-btn">
 			<br>
-			<input type="text" value="포인트입력" id="point-input-btn">원 <input type="button" value="적용" id="point-use-btn">
-			
+			<input type="text" value="포인트입력" id="point-input-btn">원  <input type="button" value="적용" id="point-use-btn">
+		<br>
+		<br>
+		<br>
 		<h3>주문 리스트</h3>
 		<hr size="1">
+		<br>
 		 <table class="basic-table">
 			<tr>
 				<th>사진</th>
 				<th>상품정보</th>
 				<th>판매가</th>
 				<th>수량</th>
+				<th>적립</th>
 				<th>합계</th>
 			</tr>
 			<c:forEach var="cart" items="${list}">
@@ -140,6 +114,10 @@ ul {
 					<td class = "align-center">
 						${cart.order_quantity}
 					</td>
+					<td>
+						${cart.order_point}p
+					</td>
+					
 					<td class="align-center">
 						<div class="sub-total" data-total="${cart.sub_total}">
 						<fmt:formatNumber value="${cart.sub_total}"/>원
@@ -147,17 +125,17 @@ ul {
 						</div>
 					</td>					
 					<c:if test="${cart.goods_size!='옵션없음'}">
-						<tr>
-							<td colspan="5">
-								<img src="${pageContext.request.contextPath}/images/btn_order_option.gif" alt="옵션" title="옵션">
-								 사이즈 : ${cart.goods_size} 
-							</td>	
+						<tr class="option-tr">
+						    <td colspan="6"><span>⤷</span> <img src="${pageContext.request.contextPath}/images/btn_order_option.gif" alt="옵션" title="옵션">
+						    <span>사이즈 : ${cart.goods_size}</span>
+						    </td>
 						</tr>
+
 					</c:if>
 				</tr>
 			</c:forEach>
 				<tr>
-					<td colspan="4" class="align-right"><b>총구매금액</b></td>
+					<td colspan="5" class="align-right"><b>총구매금액</b></td>
 					<td class="align-center"><span class="all-total" data-alltotal="${all_total}"><fmt:formatNumber value="${all_total}"/>원</span></td>
 				</tr>
 		</table>  
@@ -165,16 +143,19 @@ ul {
 		<!-- 주문금액 + 배송비 - 사용포인트 = 결제금액, 하단에 5만원 이상 결제 시 무료배송 -->
 		<div class="order-info">
 			<div class="order-dprice">
-			<h4>주문금액</h4>
-				<p><fmt:formatNumber value="${all_total}"/>원 
+			<h2>주문금액</h2>
+			<p>
+				<em class="em-highlight"><fmt:formatNumber value="${all_total}"/>원 
 					<span id="operator"><img src="${pageContext.request.contextPath}/images/order-plus.png" width="30"></span>
+				</em>
 				</p>
 			</div>
 			
 			
-			<div class="order-dprice">
-			<h4>배송비</h4>
-				<p>
+			<div class="order-dcount">
+			<h2>배송비</h2>
+			<p>
+				<em class="em-highlight">
 					<c:if test="${all_total >= 50000}">
 						0원
 					</c:if>
@@ -182,20 +163,26 @@ ul {
 						3,000원
 					</c:if>
 					<span id="operator"><img src="${pageContext.request.contextPath}/images/order-minus.png" width="30"></span>
+				</em>
 				</p>
 			</div>
 			
 			<div class="order-use-point">
-			<h4>사용포인트</h4>
-				<p>원</p>
+			<h2>사용포인트</h2>
+			<p>
+				<em class="em-highlight">원</em>
+				</p>
 			</div>
 			<span id="operator"><img src="${pageContext.request.contextPath}/images/order-equals.png" width="30"></span>
 			
 			<div class="order-final-price">
-			<h4>결제금액</h4>
-				<p><fmt:formatNumber value="${all_total}"/>원</p>
+			<h2>결제금액</h2>
+				<p>
+				<em class="em-highlight-result"><fmt:formatNumber value="${all_total}"/>원</em>
+				</p>
 			</div>
 		</div>
+		<span class="annot">5만원 이상 결제 시 무료배송입니다.</span>
 		
 		<br>
 		

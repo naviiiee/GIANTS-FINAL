@@ -10,6 +10,7 @@
 			INSERT INTO player(
 				player_num,
 				player_name,
+				player_photoname,
 				player_backnumber,
 				player_position,
 				player_photo,
@@ -22,6 +23,7 @@
 			VALUES(
 				player_seq.nextval,
 				#{player_name},
+				#{player_photoname},
 				#{player_backnumber},
 				#{player_position},
 				#{player_photo},
@@ -50,7 +52,7 @@
 
 
 		<!-- 전체/검색 레코드수 -->
-		<select id="selectPlayerCount" parameterType="map" resultType="integer">
+		<select id="selectRowCount" parameterType="map" resultType="integer">
 			SELECT
 				COUNT(*)
 			FROM player
@@ -72,12 +74,5 @@
 							<![CDATA[
 								WHERE rnum >= #{start} AND rnum <= #{end}
 							]]>
-		</select>
-		
-		
-		
-		
-		
-		
-		
+		</select>	
 </mapper>

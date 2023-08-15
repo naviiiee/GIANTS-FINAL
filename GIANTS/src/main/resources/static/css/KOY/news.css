@@ -8,9 +8,19 @@ input[type="button"], button[type="submit"]{
 	color:#FFF;
 	border:none;
 	cursor:pointer;
+	margin-top:5px;
+}
+input[type="button"]:hover, button[type="submit"]:hover{
+	width:60px;
+	height:30px;
+	background-color:#FFF;
+	color:#dd032f;
+	border:1px solid #dd032f;
+	cursor:pointer;
 }
 div.news-content{
 	min-height:300px;
+	margin:10px;
 }
 div.news-table{
 	margin:0;
@@ -37,7 +47,7 @@ div.news-table table th{
 /* 뉴스 목록
 -------------*/
 div.news-list table{
-	margin:0;
+	margin:10px 0;
 	padding:0;
 	width:100%;
 }

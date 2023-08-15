@@ -10,16 +10,44 @@
 }
 
 /* 3가지 섹션의 컨텐츠를 정렬 */
-.page-main {
+/* .page-main >.giants-photo, 
+.page-main > .news-shop, 
+.page-main > .sch-cal{
 	display: flex;
 	justify-content: space-between;
+	position : relative; /*box 설정을 위해 넣음*/
+} */
+.main-content { /*이미지 제외 아래 항목들*/
+    justify-content: space-between;
+    text-align: center;
+    width: 1200px;
+	margin:0 auto;
 }
+
+.page-main{
+	text-align: center;
+}
+
+/* 슬라이드 위로 올라오게 띄우기
+.giants-photo {
+    order: 1;
+}
+
+.news-shop {
+    order: 2;
+}
+
+.sch-cal {
+    order: 3;
+} */
 
 /* 왼쪽 섹션 */
 .sch-cal {
 	float: left;
 	width: 35%;
 	text-align: center;
+	border:1px solid;
+	
 }
 
 /* 가운데 섹션 */
@@ -28,23 +56,28 @@
 	width: 35%;
 	text-align: center;
 	margin-right: 10px;
-	margin-left: 10px;
+	margin-left: 30px;
+	border:1px solid;
 }
+
 
 /* 오른쪽 섹션 */
 .news-shop {
-	float: right;
-	width: 35%;
+float: inherit;
 	text-align: center;
 	margin-right: 10px;
-	margin-left: 10px;
+	margin-left: 900px;
+	width: 460px;
 }
 
+.main-news{
+border:1px solid;
+}
 /* SNS 섹션 */
 .sns {
 		margin : 0 auto;
 		text-align: center;
-		display: flex; /* 추가: flexbox로 설정하여 자식 요소를 가로로 정렬 */
+		display: flex; /* 자식 요소를 가로로 정렬 */
 		justify-content: center; /* 추가: 가로 정렬을 중앙에 맞춤 */
 	}
 
@@ -67,13 +100,69 @@
 	.sns li img {
 		margin: 0; /* 추가: 이미지의 마진 제거 */
 	}
+	
+	/* 이미지 슬라이드 시작*/
+	 li{
+		list-style: none;
+		}
+	div.image-slide>ul{
+		position: relative;
+	} 
+	.image-slide li{
+		display: inline-block;
+	}
+	.image-slide{
+	z-index : -99;/*우선순위는 클수록 높음*/
+	text-align: center;
+	}
+/**/
 
 </style>
 
-
+	
 
 <!-- 내용 S -->
 <div class="page-main">
+	<!-- 이미지 슬라이드 시작 -->
+	<div class="image-slide">
+		<ul>
+			<li>
+				<img src="${pageContext.request.contextPath}/images/main-image4.jpg" width="120%">
+			</li>
+			
+			<li>
+				<img src="${pageContext.request.contextPath}/images/main-image3.jpg" width="120%">
+			</li>
+			
+			<li>
+				<img src="${pageContext.request.contextPath}/images/main-image5.jpg" width="120%">
+			</li>
+		</ul>
+	</div>
+	 <script>
+        $(document).ready(function() {
+            var slideIndex = 0;
+            showSlide(slideIndex);
+            
+            function showSlide(index) {
+                var slides = $(".image-slide li");
+                if (index >= slides.length) {
+                    slideIndex = 0;
+                } else if (index < 0) {
+                    slideIndex = slides.length - 1;
+                }
+                slides.hide();
+                slides.eq(slideIndex).fadeIn();
+                slideIndex++;
+                setTimeout(function() {
+                    showSlide(slideIndex);
+                }, 3000); // 3초마다 이미지 전환
+            }
+        });
+    </script>
+	<!-- 이미지 슬라이드 끝 -->
+	<!-- content 시작ㄱ -->
+	<div class="main-content">
 	<!-- 좌측 시작-->
 	<div class="sch-cal">
 		<!-- 경기정보 -->
@@ -194,12 +283,14 @@
 	<div class="news-shop">
 		<!-- 자이언츠 뉴스 시작 -->
 		<div class="main-news">
-			<strong> <a href="#" class="news-more">자이언츠 뉴스</a>
-			</strong>
-
-
+			<strong> <a href="#" class="news-more">자이언츠 뉴스</a></strong>
+			뉴스내용
+			<br>
+			~~~~~~<br>
+			~~~~~~<br>~~~~~~<br>~~~~~~<br>~~~~~~<br>~~~~~~<br>~~~~~~<br>~~~~~~<br>
 		</div>
 		<!-- 자이언츠 뉴스 끝 -->
+		<br>
 
 		<div class="ticket-btn">
 			<a href="#"><img src="${pageContext.request.contextPath}/images/ticket_btn.png" >
@@ -215,17 +306,15 @@
 			<a href="#" > 먹거리 이동 </a>
 		</div>
 
-		<div class="">
-			<!-- 커뮤니티나 중고거래  -->
-			<a href="#" > 커뮤니티 or 중고거래 </a>
-		</div>
 	</div>
 	<!-- 우측 끝 -->
 	
 	
 
+	</div>
 </div>
 <!-- content 끝-->
+
 <!-- 하단 SNS 시작 -->
 <div class="sns">
 	<ul>

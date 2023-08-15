@@ -57,7 +57,7 @@ public class PlayerAdminController {
 		log.debug("<<선수 등록>> : " + playerVO);
 		
 		
-		/*
+		
 		if(playerVO.getPlayer_photo().length == 0) {
 			result.rejectValue("player_photo", "required");
 		}
@@ -68,7 +68,7 @@ public class PlayerAdminController {
 								//필드명,			에러코드,			에러문구에 전달할 값,	기본 에러 문구			
 			result.rejectValue("player_photo", "limitUploadSize", new Object[] {"5MB"}, null);
 		}
-		*/
+		
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
@@ -86,6 +86,43 @@ public class PlayerAdminController {
 	}
 	
 	
+	
+	
+	//이미지 출력
+	/*
+	@RequestMapping("/introduce/imageView.do")
+	public ModelAndView viewImage(@RequestParam int player_num) {
+		
+		PlayerVO playerVO = playerService.selectPlayer(player_num);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+		
+		mav.addObject("imageFile",playerVO.getPlayer_photo());
+		mav.addObject("filename",playerVO.getPlayer_photoname());
+	
+		return mav;
+	}
+	*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/*--------------
 	 * [관리자]선수 목록
 	 *-------------*/
@@ -100,7 +137,7 @@ public class PlayerAdminController {
 		//map.put("status", 0);
 		
 		//전체/검색 레코드 수
-		int count = playerService.selectPlayerCount(map);
+		int count = playerService.selectRowCount(map);
 		
 		//페이지 처리
 		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"admin_playerList.do");

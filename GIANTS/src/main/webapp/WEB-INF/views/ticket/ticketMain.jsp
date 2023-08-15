@@ -15,7 +15,7 @@
 		<input type="hidden" name="game_num" value="${game_num}">
 		<div class="select-ticket">
 			<div class="select-left">
-				<img src="${pageContext.request.contextPath}/images/groundInfo.png" width="80%" height="80%">
+				<img src="${pageContext.request.contextPath}/images/groundInfo.png" width="100%" height="100%">
 			</div>
 			<%-- 오른쪽 절반 --%>
 			<div class="select-right">
@@ -67,8 +67,8 @@
 				</div>
 				<%-- 버튼 div --%>
 				<div class="group-btn">
-					<input type="button" value="이전" class="default-btn big">
-					<input type="submit" value="구매하기" class="accept-btn big">
+					<input type="button" value="이전" class="default-btn big" onclick="location.href='gameList.do'">
+					<input type="submit" value="다음" class="accept-btn big">
 				</div>
 			</div>
 		</div>

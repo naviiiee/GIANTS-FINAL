@@ -24,9 +24,9 @@ public class PlayerServiceImpl implements PlayerService{
 	}
 
 	@Override
-	public int selectPlayerCount(Map<String, Object> map) {
+	public int selectRowCount(Map<String, Object> map) {
 		
-		return playerMapper.selectPlayerCount(map);
+		return playerMapper.selectRowCount(map);
 	}
 
 	@Override
