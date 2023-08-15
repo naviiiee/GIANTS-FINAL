@@ -136,7 +136,7 @@ hr{
 			<li style="margin-top:20%; display:flex;">
 				<a href="stadium.do" class="over">구장 소개</a>
 				<a href="map.do">오시는 길</a>
-				<a href="admin_playerList.do">선수 소개</a>
+				<a href="player.do">선수 소개</a>
 			</li>
 		</ul>
 	</div>

@@ -20,7 +20,46 @@ li{
 	display:flex;
 }
 
+.a-tab ul li a.over {
+    position: relative;
+    background: #dd0330;
+    border-color: #dd0330;
+    color: #fff;
+    text-decoration: underline;
+}
+.a-tab ul li a {
+    display: block;
+    height: 34px;
+    line-height: 34px;
+    font-size: 14px;
+    letter-spacing: -1px;
+    padding: 0 21px;
+    font-weight: bold;
+    text-decoration: none;
+    border: solid #ccc;
+    border-width: 1px;
+    color: #767676;
+}
 
+.a-tab ul li a {
+    display: block;
+    height: 34px;
+    line-height: 34px;
+    font-size: 14px;
+    letter-spacing: -1px;
+    padding: 0 21px;
+    font-weight: bold;
+    text-decoration: none;
+    border: solid #ccc;
+    border-width: 1px;
+    color: #767676;
+}
+
+.a-tab{
+	display:flex;
+	margin-left: 61%;
+	margin-bottom: 4%;
+}
 
 </style>
 <!-- [관리자] 선수 목록 시작 -->
@@ -46,6 +85,23 @@ li{
 		</div>
 	</div>
 	<hr size="0.05" width="100%" noshade style="margin-bottom:3%">
+	
+	
+	
+	<div class="a-tab">
+		<ul class="align-right">
+			<li style="display:flex;">
+				<a href="admin_playerList.do" class="over">감독</a>
+				<a href="playerList_c.do">코치</a>
+				<a href="playerList_t.do">투수</a>
+				<a href="playerList_p.do">포수</a>
+				<a href="admin_playerList.do">외야수</a>
+				<a href="admin_playerList.do">내야수</a>
+			</li>
+		</ul>
+	</div>
+	
+	
 	<form action="commuList.do" id="search_form" method="get"  style="padding-bottom: 24px;">
 		<ul class="search align-center">
 			<li>
@@ -62,24 +118,7 @@ li{
 			</li>
 		</ul>
 		
-		
-		<!-- 
-		<ul>
-			<li>
-				<select name="keyfield" id="keyfield">
-					<option>==선택==</option>
-					<option value="">감독</option>
-					<option value="" <c:if test="${param.keyfield == 2}">selected</c:if>>투수</option>
-					<option value="" <c:if test="${param.keyfield == 3}">selected</c:if>>포수</option>
-					<option value="" <c:if test="${param.keyfield == 4}">selected</c:if>>내야수</option>
-					<option value="" <c:if test="${param.keyfield == 5}">selected</c:if>>외야수</option>
-				</select>
-			</li>
-		</ul>
-		 -->
-		
-		
-		
+
 		<!--
 		<ul class="dept_001_wrap">
 			<li class="dept_001 location_tap_menu">
@@ -112,13 +151,7 @@ li{
 	
 	
 	
-		<div class="align-right" >
-			<c:if test="${!empty user}">
-			<input type="button" value="선수 등록" onclick="location.href='admin_player.do'" class="accept-btn">
-			<input type="button" value="수정" onclick="location.href='admin_player.do'" class="accept-btn">
-			</c:if>
-			
-		</div>
+		
 	</form>
 	
 	<!-- 목록 -->
@@ -138,18 +171,29 @@ li{
 				<th>입단년도</th>
 			</tr> 
 			<c:forEach var="player" items="${list}">
-				<tr>
-					<td class="align-center"><img src="${pageContext.request.contextPath}/introduce/imageView.do?player_num=${player.player_num}"  width="200" height="200"></td>
-					<td class="align-center">${player.player_backnumber}</td>
-					<td class="align-center">${player.player_name}</td>
-					<td class="align-center">${player.player_birthday}</td>
-					<td class="align-center">${player.player_position}</td>
-					<td class="align-center">${player.player_toway}</td>
-					<td class="align-center">${player.player_career}</td>
-					<td class="align-center">${player.player_join}</td>
-				</tr>
+				<c:if test="${player.player_position == '감독'}">
+					<tr>
+						<td class="align-center"><img src="${pageContext.request.contextPath}/introduce/imageView.do?player_num=${player.player_num}"  width="200" height="200"></td>
+						<td class="align-center">${player.player_backnumber}</td>
+						<td class="align-center">${player.player_name}</td>
+						<td class="align-center">${player.player_birthday}</td>
+						<td class="align-center">${player.player_position}</td>
+						<td class="align-center">${player.player_toway}</td>
+						<td class="align-center">${player.player_career}</td>
+						<td class="align-center">${player.player_join}</td>
+					</tr>
+				</c:if>
 			</c:forEach>
 		</table>
+		
+		<div class="align-right" >
+			<c:if test="${!empty user}">
+			<input type="button" value="선수 등록" onclick="location.href='admin_player.do'" class="accept-btn">
+			<input type="button" value="수정" onclick="location.href='admin_player.do'" class="accept-btn">
+			</c:if>
+		</div>
+		
+		
 		<!-- 페이지 -->
 		<div class="align-center">${page}</div>
 	</c:if>

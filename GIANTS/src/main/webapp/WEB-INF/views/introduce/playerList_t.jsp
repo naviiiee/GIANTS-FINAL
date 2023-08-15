@@ -91,9 +91,9 @@ li{
 	<div class="a-tab">
 		<ul class="align-right">
 			<li style="display:flex;">
-				<a href="admin_playerList.do" class="over">감독</a>
+				<a href="player.do">감독</a>
 				<a href="playerList_c.do">코치</a>
-				<a href="playerList_t.do">투수</a>
+				<a href="playerList_t.do" class="over">투수</a>
 				<a href="playerList_p.do">포수</a>
 				<a href="playerList_w.do">외야수</a>
 				<a href="playerList_n.do">내야수</a>
@@ -171,7 +171,7 @@ li{
 				<th>입단년도</th>
 			</tr> 
 			<c:forEach var="player" items="${list}">
-				<c:if test="${player.player_position == '감독'}">
+				<c:if test="${player.player_position == '투수'}">
 					<tr>
 						<td class="align-center"><img src="${pageContext.request.contextPath}/introduce/imageView.do?player_num=${player.player_num}"  width="200" height="200"></td>
 						<td class="align-center">${player.player_backnumber}</td>

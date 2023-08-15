@@ -158,4 +158,60 @@ public class PlayerAdminController {
 		
 		return mav;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//[선수 소개]코치 폼 
+	/*
+	@GetMapping("/introduce/playerList_c.do")
+	public String form_c() {
+		return "playerList_c";
+	}
+	
+	//전송
+	@RequestMapping("/introduce/playerList_c.do")
+	public ModelAndView process_c(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+								String keyfield,String keyword) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		//status가 0이면 미표시(1), 표시(2) 모두 체크
+		//map.put("status", 0);
+		
+		//전체/검색 레코드 수
+		int count = playerService.selectRowCount(map);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"playerList_c.do");
+		
+		List<PlayerVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = playerService.selectPlayerList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("playerList_c");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
+	}
+	 */
+	
 }

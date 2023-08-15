@@ -28,12 +28,13 @@ public class PlayerController {
 	/*--------------
 	 * 선수 상세
 	 *-------------*/
+	/*
 	@GetMapping("/introduce/player.do")
 	public String form() {
 		return "player";
 	}
 	
-	/*
+	
 	@RequestMapping("/introduce/player.do")
 	public String detail(@RequestParam("player_num") int player_num, Model model) {
 		
@@ -92,6 +93,195 @@ public class PlayerController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("player");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*--------------
+	 * [선수 소개]코치
+	 *-------------*/
+	@RequestMapping("/introduce/playerList_c.do")
+	public ModelAndView process_c(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+								String keyfield,String keyword) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		//status가 0이면 미표시(1), 표시(2) 모두 체크
+		//map.put("status", 0);
+		
+		//전체/검색 레코드 수
+		int count = playerService.selectRowCount(map);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"playerList_c.do");
+		
+		List<PlayerVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = playerService.selectPlayerList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("playerList_c");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
+	}
+	
+	/*--------------
+	 * [선수 소개]투수
+	 *-------------*/
+	@RequestMapping("/introduce/playerList_t.do")
+	public ModelAndView process_t(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+								String keyfield,String keyword) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		//status가 0이면 미표시(1), 표시(2) 모두 체크
+		//map.put("status", 0);
+		
+		//전체/검색 레코드 수
+		int count = playerService.selectRowCount(map);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"playerList_t.do");
+		
+		List<PlayerVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = playerService.selectPlayerList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("playerList_t");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
+	}
+	
+	/*--------------
+	 * [선수 소개]포수
+	 *-------------*/
+	@RequestMapping("/introduce/playerList_p.do")
+	public ModelAndView process_p(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+								String keyfield,String keyword) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		//status가 0이면 미표시(1), 표시(2) 모두 체크
+		//map.put("status", 0);
+		
+		//전체/검색 레코드 수
+		int count = playerService.selectRowCount(map);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"playerList_p.do");
+		
+		List<PlayerVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = playerService.selectPlayerList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("playerList_p");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
+	}
+	
+	/*--------------
+	 * [선수 소개]외야수
+	 *-------------*/
+	@RequestMapping("/introduce/playerList_w.do")
+	public ModelAndView process_w(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+								String keyfield,String keyword) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		//status가 0이면 미표시(1), 표시(2) 모두 체크
+		//map.put("status", 0);
+		
+		//전체/검색 레코드 수
+		int count = playerService.selectRowCount(map);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"playerList_w.do");
+		
+		List<PlayerVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = playerService.selectPlayerList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("playerList_w");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
+	}
+	
+	
+	/*--------------
+	 * [선수 소개]내야수
+	 *-------------*/
+	@RequestMapping("/introduce/playerList_n.do")
+	public ModelAndView process_n(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+								String keyfield,String keyword) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		//status가 0이면 미표시(1), 표시(2) 모두 체크
+		//map.put("status", 0);
+		
+		//전체/검색 레코드 수
+		int count = playerService.selectRowCount(map);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"playerList_n.do");
+		
+		List<PlayerVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = playerService.selectPlayerList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("playerList_n");
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());
