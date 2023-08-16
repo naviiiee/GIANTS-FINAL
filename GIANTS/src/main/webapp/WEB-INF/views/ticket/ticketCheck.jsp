@@ -116,7 +116,7 @@
 					 				'pay_method':rsp.pay_method,
 					 				'ticket_date':[[${gameVO.game_date}]],
 					 				'total_price':rsp.amount
-					 			}
+					 			} 
 					 			console.log(result);
 					 			
 					 			$.ajax({

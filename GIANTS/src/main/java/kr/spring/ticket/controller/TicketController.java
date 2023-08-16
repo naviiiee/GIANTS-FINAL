@@ -114,7 +114,7 @@ public class TicketController {
 	}
 	
 	/* ----- [Order] 티켓주문 -----*/
-	@PostMapping("/ticket/orderForm.do")
+	@PostMapping("/ticket/orderForm.do") 
 	public String orderTicketForm(@RequestParam int game_num, @RequestParam int grade_num, SeatVO seatVO, HttpSession session, Model model) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		

@@ -14,4 +14,5 @@ public class TicketVO {
 	private String pay_method;
 	private String ticket_date;
 	private int total_price;
+	
 }

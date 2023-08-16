@@ -91,7 +91,7 @@ $(function() {
 		let check_col = $(this).attr('data-col');
 		let info = check_block + check_row + check_col;
 		
-		if($(this).hasClass('clicked')) {
+		if($(this).hasClass('clicked')) { 
 			$(this).removeClass('clicked');
 			$(this).addClass('gn'+$(this).attr('data-grade'));
 			$('#del'+$(this).attr('data-info')).remove();
