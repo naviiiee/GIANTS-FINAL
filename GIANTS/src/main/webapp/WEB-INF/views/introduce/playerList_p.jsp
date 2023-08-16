@@ -16,50 +16,6 @@ li{
 }
 
 
-.title01{
-	display:flex;
-}
-
-.a-tab ul li a.over {
-    position: relative;
-    background: #dd0330;
-    border-color: #dd0330;
-    color: #fff;
-    text-decoration: underline;
-}
-.a-tab ul li a {
-    display: block;
-    height: 34px;
-    line-height: 34px;
-    font-size: 14px;
-    letter-spacing: -1px;
-    padding: 0 21px;
-    font-weight: bold;
-    text-decoration: none;
-    border: solid #ccc;
-    border-width: 1px;
-    color: #767676;
-}
-
-.a-tab ul li a {
-    display: block;
-    height: 34px;
-    line-height: 34px;
-    font-size: 14px;
-    letter-spacing: -1px;
-    padding: 0 21px;
-    font-weight: bold;
-    text-decoration: none;
-    border: solid #ccc;
-    border-width: 1px;
-    color: #767676;
-}
-
-.a-tab{
-	display:flex;
-	margin-left: 61%;
-	margin-bottom: 4%;
-}
 
 </style>
 <!-- [관리자] 선수 목록 시작 -->
@@ -87,7 +43,7 @@ li{
 	<hr size="0.05" width="100%" noshade style="margin-bottom:3%">
 	
 	
-	
+	<!--  
 	<div class="a-tab">
 		<ul class="align-right">
 			<li style="display:flex;">
@@ -117,42 +73,58 @@ li{
 				<input type="submit" value="검색" style="height:30px;"  class="accept-btn">
 			</li>
 		</ul>
-		
-
-		<!--
-		<ul class="dept_001_wrap">
-			<li class="dept_001 location_tap_menu">
-				<a href="#">감독</a>
-				<ul class="dept_002_wrap" style="display:none;">
-					<li class="dept_002">
-						<a href="">감독</a>
-					</li>
-					<li class="dept_002">
-						<a href="">투수</a>
-					</li>
-					<li class="dept_002">
-						<a href="">포수</a>
-					</li>
-					<li class="dept_002">
-						<a href="">내야수</a>
-					</li>
-					<li class="dept_002">
-						<a href="">외야수</a>
-					</li>
-				</ul>
+	</form>
+	-->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="aaa">
+		 <div class="dropdown">
+	        <button class="dropdown-btn"><img src="${pageContext.request.contextPath}/images/아래화살표.png">감독</button>
+	        <div class="dropdown-submenu">
+	            <a href="player.do">감독</a>
+	            <a href="#none">코치</a>
+	            <a href="playerList_t.do" >투수</a>
+	            <a href="playerList_p.do" class="over">포수</a>
+	            <a href="playerList_w.do">외야수</a>
+	            <a href="playerList_n.do">내야수</a>
+	   	 </div>
+    </div>
+	<div>
+	<form action="commuList.do" id="search_form" method="get"  style="padding-bottom: 24px;">
+		<ul class="search align-center">
+			<li>
+				<select name="keyfield" id="keyfield">
+					<option value="1" <c:if test="${param.keyfield == 1}">SELECTED</c:if>>선수명</option>
+					<option value="2" <c:if test="${param.keyfield == 2}">SELECTED</c:if>>선수 포지션</option>
+				</select>
+			</li>
+			<li>
+				<input type="search" name="keyword" id="keyword" value="${param.keyword}" style="height:30px;">
+			</li>
+			<li>
+				<input type="submit" value="검색" style="height:30px;"  class="accept-btn">
 			</li>
 		</ul>
-	  -->
-	
-	
-	
-	
-	
-	
-	
-	
-		
-	</form>
+		</form> 
+		</div>
+		<div class="a-tab align-right">
+		<ul>
+			<li style="margin-top:20%; display:flex;">
+				<a href="stadium.do">구장 소개</a>
+				<a href="map.do">오시는 길</a>
+				<a href="food.do">먹거리</a>
+				<a href="player.do" class="over">선수 소개</a>
+			</li>
+		</ul>
+	</div>
+	</div>
 	
 	<!-- 목록 -->
 	<c:if test="${count == 0}">

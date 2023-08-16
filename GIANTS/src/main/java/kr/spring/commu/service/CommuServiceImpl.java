@@ -140,7 +140,7 @@ public class CommuServiceImpl implements CommuService{
 	}
 
 	@Override
-	public CommuReplyVO selectReport(Integer repo_num) {
+	public CommuReportVO selectReport(Integer repo_num) {
 		
 		return commuMapper.selectReport(repo_num);
 	}

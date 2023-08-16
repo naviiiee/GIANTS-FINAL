@@ -26,15 +26,19 @@
 				<form:input path="companyDetailVO.comp_num" placeholder="숫자 10자" type="text"/>
 				<br><form:errors path="companyDetailVO.comp_num" cssClass="error-color"/>
 			</li>
-			 <li>
+		 	<li>
 				<form:label path="companyDetailVO.comp_name">기업명</form:label>
 				<form:input path="companyDetailVO.comp_name"/>
-				<br><form:errors path="companyDetailVO.comp_name" cssClass="error-color"/>
+				<br><form:errors path="companyDetailVO.comp_name" cssClass="error-color"/> 
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_cate">카테고리</form:label>
-				<form:input path="companyDetailVO.comp_cate"/>
-				<br><form:errors path="companyDetailVO.comp_cate" cssClass="error-color"/>
+				<form:radiobutton path="companyDetailVO.comp_cate" value="1"/>치킨
+				<form:radiobutton path="companyDetailVO.comp_cate" value="2"/>술/안주
+				<form:radiobutton path="companyDetailVO.comp_cate" value="3"/>분식
+				<form:radiobutton path="companyDetailVO.comp_cate" value="4"/>간식
+				<form:radiobutton path="companyDetailVO.comp_cate" value="5"/>패스트푸드
+				<form:errors path="companyDetailVO.comp_cate" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="mem_id">아이디</form:label>

@@ -19,7 +19,7 @@
     line-height: 100%;
     letter-spacing: -1px;
     text-transform: uppercase;
-    margin-right: 53%;
+    margin-right: 44%;
     margin-bottom:3%;
 }
 
@@ -110,7 +110,9 @@ hr{
 
 .a-tab{
 	display:flex;
-	
+    margin-left: 0%;
+    margin-bottom: 4%;
+    margin-top: -3%;
 }
 </style>  
  
@@ -136,6 +138,7 @@ hr{
 			<li style="margin-top:20%; display:flex;">
 				<a href="stadium.do" class="over">구장 소개</a>
 				<a href="map.do">오시는 길</a>
+				<a href="food.do">먹거리</a>
 				<a href="player.do">선수 소개</a>
 			</li>
 		</ul>

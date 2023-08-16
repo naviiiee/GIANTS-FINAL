@@ -17,49 +17,53 @@
 			<li>
 				<form:label path="companyDetailVO.comp_owner">사업자명</form:label>
 				<form:input path="companyDetailVO.comp_owner"/>
-				<form:errors path="companyDetailVO.comp_owner"/>
+				<form:errors path="companyDetailVO.comp_owner" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_name">기업명</form:label>
 				<form:input path="companyDetailVO.comp_name"/>
-				<form:errors path="companyDetailVO.comp_name"/>
+				<form:errors path="companyDetailVO.comp_name" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_cate">카테고리</form:label>
-				<form:input path="companyDetailVO.comp_cate"/>
-				<form:errors path="companyDetailVO.comp_cate"/>
+				<form:radiobutton path="companyDetailVO.comp_cate" value="1"/>치킨
+				<form:radiobutton path="companyDetailVO.comp_cate" value="2"/>술/안주
+				<form:radiobutton path="companyDetailVO.comp_cate" value="3"/>분식
+				<form:radiobutton path="companyDetailVO.comp_cate" value="4"/>간식
+				<form:radiobutton path="companyDetailVO.comp_cate" value="5"/>패스트푸드
+				<form:errors path="companyDetailVO.comp_cate" cssClass="error-color"/> 
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_phone">연락처</form:label>
 				<form:input path="companyDetailVO.comp_phone" placeholder="숫자 11자"/>
-				<form:errors path="companyDetailVO.comp_phone"/>
+				<form:errors path="companyDetailVO.comp_phone" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_email">이메일</form:label>
 				<form:input path="companyDetailVO.comp_email"/>
 				<input type="button" id="#" value="이메일인증" class="default-btn">
-				<form:errors path="companyDetailVO.comp_email"/>
+				<form:errors path="companyDetailVO.comp_email" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_zipcode">우편번호</form:label>
 				<form:input path="companyDetailVO.comp_zipcode"/>
 				<input type="button" onclick="execDaumPostcode()" value="우편번호찾기" class="default-btn">
-				<form:errors path="companyDetailVO.comp_zipcode"/>
+				<form:errors path="companyDetailVO.comp_zipcode" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_address1">주소</form:label>
 				<form:input path="companyDetailVO.comp_address1"/>
-				<form:errors path="companyDetailVO.comp_address1"/>
+				<form:errors path="companyDetailVO.comp_address1" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_address2">상세주소</form:label>
 				<form:input path="companyDetailVO.comp_address2"/>
-				<form:errors path="companyDetailVO.comp_address2"/>
+				<form:errors path="companyDetailVO.comp_address2" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_content">기업소개</form:label>
 				<form:input path="companyDetailVO.comp_content"/>
-				<form:errors path="companyDetailVO.comp_content"/>
+				<form:errors path="companyDetailVO.comp_content" cssClass="error-color"/>
 			</li>
 		</ul>
 		<div class="mypage-bottom">

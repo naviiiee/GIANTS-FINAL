@@ -138,9 +138,9 @@
 	
 	
 	<!-- 커뮤니티 신고 글 등록 -->
-	<insert id="insertCommuRepo" parameterType="commuReportVO">
-		INSERT INTO commu__report (repo_num,repo_content,repo_ip,repo_category,mem_num,post_num) 
-		VALUES (commu_report_seq.nextval, #{repo_content} , #{repo_ip}, #{repo_category}, #{mem_num}, #{post_num})
+	<insert id="insertReport" parameterType="commuReportVO">
+		INSERT INTO commu_report (repo_num,repo_content,repo_ip,repo_category,mem_num,commu_num) 
+		VALUES (commu_report_seq.nextval, #{repo_content} , #{repo_ip}, #{repo_category}, #{mem_num}, #{commu_num})
 	</insert>
 	
 	

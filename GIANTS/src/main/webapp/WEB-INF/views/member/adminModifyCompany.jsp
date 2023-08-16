@@ -24,7 +24,7 @@
 				</li>
 				<li>
 					<label>전화번호</label>
-					${memberVO.companyDetailVO.comp_phone}
+					${memberVO.companyDetailVO.comp_phone} 
 				</li>
 				<li>
 					<label>이메일</label>

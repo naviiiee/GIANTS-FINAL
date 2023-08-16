@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* 공통 버튼
 ----------------*/
-input[type="button"], button[type="submit"]{
+input[type="button"], input[type="submit"], button[type="submit"]:not(.not-css){
 	width:60px;
 	height:30px;
 	background-color:#dd032f;
@@ -50,13 +50,13 @@ form#goods_cart{
 }
 .goods-btns{
 	cursor:pointer;
-	display: flex;
-	justify-content: center;
+	display:flex;
+	justify-content:space-between;
 }
 .goods-btns div{
 	margin:5px;
-	width:230px;
-	height:67.8px;
+	width:220px;
+	/* height:67.8px; */
 	border:1px solid #000;
 	display:inline-block;
 	text-align:center;
@@ -70,6 +70,15 @@ img#fav_btn, img#cart_btn, img#pay_btn{
 span#output_fcount{
 	color:#6cace4;
 	font-weight:bold;
+}
+.not-css{
+	margin:0;
+	padding:0;
+	background-color:#FFF;
+	border:none;
+}
+div#goods_fav{
+	width:220px;
 }
 div#goods_cart{
 	background-color:gray;
@@ -195,3 +204,11 @@ span#avg_star{
     width:100px;
     text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 }
+
+
+
+
+
+
+
+

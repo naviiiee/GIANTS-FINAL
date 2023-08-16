@@ -44,7 +44,7 @@ public interface CommuMapper {
 	@Insert("INSERT INTO commu_like (commu_like_num,commu_num,mem_num) VALUES (commu_like_seq.nextval,#{commu_num},#{mem_num})")
 	public void insertFav(CommuFavVO fav);
 	
-	@Delete("DELETE FROM commu_like WHERE commu_num=#{commu_num}")
+	@Delete("DELETE FROM commu_like WHERE commu_like_num=#{commu_like_num}")
 	public void deleteFav(Integer fav_num);
 	
 	//부모글 삭제 시 좋아요가 존재하면, 부모글이 삭제되기 전 좋아요를 먼저 삭제
@@ -82,7 +82,7 @@ public interface CommuMapper {
 	public int selectRowCountReort(Map<String,Object> map);
 	
 	@Select("SELECT * FROM commu_report WHERE repo_num=#{repo_num}")
-	public CommuReplyVO selectReport (Integer repo_num);
+	public CommuReportVO selectReport (Integer repo_num);
 	public void insertReport(CommuReportVO commuReport);
 	
 	@Delete("DELETE FROM commu_report WHERE repo_num=#{repo_num}")

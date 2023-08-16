@@ -18,7 +18,7 @@
 			<c:if test="${memberVO.mem_auth == 2 || memberVO.mem_auth == 5}">
 				<li>
 					<label>이름</label>
-					${memberVO.memberDetailVO.mem_name}
+					${memberVO.memberDetailVO.mem_name} 
 				</li>
 				<li>
 					<label>닉네임</label>

@@ -241,3 +241,104 @@ div.commu-table table th{
 .player-space .float-clear{
 	clear:both;
 }
+
+/* 드롭다운 */
+.dorpdown a{
+	color : #222;
+    text-decoration: none;
+}
+
+.dropdown {
+    /* 보더를 통해서 틀을 봐주는게 좋다 ! */
+    /* border: 1px solid #000; */
+    /* width: 200px; */
+    display: inline-block;
+    margin-right: 20%;
+}
+.dropdown-btn {
+    width:100px;
+    height:40px;
+    /* 패딩으로 크기 늘려주기 */
+    padding : 10px;
+    font-size: 13px;
+    background-color: #dd032f;
+    color : white;
+    border: none;
+    cursor: pointer;
+    border-radius:5px;
+}
+
+.dropdown-submenu{
+    /* border: 1px solid #000; */
+    width:100px;
+    height:30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.192);
+    display: none;
+}
+
+.dropdown-submenu a {
+    display: block;
+    padding: 7px;
+    text-align: center;
+}
+
+.dropdown-submenu a:hover{
+    background-color: #dd0330; /* 드롭다운 hover부분 */
+}
+
+.dropdown:hover .dropdown-submenu {
+    display: block;
+}
+
+
+
+/* plyerLsit */
+.title01{
+	display:flex;
+}
+
+.a-tab ul li a.over {
+    position: relative;
+    background: #dd0330;
+    border-color: #dd0330;
+    color: #fff;
+    text-decoration: underline;
+}
+.a-tab ul li a {
+    display: block;
+    height: 34px;
+    line-height: 34px;
+    font-size: 14px;
+    letter-spacing: -1px;
+    padding: 0 21px;
+    font-weight: bold;
+    text-decoration: none;
+    border: solid #ccc;
+    border-width: 1px;
+    color: #767676;
+}
+
+.a-tab ul li a {
+    display: block;
+    height: 34px;
+    line-height: 34px;
+    font-size: 14px;
+    letter-spacing: -1px;
+    padding: 0 21px;
+    font-weight: bold;
+    text-decoration: none;
+    border: solid #ccc;
+    border-width: 1px;
+    color: #767676;
+}
+
+.a-tab{
+	display:flex;
+	margin-left: 6%;
+	margin-bottom: 4%;
+	margin-top: -7%;
+}
+.aaa{
+	display:flex;
+	margin: 6% 0; /* aaa 상하 넓이 */
+}

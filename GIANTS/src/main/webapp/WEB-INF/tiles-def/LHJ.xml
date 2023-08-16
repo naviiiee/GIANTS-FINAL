@@ -27,6 +27,12 @@
     	<put-attribute name="body" value="/WEB-INF/views/introduce/map.jsp"/>
     </definition> 
     
+    <!-- 야구장 먹거리 폼 -->
+    <definition name="food" extends="main">
+    	<put-attribute name="title" value="구장소개"/>
+    	<put-attribute name="body" value="/WEB-INF/views/introduce/food.jsp"/>
+    </definition> 
+    
     <!-- 글 상세 -->
     <definition name="commuView" extends="main">
     	<put-attribute name="title" value="상세정보"/>
@@ -89,10 +95,16 @@
     	<put-attribute name="body" value="/WEB-INF/views/introduce/playerList_w.jsp"/>
     </definition>
     
-    <!-- [선수 소개] 내야수 폼 -->
+    <!-- [선수 소개] 내야수 폼 --> 
     <definition name="playerList_n" extends="main">
     	<put-attribute name="title" value="선수 목록"/>
     	<put-attribute name="body" value="/WEB-INF/views/introduce/playerList_n.jsp"/>
+    </definition>
+    
+    <!-- [관리자] 신고 목록 -->
+    <definition name="commuRepoDetail" extends="main">
+    	<put-attribute name="title" value="신고 목록"/>
+    	<put-attribute name="body" value="/WEB-INF/views/commu/commuRepoDetail.jsp"/>
     </definition>
     
 </tiles-definitions>

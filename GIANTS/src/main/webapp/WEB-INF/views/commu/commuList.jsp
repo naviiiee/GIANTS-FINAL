@@ -88,6 +88,7 @@ li{
 			
 			<c:if test="${!empty user}">
 			<input type="button" value="글쓰기" onclick="location.href='write.do'" class="accept-btn">
+			<input type="button" value="신고목록" onclick="location.href='commuRepoDetail.do'" class="accept-btn">
 			</c:if>
 			
 		</div>

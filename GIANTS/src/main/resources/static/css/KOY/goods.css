@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* 공통 버튼
 ----------------*/
-input[type="button"], button[type="submit"]{
+input[type="button"], input[type="submit"], button[type="submit"]{
 	width:60px;
 	height:30px;
 	background-color:#dd032f;
@@ -150,14 +150,103 @@ input#reg_btn{
 	 width:100px;
 }
 
+/* 상품문의 - 글 상세
+------------------*/
+.detail-content{
+	min-height:100px;
+	margin-top:5px;
+}
 
+/* 문의답변 폼
+------------------*/
+div#answer_div{
+	padding:5px 10px 40px 10px;
+	margin-top:10px;
+	background-color:#EEEEEE;
+}
+form#gans_form{
+	width:1150px;
+	margin:0;
+}
+textarea.rep-content{
+	width:90%;
+	height:50px;
+	margin:10px 10px;
+}
+div#ans_first, div#mans_first{
+	float:right;
+	width:50px;
+/* 	width:10%;
+	padding-left:15px;
+	margin-bottom:10px; */
+}
+div#ans_second{
+	float:right;
+	width:50px;
+	margin-bottom:10px;
+}
+div#loading{
+	width:100px;
+	height:50px;
+	/*정중앙에 div를 배치하기 위한 설정*/
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	/*하위 요소를 수직으로 쌓을 수 있는 공간을 만듦*/
+	display:flex;
+	/*세로 정렬*/
+	align-items:center;
+	/*가로 정렬*/
+	justify-content:center;
+}
+div.paging-button{
+	text-align:right;
+}
+div#output{
+	clear:both;
+}
+form#mans_form{
+	border:none;
+	margin:5px;
+}
 
-
-
-
-
-
-
+/* 문의답변 UI
+------------------*/
+.item{
+	min-height:100px;
+}
+div#output{
+	clear:both;
+}
+.sub-item p{
+	margin-top:5px;
+	min-height:30px;
+}
+div.ans-btns{
+	margin-bottom:3px;
+	display:block;
+}
+form#mans_form{
+	border:none;
+	margin:5px;
+}
+div#mans_second{
+	display:inline-block;
+}
+ul.detail-info{
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+ul.detail-info li{
+	margin:0;
+	padding-top:5px;
+	display:inline-block;
+}
+ul.detail-info li:last-child{
+	vertical-align:top;
+}
 
 
 

@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.goods.vo.GoodsAnswerVO;
 import kr.spring.goods.vo.GoodsFavVO;
 import kr.spring.goods.vo.GoodsOptionVO;
 import kr.spring.goods.vo.GoodsQnaVO;
@@ -104,4 +105,36 @@ public interface GoodsMapper {
 	//상품 문의 삭제
 	@Delete("DELETE FROM goods_qna WHERE qna_num=#{qna_num}")
 	public void deleteGoodsQna(Integer qna_num);
+	
+	//상품 문의 처리 상태 => 처리완료
+	@Update("UPDATE goods_qna SET qna_status=2 WHERE qna_num=#{qna_num}")
+	public void updateGoodsQnaStatusDone(Integer qna_num);
+	//상품 문의 처리 상태 => 처리전
+	@Update("UPDATE goods_qna SET qna_status=1 WHERE qna_num=#{qna_num}")
+	public void updateGoodsQnaStatusNot(Integer qna_num);
+	
+	
+	//=====상품 문의 답변=====//
+	//답변 목록
+	public List<GoodsAnswerVO> selectListGoodsAnswer(Map<String, Object> map);
+	//답변 갯수
+	@Select("SELECT count(*) FROM goods_answer WHERE qna_num=#{qna_num}")
+	//public int selectGoodsAnswerCount(Map<String, Object> map);
+	public int selectGoodsAnswerCount(Integer qna_num);
+	
+	
+	//답변 보기
+	@Select("SELECT * FROM goods_answer WHERE gans_num=#{gans_num}")
+	public GoodsAnswerVO selectGoodsAnswer(Integer gans_num);
+	//답변 등록
+	public void insertGoodsAnswer(GoodsAnswerVO answer);
+	//답변 수정
+	@Update("UPDATE goods_answer SET gans_content=#{gans_content}, gans_mdate=SYSDATE WHERE gans_num=#{gans_num}")
+	public void updateGoodsAnswer(GoodsAnswerVO answer);
+	//답변 삭제
+	@Delete("DELETE FROM goods_answer WHERE gans_num=#{gans_num}")
+	public void deleteGoodsAnswer(Integer gans_num);
+	
+	//문의글 삭제시 댓글이 존재하면 문의글 삭제 전에 답변 삭제
+	public void deleteGoodsAnswerByQnaNum(Integer qna_num);
 }

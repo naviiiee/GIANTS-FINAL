@@ -26,6 +26,7 @@ import kr.spring.commu.vo.CommuFavVO;
 import kr.spring.commu.vo.CommuReplyVO;
 import kr.spring.commu.vo.CommuReportVO;
 import kr.spring.commu.vo.CommuVO;
+import kr.spring.introduce.vo.PlayerVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
 import kr.spring.util.StringUtil;
@@ -367,20 +368,8 @@ public class CommuController {
 		}
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	
 		/*=== 커뮤니티 신고 ===*/
-
-		
-		
 		@ModelAttribute
 		public CommuReportVO initCommand_repo() {
 			return new CommuReportVO();
@@ -388,14 +377,15 @@ public class CommuController {
 		
 		
 		//등록 폼
-		@GetMapping("/commu/repo.do")
+		@GetMapping("/commu/commuRepo.do")
 		public String formRepo() {
 		
 			return "commuRepo";
 		}
 		
+		
 		//전송된 데이터 처리
-		@PostMapping("/commu/repo.do")
+		@PostMapping("/commu/commuRepo.do")
 		public String submitRepo(@Valid CommuReportVO commuReportVO, BindingResult result, 
 							 HttpServletRequest request, HttpSession session, Model model) {
 			
@@ -411,7 +401,10 @@ public class CommuController {
 			//회원 번호 세팅 (좀 길지만 한 번만 쓸거라 따로 변수 안 만들고 진행)
 			//세션에 저장해놓은 user를 MemberVO로 다운캐스팅, 거기서 mem_num을 가져와서 commuVO의 mem_num에 set
 			MemberVO user = (MemberVO)session.getAttribute("user");
-			commuReportVO.setMem_num(user.getMem_num());
+			//commuReportVO.setMem_num(user.getMem_num());
+			
+			
+			
 			
 			//IP 셋팅
 			commuReportVO.setRepo_ip(request.getRemoteAddr());
@@ -426,6 +419,50 @@ public class CommuController {
 			return "common/resultView";
 			
 		}
+		
+		
+		
+		/*--------------
+		 * [관리자]신고 목록
+		 *-------------*/
+		@RequestMapping("/commu/commuRepoDetail.do")
+		public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+									String keyfield,String keyword) {
+			
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("keyfield", keyfield);
+			map.put("keyword", keyword);
+			//status가 0이면 미표시(1), 표시(2) 모두 체크
+			//map.put("status", 0);
+			
+			//전체/검색 레코드 수
+			int count = commuService.selectRowCountReort(map);
+			
+			//페이지 처리
+			PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"commuRepoDetail.do");
+			
+			List<CommuReportVO> list = null;
+			if(count > 0) {
+				map.put("start", page.getStartRow());
+				map.put("end", page.getEndRow());
+				
+				list = commuService.selectListReport(map);
+			}
+			
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("commuRepoDetail");
+			mav.addObject("count", count);
+			mav.addObject("list", list);
+			mav.addObject("page", page.getPage());
+			
+			return mav;
+		}
+		
+		
+		
+		
+		
+		
 		
 		/*=== 커뮤니티 신고글 삭제 ===*/
 		
