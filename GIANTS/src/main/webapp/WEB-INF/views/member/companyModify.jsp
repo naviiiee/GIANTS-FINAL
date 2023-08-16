@@ -31,7 +31,7 @@
 				<form:radiobutton path="companyDetailVO.comp_cate" value="3"/>분식
 				<form:radiobutton path="companyDetailVO.comp_cate" value="4"/>간식
 				<form:radiobutton path="companyDetailVO.comp_cate" value="5"/>패스트푸드
-				<form:errors path="companyDetailVO.comp_cate" cssClass="error-color"/>
+				<form:errors path="companyDetailVO.comp_cate" cssClass="error-color"/> 
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_phone">연락처</form:label>

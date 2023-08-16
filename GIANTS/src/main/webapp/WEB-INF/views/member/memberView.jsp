@@ -119,7 +119,7 @@
 				<p>자이언츠 관리자페이지 입니다.</p>
 			</div>
 		</div>	
-		<div class="member-mypage">
+		<div class="member-mypage"> 
 			<table class="mem-table">
 			<tr>
 				<td>아이디</td><td>${member.mem_id}</td>

@@ -29,7 +29,7 @@
 		 	<li>
 				<form:label path="companyDetailVO.comp_name">기업명</form:label>
 				<form:input path="companyDetailVO.comp_name"/>
-				<br><form:errors path="companyDetailVO.comp_name" cssClass="error-color"/>
+				<br><form:errors path="companyDetailVO.comp_name" cssClass="error-color"/> 
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_cate">카테고리</form:label>
