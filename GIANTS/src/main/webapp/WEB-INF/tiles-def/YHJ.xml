@@ -54,6 +54,16 @@
     	<put-attribute name="title" value="비밀번호변경"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/memberChangePasswd.jsp"/>
     </definition>
+    <!-- 닉네임변경 -->
+    <definition name="memberChangeNk" extends="myPage"> 
+    	<put-attribute name="title" value="낙네임변경"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/memberChangeNk.jsp"/>
+    </definition>
+    <!-- 닉네임변경 -->
+    <definition name="memberChangeNkMd" extends="myPage"> 
+    	<put-attribute name="title" value="낙네임수정"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/memberChangeNkMd.jsp"/>
+    </definition>
     
     
     <!-- 회원탈퇴 -->

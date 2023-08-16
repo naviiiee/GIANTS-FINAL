@@ -37,6 +37,8 @@ public interface MemberMapper {
 	public MemberVO selectCheckMember(String id);
 	public MemberVO selectCheckCompany(String id);
 	
+	public MemberVO selectCheckMemberNk(String nickname);
+	
 	//회원번호를 이용한 회원정보 구하기
 	public MemberVO selectMember(Integer mem_num);
 	public MemberVO selectCompany(Integer mem_num);
@@ -47,6 +49,8 @@ public interface MemberMapper {
 	//회원정보수정
 	@Update("UPDATE MEMBER SET mem_nickname=#{mem_nickname} WHERE mem_num=#{mem_num}")
 	public void updateMember(MemberVO member);
+	@Update("UPDATE MEMBER SET mem_nickname=#{mem_nickname} WHERE mem_num=#{mem_num}")
+	public void updateMemberNk(MemberVO member);
 	
 	public void updateMember_detail(MemberVO member);
 	public void updateCompany_detail(MemberVO member);

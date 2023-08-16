@@ -3,35 +3,29 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/changePasswd.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/confirmNkMd.js"></script>
 <div class="mypage-top2">
 	<div class="mypage-top-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
-		<h2>비밀번호변경</h2>
-		<p>자이언츠 비밀번호변경 입니다.</p>
+		<h2>닉네임변경</h2>
+		<p>자이언츠 닉네임변경 입니다.</p>
 	</div>
 </div> 
-<!-- 비밀번호변경 시작 -->
+<!-- 닉네임변경 시작 -->
 <div class="mypage-form">
-	<form:form modelAttribute="memberVO" action="changePasswd.do" id="member_change">
+	<form:form modelAttribute="memberVO" action="changeNkMd.do" id="member_register">
 		<form:errors element="div" cssClass="error-color"/>   
 		<ul>
 			<li>
-				<form:label path="now_passwd">현재 비밀번호</form:label>
-				<form:password path="now_passwd"/>
-				<form:errors path="now_passwd" cssClass="error-color"/>
-			</li>
-			<li>
-				<form:label path="passwd">새 비밀번호</form:label>
-				<form:password path="passwd"/>
-				<form:errors path="passwd" cssClass="error-color"/>
-			</li>
-			<li>
-				<label for="confirm_passwd">새 비밀번호 확인</label>
-				<input type="password" id="confirm_passwd">
-				<span id="message_id"></span>
+				<form:label path="mem_nickname">닉네임</form:label>
+				<form:input path="mem_nickname"/>${member.mem_nickname}
+				<input type="button" id="confirmNkMd" value="닉네임중복체크" class="default-btn">
+				<span id="message_nk"></span><br>
+				<form:errors path="mem_nickname" cssClass="error-color"/>
 			</li>
 		</ul>
+		
+		
 		<div class="align-center">
 			<form:button class="default-btn">전송</form:button>
 			<input type="button" value="홈으로" class="default-btn"
@@ -39,4 +33,4 @@
 		</div>
 	</form:form>
 </div>
-<!-- 비밀번호변경 끝 -->
+<!-- 닉네임변경 끝 -->

@@ -123,4 +123,14 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.updateByAdmin(memberVO);
 	}
 
+	@Override
+	public MemberVO selectCheckMemberNk(String nickname) {
+		return memberMapper.selectCheckMemberNk(nickname);
+	}
+
+	@Override
+	public void updateMemberNk(MemberVO member) {
+		memberMapper.updateMemberNk(member);
+	}
+
 }

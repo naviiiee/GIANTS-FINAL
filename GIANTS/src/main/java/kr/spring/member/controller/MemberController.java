@@ -77,6 +77,36 @@ public class MemberController {
 		return mapAjax;
 	}
 	
+	@RequestMapping("/member/confirmNk.do")
+	@ResponseBody
+	public Map<String, String> confirmNk(@RequestParam String mem_nickname) {
+		log.debug("<<닉네임 중복 체크>> : " + mem_nickname);
+		Map<String, String> mapAjax = new HashMap<String, String>();
+		MemberVO member = memberService.selectCheckMemberNk(mem_nickname);
+		if (member != null) {
+			// 닉네임 중복
+			mapAjax.put("result", "nkDuplicated");
+		} else {
+			mapAjax.put("result", "nkNotFound");
+		}
+		return mapAjax;
+	}
+	
+	@RequestMapping("/member/confirmNkMd.do")
+	@ResponseBody
+	public Map<String, String> confirmNkMd(@RequestParam String mem_nickname) {
+		log.debug("<<닉네임 중복 체크>> : " + mem_nickname);
+		Map<String, String> mapAjax = new HashMap<String, String>();
+		MemberVO member = memberService.selectCheckMemberNk(mem_nickname);
+		if (member != null) {
+			// 닉네임 중복
+			mapAjax.put("result", "nkDuplicated");
+		} else {
+			mapAjax.put("result", "nkNotFound");
+		}
+		return mapAjax;
+	}
+	
 	// 일반회원가입 폼 호출
 	@GetMapping("/member/registerMember.do")
 	public String formMember() {
@@ -370,6 +400,37 @@ public class MemberController {
 		
 		return "common/resultView";
 	}	
+	
+	/* === 마이페이지 : 닉네임변경
+	=======================*/
+	//닉네임 변경 폼 호출
+	@GetMapping("/member/changeNkMd.do")
+	public String formChangeNkMd(HttpSession session,
+			   					 Model model) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		MemberVO memberVO = memberService.selectMember(user.getMem_num());
+		model.addAttribute("memberVO", memberVO);
+		
+		return "memberChangeNkMd";
+	}
+	@PostMapping("/member/changeNkMd.do")
+	public String submitchangeNk(@Valid MemberVO memberVO,
+			                     BindingResult result,
+			                     HttpSession session) {
+		
+		//유효성체크결과오류가 있으면 폼호출
+		//if(result.hasErrors()) { return "memberChangeNkMd"; }
+		 
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		memberVO.setMem_num(user.getMem_num());
+		
+		//닉네임변경
+		memberService.updateMemberNk(memberVO);
+		
+		return "redirect:/member/myPage.do";
+	}
 	
 	/* === 마이페이지 : 프로필사진
 	=======================*/

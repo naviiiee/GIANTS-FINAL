@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/confirmId.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/confirmNk.js"></script>
 <div class="mypage-top2">
 	<div class="mypage-top-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
@@ -68,6 +69,9 @@
 			<li>
 				<form:label path="mem_nickname">닉네임</form:label>
 				<form:input path="mem_nickname"/>
+				<input type="button" id="confirmNk" value="닉네임중복체크" class="default-btn">
+				<span id="message_nk"></span><br>
+				<form:errors path="mem_nickname" cssClass="error-color"/>
 			</li>
 		</ul>
 		</div>

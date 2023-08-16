@@ -105,6 +105,21 @@
 			mem_id=#{mem_id}
 	</select>
 	
+	<!-- NK를 이용한 일반회원정보 체크 -->
+	<select id="selectCheckMemberNk" parameterType="string" resultType="memberVO">
+		SELECT
+			mem_num,
+			mem_id,
+			mem_auth,
+			au_id,
+			passwd,
+			mem_nickname
+		FROM
+			MEMBER
+		WHERE
+			mem_nickname=#{mem_nickname}
+	</select>
+	
 	<!-- 회원번호를 이용한 회원정보 구하기 -->
 	<select id="selectMember" parameterType="integer" resultMap="memberMap">
 		SELECT

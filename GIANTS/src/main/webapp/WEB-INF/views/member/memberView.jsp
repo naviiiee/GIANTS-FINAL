@@ -28,6 +28,9 @@
 			<tr>
 				<td>회원가입일</td><td>${member.memberDetailVO.mem_regdate}</td>
 			</tr>
+			<tr>
+				<td>닉네임</td><td>${member.mem_nickname}</td>
+			</tr>
 			<tr> 
 				<td>프로필사진</td>
 			</tr>

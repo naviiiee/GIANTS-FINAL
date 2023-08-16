@@ -13,6 +13,7 @@ public interface MemberService {
 	
 	//ID를 이용한 회원정보 체크
 	public MemberVO selectCheckMember(String id);
+	public MemberVO selectCheckMemberNk(String nickname);
 	
 	//회원번호를 이용한 회원정보 구하기
 	public MemberVO selectMember(Integer mem_num);
@@ -23,6 +24,7 @@ public interface MemberService {
 	//회원정보 수정 
 	public void updateMember(MemberVO member);
 	public void updateCompany(MemberVO member);
+	public void updateMemberNk(MemberVO member);
 	
 	//프로필 이미지 업데이트
 	public void updateProfile(MemberVO member);

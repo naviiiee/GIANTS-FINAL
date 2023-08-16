@@ -282,9 +282,12 @@
 	width:500px;
 	margin:0 auto;
 }
+.mypage-form #member_change ul{
+	padding-bottom:20px;
+}
 .mypage-form #member_change li{
 	padding-bottom:10px;
-	width:620px;
+	width:520px;
 	margin:0 auto;
 }
 .mypage-bottom{
