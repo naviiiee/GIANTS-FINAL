@@ -109,7 +109,7 @@ hr{
 
 .a-tab{
 	display:flex;
-	margin-left:70%;
+	margin-left:64%;
 	margin-bottom:2%;
 	
 }
@@ -145,12 +145,13 @@ ul, ol, li {
 	</div>
 	
 	
-	
- <div class="a-tab">
+	<!--  <h1><img src="${pageContext.request.contextPath}/images/Giantlogo.png" width="200" height="200"></h1>-->
+ <div class="a-tab align-right">
 		<ul>
-			<li style="margin-top:20%; display:flex;">
-				<a href="stadium.do" >구장 소개</a>
+			<li style="margin-top:33%; display:flex;">
+				<a href="stadium.do">구장 소개</a>
 				<a href="map.do" class="over">오시는 길</a>
+				<a href="food.do">먹거리</a>
 				<a href="player.do">선수 소개</a>
 			</li>
 		</ul>

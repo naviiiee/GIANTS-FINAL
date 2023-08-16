@@ -52,7 +52,7 @@ table {
 		${commu.commu_content}
 	</div>
 	<div class="align-right">
-		<input type="button" value="신고하기" onclick="location.href='repo.do'" class="accept-btn">
+		<input type="button" value="신고하기" onclick="location.href='commuRepo.do'" class="accept-btn">
 		<input type="button" value="목록" onclick="location.href='commuList.do'" class="default-btn">
 		<c:if test="${!empty user && user.mem_num==commu.mem_num}">
 		<input type="button" value="수정" onclick="location.href='update.do?commu_num=${commu.commu_num}'" class="accept-btn">

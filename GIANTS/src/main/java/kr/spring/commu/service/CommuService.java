@@ -35,7 +35,7 @@ public interface CommuService {
 	//신고
 	public List<CommuReportVO> selectListReport (Map<String,Object> map);
 	public int selectRowCountReort(Map<String,Object> map);
-	public CommuReplyVO selectReport (Integer repo_num);
+	public CommuReportVO selectReport (Integer repo_num);
 	public void insertReport(CommuReportVO commuReport);
 	public void deleteReport(Integer repo_num);
 	

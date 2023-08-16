@@ -16,50 +16,7 @@ li{
 }
 
 
-.title01{
-	display:flex;
-}
 
-.a-tab ul li a.over {
-    position: relative;
-    background: #dd0330;
-    border-color: #dd0330;
-    color: #fff;
-    text-decoration: underline;
-}
-.a-tab ul li a {
-    display: block;
-    height: 34px;
-    line-height: 34px;
-    font-size: 14px;
-    letter-spacing: -1px;
-    padding: 0 21px;
-    font-weight: bold;
-    text-decoration: none;
-    border: solid #ccc;
-    border-width: 1px;
-    color: #767676;
-}
-
-.a-tab ul li a {
-    display: block;
-    height: 34px;
-    line-height: 34px;
-    font-size: 14px;
-    letter-spacing: -1px;
-    padding: 0 21px;
-    font-weight: bold;
-    text-decoration: none;
-    border: solid #ccc;
-    border-width: 1px;
-    color: #767676;
-}
-
-.a-tab{
-	display:flex;
-	margin-left: 61%;
-	margin-bottom: 4%;
-}
 
 </style>
 <!-- [관리자] 선수 목록 시작 -->
@@ -88,20 +45,31 @@ li{
 	
 	
 	
-	<div class="a-tab">
-		<ul class="align-right">
-			<li style="display:flex;">
-				<a href="player.do">감독</a>
-				<a href="playerList_c.do">코치</a>
-				<a href="playerList_t.do" class="over">투수</a>
-				<a href="playerList_p.do">포수</a>
-				<a href="playerList_w.do">외야수</a>
-				<a href="playerList_n.do">내야수</a>
-			</li>
-		</ul>
-	</div>
 	
 	
+	
+	
+	
+	
+	
+	
+	<div class="aaa">
+	 <div class="dropdown">
+        <button class="dropdown-btn"><img src="${pageContext.request.contextPath}/images/아래화살표.png">감독</button>
+        <div class="dropdown-submenu">
+            <a href="player.do">감독</a>
+            <a href="playerList_c.do">코치</a>
+            <a href="playerList_t.do" class="over">투수</a>
+            <a href="playerList_p.do">포수</a>
+            <a href="playerList_w.do">외야수</a>
+            <a href="playerList_n.do">내야수</a>
+        </div>
+    </div>
+
+
+
+
+	<div>
 	<form action="commuList.do" id="search_form" method="get"  style="padding-bottom: 24px;">
 		<ul class="search align-center">
 			<li>
@@ -117,6 +85,26 @@ li{
 				<input type="submit" value="검색" style="height:30px;"  class="accept-btn">
 			</li>
 		</ul>
+		</form> 
+		</div>
+		
+		
+		 
+		
+		<div class="a-tab align-right">
+		<ul>
+			<li style="margin-top:20%; display:flex;">
+				<a href="stadium.do">구장 소개</a>
+				<a href="map.do">오시는 길</a>
+				<a href="food.do">먹거리</a>
+				<a href="player.do" class="over">선수 소개</a>
+			</li>
+		</ul>
+	</div>
+	
+	
+	
+	</div>
 		
 
 		<!--

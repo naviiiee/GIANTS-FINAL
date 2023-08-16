@@ -23,4 +23,10 @@ public class StadiumController {
 		public String formMap() {
 			return "map"; //tiles 설정
 		}
+		
+	//먹거리  소개 폼
+	@GetMapping("/introduce/food.do")
+	public String formFood() {
+		return "food"; //tiles 설정
+	}
 }
