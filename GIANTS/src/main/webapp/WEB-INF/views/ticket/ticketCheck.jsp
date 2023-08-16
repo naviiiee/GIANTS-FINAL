@@ -4,6 +4,8 @@
 <!-- 예매확인 --> 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/NSH/ticket.css">
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/ticket.portone.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ticket.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <div class="page-main">
@@ -19,31 +21,26 @@
 				<div class="left-no1">
 					<h2>수령방법</h2>
 					<div class="back-white">
-						<ul>
-							<li>
-								<label>수령방법</label>
-								현장수령
-							</li>
-						</ul>
+						<div id="border_text">현장수령</div>
 					</div>
 				</div>
 				<div class="left-no2">
 					<h2>주문자 정보</h2>
 					<div class="back-white">
-						<ul>
-							<li>
-								<label>이름</label>
-								${seatVO.detailVO.mem_name}
-							</li>
-							<li>
-								<label>전화번호</label>
-								${seatVO.detailVO.mem_phone}
-							</li>
-							<li>
-								<label>이메일</label>
-								${seatVO.detailVO.mem_email}
-							</li>
-						</ul>
+						<table class="order-info">
+							<tr>
+								<th>이름</th>
+								<td>${seatVO.detailVO.mem_name}</td>
+							</tr>
+							<tr>
+								<th>전화번호</th>
+								<td>${seatVO.detailVO.mem_phone}</td>
+							</tr>
+							<tr>
+								<th>이메일</th>
+								<td>${seatVO.detailVO.mem_email}</td>
+							</tr>
+						</table>
 					</div>
 				</div>
 				<div class="left-no3">
@@ -56,33 +53,32 @@
 			<div class="select-right">
 				<div class="select-gameInfo">
 					<hr width="100%" class="color-red" noshade>
-					<div class="game-logo">
-						<img src="${pageContext.request.contextPath}/images/giants.png"> VS <img src="${pageContext.request.contextPath}/images/${gameVO.game_team}.png">
-					</div>
 					<div class="game-information">
-					롯데 VS ${gameVO.game_team}<br>
-					사직야구장<br>
-					${gameVO.game_date} ${gameVO.game_time}<br>
+						<h2>경기정보</h2>
+						<div class="game-logo">
+							<img src="${pageContext.request.contextPath}/images/giants.png"> VS <img src="${pageContext.request.contextPath}/images/${gameVO.game_team}.png">
+						</div>	
+						롯데 VS ${gameVO.game_team}<br>
+						사직야구장<br>
+						${gameVO.game_date} ${gameVO.game_time}<br>
 					</div>
-					<div>
-						<h2>예매정보</h2>
+					<div class="ticketInfo">
+						<h2>좌석정보</h2>
 						<div id="seatInfo">
-						<input type="hidden" name="title" id="grade_title" value="${gradeVO.title}">
-						<c:forEach var="seat" items="${seatVO.seat}">
-						<span class="seat-info">${seat} </span><br>
-						</c:forEach>
+							<input type="hidden" name="title" id="grade_title" value="${gradeVO.title}">
+							<c:forEach var="seat" items="${seatVO.seat}">
+							<span class="seat-info">${seat} </span><br>
+							</c:forEach>
 						</div>
 					</div>
 					<div class="price-information">
 						<table>
 							<tr class="price-total">
 								<td>결제금액</td>
-								<c:if test="${gameVO.game_state == 0}">
-								<td>${gradeVO.price_week}</td>
-								</c:if>
-								<c:if test="${gameVO.game_state == 1}">
-								<td>${gradeVO.price_weekend}</td>
-								</c:if>
+								<td>
+									<c:if test="${gameVO.game_state == 0}">${gradeVO.price_week}</c:if>
+									<c:if test="${gameVO.game_state == 1}">${gradeVO.price_weekend}</c:if>
+								</td>
 							</tr>
 						</table>
 					</div>
