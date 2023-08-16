@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 굿즈 상품문의 상세 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goods.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/goods.qna-answer.js"></script>
 <div class="page-main">
 	<div class="main-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
@@ -43,6 +44,30 @@
 	</div>
 	<hr size="1" width="100%">
 	<%-- 답변 시작 --%>
+	<div id="answer_div">
+		<span>답변</span>
+		<form id="gans_form">
+			<input type="hidden" name="qna_num" value="${qna.qna_num}" id="qna_num">
+			<textarea rows="3" cols="50" name="gans_content" id="gans_content" class="rep-content"
+				<c:if test="${empty user}">disabled="disabled"</c:if>
+				><c:if test="${empty user || user.mem_auth != 9}">관리자만 작성할 수 있습니다.</c:if></textarea>
+			<c:if test="${!empty user && user.mem_auth == 9}">
+			<div id="ans_first">
+				<span class="letter-count">300/300</span>
+			</div>
+			<div id="ans_second" class="align-right">
+				<input type="submit" value="등록">
+			</div>
+			</c:if>
+		</form>
+	</div>
+	<div id="output"></div>
+	<div class="paging-button" style="display:none;">
+		<input type="button" value="더보기">
+	</div>
+	<div class="loading" style="display:none;">
+		<img src="${pageContext.request.contextPath}/images/loading.gif" width="100" height="100">
+	</div>
 	<%-- 답변 끝 --%>
 </div>
 <!-- 굿즈 상품문의 상세 끝 -->

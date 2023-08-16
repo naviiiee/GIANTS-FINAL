@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.goods.dao.GoodsMapper;
+import kr.spring.goods.vo.GoodsAnswerVO;
 import kr.spring.goods.vo.GoodsFavVO;
 import kr.spring.goods.vo.GoodsOptionVO;
 import kr.spring.goods.vo.GoodsQnaVO;
@@ -173,6 +174,38 @@ public class GoodsServiceImpl implements GoodsService{
 	@Override
 	public void deleteGoodsQna(Integer qna_num) {
 		goodsMapper.deleteGoodsQna(qna_num);
+	}
+
+	//===== 상품문의 답변 =====//
+	
+	@Override
+	public List<GoodsAnswerVO> selectListGoodsAnswer(Map<String, Object> map) {
+		return goodsMapper.selectListGoodsAnswer(map);
+	}
+
+	@Override
+	public int selectGoodsAnswerCount(Map<String, Object> map) {
+		return goodsMapper.selectGoodsAnswerCount(map);
+	}
+
+	@Override
+	public GoodsAnswerVO selectGoodsAnswer(Integer gans_num) {
+		return goodsMapper.selectGoodsAnswer(gans_num);
+	}
+
+	@Override
+	public void insertGoodsAnswer(GoodsAnswerVO answer) {
+		goodsMapper.insertGoodsAnswer(answer);
+	}
+
+	@Override
+	public void updateGoodsAnswer(GoodsAnswerVO answer) {
+		goodsMapper.updateGoodsAnswer(answer);
+	}
+
+	@Override
+	public void deleteGoodsAnswer(Integer gans_num) {
+		goodsMapper.deleteGoodsAnswer(gans_num);
 	}
 
 }

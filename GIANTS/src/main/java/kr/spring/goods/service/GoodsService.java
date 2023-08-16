@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Select;
 
+import kr.spring.goods.vo.GoodsAnswerVO;
 import kr.spring.goods.vo.GoodsFavVO;
 import kr.spring.goods.vo.GoodsOptionVO;
 import kr.spring.goods.vo.GoodsQnaVO;
@@ -69,4 +70,18 @@ public interface GoodsService {
 	public void updateGoodsQna(GoodsQnaVO qna);
 	//상품 문의 삭제
 	public void deleteGoodsQna(Integer qna_num);
+	
+	//=====상품 문의 답변=====//
+	//답변 목록
+	public List<GoodsAnswerVO> selectListGoodsAnswer(Map<String, Object> map);
+	//답변 수
+	public int selectGoodsAnswerCount(Map<String, Object> map);
+	//답변 보기
+	public GoodsAnswerVO selectGoodsAnswer(Integer gans_num);
+	//답변 등록
+	public void insertGoodsAnswer(GoodsAnswerVO answer);
+	//답변 수정
+	public void updateGoodsAnswer(GoodsAnswerVO answer);
+	//답변 삭제
+	public void deleteGoodsAnswer(Integer gans_num);
 }

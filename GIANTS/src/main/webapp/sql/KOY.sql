@@ -67,6 +67,21 @@ create table goods_qna(
 
 create sequence goods_qna_seq;
 
+-- 상품문의 답변
+create table goods_answer(
+	gans_num number,
+	gans_content varchar2(900) not null,
+	gans_regdate date default sysdate not null,
+	gans_mdate date,
+	mem_num number not null,
+	qna_num number not null,
+	constraint goods_ans_pk primary key (gans_num),
+	constraint goods_ans_fk1 foreign key (mem_num) references member (mem_num),
+	constraint goods_ans_fk2 foreign key (qna_num) references goods_qna (qna_num)
+);
+
+create sequence goods_answer_seq;
+
 -- 상품 찜
 create table goods_fav(
    fav_num number,
