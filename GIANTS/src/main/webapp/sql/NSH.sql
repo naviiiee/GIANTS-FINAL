@@ -43,6 +43,16 @@ CREATE TABLE seat_status(
 	CONSTRAINT seat_status_fk FOREIGN KEY (seat_num) REFERENCES seat (seat_num)
 );
 
+-- 주문확인(장바구니 개념)
+CREATE TABLE ticket_cart(
+	tcart_num NUMBER,
+	seat_no1 VARCHER2(7) NOT NULL,
+	seat_no2 VARCHER2(7),
+	seat_no3 VARCHER2(7),
+	seat_no4 VARCHER2(7),
+	CONSTRAINT tcart_pk PRIMARY KEY (tcart_num)
+);
+
 -- 주문정보
 CREATE TABLE ticket(
 	ticket_num VARCHAR2(20),
@@ -68,3 +78,4 @@ CREATE SEQUENCE tgame_seq;
 CREATE SEQUENCE grade_seq;
 CREATE SEQUENCE seat_seq;
 CREATE SEQUENCE seat_status_seq;
+CREATE SEQUENCE tcart_seq;
