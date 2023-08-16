@@ -38,7 +38,7 @@ public interface CommuMapper {
 	@Select("SELECT * FROM commu_like WHERE commu_num=#{commu_num} AND mem_num=#{mem_num}")
 	public CommuFavVO selectFav(CommuFavVO fav);
 	
-	@Select("SELECT COUNT(*) FROM commu_like")
+	@Select("SELECT COUNT(*) FROM commu_like WHERE commu_num=#{commu_num}")
 	public int selectFavCount(Integer commu_num);
 	
 	@Insert("INSERT INTO commu_like (commu_like_num,commu_num,mem_num) VALUES (commu_like_seq.nextval,#{commu_num},#{mem_num})")
