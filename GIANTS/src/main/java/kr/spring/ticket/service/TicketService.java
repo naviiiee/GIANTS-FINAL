@@ -11,6 +11,7 @@ import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
 import kr.spring.ticket.vo.SeatVO;
+import kr.spring.ticket.vo.TicketVO;
 
 public interface TicketService { 
 	/* 좌석등급 */
@@ -54,4 +55,7 @@ public interface TicketService {
 	public GameVO selectGame(Integer game_num);
 	// 수정
 	public void updateGame(GameVO gameVO);
+	
+	/* 티켓 결제 */
+	public TicketVO insertTicket(TicketVO ticket);
 }

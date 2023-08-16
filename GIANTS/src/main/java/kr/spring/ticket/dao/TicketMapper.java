@@ -13,6 +13,7 @@ import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
 import kr.spring.ticket.vo.SeatVO;
+import kr.spring.ticket.vo.TicketVO;
 
 @Mapper
 public interface TicketMapper {
@@ -76,4 +77,7 @@ public interface TicketMapper {
 	public Integer selectSeatQuantity(Integer grade_num);
 	@Select("SELECT * FROM member_detail WHERE mem_num = #{mem_num}")
 	public MemberDetailVO selectMemberDetail(Integer mem_num);
+	
+	/* 티켓 결제 */
+	public TicketVO insertTicket(TicketVO ticket);
 }

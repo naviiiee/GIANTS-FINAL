@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.siot.IamportRestClient.IamportClient;
+
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.ticket.service.TicketService;
@@ -42,6 +44,11 @@ public class TicketController {
 	// javaBean(VO) 초기화
 	@ModelAttribute
 	public GameVO initGame() { return new GameVO(); }
+	
+	private IamportClient api;
+	
+	//토큰 발급
+	public TicketController() { this.api = new IamportClient("1867137175507113","3q0a9Ci8ajmex1F1yhDwBz9lSDf6pXne8sEjKpxxe4Tqw1DPRjzLGqvhJ0pIiieTV0q8oMRTn1QVXSuf"); }
 	
 	/* ----- [Ticket] 메인(요금안내 및 티켓예매 버튼 활성화) -----*/
 	@RequestMapping("/ticket/ticketInfo.do")
@@ -137,9 +144,16 @@ public class TicketController {
 	}
 	
 	/* ----- [Order] 콜백 수신처리 -----*/
-	@PostMapping("/ticket/insertMPay.do")
+	@RequestMapping("/ticket/insertMPay.do")
 	@ResponseBody
 	public String insertMPay(@RequestBody TicketVO ticketVO, HttpSession session, RedirectAttributes rttr) {
-		return "";
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		ticketVO.setMem_num(user.getMem_num());
+		
+		log.debug("<<ticketVO>> : " + ticketVO);
+		
+		ticketService.insertTicket(ticketVO);
+		
+		return "ticketMain";
 	}
 }

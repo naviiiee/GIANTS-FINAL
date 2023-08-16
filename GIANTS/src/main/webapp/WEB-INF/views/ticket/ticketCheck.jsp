@@ -83,50 +83,52 @@
 				<hr width="100%" class="color-red" noshade>
 				<div class="group-btn">
 					<input type="button" value="이전" class="default-btn big" onclick="location.href='ticketMain.do?game_num=${gameVO.game_num}'">
-					<input type="submit" value="결제" class="accept-btn big" onclick="kg_request_pay()">
+					<input type="button" value="결제" class="accept-btn big" onclick="tosspay()">
 					<script>
-					function kg_request_pay() {
+					function tosspay() {
 						if($('input[name=check_info]:checked').length != 2) {
 							alert('예매자 확인은 필수사항');
 							return false;
 						}
 						
 						let totalPrice = document.getElementsByClassName('totalPrice');
+						let ticket_quantity = document.getElementById('ticket_quantity').value;
 						
 						/* kg이니시스 결제 API */
 					    IMP.init('imp67587482');  // 가맹점 식별코드
 					    
 					 	// IMP.request_pay(param, callback) 결제창 호출
 					 	IMP.request_pay({
-					 		pg: 'INIBillTst',
-					 		pay_method: 'card',
-					 		merchant_uid: 'T' + new Date().getTime(),   // 주문번호
-					 		name:'롯데 VS' + [[${gameVO.game_team}]] + '' + [[${gameVO.game_date}]] + ' ' + [[${gameVO.game_time}]],
+					 		pg:'tosstest',
+					 		pay_method:'card',
+					 		merchant_uid:'T' + new Date().getTime(),   // 주문번호
+					 		name:'${gameVO.game_date} 롯데 VS ${gameVO.game_team}[${gameVO.game_time}',
 					 		amount:totalPrice,	// 숫자 타입
-					 		buyer_email: [[${seatVO.detailVO.mem_email}]],
-					 		buyer_name: [[${seatVO.detailVO.mem_name}]],
-					 		buyer_tel: [[${seatVO.detailVO.mem_phone}]]
+					 		buyer_email:'${seatVO.detailVO.mem_email}',
+					 		buyer_name:'${seatVO.detailVO.mem_name}',
+					 		buyer_tel:'${seatVO.detailVO.mem_phone}'
 					 	}, function(rsp) {
 					 		if( rsp.success ) {
 					 			let msg = '결제가 완료되었습니다.';
 					 			let result = {
 					 				'ticket_num':rsp.merchant_uid,
-					 				'mem_num':[[${user.mem_num}]],
-					 				'game_num':[[${gameVO.game_num}]],
+					 				'game_num':${gameVO.game_num},
 					 				'pay_method':rsp.pay_method,
-					 				'ticket_date':[[${gameVO.game_date}]],
-					 				'total_price':rsp.amount
+					 				'ticket_date':'${gameVO.game_date}',
+					 				'ticket_quantity':ticket_quantity,
+					 				'total_price':rsp.amount,
+					 				'pg':rsp.pg
 					 			} 
 					 			console.log(result);
 					 			
 					 			$.ajax({
-					 				url:'insertMPay.do',
+					 				url:'/ticket/insertMPay.do',
 					 				type:'POST',
 					 				contentType:'application/json',
 					 				data:JSON.stringify(result),
 					 				success: function (res) {
 					 					console.log(res);
-					 					location.href=res;
+					 					location.href='/ticket/ticketOrder.do?ticket_num=' + rsp.merchant_uid;
 					 				},
 									error: function (err) { console.log(err); }
 					 			});
@@ -134,9 +136,8 @@
 					 			let msg = '결제 실패';
 					 			msg += '\n에러내용 : ' + rsp.error_msg;
 					 		}
-					 		alert(msg);
 					 	});
-					}
+					};
 					</script>
 				</div>	
 			</div>

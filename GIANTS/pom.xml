@@ -14,6 +14,14 @@
 	<packaging>war</packaging>
 	<name>GIANTS</name>
 	<description>final project for Spring Boot</description>
+	
+	<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+	
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -72,6 +80,7 @@
 			<version>2.3.1</version>
 			<scope>test</scope>
 		</dependency>
+		
 		<!-- Library -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -103,6 +112,11 @@
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>com.github.iamport</groupId>
+		    <artifactId>iamport-rest-client-java</artifactId>
+		    <version>0.2.23</version>
 		</dependency>
 	</dependencies>
 

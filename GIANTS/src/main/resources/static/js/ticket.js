@@ -140,11 +140,16 @@ $(function() {
 	for(let i = 0; i < leng; i++) {
 		let seatArr = array[i].split('^');
 		
-		let output = title + ' ' + seatArr[0] + '블록 ';
+		let output = '<span class="seatQuantity">' + title + ' ' + seatArr[0] + '블록 ';
 		output += seatArr[1] + '행 ';
-		output += seatArr[2] + '번<br>';
+		output += seatArr[2] + '번</span><br>';
 		$('#seatInfo').append(output);
 	}
+	
+	let quantity = $('.seatQuantity').length;
+	let countSeat = '<input type="hidden" name="ticket_quantity" value="' + quantity + '" id="ticket_quantity">';
+	
+	$('#seatInfo').append(countSeat);
 	
 	// 선택좌석 금액
 	let price = $('.price-total>td:nth-child(2)').text();

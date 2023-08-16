@@ -12,6 +12,7 @@ import kr.spring.ticket.dao.TicketMapper;
 import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
 import kr.spring.ticket.vo.SeatVO;
+import kr.spring.ticket.vo.TicketVO;
 
 @Service
 @Transactional
@@ -81,5 +82,10 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public MemberDetailVO selectMemberDetail(Integer mem_num) { return ticketMapper.selectMemberDetail(mem_num); }
+
+	@Override
+	public TicketVO insertTicket(TicketVO ticket) {
+		return ticketMapper.insertTicket(ticket);
+	}
 }
  
