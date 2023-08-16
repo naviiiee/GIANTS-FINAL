@@ -90,6 +90,11 @@ public class FoodServiceImpl implements FoodService{
 		foodMapper.updateF_cartByFood_num(f_cartVO);
 	}
 
+	@Override
+	public void deleteOneF_cart(Integer cart_num) {
+		foodMapper.deleteOneF_cart(cart_num);
+	}
+
 	
 
 }

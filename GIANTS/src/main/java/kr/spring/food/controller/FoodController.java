@@ -83,7 +83,7 @@ public class FoodController {
 		map.put("sort", sort);
 		int count = foodService.selectCompRowCount(map);
 		
-		log.debug("매장 목록페이지 진입 >> : comp_cate : " + comp_cate + " sort : " + sort);
+		//log.debug("매장 목록페이지 진입 >> : comp_cate : " + comp_cate + " sort : " + sort);
 		
 		//페이지 처리
 		PagingUtil page = new PagingUtil(currentPage, count, 5, 5, "foodList.do");
@@ -115,7 +115,7 @@ public class FoodController {
 									   HttpSession session) {
 		//log.debug("기업상세 페이지 진입 >>> comp_num : " + comp_num);
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		log.debug("유저 정보 에서 기업정보 추출 >> : "+ user);
+		//log.debug("유저 정보 에서 기업정보 추출 >> : "+ user);
 		
 		CompanyDetailVO comp = foodService.selectComp(comp_num);
 		int count = foodService.selectRowCount(comp_num);
@@ -345,7 +345,7 @@ public class FoodController {
 	public Map<String,Object> foodCartCheck(@RequestParam int food_num,
 											@RequestParam String comp_num,
 											HttpSession session){
-		log.debug("<< 장바구니 아이템 체크 동작중 >> ");
+		//log.debug("<< 장바구니 아이템 체크 동작중 >> ");
 		Map<String,Object> mapJson = new HashMap<String,Object>();
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
@@ -356,7 +356,7 @@ public class FoodController {
 			boolean check = false;
 			//1.현재 로그인한 회원의 장바구니에 아이템이 존재하는지 조회
 			db_cart = foodService.selectF_cartList(user.getMem_num());
-			log.debug("장바구니 리스트 크기"+db_cart.size());
+			//log.debug("장바구니 리스트 크기"+db_cart.size());
 			if (db_cart.size() != 0) {
 				//  2.장바구니에 아이템이 있으면 해당 아이템의 comp_num이 
 				//	  현재 등록해야 하는 식품의 comp_num과 다른지 확인
@@ -385,7 +385,7 @@ public class FoodController {
 	@RequestMapping("/food/foodEmptyCart.do")
 	@ResponseBody
 	public Map<String,Object> foodEmptyCart(HttpSession session){
-		log.debug("<< 장바구니 모두 비우기 동작중 >> ");
+		//log.debug("<< 장바구니 모두 비우기 동작중 >> ");
 		Map<String,Object> mapJson = new HashMap<String,Object>();
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
@@ -404,7 +404,7 @@ public class FoodController {
 	public Map<String,Object> foodAddCart(F_cartVO f_cartVO,
 										  //@RequestParam String comp_num,
 										  HttpSession session){
-		log.debug("<< 장바구니 아이템 추가 동작중 >> :" + f_cartVO);
+		//log.debug("<< 장바구니 아이템 추가 동작중 >> :" + f_cartVO);
 		Map<String,Object> mapJson = new HashMap<String,Object>();
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
@@ -455,7 +455,7 @@ public class FoodController {
 		List<F_cartVO> list = null;
 		list = foodService.selectF_cartList(user.getMem_num());
 		
-		log.debug("내 장바구니 목록 확인하기 >>> " + list);
+		//log.debug("내 장바구니 목록 확인하기 >>> " + list);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.setViewName("foodUserCartList");
@@ -463,7 +463,55 @@ public class FoodController {
 		return mav;
 	}
 	
+	//장바구니 수량 변경
+	@RequestMapping("/food/fcart/changeCartQuantity.do")
+	@ResponseBody
+	public Map<String,Object> changeCartQuantity(F_cartVO f_cartVO,
+										  HttpSession session){
+		//log.debug("<< 장바구니 수량 변경 진행중 >> :" + f_cartVO);
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else {
+			//구매하고자 하는 상품의 재고 확인하기
+			FoodVO food = foodService.selectFood(f_cartVO.getFood_num());
+			if (food.getFood_status()==1) {
+				//판매중지 상품
+				mapJson.put("result", "stopSell");
+			}else if (food.getFood_quantity() < f_cartVO.getF_cart_quantity()) {
+				//재고가 부족함
+				mapJson.put("result", "noQuantity");
+			}else {
+				//장바구니 수량 변경 진행
+				log.debug("<< 장바구니 수량 변경 진행중 >> :" + f_cartVO);
+				f_cartVO.setMem_num(user.getMem_num());
+				foodService.updateF_cartByFood_num(f_cartVO);
+				mapJson.put("result", "success");
+			}
+		}
+		return mapJson;
+	}
+
 	
+	//장바구니 삭제버튼
+	@RequestMapping("/food/fcart/deleteOneCart.do")
+	@ResponseBody
+	public Map<String,Object> deleteOneCart(@RequestParam int cart_num,
+										  HttpSession session){
+		log.debug("<< 장바구니 삭제 수행중 >> :" + cart_num);
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else {
+			foodService.deleteOneF_cart(cart_num);
+			mapJson.put("result", "success");
+		}
+		return mapJson;
+	}
 	
 	
 	

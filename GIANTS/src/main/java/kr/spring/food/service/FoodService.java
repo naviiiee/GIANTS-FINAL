@@ -45,4 +45,6 @@ public interface FoodService {
 	public void deleteF_cart(Integer mem_num);
 	//장바구니 상품 업데이트(추가등록)
 	public void updateF_cartByFood_num(F_cartVO f_cartVO);
+	//장바구니 아이템 1개 삭제
+	public void deleteOneF_cart(Integer cart_num);
 }

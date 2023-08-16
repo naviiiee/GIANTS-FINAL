@@ -32,12 +32,13 @@
 					<td><img src="${pageContext.request.contextPath}/food/imageView.do?food_num=${cart.foodVO.food_num}&food_type=1" class="food-cart-img"></td>
 					<td>${cart.foodVO.food_name}</td>
 					<td>
-						<input type="number" value="${cart.f_cart_quantity}"><br>
-						<button type="button" id="change_count">변경</button>
+						<input type="number" class="food-count" value="${cart.f_cart_quantity}" min="1" max="9999"><br>
+						<input type="hidden" value="${cart.foodVO.food_num}">
+						<button type="button" class="change-count" value="${cart.cart_num}">변경</button>
 					</td>
 					<td><fmt:formatNumber value="${cart.f_cart_price}"/>원</td>
 					<td><fmt:formatNumber value="${cart.f_cart_quantity * cart.f_cart_price}"/>원</td>
-					<td><button class="del-choice">X 삭제</button></td>
+					<td><button class="del-choice" value="${cart.cart_num}">X 삭제</button></td>
 				</tr>
 				</c:forEach>
 				<tr>
