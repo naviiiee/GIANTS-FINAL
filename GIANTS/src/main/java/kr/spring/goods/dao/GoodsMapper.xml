@@ -295,7 +295,8 @@
 			  		gans_regdate,
 			  		gans_mdate,
 			  		qna_num,
-			  		mem_num
+			  		mem_num,
+			  		mem_id
 			  	  FROM goods_answer
 			  	  JOIN member USING (mem_num)
 			  	  WHERE qna_num=#{qna_num}

@@ -184,8 +184,8 @@ public class GoodsServiceImpl implements GoodsService{
 	}
 
 	@Override
-	public int selectGoodsAnswerCount(Map<String, Object> map) {
-		return goodsMapper.selectGoodsAnswerCount(map);
+	public int selectGoodsAnswerCount(Integer qna_num) {
+		return goodsMapper.selectGoodsAnswerCount(qna_num);
 	}
 
 	@Override
@@ -206,6 +206,16 @@ public class GoodsServiceImpl implements GoodsService{
 	@Override
 	public void deleteGoodsAnswer(Integer gans_num) {
 		goodsMapper.deleteGoodsAnswer(gans_num);
+	}
+
+	@Override
+	public void updateGoodsQnaStatusDone(Integer qna_num) {
+		goodsMapper.updateGoodsQnaStatusDone(qna_num);
+	}
+
+	@Override
+	public void updateGoodsQnaStatusNot(Integer qna_num) {
+		goodsMapper.updateGoodsQnaStatusNot(qna_num);
 	}
 
 }

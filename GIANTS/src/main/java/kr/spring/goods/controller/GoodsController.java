@@ -628,8 +628,10 @@ public class GoodsController {
 		}else {
 			//작성자 회원번호 등록
 			answerVO.setMem_num(user.getMem_num());
+			answerVO.setMem_id(user.getMem_id());
 			//답변 등록
 			goodsService.insertGoodsAnswer(answerVO);
+			goodsService.updateGoodsQnaStatusDone(answerVO.getQna_num());
 			
 			mapJson.put("result", "success");
 		}
@@ -655,7 +657,7 @@ public class GoodsController {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
 		//전체 레코드 수
-		int count = goodsService.selectGoodsAnswerCount(map);
+		int count = goodsService.selectGoodsAnswerCount(qna_num);
 		
 		//페이지 처리
 		PagingUtil page = new PagingUtil(currentPage, count, rowCount, 1, null);
@@ -701,6 +703,11 @@ public class GoodsController {
 			mapJson.put("result", "notAdmin");
 		}else if(user.getMem_auth() == 9  & user.getMem_num() == db_answer.getMem_num()) {
 			goodsService.deleteGoodsAnswer(gans_num);
+			
+			int tmp_cnt = goodsService.selectGoodsAnswerCount(db_answer.getQna_num());
+			if(tmp_cnt < 1) {
+				goodsService.updateGoodsQnaStatusNot(db_answer.getQna_num());
+			}
 			
 			mapJson.put("result", "success");
 		}else {

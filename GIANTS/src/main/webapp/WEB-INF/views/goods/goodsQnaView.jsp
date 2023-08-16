@@ -16,16 +16,20 @@
 		<li>작성일 | ${qna.qna_regdate}</li>
 		<li>상품명 | ${qna.goods_name}</li>
 		<li>
-			<c:if test="${qna.qna_status == 1}">처리전</c:if>
-			<c:if test="${qna.qna_status == 2}"><b>답변완료</b></c:if>
+			
+			<c:if test="${qna.qna_status == 1}">
+				<input type="checkbox" disabled>처리전
+			</c:if>
+			<c:if test="${qna.qna_status == 2}">
+				<input type="checkbox" checked="checked" disabled><b>답변완료</b>
+			</c:if>
 		</li>
 	</ul>
 	<hr size="1" width="100%">
 	<div class="detail-content">
 		${qna.qna_content}
 	</div>
-	<hr size="1" width="100%">
-	<div class="align-right">
+	<div class="align-right" style="margin-bottom:10px;">
 		<c:if test="${!empty user && user.mem_num == qna.mem_num}">
 			<input type="button" value="수정" onclick="location.href='updateGoodsQna.do?qna_num=${qna.qna_num}'">
 			<input type="button" value="삭제" id="delete_btn">
@@ -40,19 +44,20 @@
 				};
 			</script>
 		</c:if>
-		<input type="button" value="상품상세" onclick="location.href='goodsDetail.do?goods_num=${qna.goods_num}'s">
+		<input type="button" value="상품상세" onclick="location.href='goodsDetail.do?goods_num=${qna.goods_num}'">
 	</div>
 	<hr size="1" width="100%">
 	<%-- 답변 시작 --%>
 	<div id="answer_div">
-		<span>답변</span>
+		<!-- <span>답변</span> -->
 		<form id="gans_form">
 			<input type="hidden" name="qna_num" value="${qna.qna_num}" id="qna_num">
-			<textarea rows="3" cols="50" name="gans_content" id="gans_content" class="rep-content"
-				<c:if test="${empty user}">disabled="disabled"</c:if>
+			<textarea rows="3" cols="50" name="gans_content" id="gans_content" class="align-left rep-content"
+				<c:if test="${empty user || user.mem_auth != 9}">disabled="disabled"</c:if>
 				><c:if test="${empty user || user.mem_auth != 9}">관리자만 작성할 수 있습니다.</c:if></textarea>
 			<c:if test="${!empty user && user.mem_auth == 9}">
-			<div id="ans_first">
+			
+			<div id="ans_first" class="align-left">
 				<span class="letter-count">300/300</span>
 			</div>
 			<div id="ans_second" class="align-right">

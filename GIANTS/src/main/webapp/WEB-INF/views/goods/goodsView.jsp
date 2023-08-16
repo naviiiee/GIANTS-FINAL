@@ -61,7 +61,7 @@
 						평점 : 
 						<span id="avg_star">★</span> (<span id="output_score">${avg_score}</span>)
 					</li>
-				<c:if test="${goods.goods_status == 1}">
+					<c:if test="${goods.goods_status == 1}">
 					<li>
 						<li>
 						    옵션 : 
@@ -121,42 +121,43 @@
 					</li>
 				</c:if>
 				</ul>
-				
 				<div class="goods-btns">
-					<div id="goods_fav">
-						<img id="fav_btn" data-num="${goods.goods_num}" src="${pageContext.request.contextPath}/images/nofav.png">
-						<span>찜하기</span>
-						<c:if test="${!empty user}">[<span id="output_fcount"></span>]</c:if>
-						<c:if test="${empty user}"></c:if>
-					</div>
+					<button type="button" class="not-css">
+						<div id="goods_fav">
+							<img id="fav_btn" data-num="${goods.goods_num}" src="${pageContext.request.contextPath}/images/nofav.png">
+							<span>찜하기</span>
+							<c:if test="${!empty user}">[<span id="output_fcount"></span>]</c:if>
+						</div>
+					</button>
 					<c:if test="${goods.goods_status == 1}">
-					
-					<div id="goods_cart">
-						<button type="submit">
-						<img id="cart_btn" data-num="${goods.goods_num}" src="${pageContext.request.contextPath}/images/cart.png" width="20">
-						<span>장바구니</span>
+						<button type="submit" class="not-css">
+							<div id="goods_cart">
+								<img id="cart_btn" data-num="${goods.goods_num}" src="${pageContext.request.contextPath}/images/cart.png" width="20">
+								<span>장바구니</span>
+							</div>
 						</button>
-					</div>
+					</c:if>
 				</form>
-					
+				
+				<c:if test="${goods.goods_status == 1}">
 				<form id="directBuy" action="${pageContext.request.contextPath}/gorder/directOrderForm.do" method="POST">
-					<div id="goods_pay">	
 					<input type="hidden" name="order_quantity" id="direct_quantity">
 					<input type="hidden" name="goods_num" value="${goods.goods_num}">
-					<button type="submit">
-						<img id="pay_btn" data-num="${goods.goods_num}" src="${pageContext.request.contextPath}/images/card.png" width="20">
-						<span>바로구매</span>
+					<button type="submit" class="not-css">
+						<div id="goods_pay">
+							<img id="pay_btn" data-num="${goods.goods_num}" src="${pageContext.request.contextPath}/images/card.png" width="20">
+							<span>바로구매</span>
+						</div>
 					</button>	
-					</div>
+					
 				</form>
 				</c:if>
-					
-					<c:if test="${goods.goods_status == 2}">
-					<div id="sold-out">
-						<span>SOLD OUT</span>
-					</div>
-					</c:if>
+				<c:if test="${goods.goods_status == 2}">
+				<div id="sold-out">
+					<span>SOLD OUT</span>
 				</div>
+				</c:if>
+			</div>
 				<%-- <ul>
 					<li class="list-cart-btn">
 						<input class="btn btn-cart" type="submit" value="장바구니">

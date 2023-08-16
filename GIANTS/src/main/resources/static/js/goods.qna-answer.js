@@ -32,8 +32,8 @@ $(function(){
 				$(param.list).each(function(index, item){
 					let output = '<div class="item">';
 					output += '<ul class="detail-info">';
-					output += '<li>' + item.mem_num + '</li>';
-					//output += '<li>' + item.mem_id + '<br>';
+					//output += '<li>' + item.mem_num + '</li>';
+					output += '<li><b>[관리자]</b> ' + item.mem_id + '<br>';
 					
 					if(item.gans_mdate){
 						output += '<span class="modify-date">최근 수정일 : ' + item.gans_mdate + '</span>';
@@ -46,10 +46,11 @@ $(function(){
 					output += '<p>' + item.gans_content.replace(/\r\n/g, '<br>') + '</p>';
 					
 					if(param.user_num == item.mem_num){
-						output += '<input type="button" data-num="' + item.gans_num + '"value="수정" class="modify-btn">';
-						output += '<input type="button" data-num="' + item.gans_num + '"value="삭제" class="delete-btn">';
+						output += '<div class="ans-btns align-right">';
+						output += ' <input type="button" data-num="' + item.gans_num + '"value="수정" class="modify-btn">';
+						output += ' <input type="button" data-num="' + item.gans_num + '"value="삭제" class="delete-btn">';
+						output += '</div>';
 					}
-					
 					output += '<hr size="1" noshade>';
 					output += '</div>'; //end of sub-item
 					output += '</div>'; //end of item
@@ -106,6 +107,7 @@ $(function(){
 					initForm();
 					//답변 작성이 성공하면 새로 등록한 댓글을 포함해서 첫번쨰 페이지의 답변을 다시 호출함
 					selectList(1); 
+					location.reload(); //새로고침
 				}else{
 					alert('답변 등록 오류 발생');
 				}
@@ -158,8 +160,13 @@ $(function(){
 				}else if(param.result == 'notAdmin'){
 					alert('관리자만 삭제할 수 있습니다.');
 				}else if(param.result == 'success'){
-					alert('답변삭제 완료');
-					selectList(1); //목록 갱신
+					
+					let choice = confirm('답변을 삭제하시겠습니까?');
+					if(choice){
+						alert('답변삭제 완료');
+						selectList(1); //목록 갱신
+						location.reload(); //새로고침
+					}
 				}else if(param.result == 'wrongAccesss'){
 					alert('타인이 작성한 답변은 삭제할 수 없습니다.');
 				}else{
@@ -241,7 +248,7 @@ $(function(){
 					$('#mans_form').parent().find('p').html($('#mans_content').val().replace(/</g, '$lt;').replace(/>/g,'&gt;').replace(/\r\n/g, '<br>').replace(/\r/g , '<br>').replace(/\n/g, '<br>'));
 					
 					//최근 수정일 처리
-					$('#mans_form').parent().find('.modify-date').text('최근수정일 : ***');
+					$('#mans_form').parent().find('.modify-date').text('최근수정일 : 방금 전');
 					
 					//수정 폼 초기화
 					initModifyForm();

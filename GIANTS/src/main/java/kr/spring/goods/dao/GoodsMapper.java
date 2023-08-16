@@ -106,12 +106,23 @@ public interface GoodsMapper {
 	@Delete("DELETE FROM goods_qna WHERE qna_num=#{qna_num}")
 	public void deleteGoodsQna(Integer qna_num);
 	
+	//상품 문의 처리 상태 => 처리완료
+	@Update("UPDATE goods_qna SET qna_status=2 WHERE qna_num=#{qna_num}")
+	public void updateGoodsQnaStatusDone(Integer qna_num);
+	//상품 문의 처리 상태 => 처리전
+	@Update("UPDATE goods_qna SET qna_status=1 WHERE qna_num=#{qna_num}")
+	public void updateGoodsQnaStatusNot(Integer qna_num);
+	
+	
 	//=====상품 문의 답변=====//
 	//답변 목록
 	public List<GoodsAnswerVO> selectListGoodsAnswer(Map<String, Object> map);
 	//답변 갯수
 	@Select("SELECT count(*) FROM goods_answer WHERE qna_num=#{qna_num}")
-	public int selectGoodsAnswerCount(Map<String, Object> map);
+	//public int selectGoodsAnswerCount(Map<String, Object> map);
+	public int selectGoodsAnswerCount(Integer qna_num);
+	
+	
 	//답변 보기
 	@Select("SELECT * FROM goods_answer WHERE gans_num=#{gans_num}")
 	public GoodsAnswerVO selectGoodsAnswer(Integer gans_num);

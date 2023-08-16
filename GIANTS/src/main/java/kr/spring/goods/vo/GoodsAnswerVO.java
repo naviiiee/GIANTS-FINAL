@@ -1,7 +1,5 @@
 package kr.spring.goods.vo;
 
-import java.sql.Date;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,8 +10,8 @@ import lombok.ToString;
 public class GoodsAnswerVO {
 	private int gans_num;
 	private String gans_content;
-	private Date gans_regdate;
-	private Date gans_mdate;
+	private String gans_regdate;
+	private String gans_mdate;
 	private int mem_num;
 	private int qna_num;
 	
