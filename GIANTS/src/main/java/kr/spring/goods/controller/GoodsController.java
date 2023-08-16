@@ -1,5 +1,6 @@
 package kr.spring.goods.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.goods.service.GoodsService;
+import kr.spring.goods.vo.GoodsAnswerVO;
 import kr.spring.goods.vo.GoodsFavVO;
 import kr.spring.goods.vo.GoodsOptionVO;
 import kr.spring.goods.vo.GoodsQnaVO;
@@ -604,5 +606,147 @@ public class GoodsController {
 		
 		return "redirect:/goods/goodsList.do";
 	}
+	
+	/*===============// 굿즈 문의 답변 //===============*/
+	
+	/*==========================
+	 * 문의 답변 등록
+	 *==========================*/	
+	@RequestMapping("/goods/writeAnswer.do")
+	@ResponseBody
+	public Map<String, String> writeAnswer(GoodsAnswerVO answerVO, HttpSession session, HttpServletRequest request){
+		
+		log.debug("<<굿즈 문의 답변 등록>> : " + answerVO);
+		
+		Map<String, String> mapJson = new HashMap<String, String>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user == null) {
+			mapJson.put("result", "logout");
+		}else if(user != null && user.getMem_auth() != 9){
+			mapJson.put("result", "notAdmin");
+		}else {
+			//작성자 회원번호 등록
+			answerVO.setMem_num(user.getMem_num());
+			//답변 등록
+			goodsService.insertGoodsAnswer(answerVO);
+			
+			mapJson.put("result", "success");
+		}
+		
+		return mapJson;
+	}
+	
+	/*==========================
+	 * 답변 목록
+	 *==========================*/	
+	@RequestMapping("/goods/listAnswer.do")
+	@ResponseBody
+	public Map<String, Object> getAnswerList(@RequestParam(value="pageNum", defaultValue="1") int currentPage, 
+											@RequestParam(value="rowCount", defaultValue="10") int rowCount,
+											@RequestParam int qna_num, HttpSession session){
+		
+		log.debug("<<currentPage>> : " + currentPage);
+		log.debug("<<qna_num>> : " + qna_num);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("qna_num", qna_num);
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		//전체 레코드 수
+		int count = goodsService.selectGoodsAnswerCount(map);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(currentPage, count, rowCount, 1, null);
+		
+		List<GoodsAnswerVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = goodsService.selectListGoodsAnswer(map);
+		}else {
+			list = Collections.emptyList();
+		}
+		
+		log.debug("<<답변목록 - list>>" + list);
+		Map<String, Object> mapJson	= new HashMap<String, Object>();
+		mapJson.put("count", count);
+		mapJson.put("list", list);
+		
+		//로그인한 회원번호 셋팅
+		if(user != null) {
+			mapJson.put("user_num", user.getMem_num());
+		}
+		return mapJson;
+	}
+	
+	/*==========================
+	 * 답변 삭제
+	 *==========================*/	
+	@RequestMapping("/goods/deleteAnswer.do")
+	@ResponseBody
+	public Map<String, String> deleteAnswer(@RequestParam int gans_num, HttpSession session){
+		
+		log.debug("<<답변 삭제 - gans_num>> : " + gans_num);
+		
+		Map<String, String> mapJson	= new HashMap<String, String>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		GoodsAnswerVO db_answer = goodsService.selectGoodsAnswer(gans_num);
+		if(user == null) {
+			mapJson.put("result", "logout");
+		}else if(user != null && user.getMem_auth() < 9) {
+			mapJson.put("result", "notAdmin");
+		}else if(user.getMem_auth() == 9  & user.getMem_num() == db_answer.getMem_num()) {
+			goodsService.deleteGoodsAnswer(gans_num);
+			
+			mapJson.put("result", "success");
+		}else {
+			//로그인한 회원번호와 작성자 회원번호 불일치
+			mapJson.put("result", "wrongAccess");
+		}
+		return mapJson;
+	}
+	
+	/*==========================
+	 * 답변 수정
+	 *==========================*/	
+	@RequestMapping("/goods/updateAnswer.do")
+	@ResponseBody
+	public Map<String, String> modifyAnswer(GoodsAnswerVO answerVO, HttpSession session, HttpServletRequest request){
+		
+		log.debug("<<GoodsAnswerVO>> : " + answerVO);
+		
+		Map<String, String> mapJson = new HashMap<String, String>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		GoodsAnswerVO db_answer = goodsService.selectGoodsAnswer(answerVO.getGans_num());
+		
+		if(user == null) {
+			mapJson.put("result", "logout");
+		}else if(user != null && user.getMem_auth() != 9) {
+			mapJson.put("result", "notAdmin");
+		}else if(user.getMem_auth() == 9 && user.getMem_num() == db_answer.getMem_num()) {
+			goodsService.updateGoodsAnswer(answerVO);
+			
+			mapJson.put("result", "success");
+		}else {
+			mapJson.put("result", "wrongAccess");
+		}
+		return mapJson;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

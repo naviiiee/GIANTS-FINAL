@@ -264,4 +264,51 @@
 		WHERE q.qna_num=#{qna_num}
 	</select>
 	
+	<!-- =====굿즈 문의 답변===== -->
+	
+	<!-- 답변 등록 -->
+	<insert id="insertGoodsAnswer" parameterType="goodsAnswerVO">
+		INSERT INTO goods_answer(
+			gans_num,
+			gans_content,
+			mem_num,
+			qna_num)
+		VALUES(
+			goods_answer_seq.nextval,
+			#{gans_content},
+			#{mem_num},
+			#{qna_num})
+	</insert>
+	
+	<!-- 답변 목록 -->
+	<select id="selectListGoodsAnswer" parameterType="map" resultType="goodsAnswerVO">
+		SELECT
+			*
+		FROM(SELECT
+				a.*,
+				rownum rnum
+			 FROM(SELECT
+			 		gans_num,
+			 		<![CDATA[
+			  		REPLACE(REPLACE(gans_content, '<', '&lt;'), '>', '&gt;') gans_content,
+			  		]]>
+			  		gans_regdate,
+			  		gans_mdate,
+			  		qna_num,
+			  		mem_num
+			  	  FROM goods_answer
+			  	  JOIN member USING (mem_num)
+			  	  WHERE qna_num=#{qna_num}
+			  	  ORDER BY gans_num DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+	
+	
+	
+	
+	
+	
 </mapper>
