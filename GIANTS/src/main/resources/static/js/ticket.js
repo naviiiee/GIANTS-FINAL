@@ -120,6 +120,7 @@ $(function() {
 	});
 	
 	$('#order_seat').submit(function() {
+		// checkbox 유효성 검사
 		if($('.seat-leng').length == 0) {
 			alert('구매할 좌석을 선택하세요');
 			return false;
@@ -150,10 +151,6 @@ $(function() {
 	$('.price-total>td:nth-child(2)').empty()
 	$('.price-total').append((price * leng).toLocaleString() + '원');
 	
-	$('#ticket_order').submit(function() {
-		if($('input[name=check_info]:checked').length != 2) {
-			alert('예매자 확인은 필수사항');
-			return false;
-		}
-	});
+	$('.group-btn').append('<input type="hidden" name="total_price" value="'+price * leng+'" class="totalPrice">')
+
 });
