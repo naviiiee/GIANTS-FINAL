@@ -120,11 +120,11 @@
 								<span>장바구니</span>
 							</div>
 						</button>
-				</form>
+				</form>  
 			<!-- 장바구니 폼 끝 -->
 			
 			 <!-- 바로 구매 폼 -->
-	        <form id="goods_direct" method="post">
+	        <form id="goods_direct" method="post" action="${pageContext.request.contextPath}/gorder/orderFormDirect.do">
 		        <input type="hidden" id="hidden_opt_num" name="opt_num">
 		        <input type="hidden" name="goods_num">
 		        <input type="hidden" name="order_quantity">
