@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 문의 등록 시작 -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goodsQna.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goodsReview.css">
 <div class="page-main">
 	<div class="main-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
@@ -14,13 +14,9 @@
 		<form:errors element="div" cssColor="error-color"/>
 		<ul>
 			<li>
-				<label>작성자</label>
-				<span>${user.mem_id}</span>
-			</li>
-			<li>
 				<label>문의할 상품</label>
-				<select name="goods_num">
-					<option value="">====선택====</option>
+				<select name="goods_num" required>
+					<option>====선택====</option>
 					<c:forEach var="goods" items="${goods_list}">
 					<option value="${goods.goods_num}">${goods.goods_name}</option>
 					</c:forEach>

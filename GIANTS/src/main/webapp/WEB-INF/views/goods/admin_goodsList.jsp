@@ -29,9 +29,9 @@
 		<ul class="search">
 			<li>
 				<select name="keyfield" id="keyfield">
+					<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>상품명+내용</option>
 					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>상품명</option>
 					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>내용</option>
-					<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>상품명+내용</option>
 				</select>
 			</li>
 			<li>
@@ -39,7 +39,6 @@
 			</li>
 			<li>
 				<input type="submit" value="찾기">
-				<input type="button" value="목록" onclick="location.href='goodsUpdate.do'">
 			</li>
 		</ul>
 	</form>
@@ -53,7 +52,7 @@
 				<th style="width:5%;">번호</th>
 				<th style="width:8%;">카테고리</th>
 				<th>상품명</th>
-				<th style="width:12%;">가격</th>
+				<th style="width:12%;">판매가</th>
 				<th style="width:10%;">등록일</th>
 				<th style="width:7%;">상태</th>
 				<th style="width:7%;">수정</th>
@@ -69,25 +68,28 @@
 					<c:if test="${goods.goods_category == 4}">기타</c:if>
 				</td>
 				<td>
-					<a href="goodsUpdate.do?goods_num=${goods.goods_num}">${goods.goods_name}</a>
+					<a href="goodsDetail.do?goods_num=${goods.goods_num}">${goods.goods_name}</a>
 				</td>
 				<td class="align-center">
-					<fmt:formatNumber value="${goods.goods_price}"/>원
+					<fmt:formatNumber value="${goods.goods_dprice}"/>원
 				</td>
 				<td>${goods.goods_regdate}</td>
 				<td>
 					<c:if test="${goods.goods_status == 1}">판매중</c:if>
-					<c:if test="${goods.goods_status == 2}"><b style="color:#0000FF;">판매중지</b></c:if>
+					<c:if test="${goods.goods_status == 2}"><b style="color:#dd032f;">판매중지</b></c:if>
 				</td>
-				<td class="list-btn">
-					<input type="button" value="수정" onclick="location.href='goodsUpdate.do?goods_num=${goods.goods_num}'">
+				<td>
+					<input class="list-btn" type="button" value="수정" onclick="location.href='goodsUpdate.do?goods_num=${goods.goods_num}'">
 				</td>
-				<td class="list-btn">
-					<input type="button" value="삭제" onclick="location.href='goodsDelete.do?goods_num=${goods.goods_num}'">
+				<td>
+					<input class="list-btn" type="button" value="삭제" onclick="location.href='goodsDelete.do?goods_num=${goods.goods_num}'">
 				</td>
 			</tr>
 			</c:forEach>
 		</table>
+		<div class="align-right" style="margin-top:5px;">
+			<input type="button" value="목록" onclick="location.href='admin_goodsList.do'">
+		</div>
 	</div>
 	<div class="align-center">${page}</div>
 	</c:if>

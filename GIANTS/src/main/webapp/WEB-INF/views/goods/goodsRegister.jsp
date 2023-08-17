@@ -41,7 +41,7 @@
 			<li>
 				<form:label path="goods_category">상품 카테고리</form:label>
 				<form:select path="goods_category" id="goods_category">
-					<form:option value="0">===선택===</form:option>
+					<option>===선택===</option>
 					<form:option value="1">유니폼</form:option>
 					<form:option value="2">모자</form:option>
 					<form:option value="3">응원도구</form:option>
@@ -135,7 +135,7 @@
 				</script>
 			</li>
 		</ul>
-		<div class="align-center">
+		<div class="align-center" style="margin-top:10px;">
 			<form:button class="default-btn">등록</form:button>
 			<input type="button" value="목록" onclick="location.href='goodsList.do'">
 		</div>

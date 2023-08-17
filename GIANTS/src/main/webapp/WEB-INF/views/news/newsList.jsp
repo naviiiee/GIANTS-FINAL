@@ -66,12 +66,6 @@
 					});
 				</script>
 			</div>
-			<div class="align-right">
-				<c:if test="${!empty user}">
-					<input type="button" value="목록" onclick="location.href='newsList.do'">
-					<input type="button" value="글쓰기" onclick="location.href='newsWrite.do'">
-				</c:if>
-			</div>
 		</form>
 		<c:if test="${count == 0}">
 		<div>표시할 뉴스가 없습니다.</div>
@@ -79,7 +73,7 @@
 		<c:if test="${count > 0}">
 		<div class="news-list">
 			<table>
-				<tr>
+				<tr class="first-tr">
 					<th style="width:5%;">번호</th>
 					<th>제목</th>
 					<th style="width:10%;">작성일</th>
@@ -98,6 +92,12 @@
 				</tr>
 				</c:forEach>
 			</table>
+			<div class="align-right">
+				<c:if test="${!empty user}">
+					<input type="button" value="목록" onclick="location.href='newsList.do'">
+					<input type="button" value="글쓰기" onclick="location.href='newsWrite.do'">
+				</c:if>
+			</div>
 		</div>
 		<div class="align-center">${page}</div>
 		</c:if>

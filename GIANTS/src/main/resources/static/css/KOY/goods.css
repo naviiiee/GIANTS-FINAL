@@ -11,7 +11,7 @@ input[type="button"], input[type="submit"], button[type="submit"]{
 }
 
 /* 굿즈 등록, 수정
-----------------*/ 
+----------------*/
 button[type="submit"].default-btn{
 	width:60px;
 	height:30px;
@@ -61,11 +61,15 @@ div#file_detail span{
 
 /* [일반회원] 굿즈 목록
 ----------------------*/
-div.cate-filter{
-	margin-bottom:10px;
+ul.filter-btns li div{
+	width:auto;
 }
-div.cate-filter input[type="button"].off{
-	width:60px;
+div.cate-filter{
+	width:450px;
+	margin:5px 0;
+}
+div.cate-filter button[type="button"].off{
+	width:80px;
 	height:30px;
 	background-color:#6cace4;
 	color:#FFF;
@@ -75,8 +79,9 @@ div.cate-filter input[type="button"].off{
 	text-align:center;
 }
 
-div.cate-filter input[type="button"].on{
-	width:60px;
+div.cate-filter button[type="button"].off:hover,
+div.cate-filter button[type="button"].on{
+	width:80px;
 	height:30px;
 	background-color:#FFF;
 	color:#6cace4;
@@ -89,11 +94,22 @@ div.cate-filter input[type="button"].on{
 div.list-btns{
 	margin-top:5px;
 }
+ul.search{
+	float:right;
+}
+ul.search li{
+	display:inline;	
+}
 ul.search li select{
+	height:30px;
+	margin-top:10px;
+}
+#keyword{
 	height:30px;
 }
 form#search_form #order{
 	height:32px;
+	margin-top:10px;
 }
 .goods-space .horizontal-area{
 	margin:2px;
@@ -119,19 +135,29 @@ input[type="button"]#admin_btn{
 	border:none;
 	cursor:pointer;
 }
-td.list-btn input{
+input.list-btn{
 	width:110px;
 	height:30px;
 	background:none;
-	color:#dd032f;
+	color:#052345;
 	font-weight:bold;
 	border:none;
 	cursor:pointer;
 }
+input.list-btn:hover{
+	width:110px;
+	height:30px;
+	background-color:#052345;
+	color:#fff;
+	font-weight:bold;
+	border:none;
+	cursor:pointer;
+}
+
 /* [관리자] 굿즈 목록
 ----------------------*/
 div.goods-list table{
-	margin:0;
+	margin:50px 0 0 0;
 	padding:0;
 	width:100%;
 }
@@ -146,9 +172,15 @@ div.goods-list table td{
 div.goods-list table tr{
 	height:30px;
 }
+div.goods-list table tr:first-child{
+	background-color:#d9d9d9;
+	color:#052345;
+	border-top:2px solid #dd032f;
+}
 input#reg_btn{
 	 width:100px;
 }
+
 
 /* 상품문의 - 글 상세
 ------------------*/

@@ -45,14 +45,12 @@
 				<form:errors path="goods_name" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="goods_category">상품 카테고리</form:label>
-				<form:select path="goods_category" id="goods_category">
-					<form:option value="0">===선택===</form:option>
-					<form:option value="1">유니폼</form:option>
-					<form:option value="2">모자</form:option>
-					<form:option value="3">응원도구</form:option>
-					<form:option value="4">기타</form:option>
-				</form:select>
+				<label>상품 카테고리</label>
+				<form:hidden path="goods_category"/>
+				<c:if test="${goodsVO.goods_category == 1}">유니폼</c:if>
+				<c:if test="${goodsVO.goods_category == 2}">모자</c:if>
+				<c:if test="${goodsVO.goods_category == 3}">응원도구</c:if>
+				<c:if test="${goodsVO.goods_category == 4}">기타</c:if>
 			</li>
 			<li>
 				<form:label path="goods_status">상태</form:label>
@@ -64,7 +62,7 @@
 				<c:forEach var="goodsOptionVO" items="${list}" varStatus="status">
 				<div>
 					<input type="hidden" name="goods_sizes" value="${goodsOptionVO.goods_size}">
-					<label for="goods_stock${status.count}">${goodsOptionVO.goods_size}</label>
+					<label for="goods_stock${status.count}">${goodsOptionVO.goods_size} 수량</label>
 					<input id="goods_stock${status.count}" name="goods_stocks" type="number" value="${goodsOptionVO.goods_stock}" placeholder="재고수량 입력"/>
 				</div>
 				</c:forEach>
@@ -73,7 +71,7 @@
 				<c:forEach var="goodsOptionVO" items="${list}" varStatus="status">
 				<div>
 					<input type="hidden" name="goods_sizes" value="${goodsOptionVO.goods_size}">
-					<label for="goods_stocks7">${goodsOptionVO.goods_size}</label>
+					<label for="goods_stocks7">${goodsOptionVO.goods_size} 수량</label>
 					<input name="goods_stocks" id="goods_stocks7" type="number" value="${goodsOptionVO.goods_stock}" placeholder="재고수량 입력"/>
 				</div>
 				</c:forEach>
@@ -118,7 +116,7 @@
 		</ul>
 		<div class="align-center" style="margin-top:5px;">
 			<form:button class="default-btn">수정</form:button>
-			<input type="button" value="목록" onclick="location.href='goodsList.do'">
+			<input type="button" value="목록" onclick="location.href='admin_goodsList.do'">
 		</div>
 	</form:form>
 </div>

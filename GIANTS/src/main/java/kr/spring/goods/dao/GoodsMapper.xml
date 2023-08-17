@@ -44,15 +44,19 @@
 	
 	<!-- 상품 목록 -->
 	<sql id="goodsSearch">
+		<![CDATA[
+			WHERE goods_status < #{goods_status}
+		]]>
+		
 		<if test="keyword != null and keyword != ''">
 			<if test="keyfield == 1">
-				AND goods_name LIKE '%' || #{keyword} | '%'
+				AND goods_name LIKE '%' || #{keyword} || '%'
 			</if>
 			<if test="keyfield == 2">
-				AND goods_content LIKE '%' || #{keyword} | '%'
+				AND goods_content LIKE '%' || #{keyword} || '%'
 			</if>
 			<if test="keyfield == 3">
-				AND (goods_name LIKE '%' || #{keyword} | '%' OR goods_content LIKE '%' || #{keyword} | '%') 
+				AND (goods_name LIKE '%' || #{keyword} || '%' OR goods_content LIKE '%' || #{keyword} || '%') 
 			</if>
 		</if>
 	</sql>
@@ -70,20 +74,20 @@
 	</sql>
 	
 	<sql id="goodsCategory">
-		<if test="category == 0">
-		
+		<if test="goods_category == 0">
+			AND goods_category BETWEEN 1 AND 4
 		</if>
-		<if test="category == 1">
-			WHERE g.goods_category = 1
+		<if test="goods_category == 1">
+			AND goods_category = 1
 		</if>
-		<if test="category == 2">
-			WHERE g.goods_category = 2
+		<if test="goods_category == 2">
+			AND goods_category = 2
 		</if>
-		<if test="category == 3">
-			WHERE g.goods_category = 3
+		<if test="goods_category == 3">
+			AND goods_category = 3
 		</if>
-		<if test="category == 4">
-			WHERE g.goods_category = 4
+		<if test="goods_category == 4">
+			AND goods_category = 4
 		</if>
 	</sql>
 	  
@@ -115,8 +119,8 @@
 			  	   LEFT OUTER JOIN (SELECT count(*) fav_cnt, goods_num FROM goods_fav GROUP BY goods_num)f ON g.goods_num=f.goods_num
 			  	   LEFT OUTER JOIN (SELECT count(*) re_cnt, goods_num FROM goods_review GROUP BY goods_num)r ON g.goods_num=r.goods_num
 			  	   <include refid="goodsSearch"></include>
-			  	   <include refid="goodsOrder"></include>
-			  	   )a)
+			  	   <include refid="goodsCategory"></include>
+			  	   <include refid="goodsOrder"></include>)a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>

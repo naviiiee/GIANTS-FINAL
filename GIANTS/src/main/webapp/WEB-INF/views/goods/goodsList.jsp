@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 상품목록 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goods.css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/goods.filter.js"></script>
 <script type="text/javascript">
 	$(function(){
 		//검색 유효성 체크
@@ -26,39 +25,52 @@
 		<h2>상품목록</h2>
 		<hr size="0.05" width="100%" noshade>
 	</div>
-	<div class="cate-filter">
-		<input name="category" type="button" value="전체" id="filter_all" class="on" onclick="location.href='goodsList.do'">
-		<input name="category" type="button" value="유니폼" id="filter_uniform" class="off" onclick="location.href='goodsList.do?category=1'"> 
-		<input name="category" type="button" value="모자" id="filter_cap" class="off" onclick="location.href='goodsList.do?category=2'"> 
-		<input name="category" type="button" value="응원도구" id="filter_cheering" class="off" onclick="location.href='goodsList.do?category=3'"> 
-		<input name="category" type="button" value="기타" id="filter_etc" class="off" onclick="location.href='goodsList.do?category=4'">
-	</div>
-	<hr size="1" width="100%" noshade>
-	<c:if test="${!empty user && user.mem_auth == 9}">
-	<div class="align-right list-btns">
-		<input type="button" value="관리자-상품목록" onclick="location.href='admin_goodsList.do'" id="admin_btn">
-		<input type="button" value="전체목록" onclick="location.href='goodsList.do'">
-	</div>
-	</c:if>
+	
 	<form action="goodsList.do" id="search_form" method="get">
+		<ul class="filter-btns">
+			<li>
+				<c:if test="${!empty user && user.mem_auth == 9}">
+					<div class="align-right list-btns">
+						<input type="button" value="관리자-상품목록" onclick="location.href='admin_goodsList.do'" id="admin_btn">
+						<input type="button" value="전체목록" onclick="location.href='goodsList.do'">
+					</div>
+				</c:if>
+				<div class="cate-filter">
+					<button name="goods_category" type="button" value="0" id="filter_all"
+						<c:if test="${empty param.goods_category || param.goods_category == 0}"> class="on" </c:if>
+						<c:if test="${param.goods_category != 0}"> class="off" </c:if>>전체</button>
+					<button name="goods_category" type="button" value="1" id="filter_uniform" 
+						<c:if test="${param.goods_category == 1}"> class="on" </c:if>
+						<c:if test="${param.goods_category != 1}"> class="off" </c:if>>유니폼</button>
+					<button name="goods_category" type="button" value="2" id="filter_cap" 
+						<c:if test="${param.goods_category == 2}"> class="on" </c:if>
+						<c:if test="${param.goods_category != 2}"> class="off" </c:if>>모자</button>
+					<button name="goods_category" type="button" value="3" id="filter_cheering"
+						<c:if test="${param.goods_category == 3}"> class="on" </c:if>
+						<c:if test="${param.goods_category != 3}"> class="off" </c:if>>응원도구</button>
+					<button name="goods_category" type="button" value="4" id="filter_etc"
+						<c:if test="${param.goods_category == 4}"> class="on" </c:if>
+						<c:if test="${param.goods_category != 4}"> class="off" </c:if>>기타</button>
+				</div>
+				<hr size="0.05" width="100%" noshade>
+			</li>
+		</ul>
 		<ul class="search">
 			<li>
 				<select name="keyfield" id="keyfield">
-					<option value="">==선택==</option>
-					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>유니폼</option>
-					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>모자</option>
-					<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>응원도구</option>
-					<option value="4" <c:if test="${param.keyfield == 4}">selected</c:if>>기타</option>
+					<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>상품명 + 내용</option>
+					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>상품명</option>
+					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>내용</option>
 				</select>
 			</li>
 			<li>
 				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
 			</li>
 			<li>
-				<input type="submit" value="검색">
+				<input type="submit" value="검색" style="height:30px;">
 			</li>
 		</ul>
-		<div class="align-right">
+		<div class="align-left">
 			<select id="order" name="order">
 				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신</option>
 				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>찜하기순</option>
@@ -66,9 +78,38 @@
 			</select>
 			<script type="text/javascript">
 				$(function(){
+					
 					$('#order').change(function(){
-						location.href='goodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&order=' + $('#order').val();
+						location.href='goodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&order=' + $('#order').val() + '&goods_category=' + $('button[name="goods_category"]').val();
 					});
+					
+					$('#filter_all').click(function(){
+						console.log($('#filter_all').val());
+						location.href='goodsList.do';
+					});
+					
+					$('#filter_uniform').click(function(){
+						console.log($('#filter_uniform').val());
+						location.href='goodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&order=' + $('#order').val() + '&goods_category=' + $('#filter_uniform').val();
+					}); 
+					
+					$('#filter_cap').click(function(){
+						console.log($('#filter_cap').val());
+						location.href='goodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&order=' + $('#order').val() + '&goods_category=' + $('#filter_cap').val();
+					}); 
+					
+					$('#filter_cheering').click(function(){
+						console.log($('#filter_cheering').val());
+						location.href='goodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&order=' + $('#order').val() + '&goods_category=' + $('#filter_cheering').val();
+					}); 
+					
+					$('#filter_etc').click(function(){
+						console.log($('#filter_etc').val());
+						location.href='goodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&order=' + $('#order').val() + '&goods_category=' + $('#filter_etc').val();
+					});
+					
+					
+										
 				});
 			</script>
 			<c:if test="${!empty user && user.mem_auth == 9}">

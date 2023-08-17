@@ -18,10 +18,6 @@
 				<label>구매목록 불러오기</label>
 			</li>
 			--%>
-			<li>
-				<label>작성자</label>
-				<span>${memberVO.mem_id}</span>
-			</li>
 			<li> <%-- 임시로 상품목록 표시 --%>
 				<label>상품목록</label>
 				<select name="goods_num">

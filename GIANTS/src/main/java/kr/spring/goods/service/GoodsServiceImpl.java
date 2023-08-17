@@ -82,6 +82,9 @@ public class GoodsServiceImpl implements GoodsService{
 	@Override
 	public void deleteGoods(Integer goods_num) {
 		//장바구니에서 삭제
+		//리뷰 삭제
+		//goodsMapper.deleteGoodsReview();
+		//문의 삭제
 		//찜하기 목록에서 삭제
 		//굿즈 옵션 삭제
 		goodsMapper.deleteOption(goods_num);

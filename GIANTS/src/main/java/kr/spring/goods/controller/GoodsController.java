@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -119,12 +120,13 @@ public class GoodsController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
+		map.put("goods_status", 3); //status가 0이면 판매중(1), 판매중지(2) 모두 체크
 		
 		//전체|검색 레코드 수
 		int count = goodsService.selectGoodsRowCount(map);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 20, 10, "admin_goodsList.do");
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 10, 10, "admin_goodsList.do");
 		
 		List<GoodsVO> list = null;
 		if(count > 0) {
@@ -149,23 +151,23 @@ public class GoodsController {
 	@RequestMapping("/goods/goodsList.do")
 	public ModelAndView getGoodsList(@RequestParam(value="pageNum", defaultValue="1") int currentPage, 
 									 @RequestParam(value="order", defaultValue="1") int order,
-									 @RequestParam(value="category", defaultValue="0") int category,
+									 @RequestParam(value="goods_category", defaultValue="0") int goods_category,
 									 String keyfield, String keyword) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		map.put("status", 0); //status가 0이면 판매중(1), 판매중지(2) 모두 체크
+		map.put("goods_status", 2); 
 		
 		//전체|검색 레코드 수
 		int count = goodsService.selectGoodsRowCount(map);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 12, 10, "goodsList.do", "&order=" + order + "&category=" + category);
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 12, 10, "goodsList.do", "&order=" + order + "&goods_category=" + goods_category);
 		 
 		List<GoodsVO> list = null;
 		if(count > 0) {
 			map.put("order", order);
-			map.put("category", category);
+			map.put("goods_category", goods_category);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 			
@@ -180,7 +182,7 @@ public class GoodsController {
 		mav.addObject("page", page.getPage());
 		
 		return mav;
-	}
+	}	
 	
 	/*==========================
 	 * 굿즈 상세페이지
@@ -388,16 +390,13 @@ public class GoodsController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", 1);
-		map.put("end", 50);
-		map.put("status", 0);
+		map.put("end", 1000000);
+		map.put("goods_status", 3);
 		
 		List<GoodsVO> goods_list = goodsService.selectGoodsList(map);
 		model.addAttribute("goods_list", goods_list);
 		log.debug("<<goods_list>> : " +goods_list);
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		model.addAttribute("memberVO", user);
-		
-		log.debug("<<user>> : " +user);
+		model.addAttribute("memberVO", (MemberVO)session.getAttribute("user"));
 		
 		return "reviewWrite";
 	}
@@ -437,7 +436,7 @@ public class GoodsController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", 1);
 		map.put("end", 50);
-		map.put("status", 0);
+		map.put("goods_status", 3);
 		
 		List<GoodsVO> goods_list = goodsService.selectGoodsList(map);
 		model.addAttribute("goods_list", goods_list);
@@ -501,8 +500,8 @@ public class GoodsController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", 1);
-		map.put("end", 50);
-		map.put("status", 0);
+		map.put("end", 1000000);
+		map.put("goods_status", 3);
 		
 		List<GoodsVO> goods_list = goodsService.selectGoodsList(map);
 		model.addAttribute("goods_list", goods_list);
