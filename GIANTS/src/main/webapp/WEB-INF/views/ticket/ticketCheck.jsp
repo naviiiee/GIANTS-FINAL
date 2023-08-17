@@ -90,9 +90,9 @@
 					<input type="button" value="이전" class="default-btn big" onclick="location.href='ticketMain.do?game_num=${gameVO.game_num}'">
 					<input type="button" value="결제" class="accept-btn big" onclick="requestPay()">
 					<script>
-					
-				    
 					function requestPay() {
+						// 구매할 좌석이 이미 예매된 좌석인지 확인하는 통신
+						
 						/* Portone 결제 API */
 						var IMP = window.IMP;
 					    IMP.init('imp67587482');  // 가맹점 식별코드
@@ -102,50 +102,46 @@
 							return false;
 						}
 						
-						let totalPrice = document.getElementsByClassName('totalPrice');
+						let totalPrice = document.getElementById('totalPrice').value;
 						let ticket_quantity = document.getElementById('ticket_quantity').value;
+						let ticket_num = 'T' + new Date().getTime();
 						
-						console.log('T' + new Date().getTime());
-						console.log('${gameVO.game_date} 롯데 VS ${gameVO.game_team} ${gameVO.game_time}');
-						//console.log(totalPrice);
 						
 					 	// IMP.request_pay(param, callback) 결제창 호출
 					 	IMP.request_pay({
-					 		pg:'html5_inicis',
+					 		pg:'kakaopay',
 					 		pay_method:'card',
-					 		merchant_uid:'T' + new Date().getTime(),   // 주문번호
+					 		merchant_uid:ticket_num,   // 주문번호
 					 		name:'${gameVO.game_date} 롯데 VS ${gameVO.game_team} ${gameVO.game_time}',
-					 		amount:100,	// 숫자 타입
+					 		amount:totalPrice,	// 숫자 타입
 					 		buyer_email:'${seatVO.detailVO.mem_email}',
 					 		buyer_name:'${seatVO.detailVO.mem_name}',
 					 		buyer_tel:'${seatVO.detailVO.mem_phone}'
 					 	}, function(rsp) {
 					 		if(rsp.success) {
-					 			
-					 			/* let msg = '결제가 완료되었습니다.';
+					 			let msg = '결제가 완료되었습니다.';
 					 			let result = {
-					 				'ticket_num':rsp.merchant_uid,
+					 				'ticket_num':ticket_num,
 					 				'game_num':${gameVO.game_num},
-					 				'pay_method':rsp.pay_method,
+					 				'pay_method':'card',
 					 				'ticket_date':'${gameVO.game_date}',
 					 				'ticket_quantity':ticket_quantity,
-					 				'total_price':rsp.amount,
-					 				'pg':rsp.pg
-					 			} */
-					 			
-					 			/* console.log(result);
+					 				'total_price':totalPrice,
+					 				'pg':'kakaopay'
+					 			}
+					 			console.log(result);
 					 			
 					 			$.ajax({
-					 				url:'/ticket/insertMPay.do',
-					 				type:'POST',
+					 				url:'insertMPay.do',
+					 				type:'post',
 					 				contentType:'application/json',
 					 				data:JSON.stringify(result),
 					 				success: function (res) {
-					 					console.log(res);
+					 					alert('결제 성공!!');
 					 					location.href=res;
 					 				},
 									error: function (err) { console.log(err); }
-					 			}); */
+					 			}); 
 					 		} else {
 					 			let msg = '결제 실패';
 					 			msg += '\n에러내용 : ' + rsp.error_msg;

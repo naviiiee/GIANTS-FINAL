@@ -101,12 +101,13 @@ $(function() {
 		
 			let seat_info = '<tr class="seat-leng" id="del'+info+'"><td>';
 			seat_info += '<img src="../images/grade' + $(this).attr('data-grade') + '.png"> ' + check_block + '블럭 ' + check_row + '행 ' + check_col + '번';
-			/*
-			seat_info += '<input type="hidden" name="seatB" class="seatB" value="' + check_block + '">';
+			
+			/*seat_info += '<input type="hidden" name="seatB" class="seatB" value="' + check_block + '">';
 			seat_info += '<input type="hidden" name="seatR" class="seatR" value="' + check_row + '">';
-			seat_info += '<input type="hidden" name="seatC" class="seatC" value="' + check_col + '">';
-			*/
+			seat_info += '<input type="hidden" name="seatC" class="seatC" value="' + check_col + '">';*/
+			
 			seat_info += '<input type="hidden" name="seat" value="' + check_block + '^' + check_row + '^' + check_col + '">';
+			//seat_info += '<input type="hidden" name="seat_info" value="' + check_block + check_row  + check_col + '">';
 			seat_info += '<input type="hidden" name="grade_num" value="' + $(this).attr('data-grade') + '">';
 			seat_info += '</td></tr>';
 			
@@ -114,6 +115,8 @@ $(function() {
 			
 			if($('.seat-leng').length > 4) {
 				alert('1인 최대 4매까지 예매가능');
+				$('.seat-leng').last().remove();
+				$(this).last().addClass('gn'+$(this).attr('data-grade'));
 				return;
 			}
 		}
@@ -143,6 +146,7 @@ $(function() {
 		let output = '<span class="seatQuantity">' + title + ' ' + seatArr[0] + '블록 ';
 		output += seatArr[1] + '행 ';
 		output += seatArr[2] + '번</span><br>';
+		output += '<input type="hidden" name="seat_info" class="seatBRC" value="'+seatArr[0]+seatArr[1]+seatArr[2]+'">';
 		$('#seatInfo').append(output);
 	}
 	
@@ -156,6 +160,6 @@ $(function() {
 	$('.price-total>td:nth-child(2)').empty()
 	$('.price-total').append((price * leng).toLocaleString() + '원');
 	
-	$('.group-btn').append('<input type="hidden" name="total_price" value="'+price * leng+'" class="totalPrice">')
+	$('.group-btn').append('<input type="hidden" name="total_price" value="' + price * leng + '" id="totalPrice">')
 
 });

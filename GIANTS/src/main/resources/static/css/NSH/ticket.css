@@ -84,7 +84,8 @@ input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }
 .seat-btn:hover{ cursor:pointer; background-color:transparent; transition:0.2s ease-out; border:1px solid #fff; }
 .clicked{ background:#fff; }
 .gn1{ background:#627833; }
-.gn63{ background:#D77783; } 
+.gn63{ background:#D77783; }
+.gn81{ background:#997A8D; }
 
 /* 스크롤바 */
 .scrollBar::-webkit-scrollbar { width:10px;  /* 스크롤바의 너비 */ }

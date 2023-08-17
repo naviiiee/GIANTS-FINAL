@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
+import kr.spring.ticket.vo.SeatStatusVO;
 import kr.spring.ticket.vo.SeatVO;
 import kr.spring.ticket.vo.TicketVO;
 
@@ -57,5 +58,6 @@ public interface TicketService {
 	public void updateGame(GameVO gameVO);
 	
 	/* 티켓 결제 */
-	public TicketVO insertTicket(TicketVO ticket);
+	public void insertSeatStatus(SeatStatusVO seatStatusVO);	// 좌석예매정보 등록
+	public void insertTicket(TicketVO ticket);
 }

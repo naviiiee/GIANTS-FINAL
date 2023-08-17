@@ -10,7 +10,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class TicketVO {
-	private int ticket_num;
+	private String ticket_num;
 	private int mem_num;
 	private int game_num;
 	private String pay_method;
@@ -19,4 +19,6 @@ public class TicketVO {
 	private Date ticket_modify;
 	private int total_price;
 	private String pg;
+
+	private String seat_info;
 }

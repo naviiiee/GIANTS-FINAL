@@ -1,7 +1,5 @@
 package kr.spring.ticket.controller;
 
-import java.net.http.HttpHeaders;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,10 +7,8 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +24,7 @@ import kr.spring.member.vo.MemberVO;
 import kr.spring.ticket.service.TicketService;
 import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
+import kr.spring.ticket.vo.SeatStatusVO;
 import kr.spring.ticket.vo.SeatVO;
 import kr.spring.ticket.vo.TicketVO;
 import lombok.extern.slf4j.Slf4j;
@@ -146,7 +143,7 @@ public class TicketController {
 	/* ----- [Order] 콜백 수신처리 -----*/
 	@RequestMapping("/ticket/insertMPay.do")
 	@ResponseBody
-	public String insertMPay(@RequestBody TicketVO ticketVO, HttpSession session, RedirectAttributes rttr) {
+	public String insertMPay(@RequestBody TicketVO ticketVO, HttpSession session, RedirectAttributes rttr) {		
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		ticketVO.setMem_num(user.getMem_num());
 		
@@ -154,6 +151,6 @@ public class TicketController {
 		
 		ticketService.insertTicket(ticketVO);
 		
-		return "ticketMain";
+		return "/ticket/gameList.do";	// 결제이후 이동할 주소 지정
 	}
 }

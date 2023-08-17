@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Update;
 import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
+import kr.spring.ticket.vo.SeatStatusVO;
 import kr.spring.ticket.vo.SeatVO;
 import kr.spring.ticket.vo.TicketVO;
 
@@ -79,5 +80,7 @@ public interface TicketMapper {
 	public MemberDetailVO selectMemberDetail(Integer mem_num);
 	
 	/* 티켓 결제 */
-	public TicketVO insertTicket(TicketVO ticket);
+	@Insert("INSERT INTO seat_status (status_num, seat_info, seat_date, seat_auth) VALUES(seat_status_seq.nextval, #{seat_info}, #{seat_date}, #{seat_auth})")
+	public void insertSeatStatus(SeatStatusVO seatStatusVO);	// 좌석예매정보 등록
+	public void insertTicket(TicketVO ticketVO);
 }
