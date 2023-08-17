@@ -49,4 +49,10 @@ public interface MemberService {
 	public int selectRowCount(Map<String,Object> map);
 	public List<MemberVO> selectList(Map<String,Object> map);
 	public void updateByAdmin(MemberVO memberVO);
+	
+	//아이디 찾기
+	public MemberVO findMemberId(String mem_name, String mem_phone);
+	//비밀번호 찾기
+	public MemberVO findMemberPw(String mem_id, String mem_name, String mem_phone, String mem_email);
+	public void changePw(int mem_num, String new_passwd);
 }

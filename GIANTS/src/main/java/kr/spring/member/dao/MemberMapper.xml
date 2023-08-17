@@ -132,6 +132,27 @@
 			m.mem_num=#{mem_num}
 	</select>
 	
+	<select id="findMemberId" parameterType="string" resultMap="memberMap">
+		SELECT
+			*
+		FROM
+			MEMBER m JOIN MEMBER_DETAIL d
+		ON
+			m.mem_num = d.mem_num
+		WHERE
+			d.mem_name=#{mem_name} AND d.mem_phone=#{mem_phone}
+	</select>
+	<select id="findMemberPw" parameterType="string" resultMap="memberMap">
+		SELECT
+			*
+		FROM
+			MEMBER m JOIN MEMBER_DETAIL d
+		ON
+			m.mem_num = d.mem_num
+		WHERE
+			m.mem_id=#{mem_id} AND d.mem_name=#{mem_name} AND d.mem_phone=#{mem_phone} AND d.mem_email=#{mem_email}
+	</select>
+	
 	<!-- 기업번호를 이용한 회원정보 구하기 -->
 	<select id="selectCompany" parameterType="integer" resultMap="companyMap">
 		SELECT 
@@ -239,46 +260,54 @@
 		]]>
 	</select>
 	
-	<!-- 회원관리xml -->
-	<!-- <select id="" parameterType="integer" resultType="memberVO">
+	<!-- 아이디 찾기 -->
+	<!-- <select id="findId" parameterType="map" resultType="memberVO">
 	SELECT
-		m.mem_num,
-		m.mem_id,
-		m.mem_nickname,
-		m.mem_auth,
-		m.passwd,
-		d.mem_auid,
-		d.mem_name,
-		d.mem_public,
-		d.mem_phone,
-		d.mem_email,
-		d.mem_zipcode,
-		d.mem_address1,
-		d.mem_address2,
-		d.mem_photo,
-		d.mem_photoname,
-		d.mem_regdate,
-		d.mem_modifydate,
-		d.mem_point,
-		c.comp_num,
-		c.comp_owner,
-		c.comp_cate,
-		c.comp_name,
-		c.comp_cate,
-		c.comp_phone,
-		c.comp_email,
-		c.comp_zipcode,
-		c.comp_address1,
-		c.comp_address2,
-		c.comp_photo,
-		c.comp_photoname,
-		c.comp_regdate,
-		c.comp_modifydate,
-		c.comp_content
-	FROM 
-		m MEMBER
-	LEFT OUTER JOIN MEMBER_DETAIL ON m.mem_num = d.mem_num
-	LEFT OUTER JOIN COMPANY_DETAIL ON m.mem_num = c.mem_num
-	WHERE m.mem_num = #{mem_num}
+   		mem_id
+	FROM
+	    MEMBER m 
+	LEFT OUTER JOIN MEMBER_DETAIL d
+		ON m.mem_num = d.mem_num
+	LEFT OUTER JOIN COMPANY_DETAIL c
+		ON m.mem_num = c.mem_num
+	WHERE 
+		( mem_name=#{mem_name}
+	AND mem_phone=#{mem_phone})
+	OR
+		(comp_owner=#{comp_owner}
+	AND comp_phone=#{comp_phone});
 	</select> -->
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findPw" parameterType="map" resultType="memberVO">
+		SELECT
+			*
+		FROM
+		    MEMBER m 
+		LEFT OUTER JOIN MEMBER_DETAIL d
+			ON m.mem_num = d.mem_num
+		LEFT OUTER JOIN COMPANY_DETAIL c
+			ON m.mem_num = c.mem_num
+		WHERE
+			mem_id=#{mem_id} AND
+			mem_name=#{mem_name} AND
+			mem_phone=#{mem_phone} AND
+			mem_email=#{mem_email}
+			mem_modifydate=SYSDATE
+		OR
+			mem_id=#{mem_id} AND
+			comp_owner=#{comp_owner} AND
+			comp_phone=#{comp_phone} AND
+			comp_email=#{comp_email}
+			comp_modifydate=SYSDATE
+	</select>
+	
+	<update id="changePw" parameterType="memberVO">
+		UPDATE
+			MEMBER
+		SET
+			passwd=#{new_passwd}
+		WHERE
+			mem_num=#{mem_num}
+	</update>
 </mapper>

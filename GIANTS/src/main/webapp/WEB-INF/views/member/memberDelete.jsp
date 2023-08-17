@@ -28,7 +28,7 @@
 		</ul>
 		<div class="mypage-bottom">
 			<form:button class="bottom-btn">전송</form:button>
-			<input type="button" value="마이페이지" class="my-btn"
+			<input type="button" value="목록" class="bottom-btn"
 				   onclick="location.href='myPage.do'">
 		</div>
 	</form:form>

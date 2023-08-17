@@ -10,6 +10,26 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/commonRegister.jsp"/>
 	</definition>
 	
+	<definition name="commonfindId" extends="main"> 
+    	<put-attribute name="title" value="아이디찾기"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/findIdForm.jsp"/>
+    </definition>
+    
+	<definition name="findIdResult" extends="main">
+		<put-attribute name="title" value="아아디찾기결과"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/findIdResult.jsp"/>
+	</definition>
+	
+	<definition name="commonfindPw" extends="main"> 
+    	<put-attribute name="title" value="비밀번호찾기"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/findPwForm.jsp"/>
+    </definition>
+    
+    <definition name="findPwResult" extends="main">
+		<put-attribute name="title" value="비밀번호찾기결과"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/findPwResult.jsp"/>
+	</definition>
+	
 	<definition name="memberRegister" extends="main">
 		<put-attribute name="title" value="일반회원가입"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/memberRegister.jsp"/>
@@ -19,7 +39,6 @@
 		<put-attribute name="title" value="기업회원가입"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/companyRegister.jsp"/>
 	</definition>
-	
 	
 	<!-- 로그인 -->
 	<definition name="memberLogin" extends="main"> 
@@ -54,7 +73,7 @@
     	<put-attribute name="title" value="비밀번호변경"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/memberChangePasswd.jsp"/>
     </definition>
-    <!-- 닉네임변경 -->
+    <!-- 닉네임유효성검사 -->
     <definition name="memberChangeNk" extends="myPage"> 
     	<put-attribute name="title" value="낙네임변경"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/memberChangeNk.jsp"/>
@@ -137,10 +156,4 @@
     	<put-attribute name="title" value="굿즈관리"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/adminMypageGoods.jsp"/>
     </definition>
-    
-     <definition name="adminMypageSaleManage" extends="myPage"> 
-    	<put-attribute name="title" value="매출관리"/>
-    	<put-attribute name="body" value="/WEB-INF/views/member/adminMypageSaleManage.jsp"/>
-    </definition>
-    
 </tiles-definitions>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,27 +34,114 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class MemberController {
-	// 로그 대상 지정
+	/*=====================
+	 * 로그 대상 지정
+	 *=====================*/
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
 	@Autowired
 	private MemberService memberService;
 
-	/* 자바빈 초기화 */
+	/*=====================
+	 * 자바빈 초기화
+	 *=====================*/
 	@ModelAttribute
 	public MemberVO initCommand() {
 		return new MemberVO();
 	}
 
 	
-	/* === 회원가입 
-	=======================*/
+	/*=====================
+	 * 회원가입
+	 *=====================*/
 	// 회원등급 선택 호출
 	@RequestMapping("/member/registerCommon.do")
 	public String form() {
 		return "commonRegister";
 	}
 
+	
+	/*=====================
+	 * 아이디 찾기
+	 *=====================*/
+	@GetMapping("/member/findId.do")
+	public String formFindId() {
+		log.debug("<<findId>>");
+		return "commonfindId";
+	}
+	@PostMapping("/member/findId.do")
+	public String submitFindId(@Valid MemberVO memberVO, BindingResult result,
+			Model model, HttpServletRequest request, HttpSession session) {
+		
+		MemberVO db_member = memberService.findMemberId(memberVO.getMem_name(),memberVO.getMem_phone());
+		
+		log.debug("<<db_member>> : " + db_member);
+		log.debug("<<Mem_name>> : " + memberVO.getMem_name());
+		
+		if(db_member!=null) {
+			if(db_member.getMemberDetailVO().getMem_name().equals(memberVO.getMem_name())
+					&& db_member.getMemberDetailVO().getMem_phone().equals(memberVO.getMem_phone())) {
+				
+				model.addAttribute("db_member", db_member);
+				return "findIdResult";
+			}
+		}else {
+			return "formFindId()";
+		}
+		return "formFindId()";
+	}
+	/*=====================
+	 * 비밀번호 찾기
+	 *=====================*/
+	@GetMapping("/member/findPw.do")
+	public String formFindPw() {
+		log.debug("<<findPw>>");
+		return "commonfindPw";
+	}
+	@PostMapping("/member/findPw.do")
+	public String submitFindPw(@Valid MemberVO memberVO, BindingResult result,
+							   Model model, HttpServletRequest request, HttpSession session) {
+		
+		MemberVO db_member = memberService.findMemberPw(memberVO.getMem_id(),
+														memberVO.getMem_name(),
+														memberVO.getMem_phone(),
+														memberVO.getMem_email());
+		
+		log.debug("<<db_member>> : " + db_member);
+		log.debug("<<db_member>> : " + memberVO.getMem_id());
+		log.debug("<<db_member>> : " + memberVO.getMem_email());
+		
+		if(db_member!=null) {
+			if(db_member.getMem_id().equals(memberVO.getMem_id())
+					&& db_member.getMemberDetailVO().getMem_name().equals(memberVO.getMem_name())
+					&& db_member.getMemberDetailVO().getMem_phone().equals(memberVO.getMem_phone())
+					&& db_member.getMemberDetailVO().getMem_email().equals(memberVO.getMem_email())) {
+				log.debug("<<조건문 통과>>");
+				
+				 // 난수 생성
+		        String new_passwd = RandomStringUtils.randomNumeric(6);
+		        log.debug("<<new_passwd>> : " + new_passwd);
+		        
+		        // 모델에 난수 추가
+		        model.addAttribute("new_passwd", new_passwd);
+
+		        // 비밀번호 변경
+		        memberService.changePw(db_member.getMem_num(), new_passwd);
+		        
+				model.addAttribute("db_member", db_member);
+				return "findPwResult";
+			}
+		}else {
+			return "formFindPw()";
+		}
+		return "formFindPw()";
+	}
+	
+	
+	/*=====================
+	 * 유효성 검사
+	 *=====================*/
+	//회원가입시 아이디 유효성 체크
 	@RequestMapping("/member/confirmId.do")
 	@ResponseBody
 	public Map<String, String> confirmId(@RequestParam String mem_id) {
@@ -76,7 +164,7 @@ public class MemberController {
 
 		return mapAjax;
 	}
-	
+	//회원가입시 닉네임 유효성 체크
 	@RequestMapping("/member/confirmNk.do")
 	@ResponseBody
 	public Map<String, String> confirmNk(@RequestParam String mem_nickname) {
@@ -91,7 +179,7 @@ public class MemberController {
 		}
 		return mapAjax;
 	}
-	
+	//회원정보수정시 닉네임 유효성 체크
 	@RequestMapping("/member/confirmNkMd.do")
 	@ResponseBody
 	public Map<String, String> confirmNkMd(@RequestParam String mem_nickname) {
@@ -107,12 +195,15 @@ public class MemberController {
 		return mapAjax;
 	}
 	
+	
+	/*=====================
+	 * 일반회원가입
+	 *=====================*/
 	// 일반회원가입 폼 호출
 	@GetMapping("/member/registerMember.do")
 	public String formMember() {
 		return "memberRegister";
 	}
-	
 	// 일반회원가입 처리
 	@PostMapping("/member/registerMember.do")
 	public String submit(@Valid MemberVO memberVO, BindingResult result,
@@ -130,13 +221,15 @@ public class MemberController {
 
 		return "common/notice";
 	}
-
+	
+	/*=====================
+	 * 기업회원가입
+	 *=====================*/
 	// 기업회원가입 폼 호출
 	@GetMapping("/member/registerCompany.do")
 	public String formCompany() {
 		return "companyRegister";
 	}
-
 	// 기업회원가입 처리
 	@PostMapping("/member/registerCompany.do")
 	public String submitCompany(@Valid MemberVO memberVO, BindingResult result,
@@ -163,14 +256,14 @@ public class MemberController {
 	}
 	
 
-	/* === 로그인 
-	=======================*/
+	/*=====================
+	 * 로그인
+	 *=====================*/
 	// 로그인폼
 	@GetMapping("/member/login.do")
 	public String formLogin() {
 		return "memberLogin";
 	}
-
 	// 로그인 데이터 처리
 	@PostMapping("/member/login.do")
 	public String submitLogin(@Valid MemberVO memberVO, 
@@ -248,22 +341,31 @@ public class MemberController {
 	}
 	
 
-	/* === 로그아웃 
-	=======================*/
+	/*=====================
+	 * 로그아웃
+	 *=====================*/
 	@RequestMapping("/member/logout.do")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session,
+						 HttpServletResponse response) {
 		// 로그아웃
 		session.invalidate();
 
 		// 자동로그인 해제 시작//
+		//클라이언트 쿠키 처리
+		Cookie auto_cookie = new Cookie("au-log","");
+		auto_cookie.setMaxAge(0); //쿠키의 삭제
+		auto_cookie.setPath("/");
+		
+		response.addCookie(auto_cookie);		
 		// 자동로그인 해제 끝//
 
 		return "redirect:/main/main.do";
 	}
 
 	
-	/* === 마이페이지 
-	=======================*/
+	/*=====================
+	 * 마이페이지
+	 *=====================*/
 	@RequestMapping("/member/myPage.do")
 	public String myPage(HttpSession session, Model model) {
 		
@@ -282,8 +384,9 @@ public class MemberController {
 		return "myPage";
 	}
 	
-	/* === 마이페이지 : 회원정보수정
-	=======================*/
+	/*=====================
+	 * 일반 회원정보 수정
+	 *=====================*/
 	//일반회원 수정 폼 호출
 	@GetMapping("/member/updateMember.do")
 	public String formUpdateMember(HttpSession session,
@@ -313,6 +416,9 @@ public class MemberController {
 		return "redirect:/member/myPage.do";
 	}
 	
+	/*=====================
+	 * 기업 회원정보 수정
+	 *=====================*/
 	//기업회원 수정 폼 호출
 	@GetMapping("/member/updateCompany.do")
 	public String formUpdateCompany(HttpSession session,
@@ -339,10 +445,43 @@ public class MemberController {
 		memberService.updateCompany(memberVO);
 		
 		return "redirect:/member/myPage.do";
+	}	
+	
+	/*=====================
+	 * 닉네임 변경
+	 *=====================*/
+	//닉네임 변경 폼 호출
+	@GetMapping("/member/changeNkMd.do")
+	public String formChangeNkMd(HttpSession session,
+			   					 Model model) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		MemberVO memberVO = memberService.selectMember(user.getMem_num());
+		model.addAttribute("memberVO", memberVO);
+		
+		return "memberChangeNkMd";
+	}
+	@PostMapping("/member/changeNkMd.do")
+	public String submitchangeNk(@Valid MemberVO memberVO,
+			                     BindingResult result,
+			                     HttpSession session) {
+		
+		//유효성체크결과오류가 있으면 폼호출
+		//if(result.hasErrors()) { return "memberChangeNkMd"; }
+		 
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		memberVO.setMem_num(user.getMem_num());
+		
+		//닉네임변경
+		memberService.updateMemberNk(memberVO);
+		
+		return "redirect:/member/myPage.do";
 	}
 	
-	/* === 마이페이지 : 비밀번호변경
-	=======================*/
+	/*=====================
+	 * 마이페이지 : 비밀번호변경
+	 *=====================*/
 	//비밀번호 변경 폼 호출
 	@GetMapping("/member/changePasswd.do")
 	public String formChangePasswd() {
@@ -399,41 +538,11 @@ public class MemberController {
 				request.getContextPath() + "/member/myPage.do");
 		
 		return "common/resultView";
-	}	
-	
-	/* === 마이페이지 : 닉네임변경
-	=======================*/
-	//닉네임 변경 폼 호출
-	@GetMapping("/member/changeNkMd.do")
-	public String formChangeNkMd(HttpSession session,
-			   					 Model model) {
-		
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		MemberVO memberVO = memberService.selectMember(user.getMem_num());
-		model.addAttribute("memberVO", memberVO);
-		
-		return "memberChangeNkMd";
-	}
-	@PostMapping("/member/changeNkMd.do")
-	public String submitchangeNk(@Valid MemberVO memberVO,
-			                     BindingResult result,
-			                     HttpSession session) {
-		
-		//유효성체크결과오류가 있으면 폼호출
-		//if(result.hasErrors()) { return "memberChangeNkMd"; }
-		 
-		
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		memberVO.setMem_num(user.getMem_num());
-		
-		//닉네임변경
-		memberService.updateMemberNk(memberVO);
-		
-		return "redirect:/member/myPage.do";
 	}
 	
-	/* === 마이페이지 : 프로필사진
-	=======================*/
+	/*=====================
+	 * 마이페이지 : 프로필사진
+	 *=====================*/
 	//프로필 사진 출력(로그인 전용)
 	@RequestMapping("/member/photoView.do")
 	public String getProfile(HttpSession session,
@@ -503,7 +612,7 @@ public class MemberController {
 		}
 
 	}
-	//프로필 사진 업데이트 private MemberDetailVO memberDetailVO;
+	//프로필 사진 업데이트
 	@RequestMapping("/member/updateMyPhoto.do")
 	@ResponseBody
 	public Map<String,String> updateProfile(MemberVO memberVO,
@@ -533,8 +642,9 @@ public class MemberController {
 	}
 
 	
-	/* === 회원탈퇴 
-	=======================*/
+	/*=====================
+	 * 회원탈퇴
+	 *=====================*/
 	// 일반회원탈퇴 폼 호출
 	@GetMapping("/member/deleteMember.do")
 	public String formDeleteMember() {
@@ -685,4 +795,5 @@ public class MemberController {
 		
 		return "adminMypageSaleManage";
 	}
+	
 }

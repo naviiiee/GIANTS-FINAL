@@ -52,8 +52,10 @@
 				<li><hr size="0.05" width="100%" noshade></li>
 				<li>
 					아이디나 비밀번호를 잊으셨나요?<br>
-					<input type="button" value="아이디 / 비밀번호 찾기" class="login-sub-btn"
-							onclick="#">
+					<input type="button" value="아이디찾기" class="login-sub-btn"
+							onclick="location.href='${pageContext.request.contextPath}/member/findId.do'">
+					<input type="button" value="비밀번호찾기" class="login-sub-btn"
+							onclick="location.href='${pageContext.request.contextPath}/member/findPw.do'">
 				</li>
 			</ul>
 		</div>

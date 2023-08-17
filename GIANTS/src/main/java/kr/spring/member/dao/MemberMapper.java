@@ -11,7 +11,6 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.member.vo.CompanyDetailVO;
-import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.member.vo.MemberVO;
 
 @Mapper 
@@ -93,4 +92,10 @@ public interface MemberMapper {
 	public List<MemberVO> selectList(Map<String,Object> map);
 	@Update("UPDATE MEMBER SET mem_auth=#{mem_auth} WHERE mem_num=#{mem_num}")
 	public void updateByAdmin(MemberVO memberVO);
+	
+	//아이디 찾기
+	public MemberVO findMemberId(String mem_name, String mem_phone);
+	//비밀번호 찾기
+	public MemberVO findMemberPw(String mem_id, String mem_name, String mem_phone, String mem_email);
+	public void changePw(int mem_num, String new_passwd);
 }

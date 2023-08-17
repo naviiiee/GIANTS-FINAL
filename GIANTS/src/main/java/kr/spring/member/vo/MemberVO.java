@@ -24,6 +24,7 @@ public class MemberVO {
 	public int mem_auth; // 회원등급 ( 0:탈퇴 1:정지 2:일반 3:기업 5:일반정지 6: 기업정지 9:관리 )
 	@Pattern(regexp = "^[A-Za-z0-9]{4,12}$")
 	private String passwd; // 비밀번호
+	private String new_passwd; // 임시비밀번호
 	private String au_id; //자동로그인
 	private String auto;
 	@Valid
@@ -34,7 +35,7 @@ public class MemberVO {
 	// 비밀번호 변경시 현재 비밀번호를 저장하는 용도로 사용
 	@Pattern(regexp = "^[A-Za-z0-9]{4,12}$")
 	private String now_passwd; // 비밀번호변경
-	
+
 	private byte[] mem_photo;
 	private String mem_photoname;
 
@@ -63,4 +64,12 @@ public class MemberVO {
 	private String comp_phone; // 전화번호
 	private String comp_email; // 이메일
 	private Date comp_regdate; // 가입일
+	/*
+	public String getMem_name() {
+		return mem_name;
+	}
+	public String getMem_phone() {
+		return mem_phone;
+	}
+	*/
 }

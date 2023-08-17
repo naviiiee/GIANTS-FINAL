@@ -28,8 +28,8 @@
 		
 		<div class="align-center">
 			<form:button class="default-btn">전송</form:button>
-			<input type="button" value="홈으로" class="default-btn"
-				   onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
+			<input type="button" value="목록" class="default-btn"
+				   onclick="location.href='${pageContext.request.contextPath}/member/myPage.do'">
 		</div>
 	</form:form>
 </div>

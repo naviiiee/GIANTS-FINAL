@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.vo.CompanyDetailVO;
-import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.member.vo.MemberVO;
 
 @Service
@@ -133,4 +132,18 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.updateMemberNk(member);
 	}
 
+	@Override
+	public MemberVO findMemberId(String mem_name, String mem_phone) {
+		return memberMapper.findMemberId(mem_name, mem_phone);
+	}
+
+	@Override
+	public MemberVO findMemberPw(String mem_id, String mem_name, String mem_phone, String mem_email) {
+		return memberMapper.findMemberPw(mem_id, mem_name, mem_phone, mem_email);
+	}
+
+	@Override
+	public void changePw(int mem_num, String new_passwd) {
+		memberMapper.changePw(mem_num, new_passwd);
+	}
 }

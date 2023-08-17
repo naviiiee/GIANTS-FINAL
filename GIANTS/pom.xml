@@ -118,6 +118,10 @@
 		    <artifactId>iamport-rest-client-java</artifactId>
 		    <version>0.2.23</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
