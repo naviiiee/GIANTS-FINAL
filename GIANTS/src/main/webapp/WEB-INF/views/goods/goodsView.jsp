@@ -128,12 +128,14 @@
 		        <input type="hidden" id="hidden_opt_num" name="opt_num">
 		        <input type="hidden" name="goods_num">
 		        <input type="hidden" name="order_quantity">
-		        <div id="goods_direct">
-			        <button type="submit" class="direct-btn" data-action="direct"> 
-			            <img id="pay_btn" data-num="${goods.goods_num}" src="${pageContext.request.contextPath}/images/card.png" width="20">
-			            <span>바로구매</span>
-			        </button>
-				</div>
+		        
+			        <button type="submit" class="not-css">
+						<div id="goods_pay">
+							<img id="pay_btn" data-num="${goods.goods_num}" src="${pageContext.request.contextPath}/images/card.png" width="20">
+							<span>바로구매</span>
+						</div>
+					</button>	
+				
 			</form>
 			<script>
 				    // select 태그에서 선택된 opt_num 넘겨주기
