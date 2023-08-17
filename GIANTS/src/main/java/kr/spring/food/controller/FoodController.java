@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -23,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.food.service.FoodService;
 import kr.spring.food.vo.F_cartVO;
+import kr.spring.food.vo.F_orderVO;
+import kr.spring.food.vo.F_order_detailVO;
 import kr.spring.food.vo.FoodVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.CompanyDetailVO;
@@ -44,6 +47,11 @@ public class FoodController {
 	@ModelAttribute
 	public FoodVO initCommand() {
 		return new FoodVO();
+	}
+	
+	@ModelAttribute
+	public F_orderVO initCommand2() {
+		return new F_orderVO();
 	}
 	
 	/*	====================
@@ -113,9 +121,6 @@ public class FoodController {
 	public ModelAndView foodCompDetail(@RequestParam String comp_num,
 									   @RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
 									   HttpSession session) {
-		//log.debug("기업상세 페이지 진입 >>> comp_num : " + comp_num);
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		//log.debug("유저 정보 에서 기업정보 추출 >> : "+ user);
 		
 		CompanyDetailVO comp = foodService.selectComp(comp_num);
 		int count = foodService.selectRowCount(comp_num);
@@ -296,7 +301,6 @@ public class FoodController {
 			vo.setFood_photo2_name(db_foodVO.getFood_photo1_name());
 		}
 		
-		log.debug("푸드 업데이트 수행");
 		foodService.fixFood(vo);
 		
 		//View에 표시할 메세지
@@ -326,8 +330,8 @@ public class FoodController {
 	//폼 호출
 	@RequestMapping("/food/foodDetail.do")
 	public String formFoodDetail(@RequestParam int food_num,
-							 @RequestParam String comp_num,
-							 Model model) {
+							 	 @RequestParam String comp_num,
+							 	 Model model) {
 		FoodVO food = foodService.selectFood(food_num);
 		CompanyDetailVO comp = memberService.selectCompanyDetail(comp_num);
 		model.addAttribute("food", food);
@@ -362,8 +366,6 @@ public class FoodController {
 				//	  현재 등록해야 하는 식품의 comp_num과 다른지 확인
 				for (F_cartVO cart : db_cart) {
 					//장바구니에 담겨있는 아이템들과 현재 넣을 아이템의 매장번호가 다를경우
-					log.debug("DB내에 저장된 식품의 comp_num : " +cart.getFoodVO().getComp_num() + 
-							",\n     유저가 선택한 식품의 comp_num : " + comp_num);
 					if (!cart.getFoodVO().getComp_num().equals(comp_num)) {
 						check = true;
 						break;
@@ -375,7 +377,7 @@ public class FoodController {
 				mapJson.put("result", "MismatchCompany");
 			}else {
 				//장바구니가 비워져 있거나 동일상품임을 알림
-				log.debug("장바구니 체크 Empty 진입");
+				//log.debug("장바구니 체크 Empty 진입");
 				mapJson.put("result", "Empty");
 			}
 		}
@@ -402,7 +404,6 @@ public class FoodController {
 	@RequestMapping("/food/foodAddCart.do")
 	@ResponseBody
 	public Map<String,Object> foodAddCart(F_cartVO f_cartVO,
-										  //@RequestParam String comp_num,
 										  HttpSession session){
 		//log.debug("<< 장바구니 아이템 추가 동작중 >> :" + f_cartVO);
 		Map<String,Object> mapJson = new HashMap<String,Object>();
@@ -443,12 +444,12 @@ public class FoodController {
 	}
 	
 	/*	==========================
-	 *		장바구니 페이지
+	 *		장바구니 페이지 - foodUserCartList.js
 	 * 	==========================*/
 	//폼 호출
 	@RequestMapping("/food/fcart/foodUserCartList.do")
 	public ModelAndView formFoodUserCartList(HttpSession session,
-									   Model model) {
+									   		 Model model) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
 		//카트 목록을 mem_num을 통해서 조회하여 담아 넘김
@@ -467,7 +468,7 @@ public class FoodController {
 	@RequestMapping("/food/fcart/changeCartQuantity.do")
 	@ResponseBody
 	public Map<String,Object> changeCartQuantity(F_cartVO f_cartVO,
-										  HttpSession session){
+										  	     HttpSession session){
 		//log.debug("<< 장바구니 수량 변경 진행중 >> :" + f_cartVO);
 		Map<String,Object> mapJson = new HashMap<String,Object>();
 		
@@ -485,7 +486,7 @@ public class FoodController {
 				mapJson.put("result", "noQuantity");
 			}else {
 				//장바구니 수량 변경 진행
-				log.debug("<< 장바구니 수량 변경 진행중 >> :" + f_cartVO);
+				//log.debug("<< 장바구니 수량 변경 진행중 >> :" + f_cartVO);
 				f_cartVO.setMem_num(user.getMem_num());
 				foodService.updateF_cartByFood_num(f_cartVO);
 				mapJson.put("result", "success");
@@ -493,14 +494,13 @@ public class FoodController {
 		}
 		return mapJson;
 	}
-
 	
 	//장바구니 삭제버튼
 	@RequestMapping("/food/fcart/deleteOneCart.do")
 	@ResponseBody
 	public Map<String,Object> deleteOneCart(@RequestParam int cart_num,
-										  HttpSession session){
-		log.debug("<< 장바구니 삭제 수행중 >> :" + cart_num);
+										    HttpSession session){
+		//log.debug("<< 장바구니 삭제 수행중 >> :" + cart_num);
 		Map<String,Object> mapJson = new HashMap<String,Object>();
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
@@ -513,11 +513,120 @@ public class FoodController {
 		return mapJson;
 	}
 	
+	/*	==========================
+	 *		주문페이지
+	 * 	==========================*/
+	//주문 폼 호출
+	@PostMapping("/food/forder/foodOrderForm.do")
+	public String formFoodOrder(F_orderVO f_orderVO, HttpSession session,
+	           					Model model, HttpServletRequest request) {
+		
+		if (f_orderVO.getCart_numbers()==null || f_orderVO.getCart_numbers().length==0) {
+			model.addAttribute("message", "정상적인 주문이 아닙니다.");
+			model.addAttribute("url", request.getContextPath()+"/food/fcart/foodUserCartList.do");
+			return "common/resultView";
+		}
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("mem_num", user.getMem_num());
+		map.put("cart_numbers", f_orderVO.getCart_numbers());
+		int total_price = foodService.selectTotalByMem_num(map);
+		if (total_price <= 0) {
+			model.addAttribute("message", "정상적인 주문이 아니거나 상품의 수량이 부족합니다.");
+			model.addAttribute("url", request.getContextPath()+"/food/fcart/foodUserCartList.do");
+			return "common/resultView";
+		}
+		
+		//장바구니에 담아둔 상품 정보 호출
+		List<F_cartVO> cartList = foodService.selectF_cartListForOrder(map);
+		
+		for (F_cartVO cart : cartList) {
+			FoodVO food = foodService.selectFood(cart.getFoodVO().getFood_num());
+			if (food.getFood_status()==1) {	//현재 오류 부분
+				//해당상품이 판매중지인 경우
+				model.addAttribute("message", "["+food.getFood_name()+"]상품은 판매 중지 되었습니다.");
+				model.addAttribute("url", request.getContextPath()+"/food/fcart/foodUserCartList.do");
+				return "common/resultView";
+			}
+			
+			if (food.getFood_quantity() < cart.getF_cart_quantity()) {
+				//해당상품의 재고 수량이 부족한 경우
+				model.addAttribute("message", "["+food.getFood_name()+"]상품 재고수량 부족으로인한 주문 불가");
+				model.addAttribute("url", request.getContextPath()+"/food/fcart/foodUserCartList.do");
+				return "common/resultView";
+			}
+			//동일상품의 총 가격 세팅
+			cart.setSub_total(cart.getF_cart_quantity() * cart.getF_cart_price());
+			cart.setFood_num(food.getFood_num());
+			
+			log.debug("\n\n 출력 테스트 >> : " + cart.getF_cart_quantity());
+		}
+		
+		model.addAttribute("list", cartList);
+		model.addAttribute("total_price", total_price);
+		
+		return "foodOrderForm";
+	}
 	
-	
-	
-	
-	
+	//전송 데이터 처리
+	@PostMapping("/food/forder/foodOrder.do")
+	public String submitFoodOrder(@Valid F_orderVO f_orderVO, BindingResult result,
+									HttpSession session,Model model,
+						            HttpServletRequest request,
+						            HttpServletResponse response) {
+		log.debug("\n\n 전송된 데이터 처리중 >>> " + f_orderVO);
+		//전송된 데이터 유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			return formFoodOrder(f_orderVO,session,model,request);
+		}
+		
+		//cart_num 이 일치하는지 체크
+		if (f_orderVO.getCart_numbers() == null || f_orderVO.getCart_numbers().length==0) {
+			model.addAttribute("message", "정상적인 주문이 아닙니다.");
+			model.addAttribute("url", request.getContextPath()+"/food/fcart/foodUserCartList.do");
+			return "common/resultView";
+		}
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("mem_num", user.getMem_num());
+		map.put("cart_numbers", f_orderVO.getCart_numbers());
+		int total_price = foodService.selectTotalByMem_num(map);
+		//db에 저장된 구매할 총 금액가격과 일치하는지 체크
+		if (total_price <= 0) {
+			model.addAttribute("message", "정상적인 주문이 아니거나 상품의 수량이 부족합니다.");
+			model.addAttribute("url", request.getContextPath()+"/food/fcart/foodUserCartList.do");
+			return "common/resultView";
+		}
+		
+		//장바구니에 담겨있는 상품 정보 호출
+		List<F_cartVO> cartList = foodService.selectF_cartListForOrder(map);
+		
+		//개별 주문 상품 저장
+		List<F_order_detailVO> f_order_detailList = new ArrayList<F_order_detailVO>();
+		
+		for (F_cartVO f_cart : cartList) {
+			
+		}
+		
+		return "common/notice";
+	}
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

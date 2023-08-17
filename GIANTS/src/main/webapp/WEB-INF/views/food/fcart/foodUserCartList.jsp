@@ -18,7 +18,7 @@
 			<c:if test="${not empty list}">
 			<table id="cart_tb">
 				<tr>
-					<th><input type="checkbox" id="all_chk"><!-- 전체체크박스 --></th>
+					<th><input type="checkbox" id="all_chk" checked="checked"><!-- 전체체크박스 --></th>
 					<th>이미지</th>
 					<th>상품정보</th>
 					<th>수량</th>
@@ -28,7 +28,10 @@
 				</tr>
 				<c:forEach var="cart" items="${list}">
 				<tr>
-					<td><input type="checkbox" class="food-chk"></td>
+					<td>
+						<input type="hidden" value="${cart.cart_num}">
+						<input type="checkbox" class="food-chk" data-hidden-price="${cart.f_cart_quantity * cart.f_cart_price}" checked="checked">
+					</td>
 					<td><img src="${pageContext.request.contextPath}/food/imageView.do?food_num=${cart.foodVO.food_num}&food_type=1" class="food-cart-img"></td>
 					<td>${cart.foodVO.food_name}</td>
 					<td>
@@ -47,6 +50,7 @@
 					</td>
 				</tr>
 			</table>
+			
 			</c:if>
 			<!-- 조건문 -->
 			<c:if test="${empty list}">
@@ -54,6 +58,15 @@
 				<p class="bdr">장바구니가 비어 있습니다.</p>
 			</div>
 			</c:if>
+			<form id="all_frm" action="/food/forder/foodOrderForm.do" method="post">
+			<c:if test="${not empty list}">
+				<c:forEach var="cart" items="${list}">
+					<input type="hidden" name="cart_numbers" value="${cart.cart_num}">
+				</c:forEach>
+			</c:if>
+			</form>
+			<form id="sel_frm" action="/food/forder/foodOrderForm.do" method="post">
+			</form>
 		</div>
 		<!-- 하단 버튼들 -->
 		<div class="cart-buttons align-center">

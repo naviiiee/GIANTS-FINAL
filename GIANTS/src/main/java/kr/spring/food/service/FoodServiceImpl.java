@@ -95,6 +95,17 @@ public class FoodServiceImpl implements FoodService{
 		foodMapper.deleteOneF_cart(cart_num);
 	}
 
+	//=================주문하기============================
+	@Override
+	public int selectTotalByMem_num(Map<String, Object> map) {
+		return foodMapper.selectTotalByMem_num(map);
+	}
+
+	@Override
+	public List<F_cartVO> selectF_cartListForOrder(Map<String, Object> map) {
+		return foodMapper.selectF_cartListForOrder(map);
+	}
+
 	
 
 }

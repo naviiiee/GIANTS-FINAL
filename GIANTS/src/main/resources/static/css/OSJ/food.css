@@ -679,14 +679,89 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 
+/*  ===================================
+	========== foodOrderForm ==========
+	=================================== */
+.order-container{
+	width: 100%;
+    margin: auto;
+}
+.order-List{
+	min-height:200px;
+	width:1000px;
+	padding: 30px 0px;
+	margin:auto;
+}
+.order-title{
+    margin-bottom: 10px;
+}
+.order-title h2{
+	line-height: 35px;
+}
 
+#order_tb{
+	width:100%;
+	margin:auto;
+	margin-bottom:100px;
+	text-align: center;
+	font-size: 14pt;
+	border:1px solid lightgray;
+	border-collapse: collapse;
+}
+#order_tb tr{
+	height: 80px; 
+	background-color: white;
+	border:1px solid lightgray;
+}
+#order_tb tr td:nth-child(2){
+	width: 350px;
+}
+#order_tb tr:first-child{
+	height: 50px;
+}
+#order_tb tr:last-child{
+	height: 50px;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+#order_tb tr td:nth-child(4),
+#order_tb tr:last-child td:nth-child(2){
+	width: 150px;
+}
+#order_tb tr:last-child td:first-child b{
+	margin-right: 20px;
+}
+#order_tb th,
+#order_tb td{
+	border:1px solid lightgray;
+}
 
+.order-List ul{
+	margin-left: 30px;
+	margin-bottom: 100px;
+	font-size: 1.2em;
+}
+.order-List ul li{
+	margin-bottom: 10px;
+}
+.order-List ul li label{
+	display:inline-block;
+	width: 100px;
+}
 
-
-
-
-
-
+.order-btn{
+	padding: 10px 20px;
+	font-size: 1.1em;
+	font-weight: bold;
+	background-color: #052345;
+	color: #fff;
+	border: 1px solid #fff;
+	border-radius: 3px;
+}
+.order-btn:first-child {
+	margin-right: 10px;
+	background-color: #dd032f;
+}
 
 
 

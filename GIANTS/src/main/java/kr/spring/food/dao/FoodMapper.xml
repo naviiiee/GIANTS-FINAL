@@ -52,7 +52,7 @@
 		)
 	</insert>
 	<!-- 기업 식품 수정 -->
-	<update id="">
+	<update id="fixFood" parameterType="foodVO">
 		UPDATE 
 			FOOD 
 		SET 
@@ -189,6 +189,52 @@
 	  ON re.food_num=f.food_num
 	)
 	</select>
+	
+	
+	
+	<!-- 주문 -->
+	<!-- 주문폼 에서 장바구니 호출용 쿼리문 -->
+	<sql id="cartCondition">
+		WHERE mem_num=#{mem_num}
+		/*주문폼에서 장바귀 정보 읽어 올 때 cart_numbers 사용함*/
+		<if test="cart_numbers!=null and cart_numbers.length>0">
+			AND cart_num IN
+			<foreach item="item" index="index" collection="cart_numbers"
+                        open="(" separator="," close=")">  
+				#{item}
+			</foreach>
+		</if>
+	</sql>	
+	
+	<!-- 장바구니에서 주문한 총 금액 불러오기 -->
+	<select id="selectTotalByMem_num" parameterType="map" resultType="integer">
+		SELECT 
+    	  NVL(SUM(sub_total),0)
+		FROM (SELECT 
+        	    mem_num,
+        	    cart_num,
+        	    (f_cart_quantity*f_cart_price) as sub_total
+      		  FROM f_cart)
+		<include refid="cartCondition"></include>
+	</select>
+	
+	<!-- 장바구니 목록 가져오기 -->
+	<select id="selectF_cartListForOrder" parameterType="map" resultMap="cartMap">
+		SELECT
+		  cart_num,
+		  food_num,
+		  f_cart_quantity,
+		  f_cart_price,
+		  mem_num,
+		  food_name,
+		  food_price,
+		  food_quantity,
+		  food_status
+		FROM f_cart JOIN food USING(food_num)
+		<include refid="cartCondition"></include>
+		ORDER BY food_num ASC
+	</select>
+	
 	
 </mapper>
 

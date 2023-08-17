@@ -47,4 +47,10 @@ public interface FoodService {
 	public void updateF_cartByFood_num(F_cartVO f_cartVO);
 	//장바구니 아이템 1개 삭제
 	public void deleteOneF_cart(Integer cart_num);
+	
+	//------------ 주문하기 ----------------------------------
+	//장바구니에서 주문한 총 금액 불러오기
+	public int selectTotalByMem_num(Map<String,Object> map);
+	//주문할 상품 목록 장바구니에서 호출
+	public List<F_cartVO> selectF_cartListForOrder(Map<String,Object> map);
 }

@@ -49,4 +49,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/food/fcart/foodUserCartList.jsp"/>
 	</definition>
 	
+	<!-- 주문 폼 -->
+	<definition name="foodOrderForm" extends="main">
+		<put-attribute name="title" value="식품 - 주문하기"/>
+		<put-attribute name="body" value="/WEB-INF/views/food/forder/foodOrderForm.jsp"/>
+	</definition>
+	
 </tiles-definitions>
