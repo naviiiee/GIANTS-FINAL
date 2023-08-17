@@ -346,7 +346,7 @@ public class CommuController {
 		public Map<String,String> modifyReply(CommuReplyVO commuReplyVO,
 											  HttpSession session,
 											  HttpServletRequest request){
-			log.debug("<<BoardReplyVO>> : " + commuReplyVO);
+			log.debug("<<CommuReplyVO>> : " + commuReplyVO);
 			
 			Map<String,String> mapJson = new HashMap<String,String>();
 			
@@ -378,15 +378,17 @@ public class CommuController {
 		
 		//등록 폼
 		@GetMapping("/commu/commuRepo.do")
-		public String formRepo() {
-		
+		public String formRepo(@RequestParam int commu_num, Model model) {
+			CommuVO vo = commuService.selectCommu(commu_num);
+			
+			model.addAttribute("commu", vo);
 			return "commuRepo";
 		}
 		
 		
 		//전송된 데이터 처리
 		@PostMapping("/commu/commuRepo.do")
-		public String submitRepo(@Valid CommuReportVO commuReportVO, BindingResult result, 
+		public String submitRepo(@RequestParam int commu_num, @Valid CommuReportVO commuReportVO, BindingResult result, 
 							 HttpServletRequest request, HttpSession session, Model model) {
 			
 			log.debug("<<커뮤니티 신고>> : " + commuReportVO);
@@ -395,7 +397,7 @@ public class CommuController {
 			
 			//유효성 체크 결과 오류 발생 시 폼을 다시 호출
 			if(result.hasErrors()) {
-				return form();
+				return "commuRepo";
 			}
 			 
 			//회원 번호 세팅 (좀 길지만 한 번만 쓸거라 따로 변수 안 만들고 진행)
@@ -408,6 +410,9 @@ public class CommuController {
 			
 			//IP 셋팅
 			commuReportVO.setRepo_ip(request.getRemoteAddr());
+			commuReportVO.setCommu_num(commu_num);
+			commuReportVO.setMem_num(user.getMem_num());
+			
 			
 			//글 등록 처리
 			commuService.insertReport(commuReportVO);
@@ -425,7 +430,8 @@ public class CommuController {
 		/*--------------
 		 * [관리자]신고 목록
 		 *-------------*/
-		@RequestMapping("/commu/commuRepoDetail.do")
+		/*
+		@RequestMapping("/commu/commuRepoList.do")
 		public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
 									String keyfield,String keyword) {
 			
@@ -439,7 +445,7 @@ public class CommuController {
 			int count = commuService.selectRowCountReort(map);
 			
 			//페이지 처리
-			PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"commuRepoDetail.do");
+			PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"commuRepoList.do");
 			
 			List<CommuReportVO> list = null;
 			if(count > 0) {
@@ -450,12 +456,47 @@ public class CommuController {
 			}
 			
 			ModelAndView mav = new ModelAndView();
-			mav.setViewName("commuRepoDetail");
+			mav.setViewName("commuRepoList");
 			mav.addObject("count", count);
 			mav.addObject("list", list);
 			mav.addObject("page", page.getPage());
 			
 			return mav;
+		}
+		*/
+		
+		
+		@RequestMapping("/commu/commuRepoList.do")
+		public ModelAndView getcommuRepoList(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
+									@RequestParam(value="order", defaultValue="1") int order,
+									String keyfield, String keyword){
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("keyfield",keyfield);
+			map.put("keyword",keyword);
+			
+			//전체or검색 레코드 수
+			int count = commuService.selectRowCountReort(map);
+			log.debug("<<count>> : " + count);
+			
+			//페이지 처리
+			PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"commuRepoList.do","&order="+order);
+			
+			List<CommuReportVO> list = null;
+			if(count > 0) {
+				map.put("order", order);
+				map.put("start", page.getStartRow());
+				map.put("end", page.getEndRow());
+				
+				list = commuService.selectListReport(map);
+			}
+			
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("commuRepoList");
+			mav.addObject("count",count);
+			mav.addObject("list",list);
+			mav.addObject("page",page.getPage());
+		
+		return mav;
 		}
 		
 		

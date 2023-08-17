@@ -102,9 +102,9 @@
     </definition>
     
     <!-- [관리자] 신고 목록 -->
-    <definition name="commuRepoDetail" extends="main">
+    <definition name="commuRepoList" extends="main">
     	<put-attribute name="title" value="신고 목록"/>
-    	<put-attribute name="body" value="/WEB-INF/views/commu/commuRepoDetail.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/commu/commuRepoList.jsp"/>
     </definition>
     
 </tiles-definitions>

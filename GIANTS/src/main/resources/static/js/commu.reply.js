@@ -59,8 +59,8 @@ $(function(){
 					output += '<p>' + item.re_content.replace(/\r\n/g,'<br>') + '</p>';
 					//로그인 회원 번호 = 작성자 회원 번호 일치 시 (작성자 본인일 시) 수정,삭제 가능
 					if(param.user_num == item.mem_num){
-						output += ' <input type="button" data-num="'+item.re_num+'" value="수정" class="default-btn">';
-						output += ' <input type="button" data-num="'+item.re_num+'" value="삭제" class="accept-btn">';
+						output += ' <input type="button" data-num="'+item.re_num+'" value="수정" class="modify-btn default-btn">';
+						output += ' <input type="button" data-num="'+item.re_num+'" value="삭제" class="delete-btn accept-btn">';
 					}
 					output += '<hr size="1" noshade>'; 
 					output += '</div>'; //end of sub-item
@@ -140,25 +140,8 @@ $(function(){
 	}
 	
 	
-	//textarea에 내용 입력 시 글자 수 체크
-	//미래 태그이므로 다음과 같이 표기
-	$(document).on('keyup','textarea',function(){
-		let inputLength = $(this).val().length; //입력한 글자 수 구하기
-		if(inputLength > 300){ //300자 초과 입력 시
-			$(this).val($(this).val().substring(0,300));
-		}else{ //300자 이하 입력 시
-			//남은 글자 수 구하기
-			let remain = 300 - inputLength;
-			remain += '/300';
-			//글자 수 변경
-			if($(this).attr('id') == 're_content'){ //등록 폼
-				$('#re_first .letter-count').text(remain);
-			}else{ //수정 폼
-				$('#mre_first .letter-count').text(remain);
-			}
-		}
-	});
 	
+
 	
 	//댓글 수정 폼 호출
 	//미래 태그이므로 다음과 같이 표기
@@ -217,6 +200,39 @@ $(function(){
 	}
 	
 	
+	
+	
+	
+	
+	//textarea에 내용 입력 시 글자 수 체크
+	//미래 태그이므로 다음과 같이 표기
+	$(document).on('keyup','textarea',function(){
+		let inputLength = $(this).val().length; //입력한 글자 수 구하기
+		if(inputLength > 300){ //300자 초과 입력 시
+			$(this).val($(this).val().substring(0,300));
+		}else{ //300자 이하 입력 시
+			//남은 글자 수 구하기
+			let remain = 300 - inputLength;
+			remain += '/300';
+			//글자 수 변경
+			if($(this).attr('id') == 're_content'){ //등록 폼
+				$('#re_first .letter-count').text(remain);
+			}else{ //수정 폼
+				$('#mre_first .letter-count').text(remain);
+			}
+		}
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//댓글 수정
 	$(document).on('submit','#mre_form',function(event){
 		if($('#mre_content').val().trim() == ''){
@@ -231,7 +247,7 @@ $(function(){
 			url:'updateReply.do',
 			type:'post',
 			data:form_data,
-			dataType:'json',
+			dataType:'json',  
 			success:function(param){
 				if(param.result == 'logout'){
 					alert('로그인해야 수정할 수 있습니다.');

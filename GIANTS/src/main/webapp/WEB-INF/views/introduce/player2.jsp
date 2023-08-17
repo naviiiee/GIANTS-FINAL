@@ -16,11 +16,6 @@ li{
 }
 
 
-.title01{
-	display:flex;
-}
-
-
 
 </style>
 <!-- [관리자] 선수 목록 시작 -->
@@ -46,6 +41,47 @@ li{
 		</div>
 	</div>
 	<hr size="0.05" width="100%" noshade style="margin-bottom:3%">
+	
+	
+	<!--  
+	<select> 
+	  <option value="player.do" >감독</option> 
+	  <option value="playerList_c.do">코치</option> 
+	  <option value="투수">투수</option> 
+	  <option value="포수">포수</option> 
+	  <option value="외야수">외야수</option> 
+	  <option value="내야수">내야수</option> 
+	</select>
+	-->
+	
+	<!--  
+	 <div class="dropdown">
+        <button class="dropdown-btn"><img src="${pageContext.request.contextPath}/images/아래화살표.png">감독</button>
+        <div class="dropdown-submenu">
+            <a href="player.do" class="over">감독</a>
+            <a href="#none">코치</a>
+            <a href="playerList_t.do">투수</a>
+            <a href="#none">포수</a>
+            <a href="#none">외야수</a>
+            <a href="#none">내야수</a>
+        </div>
+    </div>
+    
+    
+
+	
+	<div class="a-tab align-right">
+		<ul>
+			<li style="margin-top:20%; display:flex;">
+				<a href="stadium.do">구장 소개</a>
+				<a href="map.do">오시는 길</a>
+				<a href="food.do">먹거리</a>
+				<a href="player.do" class="over">선수 소개</a>
+			</li>
+		</ul>
+	</div>
+	
+	
 	<form action="commuList.do" id="search_form" method="get"  style="padding-bottom: 24px;">
 		<ul class="search align-center">
 			<li>
@@ -61,17 +97,51 @@ li{
 				<input type="submit" value="검색" style="height:30px;"  class="accept-btn">
 			</li>
 		</ul>
-	
-	
-	
-		<div class="align-right" >
-			<c:if test="${!empty user}">
-			<input type="button" value="선수 등록" onclick="location.href='admin_player.do'" class="accept-btn">
-			<input type="button" value="목록" onclick="location.href='admin_playerList.do'" class="accept-btn">
-			</c:if>
-			
+		</form>
+		-->
+		
+		
+	<div class="aaa">
+		 <div class="dropdown">
+	        <button class="dropdown-btn"><img src="${pageContext.request.contextPath}/images/아래화살표.png">감독</button>
+	        <div class="dropdown-submenu">
+	            <a href="player.do" class="over">감독</a>
+	            <a href="playerList_c.do">코치</a>
+	            <a href="playerList_t.do" >투수</a>
+	            <a href="playerList_p.do">포수</a>
+	            <a href="playerList_w.do">외야수</a>
+	            <a href="playerList_n.do">내야수</a>
+	   	 </div>
+    </div>
+	<div>
+	<form action="commuList.do" id="search_form" method="get"  style="padding-bottom: 24px;">
+		<ul class="search align-center">
+			<li>
+				<select name="keyfield" id="keyfield">
+					<option value="1" <c:if test="${param.keyfield == 1}">SELECTED</c:if>>선수명</option>
+					<option value="2" <c:if test="${param.keyfield == 2}">SELECTED</c:if>>선수 포지션</option>
+				</select>
+			</li>
+			<li>
+				<input type="search" name="keyword" id="keyword" value="${param.keyword}" style="height:30px;">
+			</li>
+			<li>
+				<input type="submit" value="검색" style="height:30px;"  class="accept-btn">
+			</li>
+		</ul>
+		</form> 
 		</div>
-	</form>
+		<div class="a-tab align-right">
+		<ul>
+			<li style="margin-top:20%; display:flex;">
+				<a href="stadium.do">구장 소개</a>
+				<a href="map.do">오시는 길</a>
+				<a href="food.do">먹거리</a>
+				<a href="player.do" class="over">선수 소개</a>
+			</li>
+		</ul>
+	</div>
+	</div>
 	
 	
 	
@@ -82,10 +152,10 @@ li{
 	
 	
 	
+		
 	
 	
-	
-	
+	<!-- 목록 -->
 	<c:if test="${count == 0}">
 		<div class="result-display">표시할 선수목록이 없습니다.</div>
 	</c:if>
@@ -93,69 +163,39 @@ li{
 		<table class="striped-table">
 			<tr>
 				<th>선수</th>
+				<th>번호</th>
+				<th>이름</th>
+				<th>생년월일</th>
+				<th>포지션</th>
+				<th>투타</th>
+				<th>경력사항</th>
+				<th>입단년도</th>
 			</tr> 
 			<c:forEach var="player" items="${list}">
-				<tr>
-					<td class="align-center"><img src="${pageContext.request.contextPath}/introduce/imageView.do?player_num=${player.player_num}"  width="200" height="200"></td>
-				</tr>
+				<c:if test="${player.player_position == '감독'}">
+					<tr>
+						<td class="align-center"><img src="${pageContext.request.contextPath}/introduce/imageView.do?player_num=${player.player_num}"  width="200" height="200"></td>
+						<td class="align-center">${player.player_backnumber}</td>
+						<td class="align-center">${player.player_name}</td>
+						<td class="align-center">${player.player_birthday}</td>
+						<td class="align-center">${player.player_position}</td>
+						<td class="align-center">${player.player_toway}</td>
+						<td class="align-center">${player.player_career}</td>
+						<td class="align-center">${player.player_join}</td>
+					</tr>
+				</c:if>
 			</c:forEach>
 		</table>
-	</c:if>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<!-- 목록 -->
-	<!--  
-	<div>
-		<c:forEach var="player" items="${list}">
-		<img src="${pageContext.request.contextPath}/introduce/imageView.do?player_num=${player.player_num}">
-		</c:forEach>
-	
-	
-		<table class="striped-table">
-			<tr>
-				<th>선수 프로필</th>
-				<th>선수 이름</th>
-			</tr> 
-			<c:forEach var="player" items="${list}">
-				<tr>
-					<td class="align-center"><img src="${pageContext.request.contextPath}/introduce/imageView.do?player_num=${player.player_num}"></td>
-					<td class="align-center">${player.player_name}</td>
-				</tr>
-			</c:forEach>
-		</table>
-	</div>
-	
-	<c:if test="${count == 0}">
-	<div>표시할 선수가 없습니다.</div>
-	</c:if>
-	<c:if test="${count > 0}">
-	<div class="player-space">
-		<c:forEach var="player" items="${list}">
-		<div class="horizontal-area">
-			<a href="${pageContext.request.contextPath}/introudce/player_detail.do?player_num=${plyer.player_num}">
-				<img src="imageView.do?player_num=${player.player_num}" width="400" height="400">
-				<img src="${pageContext.request.contextPath}/introduce/imageView.do?player_num=${player.player_num}">
-				<span>${player.player_name}</span>
-			</a>
+		
+		<div class="align-right" >
+			<c:if test="${!empty user}">
+			<input type="button" value="선수 등록" onclick="location.href='admin_player.do'" class="accept-btn">
+			<input type="button" value="수정" onclick="location.href='admin_player.do'" class="accept-btn">
+			</c:if>
 		</div>
-		</c:forEach>
-		<hr width="100%" size="1" noshade="noshade" class="float-clear">
-	</div>
-	-->
-	
-	
-		<!-- 페이지 -->
-		<div class="align-center">${page}</div>
+		
+		
+		
 	</c:if>
-	
-	
 </div>
 <!-- [관리자] 선수 목록 끝 -->

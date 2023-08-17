@@ -136,7 +136,7 @@ public class CommuServiceImpl implements CommuService{
 	@Override
 	public int selectRowCountReort(Map<String, Object> map) {
 		
-		return commuMapper.selectRowCountReort(map);
+		return commuMapper.selectRowCount(map);
 	}
 
 	@Override

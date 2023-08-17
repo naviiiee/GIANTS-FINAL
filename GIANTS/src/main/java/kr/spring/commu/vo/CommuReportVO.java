@@ -3,8 +3,7 @@ package kr.spring.commu.vo;
 
 import java.sql.Date;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +21,7 @@ public class CommuReportVO {
 	private int repo_category; //신고범위
 	private int commu_num; //커뮤니티 번호
 	private int mem_num; //신고자 회원번호
+	private String mem_nickname;
 	
 	//private String status;  
 	

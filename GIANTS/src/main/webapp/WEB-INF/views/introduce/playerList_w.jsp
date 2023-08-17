@@ -80,7 +80,7 @@ li{
 	
 	<div class="aaa">
 		 <div class="dropdown">
-	        <button class="dropdown-btn"><img src="${pageContext.request.contextPath}/images/아래화살표.png">감독</button>
+	        <button class="dropdown-btn"><img src="${pageContext.request.contextPath}/images/아래화살표.png">외야수</button>
 	        <div class="dropdown-submenu">
 	            <a href="player.do">감독</a>
 	            <a href="#none">코치</a>

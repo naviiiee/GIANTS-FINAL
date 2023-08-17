@@ -14,9 +14,102 @@ li{
 	align-items:center;
 	justify-content:center;
 }
+.roster-img{
+	position: relative;
+    float: left;
+    width: 570px;
+    height: 604px;
+    background: none;
+}
+
+.roster-txt{
+	float: left;
+    width: 390px;
+    padding-left: 0;
+    padding-top: 60px;
+    position: relative;
+}
+
+img{
+    border: 0px;
+    vertical-align: middle;
+}
+
+.director{
+	overflow:hidden;
+}
+
+.pos{
+	font-size: 24px;
+    font-weight: bold;
+    color: black;
+}
+
+.name{
+	font-size: 54px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 100%;
+    padding-top: 15px;
+    margin-bottom: 35px;
+}
+
+.nb{
+    display: inline-block;
+    width: 90px;
+    height: 60px;
+    vertical-align: top;
+    line-height: 100%;
+    font-size: 50px;
+    font-weight: bold;
+    background: url(/html/_Img/stat/nb_bg_new.png) no-repeat left 3px;
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+    margin-left: 15px;
+    padding-top: 2px;
+    height: 52px;
+    margin-top: 5px;
+    background: #dd0330;
+    border-radius: 10px;
+    padding-top: 0;
+}
+
+dt{
+    display: block;
+    float: left;
+    width: 80px;
+    color: black;
+    margin: 5px 0px;
+    font-weight: bold;
+}
+
+dd{
+    display: block;
+    float: left;
+    width: 305px;
+    border-left: none;
+    /* font-size: 12px; */
+    padding-left: 5px;
+    margin: 5px 0px;
+    color: black;
+}
+
+strong{
+	color: black;
+}
+
+.ename{
+	margin-bottom:5%;
+}
 
 
-
+/*  
+.bbb{
+	background:#ffffff url(/_Img/Board/roster/roster_view_bg_01.jpg) no-repeat center top;
+	height:800px;
+}
+*/
 </style>
 <!-- [관리자] 선수 목록 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LHJ/commu.css">
@@ -43,63 +136,7 @@ li{
 	<hr size="0.05" width="100%" noshade style="margin-bottom:3%">
 	
 	
-	<!--  
-	<select> 
-	  <option value="player.do" >감독</option> 
-	  <option value="playerList_c.do">코치</option> 
-	  <option value="투수">투수</option> 
-	  <option value="포수">포수</option> 
-	  <option value="외야수">외야수</option> 
-	  <option value="내야수">내야수</option> 
-	</select>
-	-->
 	
-	<!--  
-	 <div class="dropdown">
-        <button class="dropdown-btn"><img src="${pageContext.request.contextPath}/images/아래화살표.png">감독</button>
-        <div class="dropdown-submenu">
-            <a href="player.do" class="over">감독</a>
-            <a href="#none">코치</a>
-            <a href="playerList_t.do">투수</a>
-            <a href="#none">포수</a>
-            <a href="#none">외야수</a>
-            <a href="#none">내야수</a>
-        </div>
-    </div>
-    
-    
-
-	
-	<div class="a-tab align-right">
-		<ul>
-			<li style="margin-top:20%; display:flex;">
-				<a href="stadium.do">구장 소개</a>
-				<a href="map.do">오시는 길</a>
-				<a href="food.do">먹거리</a>
-				<a href="player.do" class="over">선수 소개</a>
-			</li>
-		</ul>
-	</div>
-	
-	
-	<form action="commuList.do" id="search_form" method="get"  style="padding-bottom: 24px;">
-		<ul class="search align-center">
-			<li>
-				<select name="keyfield" id="keyfield">
-					<option value="1" <c:if test="${param.keyfield == 1}">SELECTED</c:if>>선수명</option>
-					<option value="2" <c:if test="${param.keyfield == 2}">SELECTED</c:if>>선수 포지션</option>
-				</select>
-			</li>
-			<li>
-				<input type="search" name="keyword" id="keyword" value="${param.keyword}" style="height:30px;">
-			</li>
-			<li>
-				<input type="submit" value="검색" style="height:30px;"  class="accept-btn">
-			</li>
-		</ul>
-		</form>
-		-->
-		
 		
 	<div class="aaa">
 		 <div class="dropdown">
@@ -147,45 +184,59 @@ li{
 	
 	
 	
-	
-	
-	
-	
-	
-		
-	
-	
 	<!-- 목록 -->
 	<c:if test="${count == 0}">
 		<div class="result-display">표시할 선수목록이 없습니다.</div>
 	</c:if>
-	<c:if test="${count > 0}">
-		<table class="striped-table">
-			<tr>
-				<th>선수</th>
-				<th>번호</th>
-				<th>이름</th>
-				<th>생년월일</th>
-				<th>포지션</th>
-				<th>투타</th>
-				<th>경력사항</th>
-				<th>입단년도</th>
-			</tr> 
-			<c:forEach var="player" items="${list}">
-				<c:if test="${player.player_position == '감독'}">
-					<tr>
-						<td class="align-center"><img src="${pageContext.request.contextPath}/introduce/imageView.do?player_num=${player.player_num}"  width="200" height="200"></td>
-						<td class="align-center">${player.player_backnumber}</td>
-						<td class="align-center">${player.player_name}</td>
-						<td class="align-center">${player.player_birthday}</td>
-						<td class="align-center">${player.player_position}</td>
-						<td class="align-center">${player.player_toway}</td>
-						<td class="align-center">${player.player_career}</td>
-						<td class="align-center">${player.player_join}</td>
-					</tr>
-				</c:if>
-			</c:forEach>
-		</table>
+	
+	<div class=bbb>
+	<div class="director">
+	<c:forEach var="player" items="${list}">
+	<c:if test="${player.player_position == '감독'}">
+		<div class="roster-img">
+		<img src="${pageContext.request.contextPath}/introduce/imageView.do?player_num=${player.player_num}">
+		</div>	
+		<div class="roster-txt">
+			<p class="pos">${player.player_position}</p>
+			<p class="name">
+				<strong>
+				${player.player_name}
+				<span class="nb">${player.player_backnumber}</span>
+				</strong>
+			</p>
+			<p class="ename">LARRY JAMES SUTTON</p>
+			<hr size="0.03" width="140%" noshade>
+			<dl>
+				<dt>생년월일</dt>
+				<dd>${player.player_birthday}</dd>
+				<dt>입단년도</dt>
+				<dd>${player.player_join}</dd>
+				<dt>학력사항</dt>
+				<dd>
+				Mater Dei High School (캘리포니아, 미국)<br>
+				University of Illinois (일리노이, 미국)
+				</dd>
+				<dt>선수 경력사항</dt>
+				<dd>
+				(1992) 캔자스시티 로얄스 지명<br>
+				(1992-1999) 캔자스시티 로얄스<br>
+				(2000-2001) 세인트루이스 카디널스<br>
+				(2002) 오클랜드 어슬레틱스<br>
+				(2004) 플로리다 말린스<br>
+				(2005-2006) 현대 유니콘스<br>
+				(2007) 기아 타이거즈
+				</dd>
+				<dt>코치 경력사항</dt>
+				<dd>${player.player_career}</dd>
+			</dl>
+		</div>			
+	</c:if>
+	</c:forEach>			
+	</div>
+	</div>
+	
+	
+		
 		
 		<div class="align-right" >
 			<c:if test="${!empty user}">
@@ -195,8 +246,7 @@ li{
 		</div>
 		
 		
-		<!-- 페이지 -->
-		<div class="align-center">${page}</div>
-	</c:if>
+		
+	
 </div>
 <!-- [관리자] 선수 목록 끝 -->

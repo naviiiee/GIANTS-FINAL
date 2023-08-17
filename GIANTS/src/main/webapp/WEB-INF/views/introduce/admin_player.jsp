@@ -65,7 +65,7 @@
 		</ul>
 		<div class="align-center">
 			<form:button>선수 등록</form:button>
-			<input type="button" value="목록" onclick="location.href='admin_playerList.do'">
+			<input type="button" value="목록" onclick="location.href='admin_player.do'">
 		</div>
 	</form:form>
 </div>

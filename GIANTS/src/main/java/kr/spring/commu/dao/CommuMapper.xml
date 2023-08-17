@@ -148,7 +148,7 @@
 	<select id="selectListReport" parameterType="map" resultType="commuReportVO">
 		SELECT * 
 		FROM (SELECT a.*, rownum rnum 
-			  FROM (SELECT repo_num,
+			  FROM (SELECT repo_num, 
 			  			   <![CDATA[ 
 			  			   REPLACE(REPLACE(repo_content,'<','&lt;'),'>','&gt;') repo_content,
 			  			   ]]> 
@@ -158,9 +158,8 @@
 			  			   mem_num,
 			  			   mem_id,
 			  			   mem_nickname 
-			  		FROM commu_report JOIN member USING(mem_num) 
-			  		WHERE commu_num = #{commu_num} 
-			  		ORDER BY re_num DESC)a) 
+			  		FROM commu_report JOIN member USING(mem_num)
+			  		ORDER BY repo_num DESC)a) 
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>

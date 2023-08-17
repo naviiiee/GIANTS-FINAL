@@ -11,6 +11,7 @@
       	
       	<form:form modelAttribute="commuReportVO" action="commuRepo.do" id="commuRepo" enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
+		<input type="hidden" name="commu_num" value="${commu.commu_num}">
 		<ul>
 			<li>
 				<form:radiobutton path="repo_category" value="1" id="status1"/>음란성 또는 부적합한 내용

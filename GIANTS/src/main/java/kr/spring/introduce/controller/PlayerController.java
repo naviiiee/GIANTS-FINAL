@@ -81,7 +81,7 @@ public class PlayerController {
 		int count = playerService.selectRowCount(map);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"player.do");
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,30,1,"player.do");
 		
 		List<PlayerVO> list = null;
 		if(count > 0) {

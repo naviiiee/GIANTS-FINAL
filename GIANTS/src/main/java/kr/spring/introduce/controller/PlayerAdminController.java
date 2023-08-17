@@ -79,7 +79,7 @@ public class PlayerAdminController {
 		
 		//View에 표시할 메시지
 		model.addAttribute("message", "선수 등록이 완료되었습니다.");
-		model.addAttribute("url", request.getContextPath()+"/introduce/admin_playerList.do");
+		model.addAttribute("url", request.getContextPath()+"/introduce/player.do");
 		
 		
 		return "common/resultView";
@@ -124,9 +124,10 @@ public class PlayerAdminController {
 	
 	
 	/*--------------
-	 * [관리자]선수 목록
+	 * 선수 목록
 	 *-------------*/
-	@RequestMapping("/introduce/admin_playerList.do")
+	/*
+	@RequestMapping("/introduce/player.do")
 	public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
 								String keyfield,String keyword) {
 		
@@ -140,7 +141,7 @@ public class PlayerAdminController {
 		int count = playerService.selectRowCount(map);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"admin_playerList.do");
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"player.do");
 		
 		List<PlayerVO> list = null;
 		if(count > 0) {
@@ -151,13 +152,14 @@ public class PlayerAdminController {
 		}
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin_playerList");
+		mav.setViewName("player");
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());
 		
 		return mav;
 	}
+	*/
 	
 	
 	
