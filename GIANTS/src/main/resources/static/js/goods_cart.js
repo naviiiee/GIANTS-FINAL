@@ -25,20 +25,88 @@ $(function(){
 			}
 		});
 	});
+	//============================
+	//바로 구매
+	$('#goods_direct button[type="submit"]').click(function(event){
+		event.preventDefault(); // 기본 클릭 동작을 막음
 		
-	
-	
-	//장바구니 등록
-	$('#goods_cart').submit(function(event){
 		if($('#order_quantity').val() == ''){
 			alert('수량을 입력하세요');
 			$('#order_quantity').focus();
 			return false;
 		}
 		
-		let form_data = $(this).serialize();
+	 // 선택된 옵션 정보 가져오기
+	    var selectedOption = $('#optionSelect option:selected');
+	    var optNumValue = selectedOption.val();
+	
+	    // 옵션 선택 여부 확인
+	    if (optNumValue === "") {
+	        alert("옵션을 선택하세요.");
+	        return false;
+	    }
+
+    	
+		let form_data = {
+		    goods_num: $('#goods_num').val(),
+		    goods_dprice: $('#goods_price').val(),
+		    order_quantity: $('#order_quantity').val(),
+		    opt_num: optNumValue,  // 이 부분 추가
+		};
+  		//서버와 통신
+		$.ajax({
+			url:'../gorder/directBuy.do',
+			type:'post',
+			data:form_data,
+			dataType:'json',
+			success:function(param){
+				if(param.result == 'logout'){
+					alert('로그인 후 사용하세요!');
+				}else if(param.result == 'success'){
+					alert('주문 폼으로 이동합니다.');
+					location.href='../gorder/orderFormDirect.do';
+				}else{
+					alert('바로구매 오류');
+				}
+			},
+			error:function(){
+				alert('네트워크 오류 발생 - 바로구매');
+			}
+		});
 		
-		//서버와 통신
+		$('#goods_direct form').submit();
+	});
+	
+	//============================
+	//장바구니 등록
+	$('#goods_cart button[type="submit"]').click(function(event){
+		event.preventDefault(); // 기본 클릭 동작을 막음
+		
+		if($('#order_quantity').val() == ''){
+			alert('수량을 입력하세요');
+			$('#order_quantity').focus();
+			return false;
+		}
+		
+		 // 선택된 옵션 정보 가져오기
+		var selectedOption = $('#optionSelect option:selected');
+		var optNumValue = selectedOption.val();
+		console.log("Selected opt_num:", optNumValue);		
+		    // 옵션 선택 여부 확인
+		    if (optNumValue === "") {
+		        alert("옵션을 선택하세요.");
+		        return false;
+		    }
+		
+		let form_data = {
+		    goods_num: $('#goods_num').val(),
+		    goods_dprice: $('#goods_price').val(),
+		    order_quantity: $('#order_quantity').val(),
+		    opt_num: optNumValue,  // 이 부분 추가
+		};
+		
+		//장바구니
+  		//서버와 통신
 		$.ajax({
 			url:'../cart/write.do',
 			type:'post',
@@ -60,9 +128,9 @@ $(function(){
 				alert('네트워크 오류 발생');
 			}
 		});
-		event.preventDefault();		
-	});
-	
+		$('#goods_cart form').submit();
+	});		
+	  
 	//장바구니에 담겨있는 상품의 총구매금액
 	let cart_sum = $('.all-total').attr('data-alltotal');
 	

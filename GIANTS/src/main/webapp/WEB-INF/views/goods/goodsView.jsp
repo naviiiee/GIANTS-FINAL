@@ -61,7 +61,7 @@
 						평점 : 
 						<span id="avg_star">★</span> (<span id="output_score">${avg_score}</span>)
 					</li>
-					<c:if test="${goods.goods_status == 1}">
+				<c:if test="${goods.goods_status == 1}">
 					<li>
 						<li>
 						    옵션 : 
@@ -77,25 +77,7 @@
 						    </select>
 						    
 						</li>
-						<script>
-						    // 옵션 선택이 변경되었을 때 호출되는 함수
-						    function updateHiddenInput() {
-						        var optionSelect = document.getElementById("optionSelect");
-						        var optNumInput = document.getElementById("opt_num");
-						        
-						        var selectedOption = optionSelect.options[optionSelect.selectedIndex];
-						        var optNumValue = selectedOption.getAttribute("data-stock");
-						        
-						        optNumInput.value = optNumValue;
-						    }
 						
-						    // 옵션 선택 변경 이벤트에 함수 연결
-						    var optionSelect = document.getElementById("optionSelect");
-						    optionSelect.addEventListener("change", updateHiddenInput);
-						    
-						    // 페이지 로드 시에도 최초 값 설정
-						    updateHiddenInput();
-						</script>
 						
 					</li>
 					<%-- 
@@ -121,6 +103,7 @@
 					</li>
 				</c:if>
 				</ul>
+				
 				<div class="goods-btns">
 					<button type="button" class="not-css">
 						<div id="goods_fav">
@@ -129,29 +112,40 @@
 							<c:if test="${!empty user}">[<span id="output_fcount"></span>]</c:if>
 						</div>
 					</button>
-					<c:if test="${goods.goods_status == 1}">
+					
+				<c:if test="${goods.goods_status == 1}">
 						<button type="submit" class="not-css">
 							<div id="goods_cart">
 								<img id="cart_btn" data-num="${goods.goods_num}" src="${pageContext.request.contextPath}/images/cart.png" width="20">
 								<span>장바구니</span>
 							</div>
 						</button>
-					</c:if>
 				</form>
-				
-				<c:if test="${goods.goods_status == 1}">
-				<form id="directBuy" action="${pageContext.request.contextPath}/gorder/directOrderForm.do" method="POST">
-					<input type="hidden" name="order_quantity" id="direct_quantity">
-					<input type="hidden" name="goods_num" value="${goods.goods_num}">
-					<button type="submit" class="not-css">
-						<div id="goods_pay">
-							<img id="pay_btn" data-num="${goods.goods_num}" src="${pageContext.request.contextPath}/images/card.png" width="20">
-							<span>바로구매</span>
-						</div>
-					</button>	
-					
-				</form>
-				</c:if>
+			<!-- 장바구니 폼 끝 -->
+			
+			 <!-- 바로 구매 폼 -->
+	        <form id="goods_direct" method="post">
+		        <input type="hidden" id="hidden_opt_num" name="opt_num">
+		        <input type="hidden" name="goods_num">
+		        <input type="hidden" name="order_quantity">
+		        <div id="goods_direct">
+			        <button type="submit" class="direct-btn" data-action="direct"> 
+			            <img id="pay_btn" data-num="${goods.goods_num}" src="${pageContext.request.contextPath}/images/card.png" width="20">
+			            <span>바로구매</span>
+			        </button>
+				</div>
+			</form>
+			<script>
+				    // select 태그에서 선택된 opt_num 넘겨주기
+				    $('#optionSelect').change(function() {
+				        var selectedOption = $(this).find('option:selected');
+				        var optNumValue = selectedOption.val();
+				        $('#hidden_opt_num').val(optNumValue);
+				    });
+			</script>
+			</c:if>	 
+			
+			   
 				<c:if test="${goods.goods_status == 2}">
 				<div id="sold-out">
 					<span>SOLD OUT</span>
