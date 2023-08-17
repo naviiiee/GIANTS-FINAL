@@ -26,6 +26,7 @@ import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
 import kr.spring.ticket.vo.SeatStatusVO;
 import kr.spring.ticket.vo.SeatVO;
+import kr.spring.ticket.vo.TicketCheckVO;
 import kr.spring.ticket.vo.TicketVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -118,20 +119,28 @@ public class TicketController {
 	}
 	
 	/* ----- [Order] 티켓주문 -----*/
-	@PostMapping("/ticket/orderForm.do") 
+	@PostMapping("/ticket/orderForm.do")
 	public String orderTicketForm(@RequestParam int game_num, @RequestParam int grade_num, SeatVO seatVO, HttpSession session, Model model) {
+		log.debug("<<seat_info>> : " + seatVO.getSeat_info());
+		
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
 		if(user == null) { return "redirect:/member/login.do"; }
 		
 		seatVO.setDetailVO(ticketService.selectMemberDetail(user.getMem_num()));
 		
-		log.debug("<<game_num>> : " + game_num);
 		GameVO gameVO = ticketService.selectGame(game_num);
-		
-		log.debug("<<grade_num>> : " + grade_num);
 		GradeVO gradeVO = ticketService.selectGrade(grade_num);
-		log.debug("<<gradeVO.title>> : " + gradeVO.getTitle());
+		
+		TicketCheckVO checkVO = new TicketCheckVO();
+		int length = seatVO.getSeat_info().split(",").length;
+		for(int i = 0; i < length; i++) {
+			checkVO.setSeat_info(seatVO.getSeat_info().split(",")[i]);
+			checkVO.setGame_num(game_num);
+			checkVO.setMem_num(user.getMem_num());
+			
+			ticketService.insertTicketCheck(checkVO);
+		}
 		
 		model.addAttribute("seatVO", seatVO);
 		model.addAttribute("gameVO", gameVO);

@@ -12,6 +12,7 @@ import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
 import kr.spring.ticket.vo.SeatStatusVO;
 import kr.spring.ticket.vo.SeatVO;
+import kr.spring.ticket.vo.TicketCheckVO;
 import kr.spring.ticket.vo.TicketVO;
 
 public interface TicketService { 
@@ -58,6 +59,7 @@ public interface TicketService {
 	public void updateGame(GameVO gameVO);
 	
 	/* 티켓 결제 */
+	public void insertTicketCheck(TicketCheckVO ticketCheckVO);	// 좌석선택정보 저장
 	public void insertSeatStatus(SeatStatusVO seatStatusVO);	// 좌석예매정보 등록
 	public void insertTicket(TicketVO ticket);
 }

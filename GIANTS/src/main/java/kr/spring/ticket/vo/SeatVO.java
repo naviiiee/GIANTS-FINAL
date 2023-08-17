@@ -32,4 +32,5 @@ public class SeatVO {
 	private String seatC;	// 선택한 좌석 열
 	
 	private String seat;
+	private String seat_info;
 }

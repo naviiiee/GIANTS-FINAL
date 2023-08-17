@@ -14,6 +14,7 @@ import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
 import kr.spring.ticket.vo.SeatStatusVO;
 import kr.spring.ticket.vo.SeatVO;
+import kr.spring.ticket.vo.TicketCheckVO;
 import kr.spring.ticket.vo.TicketVO;
 
 @Mapper
@@ -80,6 +81,8 @@ public interface TicketMapper {
 	public MemberDetailVO selectMemberDetail(Integer mem_num);
 	
 	/* 티켓 결제 */
+	@Insert("INSERT INTO ticket_check (check_num, seat_info, game_num, mem_num) VALUES(ticket_check_seq.nextval, #{seat_info}, #{game_num}, #{mem_num})")
+	public void insertTicketCheck(TicketCheckVO ticketCheckVO);	// 좌석선택정보 저장
 	@Insert("INSERT INTO seat_status (status_num, seat_info, seat_date, seat_auth) VALUES(seat_status_seq.nextval, #{seat_info}, #{seat_date}, #{seat_auth})")
 	public void insertSeatStatus(SeatStatusVO seatStatusVO);	// 좌석예매정보 등록
 	public void insertTicket(TicketVO ticketVO);

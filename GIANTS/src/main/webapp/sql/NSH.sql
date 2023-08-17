@@ -43,12 +43,20 @@ CREATE TABLE seat_status(
 	CONSTRAINT seat_status_fk FOREIGN KEY (seat_num) REFERENCES seat (seat_num)
 );
 
--- 주문정보
+-- 선택정보확인(장바구니개념)
+CREATE TABLE ticket_check(
+	check_num NUMBER,
+	seat_info VARCHAR2(10) NOT NULL,
+	game_num NUMBER NOT NULL,
+	mem_num NUMBER NOT NULL,
+	CONSTRAINT ticket_check_pk PRIMARY KEY (check_num)
+);
+
+-- 티켓
 CREATE TABLE ticket(
 	ticket_num VARCHAR2(20),
     mem_num NUMBER,
     game_num NUMBER,
-    seat_num NUMBER,
 	ticket_date DATE DEFAULT SYSDATE NOT NULL,
 	ticket_quantity NUMBER(1) NOT NULL,
 	ticket_modify DATE,
@@ -59,8 +67,12 @@ CREATE TABLE ticket(
 	pay_method varchar2(30) not null,
 	CONSTRAINT ticket_pk PRIMARY KEY (ticket_num),
 	CONSTRAINT ticket_fk FOREIGN KEY (mem_num) REFERENCES member (mem_num),
-	CONSTRAINT ticket_fk2 FOREIGN KEY (game_num) REFERENCES tgame (game_num),
-	CONSTRAINT ticket_fk3 FOREIGN KEY (seat_num) REFERENCES seat (seat_num)
+	CONSTRAINT ticket_fk2 FOREIGN KEY (game_num) REFERENCES tgame (game_num)
+);
+
+-- 티켓상세
+CREATE TABLE ticket_detail(
+	
 );
 
 -- sequence
@@ -68,3 +80,4 @@ CREATE SEQUENCE tgame_seq;
 CREATE SEQUENCE grade_seq;
 CREATE SEQUENCE seat_seq;
 CREATE SEQUENCE seat_status_seq;
+CREATE SEQUENCE ticket_check_seq;

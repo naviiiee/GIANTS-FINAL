@@ -107,7 +107,7 @@ $(function() {
 			seat_info += '<input type="hidden" name="seatC" class="seatC" value="' + check_col + '">';*/
 			
 			seat_info += '<input type="hidden" name="seat" value="' + check_block + '^' + check_row + '^' + check_col + '">';
-			//seat_info += '<input type="hidden" name="seat_info" value="' + check_block + check_row  + check_col + '">';
+			seat_info += '<input type="hidden" name="seat_info" value="' + check_block + check_row  + check_col + '">';
 			seat_info += '<input type="hidden" name="grade_num" value="' + $(this).attr('data-grade') + '">';
 			seat_info += '</td></tr>';
 			

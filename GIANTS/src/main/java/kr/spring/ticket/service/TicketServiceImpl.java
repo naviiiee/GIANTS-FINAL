@@ -13,6 +13,7 @@ import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
 import kr.spring.ticket.vo.SeatStatusVO;
 import kr.spring.ticket.vo.SeatVO;
+import kr.spring.ticket.vo.TicketCheckVO;
 import kr.spring.ticket.vo.TicketVO;
 
 @Service
@@ -86,6 +87,9 @@ public class TicketServiceImpl implements TicketService {
 
 	/* Ticket */
 	@Override
+	public void insertTicketCheck(TicketCheckVO ticketCheckVO) { ticketMapper.insertTicketCheck(ticketCheckVO); }
+	
+	@Override
 	public void insertSeatStatus(SeatStatusVO seatStatusVO) { ticketMapper.insertSeatStatus(seatStatusVO); }
 	
 	@Override
@@ -93,6 +97,5 @@ public class TicketServiceImpl implements TicketService {
 		ticketMapper.insertTicket(ticket);
 	}
 
-	
 }
  
