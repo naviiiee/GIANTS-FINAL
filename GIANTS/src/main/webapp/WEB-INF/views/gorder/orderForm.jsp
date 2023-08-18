@@ -12,19 +12,8 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <div class="page-main">
-
+<!-- 보유 중인 포인트, 결제 api - form 전송 -->
 		
-		<br>
-		<br>
-		<br>
-		<h3>포인트적용</h3><span>포인트는 100점 이상부터 사용가능합니다</span>
-		<hr size="1">
-			잔여포인트 : p   <input type="button" value="전액사용" id="point-btn">
-			<br>
-			<input type="text" value="포인트입력" id="point-input-btn" name="order_point">원  <input type="button" value="적용" id="point-use-btn">
-		<br>
-		<br>
-		<br>
 		<h3>주문 리스트</h3>
 		<hr size="1">
 		<br>
@@ -79,6 +68,16 @@
 					<td class="align-center"><span class="all-total" data-alltotal="${all_total}"><fmt:formatNumber value="${all_total}"/>원</span></td>
 				</tr>
 		</table>  
+		
+		<br>
+		<br>
+		<h3>포인트적용</h3><span>포인트는 100점 이상부터 사용가능합니다</span>
+		<hr size="1">
+			잔여포인트 : p   <input type="button" value="전액사용" id="point-btn">
+			<br>
+			<input type="text" value="포인트입력" id="point-input-btn" name="order_point">원  <input type="button" value="적용" id="point-use-btn">
+		<br>
+		<br>
 		
 		<!-- 주문금액 + 배송비 - 사용포인트 = 결제금액, 하단에 5만원 이상 결제 시 무료배송 -->
 		<div class="order-info">
@@ -179,6 +178,8 @@
 		
 		<div class="align-center">
 			<form:button class="default-btn" onclick="requestPay()">전송 - 주문 api</form:button> <!-- 무통장입금을 하거나 결제 완료되면 자동으로 전송...? -->
+			<input type="button" value="주문취소" class="default-btn"
+			 onclick="location.href='${pageContext.request.contextPath}/gorder/goods_cart.do'">
 		</div>    
 		</form:form>
 		<!-- 폼 처리 끝 -->
@@ -188,8 +189,7 @@
 		   
 	
 		<div class="align-center">
-			<input type="button" value="주문취소" class="default-btn"
-			 onclick="location.href='${pageContext.request.contextPath}/gorder/goods_cart.do'">
+			
 			 <!-- <button class="default-btn" onclick="requestPay()">주문API</button> -->
 			 <script>
     function requestPay() { 
@@ -212,12 +212,6 @@
 	 			let msg = '결제가 완료되었습니다.';
 	 			let result = {
 	 				
-	 				/* 'ticket_num':ticket_num,
-	 				'game_num':${gameVO.game_num},
-	 				'pay_method':'card',
-	 				'ticket_date':'${gameVO.game_date}',
-	 				'ticket_quantity':ticket_quantity,
-	 				'total_price':totalPrice, */
 	 				'pg':'kakaopay'
 	 			}
 	 			console.log(result);
@@ -228,7 +222,7 @@
 	 				contentType:'application/json',
 	 				data:JSON.stringify(result),
 	 				success: function (res) {
-	 					alert('결제 성공!!');
+	 					alert('결제 완료');
 	 					location.href=res;
 	 				},
 					error: function (err) { console.log(err); }
