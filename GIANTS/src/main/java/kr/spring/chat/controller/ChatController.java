@@ -162,5 +162,4 @@ public class ChatController {
 		model.addAttribute("page", page.getPage());
 		return "chatList";
 	}
-	
 }

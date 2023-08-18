@@ -86,4 +86,5 @@ public class ChatServiceImpl implements ChatService{
 	public int selectRowCount(Map<String, Object> map) {
 		return chatMapper.selectRowCount(map);
 	}
+	
 }

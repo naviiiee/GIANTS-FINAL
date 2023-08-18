@@ -61,7 +61,7 @@ public class AppConfig implements WebMvcConfigurer {
 				.addPathPatterns("/member/changePassword.do")
 				// Ticket
 				//.addPathPatterns("/ticket/ticketMain.do"); 
-				// Chatting 
+				// Chatting
 				.addPathPatterns("/chat/chatting.do");
 
 		//Comp(기업) 인터셉터 설정

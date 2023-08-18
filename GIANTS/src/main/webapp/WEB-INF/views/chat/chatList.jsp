@@ -17,7 +17,7 @@
 					<a href="chatting.do?chatroom_num=${chat.chatroom_num}">
 						<!-- <b>${chat.chatRoomVO.mem_id}(${chat.room_cnt})</b> -->
 						<br>
-						<span>${fn:substring(chat.chatVO.message, 0, 45)}</span> <!-- 45자의 메시지가 보여짐 -->
+						<span>${fn:substring(chat.chatVO.message, 0, 45)}</span> <!-- 45자의 메시지가 보여짐 --> 
 					</a>
 				</td>
 				<td>
