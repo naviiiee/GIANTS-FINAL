@@ -132,4 +132,25 @@ public class MemberAdminController {
 		return "common/resultView";
 	}
 	
+	/* === 마이페이지 : 관리자
+	=======================*/
+	//티켓관리
+	@RequestMapping("/member/adminMypageTicket.do")
+	public String adminMypageTicket(HttpSession session, Model model) {
+		
+		return "adminMypageTicket";
+	}
+	//굿즈관리
+	@RequestMapping("/member/adminMypageGoods.do")
+	public String adminMypageGoods(HttpSession session, Model model) {
+		
+		return "adminMypageGoods";
+	}
+	//매출관리
+	@RequestMapping("/member/adminMypageSaleManage.do")
+	public String adminMypageSaleManage(HttpSession session, Model model) {
+		
+		return "adminMypageSaleManage";
+	}
+	
 } 

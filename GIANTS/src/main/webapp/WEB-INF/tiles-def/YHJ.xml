@@ -10,19 +10,26 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/commonRegister.jsp"/>
 	</definition>
 	
-	<definition name="commonfindId" extends="main"> 
-    	<put-attribute name="title" value="아이디찾기"/>
+	<definition name="memberfindId" extends="main"> 
+    	<put-attribute name="title" value="일반아이디찾기"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/findIdForm.jsp"/>
     </definition>
-    
+    <definition name="companyfindId" extends="main"> 
+    	<put-attribute name="title" value="기업아이디찾기"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/findIdFormCp.jsp"/>
+    </definition>
 	<definition name="findIdResult" extends="main">
-		<put-attribute name="title" value="아아디찾기결과"/>
+		<put-attribute name="title" value="아이디찾기결과"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/findIdResult.jsp"/>
 	</definition>
 	
-	<definition name="commonfindPw" extends="main"> 
-    	<put-attribute name="title" value="비밀번호찾기"/>
+	<definition name="memberfindPw" extends="main"> 
+    	<put-attribute name="title" value="일반비밀번호찾기"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/findPwForm.jsp"/>
+    </definition>
+    <definition name="companyfindPw" extends="main"> 
+    	<put-attribute name="title" value="기업비밀번호찾기"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/findPwFormCp.jsp"/>
     </definition>
     
     <definition name="findPwResult" extends="main">
