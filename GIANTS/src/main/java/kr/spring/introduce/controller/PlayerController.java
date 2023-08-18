@@ -8,8 +8,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,29 +23,6 @@ public class PlayerController {
 	@Autowired
 	private PlayerService playerService;
 	
-	/*--------------
-	 * 선수 상세
-	 *-------------*/
-	/*
-	@GetMapping("/introduce/player.do")
-	public String form() {
-		return "player";
-	}
-	
-	
-	@RequestMapping("/introduce/player.do")
-	public String detail(@RequestParam("player_num") int player_num, Model model) {
-		
-		model.addAttribute("player_num", player_num);
-		
-		log.debug("<<player_num>> : " + player_num);
-		
-		PlayerVO playerVO = playerService.selectPlayer(player_num);
-		model.addAttribute("player", playerVO);
-		
-		return "player";
-	}
-	*/
 	
 	//이미지 출력
 	@RequestMapping("/introduce/imageView.do")
@@ -125,7 +100,7 @@ public class PlayerController {
 		int count = playerService.selectRowCount(map);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"playerList_c.do");
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,30,10,"playerList_c.do");
 		
 		List<PlayerVO> list = null;
 		if(count > 0) {
@@ -161,7 +136,7 @@ public class PlayerController {
 		int count = playerService.selectRowCount(map);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"playerList_t.do");
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,30,10,"playerList_t.do");
 		
 		List<PlayerVO> list = null;
 		if(count > 0) {
@@ -197,7 +172,7 @@ public class PlayerController {
 		int count = playerService.selectRowCount(map);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"playerList_p.do");
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,30,10,"playerList_p.do");
 		
 		List<PlayerVO> list = null;
 		if(count > 0) {
@@ -233,7 +208,7 @@ public class PlayerController {
 		int count = playerService.selectRowCount(map);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"playerList_w.do");
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,30,10,"playerList_w.do");
 		
 		List<PlayerVO> list = null;
 		if(count > 0) {
@@ -270,7 +245,7 @@ public class PlayerController {
 		int count = playerService.selectRowCount(map);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"playerList_n.do");
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,30,10,"playerList_n.do");
 		
 		List<PlayerVO> list = null;
 		if(count > 0) {

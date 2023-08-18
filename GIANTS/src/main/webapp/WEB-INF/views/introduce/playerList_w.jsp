@@ -42,40 +42,6 @@ li{
 	<hr size="0.05" width="100%" noshade style="margin-bottom:3%">
 	
 	
-	<!-- 
-	<div class="a-tab">
-		<ul class="align-right">
-			<li style="display:flex;">
-				<a href="player.do">감독</a>
-				<a href="playerList_c.do">코치</a>
-				<a href="playerList_t.do">투수</a>
-				<a href="playerList_p.do">포수</a>
-				<a href="playerList_w.do" class="over">외야수</a>
-				<a href="playerList_n.do">내야수</a>
-			</li>
-		</ul>
-	</div>
-	
-	
-	<form action="commuList.do" id="search_form" method="get"  style="padding-bottom: 24px;">
-		<ul class="search align-center">
-			<li>
-				<select name="keyfield" id="keyfield">
-					<option value="1" <c:if test="${param.keyfield == 1}">SELECTED</c:if>>선수명</option>
-					<option value="2" <c:if test="${param.keyfield == 2}">SELECTED</c:if>>선수 포지션</option>
-				</select>
-			</li>
-			<li>
-				<input type="search" name="keyword" id="keyword" value="${param.keyword}" style="height:30px;">
-			</li>
-			<li>
-				<input type="submit" value="검색" style="height:30px;"  class="accept-btn">
-			</li>
-		</ul>
-	</form>
-	 -->
-	
-	
 	
 	
 	<div class="aaa">
@@ -144,7 +110,10 @@ li{
 					<tr>
 						<td class="align-center"><img src="${pageContext.request.contextPath}/introduce/imageView.do?player_num=${player.player_num}"  width="200" height="200"></td>
 						<td class="align-center">${player.player_backnumber}</td>
-						<td class="align-center">${player.player_name}</td>
+						<td class="align-center">
+						<c:if test="${user.mem_auth != 9}">${player.player_name}</c:if>
+						<c:if test="${!empty user && user.mem_auth == 9}"><a href="admin_playerModify.do?player_num=${player.player_num}" style="text-decoration : underline; color: #196ef7; text-decoration-color:#196ef7;">${player.player_name}</a></c:if>
+						</td>
 						<td class="align-center">${player.player_birthday}</td>
 						<td class="align-center">${player.player_position}</td>
 						<td class="align-center">${player.player_toway}</td>
@@ -158,7 +127,6 @@ li{
 		<div class="align-right" >
 			<c:if test="${!empty user}">
 			<input type="button" value="선수 등록" onclick="location.href='admin_player.do'" class="accept-btn">
-			<input type="button" value="수정" onclick="location.href='admin_player.do'" class="accept-btn">
 			</c:if>
 		</div>
 		

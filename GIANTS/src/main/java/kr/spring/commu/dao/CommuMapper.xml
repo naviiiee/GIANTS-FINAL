@@ -28,11 +28,11 @@
 	
 	<!-- 글 조회 순서 -->
 	<sql id="commuOrder">
-		<if test="order == 1"> <!-- 커뮤 글 번호 순서 -->
-			ORDER BY c.commu_num DESC 
+		<if test="order == 1"> <!-- 커뮤 글 최신글 순서 -->
+			ORDER BY commu_date DESC 
 		</if>
 		<if test="order == 2"> <!-- 커뮤 글 조회수 순서 -->
-			ORDER BY c.commu_hit DESC
+			ORDER BY commu_hit DESC
 		</if>
 		<if test="order == 3"> <!-- 커뮤 글 좋아요 수 순서 -->
 			ORDER BY fav_cnt DESC

@@ -39,11 +39,11 @@
 }
 
 dd {
-	margin-top:7%;
+	margin-top:12%;
 }
 
 dt {
-	margin-top:17%;
+	margin-top:25%;
 }
 
 /*  
@@ -114,6 +114,8 @@ hr{
     margin-bottom: 4%;
     margin-top: -3%;
 }
+
+
 </style>  
  
 <div class="page-main">
@@ -148,7 +150,7 @@ hr{
 		<div class="title03" style="width:100%">
 			<dl>
 				<dt>위치</dt>
-				<dd>부산광역시 동래구 사직로 45</dd>
+				<dd>부산광역시 동래구 사직로 45 종합운동장</dd>
 				<hr size="0.03" width="140%" noshade>
 				<dt>면적</dt>
 				<dd>총 면적 : 50.301㎡</dd>
@@ -158,9 +160,9 @@ hr{
 				<hr size="0.03" width="140%" noshade>
 			</dl>
 		</div>
-		<div>
+		<div style="margin-bottom:5%;">
 			<img src="${pageContext.request.contextPath}/images/사직야구장.png" class="sazik" width="700" height="700">
-			<span>
+			<span style="font-size : 106%;">
 			대한민국 부산광역시 동래구 사직동에 있는 야구장으로 1985년 10월에 완공되었으며 23,646석의 관람석이 있다.<br>
 			구장 크기는 좌·우 펜스까지 95m, 중앙 펜스까지 118m이고, 펜스 높이가 펜스 상단 철망을 포함해서 4.8m다.<br>
 			외형은 일본 요코하마 스타디움과 비슷하다.<br><br>

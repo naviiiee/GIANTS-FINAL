@@ -7,10 +7,11 @@
 </style>
 <div id="item_form" class="page-main">
 	<h2>선수 등록</h2>
-	<form:form modelAttribute="playerVO" action="admin_player.do" id="admin_player" enctype="multipart/form-data">
+	<form:form modelAttribute="playerVO" action="admin_playerModify.do" id="admin_playerModify" enctype="multipart/form-data">
+		<form:hidden path="player_num"/>
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
-			<li> 
+			<li>
 				<form:label path="player_name">선수명</form:label>
 				<form:input path="player_name"/>
 				<form:errors path="player_name" cssClass="error-color"/>
@@ -65,7 +66,18 @@
 		</ul>
 		<div class="align-center">
 			<form:button class="accept-btn">선수 등록</form:button>
-			<input type="button" value="목록" onclick="location.href='admin_player.do'" class="accept-btn">
+			<input type="button" value="삭제" id="delete_btn" class="accept-btn">
+			<script type="text/javascript">
+				let delete_btn = document.getElementById('delete_btn');
+				delete_btn.onclick=function(){
+					let choice = confirm('삭제하시겠습니까?');
+					if(choice){
+						//히스토리를 지우면서 이동
+						location.replace('delete.do?commu_num=${commu.commu_num}');
+					}
+				};
+			</script>
+			<input type="button" value="목록" onclick="location.href='player.do'" class="accept-btn">
 		</div>
 	</form:form>
 </div>
