@@ -100,6 +100,11 @@ a:hover,a:hover,a.visited:hover{color:#333;text-decoration:none;}
 	width: 150px;
 	color:#FFF;
 }
+#chat{
+	width: 25px;
+	height: 25px;
+	margin-top: 9px;
+}
 /* 로그인, 로그아웃 */
 .top-menu-login,
 .top-menu-loginout{

@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KMS/trading.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/trading.mark.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/chat.js"></script>
 <div class="page-main">
 	<h2>${trading.trade_title}</h2>
 	<div class="align-right">
@@ -16,7 +17,7 @@
 		<img id="output_mark" data-num="${trading.trade_num}" src="${pageContext.request.contextPath}/images/bookmark1.png" width="40">
 		<span id="output_markcnt"></span>	
 		<%-- 채팅 --%>
-		<a href="${pageContext.request.contextPath}/chat/chatRoomWrite.do"><img id="chat" data-num="${trading.trade_num}" src="${pageContext.request.contextPath}/images/bubble_speech.png" width="40"></a>
+		<img id="chat" data-num="${trading.trade_num}" src="${pageContext.request.contextPath}/images/bubble_speech.png" width="40">
 	</div>
 	<ul class="detail-info">
 		<li>

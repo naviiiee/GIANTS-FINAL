@@ -78,5 +78,10 @@ public class TradingServiceImpl implements TradingService{
 	public void deleteMark(Integer mark_num) {
 		tradingMapper.deleteMark(mark_num);
 	}
+
+	@Override
+	public int selectMemNumByTradeNum(Integer trade_num) {
+		return tradingMapper.selectMemNumByTradeNum(trade_num);
+	}
 	
 } 

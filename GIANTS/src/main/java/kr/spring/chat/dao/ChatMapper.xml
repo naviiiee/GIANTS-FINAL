@@ -1,5 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.chat.dao.ChatMapper">
+	<!-- 채팅 멤버 읽기 -->
+	<select id="selectChatMember" parameterType="integer" resultType="ChatVO">
+		SELECT mem_num, mem_id, mem_nickname FROM chat JOIN member USING (mem_num) WHERE chatroom_num=#{chatroom_num}
+	</select>
+	
+	<!-- 채팅 메시지 등록-->
+	<insert id="insertChat" parameterType="chatVO">
+		INSERT INTO chat(
+			chat_num,
+			chatroom_num,
+			mem_num,
+			message
+			)
+		VALUES(
+			#{chat_num},
+			#{chatroom_num},
+			#{mem_num},
+			#{message}
+			)
+	</insert>
+	
+	<!-- 채팅 메시지 읽기 -->
+	<select id="selectChatDetail" parameterType="integer" resultType="chatVO">
+		SELECT 
+			<![CDATA[
+			REPLACE(REPLACE(message,'<','&lt;'),'>','&gt;') message,
+			]]> <!--html 불허-->
+			chat_date,
+			read_count,
+			mem_num,
+			mem_id,
+			mem_nickname 
+		FROM chat 
+			 LEFT OUTER JOIN (SELECT chat_num, COUNT(*) read_count 
+							  FROM chat_read GROUP BY chat_num)
+			  USING (chat_num) 
+			 JOIN member
+			  USING (mem_num)
+		WHERE chatroom_num = #{chatroom_num}
+		ORDER BY chat_date ASC
+	</select>
 
+	<!-- 채팅방 레코드 수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT COUNT(*) FROM chatroom
+	</select>
+	
+	<!-- 채팅방 목록 -->
+	<select id="selectChatRoomList" parameterType="map" resultType="chatRoomVO">
+		SELECT * FROM (SELECT a.*, rownum rnum FROM(SELECT * FROM chatroom ORDER BY chatroom_num DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
 </mapper>

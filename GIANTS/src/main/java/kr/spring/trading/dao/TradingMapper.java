@@ -37,4 +37,9 @@ public interface TradingMapper {
 	@Delete("DELETE FROM bookmark WHERE mark_num=#{mark_num}")
 	public void deleteMark(Integer mark_num);
 	public void deleteMarkByTradeNum(Integer trade_num);
+	
+	//작성자 회원번호 구하기
+	@Select("SELECT mem_num FROM trading WHERE trade_num=#{trade_num}")
+	//@Select("SELECT mem_num, mem_id FROM trading t JOIN member_detail d ON t.mem_num = d.mem_num WHERE trade_num=#{trade_num}")
+	public int selectMemNumByTradeNum(Integer trade_num);
 } 
