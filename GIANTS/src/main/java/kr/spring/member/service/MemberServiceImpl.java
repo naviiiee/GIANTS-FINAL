@@ -136,14 +136,24 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO findMemberId(String mem_name, String mem_phone) {
 		return memberMapper.findMemberId(mem_name, mem_phone);
 	}
-
+	
 	@Override
 	public MemberVO findMemberPw(String mem_id, String mem_name, String mem_phone, String mem_email) {
 		return memberMapper.findMemberPw(mem_id, mem_name, mem_phone, mem_email);
 	}
-
+	
 	@Override
 	public void changePw(int mem_num, String new_passwd) {
 		memberMapper.changePw(mem_num, new_passwd);
+	}
+
+	@Override
+	public MemberVO findCompanyId(String comp_owner, String comp_phone) {
+		return memberMapper.findCompanyId(comp_owner, comp_phone);
+	}
+
+	@Override
+	public MemberVO findCompanyPw(String mem_id, String comp_owner, String comp_phone, String comp_email) {
+		return memberMapper.findCompanyPw(mem_id, comp_owner, comp_phone, comp_email);
 	}
 }
