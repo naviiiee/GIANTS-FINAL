@@ -42,6 +42,48 @@ public class GorderServiceImpl implements GorderService{
 		return orderMapper.selectListOrder(map);
 	}
 
+
+	@Override
+	public void updatePoint(int mem_num) {
+		orderMapper.updatePoint(mem_num);
+	}
+
+	@Override
+	public int selectOrderCountByMem_num(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<GorderVO> selectListOrderByMem_num(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public GorderVO selectOrder(Integer order_num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<GorderDetailVO> selectListOrderDetail(Integer order_num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateOrder(GorderVO order) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateOrderStatus(GorderVO order) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 	

@@ -3,7 +3,7 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<!-- 아래 설정을 상황에 맞게 수정해서 사용하세요 -->
+	<!-- 굿즈 주문 -->
 	
 	<definition name="goods_cart" extends="main">
 		<put-attribute name="title" value="굿즈 - 장바구니"/>
@@ -14,5 +14,46 @@
 		<put-attribute name="title" value="굿즈 - 주문폼"/>
 		<put-attribute name="body" value="/WEB-INF/views/gorder/orderForm.jsp"/>
 	</definition> 
+	
+	<definition name="orderFormDirect" extends="main">
+		<put-attribute name="title" value="굿즈 - 바로구매폼"/>
+		<put-attribute name="body" value="/WEB-INF/views/gorder/orderFormDirect.jsp"/>
+	</definition> 
+	
+	<!-- 그 외 -->
+	<!-- 사용자 -->
+    <definition name="orderList" extends="memberMypageGoodList">
+    	<put-attribute name="title" value="주문목록"/>
+	    <put-attribute name="body" value="/WEB-INF/views/gorder/user_orderList.jsp"/>
+    </definition>
+    <definition name="orderDetail" extends="myPage">
+    	<put-attribute name="title" value="주문내역"/>
+	    <put-attribute name="body" value="/WEB-INF/views/gorder/user_detail.jsp"/>
+    </definition>
+    <definition name="orderModify" extends="myPage">
+    	<put-attribute name="title" value="주문내역"/>
+	    <put-attribute name="body" value="/WEB-INF/views/gorder/user_modifyForm.jsp"/>
+    </definition>
+    
+    <!-- 관리자 -->
+    <definition name="adminOrderList" extends="adminMypageGoods">
+    	<put-attribute name="title" value="주문목록(관리자용)"/>
+	    <put-attribute name="body" value="/WEB-INF/views/gorder/admin_list.jsp"/>
+    </definition>
+    <definition name="adminOrderDetail" extends="adminMypageGoods">
+    	<put-attribute name="title" value="주문내역(관리자용)"/>
+	    <put-attribute name="body" value="/WEB-INF/views/gorder/admin_detail.jsp"/>
+    </definition>
+    <definition name="adminOrderModify" extends="adminMypageGoods">
+    	<put-attribute name="title" value="배송지정보수정(관리자용)"/>
+	    <put-attribute name="body" value="/WEB-INF/views/gorder/admin_modifyForm.jsp"/>
+    </definition>
+     <definition name="adminOrderStatus" extends="adminMypageGoods">
+    	<put-attribute name="title" value="주문상태수정(관리자용)"/>
+	    <put-attribute name="body" value="/WEB-INF/views/gorder/admin_status.jsp"/>
+    </definition>
+	
+	
+	
 	
 </tiles-definitions> 

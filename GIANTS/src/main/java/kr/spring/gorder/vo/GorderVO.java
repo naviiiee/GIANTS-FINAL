@@ -12,7 +12,7 @@ public class GorderVO {
 	private int order_num;
 	private int mem_num;
 	private String goods_name;
-	private int payment;
+	private int order_payment;
 	private int order_status; //배송 상태(default 0, 0:결제완료)
 	private Date order_regdate;
 	private Date order_modifydate; //수정일
@@ -30,7 +30,7 @@ public class GorderVO {
 	private int order_total; 
 	private int merchant_uid; //결제 api
 	
-	
+	private String id; //구매자 id
 	private int[] cart_numbers; //장바구니에서 선택한 상품의 번호들
 	private GorderDetailVO gorderDetailVO;
 	

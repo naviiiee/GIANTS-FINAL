@@ -4,16 +4,76 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 상품 구매 시작 -->
-<!-- list, all_total 가져옴 -->
+<!-- goods(goodsVO), option(goodsOptionVO),  -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/orderForm.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_order_form.js"></script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-<div class="page-main">
+<style>
 
+</style>
+<div class="page-main">
+	
+	<form:form modelAttribute="orderVO" action="order.do" id="order_register">
+	
+		<h3>주문자 정보</h3> <!-- 굳이 넣어야할까? -->
+		<hr size="1">
+		<ul>
+			<li>
+				이름 <input type="text">
+			</li>
+			
+			<li>
+				이메일 <input type="email">
+			</li>
+			
+			<li>
+				연락처 <input type="text">
+			</li>
+		</ul>
+		<br>
+		<br>
+		<br>
 		
+		<h3>배송정보</h3>
+		<hr size="1">
+		<br>
+		<ul>
+			<li>
+				<form:label path="order_name">받는 사람</form:label>
+				<form:input path="order_name"/>
+				<input type="button" value="회원주소사용" id="member_address" class="default-btn"> <!-- 회원 가입 시 입력했던 정보 가져오기 -->
+				<form:errors path="order_name" cssClass="error-color"/>      
+			</li>
+			<li>
+				<label for="zipcode">우편번호</label>
+				<form:input path="order_zipcode" id="zipcode" maxlength="10"/>
+				<input type="button" onclick="execDaumPostcode()"
+				            value="우편번호 찾기" class="default-btn"> 
+				<form:errors path="order_zipcode" cssClass="error-color"/>     
+			</li>
+			<li>
+				<label for="address1">주소</label>
+				<form:input path="order_address1" id="address1" maxlength="30"/>
+				<form:errors path="order_address1" cssClass="error-color"/>      
+			</li>
+			<li>
+				<label for="address2">상세주소</label>
+				<form:input path="order_address2" id="address2" maxlength="30"/>
+				<form:errors path="order_address2" cssClass="error-color"/>      
+			</li>
+			<li>
+				<form:label path="mem_phone">전화번호</form:label>
+				<form:input path="mem_phone" maxlength="15" id="mem_phone"/>
+				<form:errors path="mem_phone" cssClass="error-color"/>      
+			</li>
+			<li>
+				<form:label path="order_message">남기실 말씀</form:label>
+				<form:input path="order_message"/>
+				<form:errors path="order_message" cssClass="error-color"/>      
+			</li>
+			
+		</ul>	
 		<br>
 		<br>
 		<br>
@@ -21,7 +81,7 @@
 		<hr size="1">
 			잔여포인트 : p   <input type="button" value="전액사용" id="point-btn">
 			<br>
-			<input type="text" value="포인트입력" id="point-input-btn" name="order_point">원  <input type="button" value="적용" id="point-use-btn">
+			<input type="text" value="포인트입력" id="point-input-btn">원  <input type="button" value="적용" id="point-use-btn">
 		<br>
 		<br>
 		<br>
@@ -37,7 +97,6 @@
 				<th>적립</th>
 				<th>합계</th>
 			</tr>
-			<c:forEach var="cart" items="${list}">
 				<tr>
 					<td>
 						<a href="${pageContext.request.contextPath}/goods/goodsDetail.do?goods_num=${cart.goods_num}">
@@ -45,36 +104,35 @@
 						</a>
 					</td>
 					<td>
-							${cart.goodsVO.goods_name}
+							${goods_name}
 					</td>
 					<td class="align-center">
-						<span class="goods-price" data-price="${cart.goodsVO.goods_dprice}"><fmt:formatNumber value="${cart.goodsVO.goods_dprice}"/>원</span>
+						<span class="goods-price" data-price="${goods_dprice}"><fmt:formatNumber value="${goods_dprice}"/>원</span>
 					</td>
 					
 					<td class = "align-center">
-						${cart.order_quantity}
+						${order_quantity}
 					</td>
 					<td>
-						${cart.order_point}p
+						${order_point}p
 					</td>
 					
 					<td class="align-center">
-						<div class="sub-total" data-total="${cart.sub_total}">
-						<fmt:formatNumber value="${cart.sub_total}"/>원
+						<div class="sub-total" data-total="${sub_total}">
+						<fmt:formatNumber value="${sub_total}"/>원
 						<br>
 						</div>
 					</td>					
-					<c:if test="${cart.goods_size!='옵션없음'}">
+					<c:if test="${goods_size!='옵션없음'}">
 						<tr class="option-tr">
 						    <td colspan="6"><span>⤷</span> <img src="${pageContext.request.contextPath}/images/btn_order_option.gif" alt="옵션" title="옵션">
-						    <span>사이즈 : ${cart.goods_size}</span>
+						    <span>사이즈 : ${goods_size}</span>
 						    </td>
 						</tr>
 
 					</c:if>
 				</tr>
-			</c:forEach>
-				<tr class="all_total">
+				<tr>
 					<td colspan="5" class="align-right"><b>총구매금액</b></td>
 					<td class="align-center"><span class="all-total" data-alltotal="${all_total}"><fmt:formatNumber value="${all_total}"/>원</span></td>
 				</tr>
@@ -128,122 +186,18 @@
 		
 		<h3>결제수단</h3>
 		<hr size="1">
-		<li>	<!-- 통장입금 radio  버튼 누르면 계좌번호 보이도록 처리-->
-			<input type="radio" path="order_payment" id="payment1" value="1"/>무통장입금
-			<input type="radio" path="order_payment" id="payment2" value="2"/>카드결제                
+		<li>
+			<input type="radio" name="order_payment" id="payment1" value="1">통장입금
+			<input type="radio" name="order_payment" id="payment2" value="2">카드결제                
 		</li>
 		
-		
-			<form:form modelAttribute="orderVO" action="order.do" id="order_register">
-		<h3>배송정보</h3>
-		<hr size="1">
-		<br>
-		<ul>
-			<li>
-				<form:label path="order_name">받는 사람</form:label>
-				<form:input path="order_name"/>
-				<input type="button" value="회원주소사용" id="member_address" class="default-btn"> <!-- 회원 가입 시 입력했던 정보 가져오기 -->
-				<form:errors path="order_name" cssClass="error-color"/>      
-			</li>
-			<li>
-				<label for="zipcode">우편번호</label>
-				<form:input path="order_zipcode" id="zipcode" maxlength="10"/>
-				<input type="button" onclick="execDaumPostcode()"
-				            value="우편번호 찾기" class="default-btn"> 
-				<form:errors path="order_zipcode" cssClass="error-color"/>     
-			</li>
-			<li>
-				<label for="address1">주소</label>
-				<form:input path="order_address1" id="address1" maxlength="30"/>
-				<form:errors path="order_address1" cssClass="error-color"/>      
-			</li>
-			<li>
-				<label for="address2">상세주소</label>
-				<form:input path="order_address2" id="address2" maxlength="30"/>
-				<form:errors path="order_address2" cssClass="error-color"/>      
-			</li>
-			<li>
-				<form:label path="mem_phone">전화번호</form:label>
-				<form:input path="mem_phone" maxlength="15" id="mem_phone"/>
-				<form:errors path="mem_phone" cssClass="error-color"/>      
-			</li>
-			<li>
-				<form:label path="order_message">남기실 말씀</form:label>
-				<form:input path="order_message"/>
-				<form:errors path="order_message" cssClass="error-color"/>      
-			</li>
-			
-		</ul>	
-		
-		
-		
 		<div class="align-center">
-			<form:button class="default-btn" onclick="requestPay()">전송 - 주문 api</form:button> <!-- 무통장입금을 하거나 결제 완료되면 자동으로 전송...? -->
-		</div>    
-		</form:form>
-		<!-- 폼 처리 끝 -->
-		
-
-		
-		   
-	
-		<div class="align-center">
+			<form:button class="default-btn">주문하기</form:button>
 			<input type="button" value="주문취소" class="default-btn"
 			 onclick="location.href='${pageContext.request.contextPath}/gorder/goods_cart.do'">
-			 <!-- <button class="default-btn" onclick="requestPay()">주문API</button> -->
-			 <script>
-    function requestPay() { 
-		
-		var IMP = window.IMP;
-	    IMP.init('imp40441146');  // 가맹점 식별코드
-		
-	 	// IMP.request_pay(param, callback) 결제창 호출
-	 	IMP.request_pay({
-	 		pg:'kakaopay',
-	 		pay_method:'card',
-	 		merchant_uid:1234,   // 주문번호  merchant_uid : 'merchant_'+new Date().getTime(),
-	 		name:'test',
-	 		amount:${all_total},	
-	 		buyer_email:'이메일',
-	 		buyer_name:'이름',
-	 		buyer_tel:'전화번호'
-	 	}, function(rsp) {
-	 		if(rsp.success) {
-	 			let msg = '결제가 완료되었습니다.';
-	 			let result = {
-	 				
-	 				/* 'ticket_num':ticket_num,
-	 				'game_num':${gameVO.game_num},
-	 				'pay_method':'card',
-	 				'ticket_date':'${gameVO.game_date}',
-	 				'ticket_quantity':ticket_quantity,
-	 				'total_price':totalPrice, */
-	 				'pg':'kakaopay'
-	 			}
-	 			console.log(result);
-	 			
-	 			$.ajax({
-	 				url:'insertMPay.do',
-	 				type:'post',
-	 				contentType:'application/json',
-	 				data:JSON.stringify(result),
-	 				success: function (res) {
-	 					alert('결제 성공!!');
-	 					location.href=res;
-	 				},
-					error: function (err) { console.log(err); }
-	 			}); 
-	 		} else {
-	 			let msg = '결제 실패';
-	 			msg += '\n에러내용 : ' + rsp.error_msg;
-	 		}
-	 	});
-	}
-    
-    </script>
-		</div>          
-    
-	
+		</div>             
+	</form:form>
+</div>
 <!-- 우편번호 검색 시작 -->
 <!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">

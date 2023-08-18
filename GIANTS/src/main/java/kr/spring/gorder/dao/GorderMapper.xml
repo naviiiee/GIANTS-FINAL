@@ -26,7 +26,7 @@
 		  #{goods_name},
 		  #{order_payment},
 		  #{order_status},
-		  #{order_regdate},
+		  SYSDATE,
 		  #{order_name},
 		  #{order_zipcode},
 		  #{order_address1},
@@ -38,32 +38,31 @@
 		  )  
 	</insert>
 	
-	<!-- <insert id="insertOrderDetail" parameterType="orderDetailVO">
-		INSERT INTO sporder_detail(
+	<insert id="insertOrderDetail" parameterType="GorderDetailVO">
+		INSERT INTO g_order_detail(
 		  detail_num,
-		  mem_num,
 		  order_num,
-		  order_point,
-		  order_dcost,
+		  order_point, <!-- 주문으로 인해 적립된 주문포인트이고 mem_point는 이를 누적시켜줘야함 -->
 		  goods_num,
-		  goods_dprice,
-		  goods_total,
-		  goods_size,
-		  mem_point
-		  
-		  
-		  
-		  )
+		  order_quantity)
 		VALUES(
 		  sporder_detail_seq.nextval,
-		  #{item_num},
-		  #{item_name},
-		  #{item_price},
-		  #{item_delivery},
-		  #{item_total},
-		  #{order_quantity},
-		  #{order_num})  
-	</insert> -->
+		  #{detail_num},
+		  #{order_num},
+		  #{order_point},
+		  #{goods_num},
+		  #{order_quantity})  
+	</insert>
+	
+	<!-- 포인트 누적해주기 -->
+	<update id="updatePoint" parameterType="integer">
+		UPDATE member_detail m
+		SET m.mem_point = m.mem_point + (
+		    SELECT SUM(o.order_point) 
+		    FROM g_order_detail o 
+		    WHERE o.mem_num = #{mem_num})
+		WHERE m.mem_num =#{mem_num}
+	</update>
 	
 	<!-- 관리자 - 주문 목록 -->
 	<sql id="orderSearch">
@@ -107,7 +106,56 @@
 		]]>
 	</select>
 
-
+	<!-- 사용자 주문 목록 -->
+	<sql id="orderSearchByUser">
+		WHERE mem_num = #{mem_num}
+		<if test="keyword != null and keyword != ''">
+			<if test="keyfield == 1">
+				AND order_num = #{keyword}
+			</if>
+			<if test="keyfield == 2">
+				AND item_name LIKE '%' || #{keyword} || '%'
+			</if>
+		</if>
+	</sql>
+	
+	<select id="selectOrderCountByMem_num" parameterType="map">
+		SELECT
+		  COUNT(*)
+		FROM g_order
+		<include refid="orderSearchByUser"></include>
+	</select>
+	
+	<select id="selectListOrderByMem_num" parameterType="map"
+	                                           resultType="GorderVO">
+		SELECT
+		  *
+		FROM (SELECT
+		        a.*,
+		        rownum rnum
+		      FROM (SELECT
+		              *
+		            FROM g_order
+		            <include refid="orderSearchByUser"></include>
+		            ORDER BY order_num DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>		            
+	</select>
+	
+	<!-- 배송지정보수정 -->
+	<update id="updateOrder" parameterType="GorderVO">
+		UPDATE g_order
+		SET
+		  order_name=#{order_name},
+		  order_zipcode=#{order_zipcode},
+		  order_address1=#{order_address1},
+		  order_address2=#{order_address2},
+		  mem_phone=#{mem_phone},
+		  order_message=#{order_message},
+		  order_modifydate=SYSDATE
+		WHERE order_num=#{order_num}
+	</update>
 
 
 
