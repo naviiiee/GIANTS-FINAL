@@ -131,7 +131,57 @@
 			<input type="radio" path="order_payment" id="payment1" value="1"/>무통장입금
 			<input type="radio" path="order_payment" id="payment2" value="2"/>카드결제                
 		</li>
+		<div id="bankInfo" style="display: none;">
+    		<span>계좌번호: xxx-xxxx-xxxx (3시간 이내로 입금하지 않으면 자동 취소됩니다.)</span>
+		</div>
 		
+		<div id="payInfo" style="display : none;'">
+		<button class="default-btn" onclick="requestPay()">주문API</button>
+		
+		</div>
+		
+		
+		<script type="text/javascript">
+		
+		const payment1Radio = document.getElementById('payment1');
+	    const payment2Radio = document.getElementById('payment2');
+	    const bankInfoDiv = document.getElementById('bankInfo');
+	    const payInfoDiv = document.getElementById('payInfo');
+	    
+	    let payment1Checked = false; // 무통장입금 라디오 버튼의 상태
+	 // 무통장입금 라디오 버튼이 선택되었을 때
+		payment1Radio.addEventListener('change', function() {
+		    if (this.checked) {
+		        bankInfoDiv.style.display = 'block';
+		        payInfoDiv.style.display = 'none';
+		        payment1Checked = true;
+		        payment2Radio.checked = false;
+		    } else {
+		        // 계좌번호 <div> 요소를 숨김
+		        bankInfoDiv.style.display = 'none';
+		        payment1Checked = false;
+		    }
+		});
+
+		 payment2Radio.addEventListener('change', function() {
+		        if (this.checked) {
+		            bankInfoDiv.style.display = 'none'; //계좌번호 숨기기
+		            payInfoDiv.style.display = 'block'; //결제 api 버튼 보여주기
+		            payment1Radio.checked = false; // 무통장입금 라디오 버튼 선택 해제
+		            payment1Checked = false;
+		        }
+		        
+		        else{
+		        	payInfoDiv.style.display = 'none';
+		        	
+		        }
+		        
+		    });
+
+
+		
+
+		</script>
 		
 			<form:form modelAttribute="orderVO" action="order.do" id="order_register">
 		<h3>배송정보</h3>
@@ -190,7 +240,7 @@
 	
 		<div class="align-center">
 			
-			 <!-- <button class="default-btn" onclick="requestPay()">주문API</button> -->
+			 <!--  -->
 			 <script>
     function requestPay() { 
 		
