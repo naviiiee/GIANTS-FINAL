@@ -22,7 +22,7 @@ public class GoodsQnaVO {
 	private Date qna_mdate;
 	private int qna_status; //1:답변전, 2:답변완료
 	private int mem_num;
-	@NotEmpty
+	
 	private int goods_num;
 	private String qna_ip;
 	

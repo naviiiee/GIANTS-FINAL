@@ -64,11 +64,11 @@ div#file_detail span{
 ul.filter-btns li div{
 	width:auto;
 }
-div.cate-filter{
+div#cate-filter{
 	width:450px;
-	margin:5px 0;
+	margin-bottom:7px;
 }
-div.cate-filter button[type="button"].off{
+div#cate-filter button[type="button"].off{
 	width:80px;
 	height:30px;
 	background-color:#6cace4;
@@ -79,8 +79,8 @@ div.cate-filter button[type="button"].off{
 	text-align:center;
 }
 
-div.cate-filter button[type="button"].off:hover,
-div.cate-filter button[type="button"].on{
+div#cate-filter button[type="button"].off:hover,
+div#cate-filter button[type="button"].on{
 	width:80px;
 	height:30px;
 	background-color:#FFF;
@@ -91,8 +91,10 @@ div.cate-filter button[type="button"].on{
 	text-align:center;
 }
 
-div.list-btns{
-	margin-top:5px;
+div#list-btns{
+	width:450px;
+	margin:0;
+	float:right;
 }
 ul.search{
 	float:right;
@@ -128,7 +130,7 @@ form#search_form #order{
 	clear:both;
 }
 input[type="button"]#admin_btn{
-	width:110px;
+	width:80px;
 	height:30px;
 	background-color:#dd032f;
 	color:#FFF;
@@ -177,10 +179,6 @@ div.goods-list table tr:first-child{
 	color:#052345;
 	border-top:2px solid #dd032f;
 }
-input#reg_btn{
-	 width:100px;
-}
-
 
 /* 상품문의 - 글 상세
 ------------------*/
@@ -196,7 +194,8 @@ div#answer_div{
 	margin-top:10px;
 	background-color:#EEEEEE;
 }
-form#gans_form{
+form#gans_form,
+form#mans_form{
 	width:1150px;
 	margin:0;
 }
@@ -212,11 +211,12 @@ div#ans_first, div#mans_first{
 	padding-left:15px;
 	margin-bottom:10px; */
 }
-div#ans_second{
+div#ans_second, div#mans_second{
 	float:right;
-	width:50px;
+	width:135px;
 	margin-bottom:10px;
 }
+
 div#loading{
 	width:100px;
 	height:50px;
@@ -241,6 +241,30 @@ div#output{
 form#mans_form{
 	border:none;
 	margin:5px;
+}
+
+/* 문의글 UI
+------------------*/
+table.top-part{
+	margin:0;
+	padding:0;
+}
+table.top-part,
+table.top-part td,
+table.top-part th{
+	border:1px solid #ccc;
+	border-collapse : collapse;
+	text-align:center;
+	font-size:11pt;
+}
+table.top-part{
+	margin:5px 0 10px 0;
+	padding:0;
+	width:100%;
+	height:100px;
+}
+table.top-part th{
+	background-color:rgb(230, 230, 230);
 }
 
 /* 문의답변 UI
@@ -280,7 +304,25 @@ ul.detail-info li:last-child{
 	vertical-align:top;
 }
 
-
+/* 문의 등록
+------------------*/
+form#qna_register ul li label,
+form#qna_modify ul li label{
+	margin:0 0 5px 10px;
+	display:inline-block;
+	font-size:14pt;
+	width:200px;
+}
+form#qna_register input[type="text"],
+form#qna_modify input[type="text"]{
+	width:50%;
+	height:25px;
+}
+form#qna_register textarea,
+form#qna_modify textarea{
+	width:50%;
+	height:100px;
+}
 
 
 

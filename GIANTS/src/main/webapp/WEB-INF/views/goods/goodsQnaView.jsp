@@ -10,21 +10,30 @@
 		<h2>상품문의</h2>
 		<hr size="0.05" width="100%" noshade>
 	</div>
-	<ul>
-		<li>제목 | ${qna.qna_title}</li>
-		<li>작성자 | ${qna.mem_id}</li>
-		<li>작성일 | ${qna.qna_regdate}</li>
-		<li>상품명 | ${qna.goods_name}</li>
-		<li>
-			
-			<c:if test="${qna.qna_status == 1}">
-				<input type="checkbox" disabled>처리전
-			</c:if>
-			<c:if test="${qna.qna_status == 2}">
-				<input type="checkbox" checked="checked" disabled><b>답변완료</b>
-			</c:if>
-		</li>
-	</ul>
+	<table class="top-part">
+		<tr>
+			<th colspan="1">제목</th>
+			<td colspan="6">${qna.qna_title}</td>
+		</tr>
+		<tr>
+			<th>상품명</th>
+			<td>
+				<a href="goodsDetail.do?goods_num=${qna.goods_num}">${qna.goods_name}</a>
+			</td>
+			<th>작성자</th>
+			<td>${qna.mem_id}</td>
+			<th>작성일</th>
+			<td>${qna.qna_regdate}</td>
+			<td>
+				<c:if test="${qna.qna_status == 1}">
+					<input type="checkbox" disabled>처리전
+				</c:if>
+				<c:if test="${qna.qna_status == 2}">
+					<input type="checkbox" checked="checked" disabled><b>답변완료</b>
+				</c:if>
+			</td>
+		</tr>
+	</table>
 	<hr size="1" width="100%">
 	<div class="detail-content">
 		${qna.qna_content}

@@ -221,4 +221,9 @@ public class GoodsServiceImpl implements GoodsService{
 		goodsMapper.updateGoodsQnaStatusNot(qna_num);
 	}
 
+	@Override
+	public int getGoodsTotalStock(Integer goods_num) {
+		return goodsMapper.getGoodsTotalStock(goods_num);
+	}
+
 }

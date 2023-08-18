@@ -14,6 +14,31 @@
 				return false;
 			}
 		});
+		
+		$('#filter_all').click(function(){
+			console.log($('#filter_all').val());
+			location.href='admin_goodsList.do';
+		});
+		
+		$('#filter_uniform').click(function(){
+			console.log($('#filter_uniform').val());
+			location.href='admin_goodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&goods_category=' + $('#filter_uniform').val();
+		}); 
+		
+		$('#filter_cap').click(function(){
+			console.log($('#filter_cap').val());
+			location.href='admin_goodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&goods_category=' + $('#filter_cap').val();
+		}); 
+		
+		$('#filter_cheering').click(function(){
+			console.log($('#filter_cheering').val());
+			location.href='admin_goodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&goods_category=' + $('#filter_cheering').val();
+		}); 
+		
+		$('#filter_etc').click(function(){
+			console.log($('#filter_etc').val());
+			location.href='admin_goodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&goods_category=' + $('#filter_etc').val();
+		});
 	});
 </script>
 <div class="page-main">
@@ -23,9 +48,35 @@
 		<hr size="0.05" width="100%" noshade>
 	</div>
 	<form action="admin_goodsList.do" id="search_form" method="get">
-		<div class="align-right">
-			<input type="button" value="상품등록" onclick="location.href='registerGoods.do'" id="reg_btn">
-		</div>
+		<ul class="filter-btns">
+			<li>
+				<c:if test="${!empty user && user.mem_auth == 9}">
+					<div class="align-right" id="list-btns">
+						<input type="button" value="[관리자]목록" onclick="location.href='admin_goodsList.do'" id="admin_btn">
+						<input type="button" value="일반목록" onclick="location.href='goodsList.do'">
+						<input type="button" value="상품등록" onclick="location.href='registerGoods.do'">
+					</div>
+				</c:if>
+				<div id="cate-filter">
+					<button name="goods_category" type="button" value="0" id="filter_all"
+						<c:if test="${empty param.goods_category || param.goods_category == 0}"> class="on" </c:if>
+						<c:if test="${param.goods_category != 0}"> class="off" </c:if>>전체</button>
+					<button name="goods_category" type="button" value="1" id="filter_uniform" 
+						<c:if test="${param.goods_category == 1}"> class="on" </c:if>
+						<c:if test="${param.goods_category != 1}"> class="off" </c:if>>유니폼</button>
+					<button name="goods_category" type="button" value="2" id="filter_cap" 
+						<c:if test="${param.goods_category == 2}"> class="on" </c:if>
+						<c:if test="${param.goods_category != 2}"> class="off" </c:if>>모자</button>
+					<button name="goods_category" type="button" value="3" id="filter_cheering"
+						<c:if test="${param.goods_category == 3}"> class="on" </c:if>
+						<c:if test="${param.goods_category != 3}"> class="off" </c:if>>응원도구</button>
+					<button name="goods_category" type="button" value="4" id="filter_etc"
+						<c:if test="${param.goods_category == 4}"> class="on" </c:if>
+						<c:if test="${param.goods_category != 4}"> class="off" </c:if>>기타</button>
+				</div>
+				<hr size="0.05" width="100%" noshade>
+			</li>
+		</ul>
 		<ul class="search">
 			<li>
 				<select name="keyfield" id="keyfield">
@@ -41,6 +92,7 @@
 				<input type="submit" value="찾기">
 			</li>
 		</ul>
+
 	</form>
 	<c:if test="${count == 0}">
 	<div>표시할 상품이 없습니다.</div>
@@ -56,7 +108,6 @@
 				<th style="width:10%;">등록일</th>
 				<th style="width:7%;">상태</th>
 				<th style="width:7%;">수정</th>
-				<th style="width:7%;">삭제</th>
 			</tr>
 			<c:forEach var="goods" items="${list}">
 			<tr>
@@ -80,9 +131,6 @@
 				</td>
 				<td>
 					<input class="list-btn" type="button" value="수정" onclick="location.href='goodsUpdate.do?goods_num=${goods.goods_num}'">
-				</td>
-				<td>
-					<input class="list-btn" type="button" value="삭제" onclick="location.href='goodsDelete.do?goods_num=${goods.goods_num}'">
 				</td>
 			</tr>
 			</c:forEach>

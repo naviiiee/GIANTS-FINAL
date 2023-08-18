@@ -11,6 +11,14 @@ input[type="button"], input[type="submit"], button[type="submit"]:not(.not-css){
 }
 /* 굿즈 상세페이지
 ----------------*/
+input[type="button"]#admin_btn{
+	width:80px;
+	height:30px;
+	background-color:#dd032f;
+	color:#FFF;
+	border:none;
+	cursor:pointer;
+}
 .goods-photo{
 	width:40%;
 	margin:0;
@@ -79,14 +87,17 @@ span#output_fcount{
 }
 div#goods_fav{
 	width:220px;
+	cursor:pointer;
 }
 div#goods_cart{
 	background-color:gray;
 	color:#FFF;
+	cursor:pointer;
 }
 div#goods_pay{
 	background-color:#000;
 	color:#FFF;
+	cursor:pointer;
 }
 .goods-subinfo, div#goods_delivery li{
 	padding:10px;
@@ -169,7 +180,7 @@ div#sold-out > span{
 div#goods_review, div#goods_qna{
 	width:100%;
 	text-align:center;
-	max-height:300px;
+	max-height:500px;
 	margin-bottom:20px;
 }
 div#goods_review > span, div#goods_qna > span{
@@ -193,6 +204,9 @@ table.detail-tb th{
 table.detail-tb th{
 	background-color:rgb(221, 221, 221);
 	color:#000;
+}
+table.detail-tb tr.re-content td.show-content div{
+	min-height:50px;
 }
 /* 평점표시
 ------------------*/

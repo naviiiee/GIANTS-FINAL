@@ -6,13 +6,15 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goodsDetail.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods.fav.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_cart.js"></script>
-
 <div class="page-main">
 	<div class="content-main">
 		<c:if test="${!empty user && user.mem_auth == 9}">
+		<div class="align-left">
+			<input type="button" value="[관리자]목록" onclick="location.href='admin_goodsList.do'" id="admin_btn">
+			<input type="button" value="일반목록" onclick="location.href='goodsList.do'">
+		</div>
 		<div class="align-right">
 			<input type="button" value="수정" onclick="location.href='goodsUpdate.do?goods_num=${goods.goods_num}'">
-			<input type="button" value="삭제">
 		</div>
 		</c:if>
 		<div class="goods-photo">
@@ -20,10 +22,19 @@
 		</div>
 		<div class="goods-info" ><br><br>
 			<div>
-				<c:if test="${goods.goods_category == 1}">유니폼</c:if>
-				<c:if test="${goods.goods_category == 2}">모자</c:if>
-				<c:if test="${goods.goods_category == 3}">응원도구</c:if>
-				<c:if test="${goods.goods_category == 4}">기타</c:if>
+				<span>카테고리 - </span>
+				<c:if test="${goods.goods_category == 1}">
+					<a href="goodsList.do?keyfield=3&keyword=&order=1&goods_category=1">유니폼</a>
+				</c:if>
+				<c:if test="${goods.goods_category == 2}">
+					<a href="goodsList.do?keyfield=3&keyword=&order=1&goods_category=2">모자</a>
+				</c:if>
+				<c:if test="${goods.goods_category == 3}">
+					<a href="goodsList.do?keyfield=3&keyword=&order=1&goods_category=3">응원도구</a>
+				</c:if>
+				<c:if test="${goods.goods_category == 4}">
+					<a href="goodsList.do?keyfield=3&keyword=&order=1&goods_category=4">기타</a>
+				</c:if>
 			</div>
 			<h3 class="goods-name">${goods.goods_name}</h3>
 			<hr size="2" width="97%">
@@ -44,15 +55,8 @@
 						<input type="hidden" name="goods_status" value="${goods.goods_status}" id="goods_status">
 					</li>
 					<li>
-						카테고리 : 
-						<c:if test="${goods.goods_category == 1}">유니폼</c:if>
-						<c:if test="${goods.goods_category == 2}">모자</c:if>
-						<c:if test="${goods.goods_category == 3}">응원도구</c:if>
-						<c:if test="${goods.goods_category == 4}">기타</c:if>
-					</li>
-					<li>
 						판매가 : <s><fmt:formatNumber value="${goods.goods_price}" type="number"/>원</s>
-						 (<fmt:formatNumber value="${goods.goods_disc}" type="number"/>% 할인)
+						  (<fmt:formatNumber value="${goods.goods_disc}" type="number"/>% 할인)
 						<span style="font-size:30px;">
 							<fmt:formatNumber value="${goods.goods_dprice}" type="number"/>원
 						</span>
@@ -69,7 +73,8 @@
 						        <option value="" class="align-center">===선택안함===</option>
 						        <c:forEach var="option" items="${option}">
 						            <option value="${option.opt_num}" data-stock="${option.goods_stock}">
-						                ${option.goods_size} [재고 : ${option.goods_stock}]
+						                <c:if test="${option.goods_stock > 0}">${option.goods_size} [재고 : ${option.goods_stock}]</c:if>
+						                <c:if test="${option.goods_stock <= 0}">${option.goods_size} [품절]</c:if>
 						            </option>
 						           <%--  <input type="hidden" name="goods_size" id="goods_size" value="${option.goods_size }">
 						    		<input type="hidden" name="goods_stock" id="goods_stock" value="${option.goods_stock}"> --%>
@@ -146,11 +151,9 @@
 				    });
 			</script>
 			</c:if>	 
-			
-			   
 				<c:if test="${goods.goods_status == 2}">
-				<div id="sold-out">
-					<span>SOLD OUT</span>
+				<div id="sold-out" style="cursor:default;">
+					<span>판매중지</span>
 				</div>
 				</c:if>
 			</div>
@@ -182,6 +185,9 @@
 		</div>
 		<p>
 		<div id="goods_content" class="goods-subinfo">
+			<div class="align-center" style="margin-top:10px;">
+				<img src="${pageContext.request.contextPath}/images/goods_detail_repeat.jpg" width="700">
+			</div>
 			${goods.goods_content}
 		</div>
 		<div class="medium-nav">
@@ -254,7 +260,7 @@
 		</div>
 		<div id="goods_review">
 			<div class="align-right" style="margin:10px 23px 0 0;">
-				<input type="button" value="리뷰작성" onclick="location.href='writeReview.do'">
+				<input type="button" value="리뷰작성" onclick="location.href='writeReview.do?goods_num=${goods.goods_num}'">
 			</div>
 		<c:if test="${review_cnt == 0}">
 		<span>작성된 리뷰가 없습니다.</span>
@@ -283,12 +289,12 @@
 					<td>${review.review_regdate}</td>
 				</tr>
 				<tr class="re-content" id="content${status.count}" style="display:none;">
-					<td colspan="5">
+					<td colspan="5" class="show-content" id="td${status.count}">
 						<c:if test="${!empty user && user.mem_num == review.mem_num}">
 						<div class="align-right">
 							<input type="button" value="수정" onclick="location.href='updateReview.do?review_num=${review.review_num}'">
 							<input type="button" value="삭제" id="del_review">
-							<script type="text/javascript">
+							<script>
 								let del_review = document.getElementById('del_review');
 								del_review.onclick = function(){
 									let choice = confirm('리뷰를 삭제하시겠습니까?');
@@ -297,6 +303,15 @@
 									}
 								};
 							</script>
+						</div>
+						</c:if>
+						<div class="align-right" style="margin:5px 5px 0 0;">
+							<input type="button" value="닫기" id="close_this">
+						</div>
+						<c:if test="${!empty review.review_photoname}">
+						<div class="align-left" style="margin-left:10px;">
+						<img src="${pageContext.request.contextPath}/goods/imageView2.do?review_num=${review.review_num}">
+						<br>
 						</div>
 						</c:if>
 						<div class="align-left">${review.review_content}</div>
@@ -309,16 +324,22 @@
 		</div>
 		<script>
 			$(function(){
+				
 				$('.re-title').on('click', function(){
 					let num = $(this).attr('id').substring(5);
-
-					if($('#content' + num).attr('style', 'display:none;')){
+					
+					if($('#content' + num).css('display') == 'none'){
 						$('#content' + num).show();
-					} else{
-						//$('#content' + num).css('display','none');
-						$('#content' + num).hide();
 					}
+				}); //end of re-title
+				
+				$(document).on('click', '#close_this', function(){
+					let tmp = $(this).parent();
+					tmp = $(tmp).parent();
+					let target = $(tmp).parent();
+					$(target).hide();
 				});
+				
 			});
 		</script>
 		<div class="medium-nav">
@@ -333,7 +354,7 @@
 		</div>
 		<div id="goods_qna">
 			<div class="align-right" style="margin:10px 23px 0 0;">
-				<input type="button" value="상품문의" onclick="location.href='writeQna.do'">
+				<input type="button" value="상품문의" onclick="location.href='writeQna.do?goods_num=${goods.goods_num}'">
 			</div>
 		<c:if test="${qna_cnt == 0}">
 		<span>등록된 문의사항이 없습니다.</span>

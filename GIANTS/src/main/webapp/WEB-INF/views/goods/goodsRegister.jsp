@@ -27,7 +27,7 @@
 		<ul>
 			<li>
 				<%-- 
-				<img src="${pageContext.request.contextPath}/goods/goodsPhotoView.do" width="200" height="200">
+				<img src="${pageContext.request.contextPath}/goods/imageView.do" width="200" height="200">
 				<br> --%>
 				<label for="upload">상품 썸네일 사진</label>
 				<input type="file" id="upload" name="upload" accept="image/gif,image/png,image/jpeg">
