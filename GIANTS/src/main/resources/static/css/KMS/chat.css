@@ -5,7 +5,7 @@
 .align-right{ text-align:right; }
 .float-left{ float:left; }
 
-/* 채팅하기 */
+/* 채팅하기 */ 
 #chatting_message {
 	border: 1px solid #856088;
 	width: 660px;

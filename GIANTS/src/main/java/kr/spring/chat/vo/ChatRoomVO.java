@@ -13,5 +13,5 @@ public class ChatRoomVO {
 	private int seller_num; //판매자 회원번호
 	private int buyer_num; //구매자 회원번호
 	
-	private String mem_id; //구매자 id
+	private String mem_id; //구매자 id 
 }

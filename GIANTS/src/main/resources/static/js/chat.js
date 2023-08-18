@@ -17,7 +17,7 @@ $(function(){
 				}
 			},
 			error:function(){
-				alert('네트워크 오류 발생');
+				alert('네트워크 오류 발생'); 
 			}
 		});
 	});

@@ -22,7 +22,6 @@
 				</td>
 				<td>
 					<c:if test="${!empty chat.chatVO.chat_date}">${chat.chatVO.chat_date}</c:if>
-					<c:if test="${empty chat.chatVO.chat_date}"></c:if>
 				</td>
 			</tr>
 			</c:forEach>

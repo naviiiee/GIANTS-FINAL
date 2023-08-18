@@ -59,4 +59,4 @@
 		<input type="button" value="목록" onclick="location.href='tradingList.do'" class="classic-btn small">
 	</div>
 </div>
-<!-- 게시글 상세 끝 --> 
+<!-- 게시글 상세 끝 -->

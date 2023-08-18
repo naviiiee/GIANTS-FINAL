@@ -142,7 +142,6 @@ public class ChatController {
 	public String chatList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, String keyword,HttpSession session, Model model) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		Map<String,Object> map = new HashMap<String, Object>();
-		//map.put("keyword", keyword);
 		map.put("mem_num", user.getMem_num());
 		
 		int count = chatService.selectRowCount(map);

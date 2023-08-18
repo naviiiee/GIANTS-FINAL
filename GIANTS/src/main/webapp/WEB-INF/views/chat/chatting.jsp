@@ -15,7 +15,6 @@
 		<input type="button" value="X" id="delete_chatroom">
 	</div>
 	<div id="chatting_message"></div>
-	
 	<form id="detail_form">
 		<input type="hidden" name="chatroom_num" value="${param.chatroom_num}" id="chatroom_num">
 		<div class="float-left" id="text_message">

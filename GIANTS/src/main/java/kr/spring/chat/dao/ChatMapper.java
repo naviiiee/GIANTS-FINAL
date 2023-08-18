@@ -56,7 +56,6 @@ public interface ChatMapper {
  	//채팅방 목록
 	public List<ChatRoomVO> selectChatRoomList(Map<String, Object> map);
 	public int selectRowCount(Map<String, Object> map);
-
 }
 
 

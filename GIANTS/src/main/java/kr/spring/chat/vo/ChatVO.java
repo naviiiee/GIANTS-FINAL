@@ -16,5 +16,5 @@ public class ChatVO {
 	
 	private int read_count; //채팅 메시지를 읽지 않은 회원 수
 	private String mem_id; //발신자 id
-	private String mem_nickname; //발신자 닉네임
+	private String mem_nickname; //발신자 닉네임 
 }

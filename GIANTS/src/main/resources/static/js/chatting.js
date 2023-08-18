@@ -105,7 +105,7 @@ $(function(){
 					$('#message').val('').focus();
 					selectMsg();
 				}else{
-					alert('채팅 등록 오류 발생');
+					alert('채팅 등록 오류 발생'); 
 				}
 			},
 			error:function(){
