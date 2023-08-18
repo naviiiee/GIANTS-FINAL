@@ -77,12 +77,17 @@ public interface TicketMapper {
 	// 등급별 좌석개수
 	@Select("SELECT SUM(seat_quantity) FROM seat WHERE grade_num = #{grade_num}")
 	public Integer selectSeatQuantity(Integer grade_num);
+	
 	@Select("SELECT * FROM member_detail WHERE mem_num = #{mem_num}")
 	public MemberDetailVO selectMemberDetail(Integer mem_num);
 	
 	/* 티켓 결제 */
-	@Insert("INSERT INTO ticket_check (check_num, seat_info, game_num, mem_num) VALUES(ticket_check_seq.nextval, #{seat_info}, #{game_num}, #{mem_num})")
+	@Select("SELECT ticket_check_seq.nextval FROM dual")
+	public int selectCheckNum();	// 좌석선택 확인용 번호 생성
+	@Insert("INSERT INTO ticket_check (check_num, seat_info, game_num, mem_num) VALUES(#{check_num}, #{seat_info}, #{game_num}, #{mem_num})")
 	public void insertTicketCheck(TicketCheckVO ticketCheckVO);	// 좌석선택정보 저장
+	@Delete("DELETE FROM ticket_check WHERE check_num = #{check_num}")
+	public void deleteTicketCheck(Integer check_num);	// 좌석선택정보 삭제
 	@Insert("INSERT INTO seat_status (status_num, seat_info, seat_date, seat_auth) VALUES(seat_status_seq.nextval, #{seat_info}, #{seat_date}, #{seat_auth})")
 	public void insertSeatStatus(SeatStatusVO seatStatusVO);	// 좌석예매정보 등록
 	public void insertTicket(TicketVO ticketVO);

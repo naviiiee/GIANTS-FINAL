@@ -87,7 +87,13 @@ public class TicketServiceImpl implements TicketService {
 
 	/* Ticket */
 	@Override
+	public int selectCheckNum() { return ticketMapper.selectCheckNum(); }
+	
+	@Override
 	public void insertTicketCheck(TicketCheckVO ticketCheckVO) { ticketMapper.insertTicketCheck(ticketCheckVO); }
+	
+	@Override
+	public void deleteTicketCheck(Integer check_num) { ticketMapper.deleteTicketCheck(check_num); }
 	
 	@Override
 	public void insertSeatStatus(SeatStatusVO seatStatusVO) { ticketMapper.insertSeatStatus(seatStatusVO); }
@@ -96,6 +102,6 @@ public class TicketServiceImpl implements TicketService {
 	public void insertTicket(TicketVO ticket) {
 		ticketMapper.insertTicket(ticket);
 	}
-
+	
 }
  

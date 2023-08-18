@@ -122,6 +122,26 @@ $(function() {
 		}
 	});
 	
+	// 이전버튼 클릭시 선택한 좌석정보 삭제 후 이전 화면으로 이동
+	$(document).on('click', '#delete_check', function() {
+		let game_num = $('#game_num').val();
+		
+		$.ajax({
+			url:'deleteCheck.do',
+			type:'post',
+			data:{check_num:$('#check_num').val()},
+			dataType:'json',
+			success:function(param) {
+				if(param.result == 'logout') {
+					alert('Login 후 이용가능');
+					location.href='../member/login.do';
+				} else if(param.result == 'success') { location.href='ticketMain.do?game_num=' + game_num; }
+				else { alert('선택좌석 삭제 오류 발생'); }
+			},
+			error:function() { alert('Network 오류 발생'); }
+		});
+	});
+	
 	$('#order_seat').submit(function() {
 		// checkbox 유효성 검사
 		if($('.seat-leng').length == 0) {

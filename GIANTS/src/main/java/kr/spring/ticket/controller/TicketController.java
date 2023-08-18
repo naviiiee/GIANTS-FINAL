@@ -133,8 +133,11 @@ public class TicketController {
 		GradeVO gradeVO = ticketService.selectGrade(grade_num);
 		
 		TicketCheckVO checkVO = new TicketCheckVO();
+		int check_num = ticketService.selectCheckNum();
+		
 		int length = seatVO.getSeat_info().split(",").length;
 		for(int i = 0; i < length; i++) {
+			checkVO.setCheck_num(check_num);
 			checkVO.setSeat_info(seatVO.getSeat_info().split(",")[i]);
 			checkVO.setGame_num(game_num);
 			checkVO.setMem_num(user.getMem_num());
@@ -142,11 +145,32 @@ public class TicketController {
 			ticketService.insertTicketCheck(checkVO);
 		}
 		
+		
 		model.addAttribute("seatVO", seatVO);
 		model.addAttribute("gameVO", gameVO);
 		model.addAttribute("gradeVO", gradeVO);
+		model.addAttribute("checkVO", checkVO);
 		
 		return "ticketOrderForm";
+	}
+	
+	// 선택한 좌석 정보 삭제
+	@RequestMapping("/ticket/deleteCheck.do")
+	@ResponseBody
+	public Map<String, Object> deleteCheck(@RequestParam int check_num, HttpSession session) {
+		log.debug("<<check_num>> : " + check_num);
+		
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user == null) { mapJson.put("result", "logout"); }
+		else {
+			ticketService.deleteTicketCheck(check_num);
+			
+			mapJson.put("result", "success");
+		}
+		
+		return mapJson;
 	}
 	
 	/* ----- [Order] 콜백 수신처리 -----*/

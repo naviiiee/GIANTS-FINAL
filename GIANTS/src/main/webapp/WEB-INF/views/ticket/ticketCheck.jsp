@@ -87,7 +87,9 @@
 				</div>
 				<hr width="100%" class="color-red" noshade>
 				<div class="group-btn">
-					<input type="button" value="이전" class="default-btn big" onclick="location.href='ticketMain.do?game_num=${gameVO.game_num}'">
+					<input type="hidden" name="check_num" value="${checkVO.check_num}" id="check_num">
+					<input type="hidden" name="game_num" value="${gameVO.game_num}" id="game_num">
+					<input type="button" value="이전" class="default-btn big" id="delete_check">
 					<input type="button" value="결제" class="accept-btn big" onclick="requestPay()">
 					<script>
 					function requestPay() {
@@ -143,8 +145,8 @@
 									error: function (err) { console.log(err); }
 					 			}); 
 					 		} else {
-					 			let msg = '결제 실패';
-					 			msg += '\n에러내용 : ' + rsp.error_msg;
+					 			let msg = '결제 실패\n';
+					 			msg += 'ERROE : ' + rsp.error_msg;
 					 		}
 					 	});
 					}
