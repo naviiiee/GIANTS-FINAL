@@ -19,18 +19,14 @@
 	<sql id="newsSearch">
 		<where>
 			<if test="keyword != null and keyword != ''">
-				<if test="keyfield == 1">
+				<if test="keyfield == 3">
 					n.news_title LIKE '%' || #{keyword} || '%' or
 					n.news_content LIKE '%' || #{keyword} || '%'
 				</if>
-				<if test="keyfield == 2">
+				<if test="keyfield == 1">
 					n.news_title LIKE '%' || #{keyword} || '%'
 				</if>
-				<if test="keyfield == 3">
-					m.id LIKE '%' || #{keyword} || '%' or
-					m.mem_nickname LIKE '%' || #{keyword} || '%'
-				</if>
-				<if test="keyfield == 4">
+				<if test="keyfield == 2">
 					n.news_content LIKE '%' || #{keyword} || '%'
 				</if>
 			</if>
@@ -39,7 +35,7 @@
 	
 	<sql id="newsOrder">
 		<if test="order == 1">
-			ORDER BY n.news_num DESC
+			ORDER BY n.news_regdate DESC
 		</if>
 		<if test="order == 2">
 			ORDER BY n.news_hit DESC

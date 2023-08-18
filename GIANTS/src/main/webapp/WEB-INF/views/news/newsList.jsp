@@ -39,9 +39,10 @@
 			<ul class="search">
 				<li>
 					<select name="keyfield" id="keyfield">
+						<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>제목+내용</option>
 						<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
 						<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>내용</option>
-						<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>제목+내용</option>
+						
 					</select>
 				</li>
 				<li>
@@ -55,8 +56,6 @@
 				<select id="order" name="order">
 					<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신</option>
 					<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
-					<option value="3" <c:if test="${param.order == 3}">selected</c:if>>좋아요</option>
-					<option value="4" <c:if test="${param.order == 4}">selected</c:if>>댓글수</option>
 				</select>
 				<script type="text/javascript">
 					$(function(){
@@ -95,7 +94,9 @@
 			<div class="align-right">
 				<c:if test="${!empty user}">
 					<input type="button" value="목록" onclick="location.href='newsList.do'">
-					<input type="button" value="글쓰기" onclick="location.href='newsWrite.do'">
+					<c:if test="${user.mem_auth == 9}">
+					<input type="button" value="뉴스등록" onclick="location.href='newsWrite.do'">
+					</c:if>
 				</c:if>
 			</div>
 		</div>

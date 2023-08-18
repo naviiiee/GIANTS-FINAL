@@ -19,10 +19,11 @@
 			</li>
 			--%>
 			<li> <%-- 임시로 상품목록 표시 --%>
-				<label>상품목록</label>
+				<label for="goods_num">상품목록</label>
 				<select name="goods_num">
+					<option>=====선택======</option>
 					<c:forEach var="goods" items="${goods_list}">
-					<option value="${goods.goods_num}">${goods.goods_name}</option>
+					<option value="${goods.goods_num}"<c:if test="${goods_num == goods.goods_num}">selected</c:if>>${goods.goods_name}</option>
 					</c:forEach>
 				</select>
 			</li>
