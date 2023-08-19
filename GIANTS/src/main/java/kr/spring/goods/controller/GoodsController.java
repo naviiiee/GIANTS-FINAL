@@ -110,28 +110,46 @@ public class GoodsController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/goods/imageView2.do")
+	public ModelAndView viewImage2(@RequestParam int review_num) {
+		
+		GoodsReviewVO reviewVO = goodsService.selectGoodsReview(review_num);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+		
+		mav.addObject("imageFile", reviewVO.getReview_photo());
+		mav.addObject("filename", reviewVO.getReview_photoname());
+		
+		return mav;
+	}
 		
 	/*==========================
 	 * [관리자] 굿즈 목록
 	 *==========================*/
 	@RequestMapping("/goods/admin_goodsList.do")
 	public ModelAndView process(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
+								@RequestParam(value="goods_category", defaultValue="0") int goods_category,
 								String keyfield, String keyword) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		map.put("goods_status", 3); //status가 0이면 판매중(1), 판매중지(2) 모두 체크
+		map.put("goods_status", 3); //status가 3이면 판매중(1), 판매중지(2) 모두 체크
 		
 		//전체|검색 레코드 수
+		map.put("goods_category", goods_category);
 		int count = goodsService.selectGoodsRowCount(map);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 10, 10, "admin_goodsList.do");
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 10, 10, "admin_goodsList.do", "&goods_category=" + goods_category);
 		
 		List<GoodsVO> list = null;
 		if(count > 0) {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
+			map.put("order", 1);
+			map.put("goods_category", goods_category);
 			
 			list = goodsService.selectGoodsList(map);
 		}
@@ -159,15 +177,15 @@ public class GoodsController {
 		map.put("goods_status", 2); 
 		
 		//전체|검색 레코드 수
+		map.put("order", order);
+		map.put("goods_category", goods_category);
 		int count = goodsService.selectGoodsRowCount(map);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 12, 10, "goodsList.do", "&order=" + order + "&goods_category=" + goods_category);
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 12, 10, "goodsList.do", "&goods_category=" + goods_category);
 		 
 		List<GoodsVO> list = null;
 		if(count > 0) {
-			map.put("order", order);
-			map.put("goods_category", goods_category);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 			
@@ -179,6 +197,7 @@ public class GoodsController {
 		mav.setViewName("goodsList");
 		mav.addObject("count", count);
 		mav.addObject("list", list);
+		
 		mav.addObject("page", page.getPage());
 		
 		return mav;
@@ -193,6 +212,7 @@ public class GoodsController {
 		
 		//상품 상세
 		GoodsVO goods = goodsService.selectGoods(goods_num);
+
 		
 		List<GoodsOptionVO> list = null;
 		list = goodsService.selectOptionList(goods_num);
@@ -216,10 +236,7 @@ public class GoodsController {
 		}
 		
 		float avg_score = goodsService.getAvgScore(goods_num);
-		
-		log.debug("<<로그찍기 - avg_score>>" + avg_score);
-		
-		
+				
 		//===== 상품문의 목록 =====//
 		Map<String, Object> map2 = new HashMap<String, Object>();
 		
@@ -386,7 +403,7 @@ public class GoodsController {
 	 *==========================*/	
 	//등록 폼 호출
 	@GetMapping("/goods/writeReview.do")
-	public String formReview(HttpSession session, Model model) {
+	public String formReview(HttpServletRequest request, HttpSession session, Model model) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", 1);
@@ -397,6 +414,9 @@ public class GoodsController {
 		model.addAttribute("goods_list", goods_list);
 		log.debug("<<goods_list>> : " +goods_list);
 		model.addAttribute("memberVO", (MemberVO)session.getAttribute("user"));
+		
+		int goods_num = Integer.parseInt(request.getParameter("goods_num"));
+		request.setAttribute("goods_num", goods_num);
 		
 		return "reviewWrite";
 	}
@@ -409,7 +429,7 @@ public class GoodsController {
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
-			return "reviewWrite";
+			return formReview(request, session, model);
 		}
 		
 		//회원번호 셋팅
@@ -496,7 +516,7 @@ public class GoodsController {
 	 *==========================*/	
 	//등록 폼 호출
 	@GetMapping("/goods/writeQna.do")
-	public String formQna(HttpSession session, Model model) {
+	public String formQna(HttpServletRequest request, HttpSession session, Model model) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", 1);
@@ -506,6 +526,9 @@ public class GoodsController {
 		List<GoodsVO> goods_list = goodsService.selectGoodsList(map);
 		model.addAttribute("goods_list", goods_list);
 		model.addAttribute("user", (MemberVO)session.getAttribute("user"));
+		
+		int goods_num = Integer.parseInt(request.getParameter("goods_num"));
+		request.setAttribute("goods_num", goods_num);
 		
 		return "qnaWrite";
 	}
@@ -517,7 +540,7 @@ public class GoodsController {
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
-			return formQna(session, model);
+			return formQna(request, session, model);
 		}
 		
 		//회원번호 셋팅
@@ -530,7 +553,7 @@ public class GoodsController {
 		log.debug("<<상품문의 등록>> : " + qnaVO);
 		
 		model.addAttribute("message", "상품문의가 완료되었습니다.");
-		model.addAttribute("url", request.getContextPath() + "/goods/goodsList.do");
+		model.addAttribute("url", request.getContextPath() + "/goods/goodsDetail.do?goods_num=" + qnaVO.getGoods_num() + "#goods_qna");
 		
 		return "common/resultView";
 	}
@@ -644,7 +667,7 @@ public class GoodsController {
 	@RequestMapping("/goods/listAnswer.do")
 	@ResponseBody
 	public Map<String, Object> getAnswerList(@RequestParam(value="pageNum", defaultValue="1") int currentPage, 
-											@RequestParam(value="rowCount", defaultValue="10") int rowCount,
+											@RequestParam(value="rowCount", defaultValue="5") int rowCount,
 											@RequestParam int qna_num, HttpSession session){
 		
 		log.debug("<<currentPage>> : " + currentPage);

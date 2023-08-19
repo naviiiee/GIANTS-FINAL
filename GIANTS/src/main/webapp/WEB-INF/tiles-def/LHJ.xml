@@ -107,4 +107,10 @@
     	<put-attribute name="body" value="/WEB-INF/views/commu/commuRepoList.jsp"/>
     </definition>
     
+    <!-- [관리자] 선수 정보 수정 폼 -->
+    <definition name="admin_playerModify" extends="main">
+    	<put-attribute name="title" value="신고 목록"/>
+    	<put-attribute name="body" value="/WEB-INF/views/introduce/admin_playerModify.jsp"/>
+    </definition>
+    
 </tiles-definitions>

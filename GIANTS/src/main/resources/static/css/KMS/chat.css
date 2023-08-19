@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+/* =====기본스타일 클래스 정의 =====
+==============================*/
+.align-right{ text-align:right; }
+.float-left{ float:left; }
+
+/* 채팅하기 */
+#chatting_message {
+	border: 1px solid #856088;
+	width: 660px;
+	height: 300px;
+	margin: 0 auto;
+	padding: 10px;
+	overflow: auto;
+}
+
+.date-position {
+	text-align: center;
+}
+
+.date-position span {
+	display: inline-block;
+	width: 300px;
+	height: 20px;
+	border-radius: 10px;
+	background-color: #AA98A9;
+}
+
+.from-position {
+	width: 300px;
+	margin: 20px 0 10px 350px;
+}
+
+.from-position .item {
+	background-color: #F8DE7E;
+	padding: 10px;
+	min-height: 50px;
+	border-radius: 20px;
+	border-top-right-radius: 0;
+}
+
+.to-position {
+	width: 300px;
+	margin: 10px 0 10px 0;
+}
+
+.to-position .item {
+	background-color: #856088;
+	padding: 10px;
+	min-height: 50px;
+	border-radius: 20px;
+	border-top-left-radius: 0;
+}
+
+.to-position div.space-photo {
+	float: left;
+	width: 15%;
+}
+
+.to-position div.space-message {
+	float: left;
+	width: 85%;
+}
+
+.to-position div.space-clear {
+	clear: both;
+}
+
+#read_cnt{
+	float: left;
+	height: 70px;
+	margin-top: 50px;
+}
+#msg{
+	float: left;
+	width: 85%;
+}
+
+form#detail_form {
+	width: 660px;
+	border: none;
+}
+
+#text_message{
+	width: 660px;
+	height: 100px;
+	margin: 0 auto;
+	overflow: auto;
+}
+
+#message {
+	width: 500px;
+	resize: none;
+}
+
+#message_btn {
+	margin-top: -20px;
+	width: 646px;
+}
+
+#message_btn input {
+	width: 505px;
+}
+
+/*
+.classic-btn{ 
+	width:110px; height:40px; border-radius:5px; color:white; font-weight:bold; cursor:pointer; border:1px #052345 solid; background-color:#052345; 
+}
+.classic-btn:hover{ 
+	background-color:transparent; transition:0.2s ease-out; color:#052345; 
+}
+*/

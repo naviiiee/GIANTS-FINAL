@@ -29,13 +29,14 @@
 	<form action="goodsList.do" id="search_form" method="get">
 		<ul class="filter-btns">
 			<li>
+				<div class="align-right" id="list-btns">
 				<c:if test="${!empty user && user.mem_auth == 9}">
-					<div class="align-right list-btns">
-						<input type="button" value="관리자-상품목록" onclick="location.href='admin_goodsList.do'" id="admin_btn">
-						<input type="button" value="전체목록" onclick="location.href='goodsList.do'">
-					</div>
+					<input type="button" value="상품등록" onclick="location.href='registerGoods.do'">
+					<input type="button" value="[관리자]목록" onclick="location.href='admin_goodsList.do'" id="admin_btn">
 				</c:if>
-				<div class="cate-filter">
+					<input type="button" value="전체목록" onclick="location.href='goodsList.do'">
+				</div>
+				<div id="cate-filter">
 					<button name="goods_category" type="button" value="0" id="filter_all"
 						<c:if test="${empty param.goods_category || param.goods_category == 0}"> class="on" </c:if>
 						<c:if test="${param.goods_category != 0}"> class="off" </c:if>>전체</button>
@@ -75,6 +76,8 @@
 				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신</option>
 				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>찜하기순</option>
 				<option value="3" <c:if test="${param.order == 3}">selected</c:if>>리뷰많은순</option>
+				<option value="4" <c:if test="${param.order == 4}">selected</c:if>>할인율높은순</option>
+				<option value="5" <c:if test="${param.order == 5}">selected</c:if>>낮은가격순</option>
 			</select>
 			<script type="text/javascript">
 				$(function(){
@@ -83,18 +86,21 @@
 						location.href='goodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&order=' + $('#order').val() + '&goods_category=' + $('button[name="goods_category"]').val();
 					});
 					
+					/* $('button[name="goods_category"]').click(function{
+						location.href='goodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&order=' + $('#order').val() + '&goods_category=' + $('button[name="goods_category"]').val();
+					});*/
+					
 					$('#filter_all').click(function(){
-						console.log($('#filter_all').val());
 						location.href='goodsList.do';
 					});
 					
 					$('#filter_uniform').click(function(){
-						console.log($('#filter_uniform').val());
+						//$('#order').val(1);
 						location.href='goodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&order=' + $('#order').val() + '&goods_category=' + $('#filter_uniform').val();
 					}); 
 					
 					$('#filter_cap').click(function(){
-						console.log($('#filter_cap').val());
+						//$('#order').val(1);
 						location.href='goodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&order=' + $('#order').val() + '&goods_category=' + $('#filter_cap').val();
 					}); 
 					
@@ -107,14 +113,9 @@
 						console.log($('#filter_etc').val());
 						location.href='goodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&order=' + $('#order').val() + '&goods_category=' + $('#filter_etc').val();
 					});
-					
-					
 										
 				});
 			</script>
-			<c:if test="${!empty user && user.mem_auth == 9}">
-				<input type="button" value="상품등록" onclick="location.href='registerGoods.do'">
-			</c:if>
 		</div>
 	</form>
 	<c:if test="${count == 0}">
@@ -129,6 +130,10 @@
 				<span>${goods.goods_name}</span>
 				<br>
 				<b><fmt:formatNumber value="${goods.goods_dprice}"/>원</b>
+				
+				<c:if test="">
+					품절
+				</c:if>
 			</a>
 		</div>
 		</c:forEach>

@@ -39,6 +39,9 @@ public interface GoodsMapper {
 	public GoodsVO selectGoods(Integer goods_num);
 	//상품 재고 목록
 	public List<GoodsOptionVO> selectOptionList(Integer goods_num);
+	//상품에 대한 총 재고 현황
+	@Select("SELECT sum(goods_stock) FROM goods_option WHERE goods_num=#{goods_num}")
+	public int getGoodsTotalStock(Integer goods_num);
 	 
 	//상품 정보 수정
 	public void updateGoods(GoodsVO goods);

@@ -10,7 +10,7 @@
 	<form:form modelAttribute="playerVO" action="admin_player.do" id="admin_player" enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
-			<li>
+			<li> 
 				<form:label path="player_name">선수명</form:label>
 				<form:input path="player_name"/>
 				<form:errors path="player_name" cssClass="error-color"/>
@@ -64,8 +64,8 @@
 			
 		</ul>
 		<div class="align-center">
-			<form:button>선수 등록</form:button>
-			<input type="button" value="목록" onclick="location.href='admin_player.do'">
+			<form:button class="accept-btn">선수 등록</form:button>
+			<input type="button" value="목록" onclick="location.href='admin_player.do'" class="accept-btn">
 		</div>
 	</form:form>
 </div>

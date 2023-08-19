@@ -58,10 +58,12 @@ public class AppConfig implements WebMvcConfigurer {
 				//윤현종
 				.addPathPatterns("/member/updateMember.do")
 				.addPathPatterns("/member/updateCompany.do")
-				.addPathPatterns("/member/changePassword.do");
+				.addPathPatterns("/member/changePassword.do")
 				// Ticket
 				//.addPathPatterns("/ticket/ticketMain.do"); 
-		
+				// Chatting
+				.addPathPatterns("/chat/chatting.do");
+
 		//Comp(기업) 인터셉터 설정
 		registry.addInterceptor(compCheck)
 		//오세진 - Food

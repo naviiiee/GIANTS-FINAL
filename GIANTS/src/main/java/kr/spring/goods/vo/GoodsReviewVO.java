@@ -36,8 +36,6 @@ public class GoodsReviewVO {
 	private String mem_nickname;
 	private String goods_name;
 	
-	private GoodsVO goodsVO;
-		
 	//======이미지를 byte[]로 변환하는 메서드(BLOB 처리)=====//
 	public void setUpload(MultipartFile upload) throws IOException{
 		setReview_photo(upload.getBytes()); //MultipartFile -> byte[]

@@ -48,14 +48,14 @@ li{
 	<hr size="0.05" width="100%" noshade style="margin-bottom:3%">
 	<form action="commuList.do" id="search_form" method="get"  style="padding-bottom: 24px;">
 		<ul class="search align-center">
-			<li>
+			<li style="margin: 0px 11px 10px 0;">
 				<select name="keyfield" id="keyfield">
 					<option value="1" <c:if test="${param.keyfield == 1}">SELECTED</c:if>>제목</option>
 					<option value="2" <c:if test="${param.keyfield == 2}">SELECTED</c:if>>작성자</option>
 					<option value="3" <c:if test="${param.keyfield == 3}">SELECTED</c:if>>내용</option>
 				</select>
 			</li>
-			<li>
+			<li style="margin: 0px 11px 10px 0;">
 				<input type="search" name="keyword" id="keyword" value="${param.keyword}" style="height:30px;">
 			</li>
 			<li>
@@ -66,7 +66,7 @@ li{
 	
 		<!-- 정렬 -->
 		<div class="align-right" >
-			<select id="order" name="order" style="height:30px;">
+			<select id="commuOrder" name="commuOrder" style="height:30px;">
 				<option value="1" 
 				  <c:if test="${param.order == 1}">selected</c:if>>최신글</option>
 				<option value="2" 

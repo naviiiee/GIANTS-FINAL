@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.commu.vo.CommuVO;
 import kr.spring.introduce.service.PlayerService;
 import kr.spring.introduce.vo.PlayerVO;
 import kr.spring.util.PagingUtil;
@@ -88,28 +89,58 @@ public class PlayerAdminController {
 	
 	
 	
-	//이미지 출력
-	/*
-	@RequestMapping("/introduce/imageView.do")
-	public ModelAndView viewImage(@RequestParam int player_num) {
-		
-		PlayerVO playerVO = playerService.selectPlayer(player_num);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("imageView");
-		
-		mav.addObject("imageFile",playerVO.getPlayer_photo());
-		mav.addObject("filename",playerVO.getPlayer_photoname());
 	
-		return mav;
+	
+	
+	/*--------------
+	 * 선수 정보 수정
+	 *-------------*/
+	//선수 정보 수정 폼 
+	/*
+	@GetMapping("/introduce/admin_playerModify.do")
+	public String form_modify() {
+		return "admin_playerModify";
+	}
+	
+	//전송
+	@PostMapping("/introduce/admin_playerModify.do")
+	public String submit_modify(@Valid PlayerVO playerVO,
+						 BindingResult result,
+						 Model model,
+						 HttpServletRequest request,
+						 HttpSession session) {
+		
+		log.debug("<<선수 정보 수정>> : " + playerVO);
+		
+		
+		
+		if(playerVO.getPlayer_photo().length == 0) {
+			result.rejectValue("player_photo", "required");
+		}
+		
+		
+		//용량체크 (어노테이션에서 다양하게 체크 못하니까 용량체크는 컨트롤러에서 체크 해주기)
+		if(playerVO.getPlayer_photo().length>=5*1024*1024) {//5MB
+								//필드명,			에러코드,			에러문구에 전달할 값,	기본 에러 문구			
+			result.rejectValue("player_photo", "limitUploadSize", new Object[] {"5MB"}, null);
+		}
+		
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			return form();
+		}
+		
+		playerService.updatePlayer(playerVO);
+		
+		//View에 표시할 메시지
+		model.addAttribute("message", "선수 정보 수정이 완료되었습니다.");
+		model.addAttribute("url", request.getContextPath()+"/introduce/player.do");
+		
+		
+		return "common/resultView";
 	}
 	*/
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -124,96 +155,62 @@ public class PlayerAdminController {
 	
 	
 	/*--------------
-	 * 선수 목록
+	 * 선수 정보 수정
 	 *-------------*/
-	/*
-	@RequestMapping("/introduce/player.do")
-	public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
-								String keyfield,String keyword) {
-		
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("keyfield", keyfield);
-		map.put("keyword", keyword);
-		//status가 0이면 미표시(1), 표시(2) 모두 체크
-		//map.put("status", 0);
-		
-		//전체/검색 레코드 수
-		int count = playerService.selectRowCount(map);
-		
-		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"player.do");
-		
-		List<PlayerVO> list = null;
-		if(count > 0) {
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
-			
-			list = playerService.selectPlayerList(map);
+	//선수 정보 수정 폼 호출
+		@GetMapping("/introduce/admin_playerModify.do")
+		public String formModify(@RequestParam int player_num, Model model) {
+			PlayerVO playerVO = playerService.selectPlayer(player_num);
+			model.addAttribute("playerVO", playerVO);
+			 
+			return "admin_playerModify";
 		}
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("player");
-		mav.addObject("count", count);
-		mav.addObject("list", list);
-		mav.addObject("page", page.getPage());
-		
-		return mav;
-	}
-	*/
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//[선수 소개]코치 폼 
-	/*
-	@GetMapping("/introduce/playerList_c.do")
-	public String form_c() {
-		return "playerList_c";
-	}
-	
-	//전송
-	@RequestMapping("/introduce/playerList_c.do")
-	public ModelAndView process_c(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
-								String keyfield,String keyword) {
-		
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("keyfield", keyfield);
-		map.put("keyword", keyword);
-		//status가 0이면 미표시(1), 표시(2) 모두 체크
-		//map.put("status", 0);
-		
-		//전체/검색 레코드 수
-		int count = playerService.selectRowCount(map);
-		
-		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"playerList_c.do");
-		
-		List<PlayerVO> list = null;
-		if(count > 0) {
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
+		//전송된 데이터 처리
+		@PostMapping("/introduce/admin_playerModify.do")
+		public String submitUpdate(@Valid PlayerVO playerVO,
+									BindingResult result,
+									HttpServletRequest request,
+									Model model) {
+			log.debug("<<선수 정보 수정 - playerVO>> : " + playerVO);
 			
-			list = playerService.selectPlayerList(map);
+			//유효성 체크 결과 오류가 있으면 폼을 다시 호출
+			if(result.hasErrors()) {
+				return "admin_playerModify";
+			}
+			
+			//ip 세팅
+			//playerVO.setCommu_ip(request.getRemoteAddr());
+			
+			//글 수정
+			playerService.updatePlayer(playerVO);
+			
+			//View에 표시할 메시지
+			model.addAttribute("message", "선수 정보 수정을 완료했습니다.");
+			model.addAttribute("url", request.getContextPath()+"/introduce/player.do");
+			
+			return "common/resultView";
 		}
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("playerList_c");
-		mav.addObject("count", count);
-		mav.addObject("list", list);
-		mav.addObject("page", page.getPage());
 		
-		return mav;
-	}
-	 */
+		
+		/*=== 선수 정보 삭제 ===*/
+		@RequestMapping("/introduce/admin_playerDelete.do")
+		public String submitDelete(@RequestParam int player_num) {
+			log.debug("<<선수 정보 삭제 = player_num_num>> : " + player_num);
+			
+			//글 삭제
+			playerService.deletePlayer(player_num);
+			
+			return "redirect:/introduce/player.do";
+		}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

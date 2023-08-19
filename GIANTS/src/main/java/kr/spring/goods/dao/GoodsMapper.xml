@@ -47,7 +47,6 @@
 		<![CDATA[
 			WHERE goods_status < #{goods_status}
 		]]>
-		
 		<if test="keyword != null and keyword != ''">
 			<if test="keyfield == 1">
 				AND goods_name LIKE '%' || #{keyword} || '%'
@@ -70,6 +69,12 @@
 		</if>
 		<if test="order == 3">
 			ORDER BY r.re_cnt ASC
+		</if>
+		<if test="order == 4">
+			ORDER BY goods_disc DESC
+		</if>
+		<if test="order == 5">
+			ORDER BY goods_dprice ASC
 		</if>
 	</sql>
 	
@@ -95,8 +100,11 @@
 	<select id="selectGoodsRowCount" parameterType="map" resultType="integer">
 		SELECT 
 			count(*) 
-		FROM goods
+		FROM goods g
+		LEFT OUTER JOIN (SELECT count(*) fav_cnt, goods_num FROM goods_fav GROUP BY goods_num)f ON g.goods_num=f.goods_num
+		LEFT OUTER JOIN (SELECT count(*) re_cnt, goods_num FROM goods_review GROUP BY goods_num)r ON g.goods_num=r.goods_num
 		<include refid="goodsSearch"></include>
+		<include refid="goodsCategory"></include>
 	</select>
 	 
 	<!-- 전체/검색 목록 -->
@@ -139,14 +147,16 @@
 		UPDATE 
 			goods
 		SET
+			<if test="goods_photo.length > 0">
+			goods_photo=#{goods_photo},
+			goods_photoname=#{goods_photoname},
+			</if>
 			goods_name=#{goods_name},
 			goods_price=#{goods_price},
 			goods_disc=#{goods_disc},
 			goods_dprice=#{goods_dprice},
 			goods_content=#{goods_content},
-			goods_photo=#{goods_photo},
-			goods_photoname=#{goods_photoname},
-			goods_mdate=sysdate,
+			goods_mdate=SYSDATE,
 			goods_status=#{goods_status}
 		WHERE goods_num=#{goods_num}
 	</update>

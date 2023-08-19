@@ -52,7 +52,9 @@ public interface MemberService {
 	
 	//아이디 찾기
 	public MemberVO findMemberId(String mem_name, String mem_phone);
+	public MemberVO findCompanyId(String comp_owner, String comp_phone);
 	//비밀번호 찾기
 	public MemberVO findMemberPw(String mem_id, String mem_name, String mem_phone, String mem_email);
+	public MemberVO findCompanyPw(String mem_id, String comp_owner, String comp_phone, String comp_email);
 	public void changePw(int mem_num, String new_passwd);
 }

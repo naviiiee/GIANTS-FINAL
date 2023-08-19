@@ -64,19 +64,16 @@ public class MemberController {
 	/*=====================
 	 * 아이디 찾기
 	 *=====================*/
+	/* 일반회원 아이디 찾기 */
 	@GetMapping("/member/findId.do")
 	public String formFindId() {
-		log.debug("<<findId>>");
-		return "commonfindId";
+		return "memberfindId";
 	}
 	@PostMapping("/member/findId.do")
 	public String submitFindId(@Valid MemberVO memberVO, BindingResult result,
 			Model model, HttpServletRequest request, HttpSession session) {
 		
 		MemberVO db_member = memberService.findMemberId(memberVO.getMem_name(),memberVO.getMem_phone());
-		
-		log.debug("<<db_member>> : " + db_member);
-		log.debug("<<Mem_name>> : " + memberVO.getMem_name());
 		
 		if(db_member!=null) {
 			if(db_member.getMemberDetailVO().getMem_name().equals(memberVO.getMem_name())
@@ -90,13 +87,36 @@ public class MemberController {
 		}
 		return "formFindId()";
 	}
+	/* 기업회원 아이디 찾기 */
+	@GetMapping("/member/findIdCp.do")
+	public String formFindIdCp() {
+		return "companyfindId";
+	}
+	@PostMapping("/member/findIdCp.do")
+	public String submitFindIdCp(@Valid MemberVO memberVO, BindingResult result,
+			Model model, HttpServletRequest request, HttpSession session) {
+		
+		MemberVO db_member = memberService.findCompanyId(memberVO.getComp_owner(),memberVO.getComp_phone());
+		if(db_member!=null) {
+			if(db_member.getCompanyDetailVO().getComp_owner().equals(memberVO.getComp_owner())
+					&& db_member.getCompanyDetailVO().getComp_phone().equals(memberVO.getComp_phone())) {
+				
+				model.addAttribute("db_member", db_member);
+				return "findIdResult";
+			}
+		}else {
+			return "formFindId()";
+		}
+		return "formFindId()";
+	}
 	/*=====================
 	 * 비밀번호 찾기
 	 *=====================*/
+	/* 일반회원 비밀번호 찾기 */
 	@GetMapping("/member/findPw.do")
 	public String formFindPw() {
 		log.debug("<<findPw>>");
-		return "commonfindPw";
+		return "memberfindPw";
 	}
 	@PostMapping("/member/findPw.do")
 	public String submitFindPw(@Valid MemberVO memberVO, BindingResult result,
@@ -116,6 +136,46 @@ public class MemberController {
 					&& db_member.getMemberDetailVO().getMem_name().equals(memberVO.getMem_name())
 					&& db_member.getMemberDetailVO().getMem_phone().equals(memberVO.getMem_phone())
 					&& db_member.getMemberDetailVO().getMem_email().equals(memberVO.getMem_email())) {
+				log.debug("<<조건문 통과>>");
+				
+				 // 난수 생성
+		        String new_passwd = RandomStringUtils.randomNumeric(6);
+		        log.debug("<<new_passwd>> : " + new_passwd);
+		        
+		        // 모델에 난수 추가
+		        model.addAttribute("new_passwd", new_passwd);
+
+		        // 비밀번호 변경
+		        memberService.changePw(db_member.getMem_num(), new_passwd);
+		        
+				model.addAttribute("db_member", db_member);
+				return "findPwResult";
+			}
+		}else {
+			return "formFindPw()";
+		}
+		return "formFindPw()";
+	}
+	/* 기업회원 비밀번호 찾기 */
+	@GetMapping("/member/findPwCp.do")
+	public String formFindPwCp() {
+		log.debug("<<findPw>>");
+		return "companyfindPw";
+	}
+	@PostMapping("/member/findPwCp.do")
+	public String submitFindPwCp(@Valid MemberVO memberVO, BindingResult result,
+							   Model model, HttpServletRequest request, HttpSession session) {
+		
+		MemberVO db_member = memberService.findCompanyPw(memberVO.getMem_id(),
+														memberVO.getComp_owner(),
+														memberVO.getComp_phone(),
+														memberVO.getComp_email());
+		
+		if(db_member!=null) {
+			if(db_member.getMem_id().equals(memberVO.getMem_id())
+					&& db_member.getCompanyDetailVO().getComp_owner().equals(memberVO.getComp_owner())
+					&& db_member.getCompanyDetailVO().getComp_phone().equals(memberVO.getComp_phone())
+					&& db_member.getCompanyDetailVO().getComp_email().equals(memberVO.getComp_email())) {
 				log.debug("<<조건문 통과>>");
 				
 				 // 난수 생성
@@ -772,28 +832,6 @@ public class MemberController {
 	public String companyMypageOrderList(HttpSession session, Model model) {
 		
 		return "companyMypageOrderList";
-	}
-	
-	
-	/* === 마이페이지 : 관리자
-	=======================*/
-	//티켓관리
-	@RequestMapping("/member/adminMypageTicket.do")
-	public String adminMypageTicket(HttpSession session, Model model) {
-		
-		return "adminMypageTicket";
-	}
-	//굿즈관리
-	@RequestMapping("/member/adminMypageGoods.do")
-	public String adminMypageGoods(HttpSession session, Model model) {
-		
-		return "adminMypageGoods";
-	}
-	//매출관리
-	@RequestMapping("/member/adminMypageSaleManage.do")
-	public String adminMypageSaleManage(HttpSession session, Model model) {
-		
-		return "adminMypageSaleManage";
 	}
 	
 }

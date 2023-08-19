@@ -36,5 +36,7 @@
 		</table>
 		<div class="form-page">${page}</div>
 	</c:if>
+	<input type="button" value="장바구니" class="login-sub-btn"
+		   onclick="location.href='${pageContext.request.contextPath}/gorder/goods_cart.do'">
 </div>
 <!-- 마이페이지 굿즈구매내역 끝  -->

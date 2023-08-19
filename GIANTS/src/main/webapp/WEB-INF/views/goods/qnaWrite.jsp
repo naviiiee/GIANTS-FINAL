@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 문의 등록 시작 -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goodsReview.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goods.css">
 <div class="page-main">
 	<div class="main-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
@@ -14,11 +14,11 @@
 		<form:errors element="div" cssColor="error-color"/>
 		<ul>
 			<li>
-				<label>문의할 상품</label>
+				<label for="goods_num">문의할 상품</label>
 				<select name="goods_num" required>
 					<option>====선택====</option>
 					<c:forEach var="goods" items="${goods_list}">
-					<option value="${goods.goods_num}">${goods.goods_name}</option>
+					<option value="${goods.goods_num}"<c:if test="${goods_num == goods.goods_num}">selected</c:if>>${goods.goods_name}</option>
 					</c:forEach>
 				</select>
 			</li>

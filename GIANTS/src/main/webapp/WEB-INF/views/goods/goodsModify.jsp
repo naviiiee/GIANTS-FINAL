@@ -34,7 +34,7 @@
 				<input type="file" id="upload" name="upload" accept="image/gif,image/png,image/jpeg">
 				<c:if test="${!empty goodsVO.goods_photo}">
 				<div id="file_detail">
-				<span>(${goodsVO.goods_photoname})파일이 등록되어 있습니다.</span>
+					<span>(${goodsVO.goods_photoname})파일이 등록되어 있습니다.</span>
 				</div>
 				</c:if>
 				<form:errors path="goods_photo" cssColor="error-color"/>

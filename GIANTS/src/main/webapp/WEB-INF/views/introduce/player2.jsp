@@ -42,63 +42,6 @@ li{
 	</div>
 	<hr size="0.05" width="100%" noshade style="margin-bottom:3%">
 	
-	
-	<!--  
-	<select> 
-	  <option value="player.do" >감독</option> 
-	  <option value="playerList_c.do">코치</option> 
-	  <option value="투수">투수</option> 
-	  <option value="포수">포수</option> 
-	  <option value="외야수">외야수</option> 
-	  <option value="내야수">내야수</option> 
-	</select>
-	-->
-	
-	<!--  
-	 <div class="dropdown">
-        <button class="dropdown-btn"><img src="${pageContext.request.contextPath}/images/아래화살표.png">감독</button>
-        <div class="dropdown-submenu">
-            <a href="player.do" class="over">감독</a>
-            <a href="#none">코치</a>
-            <a href="playerList_t.do">투수</a>
-            <a href="#none">포수</a>
-            <a href="#none">외야수</a>
-            <a href="#none">내야수</a>
-        </div>
-    </div>
-    
-    
-
-	
-	<div class="a-tab align-right">
-		<ul>
-			<li style="margin-top:20%; display:flex;">
-				<a href="stadium.do">구장 소개</a>
-				<a href="map.do">오시는 길</a>
-				<a href="food.do">먹거리</a>
-				<a href="player.do" class="over">선수 소개</a>
-			</li>
-		</ul>
-	</div>
-	
-	
-	<form action="commuList.do" id="search_form" method="get"  style="padding-bottom: 24px;">
-		<ul class="search align-center">
-			<li>
-				<select name="keyfield" id="keyfield">
-					<option value="1" <c:if test="${param.keyfield == 1}">SELECTED</c:if>>선수명</option>
-					<option value="2" <c:if test="${param.keyfield == 2}">SELECTED</c:if>>선수 포지션</option>
-				</select>
-			</li>
-			<li>
-				<input type="search" name="keyword" id="keyword" value="${param.keyword}" style="height:30px;">
-			</li>
-			<li>
-				<input type="submit" value="검색" style="height:30px;"  class="accept-btn">
-			</li>
-		</ul>
-		</form>
-		-->
 		
 		
 	<div class="aaa">
@@ -170,6 +113,7 @@ li{
 				<th>투타</th>
 				<th>경력사항</th>
 				<th>입단년도</th>
+				<c:if test=""></c:if>
 			</tr> 
 			<c:forEach var="player" items="${list}">
 				<c:if test="${player.player_position == '감독'}">

@@ -109,6 +109,7 @@ strong{
 	background:#ffffff url(/_Img/Board/roster/roster_view_bg_01.jpg) no-repeat center top;
 	height:800px;
 }
+
 */
 </style>
 <!-- [관리자] 선수 목록 시작 -->
@@ -151,7 +152,7 @@ strong{
 	   	 </div>
     </div>
 	<div>
-	<form action="commuList.do" id="search_form" method="get"  style="padding-bottom: 24px;">
+	<form action="player.do" id="search_form" method="get"  style="padding-bottom: 24px;">
 		<ul class="search align-center">
 			<li>
 				<select name="keyfield" id="keyfield">
@@ -189,6 +190,7 @@ strong{
 		<div class="result-display">표시할 선수목록이 없습니다.</div>
 	</c:if>
 	
+
 	<div class=bbb>
 	<div class="director">
 	<c:forEach var="player" items="${list}">
@@ -200,13 +202,14 @@ strong{
 			<p class="pos">${player.player_position}</p>
 			<p class="name">
 				<strong>
-				${player.player_name}
+					<c:if test="${user.mem_auth != 9}">${player.player_name}</c:if>
+					<c:if test="${!empty user && user.mem_auth == 9}"><a href="admin_playerModify.do?player_num=${player.player_num}" style="text-decoration : underline;">${player.player_name}</a></c:if>
 				<span class="nb">${player.player_backnumber}</span>
 				</strong>
 			</p>
 			<p class="ename">LARRY JAMES SUTTON</p>
 			<hr size="0.03" width="140%" noshade>
-			<dl>
+			<dl >
 				<dt>생년월일</dt>
 				<dd>${player.player_birthday}</dd>
 				<dt>입단년도</dt>
@@ -235,13 +238,11 @@ strong{
 	</div>
 	</div>
 	
-	
 		
 		
 		<div class="align-right" >
-			<c:if test="${!empty user}">
+			<c:if test="${!empty user && user.mem_auth == 9}">
 			<input type="button" value="선수 등록" onclick="location.href='admin_player.do'" class="accept-btn">
-			<input type="button" value="수정" onclick="location.href='admin_player.do'" class="accept-btn">
 			</c:if>
 		</div>
 		

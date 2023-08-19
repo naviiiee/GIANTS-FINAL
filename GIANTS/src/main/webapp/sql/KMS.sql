@@ -64,10 +64,12 @@ CREATE SEQUENCE chat_seq;
 CREATE TABLE CHATROOM(
  chatroom_num number not null,
  trade_num number not null,
- mem_num number not null,
+ seller_num number not null,
+ buyer_num number not null,
  constraint CHATROOM_PK primary key (chatroom_num),
  constraint CHATROOM_FK1 foreign key (trade_num) references TRADING(trade_num),
- constraint CHATROOM_FK2 foreign key (mem_num) references MEMBER(mem_num)
+ constraint CHATROOM_FK2 foreign key (seller_num) references MEMBER(mem_num),
+ constraint CHATROOM_FK3 foreign key (buyer_num) references MEMBER(mem_num)
 );
 
 CREATE SEQUENCE chatroom_seq;

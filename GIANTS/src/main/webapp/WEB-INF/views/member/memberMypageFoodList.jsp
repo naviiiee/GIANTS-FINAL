@@ -22,7 +22,7 @@
 				<th>상호명</th>
 				<th>상품</th>
 				<th>결제금액</th>
-				<th>상태</th>
+				<th>상태</th>	
 			</tr>
 			<c:forEach var="#" items="#">
 				<tr>
@@ -36,5 +36,7 @@
 		</table>
 		<div class="form-page">${page}</div>
 	</c:if>
+	<input type="button" value="장바구니" class="login-sub-btn"
+		   onclick="location.href='${pageContext.request.contextPath}/food/fcart/foodUserCartList.do'">
 </div>
 <!-- 마이페이지 푸드구매내역 끝 -->

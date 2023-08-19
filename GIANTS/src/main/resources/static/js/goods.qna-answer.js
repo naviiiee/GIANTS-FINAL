@@ -1,5 +1,5 @@
 $(function(){
-	let rowCount = 10;
+	let rowCount = 5;
 	let currentPage;
 	let count;
 	
@@ -32,13 +32,12 @@ $(function(){
 				$(param.list).each(function(index, item){
 					let output = '<div class="item">';
 					output += '<ul class="detail-info">';
-					//output += '<li>' + item.mem_num + '</li>';
-					output += '<li><b>[관리자]</b> ' + item.mem_id + '<br>';
+					output += '<li><b>[관리자]</b> ' + item.mem_id + '  ';
 					
 					if(item.gans_mdate){
-						output += '<span class="modify-date">최근 수정일 : ' + item.gans_mdate + '</span>';
+						output += '<span class="modify-date align-right"> | ' + item.gans_mdate + ' 수정</span>';
 					} else{
-						output += '<span class="modify-date">등록일 : ' + item.gans_regdate + '</span>';
+						output += '<span class="modify-date align-right"> | ' + item.gans_regdate + ' 등록</span>';
 					}
 					output += '</li>';
 					output += '</ul>';
@@ -182,24 +181,25 @@ $(function(){
 	//답변 수정 폼 호출
 	$(document).on('click', '.modify-btn', function(){
 		let gans_num = $(this).attr('data-num'); //답변 번호
-		let gans_content = $(this).parent().find('p').html().replace(/<br>/gi, '\r\n'); //답변 내용
+		let tmp = $(this).parent();
+		let gans_content = $(tmp).parent().find('p').html().replace(/<br>/gi, '\r\n'); //답변 내용
 		
 		//답변 수정 폼 UI
 		let modifyUI = '<form id="mans_form">';
 		modifyUI += '<input type="hidden" name="gans_num" id="mans_num" value="' + gans_num + '">';
 		modifyUI += '<textarea rows="3" cols="50" name="gans_content" id="mans_content" class="rep-content">' + gans_content + '</textarea>';
 		modifyUI += '<div id="mans_first"><span class="letter-count">300/300</span></div>';
-		modifyUI += '<div id="mans_second" class="align-right">';
+		modifyUI += '<div id="mans_second">';
 		modifyUI += ' <input type="submit" value="수정">';
 		modifyUI += ' <input type="button" value="취소" class="re-reset">';
 		modifyUI += '</div>';
-		modifyUI += '<hr size="1" noshade>';
+		modifyUI += '<hr size="1" width="100%" noshade>';
 		modifyUI += '</form>';
 		
 		initModifyForm();
 		
 		//수정버튼을 감싸고 있는 div 감추기
-		$(this).parent().hide();
+		$(tmp).parent().hide();
 		//수정 폼을 수정하고자 하는 데이터가 있는 div에 노출하기
 		$(this).parents('.item').append(modifyUI);
 		
