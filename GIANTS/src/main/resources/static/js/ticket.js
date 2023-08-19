@@ -1,4 +1,5 @@
 $(function() {
+	let checkCnt=0;
 	/* --------------------
 	   등급 클릭시 Block 노출
 	-------------------- */
@@ -6,7 +7,7 @@ $(function() {
 		$.ajax({
 			url:'selectedGrade.do',
 			type:'post',
-			data:{grade_num:$(this).attr('data-grade')},
+			data:{grade_num:$(this).attr('data-grade'), game_num:$('#game_num').val()},
 			dataType:'json',
 			success:function(param) {
 				if(param.result == 'logout') {
@@ -44,7 +45,7 @@ $(function() {
 		$.ajax({
 			url:'selectedBlock.do',
 			type:'post',
-			data:{seat_num:$(this).attr('data-seat')},
+			data:{seat_num:$(this).attr('data-seat'), game_num:$('#game_num').val()},
 			dataType:'json',
 			success:function(param) {
 				if(param.result == 'logout') {
@@ -54,24 +55,28 @@ $(function() {
 					$('.select-left').empty();
 					
 					let seat = $(this).attr('data-seat');
-					let grade = param.seat.grade_num
-					let block = param.seat.seat_block
-					let row = param.seat.seat_row.split(',')
-					let col = param.seat.seat_col.split(',')
+					let grade = param.seat.grade_num;
+					let block = param.seat.seat_block;
+					let row = param.seat.seat_row.split(',');
+					let col = param.seat.seat_col.split(',');
 					
 					let row_length = row.length;
 					let col_length = col.length;
+					let info_length = param.status.length;
 					
 					let seat_div = '<div class="seat-box">';
 					seat_div += '<div class="ground"><h2>그라운드 방향</h2></div>';
+					
+					
 					seat_div +=  '<div class="seat-check">';
 					
 					for(let i = 0; i < row_length; i++) {
+						
 						seat_div += '<div class="row-div">';
 						seat_div += '<span>' + row[i] + '</span>';
 						for(let j = 0; j < col_length; j++) {
-							seat_div += '<input type="button" data-info="' + block + row[i] + col[j] + '" data-seatNum="' + seat + '" class="seat-btn gn' + grade
-														 + '" data-block="' + block + '" data-grade="' + grade + '" data-row="' + row[i] + '" data-col="' + col[j] + '">';
+							seat_div += '<input type="button" data-info="' + block +'^'+ row[i] +'^'+ col[j] + '" class="seat-btn gn' + grade
+														 + '" data-info2="' + block + row[i] + col[j] + '" data-block="' + block + '" data-grade="' + grade + '" data-row="' + row[i] + '" data-col="' + col[j] + '">';
 						}
 						seat_div += '</div>';
 					}
@@ -79,6 +84,11 @@ $(function() {
 					seat_div += '</div>';
 						
 					$('.select-left').append(seat_div);
+					
+					for(let z = 0; z < info_length; z++){
+						$('input[data-info="'+param.status[z].seat_info+'"]').removeClass('gn' + grade + '').addClass('reserved').attr('disabled',true);
+					}
+					
 				} else { alert('블록 선택 오류 발생'); }
 			},
 			error:function() { alert('Network 오류 발생'); }
@@ -90,12 +100,15 @@ $(function() {
 		let check_row = $(this).attr('data-row');
 		let check_col = $(this).attr('data-col');
 		let info = check_block + check_row + check_col;
-		
+			
 		if($(this).hasClass('clicked')) { 
+			checkCnt--;
 			$(this).removeClass('clicked');
 			$(this).addClass('gn'+$(this).attr('data-grade'));
-			$('#del'+$(this).attr('data-info')).remove();
+			$('#del'+$(this).attr('data-info2')).remove();
 		} else {
+			checkCnt++;
+			
 			$(this).removeClass('gn'+$(this).attr('data-grade'));
 			$(this).addClass('clicked');
 		
@@ -106,8 +119,7 @@ $(function() {
 			seat_info += '<input type="hidden" name="seatR" class="seatR" value="' + check_row + '">';
 			seat_info += '<input type="hidden" name="seatC" class="seatC" value="' + check_col + '">';*/
 			
-			seat_info += '<input type="hidden" name="seat" value="' + check_block + '^' + check_row + '^' + check_col + '">';
-			seat_info += '<input type="hidden" name="seat_info" value="' + check_block + check_row  + check_col + '">';
+			seat_info += '<input type="hidden" name="seat_info" value="' + check_block + '^' + check_row + '^' + check_col + '">';
 			seat_info += '<input type="hidden" name="grade_num" value="' + $(this).attr('data-grade') + '">';
 			seat_info += '</td></tr>';
 			
@@ -120,26 +132,9 @@ $(function() {
 				return;
 			}
 		}
-	});
-	
-	// 이전버튼 클릭시 선택한 좌석정보 삭제 후 이전 화면으로 이동
-	$(document).on('click', '#delete_check', function() {
-		let game_num = $('#game_num').val();
-		
-		$.ajax({
-			url:'deleteCheck.do',
-			type:'post',
-			data:{check_num:$('#check_num').val()},
-			dataType:'json',
-			success:function(param) {
-				if(param.result == 'logout') {
-					alert('Login 후 이용가능');
-					location.href='../member/login.do';
-				} else if(param.result == 'success') { location.href='ticketMain.do?game_num=' + game_num; }
-				else { alert('선택좌석 삭제 오류 발생'); }
-			},
-			error:function() { alert('Network 오류 발생'); }
-		});
+
+		if(checkCnt > 0){ $('.select-checked').show(); }
+		else{ $('.select-checked').hide(); }
 	});
 	
 	$('#order_seat').submit(function() {

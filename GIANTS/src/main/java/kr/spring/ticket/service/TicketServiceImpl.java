@@ -93,15 +93,24 @@ public class TicketServiceImpl implements TicketService {
 	public void insertTicketCheck(TicketCheckVO ticketCheckVO) { ticketMapper.insertTicketCheck(ticketCheckVO); }
 	
 	@Override
-	public void deleteTicketCheck(Integer check_num) { ticketMapper.deleteTicketCheck(check_num); }
+	public List<TicketCheckVO> selectCheckList(Integer check_num) { return ticketMapper.selectCheckList(check_num); }
+	
+	@Override
+	public void deleteCheck(Integer mem_num, Integer game_num) { ticketMapper.deleteCheck(mem_num, game_num); }
+	
+	@Override
+	public int selectStatusNum() { return ticketMapper.selectStatusNum(); }
 	
 	@Override
 	public void insertSeatStatus(SeatStatusVO seatStatusVO) { ticketMapper.insertSeatStatus(seatStatusVO); }
 	
 	@Override
+	public List<SeatStatusVO> selectStatusByGame(Integer game_num) { return ticketMapper.selectStatusByGame(game_num); }
+	
+	@Override
 	public void insertTicket(TicketVO ticket) {
 		ticketMapper.insertTicket(ticket);
 	}
-	
+
 }
  

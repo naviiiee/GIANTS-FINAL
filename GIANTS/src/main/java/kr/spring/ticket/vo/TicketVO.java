@@ -20,5 +20,11 @@ public class TicketVO {
 	private int total_price;
 	private String pg;
 
-	private String seat_info;
+	private int grade_num;
+	private int status_num;
+	private String seat_date;
+	
+	private int check_num;
+	
+	private String title;
 }

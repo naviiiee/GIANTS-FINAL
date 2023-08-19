@@ -9,7 +9,8 @@ import lombok.ToString;
 @ToString
 public class SeatStatusVO {
 	private int status_num;
+	private int grade_num;
 	private String seat_info;
-	private String seat_date;
+	private int game_num;
 	private int seat_auth;	// 1:예매완료, 2:예매불가
 }
