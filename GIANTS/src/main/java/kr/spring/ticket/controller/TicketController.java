@@ -1,5 +1,6 @@
 package kr.spring.ticket.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,19 +82,23 @@ public class TicketController {
 	/* ----- [Ticket] 등급선택 후 블록정보 출력 -----*/
 	@RequestMapping("/ticket/selectedGrade.do")
 	@ResponseBody
-	public Map<String, Object> selectedGrade(@RequestParam int grade_num, SeatVO seatVO, HttpSession session) {
+	public Map<String, Object> selectedGrade(@RequestParam int game_num, @RequestParam int grade_num, SeatVO seatVO, HttpSession session) {
 		log.debug("<<grade_num>> : " + grade_num);
 		
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		
 		List<SeatVO> list = null;
+		List<SeatStatusVO> status = null;
 			
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user == null) { mapJson.put("result", "logout"); }
 		else {
 			list = ticketService.selectSeatList(seatVO);
+			status = ticketService.selectStatusByGame(game_num);
+			
 			mapJson.put("result", "success");
 			mapJson.put("list", list);
+			mapJson.put("status", status);
 		}
 		
 		return mapJson;
@@ -102,7 +107,7 @@ public class TicketController {
 	/* ----- [Ticket] 블록선택 후 좌석정보 출력 -----*/
 	@RequestMapping("/ticket/selectedBlock.do")
 	@ResponseBody
-	public Map<String, Object> selectedBlock(@RequestParam int seat_num, HttpSession session) {
+	public Map<String, Object> selectedBlock(@RequestParam int seat_num, @RequestParam int game_num, HttpSession session) {
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
@@ -111,8 +116,12 @@ public class TicketController {
 			SeatVO seat =  ticketService.selectSeat(seat_num);
 			log.debug("<<seat>> : " + seat);
 			
+			List<SeatStatusVO> status = ticketService.selectStatusByGame(game_num);
+			log.debug("<<status>> : " + status);
+			
 			mapJson.put("result", "success");
 			mapJson.put("seat", seat);
+			mapJson.put("status", status);
 		}
 		
 		return mapJson;
@@ -145,7 +154,6 @@ public class TicketController {
 			ticketService.insertTicketCheck(checkVO);
 		}
 		
-		
 		model.addAttribute("seatVO", seatVO);
 		model.addAttribute("gameVO", gameVO);
 		model.addAttribute("gradeVO", gradeVO);
@@ -154,26 +162,7 @@ public class TicketController {
 		return "ticketOrderForm";
 	}
 	
-	// 선택한 좌석 정보 삭제
-	@RequestMapping("/ticket/deleteCheck.do")
-	@ResponseBody
-	public Map<String, Object> deleteCheck(@RequestParam int check_num, HttpSession session) {
-		log.debug("<<check_num>> : " + check_num);
-		
-		Map<String, Object> mapJson = new HashMap<String, Object>();
-		
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		if(user == null) { mapJson.put("result", "logout"); }
-		else {
-			ticketService.deleteTicketCheck(check_num);
-			
-			mapJson.put("result", "success");
-		}
-		
-		return mapJson;
-	}
-	
-	/* ----- [Order] 콜백 수신처리 -----*/
+	/* ----- [Order] 결제 완료 -----*/
 	@RequestMapping("/ticket/insertMPay.do")
 	@ResponseBody
 	public String insertMPay(@RequestBody TicketVO ticketVO, HttpSession session, RedirectAttributes rttr) {		
@@ -182,7 +171,29 @@ public class TicketController {
 		
 		log.debug("<<ticketVO>> : " + ticketVO);
 		
+		int check_num = ticketVO.getCheck_num();
+		int status_num = ticketService.selectStatusNum();
+		
+		List<TicketCheckVO> checkList = ticketService.selectCheckList(check_num);
+		//List<SeatStatusVO> statusList = new ArrayList<SeatStatusVO>();
+		
+		for(TicketCheckVO check : checkList) {
+			SeatStatusVO status = new SeatStatusVO();
+			status.setStatus_num(status_num);
+			status.setGrade_num(ticketVO.getGrade_num());
+			status.setSeat_info(check.getSeat_info());
+			status.setGame_num(ticketVO.getGame_num());
+			status.setSeat_auth(1);
+			
+			ticketService.insertSeatStatus(status);
+		}
+		log.debug("<<status_num>> : " + status_num);
+		ticketVO.setStatus_num(status_num);
+		
 		ticketService.insertTicket(ticketVO);
+		
+		// 결제 완료 후 ticket_check 테이블에 있는 필요없는 정보(해당 mem_num과 game_num) 삭제
+		ticketService.deleteCheck(user.getMem_num(), ticketVO.getGame_num());
 		
 		return "/ticket/gameList.do";	// 결제이후 이동할 주소 지정
 	}

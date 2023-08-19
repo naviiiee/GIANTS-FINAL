@@ -69,7 +69,7 @@
 					<h2>좌석정보</h2>
 					<div id="seatInfo">
 						<input type="hidden" name="title" id="grade_title" value="${gradeVO.title}">
-						<c:forEach var="seat" items="${seatVO.seat}">
+						<c:forEach var="seat" items="${seatVO.seat_info}">
 						<span class="seat-info">${seat} </span><br>
 						</c:forEach>
 					</div>
@@ -88,8 +88,7 @@
 				<hr width="100%" class="color-red" noshade>
 				<div class="group-btn">
 					<input type="hidden" name="check_num" value="${checkVO.check_num}" id="check_num">
-					<input type="hidden" name="game_num" value="${gameVO.game_num}" id="game_num">
-					<input type="button" value="이전" class="default-btn big" id="delete_check">
+					<input type="button" value="이전" class="default-btn big" onclick="location.href='ticketMain.do?game_num=${gameVO.game_num}'">
 					<input type="button" value="결제" class="accept-btn big" onclick="requestPay()">
 					<script>
 					function requestPay() {
@@ -107,7 +106,9 @@
 						let totalPrice = document.getElementById('totalPrice').value;
 						let ticket_quantity = document.getElementById('ticket_quantity').value;
 						let ticket_num = 'T' + new Date().getTime();
+						let check_num = document.getElementById('check_num').value;
 						
+						console.log(check_num);
 						
 					 	// IMP.request_pay(param, callback) 결제창 호출
 					 	IMP.request_pay({
@@ -125,11 +126,14 @@
 					 			let result = {
 					 				'ticket_num':ticket_num,
 					 				'game_num':${gameVO.game_num},
+					 				'grade_num':${seatVO.grade_num},
 					 				'pay_method':'card',
-					 				'ticket_date':'${gameVO.game_date}',
+					 				'seat_date':'${gameVO.game_date}',
 					 				'ticket_quantity':ticket_quantity,
 					 				'total_price':totalPrice,
-					 				'pg':'kakaopay'
+					 				'pg':'kakaopay',
+					 				'check_num':check_num,
+					 				'title':'${gameVO.game_date} 롯데 VS ${gameVO.game_team} ${gameVO.game_time}'
 					 			}
 					 			console.log(result);
 					 			

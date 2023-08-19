@@ -6,6 +6,7 @@ CREATE TABLE tgame(
 	game_time VARCHAR2(20) NOT NULL,
 	game_team VARCHAR2(15) NOT NULL,
 	game_state NUMBER(1) DEFAULT 0 NOT NULL,	-- 0:예매대기, 1:예매가능, 2:매진, 3:경기취소
+	game_week NUMBER(1) NOT NULL,
 	CONSTRAINT tgame_pk PRIMARY KEY (game_num),
 	CONSTRAINT tgame_fk FOREIGN KEY (grade_num) REFERENCES grade (grade_num)
 );
@@ -25,7 +26,8 @@ CREATE TABLE seat(
 	seat_num NUMBER,
     grade_num NUMBER,
 	seat_block NUMBER(3) NOT NULL,
-	seat_info VARCHAR2(30) NOT NULL,	-- 블록+행+열(722A3 등과 같이 저장)
+	seat_row VARCHAR2(30) NOT NULL,
+	seat_col VARCHAR2(30) NOT NULL,
 	seat_quantity NUMBER(5) NOT NULL,
 	CONSTRAINT seat_pk PRIMARY KEY (seat_num),
 	CONSTRAINT seat_fk FOREIGN KEY (grade_num) REFERENCES grade (grade_num)
@@ -33,46 +35,36 @@ CREATE TABLE seat(
 
 -- 좌석상태
 CREATE TABLE seat_status(
-	status_num NUMBER,
-    seat_num NUMBER,
-	seat_row VARCHAR2(30) NOT NULL,
-	seat_col VARCHAR2(30) NOT NULL,
-	seat_date VARCHAR2(30) NOT NULL,
-	seat_auth NUMBER(20) NOT NULL,	-- 1:예매완료, 2:예매불가
-	CONSTRAINT seat_status_pk PRIMARY KEY (status_num),
-	CONSTRAINT seat_status_fk FOREIGN KEY (seat_num) REFERENCES seat (seat_num)
+	status_num NUMBER NOT NULL,
+	seat_info VARCHAR2(30) NOT NULL,
+	game_num NUMBER(30),
+	seat_auth NUMBER(20) NOT NULL	-- 1:예매완료, 2:예매불가
 );
 
 -- 선택정보확인(장바구니개념)
 CREATE TABLE ticket_check(
-	check_num NUMBER,
+	check_num NUMBER NOT NULL,
 	seat_info VARCHAR2(10) NOT NULL,
 	game_num NUMBER NOT NULL,
-	mem_num NUMBER NOT NULL,
-	CONSTRAINT ticket_check_pk PRIMARY KEY (check_num)
+	mem_num NUMBER NOT NULL
 );
 
 -- 티켓
 CREATE TABLE ticket(
 	ticket_num VARCHAR2(20),
-    mem_num NUMBER,
-    game_num NUMBER,
-	ticket_date DATE DEFAULT SYSDATE NOT NULL,
-	ticket_quantity NUMBER(1) NOT NULL,
+    mem_num NUMBER NOT NULL,
+    game_num NUMBER NOT NULL,
+    status_num NUMBER NOT NULL,
+    title VARCHAR2(100) NOT NULL,	-- 경기 제목
+	ticket_date DATE DEFAULT SYSDATE NOT NULL,	-- 티켓 구매 날짜
+	ticket_quantity NUMBER(1) NOT NULL,	-- 구매 수량
 	ticket_modify DATE,
 	total_price NUMBER(9) NOT NULL,
-	ticket_status NUMBER(1) NOT NULL,
-	ticket_qrlink CLOB NOT NULL,
 	pg varchar2(30) not null,
 	pay_method varchar2(30) not null,
 	CONSTRAINT ticket_pk PRIMARY KEY (ticket_num),
 	CONSTRAINT ticket_fk FOREIGN KEY (mem_num) REFERENCES member (mem_num),
 	CONSTRAINT ticket_fk2 FOREIGN KEY (game_num) REFERENCES tgame (game_num)
-);
-
--- 티켓상세
-CREATE TABLE ticket_detail(
-	
 );
 
 -- sequence

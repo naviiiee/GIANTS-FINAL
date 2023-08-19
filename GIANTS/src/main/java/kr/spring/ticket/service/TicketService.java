@@ -46,7 +46,11 @@ public interface TicketService {
 	/* 티켓 결제 */
 	public int selectCheckNum();
 	public void insertTicketCheck(TicketCheckVO ticketCheckVO);	// 좌석선택정보 저장
-	public void deleteTicketCheck(Integer check_num);	// 좌석선택정보 삭제
+	public List<TicketCheckVO> selectCheckList(Integer check_num);	// 좌석선택정보
+	public void deleteCheck(Integer mem_num, Integer game_num);
+	
+	public int selectStatusNum();
 	public void insertSeatStatus(SeatStatusVO seatStatusVO);	// 좌석예매정보 등록
+	public List<SeatStatusVO> selectStatusByGame(Integer game_num);
 	public void insertTicket(TicketVO ticket);	// 티켓주문
 }

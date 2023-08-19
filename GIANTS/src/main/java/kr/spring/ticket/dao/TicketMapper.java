@@ -86,9 +86,16 @@ public interface TicketMapper {
 	public int selectCheckNum();	// 좌석선택 확인용 번호 생성
 	@Insert("INSERT INTO ticket_check (check_num, seat_info, game_num, mem_num) VALUES(#{check_num}, #{seat_info}, #{game_num}, #{mem_num})")
 	public void insertTicketCheck(TicketCheckVO ticketCheckVO);	// 좌석선택정보 저장
-	@Delete("DELETE FROM ticket_check WHERE check_num = #{check_num}")
-	public void deleteTicketCheck(Integer check_num);	// 좌석선택정보 삭제
-	@Insert("INSERT INTO seat_status (status_num, seat_info, seat_date, seat_auth) VALUES(seat_status_seq.nextval, #{seat_info}, #{seat_date}, #{seat_auth})")
+	@Select("SELECT * FROM ticket_check WHERE check_num = #{check_num}")
+	public List<TicketCheckVO> selectCheckList(Integer check_num);
+	@Delete("DELETE *  FROM ticket_check WHERE mem_num = #{mem_num} AND game_num = #{game_num}")
+	public void deleteCheck(Integer mem_num, Integer game_num);
+	
+	@Select("SELECT seat_status_seq.nextval FROM dual")
+	public int selectStatusNum();
+	@Insert("INSERT INTO seat_status (status_num, grade_num, seat_info, game_num, seat_auth) VALUES(#{status_num}, #{grade_num}, #{seat_info}, #{game_num}, #{seat_auth})")
 	public void insertSeatStatus(SeatStatusVO seatStatusVO);	// 좌석예매정보 등록
+	@Select("SELECT * FROM seat_status WHERE game_num = #{game_num}")
+	public List<SeatStatusVO> selectStatusByGame(Integer game_num);
 	public void insertTicket(TicketVO ticketVO);
 }

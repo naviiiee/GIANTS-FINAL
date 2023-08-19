@@ -68,6 +68,11 @@ input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }
 .select-grade hr, .select-block hr, .selected-seat hr{ margin:0 auto; }
 .select-grade th, .select-block th, .selected-seat th{ font-weight:bold; font-size:16px; padding:5px; }
 
+.select-grade, .select-block { position: relative; }
+.select-grade .select-checked, .select-block .select-checked{
+	position: absolute; display:none; left:0; top:0; width:500px; height:200px;
+}
+
 .grade-table{ width:100%; text-align:center; }
 .grade_title:hover{ cursor:pointer; }
 
@@ -83,6 +88,8 @@ input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }
 .seat-btn{ width:30px; height:30px; border:none; background-color:#fff; margin:10px 10px; }
 .seat-btn:hover{ cursor:pointer; background-color:transparent; transition:0.2s ease-out; border:1px solid #fff; }
 .clicked{ background:#fff; border:1px solid #999; }
+.reserved{ background:#000; }
+.reserved:hover{ background:#000; }
 .gn1{ background:#627833; }
 .gn63{ background:#D77783; }
 .gn81{ background:#997A8D; }
