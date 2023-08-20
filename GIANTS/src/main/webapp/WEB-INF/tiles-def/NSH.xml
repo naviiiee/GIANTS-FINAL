@@ -55,5 +55,10 @@
 		<put-attribute name="title" value="좌석선택"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticket/ticketCheck.jsp"/>
 	</definition>
+
+	<definition name="ticketInfo" extends="main">
+		<put-attribute name="title" value="티켓정보"/>
+		<put-attribute name="body" value="/WEB-INF/views/ticket/ticketInfo.jsp"/>
+	</definition>
 	
 </tiles-definitions>

@@ -107,5 +107,10 @@ public interface TicketMapper {
 	@Select("SELECT count(grade_num) FROM seat_status WHERE grade_num = #{grade_num} AND seat_auth = 2")
 	public int selectAdminCountByGradeNum(Integer grade_num);
 	
+	@Select("SELECT * FROM seat_status WHERE status_num = #{status_num}")
+	public List<SeatStatusVO> selectSeatInfo(Integer status_num);
+	
 	public void insertTicket(TicketVO ticketVO);
+	@Select("SELECT * FROM ticket WHERE ticket_num = #{ticket_num}")
+	public TicketVO selectTicket(String ticket_num);
 }

@@ -60,7 +60,7 @@ input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }
 
 /* 좌석 선택 */
 .select-ticket, .check-info{ width:100%; display:flex; justify-content:center; }
-.select-left, .select-right{ width:50%; margin:0 auto; }
+.select-left, .select-right, .info3-left, .info3-right{ width:50%; margin:0 auto; }
 
 .selected-info, .game-logo{ width:50%; margin:20px auto; padding:10px 0; text-align:center; border:1px solid #999; }
 
@@ -116,3 +116,13 @@ input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }
 
 .payInfo input[type=radio]{ margin:0 5px 0 20px; }
 .price-information table{ width:100%; text-align:center; font-size:16px; font-weight:bold; }
+
+/* 티켓 정보 */
+.ticket-info1{ width:80%; margin:0 auto; text-align:center; }
+.ticket-info2{ width:80%; height:300px; background:url('/images/ticketBack.png') no-repeat; background-size:100% 100%; margin:0 auto; text-align:center; }
+.ticket-info3{ width:80%; display:flex; justify-content:center; margin:0 auto; }
+.ticket-info4{ width:80%; margin:0 auto; }
+.ticket-content{ height:250px; color:white; text-align:left; }
+.ticket-content2{ color:white; text-align:right; }
+
+.ticket-table tr td:first-child{ width:150px; }

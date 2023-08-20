@@ -120,7 +120,13 @@ public class TicketServiceImpl implements TicketService {
 	public int selectAdminCountByGradeNum(Integer grade_num) { return ticketMapper.selectAdminCountByGradeNum(grade_num); }
 	
 	@Override
+	public List<SeatStatusVO> selectSeatInfo(Integer status_num) { return ticketMapper.selectSeatInfo(status_num); }
+	
+	@Override
 	public void insertTicket(TicketVO ticket) { ticketMapper.insertTicket(ticket); }
+
+	@Override
+	public TicketVO selectTicket(String ticket_num) { return ticketMapper.selectTicket(ticket_num); }
 
 }
  

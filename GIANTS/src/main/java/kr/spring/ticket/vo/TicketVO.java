@@ -13,18 +13,21 @@ public class TicketVO {
 	private String ticket_num;
 	private int mem_num;
 	private int game_num;
-	private String pay_method;
 	private String ticket_date;
-	private int ticket_quantity;
 	private Date ticket_modify;
-	private int total_price;
-	private String pg;
 
 	private int grade_num;
 	private int status_num;
-	private String seat_date;
-	
 	private int check_num;
 	
-	private String title;
+	private String order_name;
+	private String order_phone;
+	private String order_email;
+	private String game_title;
+	private String game_date;
+	private String game_time;
+	private int ticket_quantity;
+	private int total_price;
+	private String pg;
+	private String pay_method;
 }

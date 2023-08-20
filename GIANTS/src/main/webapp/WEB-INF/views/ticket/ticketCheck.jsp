@@ -127,13 +127,17 @@
 					 				'ticket_num':ticket_num,
 					 				'game_num':${gameVO.game_num},
 					 				'grade_num':${seatVO.grade_num},
-					 				'pay_method':'card',
-					 				'seat_date':'${gameVO.game_date}',
+					 				'check_num':check_num,
+					 				'order_name':'${seatVO.detailVO.mem_name}',
+					 				'order_phone':'${seatVO.detailVO.mem_phone}',
+					 				'order_email':'${seatVO.detailVO.mem_email}',
+					 				'game_title':'롯데 VS ${gameVO.game_team}',
+					 				'game_date':'${gameVO.game_date}',
+					 				'game_time':'${gameVO.game_time}',
 					 				'ticket_quantity':ticket_quantity,
 					 				'total_price':totalPrice,
 					 				'pg':'kakaopay',
-					 				'check_num':check_num,
-					 				'title':'${gameVO.game_date} 롯데 VS ${gameVO.game_team} ${gameVO.game_time}'
+					 				'pay_method':'card'
 					 			}
 					 			console.log(result);
 					 			
@@ -142,10 +146,7 @@
 					 				type:'post',
 					 				contentType:'application/json',
 					 				data:JSON.stringify(result),
-					 				success: function (res) {
-					 					alert('결제 성공!!');
-					 					location.href=res;
-					 				},
+					 				success: function (res) { location.href=res; },
 									error: function (err) { console.log(err); }
 					 			}); 
 					 		} else {

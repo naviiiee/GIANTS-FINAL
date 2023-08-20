@@ -180,6 +180,25 @@ $(function() {
 	$('.price-total>td:nth-child(2)').empty()
 	$('.price-total').append((price * leng).toLocaleString() + '원');
 	
-	$('.group-btn').append('<input type="hidden" name="total_price" value="' + price * leng + '" id="totalPrice">')
+	$('.group-btn').append('<input type="hidden" name="total_price" value="' + price * leng + '" id="totalPrice">');
+	
+	/* ---------------
+	   예매 좌석정보
+	------------------ */
+	let seat2 = $('.seat-info').text();
+	let array2 = seat2.split(' ');
+	let leng2 = array.length - 1;
+	let title2 = $('.gradeTitle').text();
+	
+	$('#status_info').empty();
+	
+	for(let i = 0; i < leng2; i++) {
+		let seatArr2 = array2[i].split('^');
+		
+		let output2 = '<span>' + title2 + ' ' + seatArr2[0] + '블록 ';
+		output2 += seatArr2[1] + '행 ';
+		output2 += seatArr2[2] + '번</span>, ';
+		$('#status_info').append(output2);
+	}
 
 });

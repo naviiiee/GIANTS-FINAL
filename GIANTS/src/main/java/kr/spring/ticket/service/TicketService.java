@@ -58,5 +58,8 @@ public interface TicketService {
 	public int selectAdminCountBySeatNum(Integer seat_num);
 	public int selectAdminCountByGradeNum(Integer grade_num);
 	
+	public List<SeatStatusVO> selectSeatInfo(Integer status_num);
+	
 	public void insertTicket(TicketVO ticket);	// 티켓주문
+	public TicketVO selectTicket(String ticket_num);
 }

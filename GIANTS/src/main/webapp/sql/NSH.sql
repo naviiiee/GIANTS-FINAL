@@ -61,13 +61,18 @@ CREATE TABLE ticket(
     mem_num NUMBER NOT NULL,
     game_num NUMBER NOT NULL,
     status_num NUMBER NOT NULL,
-    title VARCHAR2(100) NOT NULL,	-- 경기 제목
 	ticket_date DATE DEFAULT SYSDATE NOT NULL,	-- 티켓 구매 날짜
-	ticket_quantity NUMBER(1) NOT NULL,	-- 구매 수량
 	ticket_modify DATE,
+	order_name varchar2(30) NOT null,
+	order_phone varchar2(15) NOT null,
+	order_email varchar2(50) NOT null,
+	game_title VARCHAR2(100) NOT NULL,	-- 경기 제목
+	game_date VARCHAR2(30) NOT NULL,
+	game_time VARCHAR2(20) NOT NULL,
+	ticket_quantity NUMBER(1) NOT NULL,	-- 구매 수량
 	total_price NUMBER(9) NOT NULL,
-	pg varchar2(30) not null,
-	pay_method varchar2(30) not null,
+	pg varchar2(30) NOT NULL,
+	pay_method varchar2(30) NOT NULL,
 	CONSTRAINT ticket_pk PRIMARY KEY (ticket_num),
 	CONSTRAINT ticket_fk FOREIGN KEY (mem_num) REFERENCES member (mem_num),
 	CONSTRAINT ticket_fk2 FOREIGN KEY (game_num) REFERENCES tgame (game_num)

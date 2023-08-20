@@ -51,7 +51,7 @@ public class TicketController {
 	
 	/* ----- [Ticket] 메인(요금안내 및 티켓예매 버튼 활성화) -----*/
 	@RequestMapping("/ticket/ticket.do")
-	public String ticketInfo() { return "ticket"; }
+	public String ticket() { return "ticket"; }
 	
 	/* ----- [Game] 경기목록 -----*/
 	@RequestMapping("/ticket/gameList.do")
@@ -180,7 +180,7 @@ public class TicketController {
 	/* ----- [Order] 결제 완료 -----*/
 	@RequestMapping("/ticket/insertMPay.do")
 	@ResponseBody
-	public String insertMPay(@RequestBody TicketVO ticketVO, HttpSession session, RedirectAttributes rttr) {		
+	public String insertMPay(@RequestBody TicketVO ticketVO, HttpSession session, RedirectAttributes rttr) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		ticketVO.setMem_num(user.getMem_num());
 		
@@ -211,6 +211,30 @@ public class TicketController {
 		// 결제 완료 후 ticket_check 테이블에 있는 필요없는 정보(해당 mem_num과 game_num) 삭제
 		ticketService.deleteCheck(user.getMem_num(), ticketVO.getGame_num());
 		
-		return "/ticket/gameList.do";	// 결제이후 이동할 주소 지정
+		return "/ticket/ticketInfo.do?ticket_num=" + ticketVO.getTicket_num();	// 결제이후 이동할 주소 지정
+	}
+	
+	/* ----- [Order] 티켓정보 -----*/
+	@RequestMapping("/ticket/ticketInfo.do")
+	public String ticketInfo(@RequestParam String ticket_num, Model model, HttpSession session) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		if(user == null) { return "redirect:/member/login.do"; }
+		
+		TicketVO ticket = ticketService.selectTicket(ticket_num);
+		
+		List<SeatStatusVO> list = ticketService.selectSeatInfo(ticket.getStatus_num());
+		
+		for(SeatStatusVO status : list) {
+			GradeVO grade = ticketService.selectGrade(status.getGrade_num());
+			model.addAttribute("grade", grade);
+		}
+		
+		log.debug("<<SeatStatusVO>> : " + list);
+		
+		model.addAttribute("ticket", ticket);
+		model.addAttribute("list", list);
+		
+		return "ticketInfo";
 	}
 }
