@@ -337,4 +337,48 @@
 		WHERE
 			mem_num=#{mem_num}
 	</update>
+	
+	<!-- 매장 상세정보 쿼리 -->
+	<select id="selectCompCp" parameterType="string" resultType="companyDetailVO">
+		SELECT 
+		  c.comp_num, 
+		  comp_name, 
+		  comp_photo, 
+		  comp_photoname, 
+		  comp_content, 
+		  comp_cate, 
+		  comp_score
+        FROM company_detail c
+        LEFT OUTER JOIN (SELECT c.comp_num as comp_num, round(avg(comp_score),2) as comp_score
+                         FROM company_detail c JOIN food_review r
+                         ON c.comp_num=r.comp_num
+                         WHERE c.comp_num=#{comp_num}
+                         GROUP BY c.comp_num) r
+        ON c.comp_num=r.comp_num
+        WHERE c.comp_num=#{comp_num}
+	</select>
+	<!-- 식품목록 레코드수 쿼리 -->
+	<select id="selectRowCountCp" parameterType="string" resultType="integer">
+		SELECT
+		  COUNT(*)
+		FROM food
+		WHERE comp_num=#{comp_num}
+	</select>
+	
+	<!-- 식품목록 리스트 페이징 쿼리 -->
+	<select id="selectListCp" parameterType="map" resultType="foodVO">
+		SELECT
+		  *
+		FROM (SELECT
+				a.*,
+				rownum rnum
+			  FROM (SELECT
+			  		  *
+			  		FROM food
+			  		WHERE comp_num=#{comp_num}
+			  		ORDER BY food_num DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
 </mapper>

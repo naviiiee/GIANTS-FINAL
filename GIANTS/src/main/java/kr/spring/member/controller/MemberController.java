@@ -1,6 +1,7 @@
 package kr.spring.member.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -24,11 +25,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.food.vo.FoodVO;
 import kr.spring.member.service.MemberService;
+import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.FileUtil;
+import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -832,6 +837,40 @@ public class MemberController {
 	public String companyMypageOrderList(HttpSession session, Model model) {
 		
 		return "companyMypageOrderList";
+	}
+	
+	/*	==========================
+	 *  기업페이지 : 푸드목록
+	 * 	==========================*/	
+	@RequestMapping("/member/compMypageFoodList.do")
+	public ModelAndView compMypageFoodList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
+										  HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		CompanyDetailVO comp = memberService.selectCompCp(user.getCompanyDetailVO().getComp_num());
+		int count = memberService.selectRowCountCp(comp.getComp_num());
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(currentPage, count, 5, 5, "compMypageFoodList.do");
+		
+		List<FoodVO> list = null;
+		if (count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			map.put("comp_num", comp.getComp_num());
+			
+			list = memberService.selectListCp(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("compMypageFoodList");
+		mav.addObject("comp", comp);
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
 	}
 	
 }
