@@ -36,17 +36,23 @@ CREATE TABLE seat(
 -- 좌석상태
 CREATE TABLE seat_status(
 	status_num NUMBER NOT NULL,
+	seat_num NUMBER NOT NULL,
+	grade_num NUMBER NOT NULL,
 	seat_info VARCHAR2(30) NOT NULL,
 	game_num NUMBER(30),
-	seat_auth NUMBER(20) NOT NULL	-- 1:예매완료, 2:예매불가
+	seat_auth NUMBER(20) NOT NULL,	-- 1:예매완료, 2:예매불가
+	CONSTRAINT seat_status_fk FOREIGN KEY (seat_num) REFERENCES seat (seat_num),
+	CONSTRAINT seat_status_fk2 FOREIGN KEY (grade_num) REFERENCES grade (grade_num)
 );
 
 -- 선택정보확인(장바구니개념)
 CREATE TABLE ticket_check(
 	check_num NUMBER NOT NULL,
+	seat_num NUMBER NOT NULL,
 	seat_info VARCHAR2(10) NOT NULL,
 	game_num NUMBER NOT NULL,
-	mem_num NUMBER NOT NULL
+	mem_num NUMBER NOT NULL,
+	CONSTRAINT ticket_check_fk FOREIGN KEY (seat_num) REFERENCES seat (seat_num)
 );
 
 -- 티켓

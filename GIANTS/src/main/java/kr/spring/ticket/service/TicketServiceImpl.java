@@ -108,9 +108,19 @@ public class TicketServiceImpl implements TicketService {
 	public List<SeatStatusVO> selectStatusByGame(Integer game_num) { return ticketMapper.selectStatusByGame(game_num); }
 	
 	@Override
-	public void insertTicket(TicketVO ticket) {
-		ticketMapper.insertTicket(ticket);
-	}
+	public int selectCountBySeatNum(Integer game_num, Integer seat_num) { return ticketMapper.selectCountBySeatNum(game_num, seat_num); }
+
+	@Override
+	public int selectCountByGradeNum(Integer game_num, Integer grade_num) { return ticketMapper.selectCountByGradeNum(game_num, grade_num); }
+	
+	@Override
+	public int selectAdminCountBySeatNum(Integer seat_num) { return ticketMapper.selectAdminCountBySeatNum(seat_num); }
+
+	@Override
+	public int selectAdminCountByGradeNum(Integer grade_num) { return ticketMapper.selectAdminCountByGradeNum(grade_num); }
+	
+	@Override
+	public void insertTicket(TicketVO ticket) { ticketMapper.insertTicket(ticket); }
 
 }
  

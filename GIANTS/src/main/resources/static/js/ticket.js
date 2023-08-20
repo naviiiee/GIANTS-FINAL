@@ -25,13 +25,18 @@ $(function() {
 					$(param.list).each(function(index, item) {
 						block_info += '<tr data-seat="' + item.seat_num + '" class="selected-block">';
 						block_info += '<td>' + item.seat_block + '</td>';
-						block_info += '<td>' + item.seat_quantity + '</td>';
+						
+						if(item.seat_quantity == 0) { block_info += '<td>매진</td>'; }
+						else { block_info += '<td>' + item.seat_quantity + '</td>'; }
+						
 						block_info += '</tr>';
 					});
 					
 					block_info += '</table>';
 						
 					$('.select-block').append(block_info);
+					
+					alert(item.seat_num);
 				} else { alert('좌석 선택 오류 발생'); }
 			},
 			error:function() { alert('Network 오류 발생'); }
@@ -54,7 +59,7 @@ $(function() {
 				} else if(param.result == 'success') {
 					$('.select-left').empty();
 					
-					let seat = $(this).attr('data-seat');
+					let seat = param.seat.seat_num;
 					let grade = param.seat.grade_num;
 					let block = param.seat.seat_block;
 					let row = param.seat.seat_row.split(',');
@@ -66,8 +71,6 @@ $(function() {
 					
 					let seat_div = '<div class="seat-box">';
 					seat_div += '<div class="ground"><h2>그라운드 방향</h2></div>';
-					
-					
 					seat_div +=  '<div class="seat-check">';
 					
 					for(let i = 0; i < row_length; i++) {
@@ -75,7 +78,7 @@ $(function() {
 						seat_div += '<div class="row-div">';
 						seat_div += '<span>' + row[i] + '</span>';
 						for(let j = 0; j < col_length; j++) {
-							seat_div += '<input type="button" data-info="' + block +'^'+ row[i] +'^'+ col[j] + '" class="seat-btn gn' + grade
+							seat_div += '<input type="button" data-info="' + block + '^' + row[i] +'^'+ col[j] + '" class="seat-btn gn' + grade +'" data-seatNum = "' + seat
 														 + '" data-info2="' + block + row[i] + col[j] + '" data-block="' + block + '" data-grade="' + grade + '" data-row="' + row[i] + '" data-col="' + col[j] + '">';
 						}
 						seat_div += '</div>';
@@ -96,11 +99,12 @@ $(function() {
 	});
 	
 	$(document).on('click', '.seat-btn', function() {
+		let check_seat = $(this).attr('data-seatNum');
 		let check_block = $(this).attr('data-block');
 		let check_row = $(this).attr('data-row');
 		let check_col = $(this).attr('data-col');
 		let info = check_block + check_row + check_col;
-			
+		
 		if($(this).hasClass('clicked')) { 
 			checkCnt--;
 			$(this).removeClass('clicked');
@@ -119,6 +123,7 @@ $(function() {
 			seat_info += '<input type="hidden" name="seatR" class="seatR" value="' + check_row + '">';
 			seat_info += '<input type="hidden" name="seatC" class="seatC" value="' + check_col + '">';*/
 			
+			seat_info += '<input type="hidden" name="seat_num" value="' + check_seat + '">';
 			seat_info += '<input type="hidden" name="seat_info" value="' + check_block + '^' + check_row + '^' + check_col + '">';
 			seat_info += '<input type="hidden" name="grade_num" value="' + $(this).attr('data-grade') + '">';
 			seat_info += '</td></tr>';

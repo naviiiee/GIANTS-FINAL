@@ -73,6 +73,13 @@ public class TicketController {
 		
 		List<GradeVO> list = ticketService.selectGradeList(gradeVO);
 		
+		for(GradeVO grade : list) {
+			int count = ticketService.selectCountByGradeNum(game_num, grade.getGrade_num());
+			int quantity = grade.getQuantity();
+			
+			if(count > 0) { grade.setQuantity(quantity - count); }
+		}
+		
 		model.addAttribute("game_num", game_num);
 		model.addAttribute("list", list);
 		
@@ -89,12 +96,19 @@ public class TicketController {
 		
 		List<SeatVO> list = null;
 		List<SeatStatusVO> status = null;
-			
+		
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user == null) { mapJson.put("result", "logout"); }
 		else {
 			list = ticketService.selectSeatList(seatVO);
 			status = ticketService.selectStatusByGame(game_num);
+			
+			for(SeatVO seat : list) {
+				int count = ticketService.selectCountBySeatNum(game_num, seat.getSeat_num());
+				int seat_quantity = seat.getSeat_quantity();
+				
+				if(count > 0) { seat.setSeat_quantity(seat_quantity - count); }
+			}
 			
 			mapJson.put("result", "success");
 			mapJson.put("list", list);
@@ -129,7 +143,7 @@ public class TicketController {
 	
 	/* ----- [Order] 티켓주문 -----*/
 	@PostMapping("/ticket/orderForm.do")
-	public String orderTicketForm(@RequestParam int game_num, @RequestParam int grade_num, SeatVO seatVO, HttpSession session, Model model) {
+	public String orderTicketForm(@RequestParam int game_num, @RequestParam int grade_num, @RequestParam int seat_num, SeatVO seatVO, HttpSession session, Model model) {
 		log.debug("<<seat_info>> : " + seatVO.getSeat_info());
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
@@ -147,6 +161,7 @@ public class TicketController {
 		int length = seatVO.getSeat_info().split(",").length;
 		for(int i = 0; i < length; i++) {
 			checkVO.setCheck_num(check_num);
+			checkVO.setSeat_num(seat_num);
 			checkVO.setSeat_info(seatVO.getSeat_info().split(",")[i]);
 			checkVO.setGame_num(game_num);
 			checkVO.setMem_num(user.getMem_num());
@@ -181,6 +196,7 @@ public class TicketController {
 			SeatStatusVO status = new SeatStatusVO();
 			status.setStatus_num(status_num);
 			status.setGrade_num(ticketVO.getGrade_num());
+			status.setSeat_num(check.getSeat_num());
 			status.setSeat_info(check.getSeat_info());
 			status.setGame_num(ticketVO.getGame_num());
 			status.setSeat_auth(1);
