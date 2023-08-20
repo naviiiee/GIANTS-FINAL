@@ -50,8 +50,8 @@ public class TicketController {
 	public TicketController() { this.api = new IamportClient("1867137175507113","3q0a9Ci8ajmex1F1yhDwBz9lSDf6pXne8sEjKpxxe4Tqw1DPRjzLGqvhJ0pIiieTV0q8oMRTn1QVXSuf"); }
 	
 	/* ----- [Ticket] 메인(요금안내 및 티켓예매 버튼 활성화) -----*/
-	@RequestMapping("/ticket/ticketInfo.do")
-	public String ticketInfo() { return "ticketInfo"; }
+	@RequestMapping("/ticket/ticket.do")
+	public String ticketInfo() { return "ticket"; }
 	
 	/* ----- [Game] 경기목록 -----*/
 	@RequestMapping("/ticket/gameList.do")

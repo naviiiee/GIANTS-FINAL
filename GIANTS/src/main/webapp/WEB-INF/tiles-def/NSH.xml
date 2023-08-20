@@ -3,9 +3,9 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<definition name="ticketInfo" extends="main">
+	<definition name="ticket" extends="main">
 		<put-attribute name="title" value="요금안내"/>
-		<put-attribute name="body" value="/WEB-INF/views/ticket/ticketInfo.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/ticket/ticket.jsp"/>
 	</definition>
 	
 	<!-- [Grade] -->
