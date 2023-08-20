@@ -84,18 +84,33 @@ public interface TicketMapper {
 	/* 티켓 결제 */
 	@Select("SELECT ticket_check_seq.nextval FROM dual")
 	public int selectCheckNum();	// 좌석선택 확인용 번호 생성
-	@Insert("INSERT INTO ticket_check (check_num, seat_info, game_num, mem_num) VALUES(#{check_num}, #{seat_info}, #{game_num}, #{mem_num})")
+	@Insert("INSERT INTO ticket_check (check_num, seat_num, seat_info, game_num, mem_num) VALUES(#{check_num}, #{seat_num}, #{seat_info}, #{game_num}, #{mem_num})")
 	public void insertTicketCheck(TicketCheckVO ticketCheckVO);	// 좌석선택정보 저장
 	@Select("SELECT * FROM ticket_check WHERE check_num = #{check_num}")
 	public List<TicketCheckVO> selectCheckList(Integer check_num);
-	@Delete("DELETE *  FROM ticket_check WHERE mem_num = #{mem_num} AND game_num = #{game_num}")
+	@Delete("DELETE FROM ticket_check WHERE mem_num = #{mem_num} AND game_num = #{game_num}")
 	public void deleteCheck(Integer mem_num, Integer game_num);
 	
 	@Select("SELECT seat_status_seq.nextval FROM dual")
 	public int selectStatusNum();
-	@Insert("INSERT INTO seat_status (status_num, grade_num, seat_info, game_num, seat_auth) VALUES(#{status_num}, #{grade_num}, #{seat_info}, #{game_num}, #{seat_auth})")
+	@Insert("INSERT INTO seat_status (status_num, grade_num, seat_num, seat_info, game_num, seat_auth) VALUES(#{status_num}, #{grade_num}, #{seat_num}, #{seat_info}, #{game_num}, #{seat_auth})")
 	public void insertSeatStatus(SeatStatusVO seatStatusVO);	// 좌석예매정보 등록
 	@Select("SELECT * FROM seat_status WHERE game_num = #{game_num}")
 	public List<SeatStatusVO> selectStatusByGame(Integer game_num);
+	@Select("SELECT count(seat_num) FROM seat_status WHERE game_num = #{game_num} AND seat_num = #{seat_num}")
+	public int selectCountBySeatNum(Integer game_num, Integer seat_num);
+	@Select("SELECT count(grade_num) FROM seat_status WHERE game_num = #{game_num} AND grade_num = #{grade_num}")
+	public int selectCountByGradeNum(Integer game_num, Integer grade_num);
+	
+	@Select("SELECT count(seat_num) FROM seat_status WHERE seat_num = #{seat_num} AND seat_auth = 2")
+	public int selectAdminCountBySeatNum(Integer seat_num);
+	@Select("SELECT count(grade_num) FROM seat_status WHERE grade_num = #{grade_num} AND seat_auth = 2")
+	public int selectAdminCountByGradeNum(Integer grade_num);
+	
+	@Select("SELECT * FROM seat_status WHERE status_num = #{status_num}")
+	public List<SeatStatusVO> selectSeatInfo(Integer status_num);
+	
 	public void insertTicket(TicketVO ticketVO);
+	@Select("SELECT * FROM ticket WHERE ticket_num = #{ticket_num}")
+	public TicketVO selectTicket(String ticket_num);
 }

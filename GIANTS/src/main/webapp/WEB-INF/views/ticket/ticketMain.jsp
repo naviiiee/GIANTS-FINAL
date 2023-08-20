@@ -39,7 +39,10 @@
 								<img src="${pageContext.request.contextPath}/images/grade${grade.grade_num}.png">
 								${grade.title}
 							</td>
-							<td>${grade.quantity}</td>
+							<td>
+								<c:if test="${grade.quantity == 0}">매진</c:if>
+								${grade.quantity}
+							</td>
 						</tr>
 						</c:if>
 						</c:forEach>

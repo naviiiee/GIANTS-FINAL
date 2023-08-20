@@ -24,7 +24,7 @@
 			<li><a href="${pageContext.request.contextPath}/member/changePasswd.do">비밀번호변경</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/deleteCompany.do">회원탈퇴</a></li>
 			<li><b>FOOD</b></li>
-			<li><a href="${pageContext.request.contextPath}/member/companyMypageFoodList.do">푸드목록</a></li>
+			<li><a href="${pageContext.request.contextPath}/member/compMypageFoodList.do">푸드목록</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/companyMypageSaleManage.do">매출관리</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/companyMypageOrderList.do">주문내역</a></li>
 		</ul>

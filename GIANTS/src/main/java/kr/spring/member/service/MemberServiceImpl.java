@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.spring.food.vo.FoodVO;
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberVO;
@@ -155,5 +156,20 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public MemberVO findCompanyPw(String mem_id, String comp_owner, String comp_phone, String comp_email) {
 		return memberMapper.findCompanyPw(mem_id, comp_owner, comp_phone, comp_email);
+	}
+
+	@Override
+	public CompanyDetailVO selectCompCp(String comp_num) {
+		return memberMapper.selectCompCp(comp_num);
+	}
+
+	@Override
+	public int selectRowCountCp(String comp_num) {
+		return memberMapper.selectRowCountCp(comp_num);
+	}
+
+	@Override
+	public List<FoodVO> selectListCp(Map<String, Object> map) {
+		return memberMapper.selectListCp(map);
 	}
 }

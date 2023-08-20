@@ -163,4 +163,10 @@
     	<put-attribute name="title" value="굿즈관리"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/adminMypageGoods.jsp"/>
     </definition>
+    
+	<!-- 기업페이지 : 푸드목록 -->
+	<definition name="compMypageFoodList" extends="myPage">
+		<put-attribute name="title" value="식품 - 매장 - 수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/compMypageFoodList.jsp"/>
+	</definition>
 </tiles-definitions>
