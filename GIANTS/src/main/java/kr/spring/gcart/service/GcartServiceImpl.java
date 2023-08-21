@@ -64,6 +64,11 @@ public class GcartServiceImpl implements GcartService{
 		
 	}
 	
+	@Override
+	public int getTotalByPoint(Map<String, Object> map) {
+		return cartMapper.getTotalByMem_num(map);
+	}
+	
 
 	
 

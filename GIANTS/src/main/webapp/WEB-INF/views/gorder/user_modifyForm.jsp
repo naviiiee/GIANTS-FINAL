@@ -4,20 +4,29 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 배송지정보수정 시작 -->
+		<!-- order, detailList -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_order_form.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/orderForm.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+
+orderVO : ${orderVO}
+<br>
+detailList : ${detailList}
+
 <div class="page-main">
 	<h2>배송지정보수정</h2>
-	<c:if test="${orderVO.order_status != 1}">
+	<c:if test="${orderVO.order_status > 1}">
 	<div class="result-display">
-		배송대기일 때만 배송지정보를 수정할 수 있습니다.
+		결제 완료 혹은 배송대기일 때만 배송지정보를 수정할 수 있습니다.
 	</div>
 	</c:if>
-	<c:if test="${orderVO.order_status == 1}">
+	<c:if test="${orderVO.order_status <=1}">
 	<form:form modelAttribute="orderVO" action="orderModify.do"
 	             id="order_modify">
 	    <form:hidden path="order_num"/>
-	    <form:hidden path="status"/>
-	    <form:hidden path="payment"/>
+	    <form:hidden path="order_status"/>
+	    <form:hidden path="order_payment"/>
 		<ul>   
 			<li>
 				<form:label path="order_name">받는 사람</form:label>

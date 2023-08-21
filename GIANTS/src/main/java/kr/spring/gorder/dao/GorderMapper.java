@@ -18,12 +18,15 @@ public interface GorderMapper {
 	// 주문 등록
 	@Select("SELECT g_order_seq.nextval FROM dual")
 	public int selectOrderNum();
+
 	public void insertOrder(GorderVO order);
+
 	public void insertOrderDetail(GorderDetailVO vo);
+
 	public void updatePoint(int mem_num);
 
 	// 재고수 업데이트
-	@Update("UPDATE goods SET quantity=quantity-#{order_quantity} WHERE goods_num=#{goods_num}")
+	@Update("UPDATE goods_option SET goods_stock=goods_stock-#{order_quantity} WHERE goods_num=#{goods_num}")
 	public void updateQuantity(GorderDetailVO orderDetailVO);
 
 	// 주문 상품 장바구니에서 제거
@@ -37,23 +40,29 @@ public interface GorderMapper {
 	// 관리자 - 전체/검색 목록
 	public List<GorderVO> selectListOrder(Map<String, Object> map);
 
+	// 사용자 - 전체/검색 레코드 수
+	public int selectOrderCountByMem_num(Map<String, Object> map);
+
+	// 사용자 - 전체/검색 목록
+	public List<GorderVO> selectListOrderByMem_num(Map<String, Object> map);
+
 	// 관리자/사용자 - 주문상세
-	@Select("SELECT * FROM g_order WHERE goods_num=#{goods_num}")
-	public GorderVO selectOrder(Integer goods_num);
+	@Select("SELECT * FROM g_order WHERE order_num=#{order_num}")
+	public GorderVO selectOrder(int order_num);
 
 	// 관리자/사용자 - 개별상품목록
-	@Select("SELECT * FROM g_order_detail WHERE goods_num=#{goods_num} ORDER BY goods_num DESC")
-	public List<GorderDetailVO> selectListOrderDetail(Integer goods_num);
+	@Select("SELECT * FROM g_order_detail WHERE order_num=#{order_num} ORDER BY goods_num DESC")
+	public List<GorderDetailVO> selectListOrderDetail(int order_num);
 
 	// 관리자/사용자 - 배송지수정
 	public void updateOrder(GorderVO order);
 
 	// 관리자/사용자 - 주문상태수정
-	@Update("UPDATE g_order SET status=#{status},modify_date=SYSDATE WHERE order_num=#{order_num}")
+	@Update("UPDATE g_order SET order_status=#{order_status},order_modifydate=SYSDATE WHERE order_num=#{order_num}")
 	public void updateOrderStatus(GorderVO order);
 
 	// 관리자/사용자 - 주문취소시 상품 수량 업데이트
-	@Update("UPDATE goods SET quantity=quantity + #{order_quantity} WHERE goods_num=#{goods_num}")
+	@Update("UPDATE goods_option SET goods_stock=goods_stock + #{order_quantity} WHERE goods_num=#{goods_num}")
 	public void updateItemQuantity(GorderDetailVO orderDetailVO);
 
 }

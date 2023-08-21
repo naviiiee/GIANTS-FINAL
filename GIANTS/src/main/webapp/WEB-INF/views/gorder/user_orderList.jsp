@@ -15,6 +15,11 @@
 		});
 	});
 </script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/orderForm.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<!-- count, list, page -->
+${list}
 <div class="page-main">
 	<h2>주문목록</h2>
 	<form action="orderList.do" id="search_form" method="get">
@@ -54,13 +59,14 @@
 				<a href="orderDetail.do?order_num=${order.order_num}">${order.goods_name}</a>
 			</td>
 			<td><fmt:formatNumber value="${order.order_total}"/>원</td>
-			<td>${order.reg_date}</td>
+			<td>${order.order_regdate}</td>
 			<td>
-				<c:if test="${order.status == 1}">배송대기</c:if>
-				<c:if test="${order.status == 2}">배송준비중</c:if>
-				<c:if test="${order.status == 3}">배송중</c:if>
-				<c:if test="${order.status == 4}">배송완료</c:if>
-				<c:if test="${order.status == 5}">주문취소</c:if>
+				<c:if test="${order.order_status == 0}">결제완료</c:if>
+				<c:if test="${order.order_status == 1}">배송대기</c:if>
+				<c:if test="${order.order_status == 2}">배송준비중</c:if>
+				<c:if test="${order.order_status == 3}">배송중</c:if>
+				<c:if test="${order.order_status == 4}">배송완료</c:if>
+				<c:if test="${order.order_status == 5}">주문취소</c:if>
 			</td>
 		</tr>
 		</c:forEach>

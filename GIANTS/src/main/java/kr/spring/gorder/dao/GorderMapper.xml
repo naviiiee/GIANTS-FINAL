@@ -3,7 +3,7 @@
 <mapper namespace="kr.spring.gorder.dao.GorderMapper">
 
 <!-- 상품 주문 -->
-	<insert id="insertOrder" parameterType="GorderVO">
+	<insert id="insertOrder" parameterType="gorderVO">
 		INSERT INTO g_order(
 		  order_num,
 		  mem_num,
@@ -12,6 +12,7 @@
 		  order_status,
 		  order_regdate,
 		  order_name,
+		  receive_name,
 		  order_zipcode,
 		  order_address1,
 		  order_address2,
@@ -28,6 +29,7 @@
 		  #{order_status},
 		  SYSDATE,
 		  #{order_name},
+		  #{receive_name},
 		  #{order_zipcode},
 		  #{order_address1},
 		  #{order_address2},
@@ -38,19 +40,28 @@
 		  )  
 	</insert>
 	
-	<insert id="insertOrderDetail" parameterType="GorderDetailVO">
+	<insert id="insertOrderDetail" parameterType="gorderDetailVO">
 		INSERT INTO g_order_detail(
 		  detail_num,
 		  order_num,
-		  order_point, <!-- 주문으로 인해 적립된 주문포인트이고 mem_point는 이를 누적시켜줘야함 -->
+		  order_point,
 		  goods_num,
+		  mem_num,
+		  goods_name,
+		  goods_dprice,
+		  goods_total,
+		  goods_size,
 		  order_quantity)
 		VALUES(
-		  sporder_detail_seq.nextval,
-		  #{detail_num},
+		  g_order_detail_seq.nextval,
 		  #{order_num},
 		  #{order_point},
 		  #{goods_num},
+		  #{mem_num},
+		  #{goods_name},
+		  #{goods_dprice},
+		  #{goods_total},
+		  #{goods_size},
 		  #{order_quantity})  
 	</insert>
 	
@@ -89,7 +100,7 @@
 		<include refid="orderSearch"></include>
 	</select>
 	
-	<select id="selectListOrder" parameterType="map" resultType="GorderVO">
+	<select id="selectListOrder" parameterType="map" resultType="gorderVO">
 		SELECT
 		  *
 		FROM (SELECT
@@ -144,10 +155,10 @@
 	</select>
 	
 	<!-- 배송지정보수정 -->
-	<update id="updateOrder" parameterType="GorderVO">
+	<update id="updateOrder" parameterType="gorderVO">
 		UPDATE g_order
 		SET
-		  order_name=#{order_name},
+		  order_name = #{order_name},
 		  order_zipcode=#{order_zipcode},
 		  order_address1=#{order_address1},
 		  order_address2=#{order_address2},

@@ -62,7 +62,13 @@
 		FROM g_cart c JOIN goods i ON c.goods_num = i.goods_num 
 		WHERE c.mem_num =#{mem_num} <include refid="cartCondition"></include>)
 	</select>
-	
+	<select id="getTotalByPoint" parameterType="map"
+		resultType="integer">
+		SELECT TO_CHAR(NVL(SUM(order_point),0) 
+		FROM ( SELECT c.order_quantity * i.goods_price * 0.02 as order_point
+		FROM g_cart c JOIN goods i ON c.goods_num = i.goods_num 
+		WHERE c.mem_num =#{mem_num})
+	</select>
 	
 
 
