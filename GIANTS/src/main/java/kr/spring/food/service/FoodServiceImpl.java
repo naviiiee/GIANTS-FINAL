@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.food.dao.FoodMapper;
 import kr.spring.food.vo.F_cartVO;
+import kr.spring.food.vo.F_orderVO;
+import kr.spring.food.vo.F_order_detailVO;
 import kr.spring.food.vo.FoodVO;
 import kr.spring.member.vo.CompanyDetailVO;
 
@@ -104,6 +106,31 @@ public class FoodServiceImpl implements FoodService{
 	@Override
 	public List<F_cartVO> selectF_cartListForOrder(Map<String, Object> map) {
 		return foodMapper.selectF_cartListForOrder(map);
+	}
+
+	@Override
+	public void insertF_order(F_orderVO f_order, List<F_order_detailVO> list) {
+		foodMapper.insertF_order(f_order);
+		for (F_order_detailVO fod : list) {
+			fod.setF_order_num(f_order.getF_order_num());
+			foodMapper.insertF_order_detail(fod);
+			//Food 재고수 반영
+			foodMapper.updateFoodQuantity(fod);
+			//주문 상품 장바구니에서 제거하기
+			foodMapper.deleteFodF_cart(fod.getFood_num(), f_order.getMem_num());
+		}
+	}
+
+	//영수증 목록
+	@Override
+	public List<F_orderVO> selectOrderList(Map<String, Object> map) {
+		return foodMapper.selectOrderList(map);
+	}
+	
+	//영수증 목록 페이징 카운트
+	@Override
+	public int selectOrderRowCount(Map<String, Object> map) {
+		return foodMapper.selectOrderRowCount(map);
 	}
 
 	
