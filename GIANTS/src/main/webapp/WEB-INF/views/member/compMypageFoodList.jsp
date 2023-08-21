@@ -29,7 +29,7 @@
 						<th>가격</th>
 						<th>재고수량</th>
 						<th>상태</th>
-						<th>수정/삭제</th>
+						<th>수정 / 삭제</th>
 					</tr>
 					<c:forEach var="food" items="${list}">
 					<tr>
@@ -41,11 +41,11 @@
 							<c:if test="${food.food_status == 1 }">판매중지</c:if>
 							<c:if test="${food.food_status == 2 }">판매중</c:if>
 						</td>
-						<td class="align-center">
-							<input type="button" value="수정" class="#" onclick="location.href='${pageContext.request.contextPath}/food/fixFood.do?food_num=${food.food_num}'"> 
-							<form id="del_form_${food.food_num}" action="deleteFood.do" method="post">
+						<td>
+							<form class="align-center" id="del_form_${food.food_num}" action="deleteFood.do" method="post">
+								<input class="table-td-btn" type="button" value="수정" class="#" onclick="location.href='${pageContext.request.contextPath}/food/fixFood.do?food_num=${food.food_num}'">
 								<input type="hidden" name="food_num" value="${food.food_num}">
-								<input type="button" value="삭제" class="#" data-num="${food.food_num}">
+								<input class="table-td-btn" type="button" value="삭제" class="#" data-num="${food.food_num}">
 							</form>
 						</td>
 					</tr>

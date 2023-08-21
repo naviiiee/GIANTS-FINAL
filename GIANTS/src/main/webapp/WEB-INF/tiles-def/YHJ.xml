@@ -138,24 +138,23 @@
     	<put-attribute name="body" value="/WEB-INF/views/member/memberMypageGoodList.jsp"/>
     </definition>
     
-	<!-- 기업페이지 : 푸드목록 -->
+	<!-- 기업페이지 - 푸드목록 -->
 	<definition name="compMypageFoodList" extends="myPage">
 		<put-attribute name="title" value="식품 - 매장 - 수정"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/compMypageFoodList.jsp"/>
 	</definition>
     
-    <!-- 기업회원 매출관리 -->
+    <!-- 기업페이지 - 매출관리 -->
     <definition name="companyMypageSaleManage" extends="myPage"> 
     	<put-attribute name="title" value="기업매출관리"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/companyMypageSaleManage.jsp"/>
     </definition>
     
-    <!-- 기업회원 주문내역 -->
-    <definition name="companyMypageOrderList" extends="myPage"> 
+    <!-- 기업페이지 - 주문내역 -->
+    <definition name="adminOrderList" extends="myPage"> 
     	<put-attribute name="title" value="기업주문내역"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/companyMypageOrderList.jsp"/>
     </definition>
-    
     
     <!-- 관리자 회원관리 -->
      <definition name="admin_memberList" extends="myPage"> 
@@ -181,7 +180,7 @@
     	<put-attribute name="body" value="/WEB-INF/views/member/adminMypageTicket.jsp"/>
     </definition>
     
-	<!-- 관리자 : 굿즈목록 -->
+	<!-- 관리자 : 굿즈목록 **-->
 	<definition name="adminGoodsList" extends="myPage">
 		<put-attribute name="title" value="[관리자]굿즈목록"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/adminMypageGoods.jsp"/>

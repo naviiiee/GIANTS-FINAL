@@ -3,6 +3,7 @@ package kr.spring.member.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.spring.food.vo.F_orderVO;
 import kr.spring.food.vo.FoodVO;
 import kr.spring.goods.vo.GoodsVO;
 import kr.spring.member.vo.CompanyDetailVO;
@@ -70,4 +71,8 @@ public interface MemberService {
 	public int selectGoodsRowCount(Map<String, Object> map);
 	//전체|검색 상품 목록
 	public List<GoodsVO> selectGoodsList(Map<String, Object> map);	
+	
+	//기업페이지 : 푸드목록
+	public int selectOrderCountFd(Map<String,Object> map);
+	public List<F_orderVO> selectListOrderFd(Map<String,Object> map);
 }

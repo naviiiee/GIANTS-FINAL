@@ -41,7 +41,8 @@
 	min-height:700px;
 }
 #mypage_body .mypage-nav{
-	background-color:red;
+    border: 1px #dd032f solid;
+    background-color: #dd032f;
 	color:#fff;
 	font-size:15pt;
 	width:150px;
@@ -100,7 +101,8 @@
 	position: absolute;
     top: 0;
     right: 60px;
-    background-color:red;
+    border: 1px #dd032f solid;
+    background-color: #dd032f;
     color:#FFF;
     width:150px;
     height:70px;    
@@ -142,8 +144,8 @@
 }
 /* 회원등급 : 일반회원 */
 .common-register .m-register{
-	/* background-color: rgba(5,35,69,0.75); */
-	background-color:red;
+	border: 1px #dd032f solid;
+    background-color: #dd032f;
 	color: white;
 	width:250px;
 	height:150px;
@@ -154,8 +156,8 @@
 }
 /* 회원등급 : 기업회원 */
 .common-register .c-register{
-	/* background-color: rgba(5,35,69,0.75); */
-	background-color:red;
+	border: 1px #dd032f solid;
+    background-color: #dd032f;
 	color: white;
 	width:250px;
 	height:150px;
@@ -260,7 +262,8 @@
 	width:100px;
 	height:35px;
 	border-radius: 5px;
-	background-color:red;
+	border: 1px #dd032f solid;
+    background-color: #dd032f;
 	color:#fff;
 }
 /* 전송, 홈으로 */
@@ -269,7 +272,8 @@
 	width:60px;
 	height:35px;
 	border-radius: 5px;
-	background-color:red;
+	border: 1px #dd032f solid;
+    background-color: #dd032f;
 	color:#fff;
 }
 /* 마이페이지
@@ -310,7 +314,8 @@
 	margin:0 auto;
 	height:35px;
 	border-radius: 5px;
-	background-color:red;
+	border: 1px #dd032f solid;
+    background-color: #dd032f;
 	color:#fff;
 }
 /* 관리자 회원목록 검색창 */
@@ -320,10 +325,17 @@ form#search_form{
 	border:none;
 }
 ul.search{
-	width:410px;
+	width:450px;
 	list-style:none;
 	padding:0;
 	margin:0 auto;
+}
+ul.good-search{
+	width:300px;
+	float:right;
+	margin:0 0 9px 0;
+	padding-left:10px;
+	display:inline;
 }
 ul.search li{
 	margin:0 0 9px 0;
@@ -345,7 +357,8 @@ ul.search li input{
 	width:55px;
 	height:33px;
 	border-radius: 5px;
-	background-color:red;
+	border: 1px #dd032f solid;
+    background-color: #dd032f;
 	color:#fff;
 }
 /* 관리자 회원목록 테이블 */
@@ -373,7 +386,8 @@ table.striped-table th{
 	width:55px;
 	height:38px;
 	border-radius: 5px;
-	background-color:red;
+	border: 1px #dd032f solid;
+    background-color: #dd032f;
 	color:#fff;
 }
 .form-page{
@@ -383,4 +397,13 @@ table.striped-table th{
 }
 #member_modify li{
 	padding-bottom:10px;
+}
+/* 기업페이지 푸드목록 버튼 */
+.table-td-btn{
+	border-radius: 5px;
+	border: 1px #dd032f solid;
+    background-color: #dd032f;
+	color:#fff;
+	width:40px;
+	height:30px;
 }

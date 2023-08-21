@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.spring.food.vo.F_orderVO;
 import kr.spring.food.vo.FoodVO;
 import kr.spring.goods.vo.GoodsVO;
 import kr.spring.member.dao.MemberMapper;
@@ -182,5 +183,15 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public List<GoodsVO> selectGoodsList(Map<String, Object> map) {
 		return memberMapper.selectGoodsList(map);
+	}
+
+	@Override
+	public int selectOrderCountFd(Map<String, Object> map) {
+		return memberMapper.selectOrderCountFd(map);
+	}
+
+	@Override
+	public List<F_orderVO> selectListOrderFd(Map<String, Object> map) {
+		return memberMapper.selectListOrderFd(map);
 	}
 }
