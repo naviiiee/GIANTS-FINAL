@@ -52,6 +52,7 @@ public interface TicketService {
 	public int selectStatusNum();
 	public void insertSeatStatus(SeatStatusVO seatStatusVO);	// 좌석예매정보 등록
 	public List<SeatStatusVO> selectStatusByGame(Integer game_num);
+	public List<SeatStatusVO> selectStatusBySeat(Integer seat_num);
 	public int selectCountBySeatNum(Integer game_num, Integer seat_num);
 	public int selectCountByGradeNum(Integer game_num, Integer grade_num);
 	
@@ -59,6 +60,8 @@ public interface TicketService {
 	public int selectAdminCountByGradeNum(Integer grade_num);
 	
 	public List<SeatStatusVO> selectSeatInfo(Integer status_num);
+	
+	public void deleteStatus(Integer status_num);
 	
 	public void insertTicket(TicketVO ticket);	// 티켓주문
 	public TicketVO selectTicket(String ticket_num);

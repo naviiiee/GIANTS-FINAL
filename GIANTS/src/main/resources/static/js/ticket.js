@@ -35,8 +35,6 @@ $(function() {
 					block_info += '</table>';
 						
 					$('.select-block').append(block_info);
-					
-					alert(item.seat_num);
 				} else { alert('좌석 선택 오류 발생'); }
 			},
 			error:function() { alert('Network 오류 발생'); }
@@ -68,6 +66,7 @@ $(function() {
 					let row_length = row.length;
 					let col_length = col.length;
 					let info_length = param.status.length;
+					let listLeng = param.list.length;
 					
 					let seat_div = '<div class="seat-box">';
 					seat_div += '<div class="ground"><h2>그라운드 방향</h2></div>';
@@ -88,8 +87,14 @@ $(function() {
 						
 					$('.select-left').append(seat_div);
 					
-					for(let z = 0; z < info_length; z++){
+					for(let z = 0; z < info_length; z++) {
 						$('input[data-info="'+param.status[z].seat_info+'"]').removeClass('gn' + grade + '').addClass('reserved').attr('disabled',true);
+					}
+					
+					for(let a = 0; a < listLeng; a++) {
+						$('input[data-info="'+param.list[a].seat_info+'"]').removeClass('gn' + grade + '').addClass('admin-reserved').attr('disabled',true);
+						let status_num = '<input type="hidden" name="status_num" value="' + param.list[a].status_num + '">';
+						$('#seat_edit').append(status_num);
 					}
 					
 				} else { alert('블록 선택 오류 발생'); }
@@ -123,7 +128,7 @@ $(function() {
 			seat_info += '<input type="hidden" name="seatR" class="seatR" value="' + check_row + '">';
 			seat_info += '<input type="hidden" name="seatC" class="seatC" value="' + check_col + '">';*/
 			
-			seat_info += '<input type="hidden" name="seat_num" value="' + check_seat + '">';
+			seat_info += '<input type="hidden" name="seat_num" id="seat_num" value="' + check_seat + '">';
 			seat_info += '<input type="hidden" name="seat_info" value="' + check_block + '^' + check_row + '^' + check_col + '">';
 			seat_info += '<input type="hidden" name="grade_num" value="' + $(this).attr('data-grade') + '">';
 			seat_info += '</td></tr>';

@@ -1,8 +1,11 @@
 package kr.spring.ticket.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +15,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.ticket.service.TicketService;
 import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
+import kr.spring.ticket.vo.SeatStatusVO;
 import kr.spring.ticket.vo.SeatVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -146,6 +152,57 @@ public class TicketAdminController {
 		ticketService.updateGradeQuantity(grade_num);
 		
 		return "redirect:/ticket/seatList.do?grade_num=" + grade_num;
+	}
+	
+	/* ----- [Seat] 좌석관리 -----*/
+	@GetMapping("/ticket/seatEditForm.do")
+	public String seatEditForm(@RequestParam int seat_num, Model model) {
+		SeatVO seat = ticketService.selectSeat(seat_num);
+		
+		model.addAttribute("seat", seat);
+		
+		return "seatEditForm";
+	}
+	
+	@RequestMapping("/ticket/seatEditForm.do")
+	@ResponseBody
+	public Map<String, Object> seatEditAjax(@RequestParam int seat_num) {
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		
+		List<SeatStatusVO> list = ticketService.selectStatusBySeat(seat_num);
+		mapJson.put("list", list);
+		
+		return mapJson;
+	}
+	
+	@PostMapping("/ticket/seatEdit.do")
+	public String seatEdit(SeatStatusVO statusVO, @RequestParam int status_num) {
+		int statusNum = ticketService.selectStatusNum();
+		
+		SeatStatusVO status = new SeatStatusVO();
+		
+		int count = statusVO.getSeat_info().split(",").length;
+		for(int i = 0; i < count; i++) {
+			status.setStatus_num(statusNum);
+			status.setSeat_num(statusVO.getSeat_num());
+			status.setGrade_num(statusVO.getGrade_num());
+			status.setSeat_info(statusVO.getSeat_info().split(",")[i]);
+			status.setSeat_auth(statusVO.getSeat_auth());
+			
+			if(statusVO.getSeat_auth() == 2) { ticketService.insertSeatStatus(status); }
+			else if(statusVO.getSeat_auth() == 0) { ticketService.deleteStatus(status_num); }
+		}
+		
+		log.debug("<<statusVO>> : " + statusVO);
+		log.debug("<<count>> : " + count);
+		
+		/*
+		 *  
+		 * status.setSeat_num(seat_num); status.setGrade_num(grade_num);
+		 * status.setSeat_info(seat_info); status.setSeat_auth(0);
+		 */
+		
+		return "redirect:/ticket/seatEditForm.do?seat_num=" + statusVO.getSeat_num(); 
 	}
 	
 	/* ----- [Game] 경기 등록 -----*/

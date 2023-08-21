@@ -97,18 +97,23 @@ public interface TicketMapper {
 	public void insertSeatStatus(SeatStatusVO seatStatusVO);	// 좌석예매정보 등록
 	@Select("SELECT * FROM seat_status WHERE game_num = #{game_num}")
 	public List<SeatStatusVO> selectStatusByGame(Integer game_num);
-	@Select("SELECT count(seat_num) FROM seat_status WHERE game_num = #{game_num} AND seat_num = #{seat_num}")
+	@Select("SELECT * FROM seat_status WHERE seat_num = #{seat_num} AND seat_auth = 2")
+	public List<SeatStatusVO> selectStatusBySeat(Integer seat_num);
+	@Select("SELECT count(*) FROM seat_status WHERE game_num = #{game_num} AND seat_num = #{seat_num}")
 	public int selectCountBySeatNum(Integer game_num, Integer seat_num);
-	@Select("SELECT count(grade_num) FROM seat_status WHERE game_num = #{game_num} AND grade_num = #{grade_num}")
+	@Select("SELECT count(*) FROM seat_status WHERE game_num = #{game_num} AND grade_num = #{grade_num}")
 	public int selectCountByGradeNum(Integer game_num, Integer grade_num);
 	
-	@Select("SELECT count(seat_num) FROM seat_status WHERE seat_num = #{seat_num} AND seat_auth = 2")
+	@Select("SELECT count(*) FROM seat_status WHERE seat_num = #{seat_num} AND seat_auth = 2")
 	public int selectAdminCountBySeatNum(Integer seat_num);
-	@Select("SELECT count(grade_num) FROM seat_status WHERE grade_num = #{grade_num} AND seat_auth = 2")
+	@Select("SELECT count(*) FROM seat_status WHERE grade_num = #{grade_num} AND seat_auth = 2")
 	public int selectAdminCountByGradeNum(Integer grade_num);
 	
 	@Select("SELECT * FROM seat_status WHERE status_num = #{status_num}")
 	public List<SeatStatusVO> selectSeatInfo(Integer status_num);
+	
+	@Delete("DELETE FROM seat_status WHERE status_num = #{status_num} AND seat_auth = 2")
+	public void deleteStatus(Integer status_num);
 	
 	public void insertTicket(TicketVO ticketVO);
 	@Select("SELECT * FROM ticket WHERE ticket_num = #{ticket_num}")
