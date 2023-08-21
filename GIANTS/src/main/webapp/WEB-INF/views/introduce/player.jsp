@@ -151,25 +151,31 @@ strong{
 	            <a href="playerList_n.do">내야수</a>
 	   	 </div>
     </div>
+    
+    
+	<%-- 
 	<div>
-	<form action="player.do" id="search_form" method="get"  style="padding-bottom: 24px;">
-		<ul class="search align-center">
-			<li>
-				<select name="keyfield" id="keyfield">
-					<option value="1" <c:if test="${param.keyfield == 1}">SELECTED</c:if>>선수명</option>
-					<option value="2" <c:if test="${param.keyfield == 2}">SELECTED</c:if>>선수 포지션</option>
-				</select>
-			</li>
-			<li>
-				<input type="search" name="keyword" id="keyword" value="${param.keyword}" style="height:30px;">
-			</li>
-			<li>
-				<input type="submit" value="검색" style="height:30px;"  class="accept-btn">
-			</li>
-		</ul>
-		</form> 
-		</div>
-		<div class="a-tab align-right">
+		<form action="player.do" id="search_form" method="get"  style="padding-bottom: 24px;">
+			<ul class="search align-center">
+				<li>
+					<select name="keyfield" id="keyfield">
+						<option value="1" <c:if test="${param.keyfield == 1}">SELECTED</c:if>>선수명</option>
+						<option value="2" <c:if test="${param.keyfield == 2}">SELECTED</c:if>>선수 포지션</option>
+					</select>
+				</li>
+				<li>
+					<input type="search" name="keyword" id="keyword" value="${param.keyword}" style="height:30px;">
+				</li>
+				<li>
+					<input type="submit" value="검색" style="height:30px;"  class="accept-btn">
+				</li>
+			</ul>
+			</form> 
+		</div> 
+		--%>
+		
+		
+		<div class="a-tab align-right" style="margin-left:38%;">
 		<ul>
 			<li style="margin-top:20%; display:flex;">
 				<a href="stadium.do">구장 소개</a>
