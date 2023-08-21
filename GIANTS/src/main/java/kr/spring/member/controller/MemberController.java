@@ -59,7 +59,6 @@ public class MemberController {
 	/*=====================
 	 * 회원가입
 	 *=====================*/
-	// 회원등급 선택 호출
 	@RequestMapping("/member/registerCommon.do")
 	public String form() {
 		return "commonRegister";
@@ -67,9 +66,8 @@ public class MemberController {
 
 	
 	/*=====================
-	 * 아이디 찾기
+	 * 일반회원 아이디 찾기
 	 *=====================*/
-	/* 일반회원 아이디 찾기 */
 	@GetMapping("/member/findId.do")
 	public String formFindId() {
 		return "memberfindId";
@@ -92,7 +90,10 @@ public class MemberController {
 		}
 		return "formFindId()";
 	}
-	/* 기업회원 아이디 찾기 */
+	
+	/*=====================
+	 * 기업회원 아이디 찾기
+	 *=====================*/
 	@GetMapping("/member/findIdCp.do")
 	public String formFindIdCp() {
 		return "companyfindId";
@@ -114,10 +115,10 @@ public class MemberController {
 		}
 		return "formFindId()";
 	}
+	
 	/*=====================
-	 * 비밀번호 찾기
+	 * 일반회원 비밀번호 찾기
 	 *=====================*/
-	/* 일반회원 비밀번호 찾기 */
 	@GetMapping("/member/findPw.do")
 	public String formFindPw() {
 		log.debug("<<findPw>>");
@@ -161,7 +162,10 @@ public class MemberController {
 		}
 		return "formFindPw()";
 	}
-	/* 기업회원 비밀번호 찾기 */
+	
+	/*=====================
+	 * 기업회원 비밀번호 찾기
+	 *=====================*/
 	@GetMapping("/member/findPwCp.do")
 	public String formFindPwCp() {
 		log.debug("<<findPw>>");
@@ -262,9 +266,8 @@ public class MemberController {
 	
 	
 	/*=====================
-	 * 일반회원가입
+	 * 일반 회원가입
 	 *=====================*/
-	// 일반회원가입 폼 호출
 	@GetMapping("/member/registerMember.do")
 	public String formMember() {
 		return "memberRegister";
@@ -288,9 +291,8 @@ public class MemberController {
 	}
 	
 	/*=====================
-	 * 기업회원가입
+	 * 기업 회원가입
 	 *=====================*/
-	// 기업회원가입 폼 호출
 	@GetMapping("/member/registerCompany.do")
 	public String formCompany() {
 		return "companyRegister";
@@ -452,7 +454,6 @@ public class MemberController {
 	/*=====================
 	 * 일반 회원정보 수정
 	 *=====================*/
-	//일반회원 수정 폼 호출
 	@GetMapping("/member/updateMember.do")
 	public String formUpdateMember(HttpSession session,
 								   Model model) {
@@ -484,7 +485,6 @@ public class MemberController {
 	/*=====================
 	 * 기업 회원정보 수정
 	 *=====================*/
-	//기업회원 수정 폼 호출
 	@GetMapping("/member/updateCompany.do")
 	public String formUpdateCompany(HttpSession session,
 								    Model model) {
@@ -708,9 +708,8 @@ public class MemberController {
 
 	
 	/*=====================
-	 * 회원탈퇴
+	 * 일반 회원탈퇴
 	 *=====================*/
-	// 일반회원탈퇴 폼 호출
 	@GetMapping("/member/deleteMember.do")
 	public String formDeleteMember() {
 		return "memberDelete";
@@ -753,7 +752,9 @@ public class MemberController {
 		}
 	}
 	
-	// 기업회원탈퇴 폼 호출
+	/*=====================
+	 * 기업회원 탈퇴
+	 *=====================*/
 	@GetMapping("/member/deleteCompany.do")
 	public String formDeleteCompany() {
 		return "companyDelete";
@@ -795,82 +796,30 @@ public class MemberController {
 		}
 	}
 	
-	
-	/* === 마이페이지 : 일반
-	=======================*/
-	//Ticket 내역
+	/*=====================
+	 * 일반회원 티켓구매내역
+	 *=====================*/
 	@RequestMapping("/member/memberMypageTicketList.do")
 	public String memberTicketList(HttpSession session, Model model) {
 		
 		return "memberMypageTicketList";
 	}
-	//Food 내역
+	
+	/*=====================
+	 * 일반회원 푸드구매내역
+	 *=====================*/	
 	@RequestMapping("/member/memberMypageFoodList.do")
 	public String memberFoodList(HttpSession session, Model model) {
 		
 		return "memberMypageFoodList";
 	}
-	//Goods 내역
+	
+	/*=====================
+	 * 일반회원 굿즈구매내역
+	 *=====================*/
 	@RequestMapping("/member/memberMypageGoodList.do")
 	public String memberGoodList(HttpSession session, Model model) {
 		
 		return "memberMypageGoodList";
 	}
-	
-	
-	/* === 마이페이지 : 기업
-	=======================*/
-	//푸드목록
-	@RequestMapping("/member/companyMypageFoodList.do")
-	public String companyMypageFoodList(HttpSession session, Model model) {
-		
-		return "companyMypageFoodList";
-	}
-	//매출관리
-	@RequestMapping("/member/companyMypageSaleManage.do")
-	public String companyMypageSaleManage(HttpSession session, Model model) {
-		
-		return "companyMypageSaleManage";
-	}
-	//주문내역 (들어온 주문)
-	@RequestMapping("/member/companyMypageOrderList.do")
-	public String companyMypageOrderList(HttpSession session, Model model) {
-		
-		return "companyMypageOrderList";
-	}
-	
-	/*	==========================
-	 *  기업페이지 : 푸드목록
-	 * 	==========================*/	
-	@RequestMapping("/member/compMypageFoodList.do")
-	public ModelAndView compMypageFoodList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
-										  HttpSession session) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		CompanyDetailVO comp = memberService.selectCompCp(user.getCompanyDetailVO().getComp_num());
-		int count = memberService.selectRowCountCp(comp.getComp_num());
-		
-		//페이지 처리
-		PagingUtil page = new PagingUtil(currentPage, count, 5, 5, "compMypageFoodList.do");
-		
-		List<FoodVO> list = null;
-		if (count > 0) {
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
-			map.put("comp_num", comp.getComp_num());
-			
-			list = memberService.selectListCp(map);
-		}
-		
-		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName("compMypageFoodList");
-		mav.addObject("comp", comp);
-		mav.addObject("count", count);
-		mav.addObject("list", list);
-		mav.addObject("page", page.getPage());
-		
-		return mav;
-	}
-	
 }

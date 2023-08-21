@@ -21,7 +21,15 @@ li{
 	display:flex;
 }
 
+.modifyLink{
+	text-decoration : underline;
+	color: #196ef7;
+	text-decoration-color:#196ef7;
+}
 
+.modifyLink:hover{
+	color:gray;
+}
 
 </style>
 <!-- [관리자]신고 목록 시작 -->
@@ -67,8 +75,8 @@ li{
 				
 			</tr> 
 			<c:forEach var="commuRepo" items="${list}">
-				<tr>
-					<td class="align-center"><a href="detail.do?commu_num=${commuRepo.commu_num}">${commuRepo.repo_num}</a></td>
+				<tr> 
+					<td class="align-center"><a href="detail.do?commu_num=${commuRepo.commu_num}"  class="modifyLink">${commuRepo.repo_num}</a></td>
 					<td class="align-center">
 						<c:if test="${empty commuRepo.mem_nickname}">${commuRepo.mem_id}</c:if>
 						<c:if test="${!empty commuRepo.mem_nickname}">${commuRepo.mem_nickname}</c:if>
@@ -87,7 +95,7 @@ li{
 					</td>
 					<td class="align-center">
 						<c:if test="${commuRepo.repo_content == null}">
-						.
+						표시할 신고 내용이 없습니다.
 						</c:if>
 						<c:if test="${commuRepo.repo_content != null}">
 						${commuRepo.repo_content}

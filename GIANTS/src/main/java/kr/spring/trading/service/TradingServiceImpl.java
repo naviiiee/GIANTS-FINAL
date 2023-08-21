@@ -3,10 +3,12 @@ package kr.spring.trading.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.spring.chat.dao.ChatMapper;
 import kr.spring.trading.dao.TradingMapper;
 import kr.spring.trading.vo.TradingMarkVO;
 import kr.spring.trading.vo.TradingVO;
@@ -17,6 +19,9 @@ public class TradingServiceImpl implements TradingService{
 	
 	@Autowired
 	TradingMapper tradingMapper;
+	
+	@Autowired
+	ChatMapper chatMapper;
 	
 	@Override
 	public List<TradingVO> selectList(Map<String, Object> map) {
@@ -44,18 +49,21 @@ public class TradingServiceImpl implements TradingService{
 	}
 
 	@Override
-	public void updateStatus(Integer trade_num) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void updateTrading(TradingVO trading) {
 		tradingMapper.updateTrading(trading);
 	}
 
 	@Override
 	public void deleteTrading(Integer trade_num) {
+		//부모글 북마크 삭제
+		tradingMapper.deleteMarkByTradeNum(trade_num);
+		//채팅 읽음 여부 삭제
+		tradingMapper.deleteChatReadByTradeNum(trade_num);
+		//채팅 메시지 삭제
+		tradingMapper.deleteChatByTradeNum(trade_num);
+		//채팅방 삭제
+		tradingMapper.deleteChatRoomByTradeNum(trade_num);
+		//부모글 삭제
 		tradingMapper.deleteTrading(trade_num);
 	}
 

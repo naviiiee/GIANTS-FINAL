@@ -14,13 +14,10 @@
 		<h2>티켓정보</h2>
 		<hr size="0.05" width="100%" noshade>
 	</div>
-	<div class="ticket-info1">
-		<img src="${pageContext.request.contextPath}/images/ticket_checked.png" width="32px" height="32px"><br>
-		예매가 정상적으로 완료되었습니다.
-	</div>
 	<div class="ticket-info2">
 		<div class="ticket-content">
 			<ul>
+				<li>${ticket.ticket_num}</li>
 				<li>${ticket.game_title}</li>
 				<li>사직야구장</li>
 				<li>${ticket.game_date} ${ticket.game_time}</li>

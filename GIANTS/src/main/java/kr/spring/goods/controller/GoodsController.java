@@ -29,6 +29,8 @@ import kr.spring.goods.vo.GoodsOptionVO;
 import kr.spring.goods.vo.GoodsQnaVO;
 import kr.spring.goods.vo.GoodsReviewVO;
 import kr.spring.goods.vo.GoodsVO;
+import kr.spring.gorder.service.GorderService;
+import kr.spring.gorder.vo.GorderDetailVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
 import kr.spring.util.StringUtil;
@@ -39,6 +41,9 @@ import lombok.extern.slf4j.Slf4j;
 public class GoodsController {
 	@Autowired
 	private GoodsService goodsService;
+	
+	@Autowired
+	private GorderService gorderService;
 	
 	/*==========================
 	 * 자바빈(VO) 초기화
@@ -56,6 +61,11 @@ public class GoodsController {
 	@ModelAttribute
 	public GoodsQnaVO initCommand3() {
 		return new GoodsQnaVO();
+	}
+	
+	@ModelAttribute
+	public GorderDetailVO initCommmand4() {
+		return new GorderDetailVO();
 	}
 	
 	/*==========================
@@ -80,7 +90,7 @@ public class GoodsController {
 		if(goodsVO.getGoods_photo().length >= 5*1024*1024) {//5MB
 			result.rejectValue("goods_photo", "limitUploadSize", new Object[] {"5MB"}, null);
 		}
-		
+				
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			return form();
@@ -89,7 +99,7 @@ public class GoodsController {
 		goodsService.insertGoods(goodsVO);
 		
 		model.addAttribute("message", "상품등록이 완료되었습니다.");
-		model.addAttribute("url", request.getContextPath() + "/goods/admin_goodsList.do");
+		model.addAttribute("url", request.getContextPath() + "/member/adminMypageGoodsList.do");
 
 		return "common/resultView";
 	}
@@ -330,7 +340,7 @@ public class GoodsController {
 		
 		
 		model.addAttribute("message", "상품 삭제 완료!");
-		model.addAttribute("url", request.getContextPath() + "/goods/admin_goodsList.do");
+		model.addAttribute("url", request.getContextPath() + "/member/adminMypageGoodsList.do");
 		
 		return "common/resultView";
 	}
@@ -411,6 +421,7 @@ public class GoodsController {
 		map.put("goods_status", 3);
 		
 		List<GoodsVO> goods_list = goodsService.selectGoodsList(map);
+		//List<GorderDetailVO> order_list = 
 		model.addAttribute("goods_list", goods_list);
 		log.debug("<<goods_list>> : " +goods_list);
 		model.addAttribute("memberVO", (MemberVO)session.getAttribute("user"));

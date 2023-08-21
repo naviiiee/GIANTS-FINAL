@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import kr.spring.food.vo.F_cartVO;
+import kr.spring.food.vo.F_orderVO;
+import kr.spring.food.vo.F_order_detailVO;
 import kr.spring.food.vo.FoodVO;
 import kr.spring.member.vo.CompanyDetailVO;
 
@@ -53,4 +55,10 @@ public interface FoodService {
 	public int selectTotalByMem_num(Map<String,Object> map);
 	//주문할 상품 목록 장바구니에서 호출
 	public List<F_cartVO> selectF_cartListForOrder(Map<String,Object> map);
+	//식품 주문등록하기
+	public void insertF_order(F_orderVO f_order, List<F_order_detailVO> list);
+	
+	//식품 주문(영수증)목록
+	public List<F_orderVO> selectOrderList(Map<String, Object> map);
+	public int selectOrderRowCount(Map<String,Object> map);
 }

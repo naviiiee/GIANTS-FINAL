@@ -18,11 +18,6 @@ $(document).ready(function() {
 		toggleSidebar();
 	});
 
-	$(document).keyup(function(e) {
-		if (e.keyCode === 27) {
-			toggleSidebar();
-		}
-	});
 	
 	//서브 아이템들의 버튼 동작
 	$(".sidebar-item").on("click tap", function(){

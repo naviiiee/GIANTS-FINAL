@@ -15,9 +15,15 @@ li{
 	justify-content:center;
 }
 
+.modifyLink{
+	text-decoration : underline;
+	color: #196ef7;
+	text-decoration-color:#196ef7;
+}
 
-
-
+.modifyLink:hover{
+	color:gray;
+}
 </style>
 <!-- [관리자] 선수 목록 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LHJ/commu.css">
@@ -66,16 +72,16 @@ li{
 	        </div>
 	    </div>
 		<div>
-			<form action="commuList.do" id="search_form" method="get"  style="padding-bottom: 24px;">
+			<form action="playerList_t.do" id="search_form" method="get"  style="padding-bottom: 24px;">
 			<ul class="search align-center">
-				<li>
+				<li style="margin: 0px 11px 10px 0;">
 					<select name="keyfield" id="keyfield">
 						<option value="1" <c:if test="${param.keyfield == 1}">SELECTED</c:if>>선수명</option>
-						<option value="2" <c:if test="${param.keyfield == 2}">SELECTED</c:if>>선수 포지션</option>
+						<%-- <option value="2" <c:if test="${param.keyfield == 2}">SELECTED</c:if>>선수 포지션</option> --%>
 					</select>
 				</li>
-				<li>
-					<input type="search" name="keyword" id="keyword" value="${param.keyword}" style="height:30px;">
+				<li style="margin: 0px 11px 10px 0;">
+				<input type="search" name="keyword" id="keyword" value="${param.keyword}" style="height:30px;" placeholder='선수명을 검색하세요.'>
 				</li>
 				<li>
 					<input type="submit" value="검색" style="height:30px;"  class="accept-btn">
@@ -119,7 +125,7 @@ li{
 						<td class="align-center">${player.player_backnumber}</td>
 						<td class="align-center">
 						<c:if test="${user.mem_auth != 9}">${player.player_name}</c:if>
-						<c:if test="${!empty user && user.mem_auth == 9}"><a href="admin_playerModify.do?player_num=${player.player_num}" style="text-decoration : underline; color: #196ef7; text-decoration-color:#196ef7;">${player.player_name}</a></c:if>
+						<c:if test="${!empty user && user.mem_auth == 9}"><a href="admin_playerModify.do?player_num=${player.player_num}" class="modifyLink">${player.player_name}</a></c:if>
 						</td>
 						<td class="align-center">${player.player_birthday}</td>
 						<td class="align-center">${player.player_position}</td>
@@ -132,7 +138,7 @@ li{
 		</table>
 		
 		<div class="align-right" >
-			<c:if test="${!empty user}">
+			<c:if test="${!empty user && user.mem_auth == 9}">
 			<input type="button" value="선수 등록" onclick="location.href='admin_player.do'" class="accept-btn">
 			</c:if>
 		</div>

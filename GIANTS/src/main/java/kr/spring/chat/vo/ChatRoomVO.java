@@ -13,5 +13,8 @@ public class ChatRoomVO {
 	private int seller_num; //판매자 회원번호
 	private int buyer_num; //구매자 회원번호
 	
-	private String mem_id; //구매자 id
+	private ChatVO chatVO; //채팅 메시지 VO
+	
+	private int room_cnt; //읽지 않은 메시지 수
+	//private String mem_id; //구매자 id
 }

@@ -55,4 +55,16 @@
 		<put-attribute name="body" value="/WEB-INF/views/food/forder/foodOrderForm.jsp"/>
 	</definition>
 	
+	<!-- 내 주문목록 -->
+	<definition name="myFoodOrderList" extends="main">
+		<put-attribute name="title" value="식품 - 내 주문목록"/>
+		<put-attribute name="body" value="/WEB-INF/views/food/forder/myFoodOrderList.jsp"/>
+	</definition>
+	
+	<!-- 내 주문상세정보 -->
+	<definition name="myFoodOrderDetail" extends="main">
+		<put-attribute name="title" value="식품 - 내 주문목록 - 상세정보확인"/>
+		<put-attribute name="body" value="/WEB-INF/views/food/forder/myFoodOrderDetail.jsp"/>
+	</definition>
+	
 </tiles-definitions>

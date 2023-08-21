@@ -5,11 +5,13 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.food.vo.F_cartVO;
 import kr.spring.food.vo.F_orderVO;
+import kr.spring.food.vo.F_order_detailVO;
 import kr.spring.food.vo.FoodVO;
 import kr.spring.food.vo.Food_reviewVO;
 import kr.spring.member.vo.CompanyDetailVO;
@@ -80,6 +82,17 @@ public interface FoodMapper {
 	//주문할 상품 목록 장바구니에서 호출
 	public List<F_cartVO> selectF_cartListForOrder(Map<String,Object> map);
 
+	//식품 주문등록하기
+	public void insertF_order(F_orderVO f_order);
+	public void insertF_order_detail(F_order_detailVO fod);
+	//재고수 업데이트
+	@Update("UPDATE food SET food_quantity=food_quantity-#{order_quantity} WHERE food_num=#{food_num}")
+	public void updateFoodQuantity(F_order_detailVO fod);
+	//주문 상품 장바구니에서 제거
+	@Delete("DELETE FROM f_cart WHERE food_num=#{food_num} AND mem_num=#{mem_num}")
+	public void deleteFodF_cart(@Param(value="food_num") Integer food_num,
+								@Param(value="mem_num") Integer mem_num);
+	
 	//식품 주문(영수증)목록
 	public List<F_orderVO> selectOrderList(Map<String, Object> map);
 	public int selectOrderRowCount(Map<String,Object> map);

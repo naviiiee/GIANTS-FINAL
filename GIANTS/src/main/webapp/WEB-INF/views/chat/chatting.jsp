@@ -19,11 +19,11 @@
 	
 	<form id="detail_form">
 		<input type="hidden" name="chatroom_num" value="${param.chatroom_num}" id="chatroom_num">
-		<div class="float-left" id="text_message">
+		<div class="float-left">
 			<textarea rows="5" cols="100" name="message" id="message"></textarea>
 		</div>
-		<div class="float-left" id="message_btn">
-			<input type="submit" value="전송">
+		<div class="float-left">
+			<input class="classic-btn" type="submit" value="전송하기" id="msg_btn">
 		</div>
 	</form>	
 </div>

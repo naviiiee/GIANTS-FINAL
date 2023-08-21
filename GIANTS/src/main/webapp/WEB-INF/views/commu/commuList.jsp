@@ -66,7 +66,7 @@ li{
 	
 		<!-- 정렬 -->
 		<div class="align-right" >
-			<select id="commuOrder" name="commuOrder" style="height:30px;">
+			<select id="order" name="order" style="height:30px;">
 				<option value="1" 
 				  <c:if test="${param.order == 1}">selected</c:if>>최신글</option>
 				<option value="2" 
@@ -79,7 +79,7 @@ li{
 			<script type="text/javascript">
 				$(function(){
 					$('#order').change(function(){
-						location.href='list.do?keyfield='+$('#keyfield').val() 
+						location.href='commuList.do?keyfield='+$('#keyfield').val() 
 											+ '&keyword='+$('#keyword').val() 
 											+ '&order='+$('#order').val();
 					});

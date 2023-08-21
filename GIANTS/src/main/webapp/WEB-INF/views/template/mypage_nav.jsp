@@ -35,7 +35,7 @@
 			<li><b>관리</b></li>
 			<li><a href="${pageContext.request.contextPath}/member/admin_list.do">회원목록</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/adminMypageTicket.do">티켓관리</a></li>
-			<li><a href="${pageContext.request.contextPath}/member/adminMypageGoods.do">굿즈관리</a></li>
+			<li><a href="${pageContext.request.contextPath}/member/adminMypageGoodsList.do">굿즈관리</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/adminMypageSaleManage.do">매출관리</a></li>
 		</ul>
 	</c:if>

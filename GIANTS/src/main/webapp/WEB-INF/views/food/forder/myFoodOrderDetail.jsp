@@ -10,12 +10,11 @@
 <div class="page-main">
 	<div class="main-title">
 		<img class="title-img" src="${pageContext.request.contextPath}/images/title_icon.gif">
-		<h2> 푸드 | 주문하기</h2>
+		<h2> 푸드 | 내 주문목록 | 상세정보</h2>
 	</div>
 	<hr noshade="noshade">
 	<!-- 내용물 시작 -->
 	<div class="order-container">
-		<form:form modelAttribute="f_orderVO" action="foodOrder.do" id="order_form">
 		<div class="order-List">
 			<input type="hidden" id="total_price" name="total_price" value="${total_price}">
 			<input type="hidden" id="comp_name" value="${comp_name}">
@@ -56,19 +55,16 @@
 			</div>
 			<ul>
 				<li>
-					<form:label path="buyer_name">구매자명</form:label>
-					<form:input path="buyer_name"/>
-					<form:errors path="buyer_name" cssClass="error-color"/>
+					<label>구매자명</label>
+					<p></p>
 				</li>
 				<li>
-					<form:label path="buyer_phone">전화번호</form:label>
-					<form:input path="buyer_phone" maxlength="15" placeholder="ex) 000-1234-5678 "/>
-					<form:errors path="buyer_phone" cssClass="error-color"/>      
+					<label>전화번호</label>
+					<p></p>
 				</li>
 				<li>
-					<form:label path="buyer_email">이메일</form:label>
-					<form:input path="buyer_email" type="email" placeholder="ex) giants@gmail.com "/>
-					<form:errors path="buyer_email" cssClass="error-color"/>
+					<label>이메일</label>
+					<p></p>
 				</li>
 				<li>
 					<p>* 구매 후 상품 수령을 위한 정보 및 QR코드가 이메일로 발송됩니다.</p>
@@ -80,7 +76,6 @@
 			<form:button class="order-btn">주문하기</form:button>
 			<input type="button" value="홈으로" class="order-btn" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
 		</div>
-		</form:form>
 	</div>
 	<!-- 내용물 끝 -->
 </div>

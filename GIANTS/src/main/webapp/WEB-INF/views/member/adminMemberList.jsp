@@ -70,7 +70,6 @@
 							${member.mem_id}</c:if>
 					</td>
 					
-					<!-- 안먹히는부분 -->
 					<c:if test="${member.mem_auth == 2}">
 						<td class="align-center">${member.mem_name}</td>
 						<td class="align-center">${member.mem_phone}</td>

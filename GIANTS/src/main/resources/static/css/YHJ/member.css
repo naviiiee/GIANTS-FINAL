@@ -76,6 +76,7 @@
 }
 .login-form li{
 	padding-top:10px;
+	padding-bottom:10px;
 }
 .login-form input,
 .login-form password{
@@ -109,13 +110,14 @@
     float: right;
     border-left: 1px solid #ddd;
     padding: 10px 150px 10px 40px;
-    width: 240px;
+    width: 255px;
 }
 .login-sub li{
-	margin-bottom:20px;
+	margin-bottom:15px;
 }
 .login-sub-btn{
 	margin-top:10px;
+	margin-right:5px;
 }
 /* 회원등급
 =================*/
@@ -185,7 +187,10 @@
 	width:110px;
 	text-align: left;
 }
-#member_change label{
+#member_change label,
+#member_findId label,
+#member_findIdCp label,
+#member_findPw label{
 	display:inline-block;
 	padding-right:10px;
 	font-size:1.2em;
@@ -237,7 +242,11 @@
 #member_delete input[id="mem_id"],
 #member_delete input[id="passwd"],
 #company_delete input[id="mem_id"],
-#company_delete input[id="passwd"]{
+#company_delete input[id="passwd"],
+#member_findId input[id="mem_name"],
+#member_findId input[id="mem_phone"],
+#member_findIdCp input[id="comp_owner"],
+#member_findIdCp input[id="comp_phone"]{
 	width:264px;
 	height:35px;
 	text-align: left;

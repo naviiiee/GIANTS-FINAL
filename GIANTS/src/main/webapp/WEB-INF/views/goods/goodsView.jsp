@@ -10,7 +10,7 @@
 	<div class="content-main">
 		<c:if test="${!empty user && user.mem_auth == 9}">
 		<div class="align-left">
-			<input type="button" value="[관리자]목록" onclick="location.href='admin_goodsList.do'" id="admin_btn">
+			<input type="button" value="[관리자]목록" onclick="location.href='${pageContext.request.contextPath}/member/adminMypageGoodsList.do'" id="admin_btn">
 			<input type="button" value="일반목록" onclick="location.href='goodsList.do'">
 		</div>
 		<div class="align-right">
