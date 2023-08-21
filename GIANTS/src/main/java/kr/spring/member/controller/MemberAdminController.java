@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class MemberAdminController {
 	@Autowired
-	private MemberService memberService;
+	private MemberService memberService; 
 	
 	/*=====================
 	 * 관리자 : 회원목록

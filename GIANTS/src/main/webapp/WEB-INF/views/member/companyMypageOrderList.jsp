@@ -48,7 +48,7 @@
 	<div class="result-display">표시할 주문정보가 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-	<table class="striped-table">
+	<table class="striped-table"> 
 		<tr>
 			<th>주문번호</th>
 			<th>상품명</th>

@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberCompanyController {
 	@Autowired
 	private MemberService memberService;
-	
+	 
 	/*=====================
 	 * 기업회원 푸드목록
 	 *=====================*/	

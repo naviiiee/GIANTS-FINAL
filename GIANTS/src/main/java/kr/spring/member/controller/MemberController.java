@@ -819,7 +819,7 @@ public class MemberController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		map.put("mem_num", user.getMem_num());
+		map.put("mem_num", user.getMem_num()); 
 		
 		//전체/검색 레코드수
 		int count = memberService.selectOrderCountByMem_num(map);

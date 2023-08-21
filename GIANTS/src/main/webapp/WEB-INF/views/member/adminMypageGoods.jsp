@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
 <!-- 상품목록 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods.filter.js"></script>
-<script type="text/javascript">
+<script type="text/javascript"> 
 	$(function(){
 		//검색 유효성 체크
 		$('#search_form').submit(function(){

@@ -38,7 +38,7 @@
 	<c:if test="${count > 0}">
 	<table class="striped-table">
 		<tr>
-			<th>주문번호</th>
+			<th>주문번호</th> 
 			<th>상품명</th>
 			<th>구매자</th>
 			<th>결제금액</th>

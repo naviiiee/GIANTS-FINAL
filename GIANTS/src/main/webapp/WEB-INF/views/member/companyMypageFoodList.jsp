@@ -13,7 +13,7 @@
 </div>
 <div class="mypage-form">
 		<!-- 기업 상품 리스트 시작 -->
-		<div id="fix_compMenu">
+		<div id="fix_compMenu"> 
 			<c:if test="${count == 0}"><!-- 목록 없을 경우 -->
 				<table id="fix_menuList">
 					<tr>

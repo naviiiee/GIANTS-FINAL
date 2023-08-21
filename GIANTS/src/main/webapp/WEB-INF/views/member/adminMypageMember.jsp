@@ -6,6 +6,6 @@
 	<div class="mypage-top-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>회원관리</h2>
-		<p>자이언츠 회원관리 입니다.</p>
+		<p>자이언츠 회원관리 입니다.</p> 
 	</div>
 </div> 

@@ -9,7 +9,7 @@
 		<p>자이언츠 Ticket 구매내역 입니다.</p>
 	</div>
 </div> 
-<!-- 마이페이지 티켓구매내역 시작 -->
+<!-- 마이페이지 티켓구매내역 시작 --> 
 <div class="mypage-form">
 	<c:if test="${count == 0}">
 		<div class="result-display">Ticket구매내역 없습니다.</div>
