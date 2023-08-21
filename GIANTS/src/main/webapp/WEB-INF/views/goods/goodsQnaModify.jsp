@@ -5,7 +5,7 @@
 <!-- 문의 수정 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goods.css">
 <div class="page-main">
-	<div class="main-title">
+	<div class="goods-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>문의 수정</h2>
 		<hr size="0.05" width="100%" noshade>

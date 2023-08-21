@@ -5,7 +5,7 @@
 <!-- 리뷰 등록 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goodsReview.css">
 <div class="page-main">
-	<div class="main-title">
+	<div class="goods-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>리뷰 작성</h2>
 		<hr size="0.05" width="100%" noshade>
@@ -20,7 +20,7 @@
 			--%>
 			<li> <%-- 임시로 상품목록 표시 --%>
 				<label for="goods_num">상품목록</label>
-				<select name="goods_num">
+				<select name="goods_num" id="select_list">
 					<option>=====선택======</option>
 					<c:forEach var="goods" items="${goods_list}">
 					<option value="${goods.goods_num}"<c:if test="${goods_num == goods.goods_num}">selected</c:if>>${goods.goods_name}</option>

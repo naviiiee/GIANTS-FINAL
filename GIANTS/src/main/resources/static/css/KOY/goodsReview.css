@@ -49,12 +49,28 @@ input[type="button"], button[type="submit"]{
 }
 /* 등록, 수정폼
 ------------------*/
+form#review_register ul,
+form#review_modify ul{
+	margin-top:10px;
+}
+form#review_register ul li,
+form#review_modify ul i{
+	margin-top:3px;
+}
+form#review_register ul li select,
+form#review_modify ul li select{
+	height:30px;
+}
 form#review_register ul li label,
 form#review_modify ul li label{
 	margin:0 0 5px 10px;
 	display:inline-block;
 	font-size:14pt;
 	width:200px;
+}
+form#review_register ul li fieldset,
+form#review_modify ul li fieldset{
+	height:25px;
 }
 form#review_register input[type="text"],
 form#review_modify input[type="text"]{
@@ -72,6 +88,9 @@ form#review_modify textarea{
 	margin-left:215px;
 }
 
+div.goods-title h2{
+	margin-bottom:7px;
+}
 
 
 

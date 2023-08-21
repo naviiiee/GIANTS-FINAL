@@ -11,6 +11,9 @@ input[type="button"], input[type="submit"], button[type="submit"]:not(.not-css){
 }
 /* 굿즈 상세페이지
 ----------------*/
+div.goods-title h2{
+	margin-bottom:7px;
+}
 input[type="button"]#admin_btn{
 	width:80px;
 	height:30px;

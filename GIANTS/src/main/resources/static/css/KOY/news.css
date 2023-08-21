@@ -1,4 +1,7 @@
 @charset "UTF-8";
+div.news-title h2{
+	margin-bottom:7px;
+}
 /* 뉴스 상세
 -------------*/
 input[type="button"], input[type="submit"], button[type="submit"]{
@@ -99,6 +102,8 @@ form#modify_form ul li label{
 	width:200px;
 }
 
+/* 공통 타이틀
+-------------*/
 input#news_title{
 	width:70%;
 	height:30px;
