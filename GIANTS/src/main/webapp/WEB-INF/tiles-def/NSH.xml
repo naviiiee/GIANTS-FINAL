@@ -56,6 +56,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/ticket/ticketCheck.jsp"/>
 	</definition>
 
+	<definition name="ticketReserved" extends="main">
+		<put-attribute name="title" value="결제완료"/>
+		<put-attribute name="body" value="/WEB-INF/views/ticket/ticketReserved.jsp"/>
+	</definition>
+
 	<definition name="ticketInfo" extends="main">
 		<put-attribute name="title" value="티켓정보"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticket/ticketInfo.jsp"/>

@@ -1,6 +1,5 @@
 package kr.spring.ticket.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -211,7 +210,20 @@ public class TicketController {
 		// 결제 완료 후 ticket_check 테이블에 있는 필요없는 정보(해당 mem_num과 game_num) 삭제
 		ticketService.deleteCheck(user.getMem_num(), ticketVO.getGame_num());
 		
-		return "/ticket/ticketInfo.do?ticket_num=" + ticketVO.getTicket_num();	// 결제이후 이동할 주소 지정
+		return "/ticket/ticketReserved.do?ticket_num=" + ticketVO.getTicket_num();	// 결제이후 이동할 주소 지정
+	}
+	
+	@RequestMapping("/ticket/ticketReserved.do")
+	public String ticketReserved(@RequestParam String ticket_num, Model model, HttpSession session) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		if(user == null) { return "redirect:/member/login.do"; }
+		
+		TicketVO ticket = ticketService.selectTicket(ticket_num);
+		
+		model.addAttribute("ticket", ticket);
+		
+		return "ticketReserved";
 	}
 	
 	/* ----- [Order] 티켓정보 -----*/
