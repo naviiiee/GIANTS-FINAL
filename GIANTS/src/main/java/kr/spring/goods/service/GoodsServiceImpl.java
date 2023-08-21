@@ -226,4 +226,9 @@ public class GoodsServiceImpl implements GoodsService{
 		return goodsMapper.getGoodsTotalStock(goods_num);
 	}
 
+	@Override
+	public GoodsVO selectGoodsAllInfo(Integer goods_num) {
+		return goodsMapper.selectGoodsAllInfo(goods_num);
+	}
+
 }
