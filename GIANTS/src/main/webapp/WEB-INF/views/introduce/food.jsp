@@ -142,8 +142,8 @@ hr{
 	</div>
 	</div>
 
-	<div>
-		<img src="${pageContext.request.contextPath}/images/먹거리.jpg">
+	<div class="align-center">
+		<img src="${pageContext.request.contextPath}/images/먹거리.png">
 	</div>
 
 

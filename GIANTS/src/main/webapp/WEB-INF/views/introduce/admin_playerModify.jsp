@@ -3,14 +3,42 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LHJ/commu.css">
 <style>
-
+body, div, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, p, form, fieldset, input, table, tr, th, td {
+    margin: 5px;
+    padding: 0;
+}
+#player_toway{
+	margin-left:2.5%;
+}
+#player_weight{
+	margin-left:1.5%;
+}
+#player_height{
+	margin-left:3.7%;
+}
+#player_position{
+	margin-left:1.5%;
+}
+#player_backnumber{
+	margin-left:2.5%;
+}
+#player_name{
+	margin-left:4%;
+}
+#upload{
+	margin-left:3%;
+}
+input[type="text"]{
+	width:20%;
+	height: 20px;
+}
 </style>
 <div id="item_form" class="page-main">
 	<h2>선수 등록</h2>
 	<form:form modelAttribute="playerVO" action="admin_playerModify.do" id="admin_playerModify" enctype="multipart/form-data">
 		<form:hidden path="player_num"/>
 		<form:errors element="div" cssClass="error-color"/>
-		<ul>
+		<ul class="align-center" style="margin-top: 3%;">
 			<li>
 				<form:label path="player_name">선수명</form:label>
 				<form:input path="player_name"/>
@@ -27,7 +55,7 @@
 				<form:errors path="player_position" cssClass="error-color"/>
 			</li>
 			<li>
-				<label for="upload">선수 사진</label>
+				<label for="upload" style="margin-left:1.3%;">선수 사진</label>
 				<input type="file" name="upload" id="upload" accept="image/gif,image/png,image/jpeg">
 				<form:errors path="player_photo" cssClass="error-color"/>
 			</li>
@@ -64,8 +92,8 @@
 			
 			
 		</ul>
-		<div class="align-center">
-			<form:button class="accept-btn">선수 등록</form:button>
+		<div class="align-center" style="margin-top:3%;">
+			<form:button class="accept-btn" style="width:6%;">선수 등록</form:button>
 			<input type="button" value="삭제" id="delete_btn" class="accept-btn">
 			<script type="text/javascript">
 				let delete_btn = document.getElementById('delete_btn');

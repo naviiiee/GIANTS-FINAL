@@ -151,13 +151,13 @@ hr{
 			<dl>
 				<dt>위치</dt>
 				<dd>부산광역시 동래구 사직로 45 종합운동장</dd>
-				<hr size="0.03" width="140%" noshade>
+				<hr size="0.03" width="140%" color="#ccd3de" noshade>
 				<dt>면적</dt>
 				<dd>총 면적 : 50.301㎡</dd>
-				<hr size="0.03" width="140%" noshade>
+				<hr size="0.03" width="140%" color="#ccd3de" noshade>
 				<dt>시설</dt>
 				<dd>관람석 22,990석</dd>
-				<hr size="0.03" width="140%" noshade>
+				<hr size="0.03" width="140%" color="#ccd3de" noshade>
 			</dl>
 		</div>
 		<div style="margin-bottom:5%;">

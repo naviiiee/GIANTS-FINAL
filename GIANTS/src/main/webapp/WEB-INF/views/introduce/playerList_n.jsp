@@ -24,6 +24,7 @@ li{
 .modifyLink:hover{
 	color:gray;
 }
+
 </style>
 <!-- [관리자] 선수 목록 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LHJ/commu.css">
@@ -71,9 +72,9 @@ li{
 	<form action="playerList_n.do" id="search_form" method="get"  style="padding-bottom: 24px;">
 		<ul class="search align-center">
 			<li style="margin: 0px 11px 10px 0;">
-				<select name="keyfield" id="keyfield">
+				<select name="keyfield" id="keyfield"">
 					<option value="1" <c:if test="${param.keyfield == 1}">SELECTED</c:if>>선수명</option>
-					<option value="2" <c:if test="${param.keyfield == 2}">SELECTED</c:if>>선수 포지션</option><!--  -->
+					<%-- <option value="2" <c:if test="${param.keyfield == 2}">SELECTED</c:if>>선수번호</option> --%>
 				</select>
 			</li>
 			<li style="margin: 0px 11px 10px 0;">
