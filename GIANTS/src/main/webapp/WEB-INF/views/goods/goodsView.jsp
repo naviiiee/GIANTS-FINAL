@@ -228,7 +228,7 @@
 					<li>반품처 : 서울특별시 강남구 역삼동 ****</li>
 					<li>주문하신 상품은 택배로 발송됩니다.</li>
 					<li>고객센터 : 070-1111-0000 (오전 10시 ~ 오후 5시 운영/토,일 및 공휴일 휴무)</li>
-					<li>개인정보보호 담당자 : 홍길동 / 전화 : 051)000-0000 / 메일 : test@test.com</li>
+					<li>개인정보보호 담당자 : 홍길동 / 전화 : 051)000-0000 / <br>메일 : test@test.com</li>
 				</ul>
 			</div>
 			<div class="deli-sub" style="height:350px;">
@@ -290,8 +290,9 @@
 				</tr>
 				<tr class="re-content" id="content${status.count}" style="display:none;">
 					<td colspan="5" class="show-content" id="td${status.count}">
-						<c:if test="${!empty user && user.mem_num == review.mem_num}">
-						<div class="align-right">
+						<div class="align-right" style="margin:5px 5px 0 0; height:50px;">
+							<input type="button" value="닫기" id="close_this">
+							<c:if test="${!empty user && user.mem_num == review.mem_num}">
 							<input type="button" value="수정" onclick="location.href='updateReview.do?review_num=${review.review_num}'">
 							<input type="button" value="삭제" id="del_review">
 							<script>
@@ -303,10 +304,7 @@
 									}
 								};
 							</script>
-						</div>
-						</c:if>
-						<div class="align-right" style="margin:5px 5px 0 0;">
-							<input type="button" value="닫기" id="close_this">
+							</c:if>
 						</div>
 						<c:if test="${!empty review.review_photoname}">
 						<div class="align-left" style="margin-left:10px;">
@@ -378,7 +376,7 @@
 					<td>${qna.qna_regdate}</td>
 					<td>
 						<c:if test="${qna.qna_status == 1}">처리전</c:if>
-						<c:if test="${qna.qna_status == 2}">답변완료</c:if>
+						<c:if test="${qna.qna_status == 2}"><b style="color:#0000FF;">답변완료</b></c:if>
 					</td>
 				</tr>
 				</c:forEach>

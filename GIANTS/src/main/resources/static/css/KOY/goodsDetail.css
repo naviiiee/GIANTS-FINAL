@@ -180,7 +180,7 @@ div#sold-out > span{
 div#goods_review, div#goods_qna{
 	width:100%;
 	text-align:center;
-	max-height:500px;
+	/*max-height:1000px;*/
 	margin-bottom:20px;
 }
 div#goods_review > span, div#goods_qna > span{

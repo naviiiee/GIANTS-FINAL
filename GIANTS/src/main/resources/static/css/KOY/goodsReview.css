@@ -64,10 +64,13 @@ form#review_modify input[type="text"]{
 form#review_register textarea{
 	width:50%;
 	height:100px;
+	margin-left:215px;
 }
-
-
-
+form#review_modify textarea{
+	width:50%;
+	height:100px;
+	margin-left:215px;
+}
 
 
 

@@ -53,7 +53,7 @@
 				};
 			</script>
 		</c:if>
-		<input type="button" value="상품상세" onclick="location.href='goodsDetail.do?goods_num=${qna.goods_num}'">
+		<input type="button" value="상품상세" onclick="location.href='goodsDetail.do?goods_num=${qna.goods_num}#goods_qna'">
 	</div>
 	<hr size="1" width="100%">
 	<%-- 답변 시작 --%>
