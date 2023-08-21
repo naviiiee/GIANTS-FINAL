@@ -62,7 +62,13 @@ public class AppConfig implements WebMvcConfigurer {
 				// Ticket
 				//.addPathPatterns("/ticket/ticketMain.do"); 
 				// Chatting
-				.addPathPatterns("/chat/chatting.do");
+				.addPathPatterns("/chat/chatting.do")
+				//권오윤
+				.addPathPatterns("/goods/detailQna.do")
+				.addPathPatterns("/goods/writeQna.do")
+				.addPathPatterns("/goods/writeReview.do")
+				.addPathPatterns("/goods/updateReview.do");
+
 
 		//Comp(기업) 인터셉터 설정
 		registry.addInterceptor(compCheck)
@@ -80,7 +86,12 @@ public class AppConfig implements WebMvcConfigurer {
 				.addPathPatterns("/ticket/gradeUpdate.do")
 				.addPathPatterns("/ticket/seatList.do.do")
 				.addPathPatterns("/ticket/gameWrite.do")
-				.addPathPatterns("/ticket/gameUpdate.do");
+				.addPathPatterns("/ticket/gameUpdate.do")
+				//권오윤
+				.addPathPatterns("/goods/registerGoods.do")
+				.addPathPatterns("/goods/goodsUpdate.do")
+				.addPathPatterns("/news/newsWrite.do")
+				.addPathPatterns("/news/newsUpdate.do");
 	}
 
 	@Bean
