@@ -9,7 +9,7 @@
 <div class="page-main">
 	<div class="main-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
-		<h2>${grade.title} | 좌석관리</h2>
+		<h2>${grade.title}</h2>
 		<hr size="0.05" width="100%" noshade>
 	</div>
 	<div> 
@@ -75,6 +75,7 @@
 					<td>
 						<input type="hidden" name="seat_num" value="${seat.seat_num}" id="seatNum">
 						<input type="button" value="수정" data-seatblock="${seat.seat_block}" data-quantity="${seat.seat_quantity}" class="seat-update admin-btn small">
+						<input type="button" value="관리" onclick="location.href='seatEditForm.do?seat_num=${seat.seat_num}'" class="accept-btn small">
 					</td>
 				</tr>
 				</c:forEach>

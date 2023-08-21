@@ -74,7 +74,10 @@ public class TicketController {
 		
 		for(GradeVO grade : list) {
 			int count = ticketService.selectCountByGradeNum(game_num, grade.getGrade_num());
+			int admin_count = ticketService.selectAdminCountByGradeNum(grade.getGrade_num());
 			int quantity = grade.getQuantity();
+			
+			log.debug("<<admin_count>> : " + admin_count);
 			
 			if(count > 0) { grade.setQuantity(quantity - count); }
 		}
@@ -106,7 +109,9 @@ public class TicketController {
 				int count = ticketService.selectCountBySeatNum(game_num, seat.getSeat_num());
 				int seat_quantity = seat.getSeat_quantity();
 				
-				if(count > 0) { seat.setSeat_quantity(seat_quantity - count); }
+				if(count > 0) {
+					seat.setSeat_quantity(seat_quantity - count);
+				}
 			}
 			
 			mapJson.put("result", "success");
@@ -130,11 +135,13 @@ public class TicketController {
 			log.debug("<<seat>> : " + seat);
 			
 			List<SeatStatusVO> status = ticketService.selectStatusByGame(game_num);
-			log.debug("<<status>> : " + status);
+			List<SeatStatusVO> list = ticketService.selectStatusBySeat(seat_num);
+			log.debug("<<list>> : " + list);
 			
 			mapJson.put("result", "success");
 			mapJson.put("seat", seat);
 			mapJson.put("status", status);
+			mapJson.put("list", list);
 		}
 		
 		return mapJson;
