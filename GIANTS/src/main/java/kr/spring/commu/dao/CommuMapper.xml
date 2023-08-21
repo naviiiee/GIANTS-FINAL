@@ -26,7 +26,7 @@
 		</where>
 	</sql>
 	
-	<!-- 글 조회 순서 -->
+	<!-- 커뮤 글 조회 순서 -->
 	<sql id="commuOrder">
 		<if test="order == 1"> <!-- 커뮤 글 최신글 순서 -->
 			ORDER BY commu_date DESC 

@@ -11,6 +11,7 @@
 	
 	<!-- 장바구니 체크를 위한 f_cartVO -->
 	<resultMap type="f_cartVO" id="cartMap">
+		<result property="food_num" column="food_num"/>
 		<result property="foodVO.comp_num" column="comp_num"/>
 		<result property="foodVO.food_num" column="food_num"/>
 		<result property="foodVO.food_name" column="food_name"/>
@@ -151,7 +152,9 @@
            		   <if test="sort == 2">
            		   ORDER BY comp_score ASC
            		   </if>
-           		   )a)
+           		   )a
+           		   WHERE comp_cate=#{comp_cate}
+           	  )
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
@@ -223,6 +226,7 @@
 		SELECT
 		  cart_num,
 		  food_num,
+		  comp_num,
 		  f_cart_quantity,
 		  f_cart_price,
 		  mem_num,
@@ -234,6 +238,110 @@
 		<include refid="cartCondition"></include>
 		ORDER BY food_num ASC
 	</select>
+	
+	<!-- 식품 주문등록하기 시작 -->
+	<insert id="insertF_order" parameterType="f_orderVO">
+		INSERT INTO f_order(
+		  f_order_num,
+		  mem_num,
+		  comp_num,
+		  f_order_name,
+		  total_price,
+		  buyer_name,
+		  buyer_phone,
+		  buyer_email,
+		  f_order_regDate,
+		  f_order_expireDate,
+		  f_order_qrlink,
+		  pg,
+		  pay_method)
+		VALUES(
+		  #{f_order_num},
+		  #{mem_num},
+		  #{comp_num},
+		  #{f_order_name},
+		  #{total_price},
+		  #{buyer_name},
+		  #{buyer_phone},
+		  #{buyer_email},
+		  SYSDATE,
+		  ADD_MONTHS(SYSDATE, 90),
+		  #{f_order_qrlink},
+		  #{pg},
+		  #{pay_method})
+	</insert>
+	
+	<insert id="insertF_order_detail" parameterType="f_order_detailVO">
+		INSERT INTO f_order_detail(
+		  f_detail_num,
+		  food_num,
+		  f_order_num,
+		  order_quantity,
+		  food_name,
+		  food_price,
+		  food_total)
+		VALUES(
+		  f_order_detail_seq.nextval,
+		  #{food_num},
+		  #{f_order_num},
+		  #{order_quantity},
+		  #{food_name},
+		  #{food_price},
+		  #{food_total})
+	</insert>
+	
+	<!-- 식품 주문등록하기 끝 -->
+	
+	
+	<!-- 주문목록 호출하기 시작 -->
+	<!-- 
+		sort 0 = 이미사용된 영수증 검색
+		sort 1 = 사용하기전 영수증 검색
+		sort 2 = 모든 영수증 검색
+	-->
+	<sql id="orderSort">
+		<where>
+			<if test="sort == 0">
+				mem_num=#{mem_num}
+				AND f_order_status = 0
+			</if>
+			<if test="sort == 1">
+				mem_num=#{mem_num}
+				AND f_order_status = 1
+			</if>
+			<if test="sort == 2">
+				mem_num=#{mem_num}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectOrderRowCount" parameterType="map" resultType="integer">
+		SELECT
+		  COUNT(*)
+		FROM 
+		  f_order
+		<include refid="orderSort"></include>
+	</select>
+	
+	<select id="selectOrderList" parameterType="map" resultType="f_orderVO">
+		SELECT
+		  *
+		FROM (SELECT
+			    a.*,
+			    rownum rnum
+			  FROM (SELECT
+			  		  *
+			  		FROM
+			  		  f_order o JOIN member m
+			  		  ON o.mem_num = m.mem_num
+			  		  <include refid="orderSort"></include>
+			  		  ORDER BY f_order_num DESC))
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	<!-- 주문목록 호출하기 끝 -->
+	
 	
 	
 </mapper>
