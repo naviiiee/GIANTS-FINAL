@@ -116,7 +116,7 @@
 		</ul>
 		<div class="align-center" style="margin-top:5px;">
 			<form:button class="default-btn">수정</form:button>
-			<input type="button" value="목록" onclick="location.href='admin_goodsList.do'">
+			<input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/member/adminMypageGoodsList.do'">
 		</div>
 	</form:form>
 </div>

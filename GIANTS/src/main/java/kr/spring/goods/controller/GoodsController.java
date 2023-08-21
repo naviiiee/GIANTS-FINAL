@@ -81,6 +81,10 @@ public class GoodsController {
 			result.rejectValue("goods_photo", "limitUploadSize", new Object[] {"5MB"}, null);
 		}
 		
+		if(goodsVO.getGoods_stocks() == null) {
+			result.rejectValue("goods_stocks", "required");
+		}
+				
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			return form();
@@ -89,7 +93,7 @@ public class GoodsController {
 		goodsService.insertGoods(goodsVO);
 		
 		model.addAttribute("message", "상품등록이 완료되었습니다.");
-		model.addAttribute("url", request.getContextPath() + "/goods/admin_goodsList.do");
+		model.addAttribute("url", request.getContextPath() + "/member/adminMypageGoodsList.do");
 
 		return "common/resultView";
 	}
@@ -330,7 +334,7 @@ public class GoodsController {
 		
 		
 		model.addAttribute("message", "상품 삭제 완료!");
-		model.addAttribute("url", request.getContextPath() + "/goods/admin_goodsList.do");
+		model.addAttribute("url", request.getContextPath() + "/member/adminMypageGoodsList.do");
 		
 		return "common/resultView";
 	}

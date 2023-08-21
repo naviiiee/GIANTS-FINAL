@@ -41,24 +41,27 @@
 			<li>
 				<form:label path="goods_category">상품 카테고리</form:label>
 				<form:select path="goods_category" id="goods_category">
-					<option>===선택===</option>
+					<option value="">===선택===</option>
 					<form:option value="1">유니폼</form:option>
 					<form:option value="2">모자</form:option>
 					<form:option value="3">응원도구</form:option>
 					<form:option value="4">기타</form:option>
 				</form:select>
+				<c:if test="${empty goods_category.val() == ''}"><span>카테고리 필수 선택</span></c:if>
+				<c:if test="${empty goods_category.val}"><span></span></c:if>
 			</li>
 			<li>
 				<form:label path="goods_status">상태</form:label>
 				<form:radiobutton path="goods_status" value="1"/><span class="radio-status">판매중</span>
 				<form:radiobutton path="goods_status" value="2"/><span class="radio-status">판매중지</span>
-				<form:errors path="goods_content" cssClass="error-color"/>
+				<form:errors path="goods_status" cssClass="error-color"/>
 			</li>
 			<li class="hasSize" style="display:none;">
 				<div>
 					<form:hidden path="goods_sizes" value="85"/>
 					<label for="goods_stock1">85</label>
 					<input id="goods_stock1" name="goods_stocks" type="number" placeholder="재고수량 입력"/>
+					<c:if test="${empty goods_stock1}"><span>수량 필수 입력</span></c:if>
 				</div>
 				<div>
 					<form:hidden path="goods_sizes" value="90"/>
