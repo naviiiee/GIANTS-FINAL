@@ -381,4 +381,92 @@
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
+	
+	<!-- 상품 목록 -->
+	<sql id="goodsSearch">
+		<![CDATA[
+			WHERE goods_status < #{goods_status}
+		]]>
+		<if test="keyword != null and keyword != ''">
+			<if test="keyfield == 1">
+				AND goods_name LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="keyfield == 2">
+				AND goods_content LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="keyfield == 3">
+				AND (goods_name LIKE '%' || #{keyword} || '%' OR goods_content LIKE '%' || #{keyword} || '%') 
+			</if>
+		</if>
+	</sql>
+	<sql id="goodsOrder">
+		<if test="order == 1">
+			ORDER BY goods_regdate DESC
+		</if>
+		<if test="order == 2">
+			ORDER BY f.fav_cnt ASC
+		</if>
+		<if test="order == 3">
+			ORDER BY r.re_cnt ASC
+		</if>
+		<if test="order == 4">
+			ORDER BY goods_disc DESC
+		</if>
+		<if test="order == 5">
+			ORDER BY goods_dprice ASC
+		</if>
+	</sql>	
+	<sql id="goodsCategory">
+		<if test="goods_category == 0">
+			AND goods_category BETWEEN 1 AND 4
+		</if>
+		<if test="goods_category == 1">
+			AND goods_category = 1
+		</if>
+		<if test="goods_category == 2">
+			AND goods_category = 2
+		</if>
+		<if test="goods_category == 3">
+			AND goods_category = 3
+		</if>
+		<if test="goods_category == 4">
+			AND goods_category = 4
+		</if>
+	</sql>
+	<!-- 전체/검색 레코드 수 -->
+	<select id="selectGoodsRowCount" parameterType="map" resultType="integer">
+		SELECT 
+			count(*) 
+		FROM goods g
+		LEFT OUTER JOIN (SELECT count(*) fav_cnt, goods_num FROM goods_fav GROUP BY goods_num)f ON g.goods_num=f.goods_num
+		LEFT OUTER JOIN (SELECT count(*) re_cnt, goods_num FROM goods_review GROUP BY goods_num)r ON g.goods_num=r.goods_num
+		<include refid="goodsSearch"></include>
+		<include refid="goodsCategory"></include>
+	</select>	
+	<!-- 전체/검색 목록 -->
+	<select id="selectGoodsList" parameterType="map" resultType="goodsVO">
+		SELECT
+			*
+		FROM (SELECT
+				a.*,
+				rownum rnum
+			  FROM(SELECT
+			  			g.goods_num,
+			  			g.goods_name,
+			  			g.goods_dprice,
+			  			f.fav_cnt,
+			  			r.re_cnt,
+			  			g.goods_category,
+			  			g.goods_regdate,
+			  			g.goods_status
+			  	   FROM goods g
+			  	   LEFT OUTER JOIN (SELECT count(*) fav_cnt, goods_num FROM goods_fav GROUP BY goods_num)f ON g.goods_num=f.goods_num
+			  	   LEFT OUTER JOIN (SELECT count(*) re_cnt, goods_num FROM goods_review GROUP BY goods_num)r ON g.goods_num=r.goods_num
+			  	   <include refid="goodsSearch"></include>
+			  	   <include refid="goodsCategory"></include>
+			  	   <include refid="goodsOrder"></include>)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>	
 </mapper>

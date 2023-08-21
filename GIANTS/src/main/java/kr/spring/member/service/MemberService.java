@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.spring.food.vo.FoodVO;
+import kr.spring.goods.vo.GoodsVO;
 import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberVO;
 
@@ -59,7 +60,14 @@ public interface MemberService {
 	public MemberVO findCompanyPw(String mem_id, String comp_owner, String comp_phone, String comp_email);
 	public void changePw(int mem_num, String new_passwd);
 	
+	//기업페이지 : 푸드목록
 	public CompanyDetailVO selectCompCp(String comp_num);
 	public int selectRowCountCp(String comp_num);
 	public List<FoodVO> selectListCp(Map<String, Object> map);
+	
+	//관리자페이지 : 굿즈목록
+	//전체|검색 상품 레코드수
+	public int selectGoodsRowCount(Map<String, Object> map);
+	//전체|검색 상품 목록
+	public List<GoodsVO> selectGoodsList(Map<String, Object> map);	
 }

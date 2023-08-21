@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.goods.vo.GoodsVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberDetailVO;
@@ -78,9 +79,8 @@ public class MemberAdminController {
 	}
 	
 	/*=====================
-	 * 관리자 : 회원등급변경
+	 * 일반회원 수정폼
 	 *=====================*/
-	//일반회원 수정폼
 	@GetMapping("/member/admin_updateMem.do")
 	public String form(@RequestParam int mem_num, Model model) {
 		MemberVO memberVO = memberService.selectMember(mem_num);
@@ -106,7 +106,9 @@ public class MemberAdminController {
 		return "common/resultView";
 	}
 	
-	//기업회원 수정폼
+	/*=====================
+	 * 기업회원 수정폼
+	 *=====================*/
 	@GetMapping("/member/admin_updateComp.do")
 	public String formComp(@RequestParam int mem_num, Model model) {
 		MemberVO companyVO = memberService.selectCompany(mem_num);
@@ -132,25 +134,58 @@ public class MemberAdminController {
 		return "common/resultView";
 	}
 	
-	/* === 마이페이지 : 관리자
-	=======================*/
-	//티켓관리
+	/*=====================
+	 * 관리자 티켓관리
+	 *=====================*/
 	@RequestMapping("/member/adminMypageTicket.do")
 	public String adminMypageTicket(HttpSession session, Model model) {
 		
 		return "adminMypageTicket";
 	}
-	//굿즈관리
-	@RequestMapping("/member/adminMypageGoods.do")
-	public String adminMypageGoods(HttpSession session, Model model) {
+	/*
+	/*=====================
+	 * 관리자 굿즈관리
+	 *=====================*/
+	@RequestMapping("/member/adminMypageGoodsList.do")
+	public ModelAndView process(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
+								@RequestParam(value="goods_category", defaultValue="0") int goods_category,
+								String keyfield, String keyword) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("goods_status", 3); //status가 3이면 판매중(1), 판매중지(2) 모두 체크
 		
-		return "adminMypageGoods";
-	}
-	//매출관리
+		//전체|검색 레코드 수
+		map.put("goods_category", goods_category);
+		int count = memberService.selectGoodsRowCount(map);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 10, 10, "adminMypageGoodsList.do", "&goods_category=" + goods_category);
+		
+		List<GoodsVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			map.put("order", 1);
+			map.put("goods_category", goods_category);
+			
+			list = memberService.selectGoodsList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("adminGoodsList");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
+	}		
+	/*==========================
+	 * 관리자 매출관리
+	 *==========================*/
 	@RequestMapping("/member/adminMypageSaleManage.do")
 	public String adminMypageSaleManage(HttpSession session, Model model) {
 		
 		return "adminMypageSaleManage";
 	}
-	
 } 

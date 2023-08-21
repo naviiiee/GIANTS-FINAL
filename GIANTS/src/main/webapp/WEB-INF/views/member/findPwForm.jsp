@@ -3,11 +3,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
-<div class="mypage-top2">
+<div class="mypage-top">
 	<div class="mypage-top-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
-		<h2>아이디찾기</h2>
-		<p>자이언츠 아이디찾기 입니다.</p>
+		<h2>비밀번호찾기</h2>
+		<p>자이언츠 일반회원 비밀번호찾기 입니다.</p>
 	</div> 
 </div>
 <!-- 아이디찾기 시작 -->
@@ -38,9 +38,9 @@
 		</ul>
 		</div>
 		<div class="align-center">
-			<form:button class="bottom-btn">전송</form:button>
-			<input type="button" value="홈으로" class="bottom-btn"
-			       onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
+			<form:button class="bottom-btn">찾기</form:button>
+			<input type="button" value="로그인" class="bottom-btn"
+			       onclick="location.href='${pageContext.request.contextPath}/member/login.do'">
 		</div>
 	</form:form>
 </div>
