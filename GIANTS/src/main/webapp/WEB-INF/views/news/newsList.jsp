@@ -60,7 +60,7 @@
 				<script type="text/javascript">
 					$(function(){
 						$('#order').change(function(){
-							location.href='list.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&order=' + $('#order').val();
+							location.href='newsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&order=' + $('#order').val();
 						});
 					});
 				</script>

@@ -53,6 +53,7 @@
 			</li>
 			<li>
 				<form:label path="review_content">내용</form:label>
+				<br>
 				<form:textarea path="review_content"/>
 				<form:errors path="review_content" cssColor="error-color"/>
 			</li>
@@ -63,7 +64,7 @@
 		</ul>
 		<div class="align-center">
 			<form:button>등록</form:button>
-			<input type="button" value="이전" onclick="location.href='goodsDetail.do?goods_num=${goods.goods_num}#goods_review'">
+			<input type="button" value="이전" onclick="location.href='${pageContext.request.contextPath}/goods/goodsDetail.do?goods_num=${goods_num}#goods_review'">
 		</div>
 	</form:form>
 </div>

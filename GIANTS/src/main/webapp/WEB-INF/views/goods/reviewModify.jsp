@@ -54,12 +54,14 @@
 			</li>
 			<li>
 				<form:label path="review_content">내용</form:label>
+				<br>
 				<form:textarea path="review_content"/>
 				<form:errors path="review_content" cssColor="error-color"/>
 			</li>
 			<li>
 				<label for="upload">사진</label>
 				<input type="file" id="upload" name="upload" accept="image/gif,image/png,image/jpeg">
+				<span>(${goodsReviewVO.review_photoname}) 파일이 등록되어 있습니다.</span>
 			</li>
 		</ul>
 		<div class="align-center">

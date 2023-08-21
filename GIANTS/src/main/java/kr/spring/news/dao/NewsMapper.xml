@@ -64,8 +64,7 @@
 			  	   FROM news n JOIN member m
 			  	   ON n.mem_num=m.mem_num
 			  	   <include refid="newsSearch"></include>
-			  	   <include refid="newsOrder"></include>
-			  	   )a)
+			  	   <include refid="newsOrder"></include>)a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>

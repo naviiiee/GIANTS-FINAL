@@ -99,4 +99,8 @@ form#modify_form ul li label{
 	width:200px;
 }
 
+input#news_title{
+	width:70%;
+	height:30px;
+}
 

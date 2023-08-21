@@ -41,7 +41,7 @@
 				<th>작성일자</th>
 				<td>${news.news_regdate}</td>
 				<th>조회수</th>
-				<td>${news.news_hit}</td>
+				<td width="79">${news.news_hit}</td>
 			</tr>
 		</table> 
 	</div>
