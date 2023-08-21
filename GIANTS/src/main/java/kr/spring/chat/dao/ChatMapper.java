@@ -38,7 +38,7 @@ public interface ChatMapper {
 	public void insertChat(ChatVO chatVO);
 	
 	//채팅 멤버 읽기
-	public List<ChatVO> selectChatMember(Integer chatroom_num);
+	public ChatRoomVO selectChatMember(Integer chatroom_num);
 
 	//읽지 않은 채팅 기록 저장
 	@Insert("INSERT INTO chat_read(chatroom_num,chat_num,mem_num) VALUES(#{chatroom_num},#{chat_num},#{mem_num})")
@@ -57,6 +57,11 @@ public interface ChatMapper {
 	public List<ChatRoomVO> selectChatRoomList(Map<String, Object> map);
 	public int selectRowCount(Map<String, Object> map);
 	
+	//채팅방 나가기
+	public void deleteChatRoomMember(ChatRoomVO chatRoomVO);
+	@Delete("DELETE FROM chat WHERE chatroom_num=#{chatroom_num}")
+	public void deleteChat(Integer chatroom_num);
+	@Delete("DELETE FROM chatroom WHERE chatroom_num=#{chatroom_num}")
+	public void deleteChatRoom(Integer chatroom_num);
+	
 }
-
-

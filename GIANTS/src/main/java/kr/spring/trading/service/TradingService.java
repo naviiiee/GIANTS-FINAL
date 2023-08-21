@@ -15,7 +15,6 @@ public interface TradingService {
 	public void insertTrading(TradingVO trading);
 	public TradingVO selectTrading(Integer trade_num);
 	public void updateHit(Integer trade_num);
-	public void updateStatus(Integer trade_num);
 	public void updateTrading(TradingVO trading);
 	public void deleteTrading(Integer trade_num);
 	

@@ -56,6 +56,19 @@
 			};
 		</script>
 		</c:if>
+		<c:if test="${!empty user && user.mem_auth == 9}"> <!-- 로그인한 회원번호가 관리자일 시 -->
+		<input type="button" value="삭제" id="delete_btn" class="red-btn small">
+		<script type="text/javascript">
+			let delete_btn = document.getElementById('delete_btn');
+			delete_btn.onclick = function(){
+				let choice = confirm('삭제하시겠습니까?');
+				if(choice){
+					//히스토리 정보 삭제
+					location.replace('tradingDelete.do?trade_num=${trading.trade_num}');
+				}
+			};
+		</script>
+		</c:if>
 		<input type="button" value="목록" onclick="location.href='tradingList.do'" class="classic-btn small">
 	</div>
 </div>

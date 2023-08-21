@@ -5,16 +5,33 @@
 .align-right{ text-align:right; }
 .float-left{ float:left; }
 
+/* 버튼 */
+.classic-btn, .red-btn{ 
+	width:110px; height:40px; border-radius:5px; color:white; cursor:pointer; 
+}
+.classic-btn:hover, .red-btn:hover{ 
+	background-color:transparent; transition:0.2s ease-out; 
+}
+.classic-btn{ 
+	border:1px #4682B4 solid; background-color:#4682B4; 
+}
+.classic-btn:hover{ 
+	color: #4682B4;
+}
+
 /* 채팅하기 */
 #chatting_message {
 	border: 1px solid #856088;
-	width: 660px;
-	height: 300px;
+	width: 800px;
+	height: 740px;
 	margin: 0 auto;
 	padding: 10px;
 	overflow: auto;
 }
-
+.chat_date{
+	text-align: right;
+    margin-right: 25px;
+}
 .date-position {
 	text-align: center;
 }
@@ -29,7 +46,8 @@
 
 .from-position {
 	width: 300px;
-	margin: 20px 0 10px 350px;
+	float: right;
+    clear: both;
 }
 
 .from-position .item {
@@ -42,7 +60,7 @@
 
 .to-position {
 	width: 300px;
-	margin: 10px 0 10px 0;
+	clear: both;
 }
 
 .to-position .item {
@@ -69,17 +87,16 @@
 
 #read_cnt{
 	float: left;
-	height: 70px;
-	margin-top: 50px;
+	margin-top: 70px;
 }
 #msg{
 	float: left;
 	width: 85%;
 }
-
 form#detail_form {
-	width: 660px;
-	border: none;
+	width: 820px;
+    margin: 0 auto;
+    height: 100px;
 }
 
 #text_message{
@@ -90,24 +107,20 @@ form#detail_form {
 }
 
 #message {
-	width: 500px;
-	resize: none;
+	width: 700px;
+    height: 95px;
+    resize: none;
 }
 
-#message_btn {
-	margin-top: -20px;
-	width: 646px;
+#msg_btn{
+	width: 114px;
+    height: 100px;
 }
 
-#message_btn input {
-	width: 505px;
+/* 채팅 목록 */
+.room_cnt{
+	width: 30px;
 }
-
-/*
-.classic-btn{ 
-	width:110px; height:40px; border-radius:5px; color:white; font-weight:bold; cursor:pointer; border:1px #052345 solid; background-color:#052345; 
+#room_cnt{
+	color: red;
 }
-.classic-btn:hover{ 
-	background-color:transparent; transition:0.2s ease-out; color:#052345; 
-}
-*/

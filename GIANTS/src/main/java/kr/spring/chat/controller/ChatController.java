@@ -46,7 +46,7 @@ public class ChatController {
 		
 		//로그인한 회원만 채팅 가능
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		
+
 		if(user == null) {
 			mapJson.put("result", "logout");
 		}else {
@@ -139,15 +139,18 @@ public class ChatController {
 	 * 채팅방 목록
 	 * =============== */
 	@RequestMapping("/chat/chatList.do")
-	public String chatList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, String keyword,HttpSession session, Model model) {
+	public String chatList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, HttpSession session, Model model) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("mem_num", user.getMem_num());
+		//로그인한 회원번호가 판매자/구매자의 회원번호와 일치하는 2가지 경우 모두 체크
+		map.put("seller_num", user.getMem_num());
+		map.put("buyer_num", user.getMem_num());
+		map.put("user_mem_num", user.getMem_num());
 		
 		int count = chatService.selectRowCount(map);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(null,  keyword, currentPage, count, 30, 10, "chatList.do");
+		PagingUtil page = new PagingUtil(null, null, currentPage, count, 30, 10, "chatList.do");
 		
 		List<ChatRoomVO> list = null;
 		if(count > 0) {
@@ -156,10 +159,36 @@ public class ChatController {
 			
 			list = chatService.selectChatRoomList(map);
 		}
+		log.debug("<<list>> : "+list);
 		//Model을 이용한 세팅정보 불러오기
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("page", page.getPage());
 		return "chatList";
 	}
+	
+	/* =================
+	 * 채팅방 나가기
+	 * =============== */
+	//*
+	@RequestMapping("/chat/deleteChatRoomMemberAjax.do")
+	@ResponseBody
+	public Map<String,Object> memberDeleteAjax(ChatRoomVO chatroomVO, ChatVO chatVO, HttpSession session){
+		Map<String,Object> mapJson = new HashMap<String, Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user == null) { //로그인이 되지 않은 경우
+			mapJson.put("result", "logout");
+		} else { //로그인이 된 경우
+			mapJson.put("user_mem_num", user.getMem_num());
+			//퇴장 메시지 생성
+			chatVO.setMessage(user.getMem_id() + "님이 채팅방을 나갔습니다.@{member}@");
+			chatService.deleteChatRoomMember(chatroomVO);
+			
+			mapJson.put("result", "success");
+		}
+		
+		return mapJson;
+	}
+	//*/
+	
 }

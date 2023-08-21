@@ -19,9 +19,6 @@ public interface ChatService {
 	//채팅방 정보 불러오기
 	public ChatRoomVO selectChatRoom(Integer chatroom_num);
 	
-	//채팅 멤버 읽기
-	public List<ChatVO> selectChatMember(Integer chatroom_num);
-	
 	//채팅 메시지 등록
 	public void insertChat(ChatVO chatVO);
 	
@@ -31,5 +28,8 @@ public interface ChatService {
 	//채팅방 목록
 	public List<ChatRoomVO> selectChatRoomList(Map<String, Object> map);
 	public int selectRowCount(Map<String, Object> map);
+	
+	//채팅방 나가기
+	public void deleteChatRoomMember(ChatRoomVO chatroomVO);
 	
 }
