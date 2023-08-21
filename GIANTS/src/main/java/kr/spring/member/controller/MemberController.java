@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.food.vo.F_orderVO;
 import kr.spring.food.vo.FoodVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.CompanyDetailVO;
@@ -809,9 +810,41 @@ public class MemberController {
 	 * 일반회원 푸드구매내역
 	 *=====================*/	
 	@RequestMapping("/member/memberMypageFoodList.do")
-	public String memberFoodList(HttpSession session, Model model) {
+		public ModelAndView memberMypageFoodList(@RequestParam(value="pageNum",
+												 defaultValue="1") int currentPage,
+			                                     String keyfield, String keyword,
+			                                     HttpSession session) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
 		
-		return "memberMypageFoodList";
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("mem_num", user.getMem_num());
+		
+		//전체/검색 레코드수
+		int count = memberService.selectOrderCountByMem_num(map);
+		
+		log.debug("<<count>> : " + count);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,
+				               count,20,10,"orderList.do");
+		
+		List<F_orderVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = memberService.selectListOrderByMem_num(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("memberMypageFoodList");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
 	}
 	
 	/*=====================

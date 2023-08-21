@@ -10,33 +10,53 @@
 		<p>자이언츠 Food 구매내역 입니다.</p>
 	</div>
 </div> 
-<!-- 마이페이지 푸드구매내역 시작 -->
+<!-- 주문목록 - 관리자 시작 -->
 <div class="mypage-form">
+	<form action="memberMypageFoodList.do" id="search_form" method="get">
+		<ul class="search">
+			<li>
+				<select name="keyfield">
+					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>주문번호</option>
+					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>상품명</option>
+					<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>구매자</option>
+				</select>
+			</li>
+			<li>
+				<input type="search" name="keyword" id="keyword"
+				                     value="${param.keyword}">
+			</li>
+			<li>
+				<input type="submit" value="찾기">
+				<input type="button" value="목록" 
+				   onclick="location.href='compMypageOrderList.do'">
+			</li>
+		</ul>
+	</form>
 	<c:if test="${count == 0}">
-		<div class="result-display">Food구매내역이 없습니다.</div>
+	<div class="result-display">표시할 주문정보가 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-		<table class="striped-table">
-			<tr>
-				<th>주문번호</th>
-				<th>상호명</th>
-				<th>상품</th>
-				<th>결제금액</th>
-				<th>상태</th>	
-			</tr>
-			<c:forEach var="#" items="#">
-				<tr>
-					<td class="align-center">1</td>
-					<td class="align-center">2</td>
-					<td class="align-center">3</td>
-					<td class="align-center">4</td>
-					<td class="align-center">5</td>
-				</tr>
-			</c:forEach>
-		</table>
-		<div class="form-page">${page}</div>
-	</c:if>
+	<table class="striped-table">
+		<tr>
+			<th>주문번호</th>
+			<th>상품명</th>
+			<th>구매자</th>
+			<th>결제금액</th>
+			<th>주문날짜</th>
+		</tr>
+		<c:forEach var="order" items="${list}">
+		<tr>
+			<td>${order.f_order_num}</td>
+			<td>${order.f_order_name}</td>
+			<td>${order.buyer_name}</td>
+			<td>${order.total_price}</td>
+			<td>${order.f_order_regDate}</td>
+		</tr>
+		</c:forEach>
+	</table>
 	<input type="button" value="장바구니" class="login-sub-btn"
 		   onclick="location.href='${pageContext.request.contextPath}/food/fcart/foodUserCartList.do'">
+	<div class="align-center">${page}</div>
+	</c:if>	
 </div>
-<!-- 마이페이지 푸드구매내역 끝 -->
+<!-- 주문목록 - 관리자 끝 -->

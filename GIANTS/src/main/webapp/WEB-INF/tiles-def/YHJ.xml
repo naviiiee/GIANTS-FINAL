@@ -94,7 +94,6 @@
     </definition>
     
     <!-- 닉네임유효성검사 -->
-    
     <definition name="memberChangeNk" extends="myPage"> 
     	<put-attribute name="title" value="낙네임변경"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/memberChangeNk.jsp"/>
@@ -141,7 +140,7 @@
 	<!-- 기업페이지 - 푸드목록 -->
 	<definition name="compMypageFoodList" extends="myPage">
 		<put-attribute name="title" value="식품 - 매장 - 수정"/>
-		<put-attribute name="body" value="/WEB-INF/views/member/compMypageFoodList.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/companyMypageFoodList.jsp"/>
 	</definition>
     
     <!-- 기업페이지 - 매출관리 -->
@@ -180,7 +179,7 @@
     	<put-attribute name="body" value="/WEB-INF/views/member/adminMypageTicket.jsp"/>
     </definition>
     
-	<!-- 관리자 : 굿즈목록 **-->
+	<!-- 관리자 : 굿즈목록 -->
 	<definition name="adminGoodsList" extends="myPage">
 		<put-attribute name="title" value="[관리자]굿즈목록"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/adminMypageGoods.jsp"/>

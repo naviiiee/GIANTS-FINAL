@@ -75,4 +75,8 @@ public interface MemberService {
 	//기업페이지 : 푸드목록
 	public int selectOrderCountFd(Map<String,Object> map);
 	public List<F_orderVO> selectListOrderFd(Map<String,Object> map);
+	
+	//마이페이지 - 푸드구매내역
+	public int selectOrderCountByMem_num(Map<String,Object> map);
+	public List<F_orderVO> selectListOrderByMem_num(Map<String,Object> map);	
 }

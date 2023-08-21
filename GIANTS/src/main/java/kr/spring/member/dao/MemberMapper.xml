@@ -470,10 +470,11 @@
 	
 	<select id="selectOrderCountFd" parameterType="map" resultType="integer">
 		SELECT
-			COUNT(*)
+			count(*)
 		FROM 
 			F_ORDER f LEFT JOIN MEMBER m
 			ON f.mem_num = m.mem_num
+		WHERE f.comp_num=#{comp_num}
 		<include refid="orderSearchFd"></include>
 	</select>
 	
@@ -493,4 +494,44 @@
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
+	
+	<!-- 일반회원 푸드 구매내역 -->
+	<sql id="orderSearchByUser">
+		WHERE mem_num = #{mem_num}
+		<if test="keyword != null and keyword != ''">
+			<if test="keyfield == 1">
+				f_order_num=#{keyword}
+			</if>
+			<if test="keyfield == 2">
+				f_order_name LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="keyfield == 3">
+				buyer_name LIKE '%' || #{keyword} || '%'
+			</if>
+		</if>
+	</sql>
+	
+	<select id="selectOrderCountByMem_num" parameterType="map">
+		SELECT
+		  COUNT(*)
+		FROM F_ORDER
+		<include refid="orderSearchByUser"></include>
+	</select>
+	
+	<select id="selectListOrderByMem_num" parameterType="map"
+	                                           resultType="F_orderVO">
+		SELECT
+		  *	
+		FROM (SELECT
+		        a.*,
+		        rownum rnum
+		      FROM (SELECT
+		              *
+		            FROM F_ORDER
+		            <include refid="orderSearchByUser"></include>
+		            ORDER BY f_order_num DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>		            
+	</select>	
 </mapper>

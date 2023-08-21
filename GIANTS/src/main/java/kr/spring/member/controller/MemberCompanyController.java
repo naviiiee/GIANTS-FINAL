@@ -77,9 +77,14 @@ public class MemberCompanyController {
 	public ModelAndView admin_list(
 			      @RequestParam(value="pageNum",
 			          defaultValue="1") int currentPage,
-			            String keyfield, String keyword) {
-		Map<String,Object> map = 
-				new HashMap<String,Object>();
+			            String keyfield, String keyword,
+			            HttpSession session) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		map.put("comp_num", user.getCompanyDetailVO().getComp_num());
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		
@@ -87,6 +92,8 @@ public class MemberCompanyController {
 		int count = memberService.selectOrderCountFd(map);
 		
 		log.debug("<<count>> : " + count);
+		log.debug("<<user>> : " + user);
+		log.debug("<<map>> : " + map);
 		
 		//페이지 처리
 		PagingUtil page = 
@@ -95,6 +102,7 @@ public class MemberCompanyController {
 		
 		List<F_orderVO> list = null;
 		if(count > 0) {
+			map.put(keyword, list);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 			
