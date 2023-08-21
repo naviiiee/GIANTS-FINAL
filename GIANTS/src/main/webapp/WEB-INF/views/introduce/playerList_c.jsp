@@ -24,6 +24,8 @@ li{
 .modifyLink:hover{
 	color:gray;
 }
+
+
 </style>
 <!-- [관리자] 선수 목록 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LHJ/commu.css">

@@ -293,6 +293,32 @@ div.commu-table table th{
 }
 
 
+.dropdown-submenu a:hover{
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.192);
+	color: black;
+}
+.dropdown-submenu a:visited{
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.192);
+	color: black;
+}
+
+a:hover{ /* 선수 정보 수정 링크 */
+	color: #196ef7;
+}
+a:visited{
+	color: #196ef7;
+}
+
+.commu_title a:hover{ /* 커뮤니티 리스트 제목 */
+	color: black;
+}
+
+.commu_title a:visited{
+	color: black;
+}
+
+
+
 
 /* plyerLsit */
 .title01{
@@ -342,5 +368,8 @@ div.commu-table table th{
 }
 .aaa{
 	display:flex;
-	margin: 6% 0; /* aaa 상하 넓이 */
 }
+.error-color{
+	color:#ff0000;
+}
+

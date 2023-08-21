@@ -44,9 +44,9 @@ $(function(){
 	function displayFav(param){
 		let output;
 		if(param.status == 'yesFav'){
-			output = '../images/fav02.gif';
+			output = '../images/fav02.png';
 		}else if(param.status == 'noFav'){
-			output = '../images/fav01.gif';
+			output = '../images/fav01.png';
 		}else{
 			alert('좋아요 표시 오류 발생');
 		}

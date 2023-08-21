@@ -3,13 +3,49 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LHJ/commu.css">
 <style>
-
+body, div, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, p, form, fieldset, input, table, tr, th, td {
+    margin: 5px;
+    padding: 0;
+}
+#player_toway{
+	margin-left:2.5%;
+}
+#player_weight{
+	margin-left:1.5%;
+}
+#player_height{
+	margin-left:3.7%;
+}
+#player_position{
+	margin-left:1.5%;
+}
+#player_backnumber{
+	margin-left:2.5%;
+}
+#player_name{
+	margin-left:4%;
+}
+#upload{
+	margin-left:3%;
+}
+input[type="text"]{
+	width:20%;
+	height: 20px;
+}
 </style>
 <div id="item_form" class="page-main">
-	<h2>선수 등록</h2>
+    <div class="introduce-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+		<div class="title01">
+			<h2 style="margin-right:5%">선수 등록</h2>
+			<p>[관리자] 선수 등록 페이지입니다.</p>
+		</div>
+		<hr size="0.05" width="100%" noshade>
+	</div>
+	
 	<form:form modelAttribute="playerVO" action="admin_player.do" id="admin_player" enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
-		<ul>
+		<ul class="align-center" style="margin-top: 3%;">
 			<li> 
 				<form:label path="player_name">선수명</form:label>
 				<form:input path="player_name"/>
@@ -25,7 +61,7 @@
 				<form:input path="player_position"/>
 				<form:errors path="player_position" cssClass="error-color"/>
 			</li>
-			<li>
+			<li style="margin-left:2%;">
 				<label for="upload">선수 사진</label>
 				<input type="file" name="upload" id="upload" accept="image/gif,image/png,image/jpeg">
 				<form:errors path="player_photo" cssClass="error-color"/>
@@ -63,8 +99,8 @@
 			
 			
 		</ul>
-		<div class="align-center">
-			<form:button class="accept-btn">선수 등록</form:button>
+		<div class="align-center" style="margin-top:3%;">
+			<form:button class="accept-btn" style="width:6%;">선수 등록</form:button>
 			<input type="button" value="목록" onclick="location.href='admin_player.do'" class="accept-btn">
 		</div>
 	</form:form>
