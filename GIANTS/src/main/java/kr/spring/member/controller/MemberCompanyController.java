@@ -60,16 +60,7 @@ public class MemberCompanyController {
 		
 		return mav;
 	}
-	
-	/*=====================
-	 * 기업회원 매출관리
-	 *=====================*/
-	@RequestMapping("/member/companyMypageSaleManage.do")
-	public String companyMypageSaleManage(HttpSession session, Model model) {
-		
-		return "companyMypageSaleManage";
-	}
-	
+
 	/*=====================
 	 * 기업회원 주문목록
 	 *=====================*/
@@ -110,11 +101,22 @@ public class MemberCompanyController {
 		}
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("adminOrderList");
+		mav.setViewName("compMypageOrderList");
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());
 		
 		return mav;
 	}
+	
+	
+	/*=====================
+	 * 기업회원 매출관리
+	 *=====================*/
+	@RequestMapping("/member/compMypageSaleManage.do")
+	public String companyMypageSaleManage(HttpSession session, Model model) {
+		
+		return "compMypageSaleManage";
+	}
+		
 } 

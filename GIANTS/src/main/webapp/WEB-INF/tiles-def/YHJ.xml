@@ -64,7 +64,7 @@
     	<put-attribute name="body" value="/WEB-INF/views/member/memberLogin.jsp"/>
     </definition>
     
-    
+<!-- 공통페이지 시작 -->    
     <!-- 마이페이지 -->
     <definition name="myPage" template="/WEB-INF/views/template/layout_mypage.jsp">
 		<put-attribute name="title" value="마이페이지"/>
@@ -117,8 +117,10 @@
     	<put-attribute name="title" value="기업회원탈퇴"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/companyDelete.jsp"/>
     </definition>
+<!-- 공통페이지 끝 -->    
     
     
+<!-- 일반페이지 시작 -->
     <!-- 일반회원 티켓구매내역 -->
     <definition name="memberMypageTicketList" extends="myPage"> 
     	<put-attribute name="title" value="회원티켓내역"/>
@@ -136,59 +138,66 @@
     	<put-attribute name="title" value="회원굿즈내역"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/memberMypageGoodList.jsp"/>
     </definition>
+<!-- 일반페이지 끝 -->
     
-	<!-- 기업페이지 - 푸드목록 -->
+    
+<!-- 기업페이지 시작 -->
+	<!-- 푸드목록 -->
 	<definition name="compMypageFoodList" extends="myPage">
-		<put-attribute name="title" value="식품 - 매장 - 수정"/>
-		<put-attribute name="body" value="/WEB-INF/views/member/companyMypageFoodList.jsp"/>
+		<put-attribute name="title" value="기업상품목록"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/compMypageFoodList.jsp"/>
 	</definition>
-    
-    <!-- 기업페이지 - 매출관리 -->
-    <definition name="companyMypageSaleManage" extends="myPage"> 
-    	<put-attribute name="title" value="기업매출관리"/>
-    	<put-attribute name="body" value="/WEB-INF/views/member/companyMypageSaleManage.jsp"/>
-    </definition>
-    
-    <!-- 기업페이지 - 주문내역 -->
-    <definition name="adminOrderList" extends="myPage"> 
+	
+    <!-- 주문내역 -->
+    <definition name="compMypageOrderList" extends="myPage"> 
     	<put-attribute name="title" value="기업주문내역"/>
-    	<put-attribute name="body" value="/WEB-INF/views/member/companyMypageOrderList.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/compMypageOrderList.jsp"/>
     </definition>
     
+    <!-- 매출관리 -->
+    <definition name="compMypageSaleManage" extends="myPage"> 
+    	<put-attribute name="title" value="기업매출관리"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/compMypageSaleManage.jsp"/>
+    </definition>
+<!-- 기업페이지 끝 -->
+        
+        
+<!-- 관리자페이지 시작 -->        
     <!-- 관리자 회원관리 -->
-     <definition name="admin_memberList" extends="myPage"> 
+     <definition name="adminMemberList" extends="myPage"> 
     	<put-attribute name="title" value="[관리자]회원목록(관리자)"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/adminMemberList.jsp"/>
     </definition>
     
     <!-- 관리자 일반 회원정보수정 -->
-    <definition name="admin_memberModify" extends="myPage"> 
+    <definition name="adminMemberModify" extends="myPage"> 
     	<put-attribute name="title" value="[관리자]회원권한수정(일반)"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/adminModifyMember.jsp"/>
     </definition>
     
     <!-- 관리자 기업 회원정보수정 -->
-    <definition name="admin_companyModify" extends="myPage"> 
+    <definition name="adminCompanyModify" extends="myPage"> 
     	<put-attribute name="title" value="[관리자]회원권한수정(기업)"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/adminModifyCompany.jsp"/>
     </definition>
     
-    <!-- 관리자 티켓관리 -->
+    <!-- 티켓관리 -->
     <definition name="adminMypageTicket" extends="myPage"> 
     	<put-attribute name="title" value="[관리자]티켓관리"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/adminMypageTicket.jsp"/>
     </definition>
     
-	<!-- 관리자 : 굿즈목록 -->
-	<definition name="adminGoodsList" extends="myPage">
+	<!-- 굿즈목록 -->
+	<definition name="adminMypageGoods" extends="myPage">
 		<put-attribute name="title" value="[관리자]굿즈목록"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/adminMypageGoods.jsp"/>
 	</definition>
 	
-	<!-- 관리자 : 매출관리 -->
+	<!-- 매출관리 -->
 	<definition name="adminMypageSaleManage" extends="myPage">
 		<put-attribute name="title" value="[관리자]매출관리"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/adminMypageSaleManage.jsp"/>
 	</definition>	
+<!-- 관리자페이지 끝 -->
     
 </tiles-definitions>

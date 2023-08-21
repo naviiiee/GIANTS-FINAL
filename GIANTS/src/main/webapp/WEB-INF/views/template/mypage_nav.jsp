@@ -28,7 +28,7 @@
 			<li><b>FOOD</b></li>
 			<li><a href="${pageContext.request.contextPath}/member/compMypageFoodList.do">푸드목록</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/compMypageOrderList.do">주문내역</a></li>
-			<li><a href="${pageContext.request.contextPath}/member/companyMypageSaleManage.do">매출관리</a></li>
+			<li><a href="${pageContext.request.contextPath}/member/compMypageSaleManage.do">매출관리</a></li>
 		</ul>
 	</c:if>
 	<!-- 관리자일때 NAV -->
