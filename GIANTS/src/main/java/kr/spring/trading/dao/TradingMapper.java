@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.chat.vo.ChatRoomVO;
 import kr.spring.trading.vo.TradingMarkVO;
 import kr.spring.trading.vo.TradingVO;
 
@@ -51,4 +52,7 @@ public interface TradingMapper {
 	@Delete("DELETE FROM chatroom WHERE trade_num=#{trade_num}")
 	public void deleteChatRoomByTradeNum(Integer trade_num);
 	
+	//회원별 북마크 목록
+	public List<TradingVO> selectTradingBookmarkList(Map<String, Object> map);
+	public int selectBookmarkRowCount(Map<String, Object> map);
 } 

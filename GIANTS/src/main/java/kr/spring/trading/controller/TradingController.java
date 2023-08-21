@@ -268,4 +268,42 @@ public class TradingController {
 		
 		return mapJson;
 	}
+	
+	/*=================
+	 * 북마크 목록
+	 * ===============*/
+	@RequestMapping("/member/bookmarkList.do")
+	public ModelAndView getBookmarkList(@RequestParam(value ="pageNum", defaultValue="1") int currentPage, String keyfield, String keyword, HttpSession session) {
+
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("keyfield", keyfield);
+			map.put("keyword", keyword);
+			
+			MemberVO user = (MemberVO)session.getAttribute("user");
+			map.put("mem_num", user.getMem_num());
+			
+			// 전체/검색 레코드 수
+			int count = tradingService.selectBookmarkRowCount(map);
+			
+			log.debug("<<count>> : " + count);
+			
+			//페이지 처리                                                        	  //row cnt, page cnt, 요청 url
+			PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 20, 10, "bookmarkList.do");
+			
+			List<TradingVO> list = null;
+			if(count > 0) {
+				map.put("start", page.getStartRow());
+				map.put("end", page.getEndRow());
+				
+				list = tradingService.selectTradingBookmarkList(map);
+			}
+			
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("bookmarkList"); //tiles 설정의 식별자
+			mav.addObject("count", count);
+			mav.addObject("list", list);
+			mav.addObject("page", page.getPage());
+			
+			return mav;
+		}
 }

@@ -58,10 +58,11 @@ public interface ChatMapper {
 	public int selectRowCount(Map<String, Object> map);
 	
 	//채팅방 나가기
-	public void deleteChatRoomMember(ChatRoomVO chatRoomVO);
+	/*
+	public void deleteChatRoomMember(ChatRoomVO chatroomVO);
 	@Delete("DELETE FROM chat WHERE chatroom_num=#{chatroom_num}")
 	public void deleteChat(Integer chatroom_num);
 	@Delete("DELETE FROM chatroom WHERE chatroom_num=#{chatroom_num}")
 	public void deleteChatRoom(Integer chatroom_num);
-	
+	*/
 }

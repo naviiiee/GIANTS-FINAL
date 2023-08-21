@@ -14,6 +14,8 @@
 			<li><a href="${pageContext.request.contextPath}/member/memberMypageTicketList.do">Ticket</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/memberMypageFoodList.do">Foods</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/memberMypageGoodList.do">Goods</a></li>
+			<li><b>관심목록</b></li>
+			<li><a href="${pageContext.request.contextPath}/member/bookmarkList.do">중고거래</a></li>
 		</ul>
 	</c:if>
 	<!-- 기업회원일때 NAV -->

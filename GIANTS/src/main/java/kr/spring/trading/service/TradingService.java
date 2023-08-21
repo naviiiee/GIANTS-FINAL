@@ -26,4 +26,8 @@ public interface TradingService {
 	
 	//작성자 회원번호 구하기
 	public int selectMemNumByTradeNum(Integer trade_num);
+	
+	//회원별 북마크 목록
+	public List<TradingVO> selectTradingBookmarkList(Map<String, Object> map);
+	public int selectBookmarkRowCount(Map<String, Object> map);
 }

@@ -5,6 +5,56 @@
 .align-right{ text-align:right; }
 .float-left{ float:left; }
 
+/* 채팅방 목록 */
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+hr{ 
+	margin:15px 0; 
+}
+
+.result-display{
+	width: 400px;
+	height: 200px;
+	margin: 50px auto;
+	border: 1px solid #000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.title-img{
+	margin-bottom: 3px;
+}
+
+table.striped-table{
+	border: 1px #FFF solid;
+	font-size: 15px;
+	width: 100%;
+	border-collapse: collapse;
+	margin: 7px 0;
+}
+table.striped-table td{
+	padding: .7em .5em;
+	vertical-align: middle;
+	text-align: center;
+}
+table.striped-table td{
+	border-top: 1px solid rgba(0,0,0,.1);
+	border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.room_cnt{
+	width: 30px;
+}
+#room_cnt{
+	color: red;
+}
+
 /* 버튼 */
 .classic-btn, .red-btn{ 
 	width:110px; height:40px; border-radius:5px; color:white; cursor:pointer; 
@@ -115,12 +165,4 @@ form#detail_form {
 #msg_btn{
 	width: 114px;
     height: 100px;
-}
-
-/* 채팅 목록 */
-.room_cnt{
-	width: 30px;
-}
-#room_cnt{
-	color: red;
 }
