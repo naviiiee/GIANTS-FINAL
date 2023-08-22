@@ -67,8 +67,7 @@ public class GcartController {
 	}
 
 	// =========== 장바구니 등록 ============
-	// 옵션이 다른 경우 다른 상품으로 취급해야한다 -
-
+	//옵션이 다른 경우 다른 상품 취급
 	@RequestMapping("/cart/write.do")
 	@ResponseBody
 	public Map<String, String> addToCart(GcartVO cartVO, HttpSession session) {

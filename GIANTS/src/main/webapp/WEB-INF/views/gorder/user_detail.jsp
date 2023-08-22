@@ -132,7 +132,7 @@ detailList : ${detailList} --%>
 			</script>
 			</c:if>
 			<input type="button" value="주문목록" class="default-btn"
-			 onclick="location.href='${pageContext.request.contextPath}/order/orderList.do'">
+			 onclick="location.href='${pageContext.request.contextPath}/gorder/orderList.do'">
 			<input type="button" value="MyPage" class="default-btn"
 			 onclick="location.href='${pageContext.request.contextPath}/member/myPage.do'">
 		</div>             

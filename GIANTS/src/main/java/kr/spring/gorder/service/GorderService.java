@@ -44,8 +44,11 @@ public interface GorderService {
 
 	// 관리자 - 주문상태수정
 	public void updateOrderStatus(GorderVO order);
-	// 주문 취소 시 회원이 사용한 포인트 돌려주기
+	
+	//주문 취소 시 상품 수량 돌려주기
+	public void updateGoodsQuantity(GorderDetailVO orderDetailVO);
 
-	// =========사용자 - 주문 취소 시 환불처리 + 적립된 포인트 없애기===========
+	//주문 취소 시 포인트 돌려주기
+	public void rollbackPoint(int used_point, int mem_num);
 
 }

@@ -73,6 +73,10 @@ $(function(){
 					alert('포인트는 1p 이상부터 사용가능합니다');
 					$("#used_point").val('');
 				}
+				else if(param.result=='lackPoint'){
+					alert('포인트가 부족합니다');
+					$("#used_point").val('');
+				}
 				
 				else if(param.result=='success'){
 					$('#used-point-result').html(usedPointValue +"p"); //사용한 포인트를 적용	

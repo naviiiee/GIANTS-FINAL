@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!-- 상품 바로 구매 시작 -->
+<!-- 상품 구매 시작 -->
+<!-- list, all_total 가져옴 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/orderForm.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_order_form.js"></script>
@@ -19,9 +20,16 @@
 }
 </style>
 <div class="page-main">
+((list)) : ${list}
+<br>
+((all_tota)) : ${all_total}
+<br>
+((mem_point))  : ${mem_point }
+
 		<h3>주문 리스트</h3>
 		<hr size="1">
 		<br>
+		
 		 <table class="basic-table">
 			<tr>
 				<th>사진</th>
@@ -68,6 +76,8 @@
 
 					</c:if>
 				</tr>
+				
+				<c:set var="totalOrderPoint" value="${totalOrderPoint + cart.order_point}" /> <!-- 상품 여러개인 경우 합산 -->
 				</c:forEach>		
 				<tr class="all_total">
 					<td colspan="5" class="align-right"><b>총구매금액</b></td>
@@ -103,7 +113,6 @@
 				</p>
 			</div>
 			
-			
 			<div class="order-dcostt">
 			<h2>배송비</h2>
 			<p>
@@ -130,6 +139,8 @@
 			</div>
 			<span id="operator"><img src="${pageContext.request.contextPath}/images/order-equals.png" width="30"></span>
 			
+			
+			<c:set var="allTotalAndDcost">
 			    <c:choose>
 			        <c:when test="${all_total >= 50000}">
 			            ${all_total}
@@ -138,6 +149,8 @@
 			            ${all_total + 3000}
 			        </c:otherwise>
 			    </c:choose>
+			</c:set>
+
 			<div class="order-final-price">
 			<h2>결제금액</h2> 
 				<p> 
@@ -245,8 +258,14 @@
 		        
 		    });		
 		</script>				
-		 <input type="button" value="주문취소" class="default-btn"
+
+		
+		<input type="button" value="주문취소" class="default-btn"
+			 onclick="location.href='${pageContext.request.contextPath}/gorder/goods_cart.do'">
+		 <input type="button" value="굿즈목록" class="default-btn"
 		 onclick="location.href='${pageContext.request.contextPath}/goods/goodsList.do'">
+		
+		
 		
 		<c:forEach var="cart" items="${list}">
 		<script>

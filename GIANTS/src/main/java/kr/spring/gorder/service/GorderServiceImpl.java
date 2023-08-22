@@ -24,11 +24,9 @@ public class GorderServiceImpl implements GorderService{
 		orderMapper.insertOrder(order);
 		for(GorderDetailVO vo : list) {
 			vo.setOrder_num(order.getOrder_num());
-			orderMapper.insertOrderDetail(vo);
-			//재고수 업데이트
+			orderMapper.insertOrderDetail(vo);//재고수 업데이트
 			orderMapper.updateQuantity(vo);
-			//주문 상품 장바구니에서 제거
-			orderMapper.deleteCartItem(vo.getGoods_num(), order.getMem_num());
+			orderMapper.deleteCartItem(vo.getGoods_num(), order.getMem_num());//주문 상품 장바구니에서 제거
 		}
 	}
 
@@ -64,10 +62,6 @@ public class GorderServiceImpl implements GorderService{
 		orderMapper.updateOrder(order);
 	}
 
-	@Override
-	public void updateOrderStatus(GorderVO order) {
-		orderMapper.updateOrderStatus(order);
-	}
 
 	@Override
 	public GorderVO selectOrder(int order_num) {
@@ -82,6 +76,29 @@ public class GorderServiceImpl implements GorderService{
 	@Override
 	public void usingPoint(int mem_point, int mem_num) {
 		orderMapper.usingPoint(mem_point, mem_num);
+	}
+
+	@Override
+	public void rollbackPoint(int used_point, int mem_num) {
+		orderMapper.rollbackPoint(used_point, mem_num);
+	}
+
+	@Override
+	public void updateGoodsQuantity(GorderDetailVO orderDetailVO) {
+		orderMapper.updateGoodsQuantity(orderDetailVO);
+	}
+	
+	@Override
+	public void updateOrderStatus(GorderVO order) {
+		orderMapper.updateOrderStatus(order);
+		//주문취소일 경우 상품 개수, 포인트 롤백
+		if(order.getOrder_status() == 5) {
+			List<GorderDetailVO> detailList = 
+					orderMapper.selectListOrderDetail(order.getOrder_num());
+			for(GorderDetailVO vo : detailList) {
+				orderMapper.updateGoodsQuantity(vo);
+			}
+		}
 	}
 
 

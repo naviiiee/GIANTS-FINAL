@@ -36,7 +36,12 @@ $(function(){
 				}else if(param.result == 'success'){
 					alert('바로 결제 성공! 주문 폼으로 이동합니다.');
 					location.href='../gorder/orderFormDirect.do'; //바로 결제폼으로 이동
-				} else if(param.result=='overquantity'){
+				} 
+				else if(param.result=='clearCart'){
+					alert('장바구니를 비우고 구매해주세요!');
+					location.href='../gorder/goods_cart.do';
+				}
+				else if(param.result=='overquantity'){
 					alert('재고수 부족');
 					location.href='../goods/goodsList.do';
 				}

@@ -15,7 +15,7 @@ public interface GcartService {
 	public int getTotalByMem_num(Map<String, Object> map);
 	
 	// 적립 예정 포인트
-		public int getTotalByPoint(Map<String, Object> map);
+	public int getTotalByPoint(Map<String, Object> map);
 	// 장바구니 목록
 	public List<GcartVO> getListCart(Map<String, Object> map);
 

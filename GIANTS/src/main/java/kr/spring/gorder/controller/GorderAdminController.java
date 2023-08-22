@@ -51,7 +51,6 @@ public class GorderAdminController {
 		if (count > 0) {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
-
 			list = orderService.selectListOrder(map);
 		}
 
