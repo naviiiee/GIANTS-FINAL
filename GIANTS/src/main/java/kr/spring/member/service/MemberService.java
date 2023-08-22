@@ -8,6 +8,7 @@ import kr.spring.food.vo.FoodVO;
 import kr.spring.goods.vo.GoodsVO;
 import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.ticket.vo.TicketVO;
 
 public interface MemberService {
 	//회원가입 - 일반
@@ -82,4 +83,8 @@ public interface MemberService {
 	public int selectOrderCountByMem_num(Map<String,Object> map);
 	public List<F_orderVO> selectListOrderByMem_num(Map<String,Object> map);	
 	public F_orderVO selectOrder(String f_order_num);
+	
+	// 마이페이지 - 티켓구매내역
+	public int selectTicketCountByMem_num(Map<String,Object> map);
+	public List<TicketVO> selectListTicketByMem_num(Map<String,Object> map);
 }

@@ -15,6 +15,7 @@ import kr.spring.food.vo.FoodVO;
 import kr.spring.goods.vo.GoodsVO;
 import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.ticket.vo.TicketVO;
 
 @Mapper 
 public interface MemberMapper { 
@@ -123,6 +124,11 @@ public interface MemberMapper {
 	//마이페이지 - 푸드구매내역
 	public int selectOrderCountByMem_num(Map<String,Object> map);
 	public List<F_orderVO> selectListOrderByMem_num(Map<String,Object> map);
+	
+	// 마이페이지 - 티켓구매내역
+	public int selectTicketCountByMem_num(Map<String,Object> map);
+	public List<TicketVO> selectListTicketByMem_num(Map<String,Object> map);
+	
 	//관리자/사용자 - 주문상세
 	@Select("SELECT * FROM F_ORDER WHERE f_order_num=#{f_order_num}")
 	public F_orderVO selectOrder(String f_order_num);

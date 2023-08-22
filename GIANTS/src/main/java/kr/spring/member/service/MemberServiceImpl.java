@@ -13,6 +13,7 @@ import kr.spring.goods.vo.GoodsVO;
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.ticket.vo.TicketVO;
 
 @Service
 @Transactional
@@ -213,5 +214,15 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public F_orderVO selectOrder(String f_order_num) {
 		return memberMapper.selectOrder(f_order_num);
+	}
+
+	@Override
+	public int selectTicketCountByMem_num(Map<String, Object> map) {
+		return memberMapper.selectTicketCountByMem_num(map);
+	}
+
+	@Override
+	public List<TicketVO> selectListTicketByMem_num(Map<String, Object> map) {
+		return memberMapper.selectListTicketByMem_num(map);
 	}
 }

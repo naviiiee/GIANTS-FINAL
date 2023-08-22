@@ -534,5 +534,32 @@
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>		            
-	</select>	
+	</select>
+	
+	<!-- 일반회원 티켓 구매내역 -->
+	<sql id="ticketSearchByUser">
+		WHERE mem_num = #{mem_num}
+		<if test="keyword != null and keyword != ''">
+			<if test="keyfield == 1">
+				AND game_title LIKE '%' || #{keyword} || '%'
+			</if>
+		</if>
+	</sql>
+	
+	<select id="selectTicketCountByMem_num" parameterType="map">
+		SELECT count(*)
+		FROM ticket 
+		<include refid="ticketSearchByUser"></include>
+	</select>
+	
+	<select id="selectListTicketByMem_num" parameterType="map" resultType="ticketVO">
+		SELECT *	
+		FROM (SELECT a.*, rownum rnum
+		      FROM (SELECT *
+		            FROM ticket
+		            <include refid="ticketSearchByUser"></include>
+		            ORDER BY game_date DESC)a)
+		<![CDATA[WHERE rnum >= #{start} AND rnum <= #{end}]]>		            
+	</select>
+	
 </mapper>
