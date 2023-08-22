@@ -65,7 +65,7 @@ $(function(){
 							a += '<input type="button" value="수정" id="modify-btn" data-num="' + value.review_num + '">';
 							a += '<input type="button" value="삭제" id="delete-btn" data-num="' + value.review_num + '">';
 						}
-						a += '</div>';
+						a += '</div>'; 
 						
 						a += '<div class="align-left">' + value.review_content + '</div>';
 						a += '</td>';
