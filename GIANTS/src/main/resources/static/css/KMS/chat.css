@@ -32,11 +32,11 @@ hr{
 }
 
 table.striped-table{
-	border: 1px #FFF solid;
-	font-size: 15px;
-	width: 100%;
-	border-collapse: collapse;
-	margin: 7px 0;
+    border: 1px #FFF solid;
+    font-size: 15px;
+    width: 80%;
+    border-collapse: collapse;
+    margin: 0 auto;
 }
 table.striped-table td{
 	padding: .7em .5em;
@@ -53,6 +53,9 @@ table.striped-table td{
 }
 #room_cnt{
 	color: red;
+}
+#chatlist_msg{
+	width: 645px;
 }
 
 /* 버튼 */

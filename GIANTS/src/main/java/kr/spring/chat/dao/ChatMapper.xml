@@ -55,7 +55,8 @@
 	
 	<!-- 채팅방 목록 / Max(chat_num) = 최신 메시지 -->
 	<select id="selectChatRoomList" parameterType="map" resultMap="chatMap"> 
-		SELECT * FROM (SELECT a.*, rownum rnum FROM(SELECT * FROM chatroom r 
+		SELECT * FROM (SELECT a.*, rownum rnum FROM(SELECT * FROM chatroom r
+				LEFT OUTER JOIN trading USING (trade_num) 
 		        LEFT OUTER JOIN (SELECT chatroom_num, mem_num, COUNT(*) room_cnt FROM chat_read WHERE mem_num=#{user_mem_num} GROUP BY chatroom_num, mem_num) e USING(chatroom_num)
 	            LEFT OUTER JOIN (SELECT * FROM chat WHERE chat_num IN (SELECT MAX(chat_num) chat_num FROM chat GROUP BY chatroom_num))
 	            USING(chatroom_num) WHERE seller_num=#{seller_num} OR buyer_num=#{buyer_num} ORDER BY chatroom_num DESC)a)

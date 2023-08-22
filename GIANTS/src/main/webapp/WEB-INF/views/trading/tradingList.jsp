@@ -2,10 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 중고거래 게시판 목록 시작 -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KMS/trading.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script type="text/javascript">
 	$(function() {
 		//검색 유효성 체크
@@ -30,9 +28,9 @@
 	</div>
 	</c:if>
 	<form action="tradingList.do" id="search_form" method="get" class="d-flex" role="search">
-		<ul class="trading_search">
+		<ul class="search">
 			<li>
-				<select name="keyfield" id="keyfield" class="form-select">
+				<select name="keyfield" id="keyfield">
 					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
 					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>작성자</option>
 					<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>
@@ -40,14 +38,14 @@
 				</select>
 			</li>
 			<li>
-				<input type="search" name="keyword" id="keyword" value="${param.keyword}" class="form-control me-2">
+				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
 			</li>
 			<li>
-				<input type="submit" value="검색" class="btn btn-outline-success">
+				<input type="submit" value="검색" class="red-btn middle">
 			</li>
 		</ul>
 		<div class="trading_right">
-			<select id="order" name="order" class="form-select">
+			<select id="order" name="order">
 				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>
 				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
 				<option value="3" <c:if test="${param.order == 3}">selected</c:if>>관심수</option>
