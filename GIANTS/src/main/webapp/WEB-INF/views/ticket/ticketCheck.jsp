@@ -61,7 +61,33 @@
 					<div class="game-logo">
 						<img src="${pageContext.request.contextPath}/images/giants.png"> VS <img src="${pageContext.request.contextPath}/images/${gameVO.game_team}.png">
 					</div>	
-					롯데 VS ${gameVO.game_team}<br>
+					롯데 VS <c:if test="${gameVO.game_team == 'landers'}">
+						   <input type="hidden" name="game_team" value="SSG" id="team_title">SSG
+						   </c:if>
+						   <c:if test="${gameVO.game_team == 'heroes'}">
+						   <input type="hidden" name="game_team" value="키움" id="team_title">키움
+						   </c:if>
+						   <c:if test="${gameVO.game_team == 'twins'}">
+						   <input type="hidden" name="game_team" value="LG" id="team_title">LG
+						   </c:if>
+						   <c:if test="${gameVO.game_team == 'wiz'}">
+						   <input type="hidden" name="game_team" value="KT" id="team_title">KT
+						   </c:if>
+						   <c:if test="${gameVO.game_team == 'tigers'}">
+						   <input type="hidden" name="game_team" value="KIA" id="team_title">KIA
+						   </c:if>
+						   <c:if test="${gameVO.game_team == 'dinos'}">
+						   <input type="hidden" name="game_team" value="NC" id="team_title">NC
+						   </c:if>
+						   <c:if test="${gameVO.game_team == 'lions'}">
+						   <input type="hidden" name="game_team" value="삼성" id="team_title">삼성
+						   </c:if>
+						   <c:if test="${gameVO.game_team == 'bears'}">
+						   <input type="hidden" name="game_team" value="두산" id="team_title">두산
+						   </c:if>
+						   <c:if test="${gameVO.game_team == 'eagles'}">
+						   <input type="hidden" name="game_team" value="한화" id="team_title">한화
+						   </c:if><br>
 					사직야구장<br>
 					${gameVO.game_date} ${gameVO.game_time}<br>
 				</div>
@@ -103,6 +129,7 @@
 							return false;
 						}
 						
+					    let team = document.getElementById('team_title').value;
 						let totalPrice = document.getElementById('totalPrice').value;
 						let ticket_quantity = document.getElementById('ticket_quantity').value;
 						let ticket_num = 'T' + new Date().getTime();
@@ -115,7 +142,7 @@
 					 		pg:'kakaopay.TC0ONETIME',
 					 		pay_method:'card',
 					 		merchant_uid:ticket_num,   // 주문번호
-					 		name:'${gameVO.game_date} 롯데 VS ${gameVO.game_team} ${gameVO.game_time}',
+					 		name:'${gameVO.game_date} 롯데 VS ' + team + ' ${gameVO.game_time}',
 					 		amount:totalPrice,	// 숫자 타입
 					 		buyer_email:'${seatVO.detailVO.mem_email}',
 					 		buyer_name:'${seatVO.detailVO.mem_name}',
@@ -131,7 +158,7 @@
 					 				'order_name':'${seatVO.detailVO.mem_name}',
 					 				'order_phone':'${seatVO.detailVO.mem_phone}',
 					 				'order_email':'${seatVO.detailVO.mem_email}',
-					 				'game_title':'롯데 VS ${gameVO.game_team}',
+					 				'game_title':team,
 					 				'game_date':'${gameVO.game_date}',
 					 				'game_time':'${gameVO.game_time}',
 					 				'ticket_quantity':ticket_quantity,

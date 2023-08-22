@@ -15,6 +15,7 @@ import kr.spring.ticket.vo.GradeVO;
 import kr.spring.ticket.vo.SeatStatusVO;
 import kr.spring.ticket.vo.SeatVO;
 import kr.spring.ticket.vo.TicketCheckVO;
+import kr.spring.ticket.vo.TicketDetailVO;
 import kr.spring.ticket.vo.TicketVO;
 
 @Mapper
@@ -25,8 +26,11 @@ public interface TicketMapper {
 	// 목록
 	@Select("SELECT COUNT(*) FROM tgame")
 	public int selectRowCount(GameVO gameVO);
-	@Select("SELECT * FROM tgame ORDER BY game_date ASC")
+	@Select("SELECT * FROM tgame WHERE game_date > SYSDATE ORDER BY game_date ASC")
 	public List<GameVO> selectTicketGameList(GameVO gameVO);
+	// admin용 경기목록?
+	@Select("SELECT * FROM tgame ORDER BY game_date ASC")
+	public List<GameVO> selectTicketAdminGameList(GameVO gameVO);
 	// 경기번호를 이용해 경기정보 구하기
 	@Select("SELECT * FROM tgame WHERE game_num = #{game_num}")
 	public GameVO selectGame(Integer game_num); 
@@ -42,7 +46,7 @@ public interface TicketMapper {
 	// 목록
 	@Select("SELECT COUNT(*) FROM grade")
 	public int selectGradeCount(GradeVO gradeVO);
-	@Select("SELECT * FROM grade ORDER BY grade_num DESC")
+	@Select("SELECT * FROM grade ORDER BY price_week")
 	public List<GradeVO> selectGradeList(GradeVO gradeVO);
 	// 상세
 	@Select("SELECT * FROM grade WHERE grade_num = #{grade_num}")
@@ -68,6 +72,8 @@ public interface TicketMapper {
 	// 상세
 	@Select("SELECT * FROM seat WHERE seat_num = #{seat_num}")
 	public SeatVO selectSeat(Integer seat_num);
+	@Select("SELECT * FROM seat WHERE grade_num = #{grade_num}")
+	public List<SeatVO> selectSeatByG(Integer grade_num);
 	// 수정
 	@Update("UPDATE seat SET seat_block = #{seat_block}, seat_row = #{seat_row}, seat_col = #{seat_col}, seat_quantity = #{seat_quantity} WHERE seat_num = #{seat_num}")
 	public void updateSeat(SeatVO seatVO);
@@ -113,9 +119,19 @@ public interface TicketMapper {
 	public List<SeatStatusVO> selectSeatInfo(Integer status_num);
 	
 	@Delete("DELETE FROM seat_status WHERE status_num = #{status_num} AND seat_auth = 2")
-	public void deleteStatus(Integer status_num);
+	public void deleteAdminStatus(Integer status_num);
+	@Delete("DELETE FROM seat_status WHERE status_num = #{status_num} AND seat_auth = 1")
+	public void deleteStatus(Integer status_num);	// 주문 취소시 좌석예매 정보 삭제
+	@Delete("DELETE FROM seat_status WHERE grade_num = #{grade_num}")
+	public void deleteSeatStatusByG(Integer grade_num);
 	
-	public void insertTicket(TicketVO ticketVO);
+	public void insertTicket(TicketVO ticketVO);	// 주문 등록
+	@Insert("INSERT INTO ticket_detail (detail_num, ticket_num, seat_info) VALUES(ticket_detail_seq.nextval, #{ticket_num}, #{seat_info})")
+	public void insertTicketDetail(TicketDetailVO ticketDetailVO);
 	@Select("SELECT * FROM ticket WHERE ticket_num = #{ticket_num}")
 	public TicketVO selectTicket(String ticket_num);
+	@Select("SELECT * FROM ticket_detail WHERE ticket_num = #{ticket_num}")
+	public List<TicketDetailVO> selectSeatInfoByT(String ticket_num);
+	@Update("UPDATE ticket set ticket_status = 0, ticket_modify = SYSDATE WHERE ticket_num = #{ticket_num}")
+	public void updateTicket(String ticket_num);	// 주문 취소 → ticket 테이블에서 상태만 변경
 }

@@ -124,6 +124,8 @@ $(function() {
 		output += '<input type="checkbox" name="seat_row" value="C" class="seat-row2">C';
 		output += '<input type="checkbox" name="seat_row" value="D" class="seat-row2">D';
 		output += '<input type="checkbox" name="seat_row" value="E" class="seat-row2">E';
+		output += '<input type="checkbox" name="seat_row" value="F" class="seat-row2">F';
+		output += '<input type="checkbox" name="seat_row" value="G" class="seat-row2">G';
 		output += '<span class="row-error error-color"></span>';
 		output += '</li>';
 		output += '<li>';
@@ -134,6 +136,11 @@ $(function() {
 		output += '<input type="checkbox" name="seat_col" value="3" class="seat-col2">3';
 		output += '<input type="checkbox" name="seat_col" value="4" class="seat-col2">4';
 		output += '<input type="checkbox" name="seat_col" value="5" class="seat-col2">5';
+		output += '<input type="checkbox" name="seat_col" value="6" class="seat-col2">6';
+		output += '<input type="checkbox" name="seat_col" value="7" class="seat-col2">7';
+		output += '<input type="checkbox" name="seat_col" value="8" class="seat-col2">8';
+		output += '<input type="checkbox" name="seat_col" value="9" class="seat-col2">9';
+		output += '<input type="checkbox" name="seat_col" value="10" class="seat-col2">10';
 		output += '<span class="col-error error-color"></span>';
 		output += '</li>';
 		output += '<li>';

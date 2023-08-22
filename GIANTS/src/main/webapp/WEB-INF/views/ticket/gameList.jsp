@@ -30,35 +30,74 @@
 			<th>관리자</th>
 			</c:if>
 		</tr>
-		<c:forEach var="game" items="${list}">
-		<tr>
-			<td>${game.game_date}</td>
-			<td>${game.game_time}</td>
-			<td>
-				<img src="${pageContext.request.contextPath}/images/${game.game_team}.png">
-			</td>
-			<td>사직야구장</td>
-			<td>
-				<c:if test="${game.game_state == 0}">
-				<input type="button" value="준비중" class="default-btn" readonly="readonly">
+		<c:if test="${user.mem_auth == 9}">
+			<c:forEach var="admin" items="${admin}">
+			<tr>
+				<td>${admin.game_date}</td>
+				<td>${admin.game_time}</td>
+				<td>
+					<img src="${pageContext.request.contextPath}/images/${admin.game_team}.png">
+				</td>
+				<td>사직야구장</td>
+				<td>
+					<c:if test="${admin.game_state == 0}">
+					<input type="button" value="준비중" class="default-btn" readonly="readonly">
+					</c:if>
+					<c:if test="${admin.game_state == 1}">
+					<input type="button" value="예매" onclick="location.href='ticketMain.do?game_num=${admin.game_num}'" class="accept-btn">
+					</c:if>
+					<c:if test="${admin.game_state == 2}">
+					<input type="button" value="매진" class="default-btn" readonly="readonly">
+					</c:if>
+					<c:if test="${admin.game_state == 3}">
+					<input type="button" value="취소" class="default-btn" readonly="readonly">
+					</c:if>
+					<c:if test="${admin.game_state == 4}">
+					<input type="button" value="경기종료" class="default-btn" readonly="readonly">
+					</c:if>
+				</td>
+				<c:if test="${user.mem_auth == 9}">
+				<td>
+					<input type="button" value="수정" onclick="location.href='gameUpdate.do?game_num=${admin.game_num}'" class="admin-btn small">
+				</td>
 				</c:if>
-				<c:if test="${game.game_state == 1}">
-				<input type="button" value="예매" onclick="location.href='ticketMain.do?game_num=${game.game_num}'" class="accept-btn">
+			</tr>
+			</c:forEach>
+		</c:if>
+		<c:if test="${user.mem_auth != 9}">
+			<c:forEach var="game" items="${list}">
+			<tr>
+				<td>${game.game_date}</td>
+				<td>${game.game_time}</td>
+				<td>
+					<img src="${pageContext.request.contextPath}/images/${game.game_team}.png">
+				</td>
+				<td>사직야구장</td>
+				<td>
+					<c:if test="${game.game_state == 0}">
+					<input type="button" value="준비중" class="default-btn" readonly="readonly">
+					</c:if>
+					<c:if test="${game.game_state == 1}">
+					<input type="button" value="예매" onclick="location.href='ticketMain.do?game_num=${game.game_num}'" class="accept-btn">
+					</c:if>
+					<c:if test="${game.game_state == 2}">
+					<input type="button" value="매진" class="default-btn" readonly="readonly">
+					</c:if>
+					<c:if test="${game.game_state == 3}">
+					<input type="button" value="취소" class="default-btn" readonly="readonly">
+					</c:if>
+					<c:if test="${game.game_state == 4}">
+					<input type="button" value="경기종료" class="default-btn" readonly="readonly">
+					</c:if>
+				</td>
+				<c:if test="${user.mem_auth == 9}">
+				<td>
+					<input type="button" value="수정" onclick="location.href='gameUpdate.do?game_num=${game.game_num}'" class="admin-btn small">
+				</td>
 				</c:if>
-				<c:if test="${game.game_state == 2}">
-				<input type="button" value="매진" class="default-btn" readonly="readonly">
-				</c:if>
-				<c:if test="${game.game_state == 3}">
-				<input type="button" value="취소" class="default-btn" readonly="readonly">
-				</c:if>
-			</td>
-			<c:if test="${user.mem_auth == 9}">
-			<td>
-				<input type="button" value="수정" onclick="location.href='gameUpdate.do?game_num=${game.game_num}'" class="admin-btn small">
-			</td>
-			</c:if>
-		</tr>
-		</c:forEach>
+			</tr>
+			</c:forEach>
+		</c:if>
 	</table>
 	</c:if>
 </div>

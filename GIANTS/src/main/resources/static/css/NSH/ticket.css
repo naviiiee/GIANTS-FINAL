@@ -49,7 +49,7 @@ hr{ margin:15px 0; }
 #grade_list a:hover{ color:#052345; font-weight:bold; }
 
 /* 좌석 등록 */
-#seat_write, .seatform-update{ width:30%; margin:0 auto; text-align:center; }
+#seat_write, .seatform-update{ width:35%; margin:0 auto; text-align:center; }
 #seat_write ul li, .seatform-update ul li{ margin:10px 0; }
 #seat_write ul li label, .seatform-update ul li label{ width:100px; float:left; font-weight:bold; }
 #seat_write input[type="number"], .seatform-update input[type="number"]{ width:50px; text-align:center; }
@@ -82,21 +82,32 @@ input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }
 
 .seat-box{ background-color:#f1f1f1; width:500px; height:500px; margin:0 auto; }
 .ground{ background-color:#fff; width:50%; margin:0 auto; padding:10px 0; text-align:center; }
-.seat-check{ width:80%; margin:15% auto; text-align:center; }
+.seat-check{ width:80%; height:80%; margin:10% auto; text-align:center; }
 .seat-check2{ width:80%; margin:0 auto; text-align:center; }
 
 .row-div span{ color:#999; }
 
-.seat-btn{ width:30px; height:30px; border:none; background-color:#fff; margin:10px 10px; }
+.seat-btn{ width:25px; height:25px; border:none; background-color:#fff; margin:5px 5px; }
 .seat-btn:hover{ cursor:pointer; background-color:transparent; transition:0.2s ease-out; border:1px solid #fff; }
 .clicked{ background:#fff; border:1px solid #999; }
+.click-grade, .click-block{ background:#999; opacity:0.2; }
+
 .admin-reserved{ background-color:transparent; border:1px solid #dd032f; }
 .admin-reserved:hover{ background-color:#dd032f; }
-.reserved{ background:#000; }
-.reserved:hover{ background:#000; }
-.gn1{ background:#627833; }
-.gn63{ background:#D77783; }
-.gn81{ background:#997A8D; }
+
+.reserved{ background:#999; }
+.reserved:hover{ background:#999; }
+
+.gn1{ background:#627833; }	/* 외야석 */
+.gn41{ background:#10537d; }	/* 내야상단석 */
+.gn42{ background:#be1a2a; }	/* 중앙상단석 */
+.gn43{ background:#3082b5; }	/* 내야필드석 */
+.gn61{ background:#8b4a97; }	/* 3루단체석 */
+.gn62{ background:#88be3b; }	/* 내야탁자석 */
+.gn63{ background:#D77783; }	/* 중앙탁자석 */
+.gn101{ background:#17bedf; }	/* 와이드탁자석 */
+.gn102{ background:#efbc64; }	/* 응원탁자석 */
+.gn103{ background:#c6b1c7; }	/* 로케트배터리존 */
 
 /* 스크롤바 */
 .scrollBar::-webkit-scrollbar { width:10px;  /* 스크롤바의 너비 */ }
@@ -127,11 +138,11 @@ input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }
 .reserved2{ margin:20px 0; }
 
 /* 티켓 정보 */
-.ticket-info2{ width:80%; height:300px; background:url('/images/ticketBack.png') no-repeat; background-size:100% 100%; margin:0 auto; text-align:center; }
+.ticket-info2{ width:80%; height:300px; background:url('/images/ticketBack.png') no-repeat; background-size:100% 100%; margin:0 auto; text-align:center; font-size:13px; font-weight:bold; }
 .ticket-info3{ width:80%; display:flex; justify-content:center; margin:0 auto; }
-.ticket-info4{ width:80%; margin:0 auto; }
-.ticket-content{ height:250px; color:white; text-align:left; }
-.ticket-content2{ color:white; text-align:right; }
+.ticket-info4, .ticket-info5{ width:80%; margin:0 auto; }
+.ticket-content{ padding:15px 0 0 30px; height:250px; color:white; text-align:left; }
+.ticket-content2{ padding-right:30px; color:white; text-align:right; }
 
 .ticket-table tr td:first-child{ width:150px; }
 

@@ -30,4 +30,5 @@ public class TicketVO {
 	private int total_price;
 	private String pg;
 	private String pay_method;
+	private int ticket_status;
 }

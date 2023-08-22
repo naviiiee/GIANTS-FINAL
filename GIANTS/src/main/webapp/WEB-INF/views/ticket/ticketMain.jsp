@@ -65,7 +65,7 @@
 					<hr width="100%" class="color-red" noshade>
 					<table class="seat-table">
 						<tr>
-							<th colspan="2">선택된 좌석정보</th>
+							<th colspan="2">선택된 좌석정보 <input type="image" name="reset" src="${pageContext.request.contextPath}/images/reload.png" id="reset_window"></th>
 						</tr>
 					</table>
 				</div>

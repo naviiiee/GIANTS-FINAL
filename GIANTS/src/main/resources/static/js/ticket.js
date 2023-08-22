@@ -4,6 +4,9 @@ $(function() {
 	   등급 클릭시 Block 노출
 	-------------------- */
 	$('.grade_title').click(function() {
+		if($('.click-grade').length > 0) { $('.grade_title').removeClass('click-grade'); }
+		$(this).addClass('click-grade');
+				
 		$.ajax({
 			url:'selectedGrade.do',
 			type:'post',
@@ -45,6 +48,9 @@ $(function() {
 	   Block 클릭시 seat 정보 호출
 	------------------------- */
 	$(document).on('click', '.selected-block', function() {
+		if($('.click-block').length > 0) { $('.grade_title').removeClass('click-block'); }
+		$(this).addClass('click-block');
+		
 		$.ajax({
 			url:'selectedBlock.do',
 			type:'post',
@@ -147,6 +153,9 @@ $(function() {
 		else{ $('.select-checked').hide(); }
 	});
 	
+	// 선택화면 초기화 버튼
+	$(document).on('click', '#reset_window', function() { location.reload(); return false; });
+	
 	$('#order_seat').submit(function() {
 		// checkbox 유효성 검사
 		if($('.seat-leng').length == 0) {
@@ -200,10 +209,10 @@ $(function() {
 	for(let i = 0; i < leng2; i++) {
 		let seatArr2 = array2[i].split('^');
 		
-		let output2 = '<span>' + title2 + ' ' + seatArr2[0] + '블록 ';
-		output2 += seatArr2[1] + '행 ';
-		output2 += seatArr2[2] + '번</span>, ';
+		let output2 = '<span>' + title2 + ' ' + seatArr2[0] + '블록 ' + seatArr2[1] + '행 ' + seatArr2[2] + '번</span> ';
+		let output3 = '<li>' + title2 + ' ' + seatArr2[0] + '블록 ' + seatArr2[1] + '행 ' + seatArr2[2] + '번</li>';
 		$('#status_info').append(output2);
+		$('.ticket-content ul').append(output3);
 	}
 
 });

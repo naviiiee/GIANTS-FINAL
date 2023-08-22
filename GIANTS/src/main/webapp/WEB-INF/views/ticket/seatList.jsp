@@ -33,6 +33,8 @@
 					<input type="checkbox" name="seat_row" value="C" class="seat-row">C
 					<input type="checkbox" name="seat_row" value="D" class="seat-row">D
 					<input type="checkbox" name="seat_row" value="E" class="seat-row">E
+					<input type="checkbox" name="seat_row" value="F" class="seat-row">F
+					<input type="checkbox" name="seat_row" value="G" class="seat-row">G
 					<span id="row_error" class="error-color"></span>
 				</li>
 				<li>
@@ -43,6 +45,11 @@
 					<input type="checkbox" name="seat_col" value="3" class="seat-col">3
 					<input type="checkbox" name="seat_col" value="4" class="seat-col">4
 					<input type="checkbox" name="seat_col" value="5" class="seat-col">5
+					<input type="checkbox" name="seat_col" value="6" class="seat-col">6
+					<input type="checkbox" name="seat_col" value="7" class="seat-col">7
+					<input type="checkbox" name="seat_col" value="8" class="seat-col">8
+					<input type="checkbox" name="seat_col" value="9" class="seat-col">9
+					<input type="checkbox" name="seat_col" value="10" class="seat-col">10
 					<span id="col_error" class="error-color"></span>
 				</li>
 				<li>

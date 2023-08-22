@@ -13,6 +13,7 @@ import kr.spring.ticket.vo.GradeVO;
 import kr.spring.ticket.vo.SeatStatusVO;
 import kr.spring.ticket.vo.SeatVO;
 import kr.spring.ticket.vo.TicketCheckVO;
+import kr.spring.ticket.vo.TicketDetailVO;
 import kr.spring.ticket.vo.TicketVO;
 
 public interface TicketService { 
@@ -30,7 +31,9 @@ public interface TicketService {
 	public int selectSeatCount(SeatVO seatVO);
 	public List<SeatVO> selectSeatList(SeatVO seatVO);
 	public SeatVO selectSeat(Integer seat_num);	// 상세
+	public List<SeatVO> selectSeatByG(Integer grade_num);
 	public void updateSeat(SeatVO seatVO);	// 수정
+	public void deleteSeat(Integer grade_num);	// 삭제
 	public Integer selectSeatQuantity(Integer grade_num);	// 등급별 좌석개수
 	
 	public MemberDetailVO selectMemberDetail(Integer mem_num);	// 회원 상세정보
@@ -40,6 +43,7 @@ public interface TicketService {
 	public void insertGame(GameVO gameVO);	// 등록
 	public int selectRowCount(GameVO gameVO);
 	public List<GameVO> selectTicketGameList(GameVO gameVO);
+	public List<GameVO> selectTicketAdminGameList(GameVO gameVO);
 	public GameVO selectGame(Integer game_num);	// 경기정보를 이용해 경기정보 구하기
 	public void updateGame(GameVO gameVO);	// 수정
 	
@@ -61,8 +65,13 @@ public interface TicketService {
 	
 	public List<SeatStatusVO> selectSeatInfo(Integer status_num);
 	
+	public void deleteAdminStatus(Integer status_num);
 	public void deleteStatus(Integer status_num);
+	public void deleteSeatStatusByG(Integer grade_num);
 	
 	public void insertTicket(TicketVO ticket);	// 티켓주문
+	public void insertTicketDetail(TicketDetailVO ticketDetailVO);
 	public TicketVO selectTicket(String ticket_num);
+	public List<TicketDetailVO> selectSeatInfoByT(String ticket_num);
+	public void updateTicket(String ticket_num);	// 주문 취소
 }

@@ -18,7 +18,7 @@
 		<div class="ticket-content">
 			<ul>
 				<li>${ticket.ticket_num}</li>
-				<li>${ticket.game_title}</li>
+				<li>롯데 VS ${ticket.game_title}</li>
 				<li>사직야구장</li>
 				<li>${ticket.game_date} ${ticket.game_time}</li>
 			</ul>
@@ -75,11 +75,25 @@
 				<td>좌석</td>
 				<td id="status_info">
 					<span class="gradeTitle">${grade.title}</span>
-					<c:forEach var="status" items="${list}">
-						 <span class="seat-info">${status.seat_info} </span>
+					<c:forEach var="detail" items="${list}">
+						 <span class="seat-info">${detail.seat_info} </span>
 					</c:forEach>
 				</td>
 			</tr>
 		</table>
 	</div>
+	<div class="ticket-info5 align-center">
+		<input type="hidden" name="ticket_num" value="${ticket.ticket_num}">
+		<input type="button" value="목록" class="default-btn big" onclick="location.href='${pageContext.request.contextPath}/member/memberMypageTicketList.do'">
+		<c:if test="${ticket.ticket_status == 1}">
+		<input type="button" value="주문취소" id="delete_torder" class="accept-btn big">
+		</c:if>
+	</div>
+	<script type="text/javascript">
+		let delete_btn = document.getElementById('delete_torder');
+		delete_btn.onclick = function() {
+			let choice = confirm('주문을 취소하시겠습니까??');
+			if(choice) { location.replace('deleteTorder.do?ticket_num=${ticket.ticket_num}'); }
+		};
+		</script>
 </div>

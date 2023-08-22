@@ -100,6 +100,14 @@ public class TicketAdminController {
 	public String gradeDelete(@RequestParam int grade_num) {
 		log.debug("<<등급 삭제>> : " + grade_num);
 		
+		List<SeatVO> seatVO = ticketService.selectSeatByG(grade_num);
+		log.debug("<<등급 삭제 seatVO>> : " + seatVO);
+		
+		for(SeatVO seat : seatVO) {
+			ticketService.deleteSeatStatusByG(seat.getGrade_num());
+			ticketService.deleteSeat(seat.getGrade_num());
+		}
+		
 		ticketService.deleteGrade(grade_num);
 		
 		return "redirect:/ticket/gradeList.do";
@@ -190,7 +198,7 @@ public class TicketAdminController {
 			status.setSeat_auth(statusVO.getSeat_auth());
 			
 			if(statusVO.getSeat_auth() == 2) { ticketService.insertSeatStatus(status); }
-			else if(statusVO.getSeat_auth() == 0) { ticketService.deleteStatus(status_num); }
+			else if(statusVO.getSeat_auth() == 0) { ticketService.deleteAdminStatus(status_num); }
 		}
 		
 		log.debug("<<statusVO>> : " + statusVO);

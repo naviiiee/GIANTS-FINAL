@@ -28,7 +28,7 @@
 				<form:radiobutton path="game_team" value="landers"/>SSG
 				<form:radiobutton path="game_team" value="heroes"/>키움
 				<form:radiobutton path="game_team" value="twins"/>LG
-				<form:radiobutton path="game_team" value="wids"/>KT
+				<form:radiobutton path="game_team" value="wiz"/>KT
 				<form:radiobutton path="game_team" value="tigers"/>KIA
 				<form:radiobutton path="game_team" value="dinos"/>NC
 				<form:radiobutton path="game_team" value="lions"/>삼성

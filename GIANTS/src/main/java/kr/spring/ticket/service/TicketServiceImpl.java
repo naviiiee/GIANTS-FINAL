@@ -14,6 +14,7 @@ import kr.spring.ticket.vo.GradeVO;
 import kr.spring.ticket.vo.SeatStatusVO;
 import kr.spring.ticket.vo.SeatVO;
 import kr.spring.ticket.vo.TicketCheckVO;
+import kr.spring.ticket.vo.TicketDetailVO;
 import kr.spring.ticket.vo.TicketVO;
 
 @Service
@@ -61,7 +62,13 @@ public class TicketServiceImpl implements TicketService {
 	public SeatVO selectSeat(Integer seat_num) { return ticketMapper.selectSeat(seat_num); }
 	
 	@Override
+	public List<SeatVO> selectSeatByG(Integer grade_num) { return ticketMapper.selectSeatByG(grade_num); }
+	
+	@Override
 	public void updateSeat(SeatVO seatVO) { ticketMapper.updateSeat(seatVO); }
+	
+	@Override
+	public void deleteSeat(Integer grade_num) { ticketMapper.deleteSeat(grade_num); }
 	
 	@Override
 	public Integer selectSeatQuantity(Integer grade_num) { return ticketMapper.selectSeatQuantity(grade_num); }
@@ -75,6 +82,9 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public List<GameVO> selectTicketGameList(GameVO gameVO) { return ticketMapper.selectTicketGameList(gameVO); }
+	
+	@Override
+	public List<GameVO> selectTicketAdminGameList(GameVO gameVO) { return ticketMapper.selectTicketAdminGameList(gameVO); }
 
 	@Override
 	public GameVO selectGame(Integer game_num) { return ticketMapper.selectGame(game_num); }
@@ -126,13 +136,28 @@ public class TicketServiceImpl implements TicketService {
 	public List<SeatStatusVO> selectSeatInfo(Integer status_num) { return ticketMapper.selectSeatInfo(status_num); }
 	
 	@Override
+	public void deleteAdminStatus(Integer status_num) { ticketMapper.deleteAdminStatus(status_num); }
+	
+	@Override
 	public void deleteStatus(Integer status_num) { ticketMapper.deleteStatus(status_num); }
 	
 	@Override
+	public void deleteSeatStatusByG(Integer grade_num) { ticketMapper.deleteSeatStatusByG(grade_num); }
+	
+	@Override
 	public void insertTicket(TicketVO ticket) { ticketMapper.insertTicket(ticket); }
+	
+	@Override
+	public void insertTicketDetail(TicketDetailVO ticketDetailVO) { ticketMapper.insertTicketDetail(ticketDetailVO); }
 
 	@Override
 	public TicketVO selectTicket(String ticket_num) { return ticketMapper.selectTicket(ticket_num); }
+	
+	@Override
+	public List<TicketDetailVO> selectSeatInfoByT(String ticket_num) { return ticketMapper.selectSeatInfoByT(ticket_num); }
+
+	@Override
+	public void updateTicket(String ticket_num) { ticketMapper.updateTicket(ticket_num); }
 
 }
  

@@ -27,6 +27,7 @@ import kr.spring.ticket.vo.GradeVO;
 import kr.spring.ticket.vo.SeatStatusVO;
 import kr.spring.ticket.vo.SeatVO;
 import kr.spring.ticket.vo.TicketCheckVO;
+import kr.spring.ticket.vo.TicketDetailVO;
 import kr.spring.ticket.vo.TicketVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -58,9 +59,11 @@ public class TicketController {
 		int count = ticketService.selectRowCount(gameVO);
 		
 		List<GameVO> list = ticketService.selectTicketGameList(gameVO);
+		List<GameVO> admin = ticketService.selectTicketAdminGameList(gameVO);
 		
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
+		model.addAttribute("admin", admin);
 		
 		return "gameList";
 	}
@@ -210,12 +213,21 @@ public class TicketController {
 			status.setGame_num(ticketVO.getGame_num());
 			status.setSeat_auth(1);
 			
-			ticketService.insertSeatStatus(status);
+			ticketService.insertSeatStatus(status);			
 		}
 		log.debug("<<status_num>> : " + status_num);
 		ticketVO.setStatus_num(status_num);
 		
 		ticketService.insertTicket(ticketVO);
+		
+		List<SeatStatusVO> statusList = ticketService.selectSeatInfo(status_num);
+		for(SeatStatusVO status : statusList) {
+			TicketDetailVO detail = new TicketDetailVO();
+			detail.setTicket_num(ticketVO.getTicket_num());
+			detail.setSeat_info(status.getSeat_info());
+			
+			ticketService.insertTicketDetail(detail);
+		}
 		
 		// 결제 완료 후 ticket_check 테이블에 있는 필요없는 정보(해당 mem_num과 game_num) 삭제
 		ticketService.deleteCheck(user.getMem_num(), ticketVO.getGame_num());
@@ -245,9 +257,10 @@ public class TicketController {
 		
 		TicketVO ticket = ticketService.selectTicket(ticket_num);
 		
-		List<SeatStatusVO> list = ticketService.selectSeatInfo(ticket.getStatus_num());
+		List<TicketDetailVO> list = ticketService.selectSeatInfoByT(ticket_num);
+		List<SeatStatusVO> statusList = ticketService.selectSeatInfo(ticket.getStatus_num());
 		
-		for(SeatStatusVO status : list) {
+		for(SeatStatusVO status : statusList) {
 			GradeVO grade = ticketService.selectGrade(status.getGrade_num());
 			model.addAttribute("grade", grade);
 		}
@@ -258,5 +271,18 @@ public class TicketController {
 		model.addAttribute("list", list);
 		
 		return "ticketInfo";
+	}
+	
+	/* ----- [Order] 티켓취소 -----*/
+	@RequestMapping("/ticket/deleteTorder.do")
+	public String gradeDelete(@RequestParam String ticket_num) {
+		log.debug("<<주문번호>> : " + ticket_num);
+		
+		TicketVO ticket = ticketService.selectTicket(ticket_num);
+		
+		ticketService.deleteStatus(ticket.getStatus_num());
+		ticketService.updateTicket(ticket_num);
+		
+		return "redirect:/ticket/ticketInfo.do?ticket_num=" + ticket_num;
 	}
 }

@@ -73,9 +73,19 @@ CREATE TABLE ticket(
 	total_price NUMBER(9) NOT NULL,
 	pg varchar2(30) NOT NULL,
 	pay_method varchar2(30) NOT NULL,
+	ticket_status NUMBER(1) NOU NULL,
 	CONSTRAINT ticket_pk PRIMARY KEY (ticket_num),
 	CONSTRAINT ticket_fk FOREIGN KEY (mem_num) REFERENCES member (mem_num),
 	CONSTRAINT ticket_fk2 FOREIGN KEY (game_num) REFERENCES tgame (game_num)
+);
+
+-- 티켓상세
+CREATE TABLE ticket_detail(
+	detail_num NUMBER,
+	ticket_num VARCHAR2(20) NOT NULL,
+	seat_info VARCHAR2(30) NOT NULL,
+	CONSTRAINT ticket_detail_pk PRIMARY KEY (detail_num),
+	CONSTRAINT ticket_detail_fk FOREIGN KEY (ticket_num) REFERENCES ticket (ticket_num)
 );
 
 -- sequence
@@ -84,3 +94,4 @@ CREATE SEQUENCE grade_seq;
 CREATE SEQUENCE seat_seq;
 CREATE SEQUENCE seat_status_seq;
 CREATE SEQUENCE ticket_check_seq;
+CREATE SEQUENCE ticket_detail_seq;

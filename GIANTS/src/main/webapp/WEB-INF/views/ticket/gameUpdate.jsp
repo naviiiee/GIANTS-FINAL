@@ -29,7 +29,7 @@
 				<form:radiobutton path="game_team" value="landers"/>SSG
 				<form:radiobutton path="game_team" value="heroes"/>키움
 				<form:radiobutton path="game_team" value="twins"/>LG
-				<form:radiobutton path="game_team" value="wids"/>KT
+				<form:radiobutton path="game_team" value="wiz"/>KT
 				<form:radiobutton path="game_team" value="tigers"/>KIA
 				<form:radiobutton path="game_team" value="dinos"/>NC
 				<form:radiobutton path="game_team" value="lions"/>삼성
@@ -43,6 +43,7 @@
 				<form:radiobutton path="game_state" value="1"/>예매가능
 				<form:radiobutton path="game_state" value="2"/>매진
 				<form:radiobutton path="game_state" value="3"/>경기취소
+				<form:radiobutton path="game_state" value="4"/>경기종료
 				<form:errors path="game_state" cssClass="error-color"/>
 			</li>
 		</ul>
