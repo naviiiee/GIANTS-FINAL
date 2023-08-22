@@ -332,7 +332,7 @@
 			<div id="review_output"></div>
 			<div id="review_page"></div>
 		<%-- </c:if> --%>
-		</div> 
+		</div>  
 <!-- 		<style type="text/css">
 			*{
 				margin:0;
