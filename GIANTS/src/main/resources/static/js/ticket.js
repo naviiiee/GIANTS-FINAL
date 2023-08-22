@@ -214,5 +214,18 @@ $(function() {
 		$('#status_info').append(output2);
 		$('.ticket-content ul').append(output3);
 	}
-
+	
+	/* ---------------
+	   버튼 클릭시 티켓이미지 저장
+	------------------ */
+	$(document).on('click', '#ticket_download', function() {
+		html2canvas($('.ticket-info2')[0]).then(function(canvas) {
+			let img = document.createElement('a');
+			img.download = $('#ticketNum').val() + '.png';
+			img.href=canvas.toDataURL();
+			document.body.appendChild(img);
+			img.click();
+		});
+	});
+	
 });
