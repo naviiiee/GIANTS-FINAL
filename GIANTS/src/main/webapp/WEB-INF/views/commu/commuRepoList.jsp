@@ -106,7 +106,7 @@ li{
 			</c:forEach>
 		</table>
 		</c:if>
-		<!-- 페이지 --> ㅊ
+		<!-- 페이지 -->
 		<div class="align-center">${page}</div>
 	
 	

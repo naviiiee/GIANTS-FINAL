@@ -102,7 +102,7 @@ input[type="text"]{
 			
 		</ul>
 		<div class="align-center" style="margin-top:3%;">
-			<form:button class="accept-btn" style="width:6%;">선수 등록</form:button>
+			<form:button class="accept-btn" style="width:6%;">수정</form:button>
 			<input type="button" value="삭제" id="delete_btn" class="accept-btn">
 			<script type="text/javascript">
 				let delete_btn = document.getElementById('delete_btn');
@@ -110,7 +110,7 @@ input[type="text"]{
 					let choice = confirm('삭제하시겠습니까?');
 					if(choice){
 						//히스토리를 지우면서 이동
-						location.replace('delete.do?commu_num=${commu.commu_num}');
+						location.replace('admin_playerDelete.do?player_num=${playerVO.player_num}');
 					}
 				};
 			</script>

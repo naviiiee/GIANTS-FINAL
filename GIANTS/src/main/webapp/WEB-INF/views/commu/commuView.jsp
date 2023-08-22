@@ -84,6 +84,7 @@ table {
 			delete_btn.onclick=function(){
 				let choice = confirm('삭제하시겠습니까?');
 				if(choice){
+					alert('삭제되었습니다!');
 					//히스토리를 지우면서 이동
 					location.replace('delete.do?commu_num=${commu.commu_num}');
 				}
