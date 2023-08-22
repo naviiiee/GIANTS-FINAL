@@ -34,11 +34,20 @@ input[type="text"]{
 }
 </style>
 <div id="item_form" class="page-main">
-	<h2>선수 등록</h2>
+	<div class="main-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+		<div class="title01">
+			<h2 style="margin-right:5%">선수 정보 수정</h2>
+			<p>선수 정보 수정 페이지입니다.</p>
+		</div>
+	</div>
+	<hr size="0.05" width="100%" noshade style="margin-bottom:3%">
+	
+	
 	<form:form modelAttribute="playerVO" action="admin_playerModify.do" id="admin_playerModify" enctype="multipart/form-data">
 		<form:hidden path="player_num"/>
 		<form:errors element="div" cssClass="error-color"/>
-		<ul class="align-center" style="margin-top: 3%;">
+		<ul class="align-left" style="margin-top: 3%;">
 			<li>
 				<form:label path="player_name">선수명</form:label>
 				<form:input path="player_name"/>
@@ -55,7 +64,7 @@ input[type="text"]{
 				<form:errors path="player_position" cssClass="error-color"/>
 			</li>
 			<li>
-				<label for="upload" style="margin-left:1.3%;">선수 사진</label>
+				<label for="upload">선수 사진</label>
 				<input type="file" name="upload" id="upload" accept="image/gif,image/png,image/jpeg">
 				<form:errors path="player_photo" cssClass="error-color"/>
 			</li>

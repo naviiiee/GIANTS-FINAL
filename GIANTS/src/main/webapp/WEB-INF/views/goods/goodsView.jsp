@@ -5,6 +5,7 @@
 <!-- 상품 상세 페이지 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goodsDetail.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods.fav.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/goods.review.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_cart.js"></script>
 <div class="page-main">
 	<div class="content-main">
@@ -118,7 +119,7 @@
 						</div>
 					</button>
 					
-				<c:if test="${goods.goods_status == 1}">
+				<c:if test="${goods.goods_status == 1 && total_stock > 0}">
 						<button type="submit" class="not-css">
 							<div id="goods_cart">
 								<img id="cart_btn" data-num="${goods.goods_num}" src="${pageContext.request.contextPath}/images/cart.png" width="20">
@@ -150,7 +151,14 @@
 				        $('#hidden_opt_num').val(optNumValue);
 				    });
 			</script>
-			</c:if>	 
+				</c:if>
+				
+				<c:if test="${total_stock <= 0}">
+				<div id="sold-out" style="cursor:default;">
+					SOLD OUT
+				</div>
+				</c:if>
+				
 				<c:if test="${goods.goods_status == 2}">
 				<div id="sold-out" style="cursor:default;">
 					<span>판매중지</span>
@@ -265,7 +273,9 @@
 		<c:if test="${review_cnt == 0}">
 		<span>작성된 리뷰가 없습니다.</span>
 		</c:if>
+		<%--
 		<c:if test="${review_cnt > 0}">
+		 
 			<table class="detail-tb align-center">
 				<tr>
 					<th style="width:10%;">별점</th>
@@ -318,11 +328,13 @@
 				</c:forEach>
 			</table>
 			<div>${review_page}</div>
-		</c:if>
+			--%>
+			<div id="review_output"></div>
+			<div id="review_page"></div>
+		<%-- </c:if> --%>
 		</div>
 		<script>
 			$(function(){
-				
 				$('.re-title').on('click', function(){
 					let num = $(this).attr('id').substring(5);
 					
@@ -337,9 +349,37 @@
 					let target = $(tmp).parent();
 					$(target).hide();
 				});
-				
 			});
 		</script>
+<!-- 		<style type="text/css">
+			*{
+				margin:0;
+				padding:0;
+			}
+			#wrap{
+				overflow:hidden;
+			}
+			.item{
+				margin:5px;
+				padding:5px;
+				width:300px;
+				height:150px;
+				float:left;
+				border-width:3px;
+				border-style:solid;
+				border-color:gray;
+				border-radius:10px;
+			}
+			ul{
+				overflow:hidden;
+			}
+			li{
+				float:left;
+				list-style:none;
+				padding:10px;
+				cursor:pointer;
+			}
+		</style> -->
 		<div class="medium-nav">
 			<nav>
 				<ul>

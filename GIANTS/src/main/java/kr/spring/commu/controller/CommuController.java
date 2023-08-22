@@ -95,7 +95,7 @@ public class CommuController {
 		log.debug("<<count>> : " + count);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"commuList.do","&order="+order);
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,10,10,"commuList.do","&order="+order);
 		
 		List<CommuVO> list = null;
 		if(count > 0) {
@@ -506,9 +506,17 @@ public class CommuController {
 		
 		
 		/*=== 커뮤니티 신고글 삭제 ===*/
-		
-		
-		
+		/* 
+		@RequestMapping("/commu/deleteRepo.do")
+		public String submitDeleteRepo(@RequestParam int repo_num) {
+			log.debug("<<신고 글 삭제 = repo_num>> : " + repo_num);
+			
+			//글 삭제
+			commuService.deleteReport(repo_num);
+			
+			return "redirect:/commu/commuRepoList.do";
+		}
+		*/
 		
 		
 		

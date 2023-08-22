@@ -16,6 +16,7 @@ import kr.spring.goods.vo.GoodsOptionVO;
 import kr.spring.goods.vo.GoodsQnaVO;
 import kr.spring.goods.vo.GoodsReviewVO;
 import kr.spring.goods.vo.GoodsVO;
+import kr.spring.gorder.vo.GorderDetailVO;
 
 @Mapper
 public interface GoodsMapper {
@@ -42,6 +43,9 @@ public interface GoodsMapper {
 	public GoodsVO selectGoodsAllInfo(Integer goods_num);
 	//상품 재고 목록
 	public List<GoodsOptionVO> selectOptionList(Integer goods_num);
+	//상품 재고 수 - for 품절 표시
+	@Select("SELECT sum(goods_stock) FROM goods_option WHERE goods_num=#{goods_num}")
+	public int getGoodsStockSum(Integer goods_num);
 	//상품에 대한 총 재고 현황
 	@Select("SELECT sum(goods_stock) FROM goods_option WHERE goods_num=#{goods_num}")
 	public int getGoodsTotalStock(Integer goods_num);
@@ -80,8 +84,13 @@ public interface GoodsMapper {
 	public List<GoodsReviewVO> selectGoodsReviewList(Map<String, Object> map);
 	//상품 후기 레코드 수
 	public int selectGreviewRowCount(Integer goods_num);
+	
 	//상품 후기 등록
 	public void insertGoodReview(GoodsReviewVO review);
+	//상품 후기 - 구매목록 불러오기
+	@Select("SELECT * FROM g_order_detail WHERE mem_num=#{mem_num}")
+	public List<GorderDetailVO> selectOrderDetailList(Integer mem_num);
+	
 	//상품 후기 상세
 	public GoodsReviewVO selectGoodsReview(Integer review_num);
 	//상품 후기 수정
@@ -98,7 +107,7 @@ public interface GoodsMapper {
 	//=====상품 문의=====//
 	//전체 | 검색 상품 문의 목록
 	public List<GoodsQnaVO> selectGoodsQnaList(Map<String, Object> map);
-	//전체 | 검색 상품 문의 레코드 수
+	//전체 | 검색 상품 문의 레코드 수 - 상품페이지
 	@Select("SELECT count(*) FROM goods_qna WHERE goods_num=#{goods_num}")
 	public int selectGoodsQnaCount(Integer goods_num);
 	//상품 문의 등록

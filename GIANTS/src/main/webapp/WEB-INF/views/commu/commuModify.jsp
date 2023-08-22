@@ -31,7 +31,7 @@
 			<li>
 				<form:label path="commu_title"><b>제목</b></form:label>
 				<form:input path="commu_title"  style="width:95%; height:20px; margin-left:2%;"/>
-				<form:errors path="commu_title" cssClass="error-color"/>
+				<form:errors path="commu_title" cssClass="error-color" style="margin-left: 4.5%;"/>
 			</li>
 			<li style="margin-top:1%;">
 			<li><h4>내용</h4></li>

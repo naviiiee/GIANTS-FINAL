@@ -21,8 +21,8 @@
 			<li> <%-- 임시로 상품목록 표시 --%>
 				<label for="goods_num">상품목록</label>
 				<select name="goods_num" id="select_list">
-					<option>=====선택======</option>
-					<c:forEach var="goods" items="${goods_list}">
+					<option style="text-align:center;">=====선택======</option>
+					<c:forEach var="goods" items="${order_list}">
 					<option value="${goods.goods_num}"<c:if test="${goods_num == goods.goods_num}">selected</c:if>>${goods.goods_name}</option>
 					</c:forEach>
 				</select>

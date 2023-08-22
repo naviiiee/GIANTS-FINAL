@@ -122,8 +122,10 @@
 			  			r.re_cnt,
 			  			g.goods_category,
 			  			g.goods_regdate,
-			  			g.goods_status
+			  			g.goods_status,
+			  			o.total_stock
 			  	   FROM goods g
+			  	   LEFT OUTER JOIN (SELECT sum(goods_stock) total_stock, goods_num FROM goods_option GROUP BY goods_num)o ON g.goods_num=o.goods_num
 			  	   LEFT OUTER JOIN (SELECT count(*) fav_cnt, goods_num FROM goods_fav GROUP BY goods_num)f ON g.goods_num=f.goods_num
 			  	   LEFT OUTER JOIN (SELECT count(*) re_cnt, goods_num FROM goods_review GROUP BY goods_num)r ON g.goods_num=r.goods_num
 			  	   <include refid="goodsSearch"></include>

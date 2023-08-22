@@ -1,6 +1,5 @@
 package kr.spring.goods.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +14,7 @@ import kr.spring.goods.vo.GoodsOptionVO;
 import kr.spring.goods.vo.GoodsQnaVO;
 import kr.spring.goods.vo.GoodsReviewVO;
 import kr.spring.goods.vo.GoodsVO;
+import kr.spring.gorder.vo.GorderDetailVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -42,6 +42,7 @@ public class GoodsServiceImpl implements GoodsService{
 		
 		//상품 정보 저장
 		goodsMapper.insertGoods(goodsVO);
+		goodsMapper.getGoodsTotalStock(goodsVO.getGoods_num());
 		
 		for(int i=0; i < (goodsVO.getGoods_stocks()).length; i++) {
 			String goods_size = goodsVO.getGoods_sizes()[i];
@@ -229,6 +230,11 @@ public class GoodsServiceImpl implements GoodsService{
 	@Override
 	public GoodsVO selectGoodsAllInfo(Integer goods_num) {
 		return goodsMapper.selectGoodsAllInfo(goods_num);
+	}
+
+	@Override
+	public List<GorderDetailVO> selectOrderDetailList(Integer mem_num) {
+		return goodsMapper.selectOrderDetailList(mem_num);
 	}
 
 }

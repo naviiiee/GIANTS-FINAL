@@ -3,10 +3,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LHJ/commu.css">
 <style>
+
 body, div, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, p, form, fieldset, input, table, tr, th, td {
     margin: 5px;
     padding: 0;
 }
+
 #player_toway{
 	margin-left:2.5%;
 }
@@ -32,6 +34,7 @@ input[type="text"]{
 	width:20%;
 	height: 20px;
 }
+
 </style>
 <div id="item_form" class="page-main">
     <div class="introduce-title">
@@ -45,7 +48,7 @@ input[type="text"]{
 	
 	<form:form modelAttribute="playerVO" action="admin_player.do" id="admin_player" enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
-		<ul class="align-center" style="margin-top: 3%;">
+		<ul class="align-left" style="margin-top: 3%;">
 			<li> 
 				<form:label path="player_name">선수명</form:label>
 				<form:input path="player_name"/>
@@ -61,10 +64,10 @@ input[type="text"]{
 				<form:input path="player_position"/>
 				<form:errors path="player_position" cssClass="error-color"/>
 			</li>
-			<li style="margin-left:2%;">
+			<li>
 				<label for="upload">선수 사진</label>
 				<input type="file" name="upload" id="upload" accept="image/gif,image/png,image/jpeg">
-				<form:errors path="player_photo" cssClass="error-color"/>
+				<form:errors path="player_photo" cssClass="error-color" style="margin-left:-1.5%;"/>
 			</li>
 			<li>
 				<form:label path="player_birthday">선수 생년월일</form:label>
@@ -101,7 +104,7 @@ input[type="text"]{
 		</ul>
 		<div class="align-center" style="margin-top:3%;">
 			<form:button class="accept-btn" style="width:6%;">선수 등록</form:button>
-			<input type="button" value="목록" onclick="location.href='admin_player.do'" class="accept-btn">
+			<input type="button" value="목록" onclick="location.href='player.do'" class="accept-btn">
 		</div>
 	</form:form>
 </div>

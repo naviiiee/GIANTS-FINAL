@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/NSH/ticket.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ticket.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 <div class="page-main">
 	<div class="main-title">
@@ -14,7 +16,11 @@
 		<h2>티켓정보</h2>
 		<hr size="0.05" width="100%" noshade>
 	</div>
+	<div class="ticket-info align-right">
+		<input type="image" id="ticket_download" src="${pageContext.request.contextPath}/images/downloads.png">
+	</div>
 	<div class="ticket-info2">
+		<input type="hidden" value="${ticket.ticket_num}" id="ticketNum">
 		<div class="ticket-content">
 			<ul>
 				<li>${ticket.ticket_num}</li>
