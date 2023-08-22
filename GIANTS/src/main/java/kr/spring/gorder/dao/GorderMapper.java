@@ -26,8 +26,8 @@ public interface GorderMapper {
 	public void updatePoint(int mem_num);
 	
 	// 포인트 사용하기
-	@Update("UPDATE member_detail set mem_point = mem_point - #{mem_point} WHERE mem_num = #{mem_num}")
-	public void usingPoint(int mem_point, int mem_num); //mem_point는 detail에 있음
+	@Update("UPDATE member_detail set mem_point = mem_point - #{used_point} WHERE mem_num = #{mem_num}")
+	public void usingPoint(int used_point, int mem_num); //used_point는 orderVO
 
 	// 재고수 업데이트
 	@Update("UPDATE goods_option SET goods_stock=goods_stock-#{order_quantity} WHERE goods_num=#{goods_num}")

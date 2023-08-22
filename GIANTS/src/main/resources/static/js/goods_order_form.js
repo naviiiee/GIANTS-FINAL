@@ -1,4 +1,5 @@
 $(function(){
+	
 	/*==========================
 	 * 회원 주소 읽기(배송지 지정)
      *==========================*/
@@ -26,7 +27,7 @@ $(function(){
 		});
 		
 	});
-	//포인트 전액 사용 클릭 시
+	//포인트 전액 사용 클릭 시 - 결제 금액보다 크면 안됨
 	$('#point-btn').click(function(){
 		$.ajax({
 			url : '../gorder/getMemberPoint.do', 
@@ -35,7 +36,7 @@ $(function(){
 			success : function(param){
 				if(param.result=='logout'){
 					alert('로그인 후 회원 포인트를 읽어올 수 있습니다');
-				} else if(param.result='success'){
+				} else if(param.result=='success'){
 					$('#used_point').val(param.mem_point);
 				} else{
 					alert('회원 보유 포인트 읽기 오류');
@@ -58,11 +59,24 @@ $(function(){
 			url : '../gorder/usingMemberPoint.do', 
 			type : 'get', 
 			dataType : 'json', 
+			data : {'allTotal' : resultAllTotal, 'usedPoint' : usedPointValue},
 			success : function(param){
 				if(param.result=='littlePoint'){
-					alert('포인트가 없습니다');
-				} else if(param.result='success'){
-					$('#used-point-result').html(usedPointValue +"p"); //사용한 포인트를 적용		
+					alert('포인트 사용은 1p부터 가능합니다');
+					$("#used_point").val('');
+				} 
+				else if(param.result=='overPoint'){
+					alert('포인트 사용은 결제 금액보다 클 수 없습니다');
+					$("#used_point").val('');
+				}
+				else if(param.result=='underPoint'){
+					alert('포인트는 1p 이상부터 사용가능합니다');
+					$("#used_point").val('');
+				}
+				
+				else if(param.result=='success'){
+					$('#used-point-result').html(usedPointValue +"p"); //사용한 포인트를 적용	
+					//보유 포인트를 0으로 변경	
 					$('#all_total_result').html(newResultTotal.toLocaleString() + "원");		
 					$("#used_point").attr("disabled", true); // 입력 필드 비활성화
                		$("#usingPoint").attr("disabled", true).css({

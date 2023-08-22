@@ -10,16 +10,16 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_order_form.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-
+<style>
+.btn-api{
+	background-color : #dd032f;
+	color : white;
+	width: 800px;
+	height: 30px;
+	border : none;
+}
+</style>
 <div class="page-main">
-<!-- 보유 중인 포인트, 결제 api - form 전송 -->
-	가져온 목록
-	<br>
-	${list}
-	<br>
-	${all_total}
-	<br>
-	회원 포인트 : ${mem_point }
 		<h3>주문 리스트</h3>
 		<hr size="1">
 		<br>
@@ -107,7 +107,6 @@
 				</p>
 			</div>
 			
-			
 			<div class="order-dcostt">
 			<h2>배송비</h2>
 			<p>
@@ -146,11 +145,9 @@
 			    </c:choose>
 			</c:set>
 
-			
-			<!-- 포인트 적용한거 ajax는 처리됐는데 값을 넘겨줄때 포인트 차감된 가격이 안나옴 -->
 			<div class="order-final-price">
 			<h2>결제금액</h2> 
-				<p> <!-- 최종 결제 금액 - 포인트 차감된 금액으로 보이긴 하는데 넘어가질 않음 -->
+				<p> 
 				<em class="em-highlight-result" id="all_total_result"><fmt:formatNumber value="${allTotalAndDcost}"/>원</em>
 				</p>
 			</div>
@@ -171,7 +168,7 @@
 			</li>
 			<li>
 				<label for="zipcode">우편번호</label>
-				<input name="order_zipcode" id="zipcode" maxlength="10">
+				<input type="text" name="order_zipcode" id="zipcode" maxlength="10" readonly="readonly">
 				<input type="button" onclick="execDaumPostcode()"
 				            value="우편번호 찾기" class="default-btn"> 
 			</li>
@@ -198,7 +195,7 @@
 		
 		<h3>결제 정보</h3>
 		<hr size="1">
-		입금자명 : <input type="text" id="order_name"> 
+		입금자명 <input type="text" id="order_name"> 
 		
 		
 		<br>
@@ -216,7 +213,7 @@
 		</div>
 		
 		<div id="payInfo" style="display : none;'">
-			<button class="default-btn" id="paymentButton" onclick="requestPay()">주문API</button>
+			<button class="btn-api" id="paymentButton" onclick="requestPay()">주문API</button>
 		</div>
 		<script type="text/javascript">
 		//=================radio 버튼 처리 시작=================
@@ -253,30 +250,19 @@
 		        	
 		        }
 		        
-		    });
-		    		
-		
+		    });		
 		</script>				
 
 		
-
-
-		<div class="align-center">
-			<button type="submit" class="default-btn">전송<!-- 무통장입금을 하거나 결제 완료되면 자동으로 전송...? -->
-			<br>
-			
-		</div>    	
-		
 		<input type="button" value="주문취소" class="default-btn"
 			 onclick="location.href='${pageContext.request.contextPath}/gorder/goods_cart.do'">
+		 <input type="button" value="굿즈목록" class="default-btn"
+		 onclick="location.href='${pageContext.request.contextPath}/goods/goodsList.do'">
 		
 		
 		
 		<c:forEach var="cart" items="${list}">
 		<script>
-		//merch_id 를 order_num으로? 시퀀스 삭제하고 주문번호 만들어주기?? 기본키인데.. 흠... 모르겠다!
-		
-		
 		//=================결제 api 처리 시작=================
 		// 주문번호 만들기
 		function createMid(){
@@ -294,6 +280,39 @@
 		
 		function requestPay() {
 			
+			/*유효성 검사*/
+			 if($('#receive_name').val().trim()==''){
+					alert('수령인 입력은 필수입니다.');
+					$('#receive_name').val('').focus();
+					return false;
+				}
+			
+			if($('#mem_phone').val().trim()==''){
+				alert('전화번호는 필수입니다.');
+				$('#mem_phone').val('').focus();
+				return false;
+			}
+			if($('#zipcode').val().trim()==''){
+				alert('우편번호는 필수입니다.');
+				$('#zipcode').val('').focus();
+				return false;
+			}
+			if($('#address1').val().trim()==''){
+				alert('주소는 필수입니다.');
+				$('#address1').val('').focus();
+				return false;
+			}
+			if($('#address2').val().trim()==''){
+				alert('상세주소를 입력해주세요.');
+				$('#address2').val('').focus();
+				return false;
+			}
+			if($('#order_name').val().trim()==''){
+				alert('결제자 이름은 필수입니다.');
+				$('#order_name').val('').focus();
+				return false;
+			}
+			
 			/* Portone 결제 API */
 			var IMP = window.IMP;
 		    IMP.init('imp40441146');  // 가맹점 식별코드
@@ -307,10 +326,8 @@
 		    let order_message = document.getElementById('order_message').value;
 		    let used_point = document.getElementById('used_point').value;
 		    let all_total = parseInt(document.getElementById('all_total_result').textContent);
-		    
-		   
 		    let order_dcost = document.getElementById('order_dcost').value;
-		    
+		 
 		    if (used_point === "" || used_point === null) {
 		        used_point = 0; // 포인트를 사용하지 않았으면 0으로 처리
 		    }
@@ -393,10 +410,8 @@
 						}
 						else if(param.result=='noStatus'){
 							alert('판매가 중지된 상품이 있습니다');	
-							//location.href="../gorder/goods_cart.do";
 						} else if(param.result=='noQuantity'){
 							alert('상품 재고가 부족합니다');
-							//location.href="../gorder/goods_cart.do";
 						}	
 						else if(param.result == 'success'){
 							alert('결제 성공! 결제 목록으로 이동합니다.');

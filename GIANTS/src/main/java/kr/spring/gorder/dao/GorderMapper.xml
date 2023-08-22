@@ -6,6 +6,8 @@
 	<insert id="insertOrder" parameterType="gorderVO">
 		INSERT INTO g_order(
 		  order_num,
+		  order_dcost,
+		  used_point,
 		  mem_num,
 		  goods_name,
 		  order_payment, 
@@ -23,6 +25,8 @@
 		  )
 		VALUES(
 		  #{order_num},
+		  #{order_dcost},
+		  #{used_point},
 		  #{mem_num},
 		  #{goods_name},
 		  #{order_payment},
@@ -45,7 +49,6 @@
 		  detail_num,
 		  order_num,
 		  order_point,
-		  used_point,
 		  goods_num,
 		  mem_num,
 		  goods_name,
@@ -58,7 +61,6 @@
 		  g_order_detail_seq.nextval,
 		  #{order_num},
 		  #{order_point}, 
-		  #{used_point},
 		  #{goods_num},
 		  #{mem_num},
 		  #{goods_name},
