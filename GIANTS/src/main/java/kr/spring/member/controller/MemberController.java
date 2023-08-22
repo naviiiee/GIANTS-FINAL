@@ -86,9 +86,9 @@ public class MemberController {
 				return "findIdResult";
 			}
 		}else {
-			return "formFindId()";
+			return "memberfindId";
 		}
-		return "formFindId()";
+		return "memberfindId";
 	}
 	
 	/*=====================
@@ -111,9 +111,9 @@ public class MemberController {
 				return "findIdResult";
 			}
 		}else {
-			return "formFindId()";
+			return "companyfindId";
 		}
-		return "formFindId()";
+		return "companyfindId";
 	}
 	
 	/*=====================
@@ -158,9 +158,9 @@ public class MemberController {
 				return "findPwResult";
 			}
 		}else {
-			return "formFindPw()";
+			return "memberfindPw";
 		}
-		return "formFindPw()";
+		return "memberfindPw";
 	}
 	
 	/*=====================
@@ -201,9 +201,9 @@ public class MemberController {
 				return "findPwResult";
 			}
 		}else {
-			return "formFindPw()";
+			return "companyfindPw";
 		}
-		return "formFindPw()";
+		return "companyfindPw";
 	}
 	
 	

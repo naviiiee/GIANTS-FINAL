@@ -302,6 +302,7 @@ public class TradingController {
 			mav.setViewName("bookmarkList"); //tiles 설정의 식별자
 			mav.addObject("count", count);
 			mav.addObject("list", list);
+			log.debug("<<list>> : " + list);
 			mav.addObject("page", page.getPage());
 			
 			return mav;

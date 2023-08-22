@@ -16,6 +16,6 @@ public class ChatRoomVO {
 	private ChatVO chatVO; //채팅 메시지 VO
 	
 	private int room_cnt; //읽지 않은 메시지 수
+	
 	private int user_mem_num; //로그인 유저번호
-	//private String mem_id; //구매자 id
 }

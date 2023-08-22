@@ -43,13 +43,27 @@ hr{
 	color:#dd032f;
 }
 .small{ width:50px; height:25px; }
+.middle{ width:50px; height:28px; }
 
-/* 부트스트랩 */
-.btn-outline-success{ 
-	border:1px #053B44 solid; color:#052345; 
+/* 검색 */
+ul.search{
+	float: left;
 }
-.btn-outline-success:hover{ 
-	background:#052345; color:white; 
+ul.search li{
+	display:inline;	
+}
+ul.search li select{
+	height:30px;
+	margin-top:10px;
+}
+#keyword{
+	height:30px;
+}
+form#search_form #order{
+	float: right;
+	height:32px;
+	margin-top:10px;
+	margin-bottom: 10px;
 }
 
 /* --- 중고거래 게시판 글 목록 --- */
@@ -113,8 +127,54 @@ ul.detail-info li:last-child{
 #output_bookmark{
 	cursor: pointer;
 }
+.trading-body{
+	margin: 0 auto;
+	width: 1000px;
+}
+#trade_title{
+	margin-top: 25px;
+}
+.detail-content{
+	 height: 400px;
+}
 
 /* --- 중고거래 게시판 글 작성 --- */ 
 #price_form{
 	width: 70px;
+	height: 20px;
+	margin-bottom: 5px;
+}
+#trading_title{
+	width: 600px;
+	height: 20px;
+	margin-bottom: 5px;
+}
+#status{
+	margin-top: 10px;
+}
+
+/* --- 중고거래 관심목록 --- */ 
+.bookmark-top{
+    width:1000px;
+}
+.bookmark-top{
+	display: flex;
+    position: relative;
+    border-bottom: 1px solid #BBB;
+    padding: 25px 0;
+    height: 40px;
+    z-index: 19;
+    width:1000px;
+}
+.bookmark-top-title .h2{
+	display: inline-block;
+	font-size: 29px;
+	line-height: 30px;
+	padding-top: 10px;
+	background: url(../_Img/Common/ico_mtit.gif) no-repeat 0 0;
+	margin-right: 25px;
+}
+.bookmark-form {
+    width: 800px;
+    margin: 0 auto;
 }
