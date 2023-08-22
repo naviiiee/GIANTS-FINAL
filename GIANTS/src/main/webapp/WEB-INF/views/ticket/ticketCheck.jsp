@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/NSH/ticket.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ticket.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/ticket.order.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
@@ -44,6 +45,9 @@
 							<td>${seatVO.detailVO.mem_email}</td>
 						</tr>
 					</table>
+					<input type="hidden" value="${seatVO.detailVO.mem_name}" id="mem_name">
+					<input type="hidden" value="${seatVO.detailVO.mem_phone}" id="mem_phone">
+					<input type="hidden" value="${seatVO.detailVO.mem_email}" id="mem_email">
 				</div>
 			</div>
 			<div class="left-no3">
@@ -90,6 +94,8 @@
 						   </c:if><br>
 					사직야구장<br>
 					${gameVO.game_date} ${gameVO.game_time}<br>
+					<input type="hidden" value="${gameVO.game_date}" id="game_date">
+					<input type="hidden" value="${gameVO.game_time}" id="game_time">
 				</div>
 				<div class="ticketInfo">
 					<h2>좌석정보</h2>
@@ -115,74 +121,9 @@
 				<div class="group-btn">
 					<input type="hidden" name="check_num" value="${checkVO.check_num}" id="check_num">
 					<input type="button" value="이전" class="default-btn big" onclick="location.href='ticketMain.do?game_num=${gameVO.game_num}'">
-					<input type="button" value="결제" class="accept-btn big" onclick="requestPay()">
-					<script>
-					function requestPay() {
-						// 구매할 좌석이 이미 예매된 좌석인지 확인하는 통신
-						
-						/* Portone 결제 API */
-						var IMP = window.IMP;
-					    IMP.init('imp67587482');  // 가맹점 식별코드
-						
-						if($('input[name=check_info]:checked').length != 2) {
-							alert('예매자 확인은 필수사항');
-							return false;
-						}
-						
-					    let team = document.getElementById('team_title').value;
-						let totalPrice = document.getElementById('totalPrice').value;
-						let ticket_quantity = document.getElementById('ticket_quantity').value;
-						let ticket_num = 'T' + new Date().getTime();
-						let check_num = document.getElementById('check_num').value;
-						
-						console.log(check_num);
-						
-					 	// IMP.request_pay(param, callback) 결제창 호출
-					 	IMP.request_pay({
-					 		pg:'kakaopay.TC0ONETIME',
-					 		pay_method:'card',
-					 		merchant_uid:ticket_num,   // 주문번호
-					 		name:'${gameVO.game_date} 롯데 VS ' + team + ' ${gameVO.game_time}',
-					 		amount:totalPrice,	// 숫자 타입
-					 		buyer_email:'${seatVO.detailVO.mem_email}',
-					 		buyer_name:'${seatVO.detailVO.mem_name}',
-					 		buyer_tel:'${seatVO.detailVO.mem_phone}'
-					 	}, function(rsp) {
-					 		if(rsp.success) {
-					 			let msg = '결제가 완료되었습니다.';
-					 			let result = {
-					 				'ticket_num':ticket_num,
-					 				'game_num':${gameVO.game_num},
-					 				'grade_num':${seatVO.grade_num},
-					 				'check_num':check_num,
-					 				'order_name':'${seatVO.detailVO.mem_name}',
-					 				'order_phone':'${seatVO.detailVO.mem_phone}',
-					 				'order_email':'${seatVO.detailVO.mem_email}',
-					 				'game_title':team,
-					 				'game_date':'${gameVO.game_date}',
-					 				'game_time':'${gameVO.game_time}',
-					 				'ticket_quantity':ticket_quantity,
-					 				'total_price':totalPrice,
-					 				'pg':'kakaopay',
-					 				'pay_method':'card'
-					 			}
-					 			console.log(result);
-					 			
-					 			$.ajax({
-					 				url:'insertMPay.do',
-					 				type:'post',
-					 				contentType:'application/json',
-					 				data:JSON.stringify(result),
-					 				success: function (res) { location.href=res; },
-									error: function (err) { console.log(err); }
-					 			}); 
-					 		} else {
-					 			let msg = '결제 실패\n';
-					 			msg += 'ERROE : ' + rsp.error_msg;
-					 		}
-					 	});
-					}
-					</script>
+					<input type="button" value="결제" class="accept-btn big" id="ticket_kakao">
+					<input type="hidden" value="${gameVO.game_num}" id="game_num">
+					<input type="hidden" value="${seatVO.grade_num}" id=grade_num>
 				</div>	
 			</div>
 		</div>
