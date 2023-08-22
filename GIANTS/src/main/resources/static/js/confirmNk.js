@@ -37,9 +37,12 @@ $(function(){
 	
 	//submit 이벤트 발생 시 닉네임 중복 체크 여부 발생
 	$('#member_register').submit(function(){
-		if($('#mem_nickname').val().trim()!=''){
-			$('#message_nk').css('color', 'red').text('닉네임 중복 체크 필수');
-				return false;
+		if(checkNk == 0){
+		$('#mem_nickname').css('color', 'red').text('닉네임 중복 체크 필수');
+			if($('#message_nk').val().trim()==''){
+				$('#message_nk').val('').focus();		
+			}
+			return false;
 		}
 	})
 });
