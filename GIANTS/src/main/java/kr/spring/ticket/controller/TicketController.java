@@ -72,11 +72,16 @@ public class TicketController {
 		
 		List<GradeVO> list = ticketService.selectGradeList(gradeVO);
 		
+		log.debug("<<list : >>" + list);
+		
 		for(GradeVO grade : list) {
+			log.debug("<<selected_grade>> : " + grade.getGrade_num());
+			
 			int count = ticketService.selectCountByGradeNum(game_num, grade.getGrade_num());
+			int admin_count = ticketService.selectAdminCountByGradeNum(grade.getGrade_num());
 			int quantity = grade.getQuantity();
 			
-			if(count > 0) { grade.setQuantity(quantity - count); }
+			if(count > 0 || admin_count > 0) { grade.setQuantity(quantity - count - admin_count); }
 		}
 		
 		model.addAttribute("game_num", game_num);
@@ -104,9 +109,12 @@ public class TicketController {
 			
 			for(SeatVO seat : list) {
 				int count = ticketService.selectCountBySeatNum(game_num, seat.getSeat_num());
+				int admin = ticketService.selectAdminCountBySeatNum(seat.getSeat_num());
 				int seat_quantity = seat.getSeat_quantity();
 				
-				if(count > 0) { seat.setSeat_quantity(seat_quantity - count); }
+				log.debug("<admin> : " + admin);
+				
+				if(count > 0 || admin > 0) { seat.setSeat_quantity(seat_quantity - count - admin); }
 			}
 			
 			mapJson.put("result", "success");
@@ -130,11 +138,13 @@ public class TicketController {
 			log.debug("<<seat>> : " + seat);
 			
 			List<SeatStatusVO> status = ticketService.selectStatusByGame(game_num);
-			log.debug("<<status>> : " + status);
+			List<SeatStatusVO> list = ticketService.selectStatusBySeat(seat_num);
+			log.debug("<<list>> : " + list);
 			
 			mapJson.put("result", "success");
 			mapJson.put("seat", seat);
 			mapJson.put("status", status);
+			mapJson.put("list", list);
 		}
 		
 		return mapJson;

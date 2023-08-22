@@ -14,6 +14,8 @@
 			<li><a href="${pageContext.request.contextPath}/member/memberMypageTicketList.do">Ticket</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/memberMypageFoodList.do">Foods</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/memberMypageGoodList.do">Goods</a></li>
+			<li><b>관심목록</b></li>
+			<li><a href="${pageContext.request.contextPath}/member/bookmarkList.do">중고거래</a></li>
 		</ul>
 	</c:if>
 	<!-- 기업회원일때 NAV -->
@@ -25,8 +27,8 @@
 			<li><a href="${pageContext.request.contextPath}/member/deleteCompany.do">회원탈퇴</a></li>
 			<li><b>FOOD</b></li>
 			<li><a href="${pageContext.request.contextPath}/member/compMypageFoodList.do">푸드목록</a></li>
-			<li><a href="${pageContext.request.contextPath}/member/companyMypageSaleManage.do">매출관리</a></li>
-			<li><a href="${pageContext.request.contextPath}/member/companyMypageOrderList.do">주문내역</a></li>
+			<li><a href="${pageContext.request.contextPath}/member/compMypageOrderList.do">주문내역</a></li>
+			<li><a href="${pageContext.request.contextPath}/member/compMypageSaleManage.do">매출관리</a></li>
 		</ul>
 	</c:if>
 	<!-- 관리자일때 NAV -->
@@ -35,7 +37,8 @@
 			<li><b>관리</b></li>
 			<li><a href="${pageContext.request.contextPath}/member/admin_list.do">회원목록</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/adminMypageTicket.do">티켓관리</a></li>
-			<li><a href="${pageContext.request.contextPath}/member/adminMypageGoods.do">굿즈관리</a></li>
+			<li><a href="${pageContext.request.contextPath}/member/adminMypageGoodsList.do">굿즈목록</a></li>
+			<li><a href="${pageContext.request.contextPath}/member/adminMypageGoodsOrder.do">굿즈주문내역</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/adminMypageSaleManage.do">매출관리</a></li>
 		</ul>
 	</c:if>

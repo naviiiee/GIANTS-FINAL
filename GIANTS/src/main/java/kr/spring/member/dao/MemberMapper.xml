@@ -287,24 +287,6 @@
 		]]>
 	</select>
 	
-	<!-- 아이디 찾기 -->
-	<!-- <select id="findId" parameterType="map" resultType="memberVO">
-	SELECT
-   		mem_id
-	FROM
-	    MEMBER m 
-	LEFT OUTER JOIN MEMBER_DETAIL d
-		ON m.mem_num = d.mem_num
-	LEFT OUTER JOIN COMPANY_DETAIL c
-		ON m.mem_num = c.mem_num
-	WHERE 
-		( mem_name=#{mem_name}
-	AND mem_phone=#{mem_phone})
-	OR
-		(comp_owner=#{comp_owner}
-	AND comp_phone=#{comp_phone});
-	</select> -->
-	
 	<!-- 비밀번호 찾기 -->
 	<select id="findPw" parameterType="map" resultType="memberVO">
 		SELECT
@@ -364,7 +346,6 @@
 		FROM food
 		WHERE comp_num=#{comp_num}
 	</select>
-	
 	<!-- 식품목록 리스트 페이징 쿼리 -->
 	<select id="selectListCp" parameterType="map" resultType="foodVO">
 		SELECT
@@ -381,4 +362,176 @@
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
+	
+	<!-- 관리자 굿즈목록 -->
+	<sql id="goodsSearch">
+		<![CDATA[
+			WHERE goods_status < #{goods_status}
+		]]>
+		<if test="keyword != null and keyword != ''">
+			<if test="keyfield == 1">
+				AND goods_name LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="keyfield == 2">
+				AND goods_content LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="keyfield == 3">
+				AND (goods_name LIKE '%' || #{keyword} || '%' OR goods_content LIKE '%' || #{keyword} || '%') 
+			</if>
+		</if>
+	</sql>
+	<sql id="goodsOrder">
+		<if test="order == 1">
+			ORDER BY goods_regdate DESC
+		</if>
+		<if test="order == 2">
+			ORDER BY f.fav_cnt ASC
+		</if>
+		<if test="order == 3">
+			ORDER BY r.re_cnt ASC
+		</if>
+		<if test="order == 4">
+			ORDER BY goods_disc DESC
+		</if>
+		<if test="order == 5">
+			ORDER BY goods_dprice ASC
+		</if>
+	</sql>	
+	<sql id="goodsCategory">
+		<if test="goods_category == 0">
+			AND goods_category BETWEEN 1 AND 4
+		</if>
+		<if test="goods_category == 1">
+			AND goods_category = 1
+		</if>
+		<if test="goods_category == 2">
+			AND goods_category = 2
+		</if>
+		<if test="goods_category == 3">
+			AND goods_category = 3
+		</if>
+		<if test="goods_category == 4">
+			AND goods_category = 4
+		</if>
+	</sql>
+	<!-- 전체/검색 레코드 수 -->
+	<select id="selectGoodsRowCount" parameterType="map" resultType="integer">
+		SELECT 
+			count(*) 
+		FROM goods g
+		LEFT OUTER JOIN (SELECT count(*) fav_cnt, goods_num FROM goods_fav GROUP BY goods_num)f ON g.goods_num=f.goods_num
+		LEFT OUTER JOIN (SELECT count(*) re_cnt, goods_num FROM goods_review GROUP BY goods_num)r ON g.goods_num=r.goods_num
+		<include refid="goodsSearch"></include>
+		<include refid="goodsCategory"></include>
+	</select>	
+	<!-- 전체/검색 목록 -->
+	<select id="selectGoodsList" parameterType="map" resultType="goodsVO">
+		SELECT
+			*
+		FROM (SELECT
+				a.*,
+				rownum rnum
+			  FROM(SELECT
+			  			g.goods_num,
+			  			g.goods_name,
+			  			g.goods_dprice,
+			  			f.fav_cnt,
+			  			r.re_cnt,
+			  			g.goods_category,
+			  			g.goods_regdate,
+			  			g.goods_status
+			  	   FROM goods g
+			  	   LEFT OUTER JOIN (SELECT count(*) fav_cnt, goods_num FROM goods_fav GROUP BY goods_num)f ON g.goods_num=f.goods_num
+			  	   LEFT OUTER JOIN (SELECT count(*) re_cnt, goods_num FROM goods_review GROUP BY goods_num)r ON g.goods_num=r.goods_num
+			  	   <include refid="goodsSearch"></include>
+			  	   <include refid="goodsCategory"></include>
+			  	   <include refid="goodsOrder"></include>)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>	
+	
+	<!-- 기업페이지 주문목록 -->
+	<sql id="orderSearchFd">
+		<where>
+			<if test="keyword!=null and keyword != ''">
+				<if test="keyfield == 1">
+					f_order_num=#{keyword}
+				</if>
+				<if test="keyfield == 2">
+					f_order_name LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 3">
+					buyer_name LIKE '%' || #{keyword} || '%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectOrderCountFd" parameterType="map" resultType="integer">
+		SELECT
+			count(*)
+		FROM 
+			F_ORDER f LEFT JOIN MEMBER m
+			ON f.mem_num = m.mem_num
+		WHERE f.comp_num=#{comp_num}
+		<include refid="orderSearchFd"></include>
+	</select>
+	
+	<select id="selectListOrderFd" parameterType="map" resultType="f_orderVO">
+		SELECT
+			*
+		FROM
+			(SELECT a.*, rownum rnum
+				FROM
+					(SELECT
+						*
+					FROM F_ORDER f JOIN MEMBER m
+					ON f.mem_num = m.mem_num
+					<include refid="orderSearchFd"></include>
+					ORDER BY f_order_num DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+	<!-- 일반회원 푸드 구매내역 -->
+	<sql id="orderSearchByUser">
+		WHERE mem_num = #{mem_num}
+		<if test="keyword != null and keyword != ''">
+			<if test="keyfield == 1">
+				f_order_num=#{keyword}
+			</if>
+			<if test="keyfield == 2">
+				f_order_name LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="keyfield == 3">
+				buyer_name LIKE '%' || #{keyword} || '%'
+			</if>
+		</if>
+	</sql>
+	
+	<select id="selectOrderCountByMem_num" parameterType="map">
+		SELECT
+		  COUNT(*)
+		FROM F_ORDER
+		<include refid="orderSearchByUser"></include>
+	</select>
+	
+	<select id="selectListOrderByMem_num" parameterType="map"
+	                                           resultType="F_orderVO">
+		SELECT
+		  *	
+		FROM (SELECT
+		        a.*,
+		        rownum rnum
+		      FROM (SELECT
+		              *
+		            FROM F_ORDER
+		            <include refid="orderSearchByUser"></include>
+		            ORDER BY f_order_num DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>		            
+	</select>	
 </mapper>

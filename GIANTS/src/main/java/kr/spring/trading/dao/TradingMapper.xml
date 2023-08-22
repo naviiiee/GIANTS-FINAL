@@ -85,4 +85,18 @@
 		SELECT * FROM trading t JOIN member m USING(mem_num) WHERE t.trade_num=#{trade_num}
 	</select>
 	
+	<!-- 회원별 북마크 레코드 수 -->
+	<select id="selectBookmarkRowCount" parameterType="map" resultType="integer">
+		SELECT COUNT(*) FROM bookmark WHERE mem_num=#{mem_num}
+	</select>
+	
+	<!-- 회원별 북마크 목록 -->
+	<select id="selectTradingBookmarkList" parameterType="map" resultType="tradingVO">
+		SELECT * FROM (SELECT a.*, rownum rnum FROM(SELECT * FROM trading WHERE trade_num IN (SELECT trade_num FROM bookmark WHERE mem_num=#{mem_num}) 
+				 ORDER BY trade_num DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
 </mapper>

@@ -10,6 +10,12 @@ table {
  th, td {
     border: 1px solid #444444;
   }
+  
+#output_fav, .output_rfav {
+    cursor: pointer;
+    width: 6%;
+    margin-bottom: 2%;
+}
 </style>
 <!-- 게시글 상세 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LHJ/commu.css">
@@ -38,6 +44,7 @@ table {
 				<th>작성일자</th>
 				<td>
 					<c:if test="${empty commu.commu_modifydate}">${commu.commu_date}</c:if>
+					<c:if test="${!empty commu.commu_modifydate}">(수정일) ${commu.commu_modifydate}</c:if>
 				</td>
 				<th>조회수</th>
 				<td headers="hit">${commu.commu_hit}</td>
@@ -47,8 +54,25 @@ table {
 	<div class="commu-content">
 		${commu.commu_content}
 	</div>
+	
+	
+	
+	
+	
+	
+	<div class="align-center">
+		<%-- 좋아요 버튼 및 개수 --%>
+		<img id="output_fav" data-num="${commu.commu_num}" 
+			 src="${pageContext.request.contextPath}/images/fav01.png" width="40">
+		<span id="output_fcount" style="margin-left: -5%;"></span>
+		
+	</div>
+	
+	
 	<div class="align-right">
+		<c:if test="${!empty user}">
 		<input type="button" value="신고하기" onclick="location.href='commuRepo.do?commu_num=${commu.commu_num}'" class="accept-btn">
+		</c:if>
 		<input type="button" value="목록" onclick="location.href='commuList.do'" class="default-btn">
 		<c:if test="${!empty user && user.mem_num==commu.mem_num}">
 		<input type="button" value="수정" onclick="location.href='update.do?commu_num=${commu.commu_num}'" class="accept-btn">
@@ -69,22 +93,10 @@ table {
 	</div>
 	
 	
-	
-	<div>
-		<%-- 좋아요 버튼 및 개수 --%>
-		<img id="output_fav" data-num="${commu.commu_num}" 
-			 src="${pageContext.request.contextPath}/images/fav01.gif" width="40">
-		<span id="output_fcount"></span>
-		
-	</div>
-	
-	<hr size="1" width="100%">
-	
-	
 
 
 	<!-- 댓글 UI 시작 -->
-	<div id="reply_div">
+	<div id="reply_div" style="margin-top:3%;">
 		<span class="re-title">커뮤니티 댓글</span>
 		<%-- 댓글 수 --%>
 		<b><span id="output_rcount" style="margin-left:36%;"></span></b>

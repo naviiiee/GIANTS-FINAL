@@ -3,7 +3,7 @@ $(function(){
 	
 	//============================
 	//바로 구매
-	$('#goods_direct button[type="submit"]').click(function(event){
+	$('#goods_direct').submit(function(event){
 		event.preventDefault(); // 기본 클릭 동작을 막음
 		
 		if($('#order_quantity').val() == ''){
@@ -40,7 +40,7 @@ $(function(){
 					alert('로그인 후 사용하세요!');
 				}else if(param.result == 'success'){
 					alert('주문 폼으로 이동합니다.');
-					//location.href='../gorder/orderFormDirect.do';
+					location.href='../gorder/orderFormDirect.do';
 				}else{
 					alert('바로구매 오류');
 				}
@@ -49,13 +49,12 @@ $(function(){
 				alert('네트워크 오류 발생 - 바로구매');
 			}
 		});
-		
-		$('#goods_direct form').submit();
+		event.preventDefault();
 	});
 	
 	//============================
 	//장바구니 등록
-	$('#goods_cart button[type="submit"]').click(function(){
+	$('#goods_cart').submit(function(event){
 		
 		if($('#order_quantity').val() == ''){
 			alert('수량을 입력하세요');
@@ -103,7 +102,7 @@ $(function(){
 				alert('네트워크 오류 발생');
 			}
 		});
-		$('#goods_cart form').submit();
+		event.preventDefault();
 	});		
 	  
 	//장바구니에 담겨있는 상품의 총구매금액

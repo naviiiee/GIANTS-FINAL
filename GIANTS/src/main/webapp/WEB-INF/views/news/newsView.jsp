@@ -4,7 +4,7 @@
 <!-- 뉴스 상세 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/news.css">
 <div class="page-main">
-	<div class="main-title">
+	<div class="news-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>자이언츠 뉴스</h2>
 		<hr size="0.05" width="100%" noshade>
@@ -41,7 +41,7 @@
 				<th>작성일자</th>
 				<td>${news.news_regdate}</td>
 				<th>조회수</th>
-				<td>${news.news_hit}</td>
+				<td width="79">${news.news_hit}</td>
 			</tr>
 		</table> 
 	</div>

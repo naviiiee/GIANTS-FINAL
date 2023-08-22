@@ -41,7 +41,7 @@ li{
 	<div class="main-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<div class="title01">
-			<h2 style="margin-right:5%">커뮤니티</h2>
+			<h2 style="margin-right:5%"><a href="commuList.do" style="color:black;">커뮤니티</a></h2>
 			<p>자이언츠의 커뮤니티 공간입니다.</p>
 		</div>
 	</div>
@@ -66,7 +66,7 @@ li{
 	
 		<!-- 정렬 -->
 		<div class="align-right" >
-			<select id="commuOrder" name="commuOrder" style="height:30px;">
+			<select id="order" name="order" style="height:30px;">
 				<option value="1" 
 				  <c:if test="${param.order == 1}">selected</c:if>>최신글</option>
 				<option value="2" 
@@ -79,7 +79,7 @@ li{
 			<script type="text/javascript">
 				$(function(){
 					$('#order').change(function(){
-						location.href='list.do?keyfield='+$('#keyfield').val() 
+						location.href='commuList.do?keyfield='+$('#keyfield').val() 
 											+ '&keyword='+$('#keyword').val() 
 											+ '&order='+$('#order').val();
 					});
@@ -113,7 +113,7 @@ li{
 			<c:forEach var="commu" items="${list}">
 				<tr>
 					<td class="align-center">${commu.commu_num}</td>
-					<td class="align-center" width="500">
+					<td class="align-center commu_title" width="500">
 						<a href="detail.do?commu_num=${commu.commu_num}">${commu.commu_title} (${commu.re_cnt})</a>
 					</td>
 					<td class="align-center">

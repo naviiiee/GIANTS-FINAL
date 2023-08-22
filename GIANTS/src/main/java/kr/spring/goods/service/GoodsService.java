@@ -23,6 +23,7 @@ public interface GoodsService {
 	public void insertGoods(GoodsVO goods);
 	//상품 상세
 	public GoodsVO selectGoods(Integer goods_num);
+	public GoodsVO selectGoodsAllInfo(Integer goods_num);
 	//상품 재고 목록
 	public List<GoodsOptionVO> selectOptionList(Integer goods_num);
 	//상품에 대한 총 재고 현황

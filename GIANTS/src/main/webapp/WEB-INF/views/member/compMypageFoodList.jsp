@@ -11,9 +11,9 @@
 		<p>자이언츠 (기업)${company.companyDetailVO.comp_name} 푸드목록 입니다.</p>
 	</div> 
 </div>
-<div class="page-main">
+<div class="mypage-form">
 		<!-- 기업 상품 리스트 시작 -->
-		<div id="fix_compMenu">
+		<div id="fix_compMenu"> 
 			<c:if test="${count == 0}"><!-- 목록 없을 경우 -->
 				<table id="fix_menuList">
 					<tr>
@@ -21,32 +21,31 @@
 					</tr>
 				</table>
 			</c:if>
-			
 			<c:if test="${count > 0}"> <!-- 목록 있을 경우 -->
-				<table id="fix_menuList">
+				<table class="striped-table">
 					<tr>
 						<th>상품번호</th>
 						<th>상품명</th>
 						<th>가격</th>
 						<th>재고수량</th>
 						<th>상태</th>
-						<th>수정/삭제</th>
+						<th>수정 / 삭제</th>
 					</tr>
 					<c:forEach var="food" items="${list}">
 					<tr>
-						<td>${food.food_num}</td>
-						<td>${food.food_name}</td>
-						<td><fmt:formatNumber value="${food.food_price}"/> 원</td>
-						<td><fmt:formatNumber value="${food.food_quantity}"/> 개</td>
-						<td>
+						<td class="align-center">${food.food_num}</td>
+						<td class="align-center">${food.food_name}</td>
+						<td class="align-center"><fmt:formatNumber value="${food.food_price}"/> 원</td>
+						<td class="align-center"><fmt:formatNumber value="${food.food_quantity}"/> 개</td>
+						<td class="align-center">
 							<c:if test="${food.food_status == 1 }">판매중지</c:if>
 							<c:if test="${food.food_status == 2 }">판매중</c:if>
 						</td>
 						<td>
-							<input type="button" value="수정" onclick="location.href='${pageContext.request.contextPath}/food/fixFood.do?food_num=${food.food_num}'"> 
-							<form id="del_form_${food.food_num}" action="deleteFood.do" method="post">
+							<form class="align-center" id="del_form_${food.food_num}" action="deleteFood.do" method="post">
+								<input class="table-td-btn" type="button" value="수정" class="#" onclick="location.href='${pageContext.request.contextPath}/food/fixFood.do?food_num=${food.food_num}'">
 								<input type="hidden" name="food_num" value="${food.food_num}">
-								<input type="button" value="삭제" class="del-food" data-num="${food.food_num}">
+								<input class="table-td-btn" type="button" value="삭제" class="#" data-num="${food.food_num}">
 							</form>
 						</td>
 					</tr>

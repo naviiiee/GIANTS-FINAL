@@ -25,7 +25,7 @@
 				<th>배송상태</th>
 			</tr>
 			<c:forEach var="#" items="#">
-				<tr>
+				<tr> 
 					<td class="align-center">1</td>
 					<td class="align-center">2</td>
 					<td class="align-center">3</td>

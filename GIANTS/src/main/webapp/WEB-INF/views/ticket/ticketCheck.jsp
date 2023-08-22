@@ -112,7 +112,7 @@
 						
 					 	// IMP.request_pay(param, callback) 결제창 호출
 					 	IMP.request_pay({
-					 		pg:'kakaopay',
+					 		pg:'kakaopay.TC0ONETIME',
 					 		pay_method:'card',
 					 		merchant_uid:ticket_num,   // 주문번호
 					 		name:'${gameVO.game_date} 롯데 VS ${gameVO.game_team} ${gameVO.game_time}',

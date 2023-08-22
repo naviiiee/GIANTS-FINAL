@@ -193,4 +193,114 @@ $(function() {
 		
 		$('.seat-quantity').attr('value', quantity);
 	}
+	
+	/* ----- 좌석관리 UI ----- */
+	let admin_grade = $('#admin_grade').val();
+	let admin_seat = $('#admin_seat').val();
+	let admin_seatBlock = $('#admin_block').val();
+	let admin_seatRow = $('#admin_row').val().split(',');
+	let admin_seatCol = $('#admin_col').val().split(',');
+	
+	let rowLeng = admin_seatRow.length;
+	let colLeng = admin_seatCol.length;
+	
+	$.ajax({
+		url:'seatEditForm.do',
+		type:'post',
+		data:{seat_num:admin_seat},
+		dataType:'json',
+		success:function(param) {
+			let listLeng = param.list.length;
+			
+			let seatBox = '<div class="ground"><h2>그라운드 방향</h2></div>';
+			seatBox +=  '<div class="seat-check2">';
+							
+			for(let i = 0; i < rowLeng; i++) {
+				seatBox += '<div class="row-div">';
+				seatBox += '<span>' + admin_seatRow[i] + '</span>';
+				for(let j = 0; j < colLeng; j++) {
+					seatBox += '<input type="button" data-info="' + admin_seatBlock + '^' + admin_seatRow[i] +'^'+ admin_seatCol[j] + '" class="seat-btn gn' + admin_grade
+												+ '" data-seatNum = "' + admin_seat + '" data-info2="' + admin_seatBlock + admin_seatRow[i] + admin_seatCol[j]
+												+ '" data-block="' + admin_seatBlock + '" data-grade="' + admin_grade + '" data-row="' + admin_seatRow[i] + '" data-col="' + admin_seatCol[j] + '">';
+				}
+				seatBox += '</div>';
+			}
+							
+			seatBox += '</div>';
+			
+			$('.admin_seatBox').append(seatBox);
+			
+			for(let z = 0; z < listLeng; z++){
+				if($('input[data-info="'+param.list[z].seat_info+'"]')){
+					$('input[data-info="'+param.list[z].seat_info+'"]').removeClass('gn' + admin_grade + '').addClass('admin-reserved');
+					let status_num = '<input type="hidden" name="status_num" value="' + param.list[z].status_num + '">';
+					$('#seat_edit').append(status_num);
+				} else {
+					$('input[data-info="'+param.list[z].seat_info+'"]').removeClass('admin-reserved').addClass('gn' + admin_grade + '');
+					
+				}
+			}
+			
+			let status_num = '<input type="hidden" name="status_num" value="0">';
+			$('#seat_edit').append(status_num);
+		},
+		error:function() { alert('Network 오류 발생'); }
+	})
+	
+	let checkCnt = 0;
+	
+	$(document).on('click', '.seat-btn', function() {
+		let check_seat = $(this).attr('data-seatNum');
+		let check_block = $(this).attr('data-block');
+		let check_row = $(this).attr('data-row');
+		let check_col = $(this).attr('data-col');
+		let info = check_block + check_row + check_col;
+		
+		//if($(this).hasClass('admin-reserved')) { $(this).addClass('clicked'); }
+		
+		if($(this).hasClass('clicked')) { 
+			checkCnt--;
+			$(this).removeClass('clicked').removeClass('admin-reserved');
+			$(this).addClass('gn'+$(this).attr('data-grade'));
+			$('#del'+$(this).attr('data-info2')).remove();
+		} else {
+			checkCnt++;
+			$(this).removeClass('gn'+$(this).attr('data-grade'));
+			$(this).addClass('clicked');
+		
+			let seat_info = '<tr class="seat-leng" id="del'+info+'"><td>';
+			seat_info += '<img src="../images/grade' + $(this).attr('data-grade') + '.png"> ' + check_block + '블럭 ' + check_row + '행 ' + check_col + '번';
+			
+			seat_info += '<input type="hidden" id="seatNUM" name="seat_num" value="' + check_seat + '">';
+			seat_info += '<input type="hidden" id="seatINFO" name="seat_info" value="' + check_block + '^' + check_row + '^' + check_col + '">';
+			seat_info += '<input type="hidden" id="gradeNUM" name="grade_num" value="' + $(this).attr('data-grade') + '">';
+			seat_info += '</td></tr>';
+			
+			$('.seat-table').append(seat_info);
+			
+		}
+
+		if(checkCnt > 0){ $('.select-checked').show(); }
+		else{ $('.select-checked').hide(); }
+	});
+	
+	$(document).on('submit', '#seat_edit', function() {
+		if($('.seat-leng').length == 0) {
+			alert('상태를 변경할 좌석을 선택하세요');
+			return false;
+		}
+		
+		/*$.ajax({
+			url:'seatEdit.do',
+			type:'post',
+			data:{seat_num:$('#seatNUM').val(), grade_num:$('#gradeNUM').val(), seat_info:$('#seatINFO').val()},
+			dataType:'json',
+			success:function(param) {
+				if(param.result == 'success') {
+					location.href='gradeList.do';
+				}
+			},
+			error:function() { alert('Network 오류 발생'); }
+		});*/
+	});
 });

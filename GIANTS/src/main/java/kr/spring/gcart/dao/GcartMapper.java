@@ -23,7 +23,7 @@ public interface GcartMapper {
 	public List<GcartVO> getListCart(Map<String, Object> map);
 
 	// 장바구니 상세
-	@Select("SELECT * FROM g_cart WHERE goods_num=#{goods_num} AND mem_num=#{mem_num}")
+	@Select("SELECT * FROM g_cart  WHERE goods_num=#{goods_num} AND mem_num=#{mem_num}")
 	public GcartVO getCart(GcartVO cart);
 
 	//장바구니 수정 (개별 상품 수량 수정)

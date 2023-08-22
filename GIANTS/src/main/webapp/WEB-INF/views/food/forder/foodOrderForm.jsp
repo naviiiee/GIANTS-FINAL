@@ -17,7 +17,8 @@
 	<div class="order-container">
 		<form:form modelAttribute="f_orderVO" action="foodOrder.do" id="order_form">
 		<div class="order-List">
-			<input type="hidden" name="total_price" value="${total_price}">
+			<input type="hidden" id="total_price" name="total_price" value="${total_price}">
+			<input type="hidden" id="comp_name" value="${comp_name}">
 			<div class="order-title">
 				<h2>주문 상품 목록</h2>
 			</div>
@@ -31,6 +32,8 @@
 				</tr>
 				<c:forEach var="f_cart" items="${list}">
 				<input type="hidden" name="cart_numbers" value="${f_cart.cart_num}">
+				<input type="hidden" id="comp_num" name="comp_num" value="${f_cart.foodVO.comp_num}">
+				<input type="hidden" class="food-name" value="${f_cart.foodVO.food_name}">
 				<tr>
 					<td>
 						<img src="${pageContext.request.contextPath}/food/imageView.do?food_num=${f_cart.food_num}&food_type=1" class="food-cart-img">
@@ -59,13 +62,16 @@
 				</li>
 				<li>
 					<form:label path="buyer_phone">전화번호</form:label>
-					<form:input path="buyer_phone" maxlength="15"/>
+					<form:input path="buyer_phone" maxlength="15" placeholder="ex) 000-1234-5678 "/>
 					<form:errors path="buyer_phone" cssClass="error-color"/>      
 				</li>
 				<li>
 					<form:label path="buyer_email">이메일</form:label>
-					<form:input path="buyer_email" type="email"/>
-					<form:errors path="buyer_email" cssClass="error-color"/>      
+					<form:input path="buyer_email" type="email" placeholder="ex) giants@gmail.com "/>
+					<form:errors path="buyer_email" cssClass="error-color"/>
+				</li>
+				<li>
+					<p>* 구매 후 상품 수령을 위한 정보 및 QR코드가 이메일로 발송됩니다.</p>
 				</li>
 			</ul>
 		</div>

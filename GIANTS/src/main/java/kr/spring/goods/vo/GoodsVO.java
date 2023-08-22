@@ -39,7 +39,6 @@ public class GoodsVO {
 	
 	@NotEmpty
 	private String[] goods_sizes; //상품 사이즈
-	@NotEmpty
 	private int[] goods_stocks; //상품 재고수량
 	
 	

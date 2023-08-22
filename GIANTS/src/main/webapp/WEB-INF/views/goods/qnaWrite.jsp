@@ -5,7 +5,7 @@
 <!-- 문의 등록 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goods.css">
 <div class="page-main">
-	<div class="main-title">
+	<div class="goods-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>문의 작성</h2>
 		<hr size="0.05" width="100%" noshade>
@@ -27,6 +27,7 @@
 				<form:input path="qna_title"/>
 				<form:errors path="qna_title" cssColor="error-color"/>
 			</li>
+			<br>
 			<li>
 				<form:label path="qna_content">내용</form:label>
 				<form:textarea path="qna_content"/>
@@ -35,7 +36,7 @@
 		</ul>
 		<div class="align-center">
 			<form:button>등록</form:button>
-			<input type="button" value="이전" onclick="location.href='history(-1)'">
+			<input type="button" value="이전" onclick="location.href='${pageContext.request.contextPath}/goods/goodsDetail.do?goods_num=${goods_num}#goods_qna'">
 		</div>
 	</form:form>
 </div>

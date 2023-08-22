@@ -61,12 +61,16 @@ div#file_detail span{
 
 /* [일반회원] 굿즈 목록
 ----------------------*/
+div.goods-title h2{
+	margin-bottom:7px;
+}
 ul.filter-btns li div{
 	width:auto;
 }
 div#cate-filter{
 	width:450px;
 	margin-bottom:7px;
+	margin-top:7px;
 }
 div#cate-filter button[type="button"].off{
 	width:80px;

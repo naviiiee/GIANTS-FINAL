@@ -17,7 +17,7 @@
 }
 </style>
 <div class="page-main">
-		<div class="main-title">
+		<div class="goods-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>[관리자] 상품수정</h2>
 		<hr size="0.05" width="100%" noshade>
@@ -45,18 +45,18 @@
 				<form:errors path="goods_name" cssClass="error-color"/>
 			</li>
 			<li>
-				<label>상품 카테고리</label>
-				<form:hidden path="goods_category"/>
-				<c:if test="${goodsVO.goods_category == 1}">유니폼</c:if>
-				<c:if test="${goodsVO.goods_category == 2}">모자</c:if>
-				<c:if test="${goodsVO.goods_category == 3}">응원도구</c:if>
-				<c:if test="${goodsVO.goods_category == 4}">기타</c:if>
-			</li>
-			<li>
 				<form:label path="goods_status">상태</form:label>
 				<form:radiobutton path="goods_status" value="1"/><span class="radio-status">판매중</span>
 				<form:radiobutton path="goods_status" value="2"/><span class="radio-status">판매중지</span>
 				<form:errors path="goods_content" cssClass="error-color"/>
+			</li>
+			<li>
+				<label>상품 카테고리</label>
+				<input type="hidden" id="goods_category" name="goods_category" value="${goodsVO.goods_category}">
+				<c:if test="${goodsVO.goods_category == 1}">유니폼</c:if>
+				<c:if test="${goodsVO.goods_category == 2}">모자</c:if>
+				<c:if test="${goodsVO.goods_category == 3}">응원도구</c:if>
+				<c:if test="${goodsVO.goods_category == 4}">기타</c:if>
 			</li>
 			<li class="hasSize" style="display:none;">
 				<c:forEach var="goodsOptionVO" items="${list}" varStatus="status">
@@ -64,6 +64,7 @@
 					<input type="hidden" name="goods_sizes" value="${goodsOptionVO.goods_size}">
 					<label for="goods_stock${status.count}">${goodsOptionVO.goods_size} 수량</label>
 					<input id="goods_stock${status.count}" name="goods_stocks" type="number" value="${goodsOptionVO.goods_stock}" placeholder="재고수량 입력"/>
+					<c:if test="">${goodsOptionVO.goods_size} 수량 필수 입력</c:if>
 				</div>
 				</c:forEach>
 			</li>
@@ -116,7 +117,7 @@
 		</ul>
 		<div class="align-center" style="margin-top:5px;">
 			<form:button class="default-btn">수정</form:button>
-			<input type="button" value="목록" onclick="location.href='admin_goodsList.do'">
+			<input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/member/adminMypageGoodsList.do'">
 		</div>
 	</form:form>
 </div>

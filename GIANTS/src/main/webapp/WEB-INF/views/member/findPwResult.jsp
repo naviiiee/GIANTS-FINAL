@@ -19,7 +19,5 @@
 	</ul>
 	<input type="button" value="로그인" class="bottom-btn"
 			       onclick="location.href='${pageContext.request.contextPath}/member/login.do'">
-    <input type="button" value="비밀번호찾기" class="bottom-btn"
-    onclick="location.href='${pageContext.request.contextPath}/member/main.do'">
 	</div>
 </div>

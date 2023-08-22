@@ -10,7 +10,9 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.food.vo.F_orderVO;
 import kr.spring.food.vo.FoodVO;
+import kr.spring.goods.vo.GoodsVO;
 import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberVO;
 
@@ -102,7 +104,20 @@ public interface MemberMapper {
 	public MemberVO findCompanyPw(String mem_id, String comp_owner, String comp_phone, String comp_email);
 	public void changePw(int mem_num, String new_passwd);
 	
+	//기업페이지 - 푸드목록
 	public CompanyDetailVO selectCompCp(String comp_num);
 	public int selectRowCountCp(String comp_num);
 	public List<FoodVO> selectListCp(Map<String, Object> map);
+	
+	//관리자페이지 - 굿즈목록
+	public int selectGoodsRowCount(Map<String, Object> map);
+	public List<GoodsVO> selectGoodsList(Map<String, Object> map);
+	
+	//기업페이지 - 주문목록
+	public int selectOrderCountFd(Map<String,Object> map);
+	public List<F_orderVO> selectListOrderFd(Map<String,Object> map);
+	
+	//마이페이지 - 푸드구매내역
+	public int selectOrderCountByMem_num(Map<String,Object> map);
+	public List<F_orderVO> selectListOrderByMem_num(Map<String,Object> map);
 }

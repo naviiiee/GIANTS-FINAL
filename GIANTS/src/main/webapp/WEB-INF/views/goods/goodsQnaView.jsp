@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goods.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods.qna-answer.js"></script>
 <div class="page-main">
-	<div class="main-title">
+	<div class="goods-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>상품문의</h2>
 		<hr size="0.05" width="100%" noshade>
@@ -53,7 +53,7 @@
 				};
 			</script>
 		</c:if>
-		<input type="button" value="상품상세" onclick="location.href='goodsDetail.do?goods_num=${qna.goods_num}'">
+		<input type="button" value="상품상세" onclick="location.href='goodsDetail.do?goods_num=${qna.goods_num}#goods_qna'">
 	</div>
 	<hr size="1" width="100%">
 	<%-- 답변 시작 --%>

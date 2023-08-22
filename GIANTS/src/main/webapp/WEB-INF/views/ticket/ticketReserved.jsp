@@ -17,10 +17,12 @@
 	<div class="ticket-info1">
 		<form action="ticketReserved.do" method="post" id="ticket_reserved">
 			<input type="hidden" name="ticket_num" value="${ticket.ticket_num}">
-			<img src="${pageContext.request.contextPath}/images/ticket_checked.png" width="32px" height="32px"><br>
-			주문번호 ${ticket.ticket_num}<br>
-			예매가 정상적으로 완료되었습니다.
-			<div>
+			<div class="reserved1">
+				<img src="${pageContext.request.contextPath}/images/ticket_checked.png" width="32px" height="32px"><br>
+				주문번호 ${ticket.ticket_num}<br>
+				예매가 정상적으로 완료되었습니다.
+			</div>
+			<div class="reserved2">
 				<input type="button" value="예매내역" class="accept-btn big" onclick="location.href='ticketInfo.do?ticket_num=${ticket.ticket_num}'">
 				<input type="button" value="경기목록" class="admin-btn big" onclick="location.href='gameList.do'">
 			</div>

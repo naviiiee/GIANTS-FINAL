@@ -162,13 +162,13 @@ ul, ol, li {
 			<dl>
 				<dt>주소</dt>
 				<dd>부산광역시 동래구 사직로 45 종합운동장</dd>
-				<hr size="0.03" width="130%" noshade>
+				<hr size="0.03" width="130%" color="#ccd3de"  noshade>
 				<dt>티켓예매</dt>
 				<dd>051-852-1982</dd>
-				<hr size="0.03" width="130%" noshade>
+				<hr size="0.03" width="130%" color="#ccd3de" noshade>
 				<dt>전화번호</dt>
 				<dd>051-590-9000</dd>
-				<hr size="0.03" width="130%" noshade>
+				<hr size="0.03" width="130%" color="#ccd3de" noshade>
 			</dl>
 		</div>
 		<table class="map">

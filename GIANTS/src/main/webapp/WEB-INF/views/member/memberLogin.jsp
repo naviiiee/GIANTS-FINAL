@@ -52,12 +52,12 @@
 				<li><hr size="0.05" width="100%" noshade></li>
 				<li>
 					아이디나 비밀번호를 잊으셨나요?<br>
-					일반회원 >
+					일반회원 >>
 					<input type="button" value="아이디찾기" class="login-sub-btn"
 							onclick="location.href='${pageContext.request.contextPath}/member/findId.do'">
 					<input type="button" value="비밀번호찾기" class="login-sub-btn"
-							onclick="location.href='${pageContext.request.contextPath}/member/findPw.do'">
-					기업회원 >
+							onclick="location.href='${pageContext.request.contextPath}/member/findPw.do'"><br>
+					기업회원 >>
 					<input type="button" value="아이디찾기" class="login-sub-btn"
 							onclick="location.href='${pageContext.request.contextPath}/member/findIdCp.do'">
 					<input type="button" value="비밀번호찾기" class="login-sub-btn"

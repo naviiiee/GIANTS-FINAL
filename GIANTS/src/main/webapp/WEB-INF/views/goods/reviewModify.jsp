@@ -5,7 +5,7 @@
 <!-- 리뷰 수정 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goodsReview.css">
 <div class="page-main">
-	<div class="main-title">
+	<div class="goods-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>리뷰 수정</h2>
 		<hr size="0.05" width="100%" noshade>
@@ -54,12 +54,14 @@
 			</li>
 			<li>
 				<form:label path="review_content">내용</form:label>
+				<br>
 				<form:textarea path="review_content"/>
 				<form:errors path="review_content" cssColor="error-color"/>
 			</li>
 			<li>
 				<label for="upload">사진</label>
 				<input type="file" id="upload" name="upload" accept="image/gif,image/png,image/jpeg">
+				<span>(${goodsReviewVO.review_photoname}) 파일이 등록되어 있습니다.</span>
 			</li>
 		</ul>
 		<div class="align-center">

@@ -11,10 +11,11 @@
 </head>
 <body>
 <div id="chatting" class="page-main">
+	<!--  
 	<div class="align-right">
-		<input type="button" value="X" id="delete_chatroom">
+		<input class="classic-btn" type="button" value="채팅방 퇴장" id="delete_chatroom">
 	</div>
-	
+	-->
 	<div id="chatting_message"></div>
 	
 	<form id="detail_form">

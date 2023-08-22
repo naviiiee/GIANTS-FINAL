@@ -37,6 +37,8 @@ img{
 
 .director{
 	overflow:hidden;
+    margin-top: -5%;
+}
 }
 
 .pos{
@@ -111,6 +113,10 @@ strong{
 }
 
 */
+
+
+
+
 </style>
 <!-- [관리자] 선수 목록 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LHJ/commu.css">
@@ -141,7 +147,7 @@ strong{
 		
 	<div class="aaa">
 		 <div class="dropdown">
-	        <button class="dropdown-btn"><img src="${pageContext.request.contextPath}/images/아래화살표.png">감독</button>
+	        <button class="dropdown-btn pos"><img src="${pageContext.request.contextPath}/images/아래화살표.png">감독</button>
 	        <div class="dropdown-submenu">
 	            <a href="player.do" class="over">감독</a>
 	            <a href="playerList_c.do">코치</a>
@@ -150,26 +156,9 @@ strong{
 	            <a href="playerList_w.do">외야수</a>
 	            <a href="playerList_n.do">내야수</a>
 	   	 </div>
-    </div>
-	<div>
-	<form action="player.do" id="search_form" method="get"  style="padding-bottom: 24px;">
-		<ul class="search align-center">
-			<li>
-				<select name="keyfield" id="keyfield">
-					<option value="1" <c:if test="${param.keyfield == 1}">SELECTED</c:if>>선수명</option>
-					<option value="2" <c:if test="${param.keyfield == 2}">SELECTED</c:if>>선수 포지션</option>
-				</select>
-			</li>
-			<li>
-				<input type="search" name="keyword" id="keyword" value="${param.keyword}" style="height:30px;">
-			</li>
-			<li>
-				<input type="submit" value="검색" style="height:30px;"  class="accept-btn">
-			</li>
-		</ul>
-		</form> 
 		</div>
-		<div class="a-tab align-right">
+		
+		<div class="a-tab align-right" style="margin-left:38%;">
 		<ul>
 			<li style="margin-top:20%; display:flex;">
 				<a href="stadium.do">구장 소개</a>
@@ -178,7 +167,7 @@ strong{
 				<a href="player.do" class="over">선수 소개</a>
 			</li>
 		</ul>
-	</div>
+		</div>
 	</div>
 	
 	
@@ -203,7 +192,7 @@ strong{
 			<p class="name">
 				<strong>
 					<c:if test="${user.mem_auth != 9}">${player.player_name}</c:if>
-					<c:if test="${!empty user && user.mem_auth == 9}"><a href="admin_playerModify.do?player_num=${player.player_num}" style="text-decoration : underline;">${player.player_name}</a></c:if>
+					<c:if test="${!empty user && user.mem_auth == 9}"><a href="admin_playerModify.do?player_num=${player.player_num}" style="color:black;">${player.player_name}</a></c:if>
 				<span class="nb">${player.player_backnumber}</span>
 				</strong>
 			</p>

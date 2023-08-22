@@ -37,6 +37,9 @@ public interface GoodsMapper {
 	//상품 상세
 	@Select("SELECT * FROM goods WHERE goods_num=#{goods_num}")
 	public GoodsVO selectGoods(Integer goods_num);
+	//상품 전체 정보
+	@Select("SELECT * FROM goods join goods_option using(goods_num) WHERE goods_num=#{goods_num}")
+	public GoodsVO selectGoodsAllInfo(Integer goods_num);
 	//상품 재고 목록
 	public List<GoodsOptionVO> selectOptionList(Integer goods_num);
 	//상품에 대한 총 재고 현황

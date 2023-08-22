@@ -17,7 +17,7 @@
 }
 </style>
 <div class="page-main">
-		<div class="main-title">
+		<div class="goods-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>[관리자] 상품등록</h2>
 		<hr size="0.05" width="100%" noshade>
@@ -39,63 +39,65 @@
 				<form:errors path="goods_name" cssClass="error-color"/>
 			</li>
 			<li>
+				<form:label path="goods_status">상태</form:label>
+				<form:radiobutton path="goods_status" value="1"/><span class="radio-status">판매중</span>
+				<form:radiobutton path="goods_status" value="2"/><span class="radio-status">판매중지</span>
+				<form:errors path="goods_status" cssClass="error-color"/>
+			</li>
+			<li>
 				<form:label path="goods_category">상품 카테고리</form:label>
 				<form:select path="goods_category" id="goods_category">
-					<option>===선택===</option>
+					<form:option value="0">===선택===</form:option>
 					<form:option value="1">유니폼</form:option>
 					<form:option value="2">모자</form:option>
 					<form:option value="3">응원도구</form:option>
 					<form:option value="4">기타</form:option>
 				</form:select>
-			</li>
-			<li>
-				<form:label path="goods_status">상태</form:label>
-				<form:radiobutton path="goods_status" value="1"/><span class="radio-status">판매중</span>
-				<form:radiobutton path="goods_status" value="2"/><span class="radio-status">판매중지</span>
-				<form:errors path="goods_content" cssClass="error-color"/>
+				<form:errors path="goods_category" cssClass="error-color"/>
 			</li>
 			<li class="hasSize" style="display:none;">
 				<div>
-					<form:hidden path="goods_sizes" value="85"/>
+					<input type="hidden" name="goods_sizes" value="85">
 					<label for="goods_stock1">85</label>
-					<input id="goods_stock1" name="goods_stocks" type="number" placeholder="재고수량 입력"/>
+					<input id="goods_stock1" name="goods_stocks" type="number" placeholder="재고수량 입력" value="${goods_stock1}"/>
+					<span id="stock_msg1"></span>
 				</div>
 				<div>
-					<form:hidden path="goods_sizes" value="90"/>
+					<input type="hidden" name="goods_sizes" value="90">
 					<label for="goods_stock2">90</label>
-					<input id="goods_stock2" name="goods_stocks" type="number" placeholder="재고수량 입력"/>
-					
+					<input id="goods_stock2" name="goods_stocks" type="number" placeholder="재고수량 입력" value="${goods_stock2}"/>
+					<span id="stock_msg2"></span>
 				</div>
 				<div>
-					<form:hidden path="goods_sizes" value="95"/>
+					<input type="hidden" name="goods_sizes" value="95"/>
 					<label for="goods_stock3">95</label>
-					<input id="goods_stock3" name="goods_stocks" type="number" placeholder="재고수량 입력"/>
-					
+					<input id="goods_stock3" name="goods_stocks" type="number" placeholder="재고수량 입력" value="${goods_stock3}"/>
+					<span id="stock_msg3"></span>
 				</div>
 				<div>
-				    <form:hidden path="goods_sizes" value="100"/>
+				    <input type="hidden" name="goods_sizes" value="100"/>
 				    <label for="goods_stock4">100</label>
-					<input id="goods_stock4" name="goods_stocks" type="number" placeholder="재고수량 입력"/>
-					
+					<input id="goods_stock4" name="goods_stocks" type="number" placeholder="재고수량 입력" value="${goods_stock4}"/>
+					<span id="stock_msg4"></span>
 				</div>
 				<div>
-					<form:hidden path="goods_sizes" value="105"/>
+					<input type="hidden" name="goods_sizes" value="105"/>
 					<label for="goods_stock5">105</label>
-					<input id="goods_stock5" name="goods_stocks" type="number" placeholder="재고수량 입력"/>
-					
+					<input id="goods_stock5" name="goods_stocks" type="number" placeholder="재고수량 입력" value="${goods_stock5}"/>
+					<span id="stock_msg5"></span>
 				</div>
 				<div>
-					<form:hidden path="goods_sizes" value="110"/>
+					<input type="hidden" name="goods_sizes" value="110"/>
 					<label for="goods_stock6">110</label>
-					<input id="goods_stock6" name="goods_stocks" type="number" placeholder="재고수량 입력"/>
-					
+					<input id="goods_stock6" name="goods_stocks" type="number" placeholder="재고수량 입력" value="${goods_stock6}"/>
+					<span id="stock_msg6"></span>
 				</div>
 			</li>
 			<li class="hasNoSize" style="display:none;">
-				<form:hidden path="goods_sizes" value="옵션없음"/>
+				<input type="hidden" name="goods_sizes" value="옵션없음"/>
 				<label for="goods_stock7">옵션없음</label>
-				<input id="goods_stock7" name="goods_stocks" type="number" placeholder="재고수량 입력"/>
-				
+				<input id="goods_stock7" name="goods_stocks" type="number" placeholder="재고수량 입력" value="${goods_stock7}"/>
+				<span id="stock_msg7"></span>
 			</li>
 			<li>
 				<form:label path="goods_price">상품가격</form:label>

@@ -13,6 +13,7 @@
 <!-- all_total, list(g_order_detail) - 사이즈 포함 -->
 <!-- 장바구니 시작 -->
 <div class="page-main">
+${list }
 	<h2>장바구니</h2>
 	<br>
 	<hr size="1">
@@ -119,6 +120,7 @@
 			<input type="button" value="쇼핑 계속하기" onclick="location.href='${pageContext.request.contextPath}/goods/goodsList.do'">
 			<input type = "submit" value = "주문하기"  id="order-btn">
 			<input type="button" value="장바구니 비우기" class="deleteCartAll"> 
+			<input type="button" value="주문목록" onclick="location.href='${pageContext.request.contextPath}/gorder/orderList.do'">
 		</div>
 	</form>
 	</c:if>

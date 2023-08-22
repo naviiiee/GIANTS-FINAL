@@ -91,5 +91,15 @@ public class TradingServiceImpl implements TradingService{
 	public int selectMemNumByTradeNum(Integer trade_num) {
 		return tradingMapper.selectMemNumByTradeNum(trade_num);
 	}
+
+	@Override
+	public List<TradingVO> selectTradingBookmarkList(Map<String, Object> map) {
+		return tradingMapper.selectTradingBookmarkList(map);
+	}
+
+	@Override
+	public int selectBookmarkRowCount(Map<String, Object> map) {
+		return tradingMapper.selectBookmarkRowCount(map);
+	}
 	
 } 

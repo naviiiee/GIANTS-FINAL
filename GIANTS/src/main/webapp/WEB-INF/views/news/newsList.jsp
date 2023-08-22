@@ -30,7 +30,7 @@
 	});
 </script>
 <div class="page-main">
-	<div class="main-title">
+	<div class="news-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>자이언츠 뉴스</h2>
 		<hr size="0.05" width="100%" noshade>
@@ -60,7 +60,7 @@
 				<script type="text/javascript">
 					$(function(){
 						$('#order').change(function(){
-							location.href='list.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&order=' + $('#order').val();
+							location.href='newsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&order=' + $('#order').val();
 						});
 					});
 				</script>

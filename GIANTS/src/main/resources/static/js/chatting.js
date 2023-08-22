@@ -145,5 +145,37 @@ $(function(){
 		//ajax통신을 위해 기본 이벤트 제거
 		event.preventDefault();
 	});	
-				
+	
+	/*-------------------
+		채팅방 나가기
+	--------------------*/
+	/*
+	$('#delete_chatroom').click(function(){
+		let choice = confirm('채팅방을 퇴장하시겠습니까?');
+		if(!choice){
+			return;
+		}
+		
+		//서버와 통신
+		$.ajax({
+			url:'../chat/deleteChatRoomMemberAjax.do',
+			type:'post',
+			data:{chatroom_num:$('#chatroom_num').val()},
+			dataType:'json',
+			success:function(param){
+				if(param.result == 'logout'){
+					alert('로그인해야 사용할 수 있습니다.');
+				} else if(param.result == 'success'){
+					alert('채팅방 퇴장 완료');
+					location.href='../chat/chatList.do';
+				} else{
+					alert('채팅방 퇴장 처리 오류 발생');
+				}
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});
+	});	
+	*/		
 });

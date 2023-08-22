@@ -20,7 +20,7 @@
 .horizontal-area img{ width:175px; height:175px;}
 </style>
 <div class="page-main">
-	<div class="main-title">
+	<div class="goods-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>상품목록</h2>
 		<hr size="0.05" width="100%" noshade>
@@ -32,7 +32,7 @@
 				<div class="align-right" id="list-btns">
 				<c:if test="${!empty user && user.mem_auth == 9}">
 					<input type="button" value="상품등록" onclick="location.href='registerGoods.do'">
-					<input type="button" value="[관리자]목록" onclick="location.href='admin_goodsList.do'" id="admin_btn">
+					<input type="button" value="[관리자]목록" onclick="location.href='${pageContext.request.contextPath}/member/adminMypageGoodsList.do'" id="admin_btn">
 				</c:if>
 					<input type="button" value="전체목록" onclick="location.href='goodsList.do'">
 				</div>

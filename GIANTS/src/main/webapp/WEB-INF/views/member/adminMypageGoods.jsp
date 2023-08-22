@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
 <!-- 상품목록 시작 -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goods.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods.filter.js"></script>
-<script type="text/javascript">
+<script type="text/javascript"> 
 	$(function(){
 		//검색 유효성 체크
 		$('#search_form').submit(function(){
@@ -16,86 +16,105 @@
 				return false;
 			}
 		});
+		
+		$('#filter_all').click(function(){
+			console.log($('#filter_all').val());
+			location.href='adminMypageGoodsList.do';
+		});
+		
+		$('#filter_uniform').click(function(){
+			console.log($('#filter_uniform').val());
+			location.href='adminMypageGoodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&goods_category=' + $('#filter_uniform').val();
+		}); 
+		
+		$('#filter_cap').click(function(){
+			console.log($('#filter_cap').val());
+			location.href='adminMypageGoodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&goods_category=' + $('#filter_cap').val();
+		}); 
+		
+		$('#filter_cheering').click(function(){
+			console.log($('#filter_cheering').val());
+			location.href='adminMypageGoodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&goods_category=' + $('#filter_cheering').val();
+		}); 
+		
+		$('#filter_etc').click(function(){
+			console.log($('#filter_etc').val());
+			location.href='adminMypageGoodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&goods_category=' + $('#filter_etc').val();
+		});
 	});
 </script>
 <style>
 .horizontal-area img{ width:175px; height:175px;}
 </style>
-<div class="page-main">
-	<div class="mypage-top2">
-		<div class="mypage-top-title">
-			<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
-			<h2>굿즈관리</h2>
-			<p>등록한 굿즈 목록</p>
-		</div>
+<div class="mypage-top2">
+	<div class="mypage-top-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+		<h2>굿즈목록</h2>
+		<p>자이언츠 굿즈목록 입니다.</p>
 	</div>
-	<div class="cate-filter">
-		<input name="category" type="button" value="전체" id="filter_all" class="on" onclick="location.href='goodsList.do'">
-		<input name="category" type="button" value="유니폼" id="filter_uniform" class="off" onclick="location.href='goodsList.do?category=1'"> 
-		<input name="category" type="button" value="모자" id="filter_cap" class="off" onclick="location.href='goodsList.do?category=2'"> 
-		<input name="category" type="button" value="응원도구" id="filter_cheering" class="off" onclick="location.href='goodsList.do?category=3'"> 
-		<input name="category" type="button" value="기타" id="filter_etc" class="off" onclick="location.href='goodsList.do?category=4'">
-	</div>
-	<hr size="1" width="100%" noshade>
-	<c:if test="${!empty user && user.mem_auth == 9}">
-	<div class="align-right list-btns">
-		<input type="button" value="관리자-상품목록" onclick="location.href='admin_goodsList.do'" id="admin_btn">
-		<input type="button" value="전체목록" onclick="location.href='goodsList.do'">
-	</div>
-	</c:if>
-	<form action="goodsList.do" id="search_form" method="get">
+</div> 
+<div class="mypage-form">
+	<form action="adminMypageGoodsList.do" id="search_form" method="get">
 		<ul class="search">
 			<li>
 				<select name="keyfield" id="keyfield">
-					<option value="">==선택==</option>
-					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>유니폼</option>
-					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>모자</option>
-					<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>응원도구</option>
-					<option value="4" <c:if test="${param.keyfield == 4}">selected</c:if>>기타</option>
+					<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>상품명+카테고리</option>
+					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>상품명</option>
+					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>내용</option>
 				</select>
 			</li>
 			<li>
 				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
 			</li>
 			<li>
-				<input type="submit" value="검색">
+				<input type="submit" value="찾기">
+				<input type="button" value="목록" onclick="location.href='adminMypageGoodsList.do'">
 			</li>
 		</ul>
-		<div class="align-right">
-			<select id="order" name="order">
-				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신</option>
-				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>찜하기순</option>
-				<option value="3" <c:if test="${param.order == 3}">selected</c:if>>리뷰많은순</option>
-			</select>
-			<script type="text/javascript">
-				$(function(){
-					$('#order').change(function(){
-						location.href='goodsList.do?keyfield=' + $('#keyfield').val() + '&keyword=' + $('#keyword').val() + '&order=' + $('#order').val();
-					});
-				});
-			</script>
-			<c:if test="${!empty user && user.mem_auth == 9}">
-				<input type="button" value="상품등록" onclick="location.href='registerGoods.do'">
-			</c:if>
-		</div>
 	</form>
 	<c:if test="${count == 0}">
-	<div>표시할 상품이 없습니다.</div>
+		<div>표시할 상품이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-	<div class="goods-space">
-		<c:forEach var="goods" items="${list}">
-		<div class="horizontal-area">
-			<a href="${pageContext.request.contextPath}/goods/goodsDetail.do?goods_num=${goods.goods_num}">
-				<img src="${pageContext.request.contextPath}/goods/imageView.do?goods_num=${goods.goods_num}">
-				<span>${goods.goods_name}</span>
-				<br>
-				<b><fmt:formatNumber value="${goods.goods_dprice}"/>원</b>
-			</a>
+		<table class="striped-table">
+			<tr>
+				<th>번호</th>
+				<th>카테고리</th>
+				<th>상품명</th>
+				<th>판매가</th>
+				<th>등록일</th>
+				<th>상태</th>
+				<th>수정</th>
+			</tr>
+			<c:forEach var="goods" items="${list}">
+			<tr>
+				<td class="align-center">${goods.goods_num}</td>
+				<td class="align-center">
+					<c:if test="${goods.goods_category == 1}">유니폼</c:if>
+					<c:if test="${goods.goods_category == 2}">모자</c:if>
+					<c:if test="${goods.goods_category == 3}">응원도구</c:if>
+					<c:if test="${goods.goods_category == 4}">기타</c:if>
+				</td>
+				<td class="align-center">
+					<a href="${pageContext.request.contextPath}/goods/goodsDetail.do?goods_num=${goods.goods_num}">${goods.goods_name}</a>
+				</td>
+				<td class="align-center">
+					<fmt:formatNumber value="${goods.goods_dprice}"/>원
+				</td>
+				<td>${goods.goods_regdate}</td>
+				<td>
+					<c:if test="${goods.goods_status == 1}">판매중</c:if>
+					<c:if test="${goods.goods_status == 2}"><b style="color:#dd032f;">판매중지</b></c:if>
+				</td>	
+				<td class="align-center">
+					<input class="table-td-btn" type="button" value="수정" onclick="location.href='${pageContext.request.contextPath}/goods/goodsUpdate.do?goods_num=${goods.goods_num}'">
+				</td>
+			</tr>
+			</c:forEach>
+		</table>
+		<div class="align-right">
+			<input type="button" value="상품등록" onclick="location.href='${pageContext.request.contextPath}/goods/registerGoods.do'">
 		</div>
-		</c:forEach>
-		<hr width="100%" size="1" noshade="noshade" class="float-clear">
-	</div>
 	<div class="align-center">${page}</div>
 	</c:if>
 </div>
