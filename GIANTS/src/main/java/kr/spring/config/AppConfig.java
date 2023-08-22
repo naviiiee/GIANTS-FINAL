@@ -60,7 +60,14 @@ public class AppConfig implements WebMvcConfigurer {
 				.addPathPatterns("/member/updateCompany.do")
 				.addPathPatterns("/member/changePassword.do")
 				// Ticket
-				//.addPathPatterns("/ticket/ticketMain.do"); 
+				.addPathPatterns("/ticket/ticketMain.do")
+				.addPathPatterns("/ticket/selectedGrade.do")
+				.addPathPatterns("/ticket/selectedBlock.do")
+				.addPathPatterns("/ticket/orderForm.do")
+				.addPathPatterns("/ticket/insertMPay.do")
+				.addPathPatterns("/ticket/ticketReserved.do")
+				.addPathPatterns("/ticket/ticketInfo.do")
+				.addPathPatterns("/ticket/deleteTorder.do")
 				// Chatting
 				.addPathPatterns("/chat/chatting.do")
 				//권오윤
@@ -84,7 +91,12 @@ public class AppConfig implements WebMvcConfigurer {
 				.addPathPatterns("/ticket/gradeList.do")
 				.addPathPatterns("/ticket/gradeWrite.do")
 				.addPathPatterns("/ticket/gradeUpdate.do")
-				.addPathPatterns("/ticket/seatList.do.do")
+				.addPathPatterns("/ticket/gradeDelete.do")
+				.addPathPatterns("/ticket/seatList.do")
+				.addPathPatterns("/ticket/seatWrite.do")
+				.addPathPatterns("/ticket/seatUpdate.do")
+				.addPathPatterns("/ticket/seatEditForm.do")
+				.addPathPatterns("/ticket/seatEdit.do")
 				.addPathPatterns("/ticket/gameWrite.do")
 				.addPathPatterns("/ticket/gameUpdate.do")
 				//권오윤 
