@@ -3,88 +3,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!-- 상품 구매 시작 -->
-<!-- goods(goodsVO), option(goodsOptionVO),  -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
+<!-- 상품 바로 구매 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/orderForm.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_order_form.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <style>
-
+.btn-api{
+	background-color : #dd032f;
+	color : white;
+	width: 800px;
+	height: 30px;
+	border : none;
+}
 </style>
 <div class="page-main">
-	
-	<form:form modelAttribute="orderVO" action="order.do" id="order_register">
-	
-		<h3>주문자 정보</h3> <!-- 굳이 넣어야할까? -->
-		<hr size="1">
-		<ul>
-			<li>
-				이름 <input type="text">
-			</li>
-			
-			<li>
-				이메일 <input type="email">
-			</li>
-			
-			<li>
-				연락처 <input type="text">
-			</li>
-		</ul>
-		<br>
-		<br>
-		<br>
-		
-		<h3>배송정보</h3>
-		<hr size="1">
-		<br>
-		<ul>
-			<li>
-				<form:label path="order_name">받는 사람</form:label>
-				<form:input path="order_name"/>
-				<input type="button" value="회원주소사용" id="member_address" class="default-btn"> <!-- 회원 가입 시 입력했던 정보 가져오기 -->
-				<form:errors path="order_name" cssClass="error-color"/>      
-			</li>
-			<li>
-				<label for="zipcode">우편번호</label>
-				<form:input path="order_zipcode" id="zipcode" maxlength="10"/>
-				<input type="button" onclick="execDaumPostcode()"
-				            value="우편번호 찾기" class="default-btn"> 
-				<form:errors path="order_zipcode" cssClass="error-color"/>     
-			</li>
-			<li>
-				<label for="address1">주소</label>
-				<form:input path="order_address1" id="address1" maxlength="30"/>
-				<form:errors path="order_address1" cssClass="error-color"/>      
-			</li>
-			<li>
-				<label for="address2">상세주소</label>
-				<form:input path="order_address2" id="address2" maxlength="30"/>
-				<form:errors path="order_address2" cssClass="error-color"/>      
-			</li>
-			<li>
-				<form:label path="mem_phone">전화번호</form:label>
-				<form:input path="mem_phone" maxlength="15" id="mem_phone"/>
-				<form:errors path="mem_phone" cssClass="error-color"/>      
-			</li>
-			<li>
-				<form:label path="order_message">남기실 말씀</form:label>
-				<form:input path="order_message"/>
-				<form:errors path="order_message" cssClass="error-color"/>      
-			</li>
-			
-		</ul>	
-		<br>
-		<br>
-		<br>
-		<h3>포인트적용</h3><span>포인트는 100점 이상부터 사용가능합니다</span>
-		<hr size="1">
-			잔여포인트 : p   <input type="button" value="전액사용" id="point-btn">
-			<br>
-			<input type="text" value="포인트입력" id="point-input-btn">원  <input type="button" value="적용" id="point-use-btn">
-		<br>
-		<br>
-		<br>
 		<h3>주문 리스트</h3>
 		<hr size="1">
 		<br>
@@ -97,6 +31,8 @@
 				<th>적립</th>
 				<th>합계</th>
 			</tr>
+			<c:set var="totalOrderPoint" value="0" /> <!-- 합계를 저장할 변수 초기화 -->
+			<c:forEach var="cart" items="${list}">
 				<tr>
 					<td>
 						<a href="${pageContext.request.contextPath}/goods/goodsDetail.do?goods_num=${cart.goods_num}">
@@ -104,39 +40,57 @@
 						</a>
 					</td>
 					<td>
-							${goods_name}
+							${cart.goodsVO.goods_name}
 					</td>
 					<td class="align-center">
-						<span class="goods-price" data-price="${goods_dprice}"><fmt:formatNumber value="${goods_dprice}"/>원</span>
+						<span class="goods-price" data-price="${cart.goodsVO.goods_dprice}"><fmt:formatNumber value="${cart.goodsVO.goods_dprice}"/>원</span>
 					</td>
 					
 					<td class = "align-center">
-						${order_quantity}
+						${cart.order_quantity}
 					</td>
 					<td>
-						${order_point}p
+						${cart.order_point}p
 					</td>
 					
 					<td class="align-center">
-						<div class="sub-total" data-total="${sub_total}">
-						<fmt:formatNumber value="${sub_total}"/>원
+						<div class="sub-total" data-total="${cart.sub_total}">
+						<fmt:formatNumber value="${cart.sub_total}"/>원
 						<br>
 						</div>
 					</td>					
-					<c:if test="${goods_size!='옵션없음'}">
+					<c:if test="${cart.goods_size!='옵션없음'}">
 						<tr class="option-tr">
 						    <td colspan="6"><span>⤷</span> <img src="${pageContext.request.contextPath}/images/btn_order_option.gif" alt="옵션" title="옵션">
-						    <span>사이즈 : ${goods_size}</span>
+						    <span>사이즈 : ${cart.goods_size}</span>
 						    </td>
 						</tr>
 
 					</c:if>
 				</tr>
-				<tr>
+				</c:forEach>		
+				<tr class="all_total">
 					<td colspan="5" class="align-right"><b>총구매금액</b></td>
 					<td class="align-center"><span class="all-total" data-alltotal="${all_total}"><fmt:formatNumber value="${all_total}"/>원</span></td>
 				</tr>
+				
+				<tr>
+					<td colspan="5" class="align-right"><b>예정 적립 포인트</b></td>
+					<td class="align-center"><span class="all-total"> ${totalOrderPoint}p</span></td>
+				</tr>
+		
 		</table>  
+		<br>
+		<br>
+		<h3>포인트적용</h3> <!-- 전액 사용 버튼을 누르거나 직접 입력해서 적용버튼 누르면 차감되도록 -->
+		<hr size="1">
+			잔여포인트 : ${mem_point}p   <input type="button" value="전액사용" id="point-btn" class="default-btn">
+			<br>
+			<input type="number" id="used_point" name="used_point" min=1 max="${mem_point}">원  
+			<input type="button" value="적용" id="usingPoint">
+			<input type="button" value="취소" id="cancelPoint">
+		<br>
+		<br>
 		
 		<!-- 주문금액 + 배송비 - 사용포인트 = 결제금액, 하단에 5만원 이상 결제 시 무료배송 -->
 		<div class="order-info">
@@ -150,54 +104,319 @@
 			</div>
 			
 			
-			<div class="order-dcount">
+			<div class="order-dcostt">
 			<h2>배송비</h2>
 			<p>
-				<em class="em-highlight">
+				<em class="em-highlight" id="order-dcost">
 					<c:if test="${all_total >= 50000}">
 						0원
+						<input type="hidden" value="0" name="order_dcost" id="order_dcost">
+
 					</c:if>
 					<c:if test="${all_total<50000}">
 						3,000원
+						<input type="hidden" value="3000" name="order_dcost" id="order_dcost">
 					</c:if>
-					<span id="operator"><img src="${pageContext.request.contextPath}/images/order-minus.png" width="30"></span>
 				</em>
+				
 				</p>
 			</div>
-			
+			<span id="operator"><img src="${pageContext.request.contextPath}/images/order-minus.png" width="30"></span>
 			<div class="order-use-point">
 			<h2>사용포인트</h2>
 			<p>
-				<em class="em-highlight">원</em>
+				<em class="em-highlight" id="used-point-result"> 0p</em><!-- usedpoint -->
 				</p>
 			</div>
 			<span id="operator"><img src="${pageContext.request.contextPath}/images/order-equals.png" width="30"></span>
 			
+			    <c:choose>
+			        <c:when test="${all_total >= 50000}">
+			            ${all_total}
+			        </c:when>
+			        <c:otherwise>
+			            ${all_total + 3000}
+			        </c:otherwise>
+			    </c:choose>
 			<div class="order-final-price">
-			<h2>결제금액</h2>
-				<p>
-				<em class="em-highlight-result"><fmt:formatNumber value="${all_total}"/>원</em>
+			<h2>결제금액</h2> 
+				<p> 
+				<em class="em-highlight-result" id="all_total_result"><fmt:formatNumber value="${allTotalAndDcost}"/>원</em>
 				</p>
 			</div>
 		</div>
 		<span class="annot">5만원 이상 결제 시 무료배송입니다.</span>
 		
 		<br>
+		<br>
+		
+		<h3>배송정보</h3>
+		<hr size="1">
+		<br>
+		<ul>
+			<li>
+				<label for="receive_name">받는 사람</label>
+				<input type="text" name="receive_name" id="receive_name">
+				<input type="button" value="회원주소사용" id="member_address" class="default-btn"> <!-- 회원 가입 시 입력했던 정보 가져오기 -->
+			</li>
+			<li>
+				<label for="zipcode">우편번호</label>
+				<input type="text" name="order_zipcode" id="zipcode" maxlength="10" readonly="readonly">
+				<input type="button" onclick="execDaumPostcode()"
+				            value="우편번호 찾기" class="default-btn"> 
+			</li>
+			<li>
+				<label for="address1">주소</label>
+				<input type="text" name="order_address1" id="address1" maxlength="30">
+			</li>
+			<li>
+				<label for="address2">상세주소</label>
+				<input type="text" name = "order_address2" id="address2" maxlength="30">
+			</li>
+			<li>
+				<label for="mem_phone">전화번호</label>
+				<input type="text" maxlength="15" name="mem_phone" id="mem_phone">
+			</li>
+			<li>
+				<label for="order_message">남기실 말씀</label>
+				<input type="text" name="order_message" id="order_message">
+			</li>
+			
+		</ul>	
+		
+		
+		
+		<h3>결제 정보</h3>
+		<hr size="1">
+		입금자명 <input type="text" id="order_name"> 
+		
+		
+		<br>
 		
 		<h3>결제수단</h3>
 		<hr size="1">
-		<li>
-			<input type="radio" name="order_payment" id="payment1" value="1">통장입금
-			<input type="radio" name="order_payment" id="payment2" value="2">카드결제                
+		<li>	<!-- 통장입금 radio  버튼 누르면 계좌번호 보이도록 처리-->
+			<input type="radio" path="order_payment" id="payment1" value="2">무통장입금 <!-- 무통장이면 결제 정보에서 쓴 이름 가져옴 -->
+			<input type="radio" path="order_payment" id="payment2" value="1">카드결제                
 		</li>
 		
-		<div class="align-center">
-			<form:button class="default-btn">주문하기</form:button>
-			<input type="button" value="주문취소" class="default-btn"
-			 onclick="location.href='${pageContext.request.contextPath}/gorder/goods_cart.do'">
-		</div>             
-	</form:form>
-</div>
+		<div id="bankInfo" style="display: none;">
+    		<span>계좌번호: xxx-xxxx-xxxx (3시간 이내로 입금하지 않으면 자동 취소됩니다.)</span>
+    		<!-- select로 처리하고 입력받도록... 가상계좌 구현은 하지 않기? 배송 상태 변경해주는 것처럼 아이디랑 입금자명 일치하면 관리자가 처리해주도록? -->
+		</div>
+		
+		<div id="payInfo" style="display : none;'">
+			<button class="btn-api" id="paymentButton" onclick="requestPay()">주문API</button>
+		</div>
+		<script type="text/javascript">
+		//=================radio 버튼 처리 시작=================
+		const payment1Radio = document.getElementById('payment1');
+	    const payment2Radio = document.getElementById('payment2');
+	    const bankInfoDiv = document.getElementById('bankInfo');
+	    const payInfoDiv = document.getElementById('payInfo');
+	    
+	    let payment1Checked = false; // 무통장입금 라디오 버튼의 상태
+	 // 무통장입금 라디오 버튼이 선택되었을 때
+		payment1Radio.addEventListener('change', function() {
+		    if (this.checked) {
+		        bankInfoDiv.style.display = 'block';
+		        payInfoDiv.style.display = 'none';
+		        payment1Checked = true;
+		        payment2Radio.checked = false;
+		    } else {
+		        // 계좌번호 <div> 요소를 숨김
+		        bankInfoDiv.style.display = 'none';
+		        payment1Checked = false;
+		    }
+		});
+
+		 payment2Radio.addEventListener('change', function() {
+		        if (this.checked) {
+		            bankInfoDiv.style.display = 'none'; //계좌번호 숨기기
+		            payInfoDiv.style.display = 'block'; //결제 api 버튼 보여주기
+		            payment1Radio.checked = false; // 무통장입금 라디오 버튼 선택 해제
+		            payment1Checked = false;
+		        }
+		        
+		        else{
+		        	payInfoDiv.style.display = 'none';
+		        	
+		        }
+		        
+		    });		
+		</script>				
+		 <input type="button" value="주문취소" class="default-btn"
+		 onclick="location.href='${pageContext.request.contextPath}/goods/goodsList.do'">
+		
+		<c:forEach var="cart" items="${list}">
+		<script>
+		//=================결제 api 처리 시작=================
+		// 주문번호 만들기
+		function createMid(){
+			const date = new Date();
+			const year = date.getFullYear();
+			const month = String(date.getMonth() + 1).padStart(2, "0");
+			const day = String(date.getDate()).padStart(2, "0");
+			
+			let merchant_uid = year + month + day;
+			for(let i=0;i<10;i++) {
+				merchant_uid += Math.floor(Math.random() * 8);	
+			}
+			return merchant_uid;
+		}
+		
+		function requestPay() {
+			
+			/*유효성 검사*/
+			 if($('#receive_name').val().trim()==''){
+					alert('수령인 입력은 필수입니다.');
+					$('#receive_name').val('').focus();
+					return false;
+				}
+			
+			if($('#mem_phone').val().trim()==''){
+				alert('전화번호는 필수입니다.');
+				$('#mem_phone').val('').focus();
+				return false;
+			}
+			if($('#zipcode').val().trim()==''){
+				alert('우편번호는 필수입니다.');
+				$('#zipcode').val('').focus();
+				return false;
+			}
+			if($('#address1').val().trim()==''){
+				alert('주소는 필수입니다.');
+				$('#address1').val('').focus();
+				return false;
+			}
+			if($('#address2').val().trim()==''){
+				alert('상세주소를 입력해주세요.');
+				$('#address2').val('').focus();
+				return false;
+			}
+			if($('#order_name').val().trim()==''){
+				alert('결제자 이름은 필수입니다.');
+				$('#order_name').val('').focus();
+				return false;
+			}
+			
+			/* Portone 결제 API */
+			var IMP = window.IMP;
+		    IMP.init('imp40441146');  // 가맹점 식별코드
+			
+		    let order_name = document.getElementById('order_name').value;
+		    let receive_name = document.getElementById('receive_name').value;
+		    let mem_phone = document.getElementById('mem_phone').value;
+		    let order_zipcode = document.getElementById('zipcode').value;
+		    let order_address1 = document.getElementById('address1').value;
+		    let order_address2 = document.getElementById('address2').value;
+		    let order_message = document.getElementById('order_message').value;
+		    let used_point = document.getElementById('used_point').value;
+		    let all_total = parseInt(document.getElementById('all_total_result').textContent);
+		    let order_dcost = document.getElementById('order_dcost').value;
+		 
+		    if (used_point === "" || used_point === null) {
+		        used_point = 0; // 포인트를 사용하지 않았으면 0으로 처리
+		    }
+		    console.log(used_point); 
+		 	// IMP.request_pay(param, callback) 결제창 호출
+		 	IMP.request_pay({
+		 		pg:'kakaopay.TC0ONETIME', //kakaopay.CID
+		 		pay_method:'card',
+		 		merchant_uid:createMid(),   // 주문번호
+		 		name: '${cart.goodsVO.goods_name}', //상품명
+		 		amount:${allTotalAndDcost},	// 숫자 타입
+		 		buyer_name:order_name,
+		 		buyer_tel:mem_phone
+		 	},
+		 	//callback
+		 	function(rsp) {
+		 		//결제 성공
+		 		if(rsp.success) {
+		 			const impUid = rsp.imp_uid;
+		 			const merchant_uid = rsp.merchant_uid;
+		 			const sysdate = new Date();
+		 			let msg = '결제가 완료되었습니다.';
+		 			
+		 			//~~~~~~~상품명이 2개 이상이면 마지막 값으로 덮어씌워짐... 반복문 - list처리 chat~~~~~~~
+		 			//controller로 넘어가는 값들
+		 			let result = {
+			 				'mem_num':${cart.mem_num},
+			 				'order_status' : '0',
+			 				'order_payment':'1', //카드가 1
+			 				'order_name' : order_name, //결제자 이름
+			 				'receive_name' : receive_name, //수령자 이름
+			 				'order_zipcode' : order_zipcode,
+			 				'order_address1' :order_address1,
+			 				'order_address2' : order_address2,
+			 				'mem_phone' : mem_phone, //받는 사람 전화번호
+			 				'order_message' : order_message, 
+			 				'goods_name' : '${cart.goodsVO.goods_name}',
+			 				'order_quantity' : '${cart.order_quantity}',
+			 				'used_point' : used_point,
+			 				'order_point' : '${totalOrderPoint}', //적립 포인트
+			 				'goods_num' : '${cart.goods_num}',
+			 				'goods_size' : '${cart.goods_size}',
+			 				'goods_dprice' : '${cart.goodsVO.goods_dprice}',
+			 				'order_total': all_total,  //최종 결제금액(가격+배송비-포인트)
+			 				'pg':'kakaopay',
+			 				'pay_method' : 'card',
+			 				'merchant_uid' : createMid(),
+			 				'goods_total' : ${cart.sub_total}, //동일 상품 합계 - detail
+			 				'name' : '${cart.goodsVO.goods_name}',
+			 				'amount' : all_total,
+			 				'order_dcost' : order_dcost
+		 			}
+		 			console.log(result); 
+		 			
+		 			paymentComplete(result); //ajax 통신 처리
+		 			}
+		 		//결제 실패
+		 		else {
+		 			let msg = '결제 실패\n';
+		 			msg += 'ERROE : ' + rsp.error_msg;
+		 		}
+			}); 
+		 
+		}
+		
+		//계산 완료
+		function paymentComplete(result){
+			
+			$.ajax({
+				 url: '../gorder/insertMPay.do',
+			        type: 'post',
+			        dataType: 'json', // 서버로부터 받을 데이터의 타입을 JSON으로 설정
+			        data: result, // 데이터를 JSON 문자열로 변환하여 보냄
+			        success:function(param){
+						if(param.result == 'logout'){
+							alert('로그인 후 사용하세요!');
+						} 
+						else if(param.result=='orderError'){
+							alert('주문할 상품이 없습니다');
+						}
+						else if(param.result=='noStatus'){
+							alert('판매가 중지된 상품이 있습니다');	
+						} else if(param.result=='noQuantity'){
+							alert('상품 재고가 부족합니다');
+						}	
+						else if(param.result == 'success'){
+							alert('결제 성공! 결제 목록으로 이동합니다.');
+							location.href='../gorder/orderList.do?mem_num=${cart.mem_num}';
+						}else{
+							alert('구매 오류!');
+						}
+					},
+					error:function(){
+						alert('네트워크 오류 발생 - 장바구니 api 구매');
+					}
+ 			});
+		}
+		
+
+		 </script>
+		</c:forEach>
+		
 <!-- 우편번호 검색 시작 -->
 <!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
@@ -296,6 +515,5 @@
     }
 </script>
 <!-- 상품 구매 끝 -->
-
 
 

@@ -11,9 +11,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 
 
-orderVO : ${orderVO}
+<%-- orderVO : ${orderVO}
 <br>
-detailList : ${detailList}
+detailList : ${detailList} --%>
 
 <div class="page-main">
 	<h2>배송지정보수정</h2>

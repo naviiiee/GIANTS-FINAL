@@ -132,8 +132,11 @@
 			 <!-- 바로 구매 폼 -->
 	        <form id="goods_direct" method="post" action="${pageContext.request.contextPath}/gorder/orderFormDirect.do">
 		        <input type="hidden" id="hidden_opt_num" name="opt_num">
-		        <input type="hidden" name="goods_num">
-		        <input type="hidden" name="order_quantity">
+				<input type="hidden" name="goods_num">
+				<input type="hidden" name="order_quantity">
+				<input type="hidden" name="goods_name">
+				<input type="hidden" name="goods_dprice">
+				<input type="hidden" name="goods_status">
 		        
 			        <button type="submit" class="not-css">
 						<div id="goods_pay">

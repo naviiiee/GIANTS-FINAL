@@ -72,11 +72,16 @@ public class GorderController {
 
 	// ==============================바로구매 시작 (goodsView > 바로구매)==================================================
 	//장바구니 임의등록(장바구니 목록을 보여주진 않고 등록만 해주고 바로 결제처리를 해준다)
-		@RequestMapping("/cart/write.do")
+	
+	//등록하는 메서드를 하나 더 만들어야될듯? 거기서 service.insert해주고 거기서 등록해준 정보를 여기서 받아서 값을 써야할듯 
+	//로직 정리해보기
+		@RequestMapping("/order/write.do")
 		@ResponseBody
-		public Map<String, String> addToCart(GcartVO cartVO, HttpSession session) {
+		public Map<String, String> addToCartForDirect(GcartVO cartVO, HttpSession session) {
 			Map<String, String> mapJson = new HashMap<String, String>();
 			MemberVO user = (MemberVO) session.getAttribute("user");
+			log.debug("<<D-cartVO >> : " + cartVO); //폼에서 전달해준 값이 잘 들어갔는지
+			
 			// 로그인 x
 			if (user == null) {
 				mapJson.put("result", "logout");
@@ -86,11 +91,20 @@ public class GorderController {
 				cartVO.setMem_num(user.getMem_num()); 
 				GcartVO db_cart = cartService.getCart(cartVO);
 				
-				log.debug("GcartVO : " + db_cart);
+				//장바구니에 상품이 있는 경우 상품 삭제 요청
+				if(db_cart !=null) {
+					mapJson.put("result", "clearCart");
+				}
+				
+				//장바구니가 null인 경우 바로 구매 가능
+				else {
+					
+					mapJson.put("result", "success");
+				}
 				
 				// 재고 확인
 				// 재고를 구하기 위해 상품 정보 호출
-				GoodsVO db_goods = goodsService.selectGoodsAllInfo(db_cart.getGoods_num());
+				/*GoodsVO db_goods = goodsService.selectGoodsAllInfo(db_cart.getGoods_num());
 				// 굿즈 재고, 구매수량
 				int db_stock = cartService.getStockByoption(db_goods.getGoods_num(), cartVO.getOpt_num());
 				int order_quantity = cartVO.getOrder_quantity();
@@ -103,33 +117,22 @@ public class GorderController {
 				else {
 				cartService.insertCart(cartVO);
 				mapJson.put("result", "success");
-				}
+				}*/
 			}
 
 			return mapJson;
 		}
 	
-	
-	@RequestMapping("/gorder/directBuy.do")
-	@ResponseBody
-	public Map<String, String> directBuy(GorderVO orderVO, HttpSession session) { // 상품번호, 주문수, 옵션(처리 아직) 가져옴
-		Map<String, String> mapJson = new HashMap<String, String>();
-		MemberVO user = (MemberVO) session.getAttribute("user");
-		// 로그인 x
-		if (user == null) {
-			mapJson.put("result", "logout");
-		}
-		// 로그인 o
-		else {
-			orderVO.setMem_num(user.getMem_num()); // 현재 로그인된 회원의 mem_num 설정
-			mapJson.put("result", "success"); // success인 경우 orderForm 호출
-		}
-
-		return mapJson;
-	}
 
 	// 바로 구매 폼
-	//order_quantity(detail, goods_dprice, goods_num, opt_num(vo에만 있음) 등을 orderVO에 담아서 올 것임
+	/* form name="goods_direct" - 원래 장바구니 리스트 보는 목록인데 ... 리스트를 바로구매 폼으로? 
+	<input type="hidden" name="goods_num">
+	<input type="hidden" name="order_quantity">
+	<input type="hidden" name="goods_name">
+	<input type="hidden" name="goods_dprice">
+	<input type="hidden" name="goods_status">
+	 <input type="hidden" id="hidden_opt_num" name="opt_num">
+	 */
 	@PostMapping("/gorder/orderFormDirect.do")
 	public String directForm(@ModelAttribute("orderVO") GorderVO orderVO, HttpSession session, Model model,
 			HttpServletRequest request) {
@@ -144,7 +147,7 @@ public class GorderController {
 		int all_total = cartService.getTotalByMem_num(map);
 		if (all_total <= 0) {
 			model.addAttribute("message", "정상적인 주문이 아니거나 상품의 수량이 부족합니다.");
-			model.addAttribute("url", request.getContextPath() + "/gorder/goods_cart.do");
+			model.addAttribute("url", request.getContextPath() + "/gorder/goodsList.do");
 			return "common/resultView";
 		}
 
@@ -156,7 +159,7 @@ public class GorderController {
 			if (goods.getGoods_status() == 2) {
 				// 상품 미표시
 				model.addAttribute("message", "[" + goods.getGoods_name() + "]상품판매 중지");
-				model.addAttribute("url", request.getContextPath() + "/gorder/goods_cart.do");
+				model.addAttribute("url", request.getContextPath() + "/gorder/goodsList.do");
 				return "common/resultView";
 			}
 
@@ -165,7 +168,7 @@ public class GorderController {
 			if (db_stock < cart.getOrder_quantity()) {
 				// 상품 재고 수량 부족
 				model.addAttribute("message", "[" + goods.getGoods_name() + "]재고수량 부족으로 주문 불가");
-				model.addAttribute("url", request.getContextPath() + "/gorder/goods_cart.do");
+				model.addAttribute("url", request.getContextPath() + "/gorder/goodsList.do");
 				return "common/resultView";
 			}
 
@@ -173,7 +176,6 @@ public class GorderController {
 
 		}
 
-		// mem_point 가져오기
 		MemberVO memberVO = memberService.selectMember(user.getMem_num());
 		int mem_point = memberVO.getMemberDetailVO().getMem_point();
 
@@ -183,7 +185,7 @@ public class GorderController {
 		model.addAttribute("list", cartList);
 		model.addAttribute("all_total", all_total);
 
-		return "orderForm";
+		return "orderFormDirect";
 	}
 	
 	//=============================================================================================

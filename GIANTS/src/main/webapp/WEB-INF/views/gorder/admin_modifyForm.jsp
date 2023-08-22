@@ -10,7 +10,7 @@
 	<c:if test="${orderVO.order_status > 1}">
 	<div class="result-display">
 		결제 완료 혹은 배송대기일 때만 배송지정보를 수정할 수 있습니다.
-	</div>
+	</div> 
 	</c:if>
 	<c:if test="${orderVO.order_status <=1}">
 	<form:form modelAttribute="orderVO" action="admin_modify.do"

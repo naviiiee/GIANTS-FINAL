@@ -1,37 +1,32 @@
 $(function(){
-	
-	
 	//============================
-	//바로 구매
+	//바로 구매 폼 아이디 - 장바구니에 등록하되, 리스트를 불러오지 않고 바로 결제폼으로 이동시킴
 	$('#goods_direct').submit(function(event){
 		event.preventDefault(); // 기본 클릭 동작을 막음
-		
+		 
+		if (optNumValue === "") {
+	        alert("옵션을 선택하세요.");
+	        return false;
+	    }
 		if($('#order_quantity').val() == ''){
 			alert('수량을 입력하세요');
 			$('#order_quantity').focus();
 			return false;
 		}
 		
-	 	// 선택된 옵션 정보 가져오기
 	    var selectedOption = $('#optionSelect option:selected');
 	    var optNumValue = selectedOption.val();
-	
-	    // 옵션 선택 여부 확인
-	    if (optNumValue === "") {
-	        alert("옵션을 선택하세요.");
-	        return false;
-	    }
-
-    	
 		let form_data = {
+			//gcartVO
 		    goods_num: $('#goods_num').val(),
-		    goods_dprice: $('#goods_price').val(),
+		    goods_dprice: $('#goods_dprice').val(),
 		    order_quantity: $('#order_quantity').val(),
-		    opt_num: optNumValue  // 이 부분 추가
+		    opt_num: optNumValue,
+		    goods_name : $('#goods_name').val()
+		   // goods_status : $('#goods_status').val()
 		};
-  		//서버와 통신
 		$.ajax({
-			url:'../gorder/directBuy.do',
+			url:'../order/write.do', //장바구니에 등록해주는 작업
 			type:'post',
 			data:form_data,
 			dataType:'json',
@@ -39,9 +34,13 @@ $(function(){
 				if(param.result == 'logout'){
 					alert('로그인 후 사용하세요!');
 				}else if(param.result == 'success'){
-					alert('주문 폼으로 이동합니다.');
-					location.href='../gorder/orderFormDirect.do';
-				}else{
+					alert('바로 결제 성공! 주문 폼으로 이동합니다.');
+					location.href='../gorder/orderFormDirect.do'; //바로 결제폼으로 이동
+				} else if(param.result=='overquantity'){
+					alert('재고수 부족');
+					location.href='../goods/goodsList.do';
+				}
+				else{
 					alert('바로구매 오류');
 				}
 			},
@@ -51,6 +50,8 @@ $(function(){
 		});
 		event.preventDefault();
 	});
+	//==========================================
+	
 	
 	//============================
 	//장바구니 등록

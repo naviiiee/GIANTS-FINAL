@@ -13,9 +13,6 @@
 <!-- all_total, list(g_order_detail) - 사이즈 포함 -->
 <!-- 장바구니 시작 -->
 <div class="page-main">
-${list }
-<br>
-
 	<h2>장바구니</h2>
 	<br>
 	<hr size="1">
