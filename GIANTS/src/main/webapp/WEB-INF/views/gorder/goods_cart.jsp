@@ -6,11 +6,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_cart.js"></script>
-<style>
-
-
-</style>
 <!-- all_total, list(g_order_detail) - 사이즈 포함 -->
+${list}
 <!-- 장바구니 시작 -->
 <div class="page-main">
 	<h2>장바구니</h2>
@@ -29,7 +26,6 @@
 	</c:if>
 	<c:if test="${!empty list}">
 	<form id="cart_order" action="${pageContext.request.contextPath}/gorder/orderForm.do" method="post">
-	<input type="hidden" id="mem_num">
 		<table class="basic-table">
 			<tr>
 				<!-- 1. 체크박스 -->
@@ -46,6 +42,8 @@
 				<th>합계</th>
 			</tr>
 			<c:forEach var="cart" items="${list}">
+			<input type="hidden" id="mem_num" value="${cart.mem_num}">
+			<input type="hidden" id="opt_num" value="${cart.opt_num}">
 				<tr>
 					<!-- 1. 체크박스 -->
 					<td class="align-center">
@@ -63,8 +61,6 @@
 							${cart.goodsVO.goods_name}
 					</td>
 					
-					<!-- 상품정보 끝 -->
-					
 					<!-- 4. 판매가 -->
 					<td class="align-center">
 						<span class="goods_dprice" data-dprice="${cart.goodsVO.goods_dprice}"><fmt:formatNumber value="${cart.goodsVO.goods_dprice}"/>원</span>
@@ -73,13 +69,14 @@
 					
 					<!-- 5. 수량 및 상태 체크 -->
 					<td class = "align-center">
-					<%-- <div class="order_quantity> --%>
 						<c:if test="${cart.goodsVO.goods_status==2 or cart.goodsOptionVO.goods_stock < cart.order_quantity}">[판매중지]</c:if>
 						<c:if test="${cart.goodsVO.goods_status==1 and cart.goodsOptionVO.goods_stock >= cart.order_quantity}">
-							<input type="number" name="order_quantity" min="1" max="${cart.goodsOptionVO.goods_stock}" autocomplete = "off" value = "${cart.order_quantity}">
+							<input type="number" id="order_quantity" name="order_quantity" min="1" max="${cart.goodsOptionVO.goods_stock}" 
+							autocomplete = "off" value = "${cart.order_quantity}">
 							<br>
 							<br>
-							<input type = "button" value = "변경" class = "cart-modify" data-cartnum = "${cart.cart_num}" data-goodsnum = "${cart.goods_num}">
+							<input type = "button" value = "변경" class = "cart-modify" 
+							data-cartnum = "${cart.cart_num}" data-goodsnum = "${cart.goods_num}">
 						</c:if>
 					<!-- </div> -->	
 					</td>

@@ -125,10 +125,13 @@ public class GcartController {
 	public Map<String, String> submitModify(GcartVO cartVO, HttpSession session) {
 		Map<String, String> mapJson = new HashMap<String, String>();
 		// 재고를 구하기 위해 상품 정보 호출
-		log.debug("<<cartVO 옵션 가져오는지 >> : " + cartVO); 
+		log.debug("<<장바구니 수정 - cartVO>> : " + cartVO); 
 		
-		 GcartVO db_cart = cartService.getCart(cartVO); GoodsVO db_goods =
-		 goodsService.selectGoods(db_cart.getGoods_num());
+		 GcartVO db_cart = cartService.getCart(cartVO); 
+		 
+		 log.debug("<<장바구니 수정 - db_cart>> : " + db_cart); 
+		 
+		 GoodsVO db_goods = goodsService.selectGoods(db_cart.getGoods_num());
 		 log.debug("<< db_cart >> : " + db_cart); 
 		 log.debug("<< db_goods >> : " + db_goods);
 
@@ -145,7 +148,7 @@ public class GcartController {
 			log.debug("<<재고 가져오기 goods.getGoods_num() >> : " + goods.getGoods_num());
 			log.debug("<<재고 가져오기 cartVO.getOpt_num() >> : " + cartVO.getOpt_num());
 			
-			int db_stock = cartService.getStockByoption(goods.getGoods_num(), cartVO.getOpt_num());
+			int db_stock = cartService.getStockByoption(goods.getGoods_num(), db_cart.getOpt_num());
 			
 			if (goods.getGoods_status() == 2) {// 상품 미표시
 				mapJson.put("result", "noSale");

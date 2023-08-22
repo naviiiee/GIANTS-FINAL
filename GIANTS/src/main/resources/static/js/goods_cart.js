@@ -223,22 +223,26 @@ $(function(){
 	 * 장바구니 상품 주문 수량 변경
      *============================*/
 	$('.cart-modify').on('click',function(){
-		let order_quantity = $(this).parent().find('input[name="order_quantity"]');
-		if(order_quantity.val()==''){
+		
+		let mem_num = $('#mem_num').val();
+		console.log("회원번호 : " , mem_num);
+		let order_quantity = $('#order_quantity').val();
+		console.log("읽어온 상품 수량 : ", order_quantity);
+		
+		if(order_quantity==''){
 			alert('수량을 입력하세요');
-			order_quantity.focus();
 			return;
 		}
 		
-		if(isNaN(order_quantity.val())){
+		if(isNaN(order_quantity)){
 			 //태그에 명시한 value값을 읽어옴
-			order_quantity.val(order_quantity.attr('value'));
+			order_quantity.order_quantity.attr('value');
 			return;
 		}
 		
-		if(order_quantity.val() < 1){
+		if(order_quantity < 1){
 			alert('상품의 최소 수량은 1입니다.');
-			order_quantity.val(order_quantity.attr('value'));
+			order_quantity.attr('value');
 			return;
 		}
 		
@@ -246,7 +250,11 @@ $(function(){
 		$.ajax({
 			url:'../cart/modifyCart.do',
 			type:'post',
-			data:{cart_num:$(this).attr('data-cartnum'),goods_num:$(this).attr('data-goodsnum'),order_quantity:order_quantity.val()},
+			data:{cart_num:$(this).attr('data-cartnum'),
+					goods_num:$(this).attr('data-goodsnum'),
+					order_quantity:order_quantity,
+					mem_num : mem_num
+					},
 			dataType:'json',
 			success:function(param){
 				if(param.result == 'logout'){
