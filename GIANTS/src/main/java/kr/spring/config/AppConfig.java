@@ -86,7 +86,7 @@ public class AppConfig implements WebMvcConfigurer {
 				.addPathPatterns("/food/deleteFood.do");
 		
 		//Admin(관리자) 인터셉터 설정
-		registry.addInterceptor(adminCheck)
+		registry.addInterceptor(adminCheck) 
 				// Ticket
 				.addPathPatterns("/ticket/gradeList.do")
 				.addPathPatterns("/ticket/gradeWrite.do")
