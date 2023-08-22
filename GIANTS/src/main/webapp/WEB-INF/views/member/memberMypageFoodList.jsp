@@ -53,6 +53,7 @@
 			<td>${order.total_price}</td>
 			<td>${order.f_order_regDate}</td>
 			<td>
+				<c:if test="${order.f_order_status == 1}">
 				<input type="button" value="주문취소" id="order_cancel"
 				class="default-btn"> <script>
 					let order_cancel = document
@@ -64,6 +65,7 @@
 						}
 					};
 				</script>
+				</c:if>
 			</td>
 		</tr>
 		</c:forEach>

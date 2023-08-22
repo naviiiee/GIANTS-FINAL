@@ -225,4 +225,10 @@ public class MemberServiceImpl implements MemberService{
 	public List<TicketVO> selectListTicketByMem_num(Map<String, Object> map) {
 		return memberMapper.selectListTicketByMem_num(map);
 	}
+
+	@Override
+	public void updateOrderStatus(F_orderVO order) {
+		memberMapper.updateOrderStatus(order);
+	}
+
 }
