@@ -14,65 +14,70 @@ $(function(){
 			success:function(param){
 				
 				$('#review_output').empty();
-				
-				console.log(param.page);
-				
 				let a = '';
-				/*let page = param.page;
-				let startPage = param.start;
-				let endPage = param.end;*/
-				let reviewList = param.list;
 				
-				a += '<table class="detail-tb align-center">';
-				a += '<tr>';
-				a += '<th style="width:10%;">별점</th>';
-				a += '<th>제목</th>';
-				a += '<th style="width:13%;">작성자ID</th>';
-				a += '<th style="width:12%;">등록일</th>';
-				a += '</tr>';
+				console.log(param.count);
 				
-				$.each(reviewList, function(index, value){
+				if(param.count <= 0){
+					a += '<span>작성된 리뷰가 없습니다.</span>';
+				}
+				
+				else{
+					/*let page = param.page;
+					let startPage = param.start;
+					let endPage = param.end;*/
+					let reviewList = param.list;
+					
+					a += '<table class="detail-tb align-center">';
 					a += '<tr>';
-					a += '<td>';
-					if(value.review_score == 5){
-						a += '★★★★★(5)';
-					} else if(value.review_score == 4){
-						a += '★★★★(4)';
-					} else if(value.review_score == 3){
-						a += '★★★(3)';
-					} else if(value.review_score == 2){
-						a += '★★(2)';
-					} else if(value.review_score == 1){
-						a += '★(1)';
-					}
-					a += '</td>';
-					
-					a += '<td class="re-title" id="title' + index + '" style="cursor:pointer;">' + value.review_title + '</td>';
-					a += '<td>' + value.mem_id + '</td>';
-					a += '<td>' + value.review_regdate + '</td>';
+					a += '<th style="width:10%;">별점</th>';
+					a += '<th>제목</th>';
+					a += '<th style="width:13%;">작성자ID</th>';
+					a += '<th style="width:12%;">등록일</th>';
 					a += '</tr>';
 					
-					a += '<tr class="re-content" id="content' + index + '" style="display:none;">';
-					a += '<td colspan="5" class="show-content" id="td'+index+'">';
-					a += '<div class="align-right" style="margin:5px 5px 0 0; height:50px;">';
-					a += '<input type="button" value="닫기" id="close_this">';
-					if(param.user_num == value.mem_num){
-						a += '<input type="button" value="수정" id="modify-btn" data-num="' + value.review_num + '">';
-						a += '<input type="button" value="삭제" id="delete-btn" data-num="' + value.review_num + '">';
-					}
-					a += '</div>';
+					$.each(reviewList, function(index, value){
+						a += '<tr>';
+						a += '<td>';
+						if(value.review_score == 5){
+							a += '★★★★★(5)';
+						} else if(value.review_score == 4){
+							a += '★★★★(4)';
+						} else if(value.review_score == 3){
+							a += '★★★(3)';
+						} else if(value.review_score == 2){
+							a += '★★(2)';
+						} else if(value.review_score == 1){
+							a += '★(1)';
+						}
+						a += '</td>';
+						
+						a += '<td class="re-title" id="title' + index + '" style="cursor:pointer;">' + value.review_title + '</td>';
+						a += '<td>' + value.mem_id + '</td>';
+						a += '<td>' + value.review_regdate + '</td>';
+						a += '</tr>';
+						
+						a += '<tr class="re-content" id="content' + index + '" style="display:none;">';
+						a += '<td colspan="5" class="show-content" id="td'+index+'">';
+						a += '<div class="align-right" style="margin:5px 5px 0 0; height:50px;">';
+						a += '<input type="button" value="닫기" id="close_this">';
+						if(param.user_num == value.mem_num){
+							a += '<input type="button" value="수정" id="modify-btn" data-num="' + value.review_num + '">';
+							a += '<input type="button" value="삭제" id="delete-btn" data-num="' + value.review_num + '">';
+						}
+						a += '</div>';
+						
+						a += '<div class="align-left">' + value.review_content + '</div>';
+						a += '</td>';
+						a += '</tr>';
+					}); //end of each
 					
-					a += '<div class="align-left">' + value.review_content + '</div>';
-					a += '</td>';
-					a += '</tr>';
-				}); //end of each
-				
-				a += '</table>';
+					a += '</table>';
+					
+					//페이지 번호 호출
+					setPage();
+				}
 				$('#review_output').append(a);
-				
-				
-				//페이지 번호 호출
-				setPage();
 				
 			},
 			error:function(){
@@ -86,7 +91,7 @@ $(function(){
 		$.ajax({
 			url:'reviewListCountAjax.do',
 			type:'post',
-			data:{goods_num:$('#goods_num').val(), currentPage:2, rowCount:5},
+			data:{goods_num:$('#goods_num').val(), rowCount:5},
 			dataType:'json',
 			success:function(data){
 				if(data.result == 'success'){
@@ -132,7 +137,7 @@ $(function(){
 				}else{
 					alert('오류발생!');
 				}
-				
+				console.log(currentPage);
 			},
 			error:function(){
 				alert('네트워크 오류 발생');
@@ -162,7 +167,7 @@ $(function(){
 		tmp = $(tmp).parent();
 		let target = $(tmp).parent();
 		$(target).hide();
-	});
+	}); //end of close_this
 	
 	reviewList(1, pageSize);
 	
