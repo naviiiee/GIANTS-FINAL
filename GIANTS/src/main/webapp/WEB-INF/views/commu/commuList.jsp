@@ -72,7 +72,7 @@ li{
 				<option value="2" 
 				  <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
 				<option value="3" 
-				  <c:if test="${param.order == 3}">selected</c:if>>좋아요</option>
+				  <c:if test="${param.order == 3}">selected</c:if>>추천수</option>
 				<option value="4" 
 				  <c:if test="${param.order == 4}">selected</c:if>>댓글수</option>
 			</select>
