@@ -129,10 +129,12 @@
 				<img src="${pageContext.request.contextPath}/goods/imageView.do?goods_num=${goods.goods_num}">
 				<span>${goods.goods_name}</span>
 				<br>
+				<c:if test="${goods.total_stock > 0}">
 				<b><fmt:formatNumber value="${goods.goods_dprice}"/>원</b>
-				
-				<c:if test="">
-					품절
+				</c:if>
+				<%-- 품절 표시 --%>
+				<c:if test="${goods.total_stock <= 0}">
+				<b style="background-color:red; color:#FFF;">SOLD OUT</b>
 				</c:if>
 			</a>
 		</div>

@@ -12,6 +12,7 @@ import kr.spring.goods.vo.GoodsOptionVO;
 import kr.spring.goods.vo.GoodsQnaVO;
 import kr.spring.goods.vo.GoodsReviewVO;
 import kr.spring.goods.vo.GoodsVO;
+import kr.spring.gorder.vo.GorderDetailVO;
 
 public interface GoodsService {
 	//=====일반 상품=====//
@@ -52,6 +53,8 @@ public interface GoodsService {
 	public int selectGreviewRowCount(Integer goods_num);
 	//상품 후기 등록
 	public void insertGoodReview(GoodsReviewVO review);
+	//상품 후기 - 구매목록 불러오기
+	public List<GorderDetailVO> selectOrderDetailList(Integer mem_num);
 	//상품 후기 상세
 	public GoodsReviewVO selectGoodsReview(Integer review_num);
 	//상품 후기 수정

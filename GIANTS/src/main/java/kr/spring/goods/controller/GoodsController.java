@@ -29,7 +29,6 @@ import kr.spring.goods.vo.GoodsOptionVO;
 import kr.spring.goods.vo.GoodsQnaVO;
 import kr.spring.goods.vo.GoodsReviewVO;
 import kr.spring.goods.vo.GoodsVO;
-import kr.spring.gorder.service.GorderService;
 import kr.spring.gorder.vo.GorderDetailVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
@@ -41,9 +40,6 @@ import lombok.extern.slf4j.Slf4j;
 public class GoodsController {
 	@Autowired
 	private GoodsService goodsService;
-	
-	@Autowired
-	private GorderService gorderService;
 	
 	/*==========================
 	 * 자바빈(VO) 초기화
@@ -210,6 +206,8 @@ public class GoodsController {
 		
 		mav.addObject("page", page.getPage());
 		
+		log.debug("<<로그찍기 goodsTotalStock>> : " + list.get(0));
+		
 		return mav;
 	}	
 	
@@ -223,6 +221,7 @@ public class GoodsController {
 		//상품 상세
 		GoodsVO goods = goodsService.selectGoods(goods_num);
 
+		int total_stock = goodsService.getGoodsTotalStock(goods_num);
 		
 		List<GoodsOptionVO> list = null;
 		list = goodsService.selectOptionList(goods_num);
@@ -230,23 +229,10 @@ public class GoodsController {
 		//상품명에 태그를 허용하지 않음
 		goods.setGoods_name(StringUtil.useNoHtml(goods.getGoods_name()));
 		
-		//===== 리뷰 목록 =====//
-		Map<String , Object> map = new HashMap<String, Object>();
-		
-		int review_cnt = goodsService.selectGreviewRowCount(goods_num);
-		PagingUtil page = new PagingUtil(1, review_cnt, 5, 5, "reviewList.do");
-		List<GoodsReviewVO> review = null;
-		
-		if(review_cnt > 0) {
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
-			map.put("goods_num", goods_num);
-			
-			review = goodsService.selectGoodsReviewList(map);
-		}
-		
 		float avg_score = goodsService.getAvgScore(goods_num);
-				
+		
+		//===== 리뷰 목록 =====//
+		
 		//===== 상품문의 목록 =====//
 		Map<String, Object> map2 = new HashMap<String, Object>();
 		
@@ -268,16 +254,92 @@ public class GoodsController {
 		mav.setViewName("goodsView");
 		mav.addObject("goods", goods);
 		mav.addObject("option", list);
-		mav.addObject("review", review);
-		mav.addObject("review_cnt", review_cnt);
-		mav.addObject("review_page", page.getPage());
 		mav.addObject("qna", qna);
 		mav.addObject("qna_cnt", qna_cnt);
 		mav.addObject("qna_page", page2.getPage());
 		mav.addObject("avg_score", avg_score);
+		mav.addObject("total_stock", total_stock);
 		
 		return mav;
 	}
+	
+	/*==========================
+	 * 굿즈 상세페이지 - 리뷰 페이징 처리
+	 *==========================*/
+	@RequestMapping("/goods/reviewList.do")
+	@ResponseBody
+	public Map<String, Object> getReviewListAjax(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
+									@RequestParam(value="rowCount", defaultValue="5") int rowCount,
+									@RequestParam int goods_num, HttpSession session){
+		
+		log.debug("<<currentPage>> : " + currentPage);
+		log.debug("<<board_num>> : " + goods_num);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("goods_num", goods_num);
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		//리뷰 레코드 수
+		int count = goodsService.selectGreviewRowCount(goods_num);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(currentPage, count, rowCount, 1, null);
+		
+		
+		List<GoodsReviewVO> list = null;
+		
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = goodsService.selectGoodsReviewList(map);
+		}else {
+			list = Collections.emptyList(); //비어있는 배열
+		}
+		
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		mapJson.put("count", count);
+		mapJson.put("list", list);
+		mapJson.put("goods_num", goods_num);
+		mapJson.put("page", page.getPage());
+		if(user != null) {
+			mapJson.put("user_num", user.getMem_num());
+		}
+		return mapJson;
+	}
+	
+	/*==========================
+	 * 굿즈 상세페이지 - 리뷰 레코드 수
+	 *==========================*/
+	@RequestMapping("/goods/reviewListCountAjax.do")
+	@ResponseBody
+	public Map<String, Object> getReviewCountAjax(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
+									@RequestParam(value="rowCount", defaultValue="5") int rowCount,
+									@RequestParam int goods_num, HttpSession session){
+		
+		log.debug("<<currentPage>> : " + currentPage);
+		log.debug("<<board_num>> : " + goods_num);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("goods_num", goods_num);
+		
+		//리뷰 레코드 수
+		int count = goodsService.selectGreviewRowCount(goods_num);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(currentPage, count, rowCount, 1, null);
+		
+		
+		
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		mapJson.put("count", count);
+		mapJson.put("result", "success");
+		mapJson.put("page", page.getPage());
+		
+		return mapJson;
+	}
+	
 
 	/*==========================
 	 * [관리자] 굿즈 정보 수정
@@ -327,23 +389,6 @@ public class GoodsController {
 		return "common/resultView";
 	}
 	
-	/*==========================
-	 * [관리자] 굿즈 삭제
-	 *==========================*/
-	@RequestMapping("/goods/goodsDelete.do")
-	public String submitDelete(@RequestParam int goods_num, HttpServletRequest request ,Model model) {
-		
-		log.debug("<<굿즈 삭제 - goods_num>> : " + goods_num);
-		
-		//굿즈 삭제
-		goodsService.deleteGoods(goods_num);
-		
-		
-		model.addAttribute("message", "상품 삭제 완료!");
-		model.addAttribute("url", request.getContextPath() + "/member/adminMypageGoodsList.do");
-		
-		return "common/resultView";
-	}
 	
 	/*======굿즈 찜하기=======*/
 	//굿즈 좋아요 읽기
@@ -420,11 +465,13 @@ public class GoodsController {
 		map.put("end", 1000000);
 		map.put("goods_status", 3);
 		
-		List<GoodsVO> goods_list = goodsService.selectGoodsList(map);
-		//List<GorderDetailVO> order_list = 
-		model.addAttribute("goods_list", goods_list);
-		log.debug("<<goods_list>> : " +goods_list);
-		model.addAttribute("memberVO", (MemberVO)session.getAttribute("user"));
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		//List<GoodsVO> goods_list = goodsService.selectGoodsList(map);
+		List<GorderDetailVO> order_list = goodsService.selectOrderDetailList(user.getMem_num());
+		model.addAttribute("order_list", order_list);
+		log.debug("<<로그찍기 order_list>> : " +order_list);
+		model.addAttribute("memberVO", user);
 		
 		int goods_num = Integer.parseInt(request.getParameter("goods_num"));
 		request.setAttribute("goods_num", goods_num);
@@ -639,7 +686,7 @@ public class GoodsController {
 		
 		return "redirect:/goods/goodsList.do";
 	}
-	
+		
 	/*===============// 굿즈 문의 답변 //===============*/
 	
 	/*==========================
