@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
 <div class="mypage-top2">
@@ -11,6 +12,22 @@
 </div> 
 <!-- 마이페이지 티켓구매내역 시작 --> 
 <div class="mypage-form">
+	<form action="memberMypageTicketList.do" id="search_form" method="get">
+		<ul class="search">
+			<li>
+				<select name="keyfield" id="keyfield">
+					<option value="1" <c:if test="${param.keyfield == 1}">SELECTED</c:if>>상대팀</option>
+				</select>
+			</li>
+			<li>
+				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
+			</li>
+			<li>
+				<input type="submit" value="찾기" class="default-btn">
+				<input type="button" value="목록" onclick="location.href='list.do'" class="default-btn">
+			</li>
+		</ul>
+	</form>
 	<c:if test="${count == 0}">
 		<div class="result-display">Ticket구매내역 없습니다.</div>
 	</c:if>
@@ -24,14 +41,19 @@
 				<th>결제금액</th>
 				<th>상태</th>
 			</tr>
-			<c:forEach var="#" items="#">
+			<c:forEach var="ticket" items="${list}">
 				<tr>
-					<td class="align-center">1</td>
-					<td class="align-center">2</td>
-					<td class="align-center">3</td>
-					<td class="align-center">4</td>
-					<td class="align-center">5</td>
-					<td class="align-center">6</td>
+					<td class="align-center">
+						<a href="${pageContext.request.contextPath}/ticket/ticketInfo.do?ticket_num=${ticket.ticket_num}">${ticket.ticket_num}</a>
+					</td>
+					<td class="align-center">${ticket.game_title}</td>
+					<td class="align-center">${ticket.game_time}</td>
+					<td class="align-center">${ticket.ticket_quantity}</td>
+					<td class="align-center"><fmt:formatNumber value="${ticket.total_price}"/>원</td>
+					<td class="align-center">
+						<c:if test="${ticket.ticket_status == 0}">주문취소</c:if>
+						<c:if test="${ticket.ticket_status == 1}">주문완료</c:if>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
