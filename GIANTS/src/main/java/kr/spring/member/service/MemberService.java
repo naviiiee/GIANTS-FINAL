@@ -3,6 +3,8 @@ package kr.spring.member.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Update;
+
 import kr.spring.food.vo.F_orderVO;
 import kr.spring.food.vo.FoodVO;
 import kr.spring.goods.vo.GoodsVO;
@@ -83,7 +85,8 @@ public interface MemberService {
 	public int selectOrderCountByMem_num(Map<String,Object> map);
 	public List<F_orderVO> selectListOrderByMem_num(Map<String,Object> map);	
 	public F_orderVO selectOrder(String f_order_num);
-	
+	public void updateOrderStatus(F_orderVO order);
+	  
 	// 마이페이지 - 티켓구매내역
 	public int selectTicketCountByMem_num(Map<String,Object> map);
 	public List<TicketVO> selectListTicketByMem_num(Map<String,Object> map);

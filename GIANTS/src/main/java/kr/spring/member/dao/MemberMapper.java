@@ -125,11 +125,15 @@ public interface MemberMapper {
 	public int selectOrderCountByMem_num(Map<String,Object> map);
 	public List<F_orderVO> selectListOrderByMem_num(Map<String,Object> map);
 	
-	// 마이페이지 - 티켓구매내역
+	//마이페이지 - 티켓구매내역
 	public int selectTicketCountByMem_num(Map<String,Object> map);
 	public List<TicketVO> selectListTicketByMem_num(Map<String,Object> map);
 	
 	//관리자/사용자 - 주문상세
 	@Select("SELECT * FROM F_ORDER WHERE f_order_num=#{f_order_num}")
 	public F_orderVO selectOrder(String f_order_num);
+	//관리자/사용자 - 주문상태수정
+	@Update("UPDATE F_ORDER SET f_order_status=#{f_order_status}")
+	public void updateOrderStatus(F_orderVO order);  
+	
 }

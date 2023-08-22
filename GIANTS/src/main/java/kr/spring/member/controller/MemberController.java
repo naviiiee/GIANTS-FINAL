@@ -30,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.food.vo.F_orderVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.ticket.vo.TicketVO;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PagingUtil;
@@ -801,9 +802,37 @@ public class MemberController {
 	 * 일반회원 티켓구매내역
 	 *=====================*/
 	@RequestMapping("/member/memberMypageTicketList.do")
-	public String memberTicketList(HttpSession session, Model model) {
+	public ModelAndView memberTicketList(@RequestParam(value="pageNum", defaultValue="1") int currentPage, String keyfield, String keyword, HttpSession session, Model model) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
 		
-		return "memberMypageTicketList";
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("mem_num", user.getMem_num());
+		
+		// 전체/검색 레코드수
+		int count = memberService.selectTicketCountByMem_num(map);
+		
+		log.debug("<<count>> : " + count);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage, count, 20, 10, "memberMypageTicketList.do");
+		
+		List<TicketVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = memberService.selectListTicketByMem_num(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("memberMypageTicketList");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
 	}
 	
 	/*=====================
@@ -857,14 +886,16 @@ public class MemberController {
 		//주문취소
 		F_orderVO vo = new F_orderVO();
 		vo.setF_order_num(f_order_num);
+		vo.setF_order_status(9); // 1:사용전 0:사용후 9:주문취소
+		log.debug("<<vo>> : " + vo);
+		memberService.updateOrderStatus(vo);
 		
 		model.addAttribute("message", "주문취소가 완료되었습니다.");
 		model.addAttribute("url", 
 				request.getContextPath()+"/member/memberMypageFoodList.do");
-				/*"/order/orderDetail.do?order_num="+f_order_num);*/
 		
 		return "common/resultView";
-	}
+	}  
 	
 	/*=====================
 	 * 일반회원 굿즈구매내역
