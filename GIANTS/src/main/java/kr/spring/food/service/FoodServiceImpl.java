@@ -133,6 +133,18 @@ public class FoodServiceImpl implements FoodService{
 		return foodMapper.selectOrderRowCount(map);
 	}
 
+	@Override
+	public F_orderVO selectF_order(Map<String, Object> map) {
+		return foodMapper.selectF_order(map);
+	}
+
+	@Override
+	public List<F_order_detailVO> selectListF_orderDetail(String f_order_num) {
+		return foodMapper.selectListF_orderDetail(f_order_num);
+	}
+
+	
+
 	
 
 }

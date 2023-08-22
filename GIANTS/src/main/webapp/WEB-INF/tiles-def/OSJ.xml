@@ -67,4 +67,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/food/forder/myFoodOrderDetail.jsp"/>
 	</definition>
 	
+	<!-- QR코드 출력용 -->
+	<definition name="myFoodQRcode" extends="main">
+		<put-attribute name="title" value="식품 - 내 주문목록 - 상세정보확인 - QR코드 출력"/>
+		<put-attribute name="body" value="/WEB-INF/views/food/forder/myFoodQRcode.jsp"/>
+	</definition>
+	
+	
 </tiles-definitions>

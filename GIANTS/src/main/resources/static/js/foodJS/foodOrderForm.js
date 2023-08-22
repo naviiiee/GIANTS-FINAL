@@ -1,213 +1,311 @@
 $(function(){
-	//장바구니 비우기 버튼
-	$('.emptyCart').click(function(){
-		emptyCart();
-	});
 	
-	
-	//장바구니 모두 비우기 함수
-	function emptyCart(){
-		$.ajax({
-			url:'../../food/foodEmptyCart.do',
-			type:'post',
-			dataType:'json',
-			success:function(param){
-				if(param.result == 'logout'){
-					alert('로그인이 필요한 기능입니다.');
-				}else if(param.result == 'success'){
-					alert('장바구니를 모두 비웠습니다.');
-				}else{
-					alert('장바구니 비우기 오류 발생');
-				}
-			},
-			error:function(){
-				alert('장바구니 비우기 - 네트워크 오류 발생');
+	//===============정합성 검증용===================
+	//
+	// 구매자명 검증
+	$("input[name='buyer_name']").on('blur', function() {
+		// 입력 란이 비어 있는지 확인합니다.
+		if ($(this).val().trim() === '') {
+			// 입력 란이 비어 있으면 오류 메시지를 표시합니다.
+			if ($(this).next(".error-color").length === 0) {
+			    $(this).after("<span class='error-color'>구매자명을 입력하세요.</span>");
+			}else{
+				$(this).next(".error-color").text("구매자명을 입력하세요.");
 			}
-		});
-	}
-	
-	//삭제 버튼을 클릭할 경우에 장바구니에서 아이템 삭제
-	$(document).on('click','.del-choice',function(){
-		let check = confirm("상품을 장바구니에서 삭제하시겠습니까?");
-		//해당 아이템의 장바구니번호 값을 가져옴
-		let cnum = $(this).closest('td').find('.del-choice').val();
-		if(check){
-			$.ajax({
-				url:'deleteOneCart.do',
-				type:'post',
-				data:{cart_num:cnum},
-				dataType:'json',
-				success:function(param){
-					if(param.result == 'logout'){
-						alert('로그인이 필요한 기능입니다.');
-					}else if(param.result == 'success'){
-						alert('삭제완료.\n목록을 다시 불러옵니다.');
-						location.href="/food/fcart/foodUserCartList.do";
-					}else{
-						alert('식품 삭제 오류 발생');
-					}
-				},
-				error:function(){
-					alert('식품 삭제 - 네트워크 오류 발생');
-				}
-			});
-		}else{
-			alert("삭제 취소")
+		 }else{
+		    // 입력 란이 비어 있지 않으면 오류 메시지를 제거합니다.
+		    $(this).next(".error-color").remove();
 		}
 	});
 	
-	//변경 버튼 submit
-	$(document).on('click','.change-count',function(){
-		let cnum = $(this).closest('td').find('input[type="number"]').val();
-		let fnum = $(this).closest('td').find('input[type="hidden"]').val();
-		let cartNum = $(this).val();
+	// 전화번호 검증
+	$("input[name='buyer_phone']").on('blur', function() {
+		// 입력 란이 비어 있는지 확인합니다.
+		if ($(this).val().trim() === '') {
+			// 입력 란이 비어 있으면 오류 메시지를 표시합니다.
+			if ($(this).next(".error-color").length === 0) {
+			    $(this).after("<span class='error-color'>전화번호를 입력하세요.</span>");
+				return;
+			}else{
+				$(this).next(".error-color").text("전화번호를 입력하세요.");
+				return;
+			}
+		 }
+		let phoneRegex = /^[0-9]{3}-[0-9]{4}-[0-9]{4}$/;
+		if (!phoneRegex.test($(this).val())) {
+			// 전화번호 형식이 아니면 오류 메시지를 표시합니다.
+			if ($(this).next(".error-color").length === 0) {
+				$(this).after("<span class='error-message'>전화번호 형식이 올바르지 않습니다.</span>");
+				return;
+			}else{
+				$(this).next(".error-color").text("전화번호 형식이 올바르지 않습니다.");
+				return;
+			}
+		}
+	    // 입력 란이 비어 있지 않으면 오류 메시지를 제거합니다.
+	    $(this).next(".error-color").remove();
+	});
+	
+	// 이메일 검증
+	$("input[name='buyer_email']").on('blur', function() {
+		// 입력 란이 비어 있는지 확인합니다.
+		if ($(this).val().trim() === '') {
+			// 입력 란이 비어 있으면 오류 메시지를 표시합니다.
+			if($(this).next(".error-color").length === 0){
+				$(this).after("<span class='error-color'>이메일을 입력하세요.</span>");
+				return;
+			}else{
+				$(this).next(".error-color").text("이메일을 입력하세요.");
+				return;
+			}
+		}
+		// 이메일 형식인지 확인합니다.
+		let emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+		if (!emailRegex.test($(this).val())) {
+			// 이메일 형식이 아니면 오류 메시지를 표시합니다.
+			if($(this).next(".error-color").length === 0){
+				$(this).after("<span class='error-color'>이메일 형식이 올바르지 않습니다.</span>");
+				return;
+			}else{
+				$(this).next(".error-color").text("이메일 형식이 올바르지 않습니다.");
+				return;
+			}
+		}
+		// 입력 란이 비어 있지 않고, 이메일 형식이 맞으면 오류 메시지를 제거합니다.
+		$(this).next(".error-color").remove();
+	});
+	
+	//정합성 검증 함수
+	function validate() {
+		// 구매자명 입력 란이 비어 있는지 확인합니다.
+		if ($("input[name='buyer_name']").val() === '') {
+			// 구매자명 입력 란이 비어 있으면 오류 메시지를 표시합니다.
+			if ($("input[name='buyer_name']").next(".error-color").length === 0) {
+				$("input[name='buyer_name']").after("<span class='error-color'>구매자명을 입력하세요.</span>");
+				return false;
+			}else{
+				$("input[name='buyer_name']").text("구매자명을 입력하세요.");
+				return false;
+			}
+		}
+		// 전화번호 입력 란이 비어 있는지 확인합니다.
+		if ($("input[name='buyer_phone']").val() === '') {
+			// 전화번호 입력 란이 비어 있으면 오류 메시지를 표시합니다.
+			if ($("input[name='buyer_phone']").next(".error-color").length === 0) {
+				$("input[name='buyer_phone']").after("<span class='error-color'>전화번호를 입력하세요.</span>");
+				return false;
+			}else{
+				$("input[name='buyer_phone']").text("전화번호를 입력하세요.");
+				return false;
+			}
+		}
+		// 전화번호 형식인지 확인합니다.
+		let phoneRegex = /^[0-9]{3}-[0-9]{4}-[0-9]{4}$/;
+		if (!phoneRegex.test($("input[name='buyer_phone']").val())) {
+			// 전화번호 형식이 아니면 오류 메시지를 표시합니다.
+			if ($("input[name='buyer_phone']").next(".error-color").length === 0) {
+				$("input[name='buyer_phone']").after("<span class='error-color'>전화번호 형식이 올바르지 않습니다.</span>");
+				return false;
+			}else{
+				$("input[name='buyer_phone']").text("전화번호 형식이 올바르지 않습니다.");
+				return false;
+			}
+		}
+		// 이메일 입력 란이 비어 있는지 확인합니다.
+		if ($("input[name='buyer_email']").val() === '') {
+			// 이메일 입력 란이 비어 있으면 오류 메시지를 표시합니다.
+			if ($("input[name='buyer_email']").next(".error-color").length === 0) {
+				$("input[name='buyer_email']").after("<span class='error-color'>이메일을 입력하세요.</span>");
+				return false;
+			}else{
+				$("input[name='buyer_email']").text("이메일을 입력하세요.");
+				return false;
+			}
+		}
+		// 이메일 형식인지 확인합니다.
+		let emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+		if (!emailRegex.test($("input[name='buyer_email']").val())) {
+			// 이메일 형식이 아니면 오류 메시지를 표시합니다.
+			if ($("input[name='buyer_email']").next(".error-color").length === 0) {
+				$("input[name='buyer_email']").after("<span class='error-color'>이메일 형식이 올바르지 않습니다.</span>");
+				return false;
+			}else{
+				$("input[name='buyer_email']").text("이메일 형식이 올바르지 않습니다.");
+				return false;
+			}
+		}
+		// 모든 검증사항이 통과하면 true를 반환합니다.
+		return true;
+	}
+	//
+	//===============정합성 검증용 끝===================
+	
+	
+	//주문하기 버튼 클릭시
+	$(document).on('click','.order-btn',function(e){
+		if(!validate()){
+			alert('구매자 정보를 확인하세요');
+			return false;
+		}
+		
+		let form = $('#order_form').serialize();
+		
+		//결제전 확인
 		$.ajax({
-			url:'changeCartQuantity.do',
+			url:'checkBeforePayment.do',
 			type:'post',
-			data:{cart_num:cartNum, f_cart_quantity:cnum, food_num:fnum},
+			data:form,
 			dataType:'json',
 			success:function(param){
 				if(param.result == 'logout'){
 					alert('로그인이 필요한 기능입니다.');
-				}else if(param.result == 'stopSell'){
-					alert('현재 판매중지 상품입니다.');
-					alert('상품을 장바구니에서 제거합니다.');
-					$.ajax({
-						url:'deleteOneCart.do',
-						type:'post',
-						data:{cart_num:cnum},
-						dataType:'json',
-						success:function(param){
-							if(param.result == 'logout'){
-								alert('로그인이 필요한 기능입니다.');
-							}else if(param.result == 'success'){
-								alert('삭제완료.\n목록을 다시 불러옵니다.');
-								location.href="/food/fcart/foodUserCartList.do";
-							}else{
-								alert('식품 삭제 오류 발생');
+					return;
+				}else if(param.result == 'success'){
+					alert('데이터 검증완료.\n결제를 진행합니다.');
+					
+					
+					//	-------------------------------
+					//			포트원 결제 API
+					//	-------------------------------
+					var IMP = window.IMP;
+					IMP.init('imp45386413');  // 가맹점 식별코드
+					
+					//상품명들
+					let f_order_name = "[" + $('#comp_name').val() + "] " + $('.food-name').val();
+					let trCount = $("#order_tb tr").length-2;
+					if(trCount !== 1){
+						f_order_name += " 외 " + trCount + "개의 상품"
+					}
+					
+					//let total_price = $('#total_price').val();
+					let total_price = 100;
+					let f_order_num = 'F' + new Date().getTime();
+					let buyer_email = $('#buyer_email').val();
+					let buyer_name = $('#buyer_name').val();
+					let buyer_phone = $('#buyer_phone').val();
+					const cartNumTags = document.querySelectorAll('input[name="cart_numbers"]');
+					const cart_numbers = [];
+					for (const cartNum of cartNumTags) {
+					  cart_numbers.push(cartNum.value);
+					}
+					
+					
+					// IMP.request_pay(param, callback) 결제창 호출
+					// 카카오페이로 진행중
+					IMP.request_pay({
+						pg:'kakaopay',
+						pay_method:'card',
+						merchant_uid:f_order_num,   // 주문번호
+						name:f_order_name,
+						amount:total_price,	// 숫자 타입
+						buyer_email:buyer_email,
+						buyer_name:buyer_name,
+						buyer_tel:buyer_phone
+					}, function(rsp) {
+						if(rsp.success) {
+							let result = {
+								//DB에 넣어야될 값을 객체로 생성
+								'f_order_num':f_order_num,
+								'comp_num':$('#comp_num').val(),
+								'cart_numbers':cart_numbers,
+								'f_order_name':f_order_name,
+								'total_price':total_price,
+								'buyer_email':buyer_email,
+								'buyer_name':buyer_name,
+								'buyer_phone':buyer_phone,
+								'pay_method':'card',
+								'pg':'kakaopay'
 							}
-						},
-						error:function(){
-							alert('식품 삭제 - 네트워크 오류 발생');
+							console.log(result);
+							
+							$.ajax({
+								url:'insertF_orderPay.do',
+								type:'post',
+								contentType:'application/json',
+								data:JSON.stringify(result),
+								success: function (res) {
+									alert('주문완료.\n내 주문목록으로 넘어갑니다.');
+									location.href=res;
+								},
+								error: function (err) { console.log(err); 
+									alert('err : ' + err);
+									return;
+								}
+							}); 
+						} else {
+							let msg = '결제 실패\n';
+							msg += 'ERROR : ' + rsp.error_msg;
+							alert(msg);
+							return;
 						}
 					});
-				}else if(param.result == 'noQuantity'){
-					alert('선택하신 수량이 재고수량보다 많습니다.');
-					location.href="/food/fcart/foodUserCartList.do";
-				}else if(param.result == 'success'){
-					location.href="/food/fcart/foodUserCartList.do";
+					
+				}else if(param.result == 'UnknownCartNums'){
+					alert('정상적인 주문이 아닙니다.');
+					return;
+				}else if(param.result == 'NotMatchTotalPrice'){
+					alert('정상적인 주문이 아니거나 상품의 수량이 부족합니다.');
+					return;
 				}else{
-					alert('수량 변경 오류 발생');
+					alert('결제 전 데이터 검증 오류 발생');
+					return;
 				}
 			},
 			error:function(){
-				alert('수량 변경 - 네트워크 오류 발생');
+				alert('결제 전 데이터 검증 - 네트워크 오류 발생');
 			}
 		});
-	});
+		e.preventDefault();
+	});// 결제 함수 수행 완료
 	
-	//체크박스
-	//all_chk, food-chk, total_price
-	$(document).on('click','#all_chk',function(){
-		let check = $(this).is(':checked');
-		if(check){
-			//체크 되어 있을 경우에 - true
-			$('.food-chk').prop('checked',true);
-		}else{
-			//체크 상태가 아니라면 - false
-			$('.food-chk').prop('checked',false);
-		}
-		changeTotalPrice();
-		changeFormData();
-	});
+	//---------QR 생성 예시 코드--------
+/*	function createQRCode(url,f_order_num) {
+		let result = false;
+		let xhr = new XMLHttpRequest();
 	
-	//개별 체크박스에 반응하여 총 금액을 출력 + all_chk 박스
-	$(document).on('change','.food-chk',function(){
-		let size = $('.food-chk').get().length;
-		let result = 0;
-		for (const foodItem of $('.food-chk')) {
-			if (foodItem.checked) {
-				result++;
+		xhr.open("POST", "https://goqr.me/api/v1/qrcode");
+	
+		// Set the request body to the URL.
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.send("url=" + encodeURIComponent(url));
+	
+		// 요청을 하고 난 후, xhr을 load하면 status 값이 200인 경우 정상적으로 이미지를 받아올 수 있다.
+		xhr.onload = function() {
+			if (xhr.status === 200) {
+				// QR code 이미지 변수에 담기
+				let qr_code_image = xhr.response;
+				let formData = new FormData();
+	 			formData.append("qrcode", qr_code_image);
+				formData.append("f_order_num", f_order_num);
+				$.ajax({
+					url:'createQRcode.do',
+					type:'post',
+					data: formData,
+					dataType:'json',
+					success:function(param){
+						if(param.result == 'logout'){
+							alert('로그인이 필요한 기능입니다.');
+						}else if(param.result == 'success'){
+							console.log('QR코드 생성 완료');
+							result = true;
+						}else{
+							alert('QR코드 생성 오류 발생');
+						}
+					},
+					error:function(){
+						alert('QR코드 생성 - 네트워크 오류 발생');
+					}
+				});
+			} else {
+				alert('QR코드 생성 오류 발생');
 			}
-		}
-		if(size===result){
-			$('#all_chk').prop('checked',true);
-		}else{
-			$('#all_chk').prop('checked',false);
-		}
-		changeTotalPrice();
-		changeFormData();
-	});
-	
-	//쇼핑계속하기 버튼
-	$(document).on('click','#go_foodList',function(){
-		location.href='/food/foodList.do';
-	});
-	
-	//전체상품주문 버튼
-	$(document).on('click','#all_order',function(){
-		let form = $('#all_frm');
-		//비어있는지 확인
-		if(form.html()===''){
-			alert('주문할 상품이 없습니다.');
-			return;
-		}
-		form.submit();
-	});
-	
-	//선택상품주문 버튼
-	$(document).on('click','#sel_order',function(){
-		let form = $('#sel_frm');
-		if(form.html()==='' || $(form).children('input[name="total_price"]').val()==0){
-			alert('주문할 상품이 없습니다.');
-			return;
-		}
-		form.submit();
-	});
-	
-	//체크박스에 따른 Form 히든 값 반영 함수
-	function changeFormData(){
-		let sum = 0;
-		let output='';
-		for (const foodItem of $('.food-chk')) {
-			if (foodItem.checked) {
-				sum += Number(foodItem.dataset.hiddenPrice);
-				const cartNumber = $(foodItem).closest('td').find('input[type="hidden"]').val();
-      			output += '<input type="hidden" name="cart_numbers" value="'+cartNumber+'">';
-			}
-		}
-		output += '<input type="hidden" name="total_price" value="' + sum + '">';
-		$('#sel_frm').empty();
-		$('#sel_frm').append(output);
-	}
-	
-	//총 금액 반영 함수
-	function changeTotalPrice(){
-		let sum = 0;
-		for (const foodItem of $('.food-chk')) {
-			if (foodItem.checked) {
-				sum += Number(foodItem.dataset.hiddenPrice);
-			}
-		}
-		$('#total_price').empty();
-		$('#total_price').text(Number(sum).toLocaleString());
-	}
-	
-	//모든 상품의 가격 히든 태그
-	function hiddenTotal_Price(){
-		let sum = 0;
-		for (const foodItem of $('.food-chk')) {
-			sum += Number(foodItem.dataset.hiddenPrice);
-		}
-		let output = '<input type="hidden" name="total_price" value="' + sum + '">';
-		$('#all_frm').append(output);
-	}
-	
-	
-	//초기 출력
-	changeTotalPrice();
-	changeFormData();
-	hiddenTotal_Price();
+		};// end of xhr.onload = function()-----
+		return result;
+	}// end of function createQRCode(url)-----
+
+*/	
+
+
 });
 
 

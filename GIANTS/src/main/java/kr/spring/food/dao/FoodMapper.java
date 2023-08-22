@@ -98,7 +98,9 @@ public interface FoodMapper {
 	public int selectOrderRowCount(Map<String,Object> map);
 	
 	//식품 주문(영수증)상세정보
-	public F_orderVO selectOrder(F_orderVO fo);
-	
+	public F_orderVO selectF_order(Map<String,Object> map);
+	//식품 주문 개별상세정보 
+	@Select("SELECT * FROM f_order_detail WHERE f_order_num=#{f_order_num}")
+	public List<F_order_detailVO> selectListF_orderDetail(String f_order_num);
 
 }

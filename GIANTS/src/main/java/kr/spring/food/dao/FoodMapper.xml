@@ -252,7 +252,7 @@
 		  buyer_email,
 		  f_order_regDate,
 		  f_order_expireDate,
-		  f_order_qrlink,
+		  qrlink,
 		  pg,
 		  pay_method)
 		VALUES(
@@ -266,7 +266,7 @@
 		  #{buyer_email},
 		  SYSDATE,
 		  ADD_MONTHS(SYSDATE, 90),
-		  #{f_order_qrlink},
+		  #{qrlink},
 		  #{pg},
 		  #{pay_method})
 	</insert>
@@ -331,17 +331,24 @@
 			    rownum rnum
 			  FROM (SELECT
 			  		  *
-			  		FROM
-			  		  f_order o JOIN member m
-			  		  ON o.mem_num = m.mem_num
-			  		  <include refid="orderSort"></include>
-			  		  ORDER BY f_order_num DESC))
+			  		FROM f_order
+			  		<include refid="orderSort"></include>
+			  		ORDER BY f_order_num DESC)a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
 	<!-- 주문목록 호출하기 끝 -->
 	
+	<!-- 주문 상세정보확인 -->
+	<select id="selectF_order" parameterType="map" resultType="f_orderVO">
+		SELECT 
+		  * 
+		FROM 
+		  f_order 
+		WHERE f_order_num=#{f_order_num} 
+		AND mem_num=#{mem_num}
+	</select>
 	
 	
 </mapper>

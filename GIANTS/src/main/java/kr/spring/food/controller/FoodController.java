@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -32,7 +31,6 @@ import kr.spring.food.vo.FoodVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberVO;
-import kr.spring.ticket.vo.TicketVO;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -638,16 +636,45 @@ public class FoodController {
 		f_orderVO.setMem_num(user.getMem_num());
 		//사용 전 = 1, 후 = 0 
 		f_orderVO.setF_order_status(1);
-		f_orderVO.setF_order_qrlink("NotCreate");
+		f_orderVO.setQrlink("/food/forder/companyCheckQR.do?f_order_num=" + f_orderVO.getF_order_num());
 		
 		//데이터 DB에 반영하기
 		foodService.insertF_order(f_orderVO, f_orderDetailList);
+		
+		
 		
 		//log.debug("\n\n 전송된 데이터 처리중 >>> " + cartList);
 		
 		return "/food/forder/myFoodOrderList.do";	// 결제이후 이동할 주소 지정
 	}
 	
+	//QR코드를 출력하는 화면으로 이동
+	@RequestMapping("/food/forder/myFoodQRcode.do")
+	public String showQR(@RequestParam String f_order_num,
+										HttpSession session,
+										HttpServletRequest request,
+										Model model) {
+		//QR코드 링크를 요청하는 고객이 본인임을 확인
+		Map<String, Object> map = new HashMap<String, Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		map.put("f_order_num", f_order_num);
+		map.put("mem_num", user.getMem_num());
+		
+		F_orderVO f_order = foodService.selectF_order(map);
+		if (f_order == null) {
+			//본인이 아닐경우 매장목록으로
+			model.addAttribute("message", "잘못된 요청입니다.");
+			model.addAttribute("url", request.getContextPath() + "/food/foodList.do");
+			return "common/resultView";
+		}
+		//유효기간이 만료되었을경우에 QR코드 사용상태를 변경
+		
+		//QR코드 사용상태를 확인함.
+		
+		model.addAttribute("f_order_num", f_order_num);
+		model.addAttribute("qrlink",f_order.getQrlink());
+		return "myFoodQRcode";
+	}
 	
 	/*	==========================
 	 *		내 주문목록
@@ -690,18 +717,40 @@ public class FoodController {
 	// 내 주문 상세정보확인
 	@RequestMapping("/food/forder/myFoodOrderDetail.do")
 	public String myFoodOrderDetail (@RequestParam String f_order_num,
-									 HttpSession session) {
+									 HttpSession session,
+									 Model model) {
+		
 		
 		//주문번호(f_order_num)를 통하여 모든 정보를 출력함.
 		Map<String, Object> map = new HashMap<String, Object>();
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		
+		map.put("f_order_num", f_order_num);
 		map.put("mem_num", user.getMem_num());
 		
+		log.debug("\n\n 내 주문 상세정보 확인 호출 >>>  " + map);
 		
+		//주문정보 호출
+		F_orderVO f_order = foodService.selectF_order(map);
+		//개별 상품 주문정보 호출
+		List<F_order_detailVO> detailList = foodService.selectListF_orderDetail(f_order_num);
+		
+		model.addAttribute("f_order", f_order);
+		model.addAttribute("list", detailList);
 		
 		return "myFoodOrderDetail";
 	}
+	
+	
+	//기업이 QR코드를 찍었다고 가정하여, 이 페이지를 방문하였을 경우 
+	//QR코드가 유효한지 확인하여 상태를 변경하고 해당 회원의 주문 내역을 출력하는 페이지로 이동
+	@RequestMapping("/food/forder/companyCheckQR.do")
+	public String companyCheckQR(@RequestParam String f_order_num,
+											 	HttpSession session,
+											 	Model model) {
+		
+		return "";
+	}
+	
 	
 }
 

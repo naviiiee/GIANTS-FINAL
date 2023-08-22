@@ -61,4 +61,9 @@ public interface FoodService {
 	//식품 주문(영수증)목록
 	public List<F_orderVO> selectOrderList(Map<String, Object> map);
 	public int selectOrderRowCount(Map<String,Object> map);
+	
+	//식품 주문(영수증)상세정보
+	public F_orderVO selectF_order(Map<String,Object> map);
+	//식품 주문 개별상세정보 
+	public List<F_order_detailVO> selectListF_orderDetail(String f_order_num);
 }
