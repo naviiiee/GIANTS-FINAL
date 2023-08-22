@@ -29,11 +29,13 @@ $(function(){
 		<c:forEach var="chat" items="${list}">
 		<c:choose>
 			<c:when test="${chat.chatVO == null}">
-				<div class="result-display"></div>
 			</c:when>
 			<c:otherwise>
 					<tr>
-						<td> 
+						<td>
+							<img src="${pageContext.request.contextPath}/trading/imageView.do?trade_num=${chat.trade_num}" width="40" height="40">
+						</td>
+						<td id="chatlist_msg"> 
 							<a href="chatting.do?chatroom_num=${chat.chatroom_num}" class="chatting-link">
 								<span>${fn:substring(chat.chatVO.message, 0, 45)}</span> <!-- 45자의 메시지가 보여짐-->
 							</a>

@@ -3,12 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KMS/trading.css">
 <!-- 복마크 목록 시작 -->
-<div class="page-main">
-	<div class="chatting-title">
+<div class="bookmark-top">
+	<div class="bookmark-top-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>중고거래 관심목록</h2>
-		<hr size="0.05" width="100%" noshade>
 	</div>
+</div>
+<div class="bookmark-form">
 		<br><br>
 		<c:if test="${count == 0}">
 		<div class="result-display">표시할 관심목록이 없습니다.</div>

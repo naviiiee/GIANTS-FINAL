@@ -23,17 +23,17 @@
 		<form:errors element="div" cssClass="error-color"/>
 			<ul>
 				<li>
-					<form:label path="trade_title">제목</form:label>
-					<form:input path="trade_title"/>
+					<form:label path="trade_title"><b>제목</b></form:label>
+					<form:input path="trade_title" id="trading_title"/>
 					<form:errors path="trade_title" cssClass="error-color"/>
 				</li>
 				<li>
-					<form:label path="trade_price">가격</form:label>
+					<form:label path="trade_price"><b>가격</b></form:label>
 					<form:input path="trade_price" type="number" id="price_form"/>원
 					<form:errors path="trade_price" cssClass="error-color"/>
 				</li>
 				<li>
-					<label for="upload">상품 이미지</label>
+					<label for="upload"><b>상품 이미지</b></label>
 					<input type="file" name="upload" id="upload" accept="image/gif,image/png,image/jpeg">
 					<form:errors path="trade_photo" cssClass="error-color"/>
 				</li>
@@ -60,15 +60,15 @@
 									 });			
 					</script>
 				</li>
-				<li>
-					<label>거래 상태</label>
+				<li id="status">
+					<label><b>거래 상태</b></label>
 					<form:radiobutton path="trade_status" value="0" id="status1"/>판매중
 					<form:radiobutton path="trade_status" value="1" id="status2"/>거래 완료
 				</li>
 			</ul>
 			<br>
 			<div class="align-center">
-				<form:button class="classic-btn small">수정</form:button>
+				<form:button class="red-btn small">수정</form:button>
 				<input type="button" value="목록" onclick="location.href='tradingList.do'" class="classic-btn small">
 			</div>
 	</form:form>

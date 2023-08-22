@@ -332,25 +332,7 @@
 			<div id="review_output"></div>
 			<div id="review_page"></div>
 		<%-- </c:if> --%>
-		</div>
-		<script>
-			$(function(){
-				$('.re-title').on('click', function(){
-					let num = $(this).attr('id').substring(5);
-					
-					if($('#content' + num).css('display') == 'none'){
-						$('#content' + num).show();
-					}
-				}); //end of re-title
-				
-				$(document).on('click', '#close_this', function(){
-					let tmp = $(this).parent();
-					tmp = $(tmp).parent();
-					let target = $(tmp).parent();
-					$(target).hide();
-				});
-			});
-		</script>
+		</div>  
 <!-- 		<style type="text/css">
 			*{
 				margin:0;

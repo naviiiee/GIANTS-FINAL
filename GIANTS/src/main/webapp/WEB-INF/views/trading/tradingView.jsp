@@ -11,7 +11,13 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/trading.mark.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/chat.js"></script>
 <div class="page-main">
-	<h2>${trading.trade_title}</h2>
+	<div class="trading-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+		<h2>중고거래</h2>
+		<hr size="0.05" width="100%" noshade>
+	</div>
+	<div class="trading-body">
+	<h2 id="trade_title">${trading.trade_title}</h2>
 	<div class="align-right">
 		<%-- 북마크 --%>
 		<img id="output_mark" data-num="${trading.trade_num}" src="${pageContext.request.contextPath}/images/bookmark1.png" width="40">
@@ -70,6 +76,7 @@
 		</script>
 		</c:if>
 		<input type="button" value="목록" onclick="location.href='tradingList.do'" class="classic-btn small">
+	</div>
 	</div>
 </div>
 <!-- 게시글 상세 끝 --> 
