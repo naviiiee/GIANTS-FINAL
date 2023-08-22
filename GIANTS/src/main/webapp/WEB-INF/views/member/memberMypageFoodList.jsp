@@ -33,7 +33,7 @@
 		</ul>
 	</form>
 	<c:if test="${count == 0}">
-	<div class="result-display">표시할 주문정보가 없습니다.</div>
+		<div class="result-display">표시할 주문정보가 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
 	<table class="striped-table">
@@ -43,6 +43,7 @@
 			<th>구매자</th>
 			<th>결제금액</th>
 			<th>주문날짜</th>
+			<th>주문취소</th>
 		</tr>
 		<c:forEach var="order" items="${list}">
 		<tr>
@@ -51,6 +52,19 @@
 			<td>${order.buyer_name}</td>
 			<td>${order.total_price}</td>
 			<td>${order.f_order_regDate}</td>
+			<td>
+				<input type="button" value="주문취소" id="order_cancel"
+				class="default-btn"> <script>
+					let order_cancel = document
+							.getElementById('order_cancel');
+					order_cancel.onclick = function() {
+						let choice = confirm('주문을 취소하시겠습니까?');
+						if (choice) { 
+							location.replace('orderCancel.do?f_order_num=${F_orderVO.f_order_num}');
+						}
+					};
+				</script>
+			</td>
 		</tr>
 		</c:forEach>
 	</table>

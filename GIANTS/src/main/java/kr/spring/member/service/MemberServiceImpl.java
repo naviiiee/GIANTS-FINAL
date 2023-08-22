@@ -204,4 +204,14 @@ public class MemberServiceImpl implements MemberService{
 	public List<F_orderVO> selectListOrderByMem_num(Map<String, Object> map) {
 		return memberMapper.selectListOrderByMem_num(map);
 	}
+
+	@Override
+	public void deleteFood(Integer food_num) {
+		memberMapper.deleteFood(food_num);
+	}
+
+	@Override
+	public F_orderVO selectOrder(String f_order_num) {
+		return memberMapper.selectOrder(f_order_num);
+	}
 }

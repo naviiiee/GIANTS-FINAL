@@ -35,7 +35,7 @@ $(function(){
 		$('#message_nk').text('');
 	})//end of keydown
 	
-	//submit 이벤트 발생 시 아이디 중복 체크 여부 발생
+	//submit 이벤트 발생 시 닉네임 중복 체크 여부 발생
 	$('#member_register').submit(function(){
 		if($('#mem_nickname').val().trim()!=''){
 			$('#message_nk').css('color', 'red').text('닉네임 중복 체크 필수');

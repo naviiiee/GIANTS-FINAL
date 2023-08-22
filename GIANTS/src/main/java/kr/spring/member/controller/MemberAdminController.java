@@ -51,7 +51,7 @@ public class MemberAdminController {
 		//페이지 처리
 		PagingUtil page =
 				new PagingUtil(keyfield,keyword,currentPage,
-							   count,10,10,"admin_list.do");
+							   count,10,10,"adminMemberList.do");
 		MemberVO user1 = (MemberVO)session.getAttribute("user1");
 		MemberDetailVO user2 = (MemberDetailVO)session.getAttribute("user2");
 		CompanyDetailVO user3 = (CompanyDetailVO)session.getAttribute("user3");
@@ -70,7 +70,7 @@ public class MemberAdminController {
 		}
 		log.debug("<<memberDetailVO 체크>> : " + list);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin_memberList");
+		mav.setViewName("adminMemberList");
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());
@@ -160,7 +160,7 @@ public class MemberAdminController {
 		int count = memberService.selectGoodsRowCount(map);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 10, 10, "adminMypageGoodsList.do", "&goods_category=" + goods_category);
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 10, 10, "adminMypageGoods.do", "&goods_category=" + goods_category);
 		
 		List<GoodsVO> list = null;
 		if(count > 0) {
@@ -173,7 +173,7 @@ public class MemberAdminController {
 		}
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("adminGoodsList");
+		mav.setViewName("adminMypageGoods");
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());

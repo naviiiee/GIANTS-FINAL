@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -60,6 +61,18 @@ public class MemberCompanyController {
 		
 		return mav;
 	}
+	
+	/*=====================
+	 * 식품 삭제
+	 *=====================*/
+	@PostMapping("/member/deleteFood.do")
+	public String submitDeleteFood(@RequestParam int food_num) {
+
+		//식품 삭제
+		memberService.deleteFood(food_num);
+		
+		return "redirect:/member/compMypageFoodList.do";
+	}	
 
 	/*=====================
 	 * 기업회원 주문목록
@@ -108,7 +121,6 @@ public class MemberCompanyController {
 		
 		return mav;
 	}
-	
 	
 	/*=====================
 	 * 기업회원 매출관리

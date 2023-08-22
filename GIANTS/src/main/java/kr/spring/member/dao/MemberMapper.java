@@ -108,6 +108,9 @@ public interface MemberMapper {
 	public CompanyDetailVO selectCompCp(String comp_num);
 	public int selectRowCountCp(String comp_num);
 	public List<FoodVO> selectListCp(Map<String, Object> map);
+	//식품삭제
+	@Delete("DELETE FROM food WHERE food_num=#{food_num}")
+	public void deleteFood(Integer food_num);
 	
 	//관리자페이지 - 굿즈목록
 	public int selectGoodsRowCount(Map<String, Object> map);
@@ -120,4 +123,7 @@ public interface MemberMapper {
 	//마이페이지 - 푸드구매내역
 	public int selectOrderCountByMem_num(Map<String,Object> map);
 	public List<F_orderVO> selectListOrderByMem_num(Map<String,Object> map);
+	//관리자/사용자 - 주문상세
+	@Select("SELECT * FROM F_ORDER WHERE f_order_num=#{f_order_num}")
+	public F_orderVO selectOrder(String f_order_num);
 }

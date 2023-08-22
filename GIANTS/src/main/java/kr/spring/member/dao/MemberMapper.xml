@@ -474,7 +474,6 @@
 		FROM 
 			F_ORDER f LEFT JOIN MEMBER m
 			ON f.mem_num = m.mem_num
-		WHERE f.comp_num=#{comp_num}
 		<include refid="orderSearchFd"></include>
 	</select>
 	
@@ -495,26 +494,28 @@
 		]]>
 	</select>
 	
+	
 	<!-- 일반회원 푸드 구매내역 -->
 	<sql id="orderSearchByUser">
 		WHERE mem_num = #{mem_num}
 		<if test="keyword != null and keyword != ''">
 			<if test="keyfield == 1">
-				f_order_num=#{keyword}
+				AND f_order_num=#{keyword}
 			</if>
 			<if test="keyfield == 2">
-				f_order_name LIKE '%' || #{keyword} || '%'
+				AND f_order_name LIKE '%' || #{keyword} || '%'
 			</if>
 			<if test="keyfield == 3">
-				buyer_name LIKE '%' || #{keyword} || '%'
+				AND buyer_name LIKE '%' || #{keyword} || '%'
 			</if>
 		</if>
 	</sql>
 	
 	<select id="selectOrderCountByMem_num" parameterType="map">
 		SELECT
-		  COUNT(*)
-		FROM F_ORDER
+			count(*)
+		FROM 
+			F_ORDER 
 		<include refid="orderSearchByUser"></include>
 	</select>
 	

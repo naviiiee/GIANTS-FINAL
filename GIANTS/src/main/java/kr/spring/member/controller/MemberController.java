@@ -28,9 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.food.vo.F_orderVO;
-import kr.spring.food.vo.FoodVO;
 import kr.spring.member.service.MemberService;
-import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.FileUtil;
@@ -249,6 +247,7 @@ public class MemberController {
 		}
 		return mapAjax;
 	}
+	
 	//회원정보수정시 닉네임 유효성 체크
 	@RequestMapping("/member/confirmNkMd.do")
 	@ResponseBody
@@ -284,6 +283,7 @@ public class MemberController {
 
 		// 유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) { return formMember(); }
+		
 		// 정상 처리 시 회원가입
 		memberService.insertMember(memberVO);
 		model.addAttribute("accessMsg", "(일반)회원가입이 완료되었습니다.");
@@ -845,6 +845,25 @@ public class MemberController {
 		mav.addObject("page", page.getPage());
 		
 		return mav;
+	}	
+	
+	/*====================
+	 * 사용자 주문취소
+	 *====================*/
+	@RequestMapping("/member/orderCancel.do")
+	public String submitCancel(@RequestParam String f_order_num,
+			                   Model model, HttpSession session,
+			                   HttpServletRequest request) {
+		//주문취소
+		F_orderVO vo = new F_orderVO();
+		vo.setF_order_num(f_order_num);
+		
+		model.addAttribute("message", "주문취소가 완료되었습니다.");
+		model.addAttribute("url", 
+				request.getContextPath()+"/member/memberMypageFoodList.do");
+				/*"/order/orderDetail.do?order_num="+f_order_num);*/
+		
+		return "common/resultView";
 	}
 	
 	/*=====================
