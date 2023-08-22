@@ -7,12 +7,12 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_order_form.js"></script>
 <div class="page-main">
 	<h2>배송지정보수정</h2>
-	<c:if test="${orderVO.order_status != 1}">
+	<c:if test="${orderVO.order_status > 1}">
 	<div class="result-display">
-		배송대기일 때만 배송지정보를 수정할 수 있습니다.
+		결제 완료 혹은 배송대기일 때만 배송지정보를 수정할 수 있습니다.
 	</div>
 	</c:if>
-	<c:if test="${orderVO.order_status == 1}">
+	<c:if test="${orderVO.order_status <=1}">
 	<form:form modelAttribute="orderVO" action="admin_modify.do"
 	             id="order_modify">
 	    <form:hidden path="order_num"/>
@@ -41,7 +41,7 @@
 				<form:input path="order_address2" id="address2" maxlength="30"/>
 				<form:errors path="order_address2" cssClass="error-color"/>      
 			</li>
-			<li> <!-- form path 명 오류날수도? -->
+			<li> 
 				<form:label path="mem_phone">전화번호</form:label>
 				<form:input path="mem_phone" maxlength="15"/>
 				<form:errors path="mem_phone" cssClass="error-color"/>     

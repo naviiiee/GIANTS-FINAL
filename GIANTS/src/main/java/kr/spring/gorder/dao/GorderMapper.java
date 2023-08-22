@@ -24,6 +24,10 @@ public interface GorderMapper {
 	public void insertOrderDetail(GorderDetailVO vo);
 
 	public void updatePoint(int mem_num);
+	
+	// 포인트 사용하기
+	@Update("UPDATE member_detail set mem_point = mem_point - #{mem_point} WHERE mem_num = #{mem_num}")
+	public void usingPoint(int mem_point, int mem_num); //mem_point는 detail에 있음
 
 	// 재고수 업데이트
 	@Update("UPDATE goods_option SET goods_stock=goods_stock-#{order_quantity} WHERE goods_num=#{goods_num}")
@@ -64,5 +68,7 @@ public interface GorderMapper {
 	// 관리자/사용자 - 주문취소시 상품 수량 업데이트
 	@Update("UPDATE goods_option SET goods_stock=goods_stock + #{order_quantity} WHERE goods_num=#{goods_num}")
 	public void updateItemQuantity(GorderDetailVO orderDetailVO);
+	
+	
 
 }

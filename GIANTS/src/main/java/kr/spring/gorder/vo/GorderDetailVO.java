@@ -11,6 +11,7 @@ public class GorderDetailVO {
 	private int mem_num;
 	private int order_num;//주문번호  
 	private int order_point; //주문 시 적립된 포인트
+	private int used_point;
 	private int order_dcost; //배송비, default 3000
 	private int goods_num; //상품번호
 	private String goods_name;

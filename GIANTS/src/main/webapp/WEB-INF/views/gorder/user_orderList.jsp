@@ -19,7 +19,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <!-- count, list, page -->
-${list}
 <div class="page-main">
 	<h2>주문목록</h2>
 	<form action="orderList.do" id="search_form" method="get">

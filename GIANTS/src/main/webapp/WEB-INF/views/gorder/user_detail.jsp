@@ -13,8 +13,10 @@
 orderVO : ${orderVO}
 <br>
 detailList : ${detailList}
+<br>
 
-
+<br>
+<br>
 
 
 
@@ -28,6 +30,7 @@ detailList : ${detailList}
 	    		<th>상품명</th>
 	    		<th>수량</th>
 	    		<th>가격</th>
+	    		<th>사용포인트</th>
 	    		<th>합계</th>
 	    	</tr>
 	    	<c:forEach var="detail" items="${detailList}">
@@ -36,15 +39,34 @@ detailList : ${detailList}
 	    		<td class="align-center"><fmt:formatNumber value="${detail.order_quantity}"/></td>
 	    		<td class="align-center"><fmt:formatNumber value="${detail.goods_dprice}"/>원</td>
 	    		<td class="align-center"><fmt:formatNumber value="${detail.goods_total}"/>원</td> <!-- 동일 상품 -->
+	    		<td class="align-center">${detail.used_point}p</td>
 	    	</tr>	
-	    	</c:forEach>
+	    	
 	    	<tr>
 	    		<td colspan="3" class="align-right"><b>총구매금액</b></td>
 	    		<td class="align-center">
-	    			<fmt:formatNumber value="${orderVO.order_total}"/>
+	    			<fmt:formatNumber value="${orderVO.order_total}"/>원
 	    		</td>
 	    	</tr>
-	    </table>         
+	    	
+	    	<tr>
+	    		<td colspan="3" class="align-right"><b>사용한 포인트</b></td>
+	    		<td class="align-center">
+	    			${used_point}p
+	    		</td>
+	    	</tr>
+	    	 </c:forEach>
+	    	
+	    	<tr>
+	    		<td colspan="3" class="align-right"><b>최종 결제금액</b></td>
+	    		<td class="align-center">
+	    			${orderVO.order_total}원
+	    		</td>
+	    	</tr>
+	    </table>        
+	   
+	    
+	     
 		<ul>
 			<li>
 				<span>결제자 :

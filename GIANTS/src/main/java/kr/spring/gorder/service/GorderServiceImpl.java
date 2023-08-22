@@ -71,7 +71,6 @@ public class GorderServiceImpl implements GorderService{
 
 	@Override
 	public GorderVO selectOrder(int order_num) {
-		// TODO Auto-generated method stub
 		return orderMapper.selectOrder(order_num);
 	}
 
@@ -79,6 +78,12 @@ public class GorderServiceImpl implements GorderService{
 	public List<GorderDetailVO> selectListOrderDetail(int order_num) {
 		return orderMapper.selectListOrderDetail(order_num);
 	}
+
+	@Override
+	public void usingPoint(int mem_point, int mem_num) {
+		orderMapper.usingPoint(mem_point, mem_num);
+	}
+
 
 	
 

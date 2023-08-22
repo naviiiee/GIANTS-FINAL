@@ -45,24 +45,28 @@
 		  detail_num,
 		  order_num,
 		  order_point,
+		  used_point,
 		  goods_num,
 		  mem_num,
 		  goods_name,
 		  goods_dprice,
 		  goods_total,
 		  goods_size,
-		  order_quantity)
+		  order_quantity
+		  )
 		VALUES(
 		  g_order_detail_seq.nextval,
 		  #{order_num},
-		  #{order_point},
+		  #{order_point}, 
+		  #{used_point},
 		  #{goods_num},
 		  #{mem_num},
 		  #{goods_name},
 		  #{goods_dprice},
 		  #{goods_total},
 		  #{goods_size},
-		  #{order_quantity})  
+		  #{order_quantity}
+		  )  
 	</insert>
 	
 	<!-- 포인트 누적해주기 -->

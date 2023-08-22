@@ -10,6 +10,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_order_form.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+
 <div class="page-main">
 <!-- 보유 중인 포인트, 결제 api - form 전송 -->
 	가져온 목록
@@ -17,6 +18,8 @@
 	${list}
 	<br>
 	${all_total}
+	<br>
+	회원 포인트 : ${mem_point }
 		<h3>주문 리스트</h3>
 		<hr size="1">
 		<br>
@@ -67,7 +70,8 @@
 
 					</c:if>
 				</tr>
-				<c:set var="totalOrderPoint" value="${totalOrderPoint + cart.order_point}" />
+				
+				<c:set var="totalOrderPoint" value="${totalOrderPoint + cart.order_point}" /> <!-- 상품 여러개인 경우 합산 -->
 				</c:forEach>		
 				<tr class="all_total">
 					<td colspan="5" class="align-right"><b>총구매금액</b></td>
@@ -82,11 +86,13 @@
 		</table>  
 		<br>
 		<br>
-		<h3>포인트적용</h3><span>포인트는 100점 이상부터 사용가능합니다</span>
+		<h3>포인트적용</h3> <!-- 전액 사용 버튼을 누르거나 직접 입력해서 적용버튼 누르면 차감되도록 -->
 		<hr size="1">
-			잔여포인트 : p   <input type="button" value="전액사용" id="point-btn">
+			잔여포인트 : ${mem_point}p   <input type="button" value="전액사용" id="point-btn" class="default-btn">
 			<br>
-			<input type="text" value="포인트입력" id="point-input-btn" name="order_point">원  <input type="button" value="적용" id="point-use-btn">
+			<input type="number" id="used_point" name="used_point" min=1 max="${mem_point}">원  
+			<input type="button" value="적용" id="usingPoint">
+			<input type="button" value="취소" id="cancelPoint">
 		<br>
 		<br>
 		
@@ -102,33 +108,50 @@
 			</div>
 			
 			
-			<div class="order-dcount">
+			<div class="order-dcostt">
 			<h2>배송비</h2>
 			<p>
-				<em class="em-highlight">
+				<em class="em-highlight" id="order-dcost">
 					<c:if test="${all_total >= 50000}">
 						0원
+						<input type="hidden" value="0" name="order_dcost" id="order_dcost">
+
 					</c:if>
 					<c:if test="${all_total<50000}">
 						3,000원
+						<input type="hidden" value="3000" name="order_dcost" id="order_dcost">
 					</c:if>
-					<span id="operator"><img src="${pageContext.request.contextPath}/images/order-minus.png" width="30"></span>
 				</em>
+				
 				</p>
 			</div>
-			
+			<span id="operator"><img src="${pageContext.request.contextPath}/images/order-minus.png" width="30"></span>
 			<div class="order-use-point">
 			<h2>사용포인트</h2>
 			<p>
-				<em class="em-highlight">원</em>
+				<em class="em-highlight" id="used-point-result"> 0p</em><!-- usedpoint -->
 				</p>
 			</div>
 			<span id="operator"><img src="${pageContext.request.contextPath}/images/order-equals.png" width="30"></span>
 			
+			
+			<c:set var="allTotalAndDcost">
+			    <c:choose>
+			        <c:when test="${all_total >= 50000}">
+			            ${all_total}
+			        </c:when>
+			        <c:otherwise>
+			            ${all_total + 3000}
+			        </c:otherwise>
+			    </c:choose>
+			</c:set>
+
+			
+			<!-- 포인트 적용한거 ajax는 처리됐는데 값을 넘겨줄때 포인트 차감된 가격이 안나옴 -->
 			<div class="order-final-price">
-			<h2>결제금액</h2> <!-- all_total - 배송비 - 포인트 = order_total 변수 만들어주기 -->
-				<p>
-				<em class="em-highlight-result"><fmt:formatNumber value="${all_total}"/>원</em>
+			<h2>결제금액</h2> 
+				<p> <!-- 최종 결제 금액 - 포인트 차감된 금액으로 보이긴 하는데 넘어가질 않음 -->
+				<em class="em-highlight-result" id="all_total_result"><fmt:formatNumber value="${allTotalAndDcost}"/>원</em>
 				</p>
 			</div>
 		</div>
@@ -174,9 +197,10 @@
 		
 		
 		<h3>결제 정보</h3>
-		이름 : <input type="text" id="order_name"> (입금자명을 적어주세요)
-		
 		<hr size="1">
+		입금자명 : <input type="text" id="order_name"> 
+		
+		
 		<br>
 		
 		<h3>결제수단</h3>
@@ -280,18 +304,24 @@
 		    let order_zipcode = document.getElementById('zipcode').value;
 		    let order_address1 = document.getElementById('address1').value;
 		    let order_address2 = document.getElementById('address2').value;
-		    
 		    let order_message = document.getElementById('order_message').value;
-		    //let order_point = document.getElementById('order_point').value;
-		    //let used_point = document.getElementById('used_point').value;
-			
+		    let used_point = document.getElementById('used_point').value;
+		    let all_total = parseInt(document.getElementById('all_total_result').textContent);
+		    
+		   
+		    let order_dcost = document.getElementById('order_dcost').value;
+		    
+		    if (used_point === "" || used_point === null) {
+		        used_point = 0; // 포인트를 사용하지 않았으면 0으로 처리
+		    }
+		    console.log(used_point); 
 		 	// IMP.request_pay(param, callback) 결제창 호출
 		 	IMP.request_pay({
 		 		pg:'kakaopay.TC0ONETIME', //kakaopay.CID
 		 		pay_method:'card',
 		 		merchant_uid:createMid(),   // 주문번호
 		 		name: '${cart.goodsVO.goods_name}', //상품명
-		 		amount:${all_total},	// 숫자 타입
+		 		amount:${allTotalAndDcost},	// 숫자 타입
 		 		buyer_name:order_name,
 		 		buyer_tel:mem_phone
 		 	},
@@ -316,23 +346,22 @@
 			 				'order_address1' :order_address1,
 			 				'order_address2' : order_address2,
 			 				'mem_phone' : mem_phone, //받는 사람 전화번호
-			 				'order_message' : order_message, //
+			 				'order_message' : order_message, 
 			 				'goods_name' : '${cart.goodsVO.goods_name}',
 			 				'order_quantity' : '${cart.order_quantity}',
-			 				//'order_point' : , //적립 포인트
-			 				//'used_point' : , //사용 포인트 default 0
+			 				'used_point' : used_point,
+			 				'order_point' : '${totalOrderPoint}', //적립 포인트
 			 				'goods_num' : '${cart.goods_num}',
 			 				'goods_size' : '${cart.goods_size}',
-			 				'goods_total' : '${cart.sub_total}',
 			 				'goods_dprice' : '${cart.goodsVO.goods_dprice}',
-			 				'order_total': '${all_total}',  
+			 				'order_total': all_total,  //최종 결제금액(가격+배송비-포인트)
 			 				'pg':'kakaopay',
 			 				'pay_method' : 'card',
 			 				'merchant_uid' : createMid(),
 			 				'goods_total' : ${cart.sub_total}, //동일 상품 합계 - detail
-			 				'order_point' : ${totalOrderPoint},
 			 				'name' : '${cart.goodsVO.goods_name}',
-			 				'amount' : '${all_total}',
+			 				'amount' : all_total,
+			 				'order_dcost' : order_dcost
 		 			}
 		 			console.log(result); 
 		 			
@@ -358,10 +387,17 @@
 			        success:function(param){
 						if(param.result == 'logout'){
 							alert('로그인 후 사용하세요!');
-						} else if(param.result=='orderError'){
-							alert('상품 판매 중지 또는 상품 수 부족');	
-							location.href="../gorder/goods_cart.do";
-						}						
+						} 
+						else if(param.result=='orderError'){
+							alert('주문할 상품이 없습니다');
+						}
+						else if(param.result=='noStatus'){
+							alert('판매가 중지된 상품이 있습니다');	
+							//location.href="../gorder/goods_cart.do";
+						} else if(param.result=='noQuantity'){
+							alert('상품 재고가 부족합니다');
+							//location.href="../gorder/goods_cart.do";
+						}	
 						else if(param.result == 'success'){
 							alert('결제 성공! 결제 목록으로 이동합니다.');
 							location.href='../gorder/orderList.do?mem_num=${cart.mem_num}';

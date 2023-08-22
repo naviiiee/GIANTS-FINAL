@@ -32,7 +32,7 @@ public class GorderAdminController {
 	/*
 	 * ====================== 주문 목록 ======================
 	 */
-	@RequestMapping("/order/admin_list.do")
+	@RequestMapping("/gorder/admin_list.do")
 	public ModelAndView admin_list(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
 			String keyfield, String keyword) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -61,13 +61,13 @@ public class GorderAdminController {
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());
 
-		return mav;
+		return mav; //adminOrderList
 	}
 
 	/*
 	 * ====================== 주문 내역 ======================
 	 */
-	@RequestMapping("/order/admin_detail.do")
+	@RequestMapping("/gorder/admin_detail.do")
 	public String adminDetail(@RequestParam int order_num, Model model) {
 		GorderVO order = orderService.selectOrder(order_num);
 
@@ -83,7 +83,7 @@ public class GorderAdminController {
 	 * ====================== 배송지정보수정 ======================
 	 */
 	// 배송지정보수정 폼 호출
-	@GetMapping("/order/admin_modify.do")
+	@GetMapping("/gorder/admin_modify.do")
 	public String formModify(@RequestParam int order_num, Model model) {
 		GorderVO order = orderService.selectOrder(order_num);
 		model.addAttribute("orderVO", order);
@@ -123,7 +123,7 @@ public class GorderAdminController {
 	 * ====================== 배송상태수정 ======================
 	 */
 	// 배송상태수정 폼 호출
-	@GetMapping("/order/admin_status.do")
+	@GetMapping("/gorder/admin_status.do")
 	public String formStatus(@RequestParam int order_num, Model model) {
 		GorderVO order = orderService.selectOrder(order_num);
 		model.addAttribute("orderVO", order);
@@ -132,7 +132,7 @@ public class GorderAdminController {
 	}
 
 	// 전송된 데이터 처리
-	@PostMapping("/order/admin_status.do")
+	@PostMapping("/gorder/admin_status.do")
 	public String submitStatus(GorderVO orderVO, Model model, HttpServletRequest request) {
 		GorderVO db_order = orderService.selectOrder(orderVO.getOrder_num());
 		log.debug("<<배송상태수정>> : " + db_order.getOrder_status());

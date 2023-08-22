@@ -11,6 +11,10 @@ import lombok.ToString;
 @Setter
 @ToString
 public class GorderVO {
+	private int goods_num; //상품 번호
+	private int opt_num;
+	
+	
 	private int order_num;//주문번호  
 	private int mem_num;
 	private String goods_name;
@@ -42,7 +46,6 @@ public class GorderVO {
 	private String id; //구매자 id
 	private int[] cart_numbers; //장바구니에서 선택한 상품의 번호들
 	private GorderDetailVO gorderDetailVO;
-	private int used_point; //결제 시 사용한 포인트
 	
 	private String impUid; // 아임포트 결제번호 추가
 	

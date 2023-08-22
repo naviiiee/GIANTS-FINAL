@@ -36,6 +36,7 @@ import kr.spring.gorder.service.GorderService;
 import kr.spring.gorder.vo.GorderDetailVO;
 import kr.spring.gorder.vo.GorderVO;
 import kr.spring.member.service.MemberService;
+import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -51,7 +52,7 @@ public class GorderController {
 	private GoodsService goodsService;
 	@Autowired
 	private MemberService memberService;
-
+	//자바빈 초기화
 	@ModelAttribute("orderVO")
 	public GorderVO initCommand() {
 		return new GorderVO();
@@ -64,53 +65,13 @@ public class GorderController {
 		this.api = new IamportClient("0217183128333403",
 				"8l2vQIsYUIxQ8MubQCY7fe5vQUbLZAaf8b5jWmYwWwCJDClZ0bwyM0EylaF5ALeGAtKYuYnFxV8zt3Ga");
 	}
-	
-	
-	/*
-	 * ==================== 주문 목록 ====================
-	 */
-	/*@RequestMapping("/gorder/user_orderList.do")
-	public ModelAndView orderList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, String keyfield,
-			String keyword, HttpSession session) {
-		MemberVO user = (MemberVO) session.getAttribute("user");
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("keyfield", keyfield);
-		map.put("keyword", keyword);
-		map.put("mem_num", user.getMem_num());
-
-		// 전체/검색 레코드수
-		int count = orderService.selectOrderCountByMem_num(map);
-
-		log.debug("<<count>> : " + count);
-
-		// 페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 20, 10, "orderList.do");
-
-		List<OrderVO> list = null;
-		if (count > 0) {
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
-
-			list = orderService.selectListOrderByMem_num(map);
-		}
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("orderList");
-		mav.addObject("count", count);
-		mav.addObject("list", list);
-		mav.addObject("page", page.getPage());
-
-		return mav;
-	}
-	
-	*/
 
 	/*
 	 * ==================== 상품 구매 ====================
 	 */
 
 	// 바로구매 클릭 시 - 바로 goodsView 페이지에서 읽어와서 결제폼으로 넘겨주면 됨, order_quantity, goods_num,
+	// sub_total, order_point(적립 예정포인트)
 	@RequestMapping("/gorder/directBuy.do")
 	@ResponseBody
 	public Map<String, String> directBuy(GorderVO orderVO, HttpSession session) { // 상품번호, 주문수, 옵션(처리 아직) 가져옴
@@ -158,164 +119,227 @@ public class GorderController {
 	}
 
 	// 상품 구매 폼 호출 - 장바구니 > 구매
-		@PostMapping("/gorder/orderForm.do")
-		public String form(@ModelAttribute("orderVO") GorderVO orderVO, HttpSession session, Model model,
-				HttpServletRequest request) {
-			// log.debug("<<cart_numbers>> : " + orderVO.getCart_numbers());
-			log.debug("<<장바구니 > 구매 >> : " + orderVO);
-			
+	@PostMapping("/gorder/orderForm.do")
+	public String form(@ModelAttribute("orderVO") GorderVO orderVO, HttpSession session, Model model,
+			HttpServletRequest request) {
+		// log.debug("<<cart_numbers>> : " + orderVO.getCart_numbers());
+		log.debug("<<장바구니 > 구매 >> : " + orderVO);
 
-			if (orderVO.getCart_numbers() == null || orderVO.getCart_numbers().length == 0) {
-				model.addAttribute("message", "정상적인 주문이 아닙니다.");
-				model.addAttribute("url", request.getContextPath() + "/gorder/goods_cart.do");
-				return "common/resultView";
-			}
-
-			MemberVO user = (MemberVO) session.getAttribute("user");
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("mem_num", user.getMem_num());
-			map.put("cart_numbers", orderVO.getCart_numbers()); // 여기서 처리가 안되는듯?
-			int all_total = cartService.getTotalByMem_num(map);
-			if (all_total <= 0) {
-				model.addAttribute("message", "정상적인 주문이 아니거나 상품의 수량이 부족합니다.");
-				model.addAttribute("url", request.getContextPath() + "/gorder/goods_cart.do");
-				return "common/resultView";
-			}
-
-			// 장바구니에 담겨있는 상품 정보 호출
-			List<GcartVO> cartList = cartService.getListCart(map);
-			for (GcartVO cart : cartList) {
-				GoodsVO goods = goodsService.selectGoods(cart.getGoods_num());
-				if (goods.getGoods_status() == 2) {
-					// 상품 미표시
-					model.addAttribute("message", "[" + goods.getGoods_name() + "]상품판매 중지");
-					model.addAttribute("url", request.getContextPath() + "/gorder/goods_cart.do");
-					return "common/resultView";
-				}
-				/*
-				 * log.debug("<<옵션 별 수량 >> : " + goods.getGoodsOptionVO().getGoods_stock());
-				 * if(goods.getGoodsOptionVO().getGoods_stock() < cart.getOrder_quantity()) {
-				 * //상품 재고 수량 부족 model.addAttribute("message",
-				 * "["+goods.getGoods_name()+"]재고수량 부족으로 주문 불가"); model.addAttribute("url",
-				 * request.getContextPath()+"/gorder/goods_cart.do"); return
-				 * "common/resultView";
-				 * 
-				 * }
-				 */
-
-			}
-
-			model.addAttribute("list", cartList);
-			model.addAttribute("all_total", all_total);
-
-			return "orderForm";
+		if (orderVO.getCart_numbers() == null || orderVO.getCart_numbers().length == 0) {
+			model.addAttribute("message", "정상적인 주문이 아닙니다.");
+			model.addAttribute("url", request.getContextPath() + "/gorder/goods_cart.do");
+			return "common/resultView";
 		}
 
-	/* 결제 api 작업*/
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("mem_num", user.getMem_num());
+		map.put("cart_numbers", orderVO.getCart_numbers()); // 여기서 처리가 안되는듯?
+		int all_total = cartService.getTotalByMem_num(map);
+		if (all_total <= 0) {
+			model.addAttribute("message", "정상적인 주문이 아니거나 상품의 수량이 부족합니다.");
+			model.addAttribute("url", request.getContextPath() + "/gorder/goods_cart.do");
+			return "common/resultView";
+		}
+
+		// 장바구니에 담겨있는 상품 정보 호출
+		List<GcartVO> cartList = cartService.getListCart(map);
+
+		for (GcartVO cart : cartList) {
+			GoodsVO goods = goodsService.selectGoods(cart.getGoods_num());
+			if (goods.getGoods_status() == 2) {
+				// 상품 미표시
+				model.addAttribute("message", "[" + goods.getGoods_name() + "]상품판매 중지");
+				model.addAttribute("url", request.getContextPath() + "/gorder/goods_cart.do");
+				return "common/resultView";
+			}
+
+			// 굿즈의 옵션 별 재고 가져오기
+			int db_stock = cartService.getStockByoption(cart.getGoods_num(), cart.getOpt_num());
+			if (db_stock < cart.getOrder_quantity()) {
+				// 상품 재고 수량 부족
+				model.addAttribute("message", "[" + goods.getGoods_name() + "]재고수량 부족으로 주문 불가");
+				model.addAttribute("url", request.getContextPath() + "/gorder/goods_cart.do");
+				return "common/resultView";
+			}
+
+			log.debug("<<굿즈 옵션별 재고 db_stock >> : " + db_stock);
+
+		}
+
+		// mem_point 가져오기
+		MemberVO memberVO = memberService.selectMember(user.getMem_num());
+		int mem_point = memberVO.getMemberDetailVO().getMem_point();
+
+		log.debug("<<장바구니 mem_point >> : " + mem_point);
+
+		model.addAttribute("mem_point", mem_point);
+		model.addAttribute("list", cartList);
+		model.addAttribute("all_total", all_total);
+
+		return "orderForm";
+	}
+
+	/* 결제 api 작업 */
 	@RequestMapping(value = "/gorder/insertMPay.do", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> insertMPay(GorderVO orderVO, GorderDetailVO orderDetailVO, HttpSession session, RedirectAttributes rttr, Model model, HttpServletRequest request) {		
+	public Map<String, String> insertMPay(GorderVO orderVO, GorderDetailVO orderDetailVO, HttpSession session,
+			RedirectAttributes rttr, Model model, HttpServletRequest request) {
 		log.debug("<<결제 api orderVO>> : " + orderVO);
-		log.debug("<<결제 api orderDetailVO>> : " + orderDetailVO);
-		
-		MemberVO user = (MemberVO)session.getAttribute("user");
+		log.debug("<<결제 api orderDetailVO>> : " + orderDetailVO); //제대로 다 읽어옴!!
+
+		MemberVO user = (MemberVO) session.getAttribute("user");
 		Map<String, String> mapJson = new HashMap<String, String>();
-		
+
 		// 로그인 x
 		if (user == null) {
 			mapJson.put("result", "logout");
 		}
 		// 로그인 o
-		else {
-			orderVO.setMem_num(user.getMem_num()); // 현재 로그인된 회원의 mem_num 설정
+		orderVO.setMem_num(user.getMem_num()); // 현재 로그인된 회원의 mem_num 설정
 
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("mem_num", user.getMem_num());
-			map.put("cart_numbers", orderVO.getCart_numbers());
-			int all_total = cartService.getTotalByMem_num(map);
-			
-			if (all_total <= 0) {
-				mapJson.put("result", "orderError");
-			}
-			
-			else {
-			// 장바구니에 담겨있는 상품 정보 호출
-			List<GcartVO> cartList = cartService.getListCart(map);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("mem_num", user.getMem_num());
+		map.put("cart_numbers", orderVO.getCart_numbers());
+		int all_total = cartService.getTotalByMem_num(map);
 
-			// 개별 주문 상품 저장
-			List<GorderDetailVO> orderDetailList = new ArrayList<GorderDetailVO>();
-			for (GcartVO cart : cartList) {
-				GoodsVO goods = goodsService.selectGoods(cart.getGoods_num());
-
-				if (goods.getGoods_status() == 2) {
-					// 상품이 미표시인 경우
-					mapJson.put("result", "orderError");
-					//model.addAttribute("message", "[" + goods.getGoods_name() + "]상품판매 중지");
-					//model.addAttribute("url", request.getContextPath() + "/gorder/goods_cart.do");
-				}
-
-				/* 재고수 처리 noQuantity
-				 * if (goods.getGoodsOptionVO().getGoods_stock() < cart.getOrder_quantity()) {
-				 * // 상품 재고 수량 부족 model.addAttribute("message", "[" + goods.getGoods_name() +
-				 * "]재고수량 부족으로 주문 불가"); model.addAttribute("url", request.getContextPath() +
-				 * "/gorder/goods_cart.do"); return "common/resultView"; }
-				 */
-
-				GorderDetailVO orderDetail = new GorderDetailVO();
-				orderDetail.setMem_num(user.getMem_num());
-				orderDetail.setGoods_num(cart.getGoods_num());
-				orderDetail.setGoods_name(cart.getGoodsVO().getGoods_name());
-				orderDetail.setGoods_dprice(cart.getGoodsVO().getGoods_dprice());
-				orderDetail.setGoods_size(cart.getGoods_size());
-				orderDetail.setOrder_quantity(cart.getOrder_quantity());
-				orderDetail.setGoods_total(cart.getSub_total());
-				
-				// 배송비 셋팅 - 5만원 이상 시 무료배송
-				//if (cart.getOrder_quantity() * cart.getGoodsVO().getGoods_dprice() >= 50000) {
-				//	orderDetail.setOrder_dcost(0);
-				//}
-				//orderDetail.setOrder_quantity(cart.getOrder_quantity());
-				// 동일 상품의 합계 금액
-				//orderDetail.setGoods_total(cart.getSub_total());
-				
-				log.debug("<<orderDetail>> : " + orderDetail);
-				
-				orderDetailList.add(orderDetail);
-			}
-
-			// 주문 상품의 대표 상품명 생성
-			String goods_name = "";
-			if (cartList.size() == 1) {
-				goods_name = cartList.get(0).getGoodsVO().getGoods_name();
-				log.debug("<< 굿즈 하나 산 경우 이름 >>: " + goods_name);
-			} else {
-				goods_name = cartList.get(0).getGoodsVO().getGoods_name() + "외 " + (cartList.size() - 1) + "건";
-				log.debug("<< 굿즈 외 1건 이런 식으로 됐는지 확인 >>: " + goods_name);
-				
-			}
-
-			orderVO.setGoods_name(goods_name);
-			orderVO.setOrder_total(all_total);
-			orderVO.setMem_num(user.getMem_num());
-
-			// 성공적으로 수행된 경우 주문 등록 + 굿즈 옵션 별 수량 차감
-			orderService.insertOrder(orderVO, orderDetailList);
-			orderService.updatePoint(user.getMem_num());
-			// =============================================
-			// 예상 포인트 mem_point에 적립해주기
-			
-			// =============================================
-			
-			mapJson.put("result", "success");
-			
-			}
-			
+		if (all_total <= 0) {
+			mapJson.put("result", "orderError");
 		}
+
+		// 장바구니에 담겨있는 상품 정보 호출
+		List<GcartVO> cartList = cartService.getListCart(map);
+		List<GorderDetailVO> orderDetailList = new ArrayList<GorderDetailVO>();
+		// ========
+		for (GcartVO cart : cartList) {
+			GoodsVO goods = goodsService.selectGoods(cart.getGoods_num());
+			if (goods.getGoods_status() == 2) {
+				// 상품 미표시
+				mapJson.put("result", "noStatus");
+			}
+
+			// 굿즈의 옵션 별 재고 가져오기
+
+			int db_stock = cartService.getStockByoption(cart.getGoods_num(), cart.getOpt_num());
+			if (db_stock < cart.getOrder_quantity()) {
+				// 상품 재고 수량 부족
+				mapJson.put("result", "noQuantity");
+			}
+			log.debug("<<주문api 굿즈 옵션 별 재고 : >> " + db_stock);
+			log.debug("<<주문api 주문한 재고 : >> " + cart.getOrder_quantity());
+
+			
+			 GorderDetailVO orderDetail = new GorderDetailVO();
+			 
+			 orderDetail.setMem_num(user.getMem_num());
+			 orderDetail.setGoods_num(cart.getGoods_num());
+			 orderDetail.setGoods_name(cart.getGoodsVO().getGoods_name());
+			 orderDetail.setGoods_dprice(cart.getGoodsVO().getGoods_dprice());
+			 orderDetail.setGoods_size(cart.getGoods_size());
+			 orderDetail.setOrder_quantity(cart.getOrder_quantity());
+			 orderDetail.setGoods_total(cart.getSub_total());
+			 orderDetail.setOrder_point(cart.getOrder_point()); //적립된 포인트
+			 orderDetail.setUsed_point(orderDetailVO.getUsed_point()); //사용한 포인트
+			 
+			  log.debug("<<orderDetail 세팅>> : " + orderDetail);
+			  
+			  orderDetailList.add(orderDetail);
+			 
+		}
+		GorderDetailVO orderDetail = new GorderDetailVO();
+		// =============================================
+		// 포인트를 사용한 경우 포인트 차감시키기 - used_point > 0
+		if (orderDetail.getUsed_point() > 0) {
+			orderService.usingPoint(orderDetail.getUsed_point(), user.getMem_num());
+		}
+
+		// 주문 상품의 대표 상품명 생성
+		String goods_name = "";
+		if (cartList.size() == 1) {
+			goods_name = cartList.get(0).getGoodsVO().getGoods_name();
+			log.debug("<< 굿즈 하나 산 경우 이름 >>: " + goods_name);
+		} else {
+			goods_name = cartList.get(0).getGoodsVO().getGoods_name() + "외 " + (cartList.size() - 1) + "건";
+			log.debug("<< 굿즈 외 1건 이런 식으로 됐는지 확인 >>: " + goods_name);
+
+		}
+
+		orderVO.setGoods_name(goods_name);
+		orderVO.setOrder_total(all_total);
+		orderVO.setMem_num(user.getMem_num());
+
+		// 성공적으로 수행된 경우 주문 등록 + 굿즈 옵션 별 수량 차감
+		orderService.insertOrder(orderVO, orderDetailList);
 		
-		return mapJson;	// 결제이후 이동할 주소 지정
+		
+		// =============================================
+		// 예상 포인트 mem_point에 적립해주기
+		orderService.updatePoint(user.getMem_num());
+		// =============================================
+
+		mapJson.put("result", "success");
+
+		return mapJson; 
 	}
-	
-	
+
+	/*
+	 * ==================== 회원 포인트 읽어오기 ====================
+	 */
+
+	@RequestMapping("/gorder/getMemberPoint.do")
+	@ResponseBody
+	public Map<String, Object> formPoint(HttpSession session) {
+		Map<String, Object> mapJson = new HashMap<>();
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		if (user == null) {
+			mapJson.put("result", "logout");
+		} else {
+			MemberVO db_memberDetail = memberService.selectMember(user.getMem_num());
+			mapJson.put("result", "success");
+			mapJson.put("mem_point", db_memberDetail.getMemberDetailVO().getMem_point());
+			log.debug("<<회원 보유 포인트 >> : " + db_memberDetail.getMemberDetailVO().getMem_point());
+		}
+		return mapJson;
+	}
+
+	/*
+	 * ==================== 회원 포인트 사용하기 ====================
+	 */
+	@RequestMapping("/gorder/usingMemberPoint.do")
+	@ResponseBody
+	public Map<String, Object> usingPoint(HttpSession sesssion) {
+		Map<String, Object> mapJson = new HashMap<>();
+		MemberVO user = (MemberVO) sesssion.getAttribute("user");
+		MemberVO db_memberDetail = memberService.selectMember(user.getMem_num());
+		int mem_point = db_memberDetail.getMemberDetailVO().getMem_point();
+		// dead code, 굳이 쓸 필요가 없음
+		/*
+		 * if(user == null) { mapJson.put("result", "logout"); }
+		 */
+		if (mem_point <= 0) {
+			mapJson.put("result", "littlePoint");
+		} else {
+			mapJson.put("result", "success");
+			mapJson.put("mem_point", db_memberDetail.getMemberDetailVO().getMem_point());
+		}
+		return mapJson;
+	}
+
+	@GetMapping("/gorder/cancelMemberPoint.do")
+	@ResponseBody
+	public Map<String, String> cancelMemberPoint(@RequestParam("usedPoint") int usedPoint, HttpSession sesssion) {
+		Map<String, String> mapJson = new HashMap<>();
+		MemberVO user = (MemberVO) sesssion.getAttribute("user");
+		MemberVO db_memberDetail = memberService.selectMember(user.getMem_num());
+		int mem_point = db_memberDetail.getMemberDetailVO().getMem_point();
+
+		if (mem_point <= 0) {
+			mapJson.put("result", "littlePoint");
+		} else {
+			mapJson.put("result", "success");
+		}
+		return mapJson;
+	}
 
 	/*
 	 * ==================== 회원 주소 읽기(배송지 선택) ====================
@@ -388,7 +412,7 @@ public class GorderController {
 		// 개별 상품의 주문 정보
 		List<GorderDetailVO> detailList = orderService.selectListOrderDetail(order_num);
 		log.debug("<<주문상세>> : " + detailList);
-
+		
 		model.addAttribute("orderVO", order);
 		model.addAttribute("detailList", detailList);
 
@@ -420,9 +444,9 @@ public class GorderController {
 		log.debug("<<수정하기 GorderVO>> : " + orderVO);
 
 		// 전송된 데이터 유효성 체크 결과 오류가 있으면 폼 호출
-		if (result.hasErrors()) {
-			return "orderModify";
-		}
+		/*
+		 * if (result.hasErrors()) { return "orderModify"; }
+		 */
 
 		GorderVO db_order = orderService.selectOrder(orderVO.getOrder_num());
 		if (db_order.getOrder_status() > 2) {
@@ -430,7 +454,7 @@ public class GorderController {
 			model.addAttribute("message", "배송상태가 변경되어 주문자가 배송지정보를 변경할 수 없음");
 			model.addAttribute("url", request.getContextPath() + "/gorder/orderList.do");
 		}
-		//정보 수정
+		// 정보 수정
 		orderService.updateOrder(orderVO);
 
 		model.addAttribute("message", "배송지정보가 변경되었습니다.");

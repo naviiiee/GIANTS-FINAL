@@ -10,7 +10,7 @@ $(function(){
 			dataType:'json',
 			success:function(param){
 				if(param.result == 'logout'){
-					alert('로그인 해야 회원 주소를 읽어올 수 있습니다.');
+					alert('로그인 후 회원 주소를 읽어올 수 있습니다.');
 				}else if(param.result == 'success'){
 					$('#zipcode').val(param.zipcode);
 					$('#address1').val(param.address1);
@@ -24,7 +24,99 @@ $(function(){
 				alert('네트워크 오류 발생');
 			}
 		});
+		
 	});
+	//포인트 전액 사용 클릭 시
+	$('#point-btn').click(function(){
+		$.ajax({
+			url : '../gorder/getMemberPoint.do', 
+			type : 'get', 
+			dataType : 'json', 
+			success : function(param){
+				if(param.result=='logout'){
+					alert('로그인 후 회원 포인트를 읽어올 수 있습니다');
+				} else if(param.result='success'){
+					$('#used_point').val(param.mem_point);
+				} else{
+					alert('회원 보유 포인트 읽기 오류');
+				}
+			}, error : function(){
+				alert('네트워크 오류 발생');
+			}
+			
+			
+		}); //end ajax
+	})
+	//포인트 사용 - 적용버튼 클릭 시 
+	$('#usingPoint').click(function(){
+		var resultAllTotal = parseInt($('#all_total_result').text().replace(/,/g, '')); //<em>태그의 값은 text로 가져올 수 있음, 계산작업을 위해 int형으로 반환하고 포맷넘버로 , 이후로 값을 못읽어오므로 처리
+		var usedPointValue = parseInt($("#used_point").val());
+		var newResultTotal = resultAllTotal - usedPointValue;
+		console.log("usedPointValue:", usedPointValue);
+		console.log("resultAllTotal:", resultAllTotal);
+		$.ajax({
+			url : '../gorder/usingMemberPoint.do', 
+			type : 'get', 
+			dataType : 'json', 
+			success : function(param){
+				if(param.result=='littlePoint'){
+					alert('포인트가 없습니다');
+				} else if(param.result='success'){
+					$('#used-point-result').html(usedPointValue +"p"); //사용한 포인트를 적용		
+					$('#all_total_result').html(newResultTotal.toLocaleString() + "원");		
+					$("#used_point").attr("disabled", true); // 입력 필드 비활성화
+               		$("#usingPoint").attr("disabled", true).css({
+				    backgroundColor: "gray",
+				    color: "white",
+				    cursor: "not-allowed"
+					}); // 적용 버튼 비활성화			
+				} else{
+					alert('회원 보유 포인트 읽기 오류');
+				}
+			}, error : function(){
+				alert('네트워크 오류 발생');
+			}
+			
+		}); //end ajax
+		
+	})
+		
+	//포인트 사용 취소
+	$('#cancelPoint').click(function(){
+		var resultAllTotal = parseInt($('#all_total_result').text().replace(/,/g, '')); //<em>태그의 값은 text로 가져올 수 있음, 계산작업을 위해 int형으로 반환하고 포맷넘버로 , 이후로 값을 못읽어오므로 처리
+		var usedPointValue = parseInt($("#used_point").val());
+		var newResultTotal = resultAllTotal + usedPointValue; //빼준 포인트를 다시 더해서 원래 값으로 적용
+		$.ajax({
+			url : '../gorder/cancelMemberPoint.do', 
+			type : 'get', 
+			data : {usedPoint: usedPointValue}, //controller로 전송
+			dataType : 'json', 
+			success : function(param){
+				if(param.result=='littlePoint'){
+					alert('적용된 포인트가 없습니다');
+				} else if(param.result='success'){
+					$('#used-point-result').html('0p'); //사용 포인트를 다시 0으로 돌려줌
+					$('#all_total_result').html(newResultTotal.toLocaleString() + '원');	
+					$('#used_point').val('0');
+					$("#used_point").attr("disabled", false); //활성화
+               		$("#usingPoint").attr("disabled", false).css({
+				    backgroundColor: "#052345",
+				    color: "white",
+				    cursor: "allowed"
+					}); 
+				} else{
+					alert('포인트 적용 취소 오류');
+				}
+			}, error : function(){
+				alert('네트워크 오류 발생');
+			}
+			
+		}); //end ajax
+		
+	})
+		
+		
+	
 	
 	
 	

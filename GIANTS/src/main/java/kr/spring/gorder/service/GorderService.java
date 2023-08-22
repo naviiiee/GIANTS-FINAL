@@ -17,6 +17,10 @@ public interface GorderService {
 	public void insertOrder(GorderVO order, List<GorderDetailVO> list); // Mapper에서는 order, orderDetail 따로 처리
 	public void updatePoint(int mem_num);
 
+	// 포인트 사용하기
+	public void usingPoint(int mem_point, int mem_num);
+	
+	
 	// 관리자 - 전체/검색 레코드 수
 	public int selectOrderCount(Map<String, Object> map);
 
@@ -40,6 +44,7 @@ public interface GorderService {
 
 	// 관리자 - 주문상태수정
 	public void updateOrderStatus(GorderVO order);
+	// 주문 취소 시 회원이 사용한 포인트 돌려주기
 
 	// =========사용자 - 주문 취소 시 환불처리 + 적립된 포인트 없애기===========
 

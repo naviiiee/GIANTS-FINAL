@@ -19,6 +19,7 @@ public class GcartVO {
 	private Date reg_date; //장바구니에 넣은 날짜, default SYSDATE
 	private int opt_num; //옵션 식별 번호
 	private String goods_name;
+	private int goods_stock;
 	
 	//컬럼에 없는 값들
 	private int sub_total; //같은 상품의 총구매 금액

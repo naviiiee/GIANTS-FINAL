@@ -14,13 +14,20 @@
 <!-- 장바구니 시작 -->
 <div class="page-main">
 ${list }
+<br>
+
 	<h2>장바구니</h2>
 	<br>
 	<hr size="1">
 	<br>
 	<c:if test="${empty list}">
 	<div class="result-display">
-		장바구니에 담은 상품이 없습니다.
+		장바구니에 담은 상품이 없습니다!
+		<br>
+		<br>
+		<br>
+		<br>
+		<input type="button" value="상품 구경하러가기" onclick="location.href='${pageContext.request.contextPath}/goods/goodsList.do'">
 	</div>
 	</c:if>
 	<c:if test="${!empty list}">
@@ -38,7 +45,7 @@ ${list }
 				<th>상품정보</th>
 				<th>판매가</th>
 				<th>수량</th>
-				<th>적립</th>
+				<th>적립예정포인트</th>
 				<th>합계</th>
 			</tr>
 			<c:forEach var="cart" items="${list}">

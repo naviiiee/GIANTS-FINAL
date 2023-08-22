@@ -43,8 +43,10 @@
 	
 	<!-- 장바구니 목록 -->
 	<select id="getListCart" parameterType="map" resultMap="cartMap">
-		SELECT c.cart_num, g.goods_num, mem_num, order_quantity, g.goods_name, 
-		o.goods_size, g.goods_dprice, o.goods_stock, g.goods_status, (c.order_quantity * g.goods_dprice) as sub_total, (c.order_quantity * g.goods_dprice * 0.02) as order_point
+		SELECT c.cart_num, g.goods_num, mem_num, order_quantity, g.goods_name, c.opt_num,
+		o.goods_size, g.goods_dprice, o.goods_stock, g.goods_status, 
+        (c.order_quantity * g.goods_dprice) as sub_total, 
+        (c.order_quantity * g.goods_dprice * 0.02) as order_point
 		FROM g_cart c 
         JOIN goods g ON c.goods_num = g.goods_num
         JOIN goods_option o ON c.opt_num = o.opt_num

@@ -93,7 +93,7 @@ public class GcartController {
 			// 동일상품o - 상품+옵션이 같은 경우
 			else {
 				// 재고를 구하기 위해 상품 정보 호출
-				GoodsVO db_goods = goodsService.selectGoods(db_cart.getGoods_num());
+				GoodsVO db_goods = goodsService.selectGoodsAllInfo(db_cart.getGoods_num());
 				// 굿즈의 옵션 별 재고 가져오기 
 				int db_stock = cartService.getStockByoption(db_goods.getGoods_num(), cartVO.getOpt_num());
 				
@@ -126,7 +126,7 @@ public class GcartController {
 	public Map<String, String> submitModify(GcartVO cartVO, HttpSession session) {
 		Map<String, String> mapJson = new HashMap<String, String>();
 		// 재고를 구하기 위해 상품 정보 호출
-		log.debug("<<cartVO 옵션 가져오는지 >> : " + cartVO); //????????goods_size도 못 읽어옴. cartVO 처리가 이상하게 되는듯
+		log.debug("<<cartVO 옵션 가져오는지 >> : " + cartVO); 
 		
 		 GcartVO db_cart = cartService.getCart(cartVO); GoodsVO db_goods =
 		 goodsService.selectGoods(db_cart.getGoods_num());
