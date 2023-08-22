@@ -47,7 +47,7 @@
 						<a href="${pageContext.request.contextPath}/ticket/ticketInfo.do?ticket_num=${ticket.ticket_num}">${ticket.ticket_num}</a>
 					</td>
 					<td class="align-center">${ticket.game_title}</td>
-					<td class="align-center">${ticket.game_time}</td>
+					<td class="align-center">${ticket.game_date}</td>
 					<td class="align-center">${ticket.ticket_quantity}</td>
 					<td class="align-center"><fmt:formatNumber value="${ticket.total_price}"/>원</td>
 					<td class="align-center">
