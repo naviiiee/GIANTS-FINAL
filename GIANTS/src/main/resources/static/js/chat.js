@@ -11,7 +11,7 @@ $(function(){
 				}else if(param.result == 'samePerson'){
 					alert('본인과의 채팅은 불가합니다.');
 				}else if(param.result == 'alredyExist' || param.result == 'success'){ 
-					open('../chat/chatting.do?chatroom_num='+param.chatroom_num,'chat','left=300px,toolbar=no,location=no,status=no,menubar=no,resizable=no,scrollbars=no,width=800,height=800');
+					open('../chat/chatting.do?chatroom_num='+param.chatroom_num,'chat','left=460px,toolbar=no,location=no,status=no,menubar=no,resizable=no,scrollbars=no,width=1000,height=1000');
 				}else{
 					alert('채팅방 생성 오류');
 				}
