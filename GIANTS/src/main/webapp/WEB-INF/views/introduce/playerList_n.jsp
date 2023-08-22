@@ -44,8 +44,8 @@ li{
 	<div class="main-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<div class="title01">
-			<h2 style="margin-right:5%">선수 소개</h2>
-			<p>선수 소개 페이지입니다.</p>
+			<h2 style="margin-right:5%"><a href="playerList_n.do" style="color:black;">선수 소개  [내야수]</a></h2>
+			<p>자이언츠 선수 소개 페이지입니다.</p>
 		</div>
 	</div>
 	<hr size="0.05" width="100%" noshade style="margin-bottom:3%">

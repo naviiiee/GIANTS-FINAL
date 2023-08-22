@@ -138,7 +138,7 @@ ul, ol, li {
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<div class="title01">
 			<h2 style="margin-right:5%">오시는 길</h2>
-			<p>롯데자이언츠의 사직구장 오시는 길입니다.</p>
+			<p>사직구장 오시는 길입니다.</p>
 		</div>
 		<hr size="0.05" width="100%" noshade>
 	</div>

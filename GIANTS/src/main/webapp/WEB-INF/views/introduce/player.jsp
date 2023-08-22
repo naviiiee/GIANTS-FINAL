@@ -39,7 +39,7 @@ img{
 	overflow:hidden;
     margin-top: -5%;
 }
-}
+
 
 .pos{
 	font-size: 24px;
@@ -116,7 +116,6 @@ strong{
 
 
 
-
 </style>
 <!-- [관리자] 선수 목록 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LHJ/commu.css">
@@ -136,8 +135,8 @@ strong{
 	<div class="main-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<div class="title01">
-			<h2 style="margin-right:5%">선수 소개</h2>
-			<p>선수 소개 페이지입니다.</p>
+			<h2 style="margin-right:5%"><a href="player.do" style="color:black;">선수 소개  [감독]</a></h2>
+			<p>자이언츠 선수 소개 페이지입니다.</p>
 		</div>
 	</div>
 	<hr size="0.05" width="100%" noshade style="margin-bottom:3%">

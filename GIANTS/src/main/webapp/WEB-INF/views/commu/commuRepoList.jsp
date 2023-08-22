@@ -50,8 +50,8 @@ li{
 	<div class="main-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<div class="title01">
-			<h2 style="margin-right:5%">신고목록</h2>
-			<p>자이언츠의 [관리자] 신고목록 공간입니다.</p>
+			<h2 style="margin-right:5%">[관리자] 커뮤니티 신고 목록</h2>
+			<p>커뮤니티 신고목록 공간입니다.</p>
 		</div>
 	</div>
 	<hr size="0.05" width="100%" noshade style="margin-bottom:3%">
@@ -106,8 +106,7 @@ li{
 			</c:forEach>
 		</table>
 		</c:if>
-		 
-		<!-- 페이지 -->
+		<!-- 페이지 --> ㅊ
 		<div class="align-center">${page}</div>
 	
 	
