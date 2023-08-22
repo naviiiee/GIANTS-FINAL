@@ -229,6 +229,6 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void updateOrderStatus(F_orderVO order) {
 		memberMapper.updateOrderStatus(order);
-	}
+	} 
 
 }

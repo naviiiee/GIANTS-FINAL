@@ -18,7 +18,7 @@
 		<result property="memberDetailVO.mem_modifydate" column="mem_modifydate" />
 	</resultMap>
 	<resultMap type="memberVO" id="companyMap">
-		<result property="companyDetailVO.comp_num" column="comp_num" />
+		<result property="companyDetailVO.comp_num" column="comp_num" /> 
 		<result property="companyDetailVO.comp_owner" column="comp_owner" />
 		<result property="companyDetailVO.comp_name" column="comp_name" />
 		<result property="companyDetailVO.comp_cate" column="comp_cate" />

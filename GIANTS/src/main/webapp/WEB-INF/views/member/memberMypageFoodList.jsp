@@ -55,7 +55,7 @@
 			<td>
 				<c:if test="${order.f_order_status == 1}">
 				<input type="button" value="주문취소" id="order_cancel"
-				class="default-btn"> <script>
+				class="default-btn"> <script> 
 					let order_cancel = document
 							.getElementById('order_cancel');
 					order_cancel.onclick = function() {

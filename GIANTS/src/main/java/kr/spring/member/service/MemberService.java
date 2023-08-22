@@ -86,7 +86,7 @@ public interface MemberService {
 	public List<F_orderVO> selectListOrderByMem_num(Map<String,Object> map);	
 	public F_orderVO selectOrder(String f_order_num);
 	public void updateOrderStatus(F_orderVO order);
-	
+	 
 	// 마이페이지 - 티켓구매내역
 	public int selectTicketCountByMem_num(Map<String,Object> map);
 	public List<TicketVO> selectListTicketByMem_num(Map<String,Object> map);

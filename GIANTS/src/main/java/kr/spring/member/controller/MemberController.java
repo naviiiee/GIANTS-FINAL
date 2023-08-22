@@ -895,7 +895,7 @@ public class MemberController {
 				request.getContextPath()+"/member/memberMypageFoodList.do");
 		
 		return "common/resultView";
-	}
+	} 
 	
 	/*=====================
 	 * 일반회원 굿즈구매내역

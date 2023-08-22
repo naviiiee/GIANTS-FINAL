@@ -134,6 +134,6 @@ public interface MemberMapper {
 	public F_orderVO selectOrder(String f_order_num);
 	//관리자/사용자 - 주문상태수정
 	@Update("UPDATE F_ORDER SET f_order_status=#{f_order_status}")
-	public void updateOrderStatus(F_orderVO order);
+	public void updateOrderStatus(F_orderVO order); 
 	
 }
