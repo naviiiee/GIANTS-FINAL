@@ -18,6 +18,14 @@
 	height: 30px;
 	border : none;
 }
+.btn-account{
+background-color : #dd032f;
+	color : white;
+	width: 1200px;
+	height: 30px;
+	border : none;
+
+}
 </style>
 <div class="page-main">
 		<h3>주문 리스트</h3>
@@ -204,22 +212,27 @@
 		
 		<h3>결제수단</h3>
 		<hr size="1">
-		<li>	<!-- 통장입금 radio  버튼 누르면 계좌번호 보이도록 처리-->
-			<input type="radio" path="order_payment" id="payment1" value="2">무통장입금 <!-- 무통장이면 결제 정보에서 쓴 이름 가져옴 -->
-			<input type="radio" path="order_payment" id="payment2" value="1">카드결제                
+		<li>
+			<input type="radio" path="order_payment" id="payment2" value="1">카드결제   
+			<input type="radio" path="order_payment" id="payment1" value="2">무통장입금             
 		</li>
 		
-		<div id="bankInfo" style="display: none;">
-		<select>
-			<option class="align-center">====3시간 이내로 입금하지 않으면 자동취소됩니다.====</option>
-			<option class="align-center">(국민)123-1234-1234 자이언트</option>
-		</select>
-		<button class="btn-account">주문하기</button>
-		</div>
-		<br>
 		<div id="payInfo" style="display : none;'">
 			<button class="btn-api" id="paymentButton" onclick="requestPay()">주문API</button>
 		</div>
+		
+		<div id="bankInfo" style="display: none;">
+			<select>
+				<option class="align-center">====3시간 이내로 입금하지 않으면 자동취소됩니다.====</option>
+				<option class="align-center">(국민)123-1234-1234 자이언트</option>
+			</select>
+			<br>
+			<br>
+			<div class="align-center">
+			<button class="btn-account">주문하기</button>
+			</div>
+		</div>
+		<br>
 		<script type="text/javascript">
 		//=================radio 버튼 처리 시작=================
 		const payment1Radio = document.getElementById('payment1');
