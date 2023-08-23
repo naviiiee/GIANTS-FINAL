@@ -181,6 +181,7 @@ $(function() {
 		output += seatArr[1] + '행 ';
 		output += seatArr[2] + '번</span><br>';
 		output += '<input type="hidden" name="seat_info" class="seatBRC" value="'+seatArr[0]+seatArr[1]+seatArr[2]+'">';
+		output += '<input type="hidden" class="seatBRCstatus" value="'+array[i]+'">';
 		$('#seatInfo').append(output);
 	}
 	
@@ -209,7 +210,7 @@ $(function() {
 	for(let i = 0; i < leng2; i++) {
 		let seatArr2 = array2[i].split('^');
 		
-		let output2 = '<span>' + title2 + ' ' + seatArr2[0] + '블록 ' + seatArr2[1] + '행 ' + seatArr2[2] + '번</span> ';
+		let output2 = '<span class="seat-infoLine">' + title2 + ' ' + seatArr2[0] + '블록 ' + seatArr2[1] + '행 ' + seatArr2[2] + '번</span> ';
 		let output3 = '<li>' + title2 + ' ' + seatArr2[0] + '블록 ' + seatArr2[1] + '행 ' + seatArr2[2] + '번</li>';
 		$('#status_info').append(output2);
 		$('.ticket-content ul').append(output3);
