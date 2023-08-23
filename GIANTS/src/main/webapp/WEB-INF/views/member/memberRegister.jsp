@@ -47,7 +47,6 @@
 			<li>
 				<form:label path="memberDetailVO.mem_email">이메일</form:label>
 				<form:input path="memberDetailVO.mem_email" placeholder="test@test.com"/>
-				<input type="button" id="#" value="이메일인증" class="default-btn"><br>
 				<form:errors path="memberDetailVO.mem_email" cssClass="error-color"/>
 			</li>
 			<li>

@@ -6,9 +6,8 @@
 <!-- orderVO, detailList -->
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_order_form.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/orderForm.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
 <style>
 #detail_goods_name{
 	margin-left: 60px;
@@ -23,7 +22,7 @@
 	</div>
 </div>
 <div class="mypage-form">
-	    <table class="striped-table">
+	    <table class="striped-table2">
 	    	<tr>
 	    		<th>사진</th>
 	    		<th>상품정보</th>
@@ -54,84 +53,66 @@
 	    			<fmt:formatNumber value="${all_total}"/>원
 	    		</td>
 	    	</tr>
-	    	
 	    	<tr>
 	    		<td colspan="4" class="align-right"><b>사용한 포인트</b></td>
 	    		<td class="align-center">
 	    			${orderVO.used_point}p
 	    		</td>
 	    	</tr>
-	    	
-	    	
 	    	<tr>
 	    		<td colspan="4" class="align-right"><b>최종 결제금액</b></td>
 	    		<td class="align-center">
 	    			<fmt:formatNumber value="${orderVO.order_total}"/>원
 	    		</td>
 	    	</tr>
-	    </table>        
-	   
-	    
-	    <br>
-	    <div class="member-mypage">
-		<ul>
-			<li>
-				<span>결제자 :
-				${orderVO.receive_name}
-				</span>
-			</li>
-		
-			<li>
-				<span>받는 사람 :
-				${orderVO.order_name}
-				</span>
-			</li>
-			
-			
-			<li>
-				<span>우편번호 :
-				${orderVO.order_zipcode}
-				</span>
-			</li>
-			<li>
-				<span>주소 : 
-				${orderVO.order_address1} ${orderVO.order_address2}
-				</span>
-			</li>
-			<li>
-				<span>전화번호 : 
-				${orderVO.mem_phone}
-				</span>
-			</li>
-			<li>
-				<span>남기실 말씀 : 
-				${orderVO.order_message}
-				</span>
-			</li>
-			<li>
-				<span>결제수단 : 
+	    </table> 
+</div>	           
+<br>
+<div class="member-mypage">
+	<table>
+		<tr>
+			<td>결제자</td><td>${orderVO.receive_name}</td>
+		</tr>
+		<tr>
+			<td>받는사람</td><td>${orderVO.order_name}</td>
+		</tr>
+		<tr>
+			<td>우편번호</td><td>${orderVO.order_zipcode}</td>
+		</tr>
+		<tr>
+			<td>주소</td><td>${orderVO.order_address1} ${orderVO.order_address2}</td>
+		</tr>
+		<tr>
+			<td>전화번호</td><td>${orderVO.mem_phone}</td>
+		</tr>
+		<tr>
+			<td>남기실말씀</td><td>${orderVO.order_message}</td>
+		</tr>
+		<tr>
+			<td>결제수단</td>
+			<td>
 				<c:if test="${orderVO.order_payment == 1}">카드결제</c:if>
 				<c:if test="${orderVO.order_payment == 2}">은행입금</c:if>
-				</span>
-			</li>
-			<li>
-				<span>배송상태 : 
+			</td>
+		</tr>
+		<tr>
+			<td>배송상태 </td>
+			<td>
 				<c:if test="${orderVO.order_status == 0}">결제완료</c:if>
 				<c:if test="${orderVO.order_status == 1}">배송대기</c:if>
 				<c:if test="${orderVO.order_status == 2}">배송준비중</c:if>
 				<c:if test="${orderVO.order_status == 3}">배송중</c:if>
 				<c:if test="${orderVO.order_status == 4}">배송완료</c:if>
-				<c:if test="${orderVO.order_status == 5}">주문취소</c:if>
-				</span>
-			</li>
-		</ul>	
-		</div>
-		<br>
-		<div class="align-center">
+				<c:if test="${orderVO.order_status == 5}">주문취소</c:if></td>
+			</tr>
+	</table>
+</div>
+<br>
+<div class="align-center">
 			<c:if test="${orderVO.order_status <2}">
 			<input type="button" value="배송지정보수정" 
-			 onclick="location.href='orderModify.do?order_num=${orderVO.order_num}'" class="#">
-			<input type="button" value="주문취소" id="order_cancel" class="#">
+			 onclick="location.href='orderModify.do?order_num=${orderVO.order_num}'" class="default-btn">
+			<input type="button" value="주문취소" id="order_cancel" class="default-btn">
 			<script>
 				let order_cancel = document.getElementById('order_cancel');
 				order_cancel.onclick=function(){
@@ -142,12 +123,9 @@
 				};
 			</script>
 			</c:if>
-			<input type="button" value="주문목록" class="#"
+			<input type="button" value="주문목록" class="default-btn"
 			 onclick="location.href='${pageContext.request.contextPath}/gorder/orderList.do'">
-			<input type="button" value="MyPage" class="#"
-			 onclick="location.href='${pageContext.request.contextPath}/member/myPage.do'">
-		</div>             
-</div>
+		</div>
 <!-- 주문내역 끝 -->
 
 

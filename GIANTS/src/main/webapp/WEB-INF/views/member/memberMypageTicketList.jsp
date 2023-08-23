@@ -29,7 +29,7 @@
 		</ul>
 	</form>
 	<c:if test="${count == 0}">
-		<div class="result-display">Ticket구매내역 없습니다.</div>
+		<div class="member-mypage align-center">구매내역이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
 		<p class="Mypage-p">*티켓번호 클릭시 상세페이지로 이동</p>

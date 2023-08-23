@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.food.vo.F_orderVO;
 import kr.spring.food.vo.F_order_detailVO;
+import kr.spring.food.vo.FoodVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.ticket.vo.TicketVO;
@@ -889,6 +890,7 @@ public class MemberController {
 		//주문번호(f_order_num)를 통하여 모든 정보를 출력함.
 		Map<String, Object> map = new HashMap<String, Object>();
 		MemberVO user = (MemberVO)session.getAttribute("user");
+		
 		map.put("f_order_num", f_order_num);
 		map.put("mem_num", user.getMem_num());
 		
@@ -910,12 +912,19 @@ public class MemberController {
 	public String submitCancel(@RequestParam String f_order_num,
 			                   Model model, HttpSession session,
 			                   HttpServletRequest request) {
+		log.debug("<<f_order_num>> : " + f_order_num);
 		//주문취소
 		F_orderVO vo = new F_orderVO();
+		FoodVO vo2 = new FoodVO();
+		log.debug("<<vo>> : " + vo);
+		log.debug("<<vo2>> : " + vo2);
+		
 		vo.setF_order_num(f_order_num);
 		vo.setF_order_status(9); // 1:사용전 0:사용후 9:주문취소
+		
 		log.debug("<<vo>> : " + vo);
 		memberService.updateOrderStatus(vo);
+		memberService.updateOrderQuantity(vo2);
 		
 		model.addAttribute("message", "주문취소가 완료되었습니다.");
 		model.addAttribute("url", 

@@ -283,6 +283,7 @@
 	width:100px;
 	padding-bottom:10px;
 }
+
 /* 회원정보 수정*/
 .mypage-form{
 	margin-bottom: 20px;
@@ -361,6 +362,13 @@ ul.search li input{
     background-color: #dd032f;
 	color:#fff;
 }
+.default-btn{
+	height:35px;
+	border-radius: 5px;
+	border: 1px #dd032f solid;
+    background-color: #dd032f;
+	color:#fff;	
+}
 /* 관리자 회원목록 테이블 */
 .mypage-form #member_modify ul{
 	margin:0 auto;
@@ -371,10 +379,23 @@ table.striped-table{
 	font-size:15px;
 	margin:0 auto;
 }
+table.striped-table2 {
+    border-collapse: collapse;
+    width: 90%;
+    font-size: 15px;
+    margin: 0 auto;
+}
 table.striped-table td, table.striped-table th {
 	padding:0.5em 0.4em;
 }
 table.striped-table th{
+	background-color:rgba(5,35,69,0.75);
+	color: #FFF;	
+}
+table.striped-table2 td, table.striped-table2 th {
+	padding:0.5em 0.4em;
+}
+table.striped-table2 th{
 	background-color:rgba(5,35,69,0.75);
 	color: #FFF;	
 }
@@ -419,4 +440,8 @@ table.striped-table th{
 	border: 1px #dd032f solid;
     background-color: #dd032f;
 	color:#fff;
+}
+.mypage-r{
+	padding-left:890px;
+	padding-bottom:5px;
 }

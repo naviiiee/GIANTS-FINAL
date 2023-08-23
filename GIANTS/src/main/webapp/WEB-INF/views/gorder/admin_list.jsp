@@ -60,7 +60,7 @@
 		</tr>
 		<c:forEach var="order" items="${list}">
 		<tr>
-			<td>${order.order_num}</td>
+			<td class="align-center">${order.order_num}</td>
 			<td>${order.mem_num}</td>
 			<td>
 				<a href="admin_detail.do?order_num=${order.order_num}">${order.goods_name}</a>

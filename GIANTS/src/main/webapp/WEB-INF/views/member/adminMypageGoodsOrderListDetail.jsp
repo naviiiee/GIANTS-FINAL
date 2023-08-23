@@ -3,9 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <!-- 주문내역 시작 -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/orderForm.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
 <style>
 #order-list-value{
 	font-size: 17px;
@@ -23,11 +22,15 @@
     margin: 0 5px; /* 리스트 간격 조절 */
 }
 </style>
-
-<div class="page-main">
-	<h2>주문내역</h2>      
-	<br>
-	    <table class="basic-table">
+<div class="mypage-top2">
+	<div class="mypage-top-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+		<h2>굿즈주문내역</h2>
+		<p>자이언츠 굿즈주문내역 입니다.</p>
+	</div>
+</div>
+<div class="mypage-form">
+	    <table class="striped-table">
 	    	<tr>
 	    		<th>사진</th>
 	    		<th>상품정보</th>
@@ -74,61 +77,7 @@
 	    		</td>
 	    	</tr>
 	    </table>        
-	   
-	     <div class="ul-container">
-		<ul id="ul-one">
-			<li><img src="${pageContext.request.contextPath}/images/list-marker.png" width="20" height="20">
-				<span id="order-list-value">
-				결제자  ${orderVO.receive_name}
-				</span>
-			</li>
-		
-			<li><img src="${pageContext.request.contextPath}/images/list-marker.png" width="20" height="20">
-				<span id="order-list-value">
-				받는 사람 :
-				${orderVO.order_name}
-				</span>
-			</li>
-			<li><img src="${pageContext.request.contextPath}/images/list-marker.png" width="20" height="20">
-				<span id="order-list-value">우편번호 
-				${orderVO.order_zipcode}
-				</span>
-			</li>
-			<li><img src="${pageContext.request.contextPath}/images/list-marker.png" width="20" height="20">
-				<span id="order-list-value">주소 
-				${orderVO.order_address1} ${orderVO.order_address2}
-				</span>
-			</li>
-		</ul>
-		<ul id="ul-two">	
-			<li><img src="${pageContext.request.contextPath}/images/list-marker.png" width="20" height="20">
-				<span id="order-list-value">전화번호 
-				${orderVO.mem_phone}
-				</span>
-			</li>
-			<li><img src="${pageContext.request.contextPath}/images/list-marker.png" width="20" height="20">
-				<span id="order-list-value">남기실 말씀 
-				${orderVO.order_message}
-				</span>
-			</li>
-			<li>
-			<img src="${pageContext.request.contextPath}/images/list-marker.png" width="20" height="20">
-				<span id="order-list-value">결제수단  
-				<c:if test="${orderVO.order_payment == 1}">카드결제</c:if>
-				<c:if test="${orderVO.order_payment == 2}">은행입금</c:if>
-				</span>
-			</li>
-			<li><img src="${pageContext.request.contextPath}/images/list-marker.png" width="20" height="20">
-				<span id="order-list-value">배송상태 
-				<c:if test="${orderVO.order_status == 0}">결제완료</c:if>
-				<c:if test="${orderVO.order_status == 1}">배송대기</c:if>
-				<c:if test="${orderVO.order_status == 2}">배송준비중</c:if>
-				<c:if test="${orderVO.order_status == 3}">배송중</c:if>
-				<c:if test="${orderVO.order_status == 4}">배송완료</c:if>
-				<c:if test="${orderVO.order_status == 5}">주문취소</c:if>
-				</span>
-			</li>
-		</ul>
+	   <br>
 		</div>
 		<div class="align-center">
 			<c:if test="${orderVO.order_status == 1}">
@@ -143,6 +92,44 @@
 			<input type="button" value="MyPage" class="default-btn"
 			 onclick="location.href='${pageContext.request.contextPath}/member/myPage.do'">
 		</div>             
+<div class="member-mypage">
+	<table class="mem-table">
+		<tr>
+			<td>결제자 </td><td>${orderVO.receive_name}</td>
+		</tr>
+		<tr>
+			<td>받는사람 </td><td>${orderVO.order_name}</td>
+		</tr>
+		<tr>
+			<td>우편번호 </td><td>${orderVO.order_zipcode}</td>
+		</tr>
+		<tr>
+			<td>주소 </td><td>${orderVO.order_address1} ${orderVO.order_address2}</td>
+		</tr>
+		<tr>
+			<td>전화번호 </td><td>${orderVO.mem_phone}</td>
+		</tr>
+		<tr>
+			<td>남기실말씀 </td><td>${orderVO.order_message}</td>
+		</tr>
+		<tr>
+			<td>결제수단 </td>
+			<td>
+				<c:if test="${orderVO.order_payment == 1}">카드결제</c:if>
+				<c:if test="${orderVO.order_payment == 2}">은행입금</c:if>
+			</td>
+		</tr>
+		<tr>
+			<td>배송상태 </td>
+			<td>
+				<c:if test="${orderVO.order_status == 0}">결제완료</c:if>
+				<c:if test="${orderVO.order_status == 1}">배송대기</c:if>
+				<c:if test="${orderVO.order_status == 2}">배송준비중</c:if>
+				<c:if test="${orderVO.order_status == 3}">배송중</c:if>
+				<c:if test="${orderVO.order_status == 4}">배송완료</c:if>
+				<c:if test="${orderVO.order_status == 5}">주문취소</c:if></td>
+			</tr>
+	</table>
 </div>
 <!-- 주문내역 끝 -->
 

@@ -176,7 +176,7 @@ public class MemberAdminController {
 		int count = memberService.selectGoodsRowCount(map);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 10, 10, "adminMypageGoods.do", "&goods_category=" + goods_category);
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 10, 10, "adminMypageGoodsList.do", "&goods_category=" + goods_category);
 		
 		List<GoodsVO> list = null;
 		if(count > 0) {
@@ -196,12 +196,4 @@ public class MemberAdminController {
 		
 		return mav;
 	}		
-	/*==========================
-	 * 관리자 매출관리
-	 *==========================*/
-	@RequestMapping("/member/adminMypageSaleManage.do")
-	public String adminMypageSaleManage(HttpSession session, Model model) {
-		
-		return "adminMypageSaleManage";
-	}
 } 

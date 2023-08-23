@@ -88,6 +88,8 @@ public interface MemberService {
 	public List<F_orderVO> selectListOrderByMem_num(Map<String,Object> map);	
 	public F_orderVO selectOrder(String f_order_num);
 	public void updateOrderStatus(F_orderVO order);
+	public void updateOrderQuantity(FoodVO order); 
+	
 	public F_orderVO selectF_order(Map<String,Object> map); //식품 주문(영수증)상세정보
 	public F_orderVO selectF_orderCp(Map<String,Object> map); //식품 주문(영수증)상세정보
 	public List<F_order_detailVO> selectListF_orderDetail(String f_order_num); //식품 주문 개별상세정보	

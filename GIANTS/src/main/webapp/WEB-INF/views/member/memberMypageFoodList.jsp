@@ -35,7 +35,7 @@
 		</ul>
 	</form>
 	<c:if test="${count == 0}">
-		<div class="result-display">표시할 주문정보가 없습니다.</div>
+		<div class="member-mypage align-center">구매내역이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
 	<p class="Mypage-p">*주문번호 클릭시 상세페이지로 이동</p>
@@ -59,16 +59,19 @@
 			<td class="align-center">${order.f_order_regDate}</td>
 			<td class="align-center">
 				<c:if test="${order.f_order_status == 1}">
-				<input type="button" value="주문취소" id="order_cancel"
-				class="default-btn"> <script>  
-					let order_cancel = document
-							.getElementById('order_cancel');
-					order_cancel.onclick = function() {
+				<input type="button" value="주문취소" id="order_cancel" class="default-btn" data-order_num="${order.f_order_num}">
+				<script>  
+				$(function(){
+					$(document).on('click','#order_cancel',function(){
 						let choice = confirm('주문을 취소하시겠습니까?');
 						if (choice) { 
-							location.replace('orderCancel.do?f_order_num=${F_orderVO.f_order_num}');
+							let order_num = $(this).attr('data-order_num');
+							//console.log(order_num);
+							location.replace('orderCancel.do?f_order_num='+order_num);
 						}
-					};
+					});
+				});
+					
 				</script>
 				</c:if>
 				<c:if test="${order.f_order_status == 9}">

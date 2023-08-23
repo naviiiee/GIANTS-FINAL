@@ -55,17 +55,13 @@
 				</c:forEach>
 			</table>
 			<div class="mypage-bottom">
-				<input type="button" value="뒤로가기" class="default-btn" onclick="location.href='${pageContext.request.contextPath}/member/memberMypageFoodList.do'">
+				<c:if test="${f_order.f_order_status==1}">
+					<input type="button" value="QR코드" class="default-btn" onclick="location.href='${pageContext.request.contextPath}/food/forder/myFoodQRcode.do?f_order_num=${f_order.f_order_num}'">
+				</c:if>
+					<input type="button" value="뒤로가기" class="default-btn" onclick="location.href='${pageContext.request.contextPath}/member/memberMypageFoodList.do'">
 			</div>
 		</div>
 		
-		<!-- 하단 버튼들 -->
-		<div class="order-buttons align-center">
-			<c:if test="${f_order.f_order_status==1}">
-				<input type="button" value="QR코드생성" class="orderDetail-btn createQR" onclick="location.href='${pageContext.request.contextPath}/food/forder/myFoodQRcode.do?f_order_num=${f_order.f_order_num}'">
-			</c:if>
 		</div>
-	</div>
-	<!-- 내용물 끝 -->		
 
 <!-- 주문목록 - 관리자 끝 -->

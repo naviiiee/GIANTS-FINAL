@@ -14,14 +14,11 @@
 <div class="mypage-form">
 		<!-- 기업 상품 리스트 시작 -->
 		<div id="fix_compMenu"> 
-			<c:if test="${count == 0}"><!-- 목록 없을 경우 -->
-				<table id="fix_menuList">
-					<tr>
-						<th> 표시할 상품이 없습니다. </th>
-					</tr>
-				</table>
+			<c:if test="${count == 0}">
+				<div class="member-mypage align-center"> 없습니다.</div>
 			</c:if>
 			<c:if test="${count > 0}"> <!-- 목록 있을 경우 -->
+				<p class="Mypage-p">*상품번호 클릭시 상세페이지로 이동</p>
 				<table class="striped-table">
 					<tr>
 						<th>상품번호</th>

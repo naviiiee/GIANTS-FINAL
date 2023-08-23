@@ -251,6 +251,11 @@ public class MemberServiceImpl implements MemberService{
 	public int selectAdminTicketCount(Map<String, Object> map) { return memberMapper.selectAdminTicketCount(map); }
 
 	@Override
-	public List<TicketVO> selectAdminListTicket(Map<String, Object> map) { return memberMapper.selectAdminListTicket(map); }  
+	public List<TicketVO> selectAdminListTicket(Map<String, Object> map) { return memberMapper.selectAdminListTicket(map); }
+
+	@Override
+	public void updateOrderQuantity(FoodVO order) {
+		memberMapper.updateOrderQuantity(order);
+	}  
 
 }

@@ -54,12 +54,11 @@
 	}
 	</script>
 	
-	
-	
 	<c:if test="${count == 0}">
 	<div class="result-display">표시할 주문정보가 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
+	<p class="Mypage-p">*주문번호 클릭시 상세페이지로 이동</p>
 	<table class="striped-table">
 		<tr>
 			<th>주문번호</th>
@@ -72,10 +71,12 @@
 		<c:forEach var="order" items="${list}">
 		<tr>
 			
-			<td class="align-center">${order.order_num}</td>
+			<td class="align-center">
+				<a href="adminMypageGoodsOrderListDetail.do?order_num=${order.order_num}">${order.order_num}</a>
+			</td>
 			<td class="align-center">${order.order_name}</td>
 			<td>     
-				<a href="adminMypageGoodsOrderListDetail.do?order_num=${order.order_num}">${order.goods_name}</a>
+				${order.goods_name}
 			</td>
 			<td class="align-center"><fmt:formatNumber value="${order.order_total}"/>원</td>
 			<td class="align-center">${order.order_regdate}</td>

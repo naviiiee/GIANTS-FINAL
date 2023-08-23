@@ -60,8 +60,7 @@
 			<li>
 				<form:label path="companyDetailVO.comp_email">이메일</form:label>
 				<form:input path="companyDetailVO.comp_email" placeholder="test@test.com"/>
-				<input type="button" id="#" value="이메일인증" class="default-btn">
-				<br><form:errors path="companyDetailVO.comp_email" cssClass="error-color"/>
+				<form:errors path="companyDetailVO.comp_email" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_zipcode">우편번호</form:label>

@@ -76,6 +76,11 @@
 		<div>표시할 상품이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
+		<%-- <p class="mypage-r">
+		<input type="button" value="상품등록" class="defa"
+		       onclick="location.href='${pageContext.request.contextPath}/goods/registerGoods.do'">
+		</p> --%>
+		<p class="Mypage-p">*주문번호 클릭시 상세페이지로 이동</p>
 		<table class="striped-table">
 			<tr>
 				<th>번호</th>
@@ -88,7 +93,9 @@
 			</tr>
 			<c:forEach var="goods" items="${list}">
 			<tr>
-				<td class="align-center">${goods.goods_num}</td>
+				<td class="align-center">
+					<a href="${pageContext.request.contextPath}/goods/goodsDetail.do?goods_num=${goods.goods_num}">${goods.goods_num}</a>
+				</td>
 				<td class="align-center">
 					<c:if test="${goods.goods_category == 1}">유니폼</c:if>
 					<c:if test="${goods.goods_category == 2}">모자</c:if>
@@ -96,7 +103,7 @@
 					<c:if test="${goods.goods_category == 4}">기타</c:if>
 				</td>
 				<td class="align-center">
-					<a href="${pageContext.request.contextPath}/goods/goodsDetail.do?goods_num=${goods.goods_num}">${goods.goods_name}</a>
+					${goods.goods_name}
 				</td>
 				<td class="align-center">
 					<fmt:formatNumber value="${goods.goods_dprice}"/>원
@@ -112,9 +119,6 @@
 			</tr>
 			</c:forEach>
 		</table>
-		<div class="align-right">
-			<input type="button" value="상품등록" onclick="location.href='${pageContext.request.contextPath}/goods/registerGoods.do'">
-		</div>
 	<div class="align-center">${page}</div>
 	</c:if>
 </div>
