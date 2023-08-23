@@ -3,9 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 배송상태수정 시작 -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/orderForm.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
+<div class="mypage-top2">
+	<div class="mypage-top-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+		<h2>배송상태수정</h2>
+		<p>자이언츠 굿즈 배송상태수정 입니다.</p>
+	</div>
+</div>
 <div class="page-main">
 	<h2>배송상태수정</h2>
 	<form:form action="admin_status.do" id="order_status" modelAttribute="orderVO">

@@ -3,12 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 주문목록 - 사용자 시작 -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/orderForm.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
 <!-- count, list, page -->
-<div class="page-main">
-	<h2>주문목록</h2>
+<div class="mypage-top2">
+	<div class="mypage-top-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+		<h2>굿즈주문목록</h2>
+		<p>자이언츠 굿즈주문목록 입니다.</p>
+	</div>
+</div>
+<div class="mypage-form">
 	<!-- action으로 인해 유효성 검사를 해도 폼이 제출되므로 onsubmit이 true일때만 처리되도록 -->
 	<form action="orderList.do" id="search_form" method="get" onsubmit="return searchCheck()">
 		<ul class="search">
@@ -22,8 +27,8 @@
 				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
 			</li>
 			<li>
-				<input type="submit" value="찾기">
-				<input type="button" value="목록" 
+				<input type="submit" value="찾기" class="default-btn">
+				<input type="button" value="목록" class="default-btn"
 				   onclick="location.href='orderList.do'">
 			</li>
 		</ul>

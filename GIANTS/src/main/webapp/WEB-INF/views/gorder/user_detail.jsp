@@ -9,28 +9,21 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/orderForm.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-
-<%-- orderVO : ${orderVO}
-<br>
-detailList : ${detailList} --%>
-<br>
-
-<br>
-<br>
 <style>
 #detail_goods_name{
 	margin-left: 60px;
 }
 </style>
 
-
-
-
-<div class="page-main">
-
-	<h2>주문내역</h2>      
-	<br>
-	    <table class="basic-table">
+<div class="mypage-top2">
+	<div class="mypage-top-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+		<h2>굿즈주문내역</h2>
+		<p>자이언츠 굿즈주문내역 입니다.</p>
+	</div>
+</div>
+<div class="mypage-form">
+	    <table class="striped-table">
 	    	<tr>
 	    		<th>사진</th>
 	    		<th>상품정보</th>
@@ -79,7 +72,8 @@ detailList : ${detailList} --%>
 	    </table>        
 	   
 	    
-	     
+	    <br>
+	    <div class="member-mypage">
 		<ul>
 			<li>
 				<span>결제자 :
@@ -131,11 +125,13 @@ detailList : ${detailList} --%>
 				</span>
 			</li>
 		</ul>	
+		</div>
+		<br>
 		<div class="align-center">
 			<c:if test="${orderVO.order_status <2}">
 			<input type="button" value="배송지정보수정" 
-			 onclick="location.href='orderModify.do?order_num=${orderVO.order_num}'" class="default-btn">
-			<input type="button" value="주문취소" id="order_cancel" class="default-btn">
+			 onclick="location.href='orderModify.do?order_num=${orderVO.order_num}'" class="#">
+			<input type="button" value="주문취소" id="order_cancel" class="#">
 			<script>
 				let order_cancel = document.getElementById('order_cancel');
 				order_cancel.onclick=function(){
@@ -146,9 +142,9 @@ detailList : ${detailList} --%>
 				};
 			</script>
 			</c:if>
-			<input type="button" value="주문목록" class="default-btn"
+			<input type="button" value="주문목록" class="#"
 			 onclick="location.href='${pageContext.request.contextPath}/gorder/orderList.do'">
-			<input type="button" value="MyPage" class="default-btn"
+			<input type="button" value="MyPage" class="#"
 			 onclick="location.href='${pageContext.request.contextPath}/member/myPage.do'">
 		</div>             
 </div>

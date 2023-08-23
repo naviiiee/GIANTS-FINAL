@@ -3,10 +3,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
 <!-- 배송지정보수정 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_order_form.js"></script>
-<div class="page-main">
-	<h2>배송지정보수정</h2>
+<div class="mypage-top2">
+	<div class="mypage-top-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+		<h2>굿즈주문수정</h2>
+		<p>자이언츠 굿즈주문수정 입니다.</p>
+	</div>
+</div>
+<div class="mypage-form">
 	<c:if test="${orderVO.order_status > 1}">
 	<div class="result-display">
 		결제 완료 혹은 배송대기일 때만 배송지정보를 수정할 수 있습니다.

@@ -1,11 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
 <!-- 주문내역 시작 -->
-<div class="page-main">
-	<h2>주문내역</h2>      
-	    <table class="basic-table">
+<div class="mypage-top2">
+	<div class="mypage-top-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+		<h2>굿즈주문상세</h2>
+		<p>자이언츠 굿즈주문상세 입니다.</p>
+	</div>
+</div>
+<div class="mypage-form">
+	    <table class="striped-table">
 	    	<tr>
 	    		<th>상품명</th>
 	    		<th>수량</th>

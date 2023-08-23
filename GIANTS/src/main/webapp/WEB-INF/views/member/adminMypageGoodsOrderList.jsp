@@ -3,11 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 주문목록 - 관리자 시작 -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/orderForm.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-<div class="page-main">
-	<h2>주문목록(관리자용)</h2>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
+<div class="mypage-top2">
+	<div class="mypage-top-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+		<h2>굿즈주문목록</h2>
+		<p>자이언츠 굿즈주문목록 입니다.</p>
+	</div>
+</div>
+<div class="mypage-form">
 	<form action="adminMypageGoodsOrderList.do" id="search_form" method="get" onsubmit="return searchCheck()">
 	<ul class="search">
 			<li>
@@ -21,8 +26,8 @@
 				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
 			</li>
 			<li>
-				<input type="submit" value="찾기">
-				<input type="button" value="목록" 
+				<input type="submit" value="찾기" class="default-btn">
+				<input type="button" value="목록" class="default-btn"
 				   onclick="location.href='adminMypageGoodsOrderList.do'">
 			</li>
 		</ul>
@@ -67,14 +72,14 @@
 		<c:forEach var="order" items="${list}">
 		<tr>
 			
-			<td>${order.order_num}</td>
-			<td>${order.order_name}</td>
+			<td class="align-center">${order.order_num}</td>
+			<td class="align-center">${order.order_name}</td>
 			<td>     
 				<a href="adminMypageGoodsOrderListDetail.do?order_num=${order.order_num}">${order.goods_name}</a>
 			</td>
-			<td><fmt:formatNumber value="${order.order_total}"/>원</td>
-			<td>${order.order_regdate}</td>
-			<td>
+			<td class="align-center"><fmt:formatNumber value="${order.order_total}"/>원</td>
+			<td class="align-center">${order.order_regdate}</td>
+			<td class="align-center">
 				<c:if test="${order.order_status == 0}">결제완료</c:if>
 				<c:if test="${order.order_status == 1}">배송대기</c:if>
 				<c:if test="${order.order_status == 2}">배송준비중</c:if>

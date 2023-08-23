@@ -6,16 +6,20 @@
 <!-- 배송지정보수정 시작 -->
 		<!-- order, detailList -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_order_form.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/orderForm.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
+<div class="mypage-top2">
+	<div class="mypage-top-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+		<h2>배송지정보수정</h2>
+		<p>자이언츠 굿즈 배송지정보수정 입니다.</p>
+	</div>
+</div>
 <%-- orderVO : ${orderVO}
 <br>
 detailList : ${detailList} --%>
 
-<div class="page-main">
+<div class=mypage-form>
 	<h2>배송지정보수정</h2>
 	<c:if test="${orderVO.order_status > 1}">
 	<div class="result-display">

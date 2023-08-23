@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
 <!-- 주문목록 - 관리자 시작 -->
 <script type="text/javascript">
 	$(function(){
@@ -15,8 +17,14 @@
 		});
 	});
 </script>
-<div class="page-main">
-	<h2>주문목록(관리자용)</h2>
+<div class="mypage-top2">
+	<div class="mypage-top-title">
+		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+		<h2>굿즈주문목록</h2>
+		<p>자이언츠 굿즈주문목록 입니다.</p>
+	</div>
+</div>
+<div class="mypage-form">
 	<form action="admin_list.do" id="search_form" method="get">
 		<ul class="search">
 			<li>

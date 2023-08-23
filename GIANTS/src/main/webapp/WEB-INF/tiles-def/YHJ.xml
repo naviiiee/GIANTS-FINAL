@@ -204,19 +204,19 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/adminMypageGoods.jsp"/>
 	</definition>
 	
-	<!-- 굿즈 즈문 목록 -->
+	<!-- 굿즈 주문 목록 -->
 	<definition name="adminMypageGoodsOrderList" extends="myPage">
 		<put-attribute name="title" value="[관리자]굿즈구매목록"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/adminMypageGoodsOrderList.jsp"/>
 	</definition>
 	
-	<!-- 굿즈 즈문 목록 -->
+	<!-- 굿즈 주문 목록 -->
 	<definition name="adminMypageGoodsOrderListDetail" extends="myPage">
 		<put-attribute name="title" value="[관리자]굿즈구매상세"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/adminMypageGoodsOrderListDetail.jsp"/>
 	</definition>
 	
-	<!-- 굿즈 즈문 목록 -->
+	<!-- 굿즈 주문 목록 -->
 	<definition name="adminMypageGoodsOrderModify" extends="myPage">
 		<put-attribute name="title" value="[관리자]굿즈구매수정"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/adminMypageGoodsOrderModify.jsp"/>
