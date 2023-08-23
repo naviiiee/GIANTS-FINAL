@@ -35,23 +35,6 @@
 	    <put-attribute name="body" value="/WEB-INF/views/gorder/user_modifyForm.jsp"/>
     </definition>
     
-    <!-- 관리자 -->
-    <definition name="adminOrderList" extends="adminOrderList">
-    	<put-attribute name="title" value="주문목록(관리자용)"/>
-	    <put-attribute name="body" value="/WEB-INF/views/gorder/admin_list.jsp"/>
-    </definition>
-    <definition name="adminOrderDetail" extends="adminOrderList">
-    	<put-attribute name="title" value="주문내역(관리자용)"/>
-	    <put-attribute name="body" value="/WEB-INF/views/gorder/admin_detail.jsp"/>
-    </definition>
-    <definition name="adminOrderModify" extends="adminOrderList">
-    	<put-attribute name="title" value="배송지정보수정(관리자용)"/>
-	    <put-attribute name="body" value="/WEB-INF/views/gorder/admin_modifyForm.jsp"/>
-    </definition>
-     <definition name="adminOrderStatus" extends="adminOrderList">
-    	<put-attribute name="title" value="주문상태수정(관리자용)"/>
-	    <put-attribute name="body" value="/WEB-INF/views/gorder/admin_status.jsp"/>
-    </definition> 
 	
 	
 	

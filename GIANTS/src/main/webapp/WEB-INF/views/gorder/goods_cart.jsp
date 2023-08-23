@@ -20,20 +20,20 @@
 		<br>
 		<br>
 		<br>
+	</div>
+	<div class="align-center">
 		<input type="button" value="상품 구경하러가기" onclick="location.href='${pageContext.request.contextPath}/goods/goodsList.do'">
 	</div>
+	
 	</c:if>
 	<c:if test="${!empty list}">
 	<form id="cart_order" action="${pageContext.request.contextPath}/gorder/orderForm.do" method="post">
 		<table class="basic-table">
 			<tr>
-				<!-- 1. 체크박스 -->
 				<th>
 					<input type="checkbox" checked="checked" id="chk_all">
 				</th>
-				<!-- 2. 사진  -->
 				<th>사진</th>
-				<!-- 3. 상품정보 -->
 				<th>상품정보</th>
 				<th>판매가</th>
 				<th>수량</th>
@@ -44,29 +44,24 @@
 			<input type="hidden" id="mem_num" value="${cart.mem_num}">
 			<input type="hidden" id="opt_num" value="${cart.opt_num}">
 				<tr>
-					<!-- 1. 체크박스 -->
 					<td class="align-center">
 						<input type="checkbox" name="cart_numbers" checked="checked" class="choice-btn" value="${cart.cart_num}">
 					</td>
-					<!-- 2. 사진  -->
 					<td>
 						<a href="${pageContext.request.contextPath}/goods/goodsDetail.do?goods_num=${cart.goods_num}">
 							<img src="${pageContext.request.contextPath}/goods/imageView.do?goods_num=${cart.goods_num}" width="80" height="80">
 						</a>
 					</td>
-					<!-- 3. 상품정보 -->
 					<!-- 상품정보 (상품명 + 옵션있는 경우 tr추가해서 옵션 노출)-->
 					<td>
 							${cart.goodsVO.goods_name}
 					</td>
 					
-					<!-- 4. 판매가 -->
 					<td class="align-center">
 						<span class="goods_dprice" data-dprice="${cart.goodsVO.goods_dprice}"><fmt:formatNumber value="${cart.goodsVO.goods_dprice}"/>원</span>
 						<input type="hidden" name="goods_dprice">
 					</td>
 					
-					<!-- 5. 수량 및 상태 체크 -->
 					<td class = "align-center">
 						<c:if test="${cart.goodsVO.goods_status==2 or cart.goodsOptionVO.goods_stock < cart.order_quantity}">[판매중지]</c:if>
 						<c:if test="${cart.goodsVO.goods_status==1 and cart.goodsOptionVO.goods_stock >= cart.order_quantity}">
@@ -77,16 +72,13 @@
 							<input type = "button" value = "변경" class = "cart-modify" 
 							data-cartnum = "${cart.cart_num}" data-goodsnum = "${cart.goods_num}">
 						</c:if>
-					<!-- </div> -->	
 					</td>
 					
-					<!-- 포인트 -->
 					<td class = "align-center">
 					<span class="order_point" value="${cart.order_point}">${cart.order_point}p</span>
 						<input type="hidden" name="order_point"> 
 					</td>
 					
-					<!-- 6. 합계 -->
 					<td class="align-center">
 						<div class="sub-total" data-total="${cart.sub_total}">
 						<fmt:formatNumber value="${cart.sub_total}"/>원
@@ -94,7 +86,6 @@
 						<input type="button" value="삭제" class="cart-del" data-cartnum="${cart.cart_num}"> <!-- 여러개의 삭제가 생기기 때문에 class로 명시, 하나의 삭제만 필요하면 id로 명시하면 된다 -->
 						</div>
 					</td>					
-					<!-- 옵션 처리 -->
 					<c:if test="${cart.goods_size!='옵션없음'}">
 						<tr class="option-tr">
 						    <td colspan="7" class="option-td">
@@ -116,11 +107,10 @@
 				</tr>
 		</table>
 		
-		<div class = "buttons">
+		<div class = "align-center">
 			<input type="button" value="쇼핑 계속하기" onclick="location.href='${pageContext.request.contextPath}/goods/goodsList.do'">
 			<input type = "submit" value = "주문하기"  id="order-btn">
 			<input type="button" value="장바구니 비우기" class="deleteCartAll"> 
-			<input type="button" value="주문목록" onclick="location.href='${pageContext.request.contextPath}/gorder/orderList.do'">
 		</div>
 	</form>
 	</c:if>
