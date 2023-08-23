@@ -21,7 +21,10 @@
 	<div class="goods-space">
 		<c:forEach var="goods" items="${list}">
 		<div class="horizontal-area">
-			어ㅏ
+			<a href="${pageContext.request.contextPath}/goods/goodsDetail.do?goods_num=${goods.goods_num}">
+				<img src="${pageContext.request.contextPath}/goods/imageView.do?goods_num=${goods.goods_num}">
+				<span>${goods.goods_name}</span>
+			</a>
 		</div>
 		</c:forEach>
 		<hr width="100%" size="1" noshade="noshade" class="float-clear">
