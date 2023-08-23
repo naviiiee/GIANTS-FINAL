@@ -1,7 +1,6 @@
 -- 경기정보
 CREATE TABLE tgame(
 	game_num NUMBER,
-	grade_num NUMBER,
 	game_date VARCHAR2(30) NOT NULL,
 	game_time VARCHAR2(20) NOT NULL,
 	game_team VARCHAR2(15) NOT NULL,
@@ -74,6 +73,8 @@ CREATE TABLE ticket(
 	pg varchar2(30) NOT NULL,
 	pay_method varchar2(30) NOT NULL,
 	ticket_status NUMBER(1) NOU NULL,	-- 0:예매취소, 1:예매완료, 2:우천취소
+	qlink VARCHAR2(1000) DEFAULT 'empty',
+	order_status NUMBER DEFAULT 1 not null,	--QR 사용 여부 확인용
 	CONSTRAINT ticket_pk PRIMARY KEY (ticket_num),
 	CONSTRAINT ticket_fk FOREIGN KEY (mem_num) REFERENCES member (mem_num),
 	CONSTRAINT ticket_fk2 FOREIGN KEY (game_num) REFERENCES tgame (game_num)
