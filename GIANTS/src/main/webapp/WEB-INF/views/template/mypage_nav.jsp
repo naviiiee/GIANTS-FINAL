@@ -16,6 +16,7 @@
 			<li><a href="${pageContext.request.contextPath}/gorder/orderList.do">Goods</a></li>
 			<li><b>관심목록</b></li>
 			<li><a href="${pageContext.request.contextPath}/member/bookmarkList.do">중고거래</a></li>
+			<li><a href="${pageContext.request.contextPath}/member/goodsFavList.do">찜한 굿즈</a></li>
 		</ul>
 	</c:if>
 	<!-- 기업회원일때 NAV -->   
