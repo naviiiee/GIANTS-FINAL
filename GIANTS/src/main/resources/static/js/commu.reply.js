@@ -59,7 +59,7 @@ $(function(){
 					output += '<p>' + item.re_content.replace(/\r\n/g,'<br>') + '</p>';
 					//로그인 회원 번호 = 작성자 회원 번호 일치 시 (작성자 본인일 시) 수정,삭제 가능
 					if(param.user_num == item.mem_num){
-						output += ' <input type="button" data-num="'+item.re_num+'" value="수정" class="modify-btn default-btn">';
+						output += ' <input type="button" data-num="'+item.re_num+'" value="수정" class="modify-btn accept-btn">';
 						output += ' <input type="button" data-num="'+item.re_num+'" value="삭제" class="delete-btn accept-btn">';
 					}
 					output += '<hr size="1" noshade>'; 
@@ -159,8 +159,8 @@ $(function(){
 					+content+'</textarea>';
 		modifyUI += '<div id="mre_first"><span class="letter-count">300/300</span></div>';
 		modifyUI += '<div id="mre_second" class="align-right">';
-		modifyUI += ' <input type="submit" value="수정">';
-		modifyUI += ' <input type="button" value="취소" class="re-reset">';
+		modifyUI += ' <input type="submit" value="수정" class="modify-btn accept-btn">';
+		modifyUI += ' <input type="button" value="취소" class="re-reset accept-btn">';
 		modifyUI += '</div>';
 		modifyUI += '<hr size="1" noshade width="96%">';
 		modifyUI += '</form>';

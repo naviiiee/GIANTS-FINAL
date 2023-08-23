@@ -32,11 +32,15 @@
 			<li id="item4"class="sidebar-item"><a href="#">티켓</a></li>
 			<li id="item5"class="sidebar-item"><a href="#">푸드</a></li>
 			<li id="item6"class="sidebar-item"><a href="#">중고거래</a></li>
+			<li id="item7"class="sidebar-item"><a href="#">커뮤니티</a></li>
 		</ul>
 	</div>
 	<div id="sub_item1" class="sidebar-right hide">
 		<ul class="sidebar-list">
-			<li class="sidebar-item-sub"><a href="${pageContext.request.contextPath}/introduce/stadium.do">소개</a></li>
+			<li class="sidebar-item-sub"><a href="${pageContext.request.contextPath}/introduce/stadium.do">구장 소개</a></li>
+			<li class="sidebar-item-sub"><a href="${pageContext.request.contextPath}/introduce/map.do">오시는길</a></li>
+			<li class="sidebar-item-sub"><a href="${pageContext.request.contextPath}/introduce/map.do">먹거리</a></li>
+			<li class="sidebar-item-sub"><a href="${pageContext.request.contextPath}/introduce/player.do">소개</a></li>
 		</ul>
 	</div>
 	<div id="sub_item2" class="sidebar-right hide">
@@ -55,7 +59,7 @@
 	</div>
 	<div id="sub_item4" class="sidebar-right hide">
 		<ul class="sidebar-list">
-			<li class="sidebar-item-sub"><a href="${pageContext.request.contextPath}/ticket/ticketInfo.do">티켓</a></li>
+			<li class="sidebar-item-sub"><a href="${pageContext.request.contextPath}/ticket/gameList.do">티켓</a></li>
 		</ul>
 	</div>
 	<div id="sub_item5" class="sidebar-right hide">
@@ -70,6 +74,11 @@
 	<div id="sub_item6" class="sidebar-right hide">
 		<ul class="sidebar-list">
 			<li class="sidebar-item-sub"><a href="${pageContext.request.contextPath}/trading/tradingList.do">중고거래</a></li>
+		</ul>
+	</div>
+	<div id="sub_item7" class="sidebar-right hide">
+		<ul class="sidebar-list">
+			<li class="sidebar-item-sub"><a href="${pageContext.request.contextPath}/commu/commuList.do">커뮤니티</a></li>
 		</ul>
 	</div>
 </div>
