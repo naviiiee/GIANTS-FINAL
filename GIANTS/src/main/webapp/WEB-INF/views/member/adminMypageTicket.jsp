@@ -26,7 +26,7 @@
 			</li>
 			<li>
 				<input type="submit" value="찾기" class="default-btn">
-				<input type="button" value="목록" onclick="location.href='list.do'" class="default-btn">
+				<input type="button" value="목록" onclick="location.href='adminMypageTicket.do'" class="default-btn">
 			</li>
 		</ul>
 	</form>
@@ -56,8 +56,8 @@
 					<td class="align-center">${ticket.ticket_quantity}</td>
 					<td class="align-center"><fmt:formatNumber value="${ticket.total_price}"/>원</td>
 					<td class="align-center">
-						<c:if test="${ticket.ticket_status == 0}">주문취소</c:if>
-						<c:if test="${ticket.ticket_status == 1}">주문완료</c:if>
+						<c:if test="${ticket.ticket_status == 0}"><span style="color:#dd032f;"><b>주문취소</b></span></c:if>
+						<c:if test="${ticket.ticket_status == 1}"><span style="color:#052345;"><b>주문완료</b></span></c:if>
 					</td>
 				</tr>
 			</c:forEach>
