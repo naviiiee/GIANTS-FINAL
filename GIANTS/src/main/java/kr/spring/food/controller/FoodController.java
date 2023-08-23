@@ -885,10 +885,9 @@ public class FoodController {
 	}
 	
 	@PostMapping("/food/foodReviewForm.do")
-	public String submitFoodReview(@Valid Food_reviewVO vo, @RequestParam String f_order_num, BindingResult result,
+	public String submitFoodReview(@Valid Food_reviewVO vo, BindingResult result,@RequestParam String f_order_num, 
 									Model model, HttpServletRequest request,
 									HttpSession session) {
-		log.debug("<< 식품 추가/등록 POST 작동 >> : " + vo);
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if (result.hasErrors()) {
@@ -898,11 +897,10 @@ public class FoodController {
 		//log.debug("<< 사업자 등록번호 세팅 전 >>");
 		//사업자 등록 번호 VO에 세팅
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		vo.setComp_num(user.getCompanyDetailVO().getComp_num());
+		vo.setMem_num(user.getMem_num());
+		vo.setComp_num(foodService.selectF_orderByNum(f_order_num).getComp_num());
+		vo.setComp_score(Integer.parseInt(vo.getComp_rate()));
 		
-		//log.debug("<< 사업자 등록번호 완료 상품 등록 시작 >>");
-		
-		//리뷰 등록 sql 시작
 		//foodService.insertFood(vo);
 		
 		//View에 표시할 메세지

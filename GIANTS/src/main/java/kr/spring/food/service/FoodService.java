@@ -7,6 +7,7 @@ import kr.spring.food.vo.F_cartVO;
 import kr.spring.food.vo.F_orderVO;
 import kr.spring.food.vo.F_order_detailVO;
 import kr.spring.food.vo.FoodVO;
+import kr.spring.food.vo.Food_reviewVO;
 import kr.spring.member.vo.CompanyDetailVO;
 
 public interface FoodService {
@@ -70,4 +71,8 @@ public interface FoodService {
 	
 	// (기업) QR코드 승인 및 업데이트 처리
 	public void updateF_orderStatus(String f_order_num);
+	
+	//------------------식품 리뷰--------------------------
+	//리뷰 등록하기
+	public void insertFoodReview(Food_reviewVO review);
 }

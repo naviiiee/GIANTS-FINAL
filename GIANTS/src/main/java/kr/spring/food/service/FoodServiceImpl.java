@@ -12,6 +12,7 @@ import kr.spring.food.vo.F_cartVO;
 import kr.spring.food.vo.F_orderVO;
 import kr.spring.food.vo.F_order_detailVO;
 import kr.spring.food.vo.FoodVO;
+import kr.spring.food.vo.Food_reviewVO;
 import kr.spring.member.vo.CompanyDetailVO;
 
 @Service
@@ -150,6 +151,11 @@ public class FoodServiceImpl implements FoodService{
 	@Override
 	public void updateF_orderStatus(String f_order_num) {
 		foodMapper.updateF_orderStatus(f_order_num);
+	}
+
+	@Override
+	public void insertFoodReview(Food_reviewVO review) {
+		foodMapper.insertFoodReview(review);;
 	}
 
 	

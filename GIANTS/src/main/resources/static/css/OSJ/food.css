@@ -893,5 +893,48 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-top:15px;
 }
 
+/*  ===================================
+	======== foodReviewForm.jsp =======
+	=================================== */
+	
+.reviewForm-container h2{
+	padding-left: 10px;
+	padding-top : 10px;
+	color:black;
+}
 
+.inner-box{
+	margin-bottom: 20px;
+}
+.inner-box{
+	font-size:11pt;
+	color:black;
+	padding: 0px 30px;
+}
+.inner-box li{
+	margin-top: 10px;
+}
+.inner-box li input{
+	height: 100%;
+	width: 300px;
+	font-size:13pt;
+}
+.inner-box li input[type="radio"]{
+	width: 30px;
+}
 
+.inner-box li .label-wid{
+	display: inline-block;
+	width: 80px;
+}
+.reviewForm-container div.align-center{
+	padding : 15px 0px;
+}
+.reviewForm-container div.align-center button,
+.reviewForm-container div.align-center input{
+	height: 30px;
+	padding: 3px 8px;
+	margin: 0px 5px;
+	font-size: 11pt;
+	font-weight: bold;
+}

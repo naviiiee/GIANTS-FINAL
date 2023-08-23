@@ -108,5 +108,9 @@ public interface FoodMapper {
 	// (기업) QR코드 승인 및 업데이트 처리
 	@Update("UPDATE f_order SET f_order_status=0 WHERE f_order_num=#{f_order_num}")
 	public void updateF_orderStatus(String f_order_num);
+	
+	//------------------식품 리뷰--------------------------
+	//리뷰 등록하기
+	public void insertFoodReview(Food_reviewVO review);
 
 }

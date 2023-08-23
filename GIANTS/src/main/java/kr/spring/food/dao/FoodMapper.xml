@@ -350,6 +350,27 @@
 		AND mem_num=#{mem_num}
 	</select>
 	
+	<!-- 식품 리뷰 등록 -->
+	<insert id="insertFoodReview" parameterType="food_reviewVO">
+		INSERT INTO food_review(
+			review_num,
+			mem_num,
+			comp_num,
+			comp_score,
+			review_title,
+			review_content,
+			review_regdate
+		VALUES(
+			food_review_seq.nextval,
+			#{mem_num},
+			#{comp_num},
+			#{comp_score},
+			#{review_title},
+			#{review_content},
+			sysdate
+		)
+	</insert>
+	
 	
 </mapper>
 
