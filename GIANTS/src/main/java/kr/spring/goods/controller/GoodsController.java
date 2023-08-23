@@ -231,11 +231,11 @@ public class GoodsController {
 	 *==========================*/
 	@RequestMapping("/goods/reviewList.do")
 	@ResponseBody
-	public Map<String, Object> getReviewListAjax(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
-									@RequestParam(value="rowCount", defaultValue="10") int rowCount,
+	public Map<String, Object> getReviewListAjax(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
+									@RequestParam(value="rowCount", defaultValue="5") int rowCount,
 									@RequestParam int goods_num, HttpSession session){
 		
-		log.debug("<<currentPage>> : " + currentPage);
+		log.debug("<<+++currentPage>> : " + currentPage);
 		log.debug("<<board_num>> : " + goods_num);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -247,7 +247,7 @@ public class GoodsController {
 		int count = goodsService.selectGreviewRowCount(goods_num);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(currentPage, count, rowCount, 1, null);
+		PagingUtil page = new PagingUtil(currentPage, count, rowCount, 10, null);
 		
 		
 		List<GoodsReviewVO> list = null;
@@ -257,6 +257,10 @@ public class GoodsController {
 			map.put("end", page.getEndRow());
 			
 			list = goodsService.selectGoodsReviewList(map);
+			
+			log.debug("<<****로그찍기 list >>" + list);
+			log.debug("<<****로그찍기 start >>" + page.getStartRow());
+			log.debug("<<****로그찍기 end >>" + page.getEndRow());
 		}else {
 			list = Collections.emptyList(); //비어있는 배열
 		}
@@ -277,8 +281,8 @@ public class GoodsController {
 	 *==========================*/
 	@RequestMapping("/goods/reviewListCountAjax.do")
 	@ResponseBody
-	public Map<String, Object> getReviewCountAjax(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
-									@RequestParam(value="rowCount", defaultValue="10") int rowCount,
+	public Map<String, Object> getReviewCountAjax(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
+									@RequestParam(value="rowCount", defaultValue="5") int rowCount,
 									@RequestParam int goods_num, HttpSession session){
 		
 		log.debug("<<currentPage>> : " + currentPage);
@@ -291,10 +295,87 @@ public class GoodsController {
 		int count = goodsService.selectGreviewRowCount(goods_num);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(currentPage, count, rowCount, 1, null);
+		PagingUtil page = new PagingUtil(currentPage, count, rowCount, 10, null);
+				
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		mapJson.put("count", count);
+		mapJson.put("result", "success");
+		mapJson.put("page", page.getPage());
+		
+		return mapJson;
+	}
+	
+	/*==========================
+	 * 굿즈 상세 - 문의 페이징 처리
+	 *==========================*/
+	@RequestMapping("/goods/qnaList.do")
+	@ResponseBody
+	public Map<String, Object> getQnaListAjax(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
+									@RequestParam(value="rowCount", defaultValue="5") int rowCount,
+									@RequestParam int goods_num, HttpSession session){
+		
+		log.debug("<<+++currentPage>> : " + currentPage);
+		log.debug("<<board_num>> : " + goods_num);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("goods_num", goods_num);
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		//리뷰 레코드 수
+		int count = goodsService.selectGoodsQnaCount(goods_num);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(currentPage, count, rowCount, 10, null);
 		
 		
+		List<GoodsQnaVO> list = null;
 		
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = goodsService.selectGoodsQnaList(map);
+			
+			log.debug("<<****로그찍기 list >>" + list);
+			log.debug("<<****로그찍기 start >>" + page.getStartRow());
+			log.debug("<<****로그찍기 end >>" + page.getEndRow());
+		}else {
+			list = Collections.emptyList(); //비어있는 배열
+		}
+		
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		mapJson.put("count", count);
+		mapJson.put("list", list);
+		mapJson.put("goods_num", goods_num);
+		mapJson.put("page", page.getPage());
+		if(user != null) {
+			mapJson.put("user_num", user.getMem_num());
+		}
+		return mapJson;
+	}
+	
+	/*==========================
+	 * 굿즈 상세 - 문의 레코드 수
+	 *==========================*/
+	@RequestMapping("/goods/qnaListCountAjax.do")
+	@ResponseBody
+	public Map<String, Object> getQnaCountAjax(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
+									@RequestParam(value="rowCount", defaultValue="5") int rowCount,
+									@RequestParam int goods_num, HttpSession session){
+		
+		log.debug("<<currentPage>> : " + currentPage);
+		log.debug("<<board_num>> : " + goods_num);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("goods_num", goods_num);
+		
+		//리뷰 레코드 수
+		int count = goodsService.selectGoodsQnaCount(goods_num);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(currentPage, count, rowCount, 10, null);
+				
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		mapJson.put("count", count);
 		mapJson.put("result", "success");

@@ -47,6 +47,9 @@ input[type="button"]#admin_btn{
 	padding:0 0 5px 0;
 	font-size:20px;
 }
+#optionSelect, #order_quantity{
+	height:23px;
+}
 .goods-info .goods-name{
 	font-size:22pt;
 }
@@ -186,7 +189,7 @@ div#goods_review, div#goods_qna{
 	/*max-height:1000px;*/
 	margin-bottom:20px;
 }
-div#goods_review > span, div#goods_qna > span{
+div#review_output > span, div#goods_qna > span{
 	font-size:15pt;
 /* 	margin:50px; */
 	height:100%;
@@ -211,6 +214,22 @@ table.detail-tb th{
 table.detail-tb tr.re-content td.show-content div{
 	min-height:50px;
 }
+/* 리뷰, 문의 페이지 처리
+------------------------*/
+div#review_page, div#qna_page{
+	margin-top:5px;
+	display:inline-block;
+}
+div#review_page > li,
+div#qna_page > li{
+	float:left;
+	list-style:none;
+	cursor:pointer;
+	width:20px;
+}
+
+
+
 /* 평점표시
 ------------------*/
 span#avg_star{

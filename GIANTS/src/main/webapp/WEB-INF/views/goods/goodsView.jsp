@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KOY/goodsDetail.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods.fav.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods.review.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/goods.qna.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_cart.js"></script>
 <div class="page-main">
 	<div class="content-main">
@@ -273,70 +274,10 @@
 			<div class="align-right" style="margin:10px 23px 0 0;">
 				<input type="button" value="리뷰작성" onclick="location.href='writeReview.do?goods_num=${goods.goods_num}'">
 			</div>
-		<c:if test="${review_cnt == 0}">
-		<span>작성된 리뷰가 없습니다.</span>
-		</c:if>
-		<%--
-		<c:if test="${review_cnt > 0}">
-		 
-			<table class="detail-tb align-center">
-				<tr>
-					<th style="width:10%;">별점</th>
-					<th>제목</th>
-					<th style="width:13%;">작성자ID</th>
-					<th style="width:12%;">등록일</th>
-				</tr>
-				<c:forEach var="review" items="${review}" varStatus="status">
-				<tr>
-					<td>
-						<c:if test="${review.review_score == 5}">★★★★★(5)</c:if>
-						<c:if test="${review.review_score == 4}">★★★★(4)</c:if>
-						<c:if test="${review.review_score == 3}">★★★(3)</c:if>
-						<c:if test="${review.review_score == 2}">★★(2)</c:if>
-						<c:if test="${review.review_score == 1}">★(1)</c:if>
-					</td>
-					<td class="re-title" id="title${status.count}" style="cursor:pointer;">
-						${review.review_title}
-					</td>
-					<td>${review.mem_id}</td>
-					<td>${review.review_regdate}</td>
-				</tr>
-				<tr class="re-content" id="content${status.count}" style="display:none;">
-					<td colspan="5" class="show-content" id="td${status.count}">
-						<div class="align-right" style="margin:5px 5px 0 0; height:50px;">
-							<input type="button" value="닫기" id="close_this">
-							<c:if test="${!empty user && user.mem_num == review.mem_num}">
-							<input type="button" value="수정" onclick="location.href='updateReview.do?review_num=${review.review_num}'">
-							<input type="button" value="삭제" id="del_review">
-							<script>
-								let del_review = document.getElementById('del_review');
-								del_review.onclick = function(){
-									let choice = confirm('리뷰를 삭제하시겠습니까?');
-									if(choice){
-										location.replace('deleteReview.do?review_num=${review.review_num}');
-									}
-								};
-							</script>
-							</c:if>
-						</div>
-						<c:if test="${!empty review.review_photoname}">
-						<div class="align-left" style="margin-left:10px;">
-						<img src="${pageContext.request.contextPath}/goods/imageView2.do?review_num=${review.review_num}">
-						<br>
-						</div>
-						</c:if>
-						<div class="align-left">${review.review_content}</div>
-					</td>
-				</tr>
-				</c:forEach>
-			</table>
-			<div>${review_page}</div>
-			--%>
 			<div id="review_output"></div>
 			<div id="review_page"></div>
-		<%-- </c:if> --%>
 		</div>  
-<!-- 		<style type="text/css">
+		<!-- <style type="text/css">
 			*{
 				margin:0;
 				padding:0;
@@ -377,37 +318,10 @@
 		</div>
 		<div id="goods_qna">
 			<div class="align-right" style="margin:10px 23px 0 0;">
-				<input type="button" value="상품문의" onclick="location.href='writeQna.do?goods_num=${goods.goods_num}'">
+				<input type="button" value="문의등록" onclick="location.href='writeQna.do?goods_num=${goods.goods_num}'">
 			</div>
-		<c:if test="${qna_cnt == 0}">
-		<span>등록된 문의사항이 없습니다.</span>
-		</c:if>
-		<c:if test="${qna_cnt > 0}">
-			<table class="detail-tb align-center">
-				<tr>
-					<th style="width:10%;">번호</th>
-					<th>제목</th>
-					<th style="width:13%;">작성자ID</th>
-					<th style="width:10%;">등록일</th>
-					<th style="width:13%;">처리상태</th>
-				</tr>
-				<c:forEach var="qna" items="${qna}">
-				<tr>
-					<td>${qna.qna_num}</td>
-					<td>
-						<a href="detailQna.do?qna_num=${qna.qna_num}">${qna.qna_title}</a>
-					</td>
-					<td>${qna.mem_id}</td>
-					<td>${qna.qna_regdate}</td>
-					<td>
-						<c:if test="${qna.qna_status == 1}">처리전</c:if>
-						<c:if test="${qna.qna_status == 2}"><b style="color:#0000FF;">답변완료</b></c:if>
-					</td>
-				</tr>
-				</c:forEach>
-			</table>
-			<div>${qna_page}</div>
-		</c:if>
+			<div id="qna_output"></div>
+			<div id="qna_page"></div>
 		</div>
 	</div> <%-- end of content-main --%>
 </div>

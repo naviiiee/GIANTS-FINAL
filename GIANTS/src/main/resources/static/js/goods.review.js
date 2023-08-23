@@ -1,32 +1,40 @@
 $(function(){
 	//페이지와 관련된 정보를 가지는 변수
-	let pageSize = 5;//화면에 보여줄 레코드 수
+	let pageSize = 5;//화면에 보여줄 레코드 수 = rowCount
 	let pageBlock = 5;//페이지 표시 단위
-	let currentPage=1;//현재 보고 있는 화면
+	let currentPage =1;//현재 보고 있는 화면
 	let totalItem;//총 레코드 수
+	//let rowCount = 10;
+	//let dataPerPage = 5;
 	
-	function reviewList(num, count){
+	function reviewList(currentPage, dataPerPage){
 		$.ajax({
 			url:'reviewList.do',
 			type:'post',
-			data:{goods_num:$('#goods_num').val(), currentPage:num, rowCount:5},
+			data:{goods_num:$('#goods_num').val(), currentPage:currentPage, rowCount:pageSize},
 			dataType:'json',
 			success:function(param){
+				currentPage = Number(currentPage);
+				
+				console.log('currentPage-' + currentPage);
+				
+				dataPerPage = 5;
+				dataPerPage = Number(dataPerPage);
 				
 				$('#review_output').empty();
 				let a = '';
-				
-				console.log(param.count);
 				
 				if(param.count <= 0){
 					a += '<span>작성된 리뷰가 없습니다.</span>';
 				}
 				
 				else{
-					/*let page = param.page;
+					/*let page = param.page;*/
 					let startPage = param.start;
-					let endPage = param.end;*/
-					let reviewList = param.list;
+					let endPage = param.end;
+					let list = param.list;
+					
+					//console.log(list[0].review_score);
 					
 					a += '<table class="detail-tb align-center">';
 					a += '<tr>';
@@ -35,8 +43,47 @@ $(function(){
 					a += '<th style="width:13%;">작성자ID</th>';
 					a += '<th style="width:12%;">등록일</th>';
 					a += '</tr>';
-					
-					$.each(reviewList, function(index, value){
+					/*
+					for(var i=(currentPage - 1) * dataPerPage + 1; i < (currentPage - 1) * dataPerPage + dataPerPage + 1; i++){
+						//console.log(list[i]);
+						//console.log();
+						a += '<tr>';
+						a += '<td>' + list[i].review_score;
+						
+						if(Number(list[i].review_score) == 5){
+							a += '★★★★★(5)';
+						} else if(list[i].review_score == 4){
+							a += '★★★★(4)';
+						} else if(list[i].review_score == 3){
+							a += '★★★(3)';
+						} else if(list[i].review_score == 2){
+							a += '★★(2)';
+						} else if(list[i].review_score == 1){
+							a += '★(1)';
+						}
+						a += '</td>';
+						
+						a += '<td class="re-title" id="title' + i + '" style="cursor:pointer;">' + list[i].review_title + '</td>';
+						a += '<td>' + list[i].mem_id + '</td>';
+						a += '<td>' + list[i].review_regdate + '</td>';
+						a += '</tr>';
+						
+						a += '<tr class="re-content" id="content' + i + '" style="display:none;">';
+						a += '<td colspan="5" class="show-content" id="td'+i+'">';
+						a += '<div class="align-right" style="margin:5px 5px 0 0; height:50px;">';
+						a += '<input type="button" value="닫기" id="close_this">';
+						if(param.user_num == list[i].mem_num){
+							a += '<input type="button" value="수정" id="modify-btn" data-num="' + list[i].review_num + '">';
+							a += '<input type="button" value="삭제" id="delete-btn" data-num="' + list[i].review_num + '">';
+						}
+						a += '</div>';  
+						
+						a += '<div class="align-left">' + list[i].review_content + '</div>';
+						a += '</td>';
+						a += '</tr>';
+					}*/
+									
+					$.each(list, function(index, value){
 						a += '<tr>';
 						a += '<td>';
 						if(value.review_score == 5){
@@ -60,10 +107,10 @@ $(function(){
 						a += '<tr class="re-content" id="content' + index + '" style="display:none;">';
 						a += '<td colspan="5" class="show-content" id="td'+index+'">';
 						a += '<div class="align-right" style="margin:5px 5px 0 0; height:50px;">';
-						a += '<input type="button" value="닫기" id="close_this">';
+						a += ' <input type="button" value="닫기" id="close_this">';
 						if(param.user_num == value.mem_num){
-							a += '<input type="button" value="수정" id="modify-btn" data-num="' + value.review_num + '">';
-							a += '<input type="button" value="삭제" id="delete-btn" data-num="' + value.review_num + '">';
+							a += ' <input type="button" value="수정" class="modify-btn" data-num="' + value.review_num + '">';
+							a += ' <input type="button" value="삭제" class="delete-btn" data-num="' + value.review_num + '">';
 						}
 						a += '</div>';  
 						
@@ -71,6 +118,7 @@ $(function(){
 						a += '</td>';
 						a += '</tr>';
 					}); //end of each
+					
 					
 					a += '</table>';
 					
@@ -91,7 +139,7 @@ $(function(){
 		$.ajax({
 			url:'reviewListCountAjax.do',
 			type:'post',
-			data:{goods_num:$('#goods_num').val(), rowCount:5},
+			data:{goods_num:$('#goods_num').val(), rowCount:pageSize, currentPage:currentPage},
 			dataType:'json',
 			success:function(data){
 				if(data.result == 'success'){
@@ -134,6 +182,9 @@ $(function(){
 					}
 					//ul 태그에 생성한 li를 추가
 					$('#review_page').append(add);
+					
+					console.log('currentPage' + currentPage);
+					
 				}else{
 					alert('오류발생!');
 				}
@@ -149,11 +200,11 @@ $(function(){
 	$(document).on('click','#review_page li',function(){
 		//페이지 번호를 읽어들임
 		currentPage = $(this).attr('data-page');
-		
 		//목록 호출
-		reviewList(currentPage,pageSize);
+		reviewList(currentPage, pageSize);
 	});
 	
+	//리뷰 내용 접었다 피기
 	$(document).on('click', '.re-title', function(){
 		let num = $(this).attr('id').substring(5);
 		
@@ -169,6 +220,25 @@ $(function(){
 		$(target).hide();
 	}); //end of close_this
 	
+	//리뷰 삭제 버튼
+	$(document).on('click', '.delete-btn', function(){
+		let review_num = $(this).attr('data-num');
+		
+		let choice = confirm('삭제하시겠습니까?');
+		
+		if(choice){
+			location.replace('deleteReview.do?review_num=' + review_num);
+		}
+	}); //end of delete-btn
+	
+	//리뷰 수정 버튼
+	$(document).on('click', '.modify-btn', function(){
+		let review_num = $(this).attr('data-num');
+		
+		location.href = 'updateReview.do?review_num=' + review_num;
+	}); //end of modify-btn
+	
+	//초기 세팅
 	reviewList(1, pageSize);
 	
 });

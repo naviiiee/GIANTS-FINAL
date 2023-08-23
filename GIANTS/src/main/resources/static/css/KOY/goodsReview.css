@@ -60,6 +60,7 @@ form#review_modify ul i{
 form#review_register ul li select,
 form#review_modify ul li select{
 	height:30px;
+	width:50%;
 }
 form#review_register ul li label,
 form#review_modify ul li label{
