@@ -228,11 +228,6 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void updateOrderStatus(F_orderVO order) {
-		memberMapper.updateOrderStatus(order);
-	}
-
-	@Override
 	public F_orderVO selectF_order(Map<String, Object> map) {
 		return memberMapper.selectF_order(map);
 	}
@@ -253,9 +248,27 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public List<TicketVO> selectAdminListTicket(Map<String, Object> map) { return memberMapper.selectAdminListTicket(map); }
 
+
 	@Override
-	public void updateOrderQuantity(FoodVO order) {
-		memberMapper.updateOrderQuantity(order);
-	}  
+	public List<F_order_detailVO> selectListOrderDetail(String f_order_num) {
+		return memberMapper.selectListOrderDetail(f_order_num);
+	}
+
+	@Override
+	public void updateItemQuantity(F_order_detailVO orderDetailVO) {
+		memberMapper.updateItemQuantity(orderDetailVO);
+	}
+	
+	@Override
+	public void updateOrderStatus(F_orderVO order) {
+		memberMapper.updateOrderStatus(order);
+		//주문취소일 경우만 상품 개수 조정
+		if(order.getF_order_status() == 9) {
+			List<F_order_detailVO> detailList = memberMapper.selectListOrderDetail(order.getF_order_num());
+			for(F_order_detailVO vo : detailList) {
+				memberMapper.updateItemQuantity(vo);
+			}
+		}
+	}
 
 }

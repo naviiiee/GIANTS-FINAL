@@ -44,9 +44,9 @@
          </li>
       </ul>
    </form>
-   <c:if test="${count == 0}">
-   <div class="result-display">표시할 주문정보가 없습니다.</div>
-   </c:if>
+	<c:if test="${count == 0}">
+		<div class="member-mypage align-center"> 표시할 주문내역이 없습니다.</div>
+	</c:if>
    <c:if test="${count > 0}">
    <p class="Mypage-p">*주문번호 클릭시 상세페이지로 이동</p>
    <table class="striped-table"> 

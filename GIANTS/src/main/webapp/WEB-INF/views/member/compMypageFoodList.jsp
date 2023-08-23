@@ -15,7 +15,7 @@
 		<!-- 기업 상품 리스트 시작 -->
 		<div id="fix_compMenu"> 
 			<c:if test="${count == 0}">
-				<div class="member-mypage align-center"> 없습니다.</div>
+				<div class="member-mypage align-center"> 표시할 상품이 없습니다.</div>
 			</c:if>
 			<c:if test="${count > 0}"> <!-- 목록 있을 경우 -->
 				<p class="Mypage-p">*상품번호 클릭시 상세페이지로 이동</p>
@@ -26,24 +26,20 @@
 						<th>가격</th>
 						<th>재고수량</th>
 						<th>상태</th>
-						<th>수정 / 삭제</th>
 					</tr>
 					<c:forEach var="food" items="${list}">
 					<tr>
-						<td class="align-center">${food.food_num}</td>
+						<td class="align-center">
+							<form class="align-center" id="del_form_${food.food_num}" action="deleteFood.do" method="post">
+							<a href="${pageContext.request.contextPath}/food/fixFood.do?food_num=${food.food_num}">${food.food_num}</a>
+				            </form>
+					 	</td>
 						<td>${food.food_name}</td>
 						<td class="align-center"><fmt:formatNumber value="${food.food_price}"/> 원</td>
 						<td class="align-center"><fmt:formatNumber value="${food.food_quantity}"/> 개</td>
 						<td class="align-center">
 							<c:if test="${food.food_status == 1 }">판매중지</c:if>
 							<c:if test="${food.food_status == 2 }">판매중</c:if>
-						</td>
-						<td>
-							<form class="align-center" id="del_form_${food.food_num}" action="deleteFood.do" method="post">
-								<input class="table-td-btn" type="button" value="수정" class="#" onclick="location.href='${pageContext.request.contextPath}/food/fixFood.do?food_num=${food.food_num}'">
-								<input type="hidden" name="food_num" value="${food.food_num}">
-								<input class="table-td-btn" type="button" value="삭제" class="#" data-num="${food.food_num}">
-							</form>
 						</td>
 					</tr>
 					</c:forEach>

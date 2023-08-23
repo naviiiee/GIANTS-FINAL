@@ -142,10 +142,15 @@ public interface MemberMapper {
 	@Select("SELECT * FROM F_ORDER WHERE f_order_num=#{f_order_num}")
 	public F_orderVO selectOrder(String f_order_num);
 	
+	//개별상품목록	
+	@Select("SELECT * FROM F_ORDER_DETAIL WHERE f_order_num=#{f_order_num} ORDER BY food_num DESC")
+	public List<F_order_detailVO> selectListOrderDetail(String f_order_num);		
+	
+	//관리자/사용자 - 주문취소시 상품 수량 업데이트
+	@Update("UPDATE FOOD SET food_quantity=food_quantity + #{order_quantity} WHERE food_num=#{food_num}")
+	public void updateItemQuantity(F_order_detailVO orderDetailVO);	
+	
 	//관리자/사용자 - 주문상태수정
 	@Update("UPDATE F_ORDER SET f_order_status=#{f_order_status} WHERE f_order_num=#{f_order_num}")
 	public void updateOrderStatus(F_orderVO order);
-	@Update("UPDATE FOOD SET food_quantity=food_quantity+#{order_quantity}")
-	public void updateOrderQuantity(FoodVO order);
-	
 }

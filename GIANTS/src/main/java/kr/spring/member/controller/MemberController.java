@@ -914,16 +914,10 @@ public class MemberController {
 		log.debug("<<f_order_num>> : " + f_order_num);
 		//주문취소
 		F_orderVO vo = new F_orderVO();
-		FoodVO vo2 = new FoodVO();
-		log.debug("<<vo>> : " + vo);
-		log.debug("<<vo2>> : " + vo2);
 		
 		vo.setF_order_num(f_order_num);
 		vo.setF_order_status(9); // 1:사용전 0:사용후 9:주문취소
-		
-		log.debug("<<vo>> : " + vo);
 		memberService.updateOrderStatus(vo);
-		memberService.updateOrderQuantity(vo2);
 		
 		model.addAttribute("message", "주문취소가 완료되었습니다.");
 		model.addAttribute("url", 
