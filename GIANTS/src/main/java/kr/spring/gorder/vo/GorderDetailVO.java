@@ -1,4 +1,5 @@
 package kr.spring.gorder.vo;
+import kr.spring.goods.vo.GoodsVO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,5 +19,7 @@ public class GorderDetailVO {
 	private int goods_total;
 	private String goods_size;
 	private int mem_point;
-	private int order_quantity; //구매수량 
+	private int order_quantity; //구매수량
+	
+	private GoodsVO goodsVO;
 }

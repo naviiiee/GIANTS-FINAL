@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.news.vo.NewsVO;
@@ -21,4 +22,7 @@ public interface NewsMapper {
 	public void updateNews(NewsVO news);
 	@Delete("DELETE FROM news WHERE news_num=#{news_num}")
 	public void deleteNews(Integer news_num);
+	
+	@Select("SELECT * FROM news ORDER BY news_regdate ASC")
+	public List<NewsVO> selectNewsForMain(NewsVO newsVO);
 }

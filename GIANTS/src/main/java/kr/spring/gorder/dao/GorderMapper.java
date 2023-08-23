@@ -64,6 +64,5 @@ public interface GorderMapper {
 	@Update("UPDATE member_detail SET mem_point = mem_point + #{used_point} WHERE mem_num = #{mem_num}")
 	public void rollbackPoint(int used_point, int mem_num);
 	
-	
-
+	public List<GorderDetailVO> selectListByOrder(GorderDetailVO gorderDetailVO);
 }

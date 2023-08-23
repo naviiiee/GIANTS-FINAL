@@ -52,4 +52,10 @@ public class NewsServiceImpl implements NewsService{
 		newsMapper.deleteNews(news_num);
 	}
 
+	@Override
+	public List<NewsVO> selectNewsForMain(NewsVO newsVO) {
+		// TODO Auto-generated method stub
+		return newsMapper.selectNewsForMain(newsVO);
+	}
+
 }

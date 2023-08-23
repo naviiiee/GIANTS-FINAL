@@ -13,4 +13,6 @@ public interface NewsService {
 	public void updateHit(Integer news_num);
 	public void updateNews(NewsVO news); 
 	public void deleteNews(Integer news_num);
+	
+	public List<NewsVO> selectNewsForMain(NewsVO newsVO);
 }

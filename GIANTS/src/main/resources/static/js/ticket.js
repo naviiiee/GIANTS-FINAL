@@ -48,7 +48,7 @@ $(function() {
 	   Block 클릭시 seat 정보 호출
 	------------------------- */
 	$(document).on('click', '.selected-block', function() {
-		if($('.click-block').length > 0) { $('.grade_title').removeClass('click-block'); }
+		if($('.click-block').length > 0) { $('.selected-block').removeClass('click-block'); }
 		$(this).addClass('click-block');
 		
 		$.ajax({
