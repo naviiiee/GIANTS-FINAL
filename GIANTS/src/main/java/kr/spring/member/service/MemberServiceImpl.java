@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.food.vo.F_orderVO;
+import kr.spring.food.vo.F_order_detailVO;
 import kr.spring.food.vo.FoodVO;
 import kr.spring.goods.vo.GoodsVO;
 import kr.spring.member.dao.MemberMapper;
@@ -229,6 +230,21 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void updateOrderStatus(F_orderVO order) {
 		memberMapper.updateOrderStatus(order);
+	}
+
+	@Override
+	public F_orderVO selectF_order(Map<String, Object> map) {
+		return memberMapper.selectF_order(map);
+	}
+	
+	@Override
+	public F_orderVO selectF_orderCp(Map<String, Object> map) {
+		return memberMapper.selectF_orderCp(map);
+	}
+
+	@Override
+	public List<F_order_detailVO> selectListF_orderDetail(String f_order_num) {
+		return memberMapper.selectListF_orderDetail(f_order_num);
 	}  
 
 }

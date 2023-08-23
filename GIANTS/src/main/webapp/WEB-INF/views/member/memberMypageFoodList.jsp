@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/OSJ/food.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/foodJS/foodCss.js"></script>
 <div class="mypage-top2">
 	<div class="mypage-top-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
@@ -26,8 +28,8 @@
 				                     value="${param.keyword}">
 			</li>
 			<li>
-				<input type="submit" value="찾기">
-				<input type="button" value="목록" 
+				<input type="submit" value="찾기" class="default-btn">
+				<input type="button" value="목록" class="default-btn"
 				   onclick="location.href='compMypageOrderList.do'">
 			</li>
 		</ul>
@@ -36,6 +38,7 @@
 		<div class="result-display">표시할 주문정보가 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
+	<p class="Mypage-p">*주문번호 클릭시 상세페이지로 이동</p>
 	<table class="striped-table">
 		<tr>
 			<th>주문번호</th> 
@@ -47,12 +50,14 @@
 		</tr>
 		<c:forEach var="order" items="${list}">
 		<tr>
-			<td>${order.f_order_num}</td>
+			<td class="align-center">
+				<a href="${pageContext.request.contextPath}/member/memberMypageFoodDetail.do?f_order_num=${order.f_order_num}">${order.f_order_num}</a>
+			</td>
 			<td>${order.f_order_name}</td>
-			<td>${order.buyer_name}</td>
-			<td>${order.total_price}</td>
-			<td>${order.f_order_regDate}</td>
-			<td>
+			<td class="align-center">${order.buyer_name}</td>
+			<td class="align-center">${order.total_price}</td>
+			<td class="align-center">${order.f_order_regDate}</td>
+			<td class="align-center">
 				<c:if test="${order.f_order_status == 1}">
 				<input type="button" value="주문취소" id="order_cancel"
 				class="default-btn"> <script>  
@@ -66,12 +71,13 @@
 					};
 				</script>
 				</c:if>
+				<c:if test="${order.f_order_status == 9}">
+					취소완료
+				</c:if>
 			</td>
 		</tr>
 		</c:forEach>
 	</table>
-	<input type="button" value="장바구니" class="login-sub-btn"
-		   onclick="location.href='${pageContext.request.contextPath}/food/fcart/foodUserCartList.do'">
 	<div class="align-center">${page}</div>
 	</c:if>	
 </div>

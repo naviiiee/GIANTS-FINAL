@@ -34,7 +34,7 @@
 					<c:forEach var="food" items="${list}">
 					<tr>
 						<td class="align-center">${food.food_num}</td>
-						<td class="align-center">${food.food_name}</td>
+						<td>${food.food_name}</td>
 						<td class="align-center"><fmt:formatNumber value="${food.food_price}"/> 원</td>
 						<td class="align-center"><fmt:formatNumber value="${food.food_quantity}"/> 개</td>
 						<td class="align-center">

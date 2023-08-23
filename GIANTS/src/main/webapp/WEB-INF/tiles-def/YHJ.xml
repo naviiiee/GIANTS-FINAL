@@ -132,6 +132,12 @@
     	<put-attribute name="body" value="/WEB-INF/views/member/memberMypageFoodList.jsp"/>
     </definition>
     
+	<!-- 주문상세정보 -->
+	<definition name="memberMypageFoodDetail" extends="myPage">
+		<put-attribute name="title" value="식품 - 내 주문목록 - 상세정보확인"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberMypageFoodDetail.jsp"/>
+	</definition>    
+    
     <!-- 일반회원 굿즈구매내역 -->
     <definition name="memberMypageGoodList" extends="myPage"> 
     	<put-attribute name="title" value="회원굿즈내역"/>
@@ -153,6 +159,12 @@
     	<put-attribute name="body" value="/WEB-INF/views/member/compMypageOrderList.jsp"/>
     </definition>
     
+	<!-- 주문상세정보 -->
+	<definition name="compMypageOrderDetail" extends="myPage">
+		<put-attribute name="title" value="식품 - 내 주문목록 - 상세정보확인"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/compMypageOrderDetail.jsp"/>
+	</definition>
+	    
     <!-- 매출관리 -->
     <definition name="compMypageSaleManage" extends="myPage"> 
     	<put-attribute name="title" value="기업매출관리"/>

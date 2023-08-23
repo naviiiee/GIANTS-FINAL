@@ -32,7 +32,7 @@
 		<div class="result-display">Ticket구매내역 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-		<p>*티켓번호 클릭시 상세페이지로 이동</p>
+		<p class="Mypage-p">*티켓번호 클릭시 상세페이지로 이동</p>
 		<table class="striped-table">
 			<tr>
 				<th>티켓번호</th>

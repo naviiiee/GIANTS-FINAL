@@ -234,14 +234,14 @@
 		<where>
 			<if test="keyword != null and keyword != ''">
 				<if test="keyfield == 1">
-					m.mem_id LIKE '%' || #{keyword} || '%'
+					AND m.mem_id LIKE '%' || #{keyword} || '%'
 				</if>
 				<if test="keyfield == 2">
-					m.mem_nickname LIKE '%' || #{keyword} || '%'
+					AND d.mem_name LIKE '%' || #{keyword} || '%'
 				</if>
 				<if test="keyfield == 3">	
-					m.mem_id LIKE '%' || #{keyword} || '%' or
-					m.mem_nickname LIKE '%' || #{keyword} || '%' or
+					AND d.mem_email LIKE '%' || #{keyword} || '%' or
+					c.comp_email LIKE '%' || #{keyword} || '%'
 				</if>
 			</if>
 		</where>
@@ -456,13 +456,13 @@
 		<where>
 			<if test="keyword!=null and keyword != ''">
 				<if test="keyfield == 1">
-					f_order_num=#{keyword}
+					AND f_order_num=#{keyword}
 				</if>
 				<if test="keyfield == 2">
-					f_order_name LIKE '%' || #{keyword} || '%'
+					AND f_order_name LIKE '%' || #{keyword} || '%'
 				</if>
 				<if test="keyfield == 3">
-					buyer_name LIKE '%' || #{keyword} || '%'
+					AND buyer_name LIKE '%' || #{keyword} || '%'
 				</if>
 			</if>
 		</where>
@@ -562,4 +562,21 @@
 		<![CDATA[WHERE rnum >= #{start} AND rnum <= #{end}]]>		            
 	</select>
 	
+	<!-- 주문 상세정보확인 -->
+	<select id="selectF_order" parameterType="map" resultType="f_orderVO">
+		SELECT 
+		  * 
+		FROM 
+		  f_order 
+		WHERE f_order_num=#{f_order_num} 
+		AND mem_num=#{mem_num}
+	</select>	
+	<!-- 주문 상세정보확인 -->
+	<select id="selectF_orderCp" parameterType="map" resultType="f_orderVO">
+		SELECT 
+		  * 
+		FROM 
+		  f_order 
+		WHERE f_order_num=#{f_order_num} 
+	</select>	
 </mapper>

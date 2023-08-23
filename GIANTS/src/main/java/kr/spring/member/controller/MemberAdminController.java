@@ -51,16 +51,9 @@ public class MemberAdminController {
 		//페이지 처리
 		PagingUtil page =
 				new PagingUtil(keyfield,keyword,currentPage,
-							   count,10,10,"adminMemberList.do");
-		MemberVO user1 = (MemberVO)session.getAttribute("user1");
-		MemberDetailVO user2 = (MemberDetailVO)session.getAttribute("user2");
-		CompanyDetailVO user3 = (CompanyDetailVO)session.getAttribute("user3");
+							   count,10,10,"admin_list.do");
 		
 		List<MemberVO> list = null;
-		
-		log.debug("<<user 체크>> : " + user1);
-		log.debug("<<user 체크>> : " + user2);
-		log.debug("<<user 체크>> : " + user3);
 		
 		if(count > 0) {
 			map.put("start", page.getStartRow());
@@ -85,7 +78,7 @@ public class MemberAdminController {
 	public String form(@RequestParam int mem_num, Model model) {
 		MemberVO memberVO = memberService.selectMember(mem_num);
 		model.addAttribute("memberVO", memberVO);
-		return "admin_memberModify";
+		return "adminMemberModify";
 	}
 	//전송된 데이터 처리
 	@PostMapping("/member/admin_updateMem.do")
@@ -113,7 +106,7 @@ public class MemberAdminController {
 	public String formComp(@RequestParam int mem_num, Model model) {
 		MemberVO companyVO = memberService.selectCompany(mem_num);
 		model.addAttribute("memberVO", companyVO);
-		return "admin_companyModify";
+		return "adminCompanyModify";
 	}
 	//전송된 데이터 처리
 	@PostMapping("/member/admin_updateComp.do")

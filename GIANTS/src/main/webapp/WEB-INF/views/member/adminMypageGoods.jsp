@@ -58,7 +58,6 @@
 		<ul class="search">
 			<li>
 				<select name="keyfield" id="keyfield">
-					<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>상품명+카테고리</option>
 					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>상품명</option>
 					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>내용</option>
 				</select>
@@ -67,8 +66,9 @@
 				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
 			</li>
 			<li>
-				<input type="submit" value="찾기">
-				<input type="button" value="목록" onclick="location.href='adminMypageGoodsList.do'">
+				<input type="submit" value="찾기" class="bottom-btn">
+				<input type="button" value="목록" class="bottom-btn"
+					   onclick="location.href='adminMypageGoodsList.do'">
 			</li>
 		</ul>
 	</form>
