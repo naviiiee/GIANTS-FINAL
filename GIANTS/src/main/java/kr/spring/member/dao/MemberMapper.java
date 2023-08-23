@@ -28,7 +28,7 @@ public interface MemberMapper {
 	public int selectMem_num();
 	
 	//일반회원가입
-	@Insert("INSERT INTO MEMBER (mem_num,mem_id,passwd,mem_nickname,mem_auth) VALUES (#{mem_num},#{mem_id},#{passwd},#{mem_nickname},#{mem_auth})")
+	@Insert("INSERT INTO MEMBER (mem_num,mem_id,passwd,mem_auth) VALUES (#{mem_num},#{mem_id},#{passwd},#{mem_auth})")
 	public void insertMember(MemberVO member);
 	public void insertMember_detail(MemberVO member);
 	

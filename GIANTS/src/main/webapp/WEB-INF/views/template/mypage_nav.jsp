@@ -4,8 +4,8 @@
 <div>
 	<!-- 일반회원일때 NAV -->
 	<c:if test="${!empty user && user.mem_auth == 2}">
-		<ul class="mypage-nav">
-			<li><b>회원정보</b></li>
+		<ul>
+			<li class="nav-title"><b>회원정보</b></li>
 			<li><a href="${pageContext.request.contextPath}/member/updateMember.do">회원정보수정</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/changePasswd.do">비밀번호변경</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/changeNkMd.do">닉네임변경</a></li>
@@ -21,9 +21,9 @@
 	</c:if>
 	<!-- 기업회원일때 NAV -->   
 	<c:if test="${!empty user && user.mem_auth == 3}">
-		<ul class="mypage-nav">
-			<li><b>회원정보</b></li>
-			<li><a href="${pageContext.request.contextPath}/member/updateCompany.do">회원정보수정</a></li>
+		<ul>
+			<li class="nav-title"><b>회원정보</b></li>
+			<li class="nav_item"><a href="${pageContext.request.contextPath}/member/updateCompany.do">회원정보수정</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/changePasswd.do">비밀번호변경</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/deleteCompany.do">회원탈퇴</a></li>
 			<li><b>FOOD</b></li>

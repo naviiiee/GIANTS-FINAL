@@ -453,19 +453,18 @@
 	
 	<!-- 기업페이지 주문목록 -->
 	<sql id="orderSearchFd">
-		<where>
-			<if test="keyword!=null and keyword != ''">
-				<if test="keyfield == 1">
-					AND f_order_num=#{keyword}
-				</if>
-				<if test="keyfield == 2">
-					AND f_order_name LIKE '%' || #{keyword} || '%'
-				</if>
-				<if test="keyfield == 3">
-					AND buyer_name LIKE '%' || #{keyword} || '%'
-				</if>
+	WHERE comp_num = #{comp_num}
+		<if test="keyword!=null and keyword != ''">
+			<if test="keyfield == 1">
+				AND f_order_num=#{keyword}
 			</if>
-		</where>
+			<if test="keyfield == 2">
+				AND f_order_name LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="keyfield == 3">
+				AND buyer_name LIKE '%' || #{keyword} || '%'
+			</if>
+		</if>
 	</sql>
 	
 	<select id="selectOrderCountFd" parameterType="map" resultType="integer">

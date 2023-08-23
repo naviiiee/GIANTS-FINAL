@@ -232,7 +232,6 @@ public class MemberController {
 				mapAjax.put("result", "idNotFound");
 			}
 		}
-
 		return mapAjax;
 	}
 	//회원가입시 닉네임 유효성 체크
@@ -241,8 +240,8 @@ public class MemberController {
 	public Map<String, String> confirmNk(@RequestParam String mem_nickname) {
 		log.debug("<<닉네임 중복 체크>> : " + mem_nickname);
 		Map<String, String> mapAjax = new HashMap<String, String>();
-		MemberVO member = memberService.selectCheckMemberNk(mem_nickname);
-		if (member != null) {
+		MemberVO member2 = memberService.selectCheckMemberNk(mem_nickname);
+		if (member2 != null) {
 			// 닉네임 중복
 			mapAjax.put("result", "nkDuplicated");
 		} else {

@@ -44,23 +44,23 @@
 		<!-- 회원가입 / 아이디 / 비밀번호 찾기 -->
 		<div class="login-sub">
 			<ul>
-				<li>
+				<li class="mypage-bottom">
 					아직 롯데자이언츠 회원이 아니신가요?
-					<input type="button" value="회원가입" class="login-sub-btn"
+					<input type="button" value="회원가입" class="login-sub-btn default-btn2"
 							onclick="location.href='${pageContext.request.contextPath}/member/registerCommon.do'">
 				</li>
 				<li><hr size="0.05" width="100%" noshade></li>
-				<li>
+				<li class="mypage-bottom">
 					아이디나 비밀번호를 잊으셨나요?<br>
 					일반회원 >>
-					<input type="button" value="아이디찾기" class="login-sub-btn"
+					<input type="button" value="아이디찾기" class="login-sub-btn default-btn2"
 							onclick="location.href='${pageContext.request.contextPath}/member/findId.do'">
-					<input type="button" value="비밀번호찾기" class="login-sub-btn"
+					<input type="button" value="비밀번호찾기" class="login-sub-btn default-btn2"
 							onclick="location.href='${pageContext.request.contextPath}/member/findPw.do'"><br>
 					기업회원 >>
-					<input type="button" value="아이디찾기" class="login-sub-btn"
+					<input type="button" value="아이디찾기" class="login-sub-btn default-btn2"
 							onclick="location.href='${pageContext.request.contextPath}/member/findIdCp.do'">
-					<input type="button" value="비밀번호찾기" class="login-sub-btn"
+					<input type="button" value="비밀번호찾기" class="login-sub-btn default-btn2"
 							onclick="location.href='${pageContext.request.contextPath}/member/findPwCp.do'">		
 				</li>
 			</ul>

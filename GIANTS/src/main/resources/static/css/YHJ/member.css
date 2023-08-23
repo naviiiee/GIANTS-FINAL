@@ -41,13 +41,24 @@
 	min-height:950px;
 }
 #mypage_body .mypage-nav{
-    border: 1px #dd032f solid;
     background-color: #dd032f;
 	color:#fff;
 	font-size:15pt;
 	width:150px;
 	float:left;
+	text-align:center;
 }
+
+#mypage_body .mypage-nav a{
+	text-align:center;
+    background-color: rgba(5,35,69,1);
+	color:#d4d4d4;
+	font-size:10pt;
+	width:150px;
+	float:left;
+	padding-bottom:10px;
+}
+
 #mypage_body .mypage-body{
 	width:1000px;
 	float:right;
@@ -365,6 +376,12 @@ ul.search li input{
 .default-btn{
 	height:35px;
 	border-radius: 5px;
+	border: 1px #dd032f solid;
+    background-color: #dd032f;
+	color:#fff;	
+}
+.default-btn2{
+	height:30px;
 	border: 1px #dd032f solid;
     background-color: #dd032f;
 	color:#fff;	

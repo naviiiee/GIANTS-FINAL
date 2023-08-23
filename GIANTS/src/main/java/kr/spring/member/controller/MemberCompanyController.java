@@ -102,7 +102,7 @@ public class MemberCompanyController {
 	}	
 
 	/*=====================
-	 * 기업회원 주문목록
+	 * 기업회원 주문내역
 	 *=====================*/
 	@RequestMapping("/member/compMypageOrderList.do")
 	public ModelAndView admin_list(
