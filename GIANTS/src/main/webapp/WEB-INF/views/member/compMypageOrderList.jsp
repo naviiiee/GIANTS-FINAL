@@ -38,16 +38,17 @@
 				                     value="${param.keyword}">
 			</li>
 			<li>
-				<input type="submit" value="찾기">
-				<input type="button" value="목록" 
+				<input type="submit" value="찾기" class="default-btn">
+				<input type="button" value="목록" class="default-btn"
 				   onclick="location.href='compMypageOrderList.do'">
 			</li>
-		</ul>
-	</form>
+		</ul>      
+	</form>     
 	<c:if test="${count == 0}">
 	<div class="result-display">표시할 주문정보가 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
+	<p class="Mypage-p">*주분번호 클릭시 상세페이지로 이동</p>
 	<table class="striped-table"> 
 		<tr>
 			<th>주문번호</th>
@@ -59,14 +60,18 @@
 		</tr>
 		<c:forEach var="order" items="${list}">
 		<tr>
-			<td>${order.f_order_num}</td>
-			<td>${order.f_order_name}</td>
-			<td>${order.buyer_name}</td>
-			<td>${order.total_price}</td>
-			<td>${order.f_order_regDate}</td>
-			<td>	
+			<td class="align-center">
+				<a href="${pageContext.request.contextPath}/member/compMypageOrderDetail.do?f_order_num=${order.f_order_num}">${order.f_order_num}</a></td>
+			<td>
+				${order.f_order_name}
+			</td>
+			<td class="align-center">${order.buyer_name}</td>
+			<td class="align-center">${order.total_price}</td>
+			<td class="align-center">${order.f_order_regDate}</td>
+			<td class="align-center">	
 				<c:if test="${order.f_order_status == 0}">QR사용완료</c:if>
 				<c:if test="${order.f_order_status == 1}">QR사용전</c:if>
+				<c:if test="${order.f_order_status == 9}">주문취소</c:if>
 			</td>
 		</tr>
 		</c:forEach>
