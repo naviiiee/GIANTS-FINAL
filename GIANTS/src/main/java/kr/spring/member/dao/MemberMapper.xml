@@ -562,6 +562,37 @@
 		<![CDATA[WHERE rnum >= #{start} AND rnum <= #{end}]]>		            
 	</select>
 	
+	<!-- 관리자 티켓 구매내역 -->
+	<sql id="ticketSearchByAdmin">
+		<if test="keyword != null and keyword != ''">
+			<if test="keyfield == 1">
+				WHERE game_title LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="keyfield == 2">
+				WHERE order_name LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="keyfield == 3">
+				WHERE game_date LIKE '%' || #{keyword} || '%'
+			</if>
+		</if>
+	</sql>
+	
+	<select id="selectAdminTicketCount" parameterType="map">
+		SELECT count(*)
+		FROM ticket 
+		<include refid="ticketSearchByAdmin"></include>
+	</select>
+	
+	<select id="selectAdminListTicket" parameterType="map" resultType="ticketVO">
+		SELECT *	
+		FROM (SELECT a.*, rownum rnum
+		      FROM (SELECT *
+		            FROM ticket
+		            <include refid="ticketSearchByAdmin"></include>
+		            ORDER BY game_date DESC)a)
+		<![CDATA[WHERE rnum >= #{start} AND rnum <= #{end}]]>		            
+	</select>
+	
 	<!-- 주문 상세정보확인 -->
 	<select id="selectF_order" parameterType="map" resultType="f_orderVO">
 		SELECT 

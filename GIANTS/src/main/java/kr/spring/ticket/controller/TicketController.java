@@ -290,7 +290,7 @@ public class TicketController {
 	
 	/* ----- [Order] 티켓취소 -----*/
 	@RequestMapping("/ticket/deleteTorder.do")
-	public String gradeDelete(@RequestParam String ticket_num) {
+	public String deleteTorder(@RequestParam String ticket_num) {
 		log.debug("<<주문번호>> : " + ticket_num);
 		
 		TicketVO ticket = ticketService.selectTicket(ticket_num);

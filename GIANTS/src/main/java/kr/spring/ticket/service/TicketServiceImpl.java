@@ -158,7 +158,7 @@ public class TicketServiceImpl implements TicketService {
 	
 	@Override
 	public List<TicketDetailVO> selectSeatInfoByT(String ticket_num) { return ticketMapper.selectSeatInfoByT(ticket_num); }
-
+	
 	@Override
 	public void updateTicket(String ticket_num) { ticketMapper.updateTicket(ticket_num); }
 

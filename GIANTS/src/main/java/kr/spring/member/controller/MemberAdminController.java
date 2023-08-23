@@ -21,6 +21,7 @@ import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.ticket.vo.TicketVO;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -131,9 +132,31 @@ public class MemberAdminController {
 	 * 관리자 티켓관리
 	 *=====================*/
 	@RequestMapping("/member/adminMypageTicket.do")
-	public String adminMypageTicket(HttpSession session, Model model) {
+	public ModelAndView adminMypageTicket(@RequestParam(value="pageNum", defaultValue="1") int currentPage, String keyfield, String keyword, HttpSession session, Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
 		
-		return "adminMypageTicket";
+		int count = memberService.selectAdminTicketCount(map);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 10, 10, "adminMypageTicket.do");
+		
+		List<TicketVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = memberService.selectAdminListTicket(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("adminMypageTicket");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
 	}
 	/*
 	/*=====================

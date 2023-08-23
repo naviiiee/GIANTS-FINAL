@@ -73,7 +73,7 @@ CREATE TABLE ticket(
 	total_price NUMBER(9) NOT NULL,
 	pg varchar2(30) NOT NULL,
 	pay_method varchar2(30) NOT NULL,
-	ticket_status NUMBER(1) NOU NULL,
+	ticket_status NUMBER(1) NOU NULL,	-- 0:예매취소, 1:예매완료, 2:우천취소
 	CONSTRAINT ticket_pk PRIMARY KEY (ticket_num),
 	CONSTRAINT ticket_fk FOREIGN KEY (mem_num) REFERENCES member (mem_num),
 	CONSTRAINT ticket_fk2 FOREIGN KEY (game_num) REFERENCES tgame (game_num)

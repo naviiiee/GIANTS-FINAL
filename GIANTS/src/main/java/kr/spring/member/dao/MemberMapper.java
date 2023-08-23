@@ -130,10 +130,13 @@ public interface MemberMapper {
 	@Select("SELECT * FROM f_order_detail WHERE f_order_num=#{f_order_num}")
 	public List<F_order_detailVO> selectListF_orderDetail(String f_order_num); //식품 주문 개별상세정보	
 	
-	
 	//마이페이지 - 티켓구매내역
 	public int selectTicketCountByMem_num(Map<String,Object> map);
 	public List<TicketVO> selectListTicketByMem_num(Map<String,Object> map);
+	
+	// 관리자페이지 - 티켓목록
+	public int selectAdminTicketCount(Map<String, Object> map);
+	public List<TicketVO> selectAdminListTicket(Map<String, Object> map);
 	
 	//관리자/사용자 - 주문상세
 	@Select("SELECT * FROM F_ORDER WHERE f_order_num=#{f_order_num}")

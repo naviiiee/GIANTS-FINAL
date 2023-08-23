@@ -95,4 +95,8 @@ public interface MemberService {
 	// 마이페이지 - 티켓구매내역
 	public int selectTicketCountByMem_num(Map<String,Object> map);
 	public List<TicketVO> selectListTicketByMem_num(Map<String,Object> map);
+	
+	// 관리자페이지 - 티켓목록
+	public int selectAdminTicketCount(Map<String, Object> map);
+	public List<TicketVO> selectAdminListTicket(Map<String, Object> map);
 }

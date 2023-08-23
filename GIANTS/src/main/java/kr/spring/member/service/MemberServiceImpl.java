@@ -245,6 +245,12 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public List<F_order_detailVO> selectListF_orderDetail(String f_order_num) {
 		return memberMapper.selectListF_orderDetail(f_order_num);
-	}  
+	}
+
+	@Override
+	public int selectAdminTicketCount(Map<String, Object> map) { return memberMapper.selectAdminTicketCount(map); }
+
+	@Override
+	public List<TicketVO> selectAdminListTicket(Map<String, Object> map) { return memberMapper.selectAdminListTicket(map); }  
 
 }
