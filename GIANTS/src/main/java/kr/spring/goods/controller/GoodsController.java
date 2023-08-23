@@ -64,6 +64,11 @@ public class GoodsController {
 		return new GorderDetailVO();
 	}
 	
+	@ModelAttribute
+	public GoodsFavVO initCommmand5() {
+		return new GoodsFavVO();
+	}
+	
 	/*==========================
 	 * 굿즈 등록
 	 *==========================*/
@@ -494,6 +499,38 @@ public class GoodsController {
 		return mapJson;
 	}
 	
+	//굿즈 찜하기 목록 표시
+	@RequestMapping("/member/goodsFavList.do")
+	public ModelAndView getFavList(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
+									HttpSession session) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("mem_num", user.getMem_num());
+		
+		int count = goodsService.selectGoodsFavCountByMem_num(map);
+		
+		PagingUtil page = new PagingUtil(currentPage, count, 5, 10, null);
+		
+		List<GoodsFavVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = goodsService.selectGoodsFavList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("goodsFavList");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
+	}
 	
 	/*===============// 굿즈 리뷰 //===============*/	
 	

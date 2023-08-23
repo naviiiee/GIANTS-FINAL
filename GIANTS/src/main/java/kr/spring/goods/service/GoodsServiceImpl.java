@@ -237,4 +237,14 @@ public class GoodsServiceImpl implements GoodsService{
 		return goodsMapper.selectOrderDetailList(mem_num);
 	}
 
+	@Override
+	public List<GoodsFavVO> selectGoodsFavList(Map<String, Object> map) {
+		return goodsMapper.selectGoodsFavList(map);
+	}
+
+	@Override
+	public int selectGoodsFavCountByMem_num(Map<String, Object> map) {
+		return goodsMapper.selectGoodsFavCountByMem_num(map);
+	}
+
 }

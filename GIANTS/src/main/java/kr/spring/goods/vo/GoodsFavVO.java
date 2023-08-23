@@ -13,4 +13,8 @@ public class GoodsFavVO {
 	private int mem_num; //회원번호
 	
 	private int fav_cnt; //찜 갯수
+	private String mem_id;
+	private String goods_name;
+	
+	//private GoodsVO goodsVO;
 }

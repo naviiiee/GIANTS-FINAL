@@ -172,6 +172,43 @@
 		WHERE goods_num=#{goods_num} AND goods_size=#{goods_size}
 	</update>
 	
+	<!-- //======찜 하기======// -->
+	<!-- 찜 목록 -->
+	<select id="selectGoodsFavList" parameterType="map" resultType="goodsFavVO">
+		SELECT 
+			*
+		FROM(SELECT 
+				a.*,
+				rownum rnum
+			 FROM(SELECT
+			 		f.fav_num,
+			 		f.goods_num,
+			 		g.goods_name,
+			 		f.mem_num,
+			 		m.mem_id
+			 	  FROM goods_fav f
+			 	  LEFT OUTER JOIN goods g ON f.goods_num=g.goods_num
+			 	  LEFT OUTER JOIN member m ON f.mem_num=m.mem_num
+			 	  WHERE f.mem_num=#{mem_num}
+			 	  ORDER BY fav_num DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+	<!-- 찜하기 레코드 수 -->
+	<select id="selectGoodsFavCountByMem_num" parameterType="map" resultType="integer">
+		SELECT
+			count(*)
+		FROM 
+			goods_fav f
+		LEFT OUTER JOIN goods g ON f.goods_num=g.goods_num
+		LEFT OUTER JOIN member m ON f.mem_num=m.mem_num
+		WHERE 
+			f.mem_num=#{mem_num}
+	</select>
+	
+	
 	<!-- //======리뷰======// -->
 	<!-- 리뷰 등록 -->
 	<insert id="insertGoodReview" parameterType="goodsReviewVO">

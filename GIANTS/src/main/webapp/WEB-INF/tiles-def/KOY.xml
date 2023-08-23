@@ -75,7 +75,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/news/newsModify.jsp"/>
 	</definition>
 	
-	<!-- 경기 일정 -->
-
+	<!-- 굿즈 찜하기 목록 -->
+	<definition name="goodsFavList" extends="myPage">
+		<put-attribute name="title" value="찜한 상품"/>
+		<put-attribute name="body" value="/WEB-INF/views/goods/goodsFavList.jsp"/>
+	</definition>
 	
 </tiles-definitions>

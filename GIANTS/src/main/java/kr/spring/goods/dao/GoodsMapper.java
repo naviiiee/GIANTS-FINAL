@@ -78,6 +78,10 @@ public interface GoodsMapper {
 	public void deleteGoodsFav(Integer fav_num);
 	//상품삭제시 상품 찜 취소
 	public void deleteGoodsFavByGoodsNum(Integer goods_num);
+	//찜 목록 - 마이페이지
+	public List<GoodsFavVO> selectGoodsFavList(Map<String, Object> map);
+	//찜 목록 - 레코드 수
+	public int selectGoodsFavCountByMem_num(Map<String, Object> map);
 	
 	//=====상품 후기=====//
 	//상품 후기 목록

@@ -45,6 +45,10 @@ public interface GoodsService {
 	public void insertGoodsFav(GoodsFavVO fav);
 	//상품 찜 취소
 	public void deleteGoodsFav(Integer fav_num);
+	//찜 목록
+	public List<GoodsFavVO> selectGoodsFavList(Map<String, Object> map);
+	//찜 목록 - 레코드 수
+	public int selectGoodsFavCountByMem_num(Map<String, Object> map);
 	
 	//=====상품 후기=====// 
 	//전체|검색 상품 후기 목록
