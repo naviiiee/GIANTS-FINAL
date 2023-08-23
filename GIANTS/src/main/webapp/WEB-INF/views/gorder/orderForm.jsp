@@ -14,7 +14,7 @@
 .btn-api{
 	background-color : #dd032f;
 	color : white;
-	width: 800px;
+	width: 1200px;
 	height: 30px;
 	border : none;
 }
@@ -88,11 +88,14 @@
 		<br>
 		<h3>포인트적용</h3> <!-- 전액 사용 버튼을 누르거나 직접 입력해서 적용버튼 누르면 차감되도록 -->
 		<hr size="1">
+		<br>
 			잔여포인트 : ${mem_point}p   <input type="button" value="전액사용" id="point-btn" class="default-btn">
 			<br>
 			<input type="number" id="used_point" name="used_point" min=1 max="${mem_point}">원  
 			<input type="button" value="적용" id="usingPoint">
 			<input type="button" value="취소" id="cancelPoint">
+		<br>
+		<br>
 		<br>
 		<br>
 		
@@ -156,6 +159,7 @@
 		
 		<br>
 		<br>
+		<br>
 		
 		<h3>배송정보</h3>
 		<hr size="1">
@@ -188,16 +192,14 @@
 				<label for="order_message">남기실 말씀</label>
 				<input type="text" name="order_message" id="order_message">
 			</li>
-			
 		</ul>	
-		
-		
+		<br>		
 		
 		<h3>결제 정보</h3>
 		<hr size="1">
 		입금자명 <input type="text" id="order_name"> 
 		
-		
+		<br>
 		<br>
 		
 		<h3>결제수단</h3>
@@ -208,10 +210,13 @@
 		</li>
 		
 		<div id="bankInfo" style="display: none;">
-    		<span>계좌번호: xxx-xxxx-xxxx (3시간 이내로 입금하지 않으면 자동 취소됩니다.)</span>
-    		<!-- select로 처리하고 입력받도록... 가상계좌 구현은 하지 않기? 배송 상태 변경해주는 것처럼 아이디랑 입금자명 일치하면 관리자가 처리해주도록? -->
+		<select>
+			<option class="align-center">====3시간 이내로 입금하지 않으면 자동취소됩니다.====</option>
+			<option class="align-center">(국민)123-1234-1234 자이언트</option>
+		</select>
+		<button class="btn-account">주문하기</button>
 		</div>
-		
+		<br>
 		<div id="payInfo" style="display : none;'">
 			<button class="btn-api" id="paymentButton" onclick="requestPay()">주문API</button>
 		</div>
@@ -253,12 +258,13 @@
 		    });		
 		</script>				
 
-		
-		<input type="button" value="주문취소" class="default-btn"
-			 onclick="location.href='${pageContext.request.contextPath}/gorder/goods_cart.do'">
-		 <input type="button" value="굿즈목록" class="default-btn"
-		 onclick="location.href='${pageContext.request.contextPath}/goods/goodsList.do'">
-		
+		<br><br>
+		<div class="align-center">
+			<input type="button" value="주문취소" class="default-btn"
+				 onclick="location.href='${pageContext.request.contextPath}/gorder/goods_cart.do'">
+			 <input type="button" value="굿즈목록" class="default-btn"
+			 onclick="location.href='${pageContext.request.contextPath}/goods/goodsList.do'">
+		</div>
 		
 		
 		<c:forEach var="cart" items="${list}">

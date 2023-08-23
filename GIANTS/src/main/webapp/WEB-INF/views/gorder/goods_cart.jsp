@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/goods_cart.js"></script>
 <!-- all_total, list(g_order_detail) - 사이즈 포함 -->
-${list}
 <!-- 장바구니 시작 -->
 <div class="page-main">
 	<h2>장바구니</h2>
