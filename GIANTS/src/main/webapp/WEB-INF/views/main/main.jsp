@@ -72,23 +72,51 @@ $(document).ready(function() {
 	</div>
 	<div class="main2">
 		<div class="section-title align-center">
-			<h2>자이언츠 포토</h2>
+			<h2>GOOS TOP3</h2>
 			<hr size="0.05" width="10%" noshade style="margin:3px auto;">
 		</div>
 	</div>
 	<div class="main3">
-		<div class="main3-1 align-center">
-			<h2>자이언츠 뉴스</h2>
-			<hr size="0.05" width="10%" noshade style="margin:3px auto;">
-			<c:forEach var="news" items="${newsList}" begin="0" end="3">
-				<div class="news-info">
-					<div class="news-left"><img src="${pageContext.request.contextPath}/images/giants.png"></div>
-					<div class="news-right">
-						<h3>${news.news_title}</h3>
-						<p>${fn:substring(news.news_content, 0, 30)}</p>
+		<div class="main3-1">
+			<div class="section-title align-center">
+				<h2>자이언츠 뉴스</h2>
+				<hr size="0.05" width="10%" noshade style="margin:3px auto;">
+				<c:forEach var="news" items="${newsList}" begin="0" end="3">
+					<div class="news-info">
+						<div class="news-left"><img src="${pageContext.request.contextPath}/images/giants.png"></div>
+						<div class="news-right">
+							<h3>${fn:substring(news.news_title, 0, 20)}</h3>
+							<p>${fn:substring(news.news_content, 0, 30)}</p>
+						</div>
 					</div>
-				</div>
-			</c:forEach>
+				</c:forEach>
+			</div>
+		</div>
+		<div class="main3-2">
+			<div class="ticket-btn">
+				<a href="${pageContext.request.contextPath}/ticket/gameList.do"><img src="${pageContext.request.contextPath}/images/ticket_btn.png"></a>
+			</div>
+			<div class="goods-btn">
+				<a href="${pageContext.request.contextPath}/goods/goodsList.do"><img src="${pageContext.request.contextPath}/images/goods_btn.png"></a>
+			</div>
 		</div>
 	</div>
 </div>
+<div class="main-div2">
+	<div class="main4">
+		<a href="https://www.facebook.com/lottegiantsbusan/" target="_blank" title="facebook">
+			<img src="${pageContext.request.contextPath}/images/facebook.png" width="100%" height="100">
+		</a>
+	</div>
+	<div class="main5">
+		<a href="https://www.youtube.com/channel/UCAZQZdSY5_YrziMPqXi-Zfw" target="_blank" title="youtube">
+			<img src="${pageContext.request.contextPath}/images/youtube.jpg" width="100%" height="100">
+		</a>
+	</div>
+	<div class="main6">
+		<a href="https://www.instagram.com/busanlottegiants/" target="_blank" title="instagram">
+			<img src="${pageContext.request.contextPath}/images/instagram.png" width="100%" height="100">
+		</a>
+	</div>
+</div>
+

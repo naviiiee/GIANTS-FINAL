@@ -1,9 +1,11 @@
 /* 공통 스타일 */
 .image-slide{ width:100%; margin:0 auto; }
 
-.main-div{ width:1200px; margin:1% auto; display:flex; justify-content:center; }
-.main1, .main2, .main3{ width:30%; margin:0 auto; border:1px solid #999; }
-.section-title, .main3-1{ margin:20px auto; }
+.main-div, .main-div2{ width:1200px; margin:1% auto; display:flex; justify-content:center; }
+.main1, .main2{ width:30%; margin:0 auto; border:1px solid #052345; }
+.main3, .main4, .main5, .main6{ width:30%; margin:0 auto; }
+.main3-1{ width:100%; border:1px solid #052345; }
+.section-title{ margin:20px auto; }
 
 .game-info{ width:90%; margin:25px auto; }
 .div-margin{ margin:10px 0; font-size:14px; }
@@ -16,116 +18,6 @@
 .news-left{ width:20%; }
 .news-right{ width:80%; }
 
-.content {
-	display: flex;
-	margin: 0 auto;
-}
+.ticket-btn, .goods-btn{ margin:10px auto; }
 
-/* 3가지 섹션의 컨텐츠를 정렬 */
-/* .page-main >.giants-photo, 
-.page-main > .news-shop, 
-.page-main > .sch-cal{
-	display: flex;
-	justify-content: space-between;
-	position : relative; /*box 설정을 위해 넣음
-}
-*/
-.main-content { /*이미지 제외 아래 항목들*/
-    justify-content: space-between;
-    text-align: center;
-    width: 1200px;
-	margin:0 auto;
-}
-
-.page-main{
-	text-align: center;
-}
-
-/* 슬라이드 위로 올라오게 띄우기
-.giants-photo {
-    order: 1;
-}
-
-.news-shop {
-    order: 2;
-}
-
-.sch-cal {
-    order: 3;
-} */
-
-/* 왼쪽 섹션 */
-.sch-cal {
-	float: left;
-	width: 35%;
-	text-align: center;
-	border:1px solid;
-	
-}
-
-/* 가운데 섹션 */
-.giants-photo {
-	float: left;
-	width: 35%;
-	text-align: center;
-	margin-right: 10px;
-	margin-left: 30px;
-	border:1px solid;
-}
-
-
-/* 오른쪽 섹션 */
-.news-shop {
-float: inherit;
-	text-align: center;
-	margin-right: 10px;
-	margin-left: 900px;
-	width: 460px;
-}
-
-.main-news{
-border:1px solid;
-}
-/* SNS 섹션 */
-.sns {
-		margin : 0 auto;
-		text-align: center;
-		display: flex; /* 자식 요소를 가로로 정렬 */
-		justify-content: center; /* 추가: 가로 정렬을 중앙에 맞춤 */
-	}
-
-	.sns ul {
-		display: flex;
-		list-style: none;
-		padding: 0;
-		margin: 0; /* 추가: ul 요소의 마진 제거 */
-	}
-
-	.sns li {
-		flex: 1;
-		margin-right: 10px;
-	}
-
-	.sns li:last-child {
-		margin-right: 0;
-	}
-
-	.sns li img {
-		margin: 0; /* 추가: 이미지의 마진 제거 */
-	}
-	
-	/* 이미지 슬라이드 시작*/
-	 li{
-		list-style: none;
-		}
-	div.image-slide>ul{
-		position: relative;
-	} 
-	.image-slide li{
-		display: inline-block;
-	}
-	.image-slide{
-	z-index : -99;/*우선순위는 클수록 높음*/
-	text-align: center;
-	}
-/**/
+.ticket-btn img, .goods-btn img{ width:100%; }
