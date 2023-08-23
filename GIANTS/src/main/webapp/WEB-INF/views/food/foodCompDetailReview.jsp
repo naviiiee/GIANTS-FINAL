@@ -32,7 +32,14 @@
 	<!-- 매장 상세정보 시작 -->
 	<div class=comp-container>
 		<div class="comp-detail"><!-- 상세페이지 링크는 스크립트로 해결해야함. -->
-			<div class="f-img"><img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-main-img"></div>
+			<div class="f-img">
+				<c:if test="${empty comp.comp_photoname || comp.comp_photoname == ''}">
+					<img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-main-img">
+				</c:if> 
+				<c:if test="${!empty comp.comp_photoname}">
+					<img src="${pageContext.request.contextPath}/food/compImageView?comp_num=${comp.comp_num}" class="food-main-img">
+				</c:if> 
+			</div>
 			<div class="comp-title"><b>매장명 - ${comp.comp_name}</b></div>
 			<div class="comp-score"><b>별점 - ${comp.comp_score}</b></div>
 			<div class="comp-content">

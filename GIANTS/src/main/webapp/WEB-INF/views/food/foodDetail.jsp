@@ -61,12 +61,7 @@
 			<input type="hidden" name="comp_num" value="${food.comp_num}" id="comp_number">
 		</form>
 		<!-- 주문하기용 폼 -->
-		<form id="frm_order" method="post">
-			<input type="hidden" name="food_num" value="${food.food_num}">
-			<input type="hidden" name="order_quantity" class="fd-quantity">
-			<input type="hidden" name="food_name" value="${food.food_name}">
-			<input type="hidden" name="food_price" value="${food.food_price}">
-			<input type="hidden" name="food_total" class="fd-total">
+		<form id="frm_order" method="post" action="/food/forder/foodOrderForm.do">
 		</form>
 		<!-- 식품 상세시작 -->	
 		<div id="food_detailContent">

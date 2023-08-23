@@ -48,7 +48,14 @@
 					<form action="foodCompDetailMenu.do" method="get">
 						<input type="hidden" name=comp_num value="${comp.comp_num}" >
 					</form>
-					<div class="f-img"><img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-main-img"></div>
+					<div class="f-img">
+						<c:if test="${empty comp.comp_photoname || comp.comp_photoname == ''}">
+							<img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-main-img">
+						</c:if> 
+						<c:if test="${!empty comp.comp_photoname}">
+							<img src="${pageContext.request.contextPath}/food/compImageView?comp_num=${comp.comp_num}" class="food-main-img">
+						</c:if> 
+					</div>
 					<div class="comp-title"><b>매장명 - ${comp.comp_name}</b></div>
 					<div class="comp-score"><b>별점 - ${comp.comp_score}</b></div>
 					<div class="comp-content">

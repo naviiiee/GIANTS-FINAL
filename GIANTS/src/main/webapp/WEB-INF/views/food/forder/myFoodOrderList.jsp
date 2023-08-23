@@ -58,7 +58,11 @@
 							<span class="enable-order"><b>사용가능</b></span>
 						</c:if>
 						<c:if test="${order.f_order_status==0}">
-							<span class="disable-order"><b>사용완료</b></span>
+							<span class="disable-order"><b>사용완료</b></span><br>
+							<input type="button" value="리뷰쓰기" onclick="location.href='${pageContext.request.contextPath}/food/foodReviewForm.do?f_order_num=${order.f_order_num}'">
+						</c:if>
+						<c:if test="${order.f_order_status==9}">
+							<span class="disable-order"><b>주문취소</b></span>
 						</c:if>
 					</td> 
 				</tr>

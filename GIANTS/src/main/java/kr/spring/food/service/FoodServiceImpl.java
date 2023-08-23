@@ -137,11 +137,22 @@ public class FoodServiceImpl implements FoodService{
 	public F_orderVO selectF_order(Map<String, Object> map) {
 		return foodMapper.selectF_order(map);
 	}
+	@Override
+	public F_orderVO selectF_orderByNum(String f_order_num) {
+		return foodMapper.selectF_orderByNum(f_order_num);
+	}
 
 	@Override
 	public List<F_order_detailVO> selectListF_orderDetail(String f_order_num) {
 		return foodMapper.selectListF_orderDetail(f_order_num);
 	}
+
+	@Override
+	public void updateF_orderStatus(String f_order_num) {
+		foodMapper.updateF_orderStatus(f_order_num);
+	}
+
+	
 
 	
 

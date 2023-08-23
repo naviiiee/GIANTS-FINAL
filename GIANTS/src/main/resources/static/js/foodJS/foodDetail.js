@@ -39,9 +39,6 @@ $(function(){
 					//다른매장의 상품이 등록되어있음
 					let check = confirm('다른매장의 상품이 담겨있습니다.\n장바구니를 비우고 추가하시겠습니까?');
 					if(check){
-						//장바구니를 비움
-						//emptyCart();
-						
 						//장바구니에 상품 추가
 						$.ajax({
 							url:'../food/foodAddCart.do',
@@ -148,9 +145,127 @@ $(function(){
 	
 	
 	//주문하기 버튼, 폼
-	$('#food_order_btn')
-	$('#frm_order');
-	
+	$('#food_order_btn').click(function(){
+		
+		let form_data = $('#frm_cart').serialize();
+		
+		$.ajax({
+			url:'../food/foodCartCheck.do',
+			type:'post',
+			data:form_data,
+			dataType:'json',
+			success:function(param){
+				if(param.result == 'logout'){
+					alert('해당 기능은 로그인이 필요합니다.');
+				}else if(param.result == 'MismatchCompany' || param.order == 'NotEmpty'){
+					//다른매장의 상품이 등록되어있음
+					let check = confirm('장바구니를 비워야 주문이 가능합니다.\n장바구니를 비우고 주문하시겠습니까?');
+					if(check){
+						//장바구니에 상품 추가
+						$.ajax({
+							url:'../food/foodAddCart.do',
+							type:'post',
+							data:form_data,
+							dataType:'json',
+							beforeSend: function(){
+								emptyCart();
+							},
+							success:function(param2){
+								if(param2.result == 'logout'){
+									alert('로그인이 필요한 기능입니다.');
+								}else if(param2.result == 'success'){
+									//폼을 생성하고, cartNumbers를 ajax 통신을 이용하여 뽑아내서 form.submit 수행
+									$.ajax({
+										url:'../food/selectCartNums.do',
+										type:'post',
+										dataType:'json',
+										success:function(param3){
+											if(param3.result == 'logout'){
+												alert('로그인이 필요한 기능입니다.');
+											}else if(param3.result == 'success'){
+												//주문 폼 submit() 수행
+												let output = '';
+												let list = param3.list;
+												for (let i = 0; i < list.length; i++) {
+													output += '<input type="hidden" name="cart_numbers" value="'+list[i]+'" >';
+												}
+												$('#frm_order').append(output);
+												$('#frm_order').submit();
+											}else{
+												alert('주문 폼 생성 오류 발생');
+											}
+										},
+										error:function(){
+											alert('주문 폼 생성 - 네트워크 오류 발생');
+										}
+									});
+									
+								}else{
+									alert('장바구니 추가 오류 발생');
+								}
+							},
+							error:function(){
+								alert('장바구니 추가 - 네트워크 오류 발생');
+							}
+						});
+					}else{//취소를 눌렀을 경우
+						alert('주문 취소');
+					}
+				}else if(param.result == 'Empty'){
+					//상품 추가하기
+						$.ajax({
+							url:'../food/foodAddCart.do',
+							type:'post',
+							data:form_data,
+							dataType:'json',
+							success:function(param2){
+								if(param2.result == 'logout'){
+									alert('로그인이 필요한 기능입니다.');
+								}else if(param2.result == 'success'){
+									//폼을 생성하고, cartNumbers를 ajax 통신을 이용하여 뽑아내서 form.submit 수행
+									$.ajax({
+										url:'../food/selectCartNums.do',
+										type:'post',
+										dataType:'json',
+										success:function(param3){
+											if(param3.result == 'logout'){
+												alert('로그인이 필요한 기능입니다.');
+											}else if(param3.result == 'success'){
+												//주문 폼 submit() 수행
+												let output = '';
+												let list = param3.list;
+												for (let i = 0; i < list.length; i++) {
+													output += '<input type="hidden" name="cart_numbers" value="'+list[i]+'" >';
+												}
+												$('#frm_order').append(output);
+												$('#frm_order').submit();
+											}else{
+												alert('주문 폼 생성 오류 발생');
+											}
+										},
+										error:function(){
+											alert('주문 폼 생성 - 네트워크 오류 발생');
+										}
+									});
+								}else{
+									alert('장바구니 추가 오류 발생');
+								}
+							},
+							error:function(){
+								alert('장바구니 추가 - 네트워크 오류 발생');
+							}
+						});
+						//장바구니에 상품 추가 끝
+				}else{
+					alert('주문하기 장바구니 체크 오류 발생');
+				}
+			},
+			error:function(){
+				alert('주문하기 장바구니 체크 - 네트워크 오류 발생');
+			}
+		});//Ajax 끝
+	});
+
 	
 	//초기 화면
 	changePriceAndTotal(1,price);

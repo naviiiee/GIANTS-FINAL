@@ -770,6 +770,13 @@ input[type="number"]::-webkit-outer-spin-button {
 	background-color: #dd032f;
 }
 
+/*  ===================================
+	======== foodOrderSuccess ========
+	=================================== */
+.order-result{
+	font-size:1.2em;
+}
+
 
 /*  ===================================
 	========== myFoodOrderList ========
@@ -832,6 +839,7 @@ input[type="number"]::-webkit-outer-spin-button {
 	border: 1px solid lightgray;
 }
 #orderList_tb tr:first-child{
+	height: 50px;
 	background-color:lightgray;
 	border: 2px solid gray;
 }
@@ -884,4 +892,6 @@ input[type="number"]::-webkit-outer-spin-button {
   height:160px;
   margin-top:15px;
 }
+
+
 

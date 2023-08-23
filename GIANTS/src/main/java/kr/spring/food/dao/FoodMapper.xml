@@ -265,7 +265,7 @@
 		  #{buyer_phone},
 		  #{buyer_email},
 		  SYSDATE,
-		  ADD_MONTHS(SYSDATE, 90),
+		  SYSDATE + INTERVAL '90' DAY,
 		  #{qrlink},
 		  #{pg},
 		  #{pay_method})

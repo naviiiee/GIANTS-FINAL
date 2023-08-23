@@ -64,6 +64,10 @@ public interface FoodService {
 	
 	//식품 주문(영수증)상세정보
 	public F_orderVO selectF_order(Map<String,Object> map);
+	public F_orderVO selectF_orderByNum(String f_order_num);
 	//식품 주문 개별상세정보 
 	public List<F_order_detailVO> selectListF_orderDetail(String f_order_num);
+	
+	// (기업) QR코드 승인 및 업데이트 처리
+	public void updateF_orderStatus(String f_order_num);
 }

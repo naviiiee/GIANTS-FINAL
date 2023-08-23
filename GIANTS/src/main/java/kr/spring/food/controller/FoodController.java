@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.spring.food.dao.FoodMapper;
 import kr.spring.food.service.FoodService;
 import kr.spring.food.vo.F_cartVO;
 import kr.spring.food.vo.F_orderVO;
@@ -55,6 +56,24 @@ public class FoodController {
 		return new F_orderVO();
 	}
 	
+	
+	/*	====================
+	 *		매장이미지 출력
+	 * 	====================*/
+	@RequestMapping("/food/compImageView.do")
+	public ModelAndView compImg(@RequestParam String comp_num) {
+		
+		CompanyDetailVO comp = memberService.selectCompanyDetail(comp_num);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+		
+		mav.addObject("imageFile", comp.getComp_photo());
+		mav.addObject("filename", comp.getComp_photoname());
+			
+		return mav;
+	}
+	
 	/*	====================
 	 *		이미지 출력
 	 * 	====================*/
@@ -78,8 +97,10 @@ public class FoodController {
 		return mav;
 	}
 	
+
+	
 	/*	=======================
-	 *		매장 목록 페이지 
+	 *		(공용) 매장 목록 페이지 
 	 * 	=======================*/
 	@RequestMapping("/food/foodList.do")
 	@ResponseBody
@@ -116,7 +137,7 @@ public class FoodController {
 	}
 	
 	/*	============================
-	 *		기업 상세페이지 - 식품 메뉴
+	 *		(공용) 기업 상세페이지 - 식품 메뉴
 	 * 	============================*/
 	@RequestMapping("/food/foodCompDetailMenu.do")
 	public ModelAndView foodCompDetail(@RequestParam String comp_num,
@@ -149,11 +170,12 @@ public class FoodController {
 	}
 	
 	/*	============================
-	 *		기업 상세페이지 - 기업 리뷰
+	 *		(공용) 기업 상세페이지 - 기업 리뷰
 	 * 	============================*/
 	@RequestMapping("/food/foodCompDetailReview.do")
 	public ModelAndView foodCompDetailReview(@RequestParam String comp_num,
-									   @RequestParam(value = "pageNum", defaultValue = "1") int currentPage) {
+									   		 @RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
+									   		 HttpSession session) {
 		//log.debug("기업상세 페이지 진입 >>> comp_num : " + comp_num);
 		CompanyDetailVO comp = foodService.selectComp(comp_num);
 		int count = foodService.selectRowCount(comp_num);
@@ -178,7 +200,7 @@ public class FoodController {
 	}
 	
 	/*	========================================
-	 *		기업 상세 -> 기업 수정 페이지 
+	 *		(기업) 기업 상세 -> 기업 수정 페이지 
 	 * 	========================================*/
 	@RequestMapping("/food/fixCompFoodList.do")
 	public ModelAndView foodFixCompDetail(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
@@ -212,7 +234,7 @@ public class FoodController {
 	}
 	
 	/*	==========================
-	 *		식품 추가/등록 페이지
+	 *		(기업) 식품 추가/등록 페이지
 	 * 	==========================*/
 	@GetMapping("/food/addNewFood.do")
 	public String formAddNewFood() {
@@ -262,7 +284,7 @@ public class FoodController {
 	}
 	
 	/*	==========================
-	 *		식품 수정 페이지
+	 *		(기업) 식품 수정 페이지
 	 * 	==========================*/
 	@GetMapping("/food/fixFood.do")
 	public String formFixFood(@RequestParam int food_num, Model model) {
@@ -312,7 +334,7 @@ public class FoodController {
 	}
 	
 	/*	==========================
-	 *		식품 삭제 페이지
+	 *		(기업) 식품 삭제 페이지
 	 * 	==========================*/
 	@PostMapping("/food/deleteFood.do")
 	public String submitDeleteFood(@RequestParam int food_num) {
@@ -326,7 +348,7 @@ public class FoodController {
 	
 	
 	/*	==========================
-	 *		식품 상세 페이지
+	 *		(공용) 식품 상세 페이지
 	 * 	==========================*/
 	//폼 호출
 	@RequestMapping("/food/foodDetail.do")
@@ -342,7 +364,7 @@ public class FoodController {
 	}
 	
 	/*	==========================
-	 *		장바구니 담기 (foodDetail.js)스크립트
+	 *		(회원) 장바구니 담기 (foodDetail.js)스크립트
 	 * 	==========================*/
 	//장바구니 아이템 체크
 	@RequestMapping("/food/foodCartCheck.do")
@@ -379,6 +401,9 @@ public class FoodController {
 			}else {
 				//장바구니가 비워져 있거나 동일상품임을 알림
 				//log.debug("장바구니 체크 Empty 진입");
+				if (db_cart.size() != 0) {
+					mapJson.put("order", "NotEmpty");
+				}
 				mapJson.put("result", "Empty");
 			}
 		}
@@ -443,9 +468,35 @@ public class FoodController {
 		}
 		return mapJson;
 	}
+	//주문하기 버튼 동작
+	@RequestMapping("/food/selectCartNums.do")
+	@ResponseBody
+	public Map<String,Object> selectCartNums(HttpSession session) {
+		
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else {
+			List<F_cartVO> list = null;
+			list = foodService.selectF_cartList(user.getMem_num());
+			
+			List <Integer> numList = new ArrayList<Integer>();
+			for (F_cartVO cart : list) {
+				numList.add(cart.getCart_num());
+			}
+			mapJson.put("list", numList);
+			mapJson.put("result", "success");
+			
+			log.debug("주문하기 버튼 cartNums 동작중 >>> : " + numList);
+		}
+		
+		
+		return mapJson;
+	}
 	
 	/*	==========================
-	 *		장바구니 페이지 - foodUserCartList.js
+	 *		(회원) 장바구니 페이지 - foodUserCartList.js
 	 * 	==========================*/
 	//폼 호출
 	@RequestMapping("/food/fcart/foodUserCartList.do")
@@ -468,8 +519,8 @@ public class FoodController {
 	//장바구니 수량 변경
 	@RequestMapping("/food/fcart/changeCartQuantity.do")
 	@ResponseBody
-	public Map<String,Object> changeCartQuantity(F_cartVO f_cartVO,
-										  	     HttpSession session){
+	public Map<String,Object> changeCartQuantity(F_cartVO f_cartVO, HttpSession session){
+		
 		//log.debug("<< 장바구니 수량 변경 진행중 >> :" + f_cartVO);
 		Map<String,Object> mapJson = new HashMap<String,Object>();
 		
@@ -499,9 +550,8 @@ public class FoodController {
 	//장바구니 삭제버튼
 	@RequestMapping("/food/fcart/deleteOneCart.do")
 	@ResponseBody
-	public Map<String,Object> deleteOneCart(@RequestParam int cart_num,
-										    HttpSession session){
-		//log.debug("<< 장바구니 삭제 수행중 >> :" + cart_num);
+	public Map<String,Object> deleteOneCart(@RequestParam int cart_num, HttpSession session){
+
 		Map<String,Object> mapJson = new HashMap<String,Object>();
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
@@ -515,9 +565,9 @@ public class FoodController {
 	}
 	
 	/*	==========================
-	 *		주문페이지
+	 *		(회원) 주문페이지
 	 * 	==========================*/
-	//주문 폼 호출
+	//장바구니 -> 주문 폼 호출
 	@PostMapping("/food/forder/foodOrderForm.do")
 	public String formFoodOrder(F_orderVO f_orderVO, HttpSession session,
 	           					Model model, HttpServletRequest request) {
@@ -576,9 +626,9 @@ public class FoodController {
 	//주문하기 결제 전 데이터 검증 - foodOrderForm.jsp
 	@RequestMapping("/food/forder/checkBeforePayment.do")
 	@ResponseBody
-	public Map<String,Object> checkBeforePayment(F_orderVO f_orderVO,
-										    	 HttpSession session){
-		log.debug("<< 주문하기 결제 전 데이터 검증 수행중 >> :" + f_orderVO);
+	public Map<String,Object> checkBeforePayment(F_orderVO f_orderVO, HttpSession session){
+		
+		//log.debug("<< 주문하기 결제 전 데이터 검증 수행중 >> :" + f_orderVO);
 		Map<String,Object> mapJson = new HashMap<String,Object>();
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
@@ -609,7 +659,7 @@ public class FoodController {
 	@ResponseBody
 	public String inserF_orderPay(@RequestBody F_orderVO f_orderVO, HttpSession session, RedirectAttributes rttr) {
 		
-		log.debug("결제완료 후 콜백 처리 "+ f_orderVO);
+		//log.debug("결제완료 후 콜백 처리 "+ f_orderVO);
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -636,24 +686,48 @@ public class FoodController {
 		f_orderVO.setMem_num(user.getMem_num());
 		//사용 전 = 1, 후 = 0 
 		f_orderVO.setF_order_status(1);
-		f_orderVO.setQrlink("/food/forder/companyCheckQR.do?f_order_num=" + f_orderVO.getF_order_num());
+		f_orderVO.setQrlink("/food/forder/companyCheckQR.do?f_order_num=" + f_orderVO.getF_order_num()
+						  + "&buyer_name=" + f_orderVO.getBuyer_name());
 		
 		//데이터 DB에 반영하기
 		foodService.insertF_order(f_orderVO, f_orderDetailList);
 		
-		
-		
 		//log.debug("\n\n 전송된 데이터 처리중 >>> " + cartList);
 		
-		return "/food/forder/myFoodOrderList.do";	// 결제이후 이동할 주소 지정
+		return "/food/forder/foodOrderSuccess.do";	// 결제이후 이동할 주소 지정
 	}
+	
+	//주문완료 페이지 호출
+	@RequestMapping("/food/forder/foodOrderSuccess.do")
+	public String foodOrderSuccess(@RequestParam String f_order_num,
+										HttpSession session, HttpServletRequest request, Model model) {
+		//주문번호 + 회원번호를 통해서 인증
+		Map<String, Object> map = new HashMap<String, Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		map.put("f_order_num", f_order_num);
+		map.put("mem_num", user.getMem_num());
+		
+		F_orderVO f_order = foodService.selectF_order(map);
+		if (f_order == null) {
+			//본인이 아닐경우 매장목록으로
+			model.addAttribute("message", "잘못된 요청입니다.");
+			model.addAttribute("url", request.getContextPath() + "/food/foodList.do");
+			return "common/resultView";
+		}
+		
+		model.addAttribute("f_order", f_order);
+		return "foodOrderSuccess";
+	}
+	/*	==========================
+	 *		(회원) 주문페이지 끝
+	 * 	==========================*/
+	
+	
 	
 	//QR코드를 출력하는 화면으로 이동
 	@RequestMapping("/food/forder/myFoodQRcode.do")
 	public String showQR(@RequestParam String f_order_num,
-										HttpSession session,
-										HttpServletRequest request,
-										Model model) {
+										HttpSession session, HttpServletRequest request, Model model) {
 		//QR코드 링크를 요청하는 고객이 본인임을 확인
 		Map<String, Object> map = new HashMap<String, Object>();
 		MemberVO user = (MemberVO)session.getAttribute("user");
@@ -677,7 +751,7 @@ public class FoodController {
 	}
 	
 	/*	==========================
-	 *		내 주문목록
+	 *		(회원) 내 주문목록
 	 * 	==========================*/
 	@RequestMapping("/food/forder/myFoodOrderList.do")
 	public ModelAndView myFoodOrderList (@RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
@@ -714,13 +788,10 @@ public class FoodController {
 		return mav;
 	}
 	
-	// 내 주문 상세정보확인
+	// (회원) 내 주문 상세정보확인
 	@RequestMapping("/food/forder/myFoodOrderDetail.do")
-	public String myFoodOrderDetail (@RequestParam String f_order_num,
-									 HttpSession session,
-									 Model model) {
-		
-		
+	public String myFoodOrderDetail (@RequestParam String f_order_num, HttpSession session, Model model) {
+
 		//주문번호(f_order_num)를 통하여 모든 정보를 출력함.
 		Map<String, Object> map = new HashMap<String, Object>();
 		MemberVO user = (MemberVO)session.getAttribute("user");
@@ -740,16 +811,68 @@ public class FoodController {
 		return "myFoodOrderDetail";
 	}
 	
-	
+	/*	==========================
+	 *		(기업) QR주문확인 - compAfterCheckQR.jsp
+	 * 	==========================*/
 	//기업이 QR코드를 찍었다고 가정하여, 이 페이지를 방문하였을 경우 
 	//QR코드가 유효한지 확인하여 상태를 변경하고 해당 회원의 주문 내역을 출력하는 페이지로 이동
 	@RequestMapping("/food/forder/companyCheckQR.do")
 	public String companyCheckQR(@RequestParam String f_order_num,
-											 	HttpSession session,
-											 	Model model) {
+								 @RequestParam String buyer_name,
+											 	HttpSession session, HttpServletRequest request, Model model) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		String comp_num = user.getCompanyDetailVO().getComp_num();
+		if (comp_num==null || comp_num.trim()=="") {
+			model.addAttribute("message", "잘못된 요청입니다.");
+			model.addAttribute("url", request.getContextPath() + "/food/foodList.do");
+			return "common/resultView";
+		}
 		
-		return "";
+		F_orderVO db_f_order = foodService.selectF_orderByNum(f_order_num);
+		if (!db_f_order.getBuyer_name().equals(buyer_name)) {
+			model.addAttribute("message", "잘못된 요청입니다.");
+			model.addAttribute("url", request.getContextPath() + "/food/foodList.do");
+			return "common/resultView";
+		}
+		if (!db_f_order.getComp_num().equals(comp_num)) {
+			model.addAttribute("message", "잘못된 요청입니다.");
+			model.addAttribute("url", request.getContextPath() + "/food/foodList.do");
+			return "common/resultView";
+		}
+		//모든 조건을 확인한 후 해당 주문번호에 대해 QR상태를 업데이트 함
+		foodService.updateF_orderStatus(f_order_num);
+		
+		//출력페이지용 데이터 적재
+		List<F_order_detailVO> detailList = foodService.selectListF_orderDetail(f_order_num);
+		model.addAttribute("f_order", db_f_order);
+		model.addAttribute("list", detailList);
+		
+		return "compAfterCheckQR";
 	}
+	
+	/*	==========================
+	 *		(회원) 리뷰작성
+	 * 	==========================*/
+	//폼 호출
+	@GetMapping("/food/foodReviewForm.do")
+	public String formFoodReview(@RequestParam String f_order_num, Model model, HttpSession session, HttpServletRequest request) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		F_orderVO f_order = foodService.selectF_orderByNum(f_order_num);
+		
+		if (user.getMem_num()!=f_order.getMem_num()) {
+			model.addAttribute("message", "잘못된 요청입니다.");
+			model.addAttribute("url", request.getContextPath() + "/food/foodList.do");
+			return "common/resultView";
+		}
+		CompanyDetailVO comp = foodService.selectComp(f_order.getComp_num());
+		
+		model.addAttribute("f_order", f_order);
+		model.addAttribute("comp_name" , comp.getComp_name());
+		
+		return "foodReviewForm";
+	}
+	
 	
 	
 }

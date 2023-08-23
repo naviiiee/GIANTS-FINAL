@@ -188,8 +188,6 @@ $(function(){
 					for (const cartNum of cartNumTags) {
 					  cart_numbers.push(cartNum.value);
 					}
-					
-					
 					// IMP.request_pay(param, callback) 결제창 호출
 					// 카카오페이로 진행중
 					IMP.request_pay({
@@ -224,8 +222,9 @@ $(function(){
 								contentType:'application/json',
 								data:JSON.stringify(result),
 								success: function (res) {
-									alert('주문완료.\n내 주문목록으로 넘어갑니다.');
-									location.href=res;
+									alert('주문이 정상적으로 처리되었습니다.');
+									//주문이 처리된 후, form을 생성하여 post전송 수행
+									location.href= res + "?f_order_num=" + f_order_num;
 								},
 								error: function (err) { console.log(err); 
 									alert('err : ' + err);
@@ -257,53 +256,6 @@ $(function(){
 		});
 		e.preventDefault();
 	});// 결제 함수 수행 완료
-	
-	//---------QR 생성 예시 코드--------
-/*	function createQRCode(url,f_order_num) {
-		let result = false;
-		let xhr = new XMLHttpRequest();
-	
-		xhr.open("POST", "https://goqr.me/api/v1/qrcode");
-	
-		// Set the request body to the URL.
-		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		xhr.send("url=" + encodeURIComponent(url));
-	
-		// 요청을 하고 난 후, xhr을 load하면 status 값이 200인 경우 정상적으로 이미지를 받아올 수 있다.
-		xhr.onload = function() {
-			if (xhr.status === 200) {
-				// QR code 이미지 변수에 담기
-				let qr_code_image = xhr.response;
-				let formData = new FormData();
-	 			formData.append("qrcode", qr_code_image);
-				formData.append("f_order_num", f_order_num);
-				$.ajax({
-					url:'createQRcode.do',
-					type:'post',
-					data: formData,
-					dataType:'json',
-					success:function(param){
-						if(param.result == 'logout'){
-							alert('로그인이 필요한 기능입니다.');
-						}else if(param.result == 'success'){
-							console.log('QR코드 생성 완료');
-							result = true;
-						}else{
-							alert('QR코드 생성 오류 발생');
-						}
-					},
-					error:function(){
-						alert('QR코드 생성 - 네트워크 오류 발생');
-					}
-				});
-			} else {
-				alert('QR코드 생성 오류 발생');
-			}
-		};// end of xhr.onload = function()-----
-		return result;
-	}// end of function createQRCode(url)-----
-
-*/	
 
 
 });

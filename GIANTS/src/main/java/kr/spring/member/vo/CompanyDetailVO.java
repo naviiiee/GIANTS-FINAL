@@ -45,4 +45,5 @@ public class CompanyDetailVO {
 	private String comp_content; // 내용
 	
 	private float comp_score;		//평점
+	
 }

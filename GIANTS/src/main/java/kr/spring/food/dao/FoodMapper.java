@@ -99,8 +99,14 @@ public interface FoodMapper {
 	
 	//식품 주문(영수증)상세정보
 	public F_orderVO selectF_order(Map<String,Object> map);
+	@Select("SELECT * FROM f_order WHERE f_order_num=#{f_order_num}")
+	public F_orderVO selectF_orderByNum(String f_order_num);
 	//식품 주문 개별상세정보 
 	@Select("SELECT * FROM f_order_detail WHERE f_order_num=#{f_order_num}")
 	public List<F_order_detailVO> selectListF_orderDetail(String f_order_num);
+	
+	// (기업) QR코드 승인 및 업데이트 처리
+	@Update("UPDATE f_order SET f_order_status=0 WHERE f_order_num=#{f_order_num}")
+	public void updateF_orderStatus(String f_order_num);
 
 }
