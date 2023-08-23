@@ -13,6 +13,10 @@ import lombok.ToString;
 public class GorderVO {
 	private int goods_num; //상품 번호
 	private int opt_num;
+	private int goods_revenue; //상품 매출
+	
+	
+	
 	//==========
 	
 	private int used_point; //사용한 포인트

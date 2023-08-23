@@ -21,5 +21,15 @@ public class GorderDetailVO {
 	private int mem_point;
 	private int order_quantity; //구매수량
 	
+	
+	
+	
+	private int goods_total_list;
+	private int goods_rank;
+	  public void setGoods_rank(int goods_rank) {
+	        this.goods_rank = goods_rank;
+	    }
+	
+	
 	private GoodsVO goodsVO;
 }

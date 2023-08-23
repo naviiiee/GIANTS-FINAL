@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.spring.gcart.vo.GcartVO;
 import kr.spring.gorder.dao.GorderMapper;
 import kr.spring.gorder.vo.GorderDetailVO;
 import kr.spring.gorder.vo.GorderVO;
@@ -100,6 +101,39 @@ public class GorderServiceImpl implements GorderService{
 			}
 		}
 	}
+
+	@Override
+	public List<GorderVO> revenueGoods(Map<String, Object> map) {
+		return orderMapper.revenueGoods(map);
+	}
+
+	@Override
+	public int getAllTotalByGoodsNum(Map<String, Object> map) {
+		return orderMapper.getAllTotalByGoodsNum(map);
+	}
+
+	@Override
+	public List<GcartVO> getListRevenue(Map<String, Object> map) {
+		return orderMapper.getListRevenue(map);
+	}
+
+	@Override
+	public int allTotal() {
+		// TODO Auto-generated method stub
+		return orderMapper.allTotal();
+	}
+
+	@Override
+	public List<GorderVO> getListSale() {
+		return orderMapper.getListSale();
+	}
+
+	@Override
+	public String dbGoodsName(int goods_num) {
+		// TODO Auto-generated method stub
+		return orderMapper.dbGoodsName(goods_num);
+	}
+
 
 
 	

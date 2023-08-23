@@ -8,10 +8,27 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.gcart.vo.GcartVO;
 import kr.spring.gorder.vo.GorderDetailVO;
 import kr.spring.gorder.vo.GorderVO;
 
 public interface GorderService {
+	
+	//매출 xxx
+	public List<GorderVO> revenueGoods(Map<String, Object> map);
+	
+	//총 매출
+	public int allTotal();
+	public List<GorderVO> getListSale();
+	
+	//원래 상품명 읽어오기
+	public String dbGoodsName(int goods_num);
+	
+	//굿즈 번호 별 총액
+	public int getAllTotalByGoodsNum(Map<String, Object> map);
+	// 매출 목록
+		public List<GcartVO> getListRevenue(Map<String, Object> map);
+	
 	// 주문 등록
 	// 포인트 누적해주기
 	public void insertOrder(GorderVO order, List<GorderDetailVO> list); // Mapper에서는 order, orderDetail 따로 처리

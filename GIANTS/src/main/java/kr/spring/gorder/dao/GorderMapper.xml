@@ -1,6 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.gorder.dao.GorderMapper">
+<!-- 관리자 주문 목록 검색 -->
+<sql id="orderSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<if test="keyfield == 1">
+					order_num = #{keyword}
+				</if>
+				<if test="keyfield == 2">
+					id LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 3">
+					goods_name LIKE '%' || #{keyword} || '%'
+				</if>
+			</if>
+		</where>
+	</sql>
+		<!-- 사용자 주문 목록 검색 -->
+	<sql id="orderSearchByUser">
+		WHERE mem_num = #{mem_num}
+		<if test="keyword != null and keyword != ''">
+			<if test="keyfield == 1">
+				AND order_num = #{keyword}
+			</if>
+			<if test="keyfield == 2">
+				AND goods_name LIKE '%' || #{keyword} || '%'
+			</if>
+		</if>
+	</sql>
+
+
+<resultMap id="gorderDetailVOMap" type="gorderDetailVO">
+    <result property="goods_num" column="goods_num"/>
+    <result property="goods_dprice" column="goods_dprice"/>
+    <result property="order_quantity" column="order_quantity"/>
+    <result property="goods_total_list" column="goods_total_list"/>
+     <result property="goods_rank" column="goods_rank"/>
+</resultMap>
+
+
+<!-- 매출 목록 , 부등호 무조건 변환해줘야함!!!!!!!!!!!-->
+<select id="getListSale" resultMap="gorderDetailVOMap">
+SELECT 
+    d.goods_num, 
+    o.order_regdate, 
+    d.goods_dprice, 
+    d.order_quantity, 
+    (d.goods_dprice * d.order_quantity) as goods_total_list,
+    RANK() OVER (ORDER BY d.goods_dprice * d.order_quantity DESC) as goods_rank
+FROM g_order o 
+JOIN g_order_detail d ON o.order_num = d.order_num
+WHERE o.order_status &lt; 5
+ORDER BY goods_total_list DESC
+</select>
+
+
+	
+	
+	<!-- 매출 목록 -->
+<!-- 	\\<select id="getListRevenue" parameterType="map" resultMap="gorderVO">
+		select d.goods_num, sum(o.order_total) as sub_total
+from g_order_detail d join g_order o
+on d.order_num=o.order_num
+where o.order_status<5
+group by d.goods_num
+	
+<select id="getAllTotalByGoodsNum" parameterType="map" resultMap="gorderVO">	
+	select sum(o.order_total) as sub_total
+from g_order_detail d join g_order o
+on d.order_num=o.order_num
+where o.order_status<5 and d.goods_num=#{goods_num}
+	</select>  -->
+
+<!-- where절이 2개라 오류남 include하면 -->
+<!-- 상품 매출 리스트 + 페이지 처리 
+<select id="revenueGoods" parameterType="map" resultType="gorderVO">
+	SELECT
+		  *
+		FROM (SELECT
+		       a.*,
+		       rownum rnum
+		      FROM(SELECT d.goods_num, sum(goods_total) as goods_revenue
+						FROM g_order_detail d JOIN g_order o 
+						ON d.order_num = o.order_num
+						WHERE d.goods_num=#{goods_num} AND o.order_status<5
+						group by d.goods_num
+		           ORDER BY d.goods_num DESC
+                   )a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+</select>-->
+
+<!-- <select id="revenueGoods" parameterType="map" resultType="gorderVO">
+	SELECT
+		  *
+		FROM (SELECT
+		       a.*,
+		       rownum rnum
+		      FROM(SELECT d.goods_num, sum(goods_total) as goods_revenue
+						FROM g_order_detail d JOIN g_order o 
+						ON d.order_num = o.order_num
+						<include refid="orderSearch"></include>
+				   GROUP BY d.goods_num
+		           ORDER BY d.goods_num DESC
+                   )a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+</select>
+ -->
+ 
+ 
 
 <!-- 상품 주문 -->
 	<insert id="insertOrder" parameterType="gorderVO">
@@ -81,22 +193,6 @@
 		WHERE m.mem_num =#{mem_num}
 	</update>
 	
-	<sql id="orderSearch">
-		<where>
-			<if test="keyword != null and keyword != ''">
-				<if test="keyfield == 1">
-					order_num = #{keyword}
-				</if>
-				<if test="keyfield == 2">
-					id LIKE '%' || #{keyword} || '%'
-				</if>
-				<if test="keyfield == 3">
-					goods_name LIKE '%' || #{keyword} || '%'
-				</if>
-			</if>
-		</where>
-	</sql>
-	
 	<select id="selectOrderCount" parameterType="map" resultType="integer">
 		SELECT
 		  COUNT(*)
@@ -123,18 +219,7 @@
 		]]>
 	</select>
 
-	<!-- 사용자 주문 목록 검색 -->
-	<sql id="orderSearchByUser">
-		WHERE mem_num = #{mem_num}
-		<if test="keyword != null and keyword != ''">
-			<if test="keyfield == 1">
-				AND order_num = #{keyword}
-			</if>
-			<if test="keyfield == 2">
-				AND goods_name LIKE '%' || #{keyword} || '%'
-			</if>
-		</if>
-	</sql>
+
 	
 	<select id="selectOrderCountByMem_num" parameterType="map">
 		SELECT

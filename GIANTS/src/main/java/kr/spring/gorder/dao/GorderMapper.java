@@ -10,12 +10,31 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.gorder.vo.GorderVO;
+import kr.spring.gcart.vo.GcartVO;
 import kr.spring.gorder.vo.GorderDetailVO;
 
 @Mapper
 public interface GorderMapper {
-	//매출
-	public void revenueGoods(int order_num);
+	//매출ㅌxx
+	public List<GorderVO> revenueGoods(Map<String, Object> map);
+	//굿즈 번호 별 총액xx
+		public int getAllTotalByGoodsNum(Map<String, Object> map);
+		// 매출 목록xx
+			public List<GcartVO> getListRevenue(Map<String, Object> map);
+	//===============================
+	//주문 목록 모든 리스트
+	public List<GorderVO> getListSale();		
+	//총 금액
+	@Select("select sum(order_total) as order_revenue from g_order where order_status<5")
+	public int allTotal();
+	
+	//원래 상품명 읽어오기
+	@Select("select goods_name from goods where goods_num=#{goods_num}")
+	public String dbGoodsName(int goods_num);
+	
+	
+	//==============================
+	
 	
 	// 주문 등록
 	@Select("SELECT g_order_seq.nextval FROM dual")

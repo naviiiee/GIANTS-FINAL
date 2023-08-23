@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.gcart.vo.GcartVO;
 import kr.spring.gorder.service.GorderService;
 import kr.spring.gorder.vo.GorderDetailVO;
 import kr.spring.gorder.vo.GorderVO;
+import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,7 +31,84 @@ import lombok.extern.slf4j.Slf4j;
 public class GorderAdminController {
 	@Autowired
 	private GorderService orderService;
+	
+	@RequestMapping("/member/adminMypageSaleManage.do")
+	public String SaleList(HttpSession session, Model model) {
+		//총 매출, 굿즈 별 매출
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		
+		//총 매출
+		int order_revenue = orderService.allTotal();
+		log.debug("<<매출 - 총매출>> : " + order_revenue);
 
+		// 굿즈 번호 별 총 금액
+		//int all_total = orderService.getAllTotalByGoodsNum(map);
+		//log.debug("<<매출(굿즈 번호 별 총액)>> : " + all_total);
+		//// 개별 상품의 주문 정보 - goods_name의 외 1건 등을 하나하나 읽어올 수 있음
+		//List<GorderDetailVO> detailList = orderService.selectListOrderDetail(order_num);
+		
+		List<GorderVO> list = null;
+		if(order_revenue>0) {
+			list = orderService.getListSale();
+			log.debug("<<매출 - 모든 내용>> : " + list); 
+			
+			//List<GorderDetailVO> detailList = orderService.selectListOrderDetail(orderVO.getOrder_num());
+			
+			
+		}
+		//if (all_total > 0) {
+		//	list = orderService.getListRevenue(map);
+		//}
+		model.addAttribute("order_revenue", order_revenue);
+		model.addAttribute("list", list);
+
+		return "adminMypageSaleManage";
+	}
+	
+	
+
+	/*
+	 *  ====================== 매출 ======================
+	 
+	@RequestMapping("/member/adminMypageSaleManage.do")
+	//String keyfield, String keyword
+	public ModelAndView goodsRevenue(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		//map.put("keyfield", keyfield);
+		//map.put("keyword", keyword);
+
+		// 전체/검색 레코드 수
+		int count = orderService.selectOrderCount(map);
+		log.debug("<<R-count>> : " + count);
+
+		// 페이지 처리
+		//PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 20, 10, "adminMypageSaleManage.do");
+
+		List<GorderVO> list = null;
+		if (count > 0) {
+			//map.put("start", page.getStartRow());
+			//map.put("end", page.getEndRow());
+			list = orderService.revenueGoods(map);
+			log.debug("<<R-매출 >>  : " + list);
+			
+			//List<GorderDetailVO> detailList = null;
+			//detailList = orderService.selectListOrderDetail(order_num);
+			
+			
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("adminMypageSaleManage");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		//mav.addObject("page", page.getPage());
+
+		return mav; 
+	}*/
+
+	
 	/*
 	 * ====================== 주문 목록 ======================
 	 */
@@ -77,7 +157,7 @@ public class GorderAdminController {
 		order.setOrder_total(order_total);
 		log.debug("<<최종금액 세팅해주기>>" + order.getOrder_total());
 		
-		// 개별 상품의 주문 정보
+		// 개별 상품의 주문 정보 - goods_name의 외 1건 등을 하나하나 읽어올 수 있음
 		List<GorderDetailVO> detailList = orderService.selectListOrderDetail(order_num);
 		log.debug("<<주문상세>> : " + detailList);
 
