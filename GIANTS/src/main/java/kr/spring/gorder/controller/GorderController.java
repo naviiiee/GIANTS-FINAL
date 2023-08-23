@@ -83,7 +83,7 @@ public class GorderController {
 			
 			cartVO.setMem_num(user.getMem_num()); //mem_num 세팅
 			GcartVO db_cart = cartService.getCart(cartVO); //장바구니 확인
-				
+			log.debug("<<D-db_cart >> : " + db_cart);	
 			//장바구니에 상품이 있는 경우 상품 삭제 요청
 			if(db_cart !=null) {
 				mapJson.put("result", "clearCart");
@@ -91,10 +91,7 @@ public class GorderController {
 			
 			//장바구니가 null인 경우 바로 구매 가능
 			else {
-				//재고 확인
-				GoodsVO db_goods = goodsService.selectGoodsAllInfo(cartVO.getGoods_num());
-				//그냥 cartVO.getgoodsnum으로 해도 될거같은데
-				int db_stock = cartService.getStockByoption(db_goods.getGoods_num(), cartVO.getOpt_num()); 
+				int db_stock = cartService.getStockByoption(cartVO.getGoods_num(), cartVO.getOpt_num()); 
 				int order_quantity = cartVO.getOrder_quantity();
 				log.debug("<<D 굿즈 재고 >> : " + db_stock);
 				log.debug("<<D 구매 수량 >> : " + order_quantity);
@@ -127,7 +124,7 @@ public class GorderController {
 			model.addAttribute("url", request.getContextPath() + "/gorder/goodsList.do");
 			return "common/resultView";
 		}
-
+		
 		// 장바구니에 담겨있는 상품 정보 호출
 		List<GcartVO> cartList = cartService.getListCart(map);
 
@@ -180,7 +177,7 @@ public class GorderController {
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("mem_num", user.getMem_num());
-		map.put("cart_numbers", orderVO.getCart_numbers()); // 여기서 처리가 안되는듯?
+		map.put("cart_numbers", orderVO.getCart_numbers());
 		int all_total = cartService.getTotalByMem_num(map);
 		if (all_total <= 0) {
 			model.addAttribute("message", "정상적인 주문이 아니거나 상품의 수량이 부족합니다.");
