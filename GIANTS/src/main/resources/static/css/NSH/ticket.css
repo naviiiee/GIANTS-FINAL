@@ -141,7 +141,10 @@ input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }
 .ticket-info2{ width:80%; height:300px; background:url('/images/ticketBack.png') no-repeat; background-size:100% 100%; margin:20px auto; text-align:center; font-size:13px; font-weight:bold; }
 .ticket-info3{ width:80%; display:flex; justify-content:center; margin:20px auto; }
 .ticket-info, .ticket-info4, .ticket-info5{ width:80%; margin:20px auto; }
-.ticket-content{ padding:15px 0 0 30px; height:250px; color:white; text-align:left; }
+.ticket-content{ padding:15px 0 0 30px; height:250px; color:white; text-align:left; display:flex; justify-content:center; }
+.ticket-ul{ width:85%; }
+.ticket-qr{ width:15%; }
+
 .ticket-content2{ padding-right:30px; color:white; text-align:right; }
 
 .info3-left{ border-right:2px solid #999; }

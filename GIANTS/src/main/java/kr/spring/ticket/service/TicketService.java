@@ -77,4 +77,7 @@ public interface TicketService {
 	public TicketVO selectTicket(String ticket_num);
 	public List<TicketDetailVO> selectSeatInfoByT(String ticket_num);
 	public void updateTicket(String ticket_num);	// 주문 취소
+	
+	// QR코드 승인 및 업데이트 처리
+	public void updateOrderStatus(String ticket_num);
 }

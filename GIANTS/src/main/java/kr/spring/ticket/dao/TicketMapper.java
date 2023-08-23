@@ -140,4 +140,8 @@ public interface TicketMapper {
 	public List<TicketDetailVO> selectSeatInfoByT(String ticket_num);
 	@Update("UPDATE ticket set ticket_status = 0, ticket_modify = SYSDATE WHERE ticket_num = #{ticket_num}")
 	public void updateTicket(String ticket_num);	// 주문 취소 → ticket 테이블에서 상태만 변경
+	
+	// QR코드 승인 및 업데이트 처리
+	@Update("UPDATE ticket SET order_status=0 WHERE ticket_num = #{ticket_num}")
+	public void updateOrderStatus(String ticket_num);
 }

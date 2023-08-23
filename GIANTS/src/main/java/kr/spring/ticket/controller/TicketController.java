@@ -232,6 +232,7 @@ public class TicketController {
 		}
 		log.debug("<<status_num>> : " + status_num);
 		ticketVO.setStatus_num(status_num);
+		ticketVO.setQrlink("/ticket/ticketQRcode.do?ticket_num=" + ticketVO.getTicket_num());
 		
 		ticketService.insertTicket(ticketVO);
 		

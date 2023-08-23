@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.food.vo.F_orderVO;
+import kr.spring.food.vo.F_order_detailVO;
+import kr.spring.member.vo.MemberVO;
 import kr.spring.ticket.service.TicketService;
 import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
@@ -258,4 +261,23 @@ public class TicketAdminController {
 		return "common/resultView";
 	}
 	
+	/*	==========================
+	 *		(기업) QR주문확인 - ticketQRcode.jsp
+	 * 	==========================*/
+	//기업이 QR코드를 찍었다고 가정하여, 이 페이지를 방문하였을 경우 
+	//QR코드가 유효한지 확인하여 상태를 변경하고 해당 회원의 주문 내역을 출력하는 페이지로 이동
+	@RequestMapping("/ticket/ticketQRcode.do")
+	public String companyCheckQR(@RequestParam String ticket_num, HttpSession session, HttpServletRequest request, Model model) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		//모든 조건을 확인한 후 해당 주문번호에 대해 QR상태를 업데이트 함
+		ticketService.updateOrderStatus(ticket_num);
+		
+		//출력페이지용 데이터 적재
+		TicketVO ticket = ticketService.selectTicket(ticket_num);
+		model.addAttribute("ticket_num", ticket_num);
+		model.addAttribute("ticket", ticket);
+		
+		return "afterCheckQR";
+	}
 }

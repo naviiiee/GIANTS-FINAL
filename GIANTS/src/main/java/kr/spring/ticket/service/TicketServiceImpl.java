@@ -165,5 +165,8 @@ public class TicketServiceImpl implements TicketService {
 	@Override
 	public void updateTicket(String ticket_num) { ticketMapper.updateTicket(ticket_num); }
 
+	@Override
+	public void updateOrderStatus(String ticket_num) { ticketMapper.updateOrderStatus(ticket_num); }
+
 }
  

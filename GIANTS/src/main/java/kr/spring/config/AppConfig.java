@@ -99,6 +99,7 @@ public class AppConfig implements WebMvcConfigurer {
 				.addPathPatterns("/ticket/seatEdit.do")
 				.addPathPatterns("/ticket/gameWrite.do")
 				.addPathPatterns("/ticket/gameUpdate.do")
+				.addPathPatterns("/ticket/ticketQRcode.do")
 				//권오윤 
 				.addPathPatterns("/goods/registerGoods.do")
 				.addPathPatterns("/goods/goodsUpdate.do")

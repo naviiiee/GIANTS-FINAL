@@ -31,4 +31,6 @@ public class TicketVO {
 	private String pg;
 	private String pay_method;
 	private int ticket_status;
+	
+	private String qrlink;
 }

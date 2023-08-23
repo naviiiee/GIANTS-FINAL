@@ -71,4 +71,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/ticket/ticketInfo.jsp"/>
 	</definition>
 	
+	<!-- QR체크용 -->
+	<definition name="afterCheckQR" extends="main">
+		<put-attribute name="title" value="QR코드 출력"/>
+		<put-attribute name="body" value="/WEB-INF/views/ticket/afterCheckQR.jsp"/>
+	</definition>
+	
 </tiles-definitions>

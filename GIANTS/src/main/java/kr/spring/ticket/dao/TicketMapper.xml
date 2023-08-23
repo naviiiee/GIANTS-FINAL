@@ -24,8 +24,8 @@
 	</insert>
 	
 	<insert id="insertTicket" parameterType="ticketVO">
-		INSERT INTO ticket (ticket_num, mem_num, game_num, status_num, order_name, order_phone, order_email, game_title, game_date, game_time, ticket_quantity, total_price, pg, pay_method)
-			   VALUES (#{ticket_num}, #{mem_num}, #{game_num}, #{status_num}, #{order_name}, #{order_phone}, #{order_email}, #{game_title}, #{game_date}, #{game_time}, #{ticket_quantity}, #{total_price}, #{pg}, #{pay_method})
+		INSERT INTO ticket (ticket_num, mem_num, game_num, status_num, order_name, order_phone, order_email, game_title, game_date, game_time, ticket_quantity, total_price, pg, pay_method, qrlink)
+			   VALUES (#{ticket_num}, #{mem_num}, #{game_num}, #{status_num}, #{order_name}, #{order_phone}, #{order_email}, #{game_title}, #{game_date}, #{game_time}, #{ticket_quantity}, #{total_price}, #{pg}, #{pay_method}, #{qrlink})
 	</insert>
 	
 </mapper>
