@@ -14,7 +14,9 @@ import kr.spring.gorder.vo.GorderDetailVO;
 
 @Mapper
 public interface GorderMapper {
-
+	//매출
+	public void revenueGoods(int order_num);
+	
 	// 주문 등록
 	@Select("SELECT g_order_seq.nextval FROM dual")
 	public int selectOrderNum();
