@@ -17,7 +17,7 @@
 		<h2>티켓정보</h2>
 		<hr size="0.05" width="100%" noshade>
 	</div>
-	<c:if test="${ticket.ticket_status == 1 && user.mem_auth != 9}">
+	<c:if test="${ticket.order_status != 0 && ticket.ticket_status == 1 && user.mem_auth != 9}">
 	<div class="ticket-info align-right">
 		<input type="image" id="ticket_download" src="${pageContext.request.contextPath}/images/downloads.png">
 	</div>
@@ -114,7 +114,7 @@
 		<c:if test="${user.mem_auth == 9}">
 		<input type="button" value="목록" class="default-btn big" onclick="location.href='${pageContext.request.contextPath}/member/adminMypageTicket.do'">
 		</c:if>
-		<c:if test="${ticket.ticket_status == 1 && user.mem_auth != 9}">
+		<c:if test="${ticket.order_status != 0 && ticket.ticket_status == 1 && user.mem_auth != 9}">
 		<input type="button" value="주문취소" id="delete_torder" class="accept-btn big">
 		</c:if>
 	</div>

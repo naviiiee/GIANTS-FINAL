@@ -33,4 +33,5 @@ public class TicketVO {
 	private int ticket_status;
 	
 	private String qrlink;
+	private int order_status;
 }
