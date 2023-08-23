@@ -192,7 +192,7 @@
     	<put-attribute name="body" value="/WEB-INF/views/member/adminModifyCompany.jsp"/>
     </definition>
     
-    <!-- 티켓관리 -->
+    <!-- 티켓관리 -->    
     <definition name="adminMypageTicket" extends="myPage"> 
     	<put-attribute name="title" value="[관리자]티켓관리"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/adminMypageTicket.jsp"/>

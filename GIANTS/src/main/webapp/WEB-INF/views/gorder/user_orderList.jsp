@@ -32,7 +32,7 @@
 		</ul>
 	</form>
 	<script>
-	function searchCheck(){
+	function searchCheck(){   
 			var selectedValue = document.querySelector("select[name='keyfield']").value;
 	    	var keywordValue = document.getElementById("keyword").value;
 	    	//주문번호 입력 시 숫자만 입력 가능

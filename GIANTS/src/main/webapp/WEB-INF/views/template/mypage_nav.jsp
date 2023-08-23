@@ -18,7 +18,7 @@
 			<li><a href="${pageContext.request.contextPath}/member/bookmarkList.do">중고거래</a></li>
 		</ul>
 	</c:if>
-	<!-- 기업회원일때 NAV -->
+	<!-- 기업회원일때 NAV -->   
 	<c:if test="${!empty user && user.mem_auth == 3}">
 		<ul class="mypage-nav">
 			<li><b>회원정보</b></li>
