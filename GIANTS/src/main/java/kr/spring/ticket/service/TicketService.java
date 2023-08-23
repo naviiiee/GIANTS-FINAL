@@ -47,6 +47,8 @@ public interface TicketService {
 	public GameVO selectGame(Integer game_num);	// 경기정보를 이용해 경기정보 구하기
 	public void updateGame(GameVO gameVO);	// 수정
 	
+	public void updateTicketByGameStatus(Integer game_num);	// 경기취소일 경우 예매된 티켓 취소
+	
 	/* 티켓 결제 */
 	public int selectCheckNum();
 	public void insertTicketCheck(TicketCheckVO ticketCheckVO);	// 좌석선택정보 저장

@@ -94,6 +94,9 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public MemberDetailVO selectMemberDetail(Integer mem_num) { return ticketMapper.selectMemberDetail(mem_num); }
+	
+	@Override
+	public void updateTicketByGameStatus(Integer game_num) { ticketMapper.updateTicketByGameStatus(game_num); }
 
 	/* Ticket */
 	@Override

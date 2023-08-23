@@ -58,6 +58,7 @@
 					<td class="align-center">
 						<c:if test="${ticket.ticket_status == 0}"><span style="color:#dd032f;"><b>주문취소</b></span></c:if>
 						<c:if test="${ticket.ticket_status == 1}"><span style="color:#052345;"><b>주문완료</b></span></c:if>
+						<c:if test="${ticket.ticket_status == 2}"><span style="color:#dd032f;"><b>경기취소</b></span></c:if>
 					</td>
 				</tr>
 			</c:forEach>

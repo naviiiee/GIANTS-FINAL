@@ -40,6 +40,10 @@ public interface TicketMapper {
 	// 삭제
 	public void deleteGame(Integer game_num);
 	
+	// 경기취소일 경우 예매된 티켓 취소
+	@Update("UPDATE ticket SET ticket_status = 2 WHERE game_num = #{game_num}")
+	public void updateTicketByGameStatus(Integer game_num);
+	
 	/* 좌석등급 */
 	// 등록
 	public void insertGrade(GradeVO gradeVO);

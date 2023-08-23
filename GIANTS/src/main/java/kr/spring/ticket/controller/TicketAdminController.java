@@ -248,6 +248,8 @@ public class TicketAdminController {
 		
 		if(result.hasErrors()) { return "gameUpdate"; }
 		
+		if(gameVO.getGame_state() == 3) { ticketService.updateTicketByGameStatus(gameVO.getGame_num()); }
+		
 		ticketService.updateGame(gameVO);
 		
 		model.addAttribute("message", "수정 완료");

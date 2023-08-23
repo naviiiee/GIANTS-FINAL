@@ -98,7 +98,7 @@
 					<input type="hidden" value="${gameVO.game_time}" id="game_time">
 				</div>
 				<div class="ticketInfo">
-					<h2>좌석정보 <input type="image" name="reset" src="${pageContext.request.contextPath}/images/reload.png" id="seatInfo_check"></h2>
+					<h2>좌석정보</h2>
 					<div id="seatInfo">
 						<input type="hidden" name="title" id="grade_title" value="${gradeVO.title}">
 						<c:forEach var="seat" items="${seatVO.seat_info}">
