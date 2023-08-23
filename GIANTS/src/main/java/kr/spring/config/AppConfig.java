@@ -74,8 +74,16 @@ public class AppConfig implements WebMvcConfigurer {
 				.addPathPatterns("/goods/detailQna.do")
 				.addPathPatterns("/goods/writeQna.do")
 				.addPathPatterns("/goods/writeReview.do")
-				.addPathPatterns("/goods/updateReview.do");
-
+				.addPathPatterns("/goods/updateReview.do")
+				//이영주-굿즈 주문
+				.addPathPatterns("/gorder/goods_cart.do")
+				.addPathPatterns("/gorder/orderForm.do")
+				.addPathPatterns("/gorder/orderFormDirect.do")
+				.addPathPatterns("/gorder/user_detail.do")
+				.addPathPatterns("/gorder/user_modifyForm.do")
+				.addPathPatterns("/gorder/user_orderList.do")
+				
+				;
 
 		//Comp(기업) 인터셉터 설정
 		registry.addInterceptor(compCheck)
@@ -104,7 +112,16 @@ public class AppConfig implements WebMvcConfigurer {
 				.addPathPatterns("/goods/registerGoods.do")
 				.addPathPatterns("/goods/goodsUpdate.do")
 				.addPathPatterns("/news/newsWrite.do")
-				.addPathPatterns("/news/newsUpdate.do");
+				.addPathPatterns("/news/newsUpdate.do")
+				//이영주
+				.addPathPatterns("/member/adminGoodsOrderList.do")
+				.addPathPatterns("/member/adminGoodsOrderListDetail.do")
+				.addPathPatterns("/member/adminGoodsOrderModify.do")
+				.addPathPatterns("/member/adminGoodsOrderStatus.do")
+				
+				
+				
+				;
 	}
 
 	@Bean
