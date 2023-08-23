@@ -174,8 +174,6 @@ public class GoodsController {
 		
 		mav.addObject("page", page.getPage());
 		
-		log.debug("<<로그찍기 goodsTotalStock>> : " + list.get(0));
-		
 		return mav;
 	}	
 	
