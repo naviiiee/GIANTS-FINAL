@@ -4,16 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 주문목록 - 사용자 시작 -->
 <script type="text/javascript">
-	$(function(){
-		//검색 유효성 체크
-		$('#search_form').submit(function(){
-			if($('#keyword').val().trim()==''){
-				alert('검색어를 입력하세요');
-				$('#keyword').val('').focus();
-				return false;
-			}
-		});
-	});
+	
 </script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/orderForm.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
@@ -21,7 +12,8 @@
 <!-- count, list, page -->
 <div class="page-main">
 	<h2>주문목록</h2>
-	<form action="orderList.do" id="search_form" method="get">
+	<!-- action으로 인해 유효성 검사를 해도 폼이 제출되므로 onsubmit이 true일때만 처리되도록 -->
+	<form action="orderList.do" id="search_form" method="get" onsubmit="return searchCheck()">
 		<ul class="search">
 			<li>
 				<select name="keyfield">
@@ -39,6 +31,32 @@
 			</li>
 		</ul>
 	</form>
+	<script>
+	function searchCheck(){
+			var selectedValue = document.querySelector("select[name='keyfield']").value;
+	    	var keywordValue = document.getElementById("keyword").value;
+	    	//주문번호 입력 시 숫자만 입력 가능
+	    	if(selectedValue==1 && isNaN(keywordValue)){
+	    		alert('숫자를 입력하세요!');
+	    		$('#keyword').val('').focus();
+	    		return false;
+	    	}
+	    	
+	    	if($('#keyword').val().trim()==''){
+	    		alert('검색어를 입력하세요');
+	    		$('#keyword').val('').focus();
+	    		return false;
+	    	}
+	    	
+	    	//상품명에는 숫자가 있을 수 있으니 따로 처리 x
+	    	return true;
+	    
+	}
+		//대표 상품명으로만 검색됨
+	</script>
+	
+	
+	
 	<c:if test="${count == 0}">
 	<div class="result-display">표시할 주문정보가 없습니다.</div>
 	</c:if>

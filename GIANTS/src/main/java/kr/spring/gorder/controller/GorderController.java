@@ -409,8 +409,8 @@ public class GorderController {
 	 * ========== 주문 목록 ==========
 	 */
 	@RequestMapping("/gorder/orderList.do")
-	public ModelAndView orderList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, String keyfield,
-			String keyword, HttpSession session) {
+	public ModelAndView orderList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, 
+			String keyfield, String keyword, HttpSession session) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -432,6 +432,7 @@ public class GorderController {
 			map.put("end", page.getEndRow());
 
 			list = orderService.selectListOrderByMem_num(map);
+			log.debug("<<주문목록 검색 >> : " + list);
 		}
 
 		ModelAndView mav = new ModelAndView();

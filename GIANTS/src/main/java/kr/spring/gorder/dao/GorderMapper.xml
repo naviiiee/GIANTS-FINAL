@@ -123,7 +123,7 @@
 		]]>
 	</select>
 
-	<!-- 사용자 주문 목록 -->
+	<!-- 사용자 주문 목록 검색 -->
 	<sql id="orderSearchByUser">
 		WHERE mem_num = #{mem_num}
 		<if test="keyword != null and keyword != ''">
@@ -131,7 +131,7 @@
 				AND order_num = #{keyword}
 			</if>
 			<if test="keyfield == 2">
-				AND item_name LIKE '%' || #{keyword} || '%'
+				AND goods_name LIKE '%' || #{keyword} || '%'
 			</if>
 		</if>
 	</sql>

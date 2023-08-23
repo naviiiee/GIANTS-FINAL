@@ -17,7 +17,11 @@ detailList : ${detailList} --%>
 
 <br>
 <br>
-
+<style>
+#detail_goods_name{
+	margin-left: 60px;
+}
+</style>
 
 
 
@@ -25,30 +29,41 @@ detailList : ${detailList} --%>
 <div class="page-main">
 
 	<h2>주문내역</h2>      
+	<br>
 	    <table class="basic-table">
 	    	<tr>
-	    		<th>상품명</th>
+	    		<th>사진</th>
+	    		<th>상품정보</th>
 	    		<th>수량</th>
 	    		<th>가격</th>
 	    		<th>합계</th>
 	    	</tr>
 	    	<c:forEach var="detail" items="${detailList}">
 	    	<tr>
-	    		<td>${detail.goods_name} (${detail.goods_size})</td>
+	    		<td class="align-center">
+					<a href="${pageContext.request.contextPath}/goods/goodsDetail.do?goods_num=${detail.goods_num}">
+						<img src="${pageContext.request.contextPath}/goods/imageView.do?goods_num=${detail.goods_num}" width="80" height="80">
+		    		</a>
+	    		</td>
+	    		<td class="align-center">
+		    		<a href="${pageContext.request.contextPath}/goods/goodsDetail.do?goods_num=${detail.goods_num}">
+			    		<span id="detail_goods_name">${detail.goods_name} (${detail.goods_size})</span>
+			    	</a>
+	    		</td>
 	    		<td class="align-center"><fmt:formatNumber value="${detail.order_quantity}"/></td>
 	    		<td class="align-center"><fmt:formatNumber value="${detail.goods_dprice}"/>원</td>
 	    		<td class="align-center"><fmt:formatNumber value="${detail.goods_total}"/>원</td> <!-- 동일 상품 -->
 	    	</tr>	
 	    	 </c:forEach>
 	    	<tr>
-	    		<td colspan="3" class="align-right"><b>총구매금액</b></td>
+	    		<td colspan="4" class="align-right"><b>총구매금액</b></td>
 	    		<td class="align-center">
 	    			<fmt:formatNumber value="${all_total}"/>원
 	    		</td>
 	    	</tr>
 	    	
 	    	<tr>
-	    		<td colspan="3" class="align-right"><b>사용한 포인트</b></td>
+	    		<td colspan="4" class="align-right"><b>사용한 포인트</b></td>
 	    		<td class="align-center">
 	    			${orderVO.used_point}p
 	    		</td>
@@ -56,9 +71,9 @@ detailList : ${detailList} --%>
 	    	
 	    	
 	    	<tr>
-	    		<td colspan="3" class="align-right"><b>최종 결제금액</b></td>
+	    		<td colspan="4" class="align-right"><b>최종 결제금액</b></td>
 	    		<td class="align-center">
-	    			${orderVO.order_total}원
+	    			<fmt:formatNumber value="${orderVO.order_total}"/>원
 	    		</td>
 	    	</tr>
 	    </table>        

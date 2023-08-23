@@ -204,6 +204,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/adminMypageGoods.jsp"/>
 	</definition>
 	
+	<!-- 굿즈 즈문 목록 -->
+	<definition name="adminMypageGoodsOrderList" extends="myPage">
+		<put-attribute name="title" value="[관리자]굿즈목록"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/adminMypageGoodsOrderList.jsp"/>
+	</definition>
+	
 	<!-- 매출관리 -->
 	<definition name="adminMypageSaleManage" extends="myPage">
 		<put-attribute name="title" value="[관리자]매출관리"/>

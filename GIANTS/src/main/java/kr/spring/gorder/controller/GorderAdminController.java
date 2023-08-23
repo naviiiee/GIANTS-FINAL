@@ -32,7 +32,7 @@ public class GorderAdminController {
 	/*
 	 * ====================== 주문 목록 ======================
 	 */
-	@RequestMapping("/gorder/admin_list.do")
+	@RequestMapping("/member/adminMypageGoodsOrderList.do")
 	public ModelAndView admin_list(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
 			String keyfield, String keyword) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -45,15 +45,16 @@ public class GorderAdminController {
 		log.debug("<<count>> : " + count);
 
 		// 페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 20, 10, "admin_list.do");
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 20, 10, "adminMypageGoodsOrderList.do");
 
 		List<GorderVO> list = null;
 		if (count > 0) {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 			list = orderService.selectListOrder(map);
+			log.debug("<<관리자 주문 내역 >>  : " + list);
 		}
-
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("adminOrderList");
 		mav.addObject("count", count);
@@ -64,7 +65,7 @@ public class GorderAdminController {
 	}
 
 	/*
-	 * ====================== 주문 내역 ======================
+	 * ====================== 주문 상세 내역 ======================
 	 */
 	@RequestMapping("/gorder/admin_detail.do")
 	public String adminDetail(@RequestParam int order_num, Model model) {
