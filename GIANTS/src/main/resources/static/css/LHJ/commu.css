@@ -45,8 +45,8 @@ span.letter-count{
 	color:#999;
 }
 textarea.rep-content{
-	width:90%;
-	height:50px;
+	width: 178%;
+    height: 100px;
 	margin:10px 10px;
 }
 div#re_first, div#mre_first{

@@ -15,6 +15,7 @@ table {
     cursor: pointer;
     width: 6%;
     margin-bottom: 2%;
+}  margin: 10px 10px;
 }
 </style>
 <!-- 게시글 상세 시작 -->
@@ -100,7 +101,7 @@ table {
 	<div id="reply_div" style="margin-top:3%;">
 		<span class="re-title">커뮤니티 댓글</span>
 		<%-- 댓글 수 --%>
-		<b><span id="output_rcount" style="margin-left:36%;"></span></b>
+		<b><span id="output_rcount" style="margin-left:84%;"></span></b>
 		
 		
 		<form id="re_form">
@@ -114,7 +115,7 @@ table {
 				<span class="letter-count">300/300</span>
 			</div>
 			<div id="re_second" class="align-right">
-				<input type="submit" value="댓글 등록" class="accept-btn">
+				<input type="submit" value="댓글 등록" class="accept-btn" style="margin-left:64%;">
 			</div>
 			</c:if>
 		</form>
