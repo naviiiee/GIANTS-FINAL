@@ -3,9 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 주문목록 - 사용자 시작 -->
-<script type="text/javascript">
-	
-</script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/orderForm.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
@@ -33,24 +30,21 @@
 	</form>
 	<script>
 	function searchCheck(){   
-			var selectedValue = document.querySelector("select[name='keyfield']").value;
-	    	var keywordValue = document.getElementById("keyword").value;
-	    	//주문번호 입력 시 숫자만 입력 가능
-	    	if(selectedValue==1 && isNaN(keywordValue)){
-	    		alert('숫자를 입력하세요!');
-	    		$('#keyword').val('').focus();
-	    		return false;
-	    	}
-	    	
-	    	if($('#keyword').val().trim()==''){
-	    		alert('검색어를 입력하세요');
-	    		$('#keyword').val('').focus();
-	    		return false;
-	    	}
-	    	
-	    	//상품명에는 숫자가 있을 수 있으니 따로 처리 x
-	    	return true;
-	    
+		var selectedValue = document.querySelector("select[name='keyfield']").value;
+    	var keywordValue = document.getElementById("keyword").value;
+    	//주문번호 입력 시 숫자만 입력 가능
+    	if(selectedValue==1 && isNaN(keywordValue)){
+    		alert('숫자를 입력하세요!');
+    		$('#keyword').val('').focus();
+    		return false;
+    	}
+    	
+    	if($('#keyword').val().trim()==''){
+    		alert('검색어를 입력하세요');
+    		$('#keyword').val('').focus();
+    		return false;
+    	}
+    	return true;
 	}
 		//대표 상품명으로만 검색됨
 	</script>

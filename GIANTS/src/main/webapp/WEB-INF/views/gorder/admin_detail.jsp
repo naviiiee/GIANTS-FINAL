@@ -19,13 +19,13 @@
 	    		<td class="align-center"><fmt:formatNumber value="${detail.order_quantity}"/></td>
 	    		<td class="align-center"><fmt:formatNumber value="${detail.goods_dprice}"/>원</td>
 	    		<td class="align-center"><fmt:formatNumber value="${detail.order_dcost}"/>원</td>
-	    		<td class="align-center"><fmt:formatNumber value="${detail.goods_total}"/>원</td>
+	    		<td class="align-center"><fmt:formatNumber value="${detail.order_total}"/>원</td>
 	    	</tr>	
 	    	</c:forEach>
 	    	<tr>
 	    		<td colspan="4" class="align-right"><b>총구매금액</b></td>
 	    		<td class="align-center">
-	    			<fmt:formatNumber value="${orderVO.goods_total}"/>
+	    			<fmt:formatNumber value="${orderVO.order_total}"/>
 	    		</td>
 	    	</tr>
 	    </table>         

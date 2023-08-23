@@ -3,40 +3,54 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 주문목록 - 관리자 시작 -->
-<script type="text/javascript">
-	$(function(){
-		//검색 유효성 체크
-		$('#search_form').submit(function(){
-			if($('#keyword').val().trim()==''){
-				alert('검색어를 입력하세요');
-				$('#keyword').val('').focus();
-				return false;
-			}
-		});
-	});
-</script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/orderForm.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LYJ/cart.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <div class="page-main">
 	<h2>주문목록(관리자용)</h2>
-	<form action="admin_list.do" id="search_form" method="get">
-		<ul class="search">
+	<form action="adminMypageGoodsOrderList.do" id="search_form" method="get" onsubmit="return searchCheck()">
+	<ul class="search">
 			<li>
 				<select name="keyfield">
 					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>주문번호</option>
-					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>ID</option>
+					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>회원이름</option>
 					<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>상품명</option>
 				</select>
 			</li>
 			<li>
-				<input type="search" name="keyword" id="keyword"
-				                     value="${param.keyword}">
+				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
 			</li>
 			<li>
 				<input type="submit" value="찾기">
 				<input type="button" value="목록" 
-				   onclick="location.href='admin_list.do'">
+				   onclick="location.href='adminMypageGoodsOrderList.do'">
 			</li>
 		</ul>
 	</form>
+	<script>
+	function searchCheck(){   
+		var selectedValue = document.querySelector("select[name='keyfield']").value;
+    	var keywordValue = document.getElementById("keyword").value;
+    	
+    	if(selectedValue==1 && isNaN(keywordValue)){
+    		alert('숫자를 입력하세요!');
+    		$('#keyword').val('').focus();
+    		return false;
+    	}
+    	
+    	if($('#keyword').val().trim()==''){
+    		alert('검색어를 입력하세요');
+    		$('#keyword').val('').focus();
+    		return false;
+    	}
+    	
+    	//상품명에는 숫자가 있을 수 있으니 따로 처리 x
+    	return true;
+	}
+	</script>
+	
+	
+	
 	<c:if test="${count == 0}">
 	<div class="result-display">표시할 주문정보가 없습니다.</div>
 	</c:if>
@@ -44,7 +58,7 @@
 	<table class="striped-table">
 		<tr>
 			<th>주문번호</th>
-			<th>구매자 회원번호(아이디로 바꾸기, 아이디 넣어주기)</th>
+			<th>구매자</th>
 			<th>상품명</th>
 			<th>총구매금액</th>
 			<th>주문날짜</th>
@@ -52,14 +66,16 @@
 		</tr>
 		<c:forEach var="order" items="${list}">
 		<tr>
+			
 			<td>${order.order_num}</td>
-			<td>${order.mem_num}</td>
+			<td>${order.order_name}</td>
 			<td>     
-				<a href="admin_detail.do?order_num=${order.order_num}">${order.goods_name}</a>
+				<a href="adminMypageGoodsOrderListDetail.do?order_num=${order.order_num}">${order.goods_name}</a>
 			</td>
 			<td><fmt:formatNumber value="${order.order_total}"/>원</td>
 			<td>${order.order_regdate}</td>
 			<td>
+				<c:if test="${order.order_status == 0}">결제완료</c:if>
 				<c:if test="${order.order_status == 1}">배송대기</c:if>
 				<c:if test="${order.order_status == 2}">배송준비중</c:if>
 				<c:if test="${order.order_status == 3}">배송중</c:if>

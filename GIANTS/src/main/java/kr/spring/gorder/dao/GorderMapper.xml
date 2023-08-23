@@ -81,7 +81,6 @@
 		WHERE m.mem_num =#{mem_num}
 	</update>
 	
-	<!-- 관리자 - 주문 목록 -->
 	<sql id="orderSearch">
 		<where>
 			<if test="keyword != null and keyword != ''">
@@ -106,6 +105,7 @@
 		<include refid="orderSearch"></include>
 	</select>
 	
+	<!-- 관리자 주문 목록 -->
 	<select id="selectListOrder" parameterType="map" resultType="gorderVO">
 		SELECT
 		  *
@@ -143,6 +143,7 @@
 		<include refid="orderSearchByUser"></include>
 	</select>
 	
+	<!-- 사용자 - 주문목록 -->
 	<select id="selectListOrderByMem_num" parameterType="map"
 	                                           resultType="GorderVO">
 		SELECT

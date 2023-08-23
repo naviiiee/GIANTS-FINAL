@@ -33,7 +33,7 @@ public class GorderAdminController {
 	 * ====================== 주문 목록 ======================
 	 */
 	@RequestMapping("/member/adminMypageGoodsOrderList.do")
-	public ModelAndView admin_list(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
+	public ModelAndView adminList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
 			String keyfield, String keyword) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
@@ -41,7 +41,6 @@ public class GorderAdminController {
 
 		// 전체/검색 레코드 수
 		int count = orderService.selectOrderCount(map);
-
 		log.debug("<<count>> : " + count);
 
 		// 페이지 처리
@@ -56,7 +55,7 @@ public class GorderAdminController {
 		}
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("adminOrderList");
+		mav.setViewName("adminMypageGoodsOrderList");
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());
@@ -67,39 +66,49 @@ public class GorderAdminController {
 	/*
 	 * ====================== 주문 상세 내역 ======================
 	 */
-	@RequestMapping("/gorder/admin_detail.do")
+	@RequestMapping("/member/adminMypageGoodsOrderListDetail.do")
 	public String adminDetail(@RequestParam int order_num, Model model) {
 		GorderVO order = orderService.selectOrder(order_num);
-
+		int all_total = order.getOrder_total();
+		
+		//최종 결제금액 = 결제금액 - 포인트
+		int order_total = order.getOrder_total() - order.getUsed_point();
+		
+		order.setOrder_total(order_total);
+		log.debug("<<최종금액 세팅해주기>>" + order.getOrder_total());
+		
+		// 개별 상품의 주문 정보
 		List<GorderDetailVO> detailList = orderService.selectListOrderDetail(order_num);
+		log.debug("<<주문상세>> : " + detailList);
+
 
 		model.addAttribute("orderVO", order);
 		model.addAttribute("detailList", detailList);
-
-		return "adminOrderDetail";
+		model.addAttribute("all_total", all_total);
+		return "adminMypageGoodsOrderListDetail";
 	}
 
 	/*
 	 * ====================== 배송지정보수정 ======================
 	 */
 	// 배송지정보수정 폼 호출
-	@GetMapping("/gorder/admin_modify.do")
+	@GetMapping("/membmer/adminMypageGoodsOrderModify.do")
 	public String formModify(@RequestParam int order_num, Model model) {
 		GorderVO order = orderService.selectOrder(order_num);
 		model.addAttribute("orderVO", order);
 
-		return "adminOrderModify";
+		return "adminMypageGoodsOrderModify";
 	}
 
 	// 전송된 데이터 처리
-	@PostMapping("/order/admin_modify.do")
+	@PostMapping("/membmer/adminMypageGoodsOrderModify.do")
 	public String submitModify(@Valid GorderVO orderVO, BindingResult result, Model model, HttpServletRequest request) {
 
-		log.debug("<<OrderVO>> : " + orderVO);
+		log.debug("<<관리자) 배송지 정보 수정 GorderVO>> : " + orderVO);
 
 		// 유효성 체크 결과 오류가 있으면 폼 호출
 		if (result.hasErrors()) {
-			return "adminOrderModify";
+			return "adminMypageGoodsOrderModify";
 		}
 
 		GorderVO db_order = orderService.selectOrder(orderVO.getOrder_num());
@@ -108,12 +117,12 @@ public class GorderAdminController {
 			// 주문취소일 경우 배송지정보를 수정할 수 없음
 			model.addAttribute("message", "사용자가 주문을 취소하여 배송지정보를 수정할 수 없습니다.");
 			model.addAttribute("url",
-					request.getContextPath() + "/order/admin_detail.do?order_num=" + orderVO.getOrder_num());
+					request.getContextPath() + "/member/adminMypageGoodsOrderListDetail?order_num=" + orderVO.getOrder_num());
 		} else {
 			orderService.updateOrder(orderVO);
 
 			model.addAttribute("message", "배송지 정보가 변경되었습니다.");
-			model.addAttribute("url", request.getContextPath() + "/order/admin_detail.do?order_num=" + orderVO.getOrder_num());
+			model.addAttribute("url", request.getContextPath() + "/member/adminMypageGoodsOrderListDetail?order_num=" + orderVO.getOrder_num());
 		}
 
 		return "common/resultView";
@@ -123,16 +132,16 @@ public class GorderAdminController {
 	 * ====================== 배송상태수정 ======================
 	 */
 	// 배송상태수정 폼 호출
-	@GetMapping("/gorder/admin_status.do")
+	@GetMapping("/member/adminMypageGoodsOrderStatus.do")
 	public String formStatus(@RequestParam int order_num, Model model) {
 		GorderVO order = orderService.selectOrder(order_num);
 		model.addAttribute("orderVO", order);
 
-		return "adminOrderStatus";
+		return "adminMypageGoodsOrderStatus";
 	}
 
 	// 전송된 데이터 처리
-	@PostMapping("/gorder/admin_status.do")
+	@PostMapping("/member/adminMypageGoodsOrderStatus.do")
 	public String submitStatus(GorderVO orderVO, Model model, HttpServletRequest request) {
 		GorderVO db_order = orderService.selectOrder(orderVO.getOrder_num());
 		log.debug("<<배송상태수정>> : " + db_order.getOrder_status());
@@ -141,12 +150,12 @@ public class GorderAdminController {
 			// 주문취소시 배송상태수정 불가
 			model.addAttribute("message", "사용자가 주문을 취소하여 배송상태를 수정할 수 없습니다.");
 			model.addAttribute("url",
-					request.getContextPath() + "/order/admin_detail.do?order_num=" + orderVO.getOrder_num());
+					request.getContextPath() + "/member/adminMypageGoodsOrderListDetail.do?order_num=" + orderVO.getOrder_num());
 		} else {
 			orderService.updateOrderStatus(orderVO);
 
 			model.addAttribute("message", "배송상태가 수정되었습니다.");
-			model.addAttribute("url", request.getContextPath() + "/order/admin_status.do?order_num=" + orderVO.getOrder_num());
+			model.addAttribute("url", request.getContextPath() + "/member/adminMypageGoodsOrderStatus.do?order_num=" + orderVO.getOrder_num());
 		}
 
 		return "common/resultView";
