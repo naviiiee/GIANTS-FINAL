@@ -71,7 +71,7 @@
 				</div>
 				<%-- 버튼 div --%>
 				<div class="group-btn">
-					<input type="button" value="이전" class="default-btn big" onclick="location.href='gameList.do'">
+					<input type="button" value="이전" class="gray-btn big" onclick="location.href='gameList.do'">
 					<input type="submit" value="다음" class="accept-btn big">
 				</div>
 			</div>

@@ -5,8 +5,8 @@ hr{ margin:15px 0; }
 .error-color{ color:#dd032f; }
 
 /* 버튼 */
-.accept-btn, .admin-btn, .default-btn{ width:100px; height:30px; border-radius:5px; color:white; font-weight:bold; cursor:pointer; }
-.accept-btn:hover, .admin-btn:hover, .default-btn:hover{ background-color:transparent; transition:0.2s ease-out; }
+.accept-btn, .admin-btn, .gray-btn{ width:100px; height:30px; border-radius:5px; color:white; font-weight:bold; cursor:pointer; }
+.accept-btn:hover, .admin-btn:hover, .gray-btn:hover{ background-color:transparent; transition:0.2s ease-out; }
 
 .accept-btn{ border:1px #dd032f solid; background-color:#dd032f; }
 .accept-btn:hover{ color:#dd032f; }
@@ -14,8 +14,8 @@ hr{ margin:15px 0; }
 .admin-btn{ border:1px #052345 solid; background-color:#052345; }
 .admin-btn:hover{ color:#052345; }
 
-.default-btn{ border:1px #999 solid; background-color:#999; }
-.default-btn:hover{ color:#999; }
+.gray-btn{ border:1px #999 solid; background-color:#999; }
+.gray-btn:hover{ color:#999; }
 
 .small{ width:50px; height:25px; }
 .big{ width:150px; height:50px; font-size:18px; }

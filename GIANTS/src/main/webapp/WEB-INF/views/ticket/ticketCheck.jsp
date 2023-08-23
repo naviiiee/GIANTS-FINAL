@@ -120,7 +120,7 @@
 				<hr width="100%" class="color-red" noshade>
 				<div class="group-btn">
 					<input type="hidden" name="check_num" value="${checkVO.check_num}" id="check_num">
-					<input type="button" value="이전" class="default-btn big" onclick="location.href='ticketMain.do?game_num=${gameVO.game_num}'">
+					<input type="button" value="이전" class="gray-btn big" onclick="location.href='ticketMain.do?game_num=${gameVO.game_num}'">
 					<input type="button" value="결제" class="accept-btn big" id="ticket_kakao">
 					<input type="hidden" value="${gameVO.game_num}" id="game_num">
 					<input type="hidden" value="${seatVO.grade_num}" id=grade_num>

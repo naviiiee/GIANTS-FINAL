@@ -109,10 +109,10 @@
 	<div class="ticket-info5 align-center">
 		<input type="hidden" name="ticket_num" value="${ticket.ticket_num}">
 		<c:if test="${user.mem_auth != 9}">
-		<input type="button" value="목록" class="default-btn big" onclick="location.href='${pageContext.request.contextPath}/member/memberMypageTicketList.do'">
+		<input type="button" value="목록" class="gray-btn big" onclick="location.href='${pageContext.request.contextPath}/member/memberMypageTicketList.do'">
 		</c:if>
 		<c:if test="${user.mem_auth == 9}">
-		<input type="button" value="목록" class="default-btn big" onclick="location.href='${pageContext.request.contextPath}/member/adminMypageTicket.do'">
+		<input type="button" value="목록" class="gray-btn big" onclick="location.href='${pageContext.request.contextPath}/member/adminMypageTicket.do'">
 		</c:if>
 		<c:if test="${ticket.order_status != 0 && ticket.ticket_status == 1 && user.mem_auth != 9}">
 		<input type="button" value="주문취소" id="delete_torder" class="accept-btn big">

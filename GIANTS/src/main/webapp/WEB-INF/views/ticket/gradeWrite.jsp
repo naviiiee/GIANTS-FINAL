@@ -4,11 +4,13 @@
 <!-- 경기등록 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/NSH/ticket.css">
-<div class="page-main">
-	<div class="main-title">
-		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
-		<h2>등급등록</h2>
-		<hr size="0.05" width="100%" noshade>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
+<div class="mypage-form">
+	<div class="mypage-top2">
+		<div class="mypage-top-title">
+			<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+			<h2>등급등록</h2>
+		</div>
 	</div>
 	<form:form action="gradeWrite.do" id="insert_grade" method="post" modelAttribute="gradeVO">
 		<div class="form-list">
@@ -32,7 +34,7 @@
 		</div>
 		<hr size="0.05" width="100%" noshade>
 		<div class="align-center">
-			<input type="button" value="이전" onclick="location.href='gradeList.do'" class="default-btn">
+			<input type="button" value="이전" onclick="location.href='gradeList.do'" class="gray-btn">
 			<form:button class="admin-btn">등록</form:button>
 		</div>
 	</form:form>

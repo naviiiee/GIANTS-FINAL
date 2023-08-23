@@ -6,10 +6,12 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OSJ/food.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/NSH/ticket.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/foodJS/foodCss.js"></script>
-<div class="page-main">
-	<div class="main-title">
-		<img class="title-img" src="${pageContext.request.contextPath}/images/title_icon.gif">
-		<h2> 티켓 | 주문승인</h2>
+<div class="mypage-form">
+	<div class="mypage-top2">
+		<div class="mypage-top-title">
+			<img class="title-img" src="${pageContext.request.contextPath}/images/title_icon.gif">
+			<h2> 티켓 | 주문승인</h2>
+		</div>
 	</div>
 	<hr noshade="noshade">
 	<!-- 내용물 시작 -->
@@ -54,7 +56,7 @@
 		</div>
 		<div class="ticket-info5 align-center">
 			<input type="hidden" name="ticket_num" value="${ticket.ticket_num}">
-			<input type="button" value="목록" class="default-btn big" onclick="location.href='${pageContext.request.contextPath}/member/adminMypageTicket.do'">
+			<input type="button" value="목록" class="gray-btn big" onclick="location.href='${pageContext.request.contextPath}/member/adminMypageTicket.do'">
 		</div>
 	</div>
 	<!-- 내용물 끝 -->

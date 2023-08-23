@@ -50,7 +50,7 @@
 		</div>
 		<hr size="0.05" width="100%" noshade>
 		<div class="align-center">
-			<input type="button" value="이전" onclick="location.href='gameList.do'" class="default-btn">
+			<input type="button" value="이전" onclick="location.href='gameList.do'" class="gray-btn">
 			<form:button class="admin-btn">수정</form:button>
 		</div>
 	</form:form>

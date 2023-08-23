@@ -149,7 +149,7 @@ $(function() {
 		output += '</li>';
 		output += '<li>';
 		output += '<input type="submit" value="수정" class="admin-btn small">';
-		output += ' <input type="button" value="취소" class="closeForm default-btn small">';
+		output += ' <input type="button" value="취소" class="closeForm gray-btn small">';
 		output += '</li>';
 		output += '</ul>';
 		output += '</form>';

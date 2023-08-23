@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/NSH/ticket.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
 <div class="mypage-top2">
 	<div class="mypage-top-title">
@@ -30,6 +31,9 @@
 			</li>
 		</ul>
 	</form>
+	<div class="align-right">
+		<input type="button" value="좌석관리" onclick="location.href='${pageContext.request.contextPath}/ticket/gradeList.do'" class="admin-btn">
+	</div>
 	<c:if test="${count == 0}">
 		<div class="result-display">Ticket구매내역 없습니다.</div>
 	</c:if>

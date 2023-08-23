@@ -5,17 +5,19 @@
 <!-- 등급상세 및 좌석목록 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/NSH/ticket.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/seat.js"></script>
-<div class="page-main">
-	<div class="main-title">
-		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
-		<h2>${grade.title}</h2>
-		<hr size="0.05" width="100%" noshade>
+<div class="mypage-form">
+	<div class="mypage-top2">
+		<div class="mypage-top-title">
+			<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+			<h2>${grade.title}</h2>
+		</div>
 	</div>
 	<div> 
 		<div class="align-right">
 			<input type="button" value="+" id="open_seatForm" class="admin-btn small">
-			<input type="button" value="목록" onclick="location.href='gradeList.do'" class="default-btn small">
+			<input type="button" value="목록" onclick="location.href='gradeList.do'" class="gray-btn small">
 		</div>
 		<form action="seatWrite.do" id="seat_write" method="post" style="display:none;">
 			<input type="hidden" name="grade_num" id="grade_num" value="${grade.grade_num}">
@@ -58,7 +60,7 @@
 				</li>
 				<li>
 					<input type="submit" value="등록" class="admin-btn small">
-					<input type="button" value="취소" id="close_seatForm" class="default-btn small">
+					<input type="button" value="취소" id="close_seatForm" class="gray-btn small">
 				</li>
 			</ul>
 		</form>

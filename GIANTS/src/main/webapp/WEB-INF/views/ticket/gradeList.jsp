@@ -5,11 +5,13 @@
 <!-- 좌석등급 목록 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/NSH/ticket.css">
-<div class="page-main">
-	<div class="main-title">
-		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
-		<h2>좌석관리</h2>
-		<hr size="0.05" width="100%" noshade>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
+<div class="mypage-form">
+	<div class="mypage-top2">
+		<div class="mypage-top-title">
+			<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+			<h2>좌석관리</h2>
+		</div>
 	</div>
 	<div class="align-right">
 		<input type="button" value="+" onclick="location.href='gradeWrite.do'" class="admin-btn small">

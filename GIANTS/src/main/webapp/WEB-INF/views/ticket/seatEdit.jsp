@@ -5,12 +5,14 @@
 <!-- 등급상세 및 좌석목록 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/NSH/ticket.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/YHJ/member.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/seat.js"></script>
-<div class="page-main">
-	<div class="main-title">
-		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
-		<h2>${seat.seat_block}블록 | 좌석관리</h2>
-		<hr size="0.05" width="100%" noshade>
+<div class="mypage-form">
+	<div class="mypage-top2">
+		<div class="mypage-top-title">
+			<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+			<h2>${seat.seat_block}블록 | 좌석관리</h2>
+		</div>
 	</div>
 	<form action="seatEdit.do" method="post" id="seat_edit">
 		<input type="hidden" name="grade_num" value="${seat.grade_num}" id="admin_grade">
@@ -44,7 +46,7 @@
 					</table>
 				</div>
 				<div class="edit-btnGroup">
-						<input type="button" value="목록" onclick="location.href='seatList.do?grade_num=${seat.grade_num}'" class="default-btn">
+						<input type="button" value="목록" onclick="location.href='seatList.do?grade_num=${seat.grade_num}'" class="gray-btn">
 						<input type="submit" value="변경" class="accept-btn">
 					</div>
 			</div>
