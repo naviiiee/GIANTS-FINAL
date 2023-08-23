@@ -15,11 +15,6 @@
 		<form:hidden path="goods_num"/>
 		<form:errors element="div" cssColor="error-color"/>
 		<ul>
-			<%-- 
-			<li>
-				<label>구매목록 불러오기</label>
-			</li>
-			--%>
 			<li>
 				<label>작성자</label>
 				<span>${memberVO.mem_id}</span>

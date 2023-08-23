@@ -13,13 +13,8 @@
 	<form:form modelAttribute="goodsReviewVO" action="writeReview.do" id="review_register" enctype="multipart/form-data">
 		<form:errors element="div" cssColor="error-color"/>
 		<ul>
-			<%-- 
-			<li>
-				<label>구매목록 불러오기</label>
-			</li>
-			--%>
-			<li> <%-- 임시로 상품목록 표시 --%>
-				<label for="goods_num">상품목록</label>
+			<li> 
+				<label for="goods_num">구매목록</label>
 				<select name="goods_num" id="select_list">
 					<option style="text-align:center;">=====선택======</option>
 					<c:forEach var="goods" items="${order_list}">

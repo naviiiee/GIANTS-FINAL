@@ -45,11 +45,7 @@
 				<input type="hidden" name="goods_dprice" value="${goods.goods_price}" id="goods_price">
 				
 				
-				<%--  <input type="hidden" name="goods_stock" id="goods_stock" value="${goods.goodsOptionVO.goods_stock }"> --%>
-				<%-- <input type="hidden" name="goods_stock" value="${goods.goods_stock}" id="goods_stock"> 수량--%>
-				<ul> <%-- <c:if test="${goods.goods_stock > 0}"> 수량 --%>
-					<%-- <li>남은 수량 : <span><fmt:formatNumber value="${goods.goods_stock}"/></span></li> 수량--%>
-					<%-- <li>조회수 : <fmt:formatNumber value="${goods.goods_hit}"/>회</li> --%>
+				<ul> 
 					<li>
 						상태 :  
 						<c:if test="${goods.goods_status == 1}">판매중</c:if>
@@ -78,8 +74,6 @@
 						                <c:if test="${option.goods_stock > 0}">${option.goods_size} [재고 : ${option.goods_stock}]</c:if>
 						                <c:if test="${option.goods_stock <= 0}">${option.goods_size} [품절]</c:if>
 						            </option>
-						           <%--  <input type="hidden" name="goods_size" id="goods_size" value="${option.goods_size }">
-						    		<input type="hidden" name="goods_stock" id="goods_stock" value="${option.goods_stock}"> --%>
 						        </c:forEach>
 						    </select>
 						    
@@ -169,18 +163,7 @@
 				</div>
 				</c:if>
 			</div>
-				<%-- <ul>
-					<li class="list-cart-btn">
-						<input class="btn btn-cart" type="submit" value="장바구니">
-					</li>
-				</ul>
-				<ul>
-					<form id="directBuy" action="${pageContext.request.contextPath}/gorder/directOrderForm.do" method="POST">
-						<!-- <input type="hidden" name="order_quantity" id="direct_quantity"> 수량 -->
-						<input type="hidden" name="goods_num" value="${goods.goods_num}">
-						<button class="btn btn-buy" type="submit">바로 구매</button>
-					</form>
-				</ul> --%>
+				
 				<hr size="1" width="97%">
 			
 		</div> <%-- end of goods-info --%>
@@ -277,35 +260,6 @@
 			<div id="review_output"></div>
 			<div id="review_page"></div>
 		</div>  
-		<!-- <style type="text/css">
-			*{
-				margin:0;
-				padding:0;
-			}
-			#wrap{
-				overflow:hidden;
-			}
-			.item{
-				margin:5px;
-				padding:5px;
-				width:300px;
-				height:150px;
-				float:left;
-				border-width:3px;
-				border-style:solid;
-				border-color:gray;
-				border-radius:10px;
-			}
-			ul{
-				overflow:hidden;
-			}
-			li{
-				float:left;
-				list-style:none;
-				padding:10px;
-				cursor:pointer;
-			}
-		</style> -->
 		<div class="medium-nav">
 			<nav>
 				<ul>

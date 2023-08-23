@@ -4,8 +4,6 @@ $(function(){
 	let pageBlock = 5;//페이지 표시 단위
 	let currentPage =1;//현재 보고 있는 화면
 	let totalItem;//총 레코드 수
-	//let rowCount = 10;
-	//let dataPerPage = 5;
 	
 	function reviewList(currentPage, dataPerPage){
 		$.ajax({
@@ -34,8 +32,6 @@ $(function(){
 					let endPage = param.end;
 					let list = param.list;
 					
-					//console.log(list[0].review_score);
-					
 					a += '<table class="detail-tb align-center">';
 					a += '<tr>';
 					a += '<th style="width:10%;">별점</th>';
@@ -43,45 +39,6 @@ $(function(){
 					a += '<th style="width:13%;">작성자ID</th>';
 					a += '<th style="width:12%;">등록일</th>';
 					a += '</tr>';
-					/*
-					for(var i=(currentPage - 1) * dataPerPage + 1; i < (currentPage - 1) * dataPerPage + dataPerPage + 1; i++){
-						//console.log(list[i]);
-						//console.log();
-						a += '<tr>';
-						a += '<td>' + list[i].review_score;
-						
-						if(Number(list[i].review_score) == 5){
-							a += '★★★★★(5)';
-						} else if(list[i].review_score == 4){
-							a += '★★★★(4)';
-						} else if(list[i].review_score == 3){
-							a += '★★★(3)';
-						} else if(list[i].review_score == 2){
-							a += '★★(2)';
-						} else if(list[i].review_score == 1){
-							a += '★(1)';
-						}
-						a += '</td>';
-						
-						a += '<td class="re-title" id="title' + i + '" style="cursor:pointer;">' + list[i].review_title + '</td>';
-						a += '<td>' + list[i].mem_id + '</td>';
-						a += '<td>' + list[i].review_regdate + '</td>';
-						a += '</tr>';
-						
-						a += '<tr class="re-content" id="content' + i + '" style="display:none;">';
-						a += '<td colspan="5" class="show-content" id="td'+i+'">';
-						a += '<div class="align-right" style="margin:5px 5px 0 0; height:50px;">';
-						a += '<input type="button" value="닫기" id="close_this">';
-						if(param.user_num == list[i].mem_num){
-							a += '<input type="button" value="수정" id="modify-btn" data-num="' + list[i].review_num + '">';
-							a += '<input type="button" value="삭제" id="delete-btn" data-num="' + list[i].review_num + '">';
-						}
-						a += '</div>';  
-						
-						a += '<div class="align-left">' + list[i].review_content + '</div>';
-						a += '</td>';
-						a += '</tr>';
-					}*/
 									
 					$.each(list, function(index, value){
 						a += '<tr>';
