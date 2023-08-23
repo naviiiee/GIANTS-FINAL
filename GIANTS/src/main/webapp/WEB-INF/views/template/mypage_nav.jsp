@@ -13,7 +13,7 @@
 			<li><b>구매내역</b></li>
 			<li><a href="${pageContext.request.contextPath}/member/memberMypageTicketList.do">Ticket</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/memberMypageFoodList.do">Foods</a></li>
-			<li><a href="${pageContext.request.contextPath}/member/memberMypageGoodList.do">Goods</a></li>
+			<li><a href="${pageContext.request.contextPath}/gorder/orderList.do">Goods</a></li>
 			<li><b>관심목록</b></li>
 			<li><a href="${pageContext.request.contextPath}/member/bookmarkList.do">중고거래</a></li>
 		</ul>

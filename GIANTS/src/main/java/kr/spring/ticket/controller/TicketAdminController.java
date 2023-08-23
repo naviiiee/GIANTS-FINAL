@@ -26,6 +26,7 @@ import kr.spring.ticket.vo.GameVO;
 import kr.spring.ticket.vo.GradeVO;
 import kr.spring.ticket.vo.SeatStatusVO;
 import kr.spring.ticket.vo.SeatVO;
+import kr.spring.ticket.vo.TicketVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -254,4 +255,5 @@ public class TicketAdminController {
 		
 		return "common/resultView";
 	}
+	
 }

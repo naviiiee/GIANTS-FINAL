@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.food.vo.F_orderVO;
+import kr.spring.food.vo.F_order_detailVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.ticket.vo.TicketVO;
@@ -875,6 +876,32 @@ public class MemberController {
 		
 		return mav;
 	}	
+
+	/*====================
+	 * 일반회원 푸드구매상세
+	 *====================*/
+	@RequestMapping("/member/memberMypageFoodDetail.do")
+	public String memberMypageFoodDetail (@RequestParam String f_order_num,
+										  HttpSession session,
+										  Model model) {
+		
+		
+		//주문번호(f_order_num)를 통하여 모든 정보를 출력함.
+		Map<String, Object> map = new HashMap<String, Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		map.put("f_order_num", f_order_num);
+		map.put("mem_num", user.getMem_num());
+		
+		//주문정보 호출
+		F_orderVO f_order = memberService.selectF_order(map);
+		//개별 상품 주문정보 호출
+		List<F_order_detailVO> detailList = memberService.selectListF_orderDetail(f_order_num);
+		
+		model.addAttribute("f_order", f_order);
+		model.addAttribute("list", detailList);
+		
+		return "memberMypageFoodDetail";
+	}
 	
 	/*====================
 	 * 사용자 주문취소

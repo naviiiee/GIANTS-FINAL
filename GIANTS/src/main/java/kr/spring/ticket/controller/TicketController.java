@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,7 +156,7 @@ public class TicketController {
 	
 	/* ----- [Order] 티켓주문 -----*/
 	@PostMapping("/ticket/orderForm.do")
-	public String orderTicketForm(@RequestParam int game_num, @RequestParam int grade_num, @RequestParam int seat_num, SeatVO seatVO, HttpSession session, Model model) {
+	public String orderTicketForm(@RequestParam int game_num, @RequestParam int grade_num, @RequestParam int seat_num, SeatVO seatVO, HttpSession session, Model model, HttpServletRequest request) {
 		log.debug("<<seat_info>> : " + seatVO.getSeat_info());
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
@@ -172,6 +173,13 @@ public class TicketController {
 		
 		int length = seatVO.getSeat_info().split(",").length;
 		for(int i = 0; i < length; i++) {
+			// 선택좌석이 예매가 된 경우 조건 체크
+			if(ticketService.selectSeatInfoIsNull(seatVO.getSeat_info().split(",")[i], game_num) != null) {
+				model.addAttribute("message", "이미 선택된 좌석입니다.");
+				model.addAttribute("url", request.getContextPath() + "/ticket/ticketMain.do?game_num=" + game_num);
+				return "common/resultView";
+			}
+			
 			checkVO.setCheck_num(check_num);
 			checkVO.setSeat_num(seat_num);
 			checkVO.setSeat_info(seatVO.getSeat_info().split(",")[i]);
@@ -192,7 +200,7 @@ public class TicketController {
 	/* ----- [Order] 결제 완료 -----*/
 	@RequestMapping("/ticket/insertMPay.do")
 	@ResponseBody
-	public String insertMPay(@RequestBody TicketVO ticketVO, HttpSession session, RedirectAttributes rttr) {
+	public String insertMPay(@RequestBody TicketVO ticketVO, HttpSession session, RedirectAttributes rttr, Model model, HttpServletRequest request) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		ticketVO.setMem_num(user.getMem_num());
 		
@@ -205,6 +213,13 @@ public class TicketController {
 		//List<SeatStatusVO> statusList = new ArrayList<SeatStatusVO>();
 		
 		for(TicketCheckVO check : checkList) {
+			// 선택좌석이 예매가 된 경우 조건 체크
+			if(ticketService.selectSeatInfoIsNull(check.getSeat_info(), ticketVO.getGame_num()) != null) {
+				model.addAttribute("message", "이미 예매된 좌석입니다.");
+				model.addAttribute("url", request.getContextPath() + "/ticket/ticketMain.do?game_num=" + ticketVO.getGame_num());
+				return "common/resultView";
+			}
+			
 			SeatStatusVO status = new SeatStatusVO();
 			status.setStatus_num(status_num);
 			status.setGrade_num(ticketVO.getGrade_num());
@@ -275,7 +290,7 @@ public class TicketController {
 	
 	/* ----- [Order] 티켓취소 -----*/
 	@RequestMapping("/ticket/deleteTorder.do")
-	public String gradeDelete(@RequestParam String ticket_num) {
+	public String deleteTorder(@RequestParam String ticket_num) {
 		log.debug("<<주문번호>> : " + ticket_num);
 		
 		TicketVO ticket = ticketService.selectTicket(ticket_num);

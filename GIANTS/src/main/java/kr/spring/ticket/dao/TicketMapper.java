@@ -117,6 +117,8 @@ public interface TicketMapper {
 	
 	@Select("SELECT * FROM seat_status WHERE status_num = #{status_num}")
 	public List<SeatStatusVO> selectSeatInfo(Integer status_num);
+	@Select("SELECT * FROM seat_status WHERE seat_info = #{seat_info} AND game_num = #{game_num}")
+	public SeatStatusVO selectSeatInfoIsNull(String seat_info, Integer game_num);
 	
 	@Delete("DELETE FROM seat_status WHERE status_num = #{status_num} AND seat_auth = 2")
 	public void deleteAdminStatus(Integer status_num);

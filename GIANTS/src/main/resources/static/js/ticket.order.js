@@ -9,7 +9,34 @@ $(function() {
 	let email = $('#mem_email').val();
 	let phone = $('#mem_phone').val();
 	
+	/*$(document).on('click', '#seatInfo_check', function() {
+		let seat_info = $('.seatBRCstatus').val();
+		let length = $('.seatBRCstatus').length;
+		
+		alert(length);
+		alert(seat_info);
+		
+		$.ajax({
+			url:'searchSeatStatus.do',
+			type:'post',
+			data:{game_num:$('#game_num').val(), seat_info:$('.seatBRCstatus').val()},
+			dataType:'json',
+			success:function(param) {
+				if(param.result == 'logout') {
+					alert('Login 후 이용가능');
+					location.href='../member/login.do';
+				} else if(param.result == 'success') {
+					return;
+				}
+			},
+			error:function() { alert('Network 오류 발생'); }
+		});
+	});*/
+	
 	$(document).on('click', '#ticket_kakao', function() {
+		// 결제 전 예매여부 확인용 통신
+		
+		
 		/* Portone 결제 API */
 		let IMP = window.IMP;
 	    IMP.init('imp67587482');  // 가맹점 식별코드

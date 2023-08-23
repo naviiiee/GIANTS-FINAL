@@ -21,6 +21,7 @@ import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberDetailVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.ticket.vo.TicketVO;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -51,16 +52,9 @@ public class MemberAdminController {
 		//페이지 처리
 		PagingUtil page =
 				new PagingUtil(keyfield,keyword,currentPage,
-							   count,10,10,"adminMemberList.do");
-		MemberVO user1 = (MemberVO)session.getAttribute("user1");
-		MemberDetailVO user2 = (MemberDetailVO)session.getAttribute("user2");
-		CompanyDetailVO user3 = (CompanyDetailVO)session.getAttribute("user3");
+							   count,10,10,"admin_list.do");
 		
 		List<MemberVO> list = null;
-		
-		log.debug("<<user 체크>> : " + user1);
-		log.debug("<<user 체크>> : " + user2);
-		log.debug("<<user 체크>> : " + user3);
 		
 		if(count > 0) {
 			map.put("start", page.getStartRow());
@@ -85,7 +79,7 @@ public class MemberAdminController {
 	public String form(@RequestParam int mem_num, Model model) {
 		MemberVO memberVO = memberService.selectMember(mem_num);
 		model.addAttribute("memberVO", memberVO);
-		return "admin_memberModify";
+		return "adminMemberModify";
 	}
 	//전송된 데이터 처리
 	@PostMapping("/member/admin_updateMem.do")
@@ -113,7 +107,7 @@ public class MemberAdminController {
 	public String formComp(@RequestParam int mem_num, Model model) {
 		MemberVO companyVO = memberService.selectCompany(mem_num);
 		model.addAttribute("memberVO", companyVO);
-		return "admin_companyModify";
+		return "adminCompanyModify";
 	}
 	//전송된 데이터 처리
 	@PostMapping("/member/admin_updateComp.do")
@@ -138,9 +132,31 @@ public class MemberAdminController {
 	 * 관리자 티켓관리
 	 *=====================*/
 	@RequestMapping("/member/adminMypageTicket.do")
-	public String adminMypageTicket(HttpSession session, Model model) {
+	public ModelAndView adminMypageTicket(@RequestParam(value="pageNum", defaultValue="1") int currentPage, String keyfield, String keyword, HttpSession session, Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
 		
-		return "adminMypageTicket";
+		int count = memberService.selectAdminTicketCount(map);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 10, 10, "adminMypageTicket.do");
+		
+		List<TicketVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = memberService.selectAdminListTicket(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("adminMypageTicket");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
 	}
 	/*
 	/*=====================

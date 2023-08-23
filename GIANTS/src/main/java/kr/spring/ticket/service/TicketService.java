@@ -64,6 +64,7 @@ public interface TicketService {
 	public int selectAdminCountByGradeNum(Integer grade_num);
 	
 	public List<SeatStatusVO> selectSeatInfo(Integer status_num);
+	public SeatStatusVO selectSeatInfoIsNull(String seat_info, Integer game_num);
 	
 	public void deleteAdminStatus(Integer status_num);
 	public void deleteStatus(Integer status_num);

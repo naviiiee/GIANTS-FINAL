@@ -40,8 +40,8 @@
 					   id="keyword" value="${param.keyword}">
 			</li>
 			<li>
-				<input type="submit" value="찾기">
-				<input type="button" value="목록"
+				<input type="submit" value="찾기" class="default-btn">
+				<input type="button" value="목록" class="default-btn"
 					   onclick="location.href='admin_list.do'">
 			</li>
 		</ul>

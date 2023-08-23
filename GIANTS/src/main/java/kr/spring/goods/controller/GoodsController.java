@@ -130,44 +130,7 @@ public class GoodsController {
 		
 		return mav;
 	}
-		
-	/*==========================
-	 * [관리자] 굿즈 목록
-	 *==========================*/
-	@RequestMapping("/goods/admin_goodsList.do")
-	public ModelAndView process(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
-								@RequestParam(value="goods_category", defaultValue="0") int goods_category,
-								String keyfield, String keyword) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("keyfield", keyfield);
-		map.put("keyword", keyword);
-		map.put("goods_status", 3); //status가 3이면 판매중(1), 판매중지(2) 모두 체크
-		
-		//전체|검색 레코드 수
-		map.put("goods_category", goods_category);
-		int count = goodsService.selectGoodsRowCount(map);
-		
-		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 10, 10, "admin_goodsList.do", "&goods_category=" + goods_category);
-		
-		List<GoodsVO> list = null;
-		if(count > 0) {
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
-			map.put("order", 1);
-			map.put("goods_category", goods_category);
-			
-			list = goodsService.selectGoodsList(map);
-		}
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("adminList");
-		mav.addObject("count", count);
-		mav.addObject("list", list);
-		mav.addObject("page", page.getPage());
-		
-		return mav;
-	}
+
 	
 	/*==========================
 	 * [일반회원] 굿즈 목록
@@ -264,12 +227,12 @@ public class GoodsController {
 	}
 	
 	/*==========================
-	 * 굿즈 상세페이지 - 리뷰 페이징 처리
+	 * 굿즈 상세 - 리뷰 페이징 처리
 	 *==========================*/
 	@RequestMapping("/goods/reviewList.do")
 	@ResponseBody
 	public Map<String, Object> getReviewListAjax(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
-									@RequestParam(value="rowCount", defaultValue="5") int rowCount,
+									@RequestParam(value="rowCount", defaultValue="10") int rowCount,
 									@RequestParam int goods_num, HttpSession session){
 		
 		log.debug("<<currentPage>> : " + currentPage);
@@ -310,12 +273,12 @@ public class GoodsController {
 	}
 	
 	/*==========================
-	 * 굿즈 상세페이지 - 리뷰 레코드 수
+	 * 굿즈 상세 - 리뷰 레코드 수
 	 *==========================*/
 	@RequestMapping("/goods/reviewListCountAjax.do")
 	@ResponseBody
 	public Map<String, Object> getReviewCountAjax(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
-									@RequestParam(value="rowCount", defaultValue="5") int rowCount,
+									@RequestParam(value="rowCount", defaultValue="10") int rowCount,
 									@RequestParam int goods_num, HttpSession session){
 		
 		log.debug("<<currentPage>> : " + currentPage);
@@ -560,10 +523,13 @@ public class GoodsController {
 		
 		log.debug("<<리뷰 삭제 - review_num>> : " + review_num);
 		
+		GoodsReviewVO db_review = goodsService.selectGoodsReview(review_num);
+		int goods_num = db_review.getGoods_num();
+		
 		//리뷰 삭제
 		goodsService.deleteGoodsReview(review_num);
 		
-		return "redirect:/goods/goodsList.do";
+		return "redirect:/goods/goodsDetail.do?goods_num=" + goods_num + "#goods_review";
 	}
 	
 	

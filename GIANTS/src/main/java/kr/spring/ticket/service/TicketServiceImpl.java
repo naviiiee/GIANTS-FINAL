@@ -136,6 +136,9 @@ public class TicketServiceImpl implements TicketService {
 	public List<SeatStatusVO> selectSeatInfo(Integer status_num) { return ticketMapper.selectSeatInfo(status_num); }
 	
 	@Override
+	public SeatStatusVO selectSeatInfoIsNull(String seat_info, Integer game_num) { return ticketMapper.selectSeatInfoIsNull(seat_info, game_num); }
+	
+	@Override
 	public void deleteAdminStatus(Integer status_num) { ticketMapper.deleteAdminStatus(status_num); }
 	
 	@Override
@@ -155,7 +158,7 @@ public class TicketServiceImpl implements TicketService {
 	
 	@Override
 	public List<TicketDetailVO> selectSeatInfoByT(String ticket_num) { return ticketMapper.selectSeatInfoByT(ticket_num); }
-
+	
 	@Override
 	public void updateTicket(String ticket_num) { ticketMapper.updateTicket(ticket_num); }
 
