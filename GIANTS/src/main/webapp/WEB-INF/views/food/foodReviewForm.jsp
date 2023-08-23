@@ -24,6 +24,7 @@
 	<hr noshade="noshade">
 	<!-- 타이틀 끝 -->
 	<form:form modelAttribute="food_reviewVO" action="foodReviewSubmit.do" id="food_review" enctype="multipart/form-data">
+		<input type="hidden" name="f_order_num" value="${f_order_num}">
 		<div class="comp-container tbox">
 			<h2>리뷰 작성</h2>
 			<!-- 상단 분리박스 -->
@@ -36,7 +37,11 @@
 					</li>
 					<li>
 						<div class="label-wid"><form:label path="comp_score">별점</form:label></div>
-						<form:input path="comp_score"/>
+						<form:radiobutton path="comp_score" value="1"/>1점
+						<form:radiobutton path="comp_score" value="2"/>2점
+						<form:radiobutton path="comp_score" value="3"/>3점
+						<form:radiobutton path="comp_score" value="4"/>4점
+						<form:radiobutton path="comp_score" value="5"/>5점
 						<form:errors path="comp_score"/>
 					</li>
 					<li><b>리뷰내용</b></li>

@@ -23,12 +23,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import kr.spring.food.dao.FoodMapper;
 import kr.spring.food.service.FoodService;
 import kr.spring.food.vo.F_cartVO;
 import kr.spring.food.vo.F_orderVO;
 import kr.spring.food.vo.F_order_detailVO;
 import kr.spring.food.vo.FoodVO;
+import kr.spring.food.vo.Food_reviewVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.CompanyDetailVO;
 import kr.spring.member.vo.MemberVO;
@@ -54,6 +54,11 @@ public class FoodController {
 	@ModelAttribute
 	public F_orderVO initCommand2() {
 		return new F_orderVO();
+	}
+	
+	@ModelAttribute
+	public Food_reviewVO initCommand3() {
+		return new Food_reviewVO();
 	}
 	
 	
@@ -865,12 +870,46 @@ public class FoodController {
 			model.addAttribute("url", request.getContextPath() + "/food/foodList.do");
 			return "common/resultView";
 		}
+		if (f_order.getF_order_status()!=0) {
+			model.addAttribute("message", "잘못된 요청입니다.");
+			model.addAttribute("url", request.getContextPath() + "/food/foodList.do");
+			return "common/resultView";
+		}
+		
 		CompanyDetailVO comp = foodService.selectComp(f_order.getComp_num());
 		
 		model.addAttribute("f_order", f_order);
 		model.addAttribute("comp_name" , comp.getComp_name());
 		
 		return "foodReviewForm";
+	}
+	
+	@PostMapping("/food/foodReviewForm.do")
+	public String submitFoodReview(@Valid Food_reviewVO vo, @RequestParam String f_order_num, BindingResult result,
+									Model model, HttpServletRequest request,
+									HttpSession session) {
+		log.debug("<< 식품 추가/등록 POST 작동 >> : " + vo);
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if (result.hasErrors()) {
+			return formFoodReview(f_order_num, model, session, request);
+		}
+		
+		//log.debug("<< 사업자 등록번호 세팅 전 >>");
+		//사업자 등록 번호 VO에 세팅
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		vo.setComp_num(user.getCompanyDetailVO().getComp_num());
+		
+		//log.debug("<< 사업자 등록번호 완료 상품 등록 시작 >>");
+		
+		//리뷰 등록 sql 시작
+		//foodService.insertFood(vo);
+		
+		//View에 표시할 메세지
+		model.addAttribute("message", "리뷰작성이 완료되었습니다.");
+		model.addAttribute("url", request.getContextPath() + "/food/foodList.do");
+		
+		return "common/resultView";
 	}
 	
 	

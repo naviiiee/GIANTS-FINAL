@@ -15,7 +15,6 @@
 		<!-- 구매자정보 시작 -->
 		<div class="order-title">
 			<h2>구매자 정보</h2>
-			<input type="button" id="cancel_order" value="주문취소">
 			<hr>
 		</div>
 		<ul>
