@@ -22,17 +22,17 @@
 	</div>
 	<form:form modelAttribute="newsVO" action="newsUpdate.do" id="modify_form">
 		<form:hidden path="news_num"/>
-		<form:errors element="div" cssColor="error-color"/>
+		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 			<li>
 				<form:label path="news_title">제목</form:label>
 				<form:input path="news_title"/>
-				<form:errors path="news_title" cssColor="error-color"/>
+				<form:errors path="news_title" cssClass="error-color"/>
 			</li>
 			<li><label>내용</label></li>
 			<li>
 				<form:textarea path="news_content"/>
-				<form:errors path="news_content" cssColor="error-color"/>
+				<form:errors path="news_content" cssClass="error-color"/>
 				<script>
 					function MyCustomUploadAdapterPlugin(editor){
 						editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {

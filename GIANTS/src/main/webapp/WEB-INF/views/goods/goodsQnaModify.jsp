@@ -26,12 +26,12 @@
 			<li>
 				<form:label path="qna_title">제목</form:label>
 				<form:input path="qna_title"/>
-				<form:errors path="qna_title" cssColor="error-color"/>
+				<form:errors path="qna_title" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="qna_content">내용</form:label>
 				<form:textarea path="qna_content"/>
-				<form:errors path="qna_content" cssColor="error-color"/>
+				<form:errors path="qna_content" cssClass="error-color"/>
 			</li>
 		</ul>
 		<div class="align-center">

@@ -83,11 +83,7 @@ public class GoodsController {
 	public String submit(@Valid GoodsVO goodsVO, BindingResult result, Model model,
 							HttpServletRequest request, HttpSession session) {
 		log.debug("<<상품등록>> : " + goodsVO);
-		log.debug("<<goods_photo().length>> : " + goodsVO.getGoods_photo().length);
 		
-		if(goodsVO.getGoods_photo().length == 0) {
-			result.rejectValue("goods_photo", "required");
-		}
 		if(goodsVO.getGoods_photo().length >= 5*1024*1024) {//5MB
 			result.rejectValue("goods_photo", "limitUploadSize", new Object[] {"5MB"}, null);
 		}
@@ -182,7 +178,6 @@ public class GoodsController {
 	 *==========================*/
 	@RequestMapping("/goods/goodsDetail.do")
 	public ModelAndView getGoodsDetail(@RequestParam int goods_num) {
-		log.debug("<<굿즈 상세 - goods_num>> : " + goods_num);
 		
 		//상품 상세
 		GoodsVO goods = goodsService.selectGoods(goods_num);
@@ -197,32 +192,10 @@ public class GoodsController {
 		
 		float avg_score = goodsService.getAvgScore(goods_num);
 		
-		//===== 리뷰 목록 =====//
-		
-		//===== 상품문의 목록 =====//
-		Map<String, Object> map2 = new HashMap<String, Object>();
-		
-		int qna_cnt = goodsService.selectGoodsQnaCount(goods_num);
-		PagingUtil page2 = new PagingUtil(1, qna_cnt, 5, 5, "qnaList.do");
-		List<GoodsQnaVO> qna = null;
-		
-		if(qna_cnt > 0) {
-			map2.put("start", page2.getStartRow());
-			map2.put("end", page2.getEndRow());
-			map2.put("goods_num", goods_num);
-			
-			qna = goodsService.selectGoodsQnaList(map2);
-		}
-		
-		log.debug("<<로그찍기 - qna>>" + qna);
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("goodsView");
 		mav.addObject("goods", goods);
 		mav.addObject("option", list);
-		mav.addObject("qna", qna);
-		mav.addObject("qna_cnt", qna_cnt);
-		mav.addObject("qna_page", page2.getPage());
 		mav.addObject("avg_score", avg_score);
 		mav.addObject("total_stock", total_stock);
 		
@@ -237,9 +210,6 @@ public class GoodsController {
 	public Map<String, Object> getReviewListAjax(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
 									@RequestParam(value="rowCount", defaultValue="5") int rowCount,
 									@RequestParam int goods_num, HttpSession session){
-		
-		log.debug("<<+++currentPage>> : " + currentPage);
-		log.debug("<<board_num>> : " + goods_num);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("goods_num", goods_num);
@@ -260,10 +230,6 @@ public class GoodsController {
 			map.put("end", page.getEndRow());
 			
 			list = goodsService.selectGoodsReviewList(map);
-			
-			log.debug("<<****로그찍기 list >>" + list);
-			log.debug("<<****로그찍기 start >>" + page.getStartRow());
-			log.debug("<<****로그찍기 end >>" + page.getEndRow());
 		}else {
 			list = Collections.emptyList(); //비어있는 배열
 		}
@@ -287,9 +253,6 @@ public class GoodsController {
 	public Map<String, Object> getReviewCountAjax(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
 									@RequestParam(value="rowCount", defaultValue="5") int rowCount,
 									@RequestParam int goods_num, HttpSession session){
-		
-		log.debug("<<currentPage>> : " + currentPage);
-		log.debug("<<board_num>> : " + goods_num);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("goods_num", goods_num);
@@ -317,9 +280,6 @@ public class GoodsController {
 									@RequestParam(value="rowCount", defaultValue="5") int rowCount,
 									@RequestParam int goods_num, HttpSession session){
 		
-		log.debug("<<+++currentPage>> : " + currentPage);
-		log.debug("<<board_num>> : " + goods_num);
-		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("goods_num", goods_num);
 		
@@ -339,10 +299,6 @@ public class GoodsController {
 			map.put("end", page.getEndRow());
 			
 			list = goodsService.selectGoodsQnaList(map);
-			
-			log.debug("<<****로그찍기 list >>" + list);
-			log.debug("<<****로그찍기 start >>" + page.getStartRow());
-			log.debug("<<****로그찍기 end >>" + page.getEndRow());
 		}else {
 			list = Collections.emptyList(); //비어있는 배열
 		}
@@ -366,9 +322,6 @@ public class GoodsController {
 	public Map<String, Object> getQnaCountAjax(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
 									@RequestParam(value="rowCount", defaultValue="5") int rowCount,
 									@RequestParam int goods_num, HttpSession session){
-		
-		log.debug("<<currentPage>> : " + currentPage);
-		log.debug("<<board_num>> : " + goods_num);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("goods_num", goods_num);
@@ -402,8 +355,6 @@ public class GoodsController {
 		model.addAttribute("goodsVO", goodsVO);
 		model.addAttribute("list", list);
 		
-		log.debug("<<로그찍기******>>  " + goodsVO);
-		
 		return "goodsModify";	
 	}
 	
@@ -411,24 +362,13 @@ public class GoodsController {
 	@PostMapping("/goods/goodsUpdate.do")
 	public String submitUpdate(@Valid GoodsVO goodsVO, BindingResult result, 
 								HttpServletRequest request, Model model)	{
-		log.debug("<<상품 정보 수정 - GoodsVO>> : " + goodsVO);
-			
+
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			//return "goodsModify";
 			return formUpdate(goodsVO.getGoods_num(), model);
 		}
-		
-		GoodsVO db_goods = goodsService.selectGoods(goodsVO.getGoods_num());
-		
-		if(goodsVO.getGoods_photoname().isEmpty()) {
-			goodsVO.setGoods_photo(db_goods.getGoods_photo());
-		 	goodsVO.setGoods_photoname(db_goods.getGoods_photoname()); 
-		 }
-		
-		log.debug("<<로그찍기 - goodsVO.getGoods_photo()>> : " + goodsVO.getGoods_photo());
-		log.debug("<<로그찍기 - goodsVO.getGoods_photoname()>> : " + goodsVO.getGoods_photoname());
-		
+
 		//상품 정보 수정
 		goodsService.updateGoods(goodsVO);
 		
@@ -444,8 +384,6 @@ public class GoodsController {
 	@RequestMapping("/goods/getFav.do")
 	@ResponseBody
 	public Map<String, Object> getFav(GoodsFavVO fav, HttpSession session){
-		
-		log.debug("<<상품 찜하기 읽기>> : " + fav);
 		
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		
@@ -471,7 +409,6 @@ public class GoodsController {
 	@RequestMapping("/goods/writeFav.do")
 	@ResponseBody
 	public Map<String, Object> writeFav(GoodsFavVO fav, HttpSession session){
-		log.debug("<<상품 찜하기 등록/삭제 - GoodsFavVO>> : " + fav);
 		
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		
@@ -551,7 +488,6 @@ public class GoodsController {
 		//List<GoodsVO> goods_list = goodsService.selectGoodsList(map);
 		List<GorderDetailVO> order_list = goodsService.selectOrderDetailList(user.getMem_num());
 		model.addAttribute("order_list", order_list);
-		log.debug("<<로그찍기 order_list>> : " +order_list);
 		model.addAttribute("memberVO", user);
 		
 		int goods_num = Integer.parseInt(request.getParameter("goods_num"));
@@ -564,7 +500,6 @@ public class GoodsController {
 	@PostMapping("/goods/writeReview.do")
 	public String submitReview(@Valid GoodsReviewVO reviewVO, BindingResult result, 
 				HttpServletRequest request, HttpSession session, Model model) {
-		log.debug("<<리뷰등록>> : " + reviewVO);
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
@@ -603,7 +538,6 @@ public class GoodsController {
 		GoodsReviewVO reviewVO = goodsService.selectGoodsReview(review_num);
 		
 		model.addAttribute("goodsReviewVO", reviewVO);
-		log.debug("<<리뷰 수정 폼 - reviewVO>> : " + reviewVO);
 		
 		return "reviewModify";
 	}
@@ -612,8 +546,6 @@ public class GoodsController {
 	@PostMapping("/goods/updateReview.do")
 	public String submitUpdateReview(@Valid GoodsReviewVO reviewVO, BindingResult result, 
 								HttpServletRequest request, Model model) {
-		
-		log.debug("<<리뷰 수정 - GoodsReviewVO>> : " + reviewVO);
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
@@ -624,8 +556,6 @@ public class GoodsController {
 		reviewVO.setReview_ip(request.getRemoteAddr());
 		//리뷰 수정
 		goodsService.updateGoodsReview(reviewVO);
-		
-		log.debug("<<리뷰 수정2 - GoodsReviewVO>> : " + reviewVO);
 		
 		model.addAttribute("message", "리뷰 수정 완료!");
 		model.addAttribute("url", request.getContextPath() + "/goods/goodsDetail.do?goods_num=" + reviewVO.getGoods_num() + "#goods_review");
@@ -692,8 +622,6 @@ public class GoodsController {
 		
 		goodsService.insertGoodsQna(qnaVO);
 		
-		log.debug("<<상품문의 등록>> : " + qnaVO);
-		
 		model.addAttribute("message", "상품문의가 완료되었습니다.");
 		model.addAttribute("url", request.getContextPath() + "/goods/goodsDetail.do?goods_num=" + qnaVO.getGoods_num() + "#goods_qna");
 		
@@ -706,8 +634,6 @@ public class GoodsController {
 	@RequestMapping("/goods/detailQna.do")
 	public ModelAndView getDetailQna(@RequestParam int qna_num) {
 		
-		log.debug("<<상품문의상세 - qna_num>> : " + qna_num);
-		
 		//상품문의 상세
 		GoodsQnaVO qna = goodsService.selectQna(qna_num);
 		
@@ -716,8 +642,6 @@ public class GoodsController {
 		
 		//내용에 태그 불허
 		qna.setQna_content(StringUtil.useBrNoHtml(qna.getQna_content()));
-		
-		log.debug("<<상품문의상세 - qna>> : " + qna);
 		
 		return new ModelAndView("goodsQnaView", "qna", qna);
 	}
@@ -739,8 +663,6 @@ public class GoodsController {
 	//전송된 데이터 처리
 	@PostMapping("/goods/updateGoodsQna.do")
 	public String submitUpdateQna(@Valid GoodsQnaVO qnaVO, BindingResult result, HttpServletRequest request, Model model) {
-		
-		log.debug("<<상품문의 수정 - GoodsQnaVO>> : " + qnaVO);
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
@@ -766,8 +688,6 @@ public class GoodsController {
 		
 		goodsService.deleteGoodsQna(qna_num);
 		
-		log.debug("<<>>" + qna_num);
-		
 		return "redirect:/goods/goodsList.do";
 	}
 		
@@ -779,8 +699,6 @@ public class GoodsController {
 	@RequestMapping("/goods/writeAnswer.do")
 	@ResponseBody
 	public Map<String, String> writeAnswer(GoodsAnswerVO answerVO, HttpSession session, HttpServletRequest request){
-		
-		log.debug("<<굿즈 문의 답변 등록>> : " + answerVO);
 		
 		Map<String, String> mapJson = new HashMap<String, String>();
 		
@@ -836,7 +754,6 @@ public class GoodsController {
 			list = Collections.emptyList();
 		}
 		
-		log.debug("<<답변목록 - list>>" + list);
 		Map<String, Object> mapJson	= new HashMap<String, Object>();
 		mapJson.put("count", count);
 		mapJson.put("list", list);
@@ -854,8 +771,6 @@ public class GoodsController {
 	@RequestMapping("/goods/deleteAnswer.do")
 	@ResponseBody
 	public Map<String, String> deleteAnswer(@RequestParam int gans_num, HttpSession session){
-		
-		log.debug("<<답변 삭제 - gans_num>> : " + gans_num);
 		
 		Map<String, String> mapJson	= new HashMap<String, String>();
 		
@@ -888,8 +803,6 @@ public class GoodsController {
 	@ResponseBody
 	public Map<String, String> modifyAnswer(GoodsAnswerVO answerVO, HttpSession session, HttpServletRequest request){
 		
-		log.debug("<<GoodsAnswerVO>> : " + answerVO);
-		
 		Map<String, String> mapJson = new HashMap<String, String>();
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
@@ -908,16 +821,6 @@ public class GoodsController {
 		}
 		return mapJson;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }

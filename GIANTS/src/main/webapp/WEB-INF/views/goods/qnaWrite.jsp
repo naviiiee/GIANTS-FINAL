@@ -11,27 +11,37 @@
 		<hr size="0.05" width="100%" noshade>
 	</div>
 	<form:form modelAttribute="goodsQnaVO" action="writeQna.do" id="qna_register">
-		<form:errors element="div" cssColor="error-color"/>
+		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 			<li>
 				<label for="goods_num">문의할 상품</label>
 				<select name="goods_num" required>
-					<option>====선택====</option>
+					<option class="select-gnum" >====선택====</option>
 					<c:forEach var="goods" items="${goods_list}">
-					<option value="${goods.goods_num}"<c:if test="${goods_num == goods.goods_num}">selected</c:if>>${goods.goods_name}</option>
+					<option class="select-gnum" value="${goods.goods_num}"<c:if test="${goods_num == goods.goods_num}">selected</c:if>>${goods.goods_name}</option>
 					</c:forEach>
 				</select>
+				<span class="error-color" id="gnum_error"></span>
+				<script>
+					$(function(){
+						$('#gnum_error').text('상품 필수 선택');
+						
+						if($('.select_gnum').val() > 0){
+							$('#gnum_error').text('');
+						} 
+					});
+				</script>
 			</li>
 			<li>
 				<form:label path="qna_title">제목</form:label>
 				<form:input path="qna_title"/>
-				<form:errors path="qna_title" cssColor="error-color"/>
+				<form:errors path="qna_title" cssClass="error-color"/>
 			</li>
 			<br>
 			<li>
 				<form:label path="qna_content">내용</form:label>
 				<form:textarea path="qna_content"/>
-				<form:errors path="qna_content" cssColor="error-color"/>
+				<form:errors path="qna_content" cssClass="error-color"/>
 			</li>
 		</ul>
 		<div class="align-center">

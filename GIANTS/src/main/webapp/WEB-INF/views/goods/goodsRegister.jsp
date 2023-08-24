@@ -23,7 +23,7 @@
 		<hr size="0.05" width="100%" noshade>
 	</div>
 	<form:form modelAttribute="goodsVO" action="registerGoods.do" id="register_form" enctype="multipart/form-data">
-		<form:errors element="div" cssColor="error-color"/>
+		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 			<li>
 				<%-- 

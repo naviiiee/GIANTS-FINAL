@@ -16,16 +16,25 @@
 			<li> 
 				<label for="goods_num">구매목록</label>
 				<select name="goods_num" id="select_list">
-					<option style="text-align:center;">=====선택======</option>
 					<c:forEach var="goods" items="${order_list}">
-					<option value="${goods.goods_num}"<c:if test="${goods_num == goods.goods_num}">selected</c:if>>${goods.goods_name}</option>
+					<option id="select_gnum" value="${goods.goods_num}"<c:if test="${goods_num == goods.goods_num}">selected</c:if>>${goods.goods_name}</option>
 					</c:forEach>
 				</select>
+				<span class="error-color" id="gnum_error"></span>
+				<script>
+					$(function(){
+						$('#gnum_error').text('상품 필수 선택');
+						
+						if($('#select_gnum').val() > 0){
+							$('#gnum_error').text('');
+						} 
+					});
+				</script>
 			</li>
 			<li>
 				<form:label path="review_title">제목</form:label>
 				<form:input path="review_title"/>
-				<form:errors path="review_title" cssColor="error-color"/>
+				<form:errors path="review_title" cssClass="error-color"/>
 			</li>
 			<li>
 				<fieldset>
@@ -50,7 +59,7 @@
 				<form:label path="review_content">내용</form:label>
 				<br>
 				<form:textarea path="review_content"/>
-				<form:errors path="review_content" cssColor="error-color"/>
+				<form:errors path="review_content" cssClass="error-color"/>
 			</li>
 			<li>
 				<label for="upload">사진</label>

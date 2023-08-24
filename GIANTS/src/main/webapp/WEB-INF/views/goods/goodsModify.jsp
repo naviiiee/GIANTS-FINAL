@@ -24,7 +24,7 @@
 	</div>
 	<form:form modelAttribute="goodsVO" action="goodsUpdate.do" id="update_form" enctype="multipart/form-data">
 		<form:hidden path="goods_num"/>
-		<form:errors element="div" cssColor="error-color"/>
+		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 			<li>
 				<%-- 
@@ -37,7 +37,7 @@
 					<span>(${goodsVO.goods_photoname})파일이 등록되어 있습니다.</span>
 				</div>
 				</c:if>
-				<form:errors path="goods_photo" cssColor="error-color"/>
+				<form:errors path="goods_photo" cssClass="error-color"/>
 			</li>
 			<li> 
 				<form:label path="goods_name">상품명</form:label>

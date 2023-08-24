@@ -13,7 +13,7 @@
 	<form:form modelAttribute="goodsReviewVO" action="updateReview.do" id="review_modify" enctype="multipart/form-data">
 		<form:hidden path="review_num"/>
 		<form:hidden path="goods_num"/>
-		<form:errors element="div" cssColor="error-color"/>
+		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 			<li>
 				<label>작성자</label>
@@ -26,7 +26,7 @@
 			<li>
 				<form:label path="review_title">제목</form:label>
 				<form:input path="review_title"/>
-				<form:errors path="review_title" cssColor="error-color"/>
+				<form:errors path="review_title" cssClass="error-color"/>
 			</li>
 			<li>
 				<fieldset>
