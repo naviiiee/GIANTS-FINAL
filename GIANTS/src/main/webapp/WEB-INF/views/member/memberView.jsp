@@ -36,8 +36,7 @@
 			</tr>
 			<tr>
 				<td>
-					<img src="${pageContext.request.contextPath}/member/photoView.do" 
-					     width="100" height="100" class="my-photo">
+					<img src="${pageContext.request.contextPath}/member/photoView.do" width="100" height="100" class="my-photo">
 				</td>
 				<td>
 					<div class="camera" id="photo_btn">
