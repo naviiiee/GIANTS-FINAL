@@ -19,7 +19,7 @@
 	<!-- 타이틀 시작 -->
 	<div class="main-title">
 		<img class="title-img" src="${pageContext.request.contextPath}/images/title_icon.gif">
-		<h2> 푸드 | 리뷰작성</h2>
+		<h2> 푸드 | 리뷰작성 -> ${comp_name}</h2>
 	</div>
 	<hr noshade="noshade">
 	<!-- 타이틀 끝 -->

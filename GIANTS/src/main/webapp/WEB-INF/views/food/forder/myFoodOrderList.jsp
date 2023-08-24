@@ -3,8 +3,7 @@
 <!-- 유저 주문하기(푸드) 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OSJ/food.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/foodJS/foodCss.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/foodJS/foodOrderForm.js"></script>
-<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/foodJS/myFoodOrderList.js"></script>
 <div class="page-main">
 	<div class="main-title">
 		<img class="title-img" src="${pageContext.request.contextPath}/images/title_icon.gif">
@@ -60,6 +59,9 @@
 						<c:if test="${order.f_order_status==0}">
 							<span class="disable-order"><b>사용완료</b></span><br>
 							<input type="button" value="리뷰쓰기" onclick="location.href='${pageContext.request.contextPath}/food/foodReviewForm.do?f_order_num=${order.f_order_num}'">
+						</c:if>
+						<c:if test="${order.f_order_status==2}">
+							<span class="disable-order"><b>사용완료</b></span><br>
 						</c:if>
 						<c:if test="${order.f_order_status==9}">
 							<span class="disable-order"><b>주문취소</b></span>

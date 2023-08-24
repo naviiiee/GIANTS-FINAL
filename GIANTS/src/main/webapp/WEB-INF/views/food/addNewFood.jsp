@@ -33,22 +33,22 @@
 					<li>
 						<div class="label-wid"><form:label path="food_name">식품명</form:label></div>
 						<form:input path="food_name" placeholder="최대20자" autocomplete="off"/>
-						<form:errors path="food_name"/>
+						<form:errors path="food_name" cssClass="error-color"/>
 					</li>
 					<li>
 						<div class="label-wid"><form:label path="food_price">식품가격</form:label></div>
 						<form:input path="food_price" type="number" placeholder="최대9자리숫자" autocomplete="off"/>
-						<form:errors path="food_price"/>
+						<form:errors path="food_price" cssClass="error-color"/>
 					</li>
 					<li>
 						<div class="label-wid"><form:label path="food_quantity">재고수량</form:label></div>
 						<form:input path="food_quantity" type="number" placeholder="최대9자리숫자" autocomplete="off"/>
-						<form:errors path="food_quantity"/>
+						<form:errors path="food_quantity" cssClass="error-color"/>
 					</li>
 					<li><b>상품설명</b></li>
 					<li>
 						<form:textarea path="food_content"/>
-						<form:errors path="food_content"/>
+						<form:errors path="food_content" cssClass="error-color"/>
 						<script>
 							function MyCustomUploadAdapterPlugin(editor){
 								editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
@@ -84,7 +84,8 @@
 					<li>
 						<div class="label-wid"><label>표시 여부</label></div>
 						<form:radiobutton path="food_status" value="1" id="food_status1"/>비활성화
-						<form:radiobutton path="food_status" value="2" id="food_status2"/>활성화
+						<form:radiobutton path="food_status" value="2" id="food_status2" />활성화
+						<form:errors path="food_status" cssClass="error-color"/>
 					</li>
 				</ul>
 			</div>

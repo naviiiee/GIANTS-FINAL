@@ -277,7 +277,7 @@ public class FoodController {
 								 HttpSession session) {
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if (result.hasErrors()) {
-			log.debug("<<< 푸드 수정 폼 호출중 >>>");
+			//log.debug("<<< 푸드 수정 폼 호출중 >>>");
 			return formFixFood(vo.getFood_num(), model);
 		}
 		
@@ -461,7 +461,6 @@ public class FoodController {
 			mapJson.put("list", numList);
 			mapJson.put("result", "success");
 			
-			log.debug("주문하기 버튼 cartNums 동작중 >>> : " + numList);
 		}
 		
 		
@@ -587,8 +586,6 @@ public class FoodController {
 				model.addAttribute("comp_name", comp.getComp_name());
 			}
 		}
-		log.debug("카트 리스트 출력하기 " + cartList);
-		
 		
 		model.addAttribute("list", cartList);
 		model.addAttribute("total_price", total_price);
@@ -771,7 +768,7 @@ public class FoodController {
 		map.put("f_order_num", f_order_num);
 		map.put("mem_num", user.getMem_num());
 		
-		log.debug("\n\n 내 주문 상세정보 확인 호출 >>>  " + map);
+		//log.debug("\n\n 내 주문 상세정보 확인 호출 >>>  " + map);
 		
 		//주문정보 호출
 		F_orderVO f_order = foodService.selectF_order(map);
@@ -941,8 +938,6 @@ public class FoodController {
 		vo.setMem_num(user.getMem_num());
 		vo.setComp_num(foodService.selectF_orderByNum(f_order_num).getComp_num());
 		vo.setComp_score(Integer.parseInt(vo.getComp_rate()));
-		
-		log.debug("리뷰 등록 동작 확인중 : \n" + vo);
 		
 		foodService.insertFoodReview(vo);
 		foodService.updateF_orderStatusByReview(f_order_num);
