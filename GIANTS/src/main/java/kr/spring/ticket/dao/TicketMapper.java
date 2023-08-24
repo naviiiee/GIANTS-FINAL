@@ -26,7 +26,7 @@ public interface TicketMapper {
 	// 목록
 	@Select("SELECT COUNT(*) FROM tgame")
 	public int selectRowCount(GameVO gameVO);
-	@Select("SELECT * FROM tgame WHERE game_date > SYSDATE ORDER BY game_date ASC")
+	@Select("SELECT * FROM tgame WHERE game_date > SYSDATE-1 ORDER BY game_date ASC")
 	public List<GameVO> selectTicketGameList(GameVO gameVO);
 	// admin용 경기목록?
 	@Select("SELECT * FROM tgame ORDER BY game_date ASC")
