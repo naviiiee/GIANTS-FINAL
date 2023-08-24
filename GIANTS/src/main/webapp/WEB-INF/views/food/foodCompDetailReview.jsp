@@ -3,6 +3,7 @@
 <!-- 매장 상세보기 페이지 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/OSJ/food.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/foodJS/food.public.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/foodJS/foodCompDetailMenu.js"></script>
 <div class="page-main">
 	<div class="main-title">
 		<img class="title-img" src="${pageContext.request.contextPath}/images/title_icon.gif">
@@ -31,6 +32,7 @@
 	<div class="clear"></div>
 	<!-- 매장 상세정보 시작 -->
 	<div class=comp-container>
+		<input type="hidden" name="comp_num" value="${comp.comp_num}" id="showComp">
 		<div class="comp-detail"><!-- 상세페이지 링크는 스크립트로 해결해야함. -->
 			<div class="f-img">
 				<c:if test="${empty comp.comp_photoname || comp.comp_photoname == ''}">
@@ -40,7 +42,7 @@
 					<img src="${pageContext.request.contextPath}/food/compImageView?comp_num=${comp.comp_num}" class="food-main-img">
 				</c:if> 
 			</div>
-			<div class="comp-title"><b>매장명 - ${comp.comp_name}</b></div>
+			<div class="comp-title"><b>${comp.comp_name}</b></div>
 			<div class="comp-score"><b>별점 - ${comp.comp_score}</b></div>
 			<div class="comp-content">
 				${comp.comp_content}
@@ -48,54 +50,32 @@
 		</div>
 		<!-- 메뉴보기, 리뷰보기 -->	
 		<div class="comp-menu">
-			<div id="showMenu" class="food-cbox-on">메뉴 보기</div>
-			<div id="showReview">리뷰 보기</div>
+			<div id="showMenu">메뉴 보기</div>
+			<div id="showReview" class="food-cbox-on">리뷰 보기</div>
 		</div>
 		<!-- 메뉴보기, 리뷰보기 내용-->
 		<div id="compMenu_content">
-			<table id="menu_tb">
-				<tr>
-					<td>
-						<img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-mainImg">
-						<p><b>레드마블치킨</b></p><p class="float-right">20,000원</p>
-					</td>
-					<td>
-						<img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-mainImg">
-						<p><b>레드마블치킨</b></p><p class="float-right">20,000원</p>
-					</td>
-					<td>
-						<img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-mainImg">
-						<p><b>레드마블치킨</b></p><p class="float-right">20,000원</p>
-					</td>
-					<td>
-						<img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-mainImg">
-						<p><b>레드마블치킨</b></p><p class="float-right">20,000원</p>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-mainImg">
-						<p><b>레드마블치킨</b></p><p class="float-right">20,000원</p>
-					</td>
-					<td>
-						<img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-mainImg">
-						<p><b>레드마블치킨</b></p><p class="float-right">20,000원</p>
-					</td>
-					<td>
-						<img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-mainImg">
-						<p><b>레드마블치킨</b></p><p class="float-right">20,000원</p>
-					</td>
-					<td>
-						<img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-mainImg">
-						<p><b>레드마블치킨</b></p><p class="float-right">20,000원</p>
-					</td>
-				</tr>
-			</table>
-			<div class="paging align-center">${page}</div>
+			<c:if test="${count == 0}">
+				<h1 class="align-center">표시할 리뷰가 없습니다.</h1>
+			</c:if>
+			<c:if test="${count > 0}">
+				<div class="compReview-container">
+					<ul>
+						<c:forEach var="review" items="${list}">
+							<li>
+								<div>
+									<h3>${review.review_title}</h3>
+									<h4>별점 - ${review.comp_score}점</h4> <h4>작성일 - ${review.review_regdate}</h4>
+								</div>
+							</li>
+						</c:forEach>
+					</ul>
+				</div>
+				<div class="paging align-center">${page}</div>
+			</c:if>
 		</div>
 		<!-- 메뉴보기, 리뷰보기 내용 끝-->
 	</div>
-	
 	<!-- 목록 끝 -->
 </div>
 <!-- 매장 상세보기 페이지 끝-->

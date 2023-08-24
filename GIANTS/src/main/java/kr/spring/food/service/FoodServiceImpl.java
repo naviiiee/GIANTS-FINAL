@@ -158,6 +158,21 @@ public class FoodServiceImpl implements FoodService{
 		foodMapper.insertFoodReview(review);;
 	}
 
+	@Override
+	public void updateF_orderStatusByReview(String f_order_num) {
+		foodMapper.updateF_orderStatusByReview(f_order_num);
+	}
+
+	@Override
+	public List<Food_reviewVO> selectReviewList(Map<String, Object> map) {
+		return foodMapper.selectReviewList(map);
+	}
+
+	@Override
+	public int selectReviewRowCount(Map<String, Object> map) {
+		return foodMapper.selectReviewRowCount(map);
+	}
+
 	
 
 	

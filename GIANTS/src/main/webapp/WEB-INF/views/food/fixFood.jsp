@@ -98,6 +98,7 @@
 						<label class="label-wid">표시 여부</label>
 						<form:radiobutton path="food_status" value="1" id="food_status1"/> 비활성화
 						<form:radiobutton path="food_status" value="2" id="food_status2"/> 활성화
+						<form:errors path="food_status" cssClass="error-color"/>
 					</li>
 				</ul>
 			</div>

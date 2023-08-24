@@ -31,6 +31,10 @@ public interface FoodService {
 	public List<CompanyDetailVO> selectCompList(Map<String, Object> map);
 	public int selectCompRowCount(Map<String, Object> map);
 	
+	//식품 매장후기
+	public List<Food_reviewVO> selectReviewList(Map<String, Object> map);
+	public int selectReviewRowCount(Map<String, Object> map);
+	
 	//식품 상세정보
 	public FoodVO selectFood(int food_num);
 	
@@ -75,4 +79,6 @@ public interface FoodService {
 	//------------------식품 리뷰--------------------------
 	//리뷰 등록하기
 	public void insertFoodReview(Food_reviewVO review);
+	//리뷰 등록 후, 스탯 변경
+	public void updateF_orderStatusByReview(String f_order_num);
 }

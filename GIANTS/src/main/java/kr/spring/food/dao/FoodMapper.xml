@@ -61,11 +61,15 @@
 			food_price=#{food_price},
 			food_quantity=#{food_quantity},
 			food_content=#{food_content},
+			<if test="food_photo1_name != null">
 			food_photo1=#{food_photo1},
 			food_photo1_name=#{food_photo1_name},
+			</if>
+			<if test="food_photo2_name != null">
 			food_photo2=#{food_photo2},
 			food_photo2_name=#{food_photo2_name},
-			food_modify_Date=sysdate,
+			</if>
+			food_modifydate=SYSDATE,
 			food_status=#{food_status}
 		WHERE food_num=#{food_num}
 	</update>
@@ -155,6 +159,31 @@
            		   )a
            		   WHERE comp_cate=#{comp_cate}
            	  )
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+	<!-- 리뷰목록 레코드수 쿼리 -->
+	<select id="selectReviewRowCount" parameterType="map" resultType="integer">
+		SELECT
+		  COUNT(*)
+		FROM food_review
+		WHERE comp_num=#{comp_num}
+	</select>
+	
+	<!-- 리뷰목록 리스트 페이징 쿼리 -->
+	<select id="selectReviewList" parameterType="map" resultType="food_reviewVO">
+		SELECT
+		  *
+		FROM (SELECT
+				a.*,
+				rownum rnum
+			  FROM (SELECT
+			  		  *
+			  		FROM food_review
+			  		WHERE comp_num=#{comp_num}
+			  		ORDER BY review_num DESC)a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
@@ -359,7 +388,7 @@
 			comp_score,
 			review_title,
 			review_content,
-			review_regdate
+			review_regdate)
 		VALUES(
 			food_review_seq.nextval,
 			#{mem_num},

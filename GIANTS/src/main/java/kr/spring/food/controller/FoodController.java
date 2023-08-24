@@ -182,17 +182,20 @@ public class FoodController {
 									   		 @RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
 									   		 HttpSession session) {
 		//log.debug("기업상세 페이지 진입 >>> comp_num : " + comp_num);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("comp_num", comp_num);
+		
 		CompanyDetailVO comp = foodService.selectComp(comp_num);
-		int count = foodService.selectRowCount(comp_num);
+		int count = foodService.selectReviewRowCount(map);
 		
 		PagingUtil page = new PagingUtil(currentPage, count, 5, 5, "foodCompDetailReview.do");
 		
-		List<FoodVO> list = null;
+		List<Food_reviewVO> list = null;
 		if (count > 0) {
-			//map.put("start", page.getStartRow());
-			//map.put("end", page.getEndRow());
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
 			
-			//list = foodService.selectList(map);
+			list = foodService.selectReviewList(map);
 		}
 		
 		ModelAndView mav = new ModelAndView();
@@ -303,7 +306,7 @@ public class FoodController {
 	public String submitFixFood(@Valid FoodVO vo, BindingResult result,
 								 Model model, HttpServletRequest request,
 								 HttpSession session) {
-		
+/*		
 		if (vo.getFood_photo1().length == 0) 
 			result.rejectValue("food_photo1", "required");
 		if (vo.getFood_photo2().length == 0) 
@@ -313,21 +316,27 @@ public class FoodController {
 			result.rejectValue("food_photo1", "limitUploadSize", new Object[] {"10MB"}, null);
 		if(vo.getFood_photo2().length >= 10*1024*1024) 
 			result.rejectValue("food_photo2", "limitUploadSize", new Object[] {"10MB"}, null);
-		
+*/
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if (result.hasErrors()) {
+			log.debug("<<< 푸드 수정 폼 호출중 >>>");
 			return formFixFood(vo.getFood_num(), model);
 		}
+		log.debug("<<< 푸드 수정 submit 이미지 파일 수정 전 호출중 >>> : " + vo);
+		
 		//upload 이미지 파일들이 모두 동일할 경우 기존 데이터로 세팅
 		FoodVO db_foodVO = foodService.selectFood(vo.getFood_num());
-		if (vo.getFood_photo1_name()==db_foodVO.getFood_photo1_name()) {
-			vo.setFood_photo1(db_foodVO.getFood_photo1());
-			vo.setFood_photo1_name(db_foodVO.getFood_photo1_name());
+		
+		if (vo.getFood_photo1_name()==db_foodVO.getFood_photo1_name() || vo.getFood_photo1_name().trim()=="") {
+			vo.setFood_photo1(null);
+			vo.setFood_photo1_name(null);
 		}
-		if (vo.getFood_photo2_name()==db_foodVO.getFood_photo2_name()) {
-			vo.setFood_photo2(db_foodVO.getFood_photo1());
-			vo.setFood_photo2_name(db_foodVO.getFood_photo1_name());
+		if (vo.getFood_photo2_name()==db_foodVO.getFood_photo2_name() || vo.getFood_photo2_name().trim()=="") {
+			vo.setFood_photo2(null);
+			vo.setFood_photo2_name(null);
 		}
+		
+		log.debug("<<< 푸드 수정 submit 이미지 파일 수정 후 >>> : " + vo);
 		
 		foodService.fixFood(vo);
 		
@@ -901,7 +910,10 @@ public class FoodController {
 		vo.setComp_num(foodService.selectF_orderByNum(f_order_num).getComp_num());
 		vo.setComp_score(Integer.parseInt(vo.getComp_rate()));
 		
-		//foodService.insertFood(vo);
+		log.debug("리뷰 등록 동작 확인중 : \n" + vo);
+		
+		foodService.insertFoodReview(vo);
+		foodService.updateF_orderStatusByReview(f_order_num);
 		
 		//View에 표시할 메세지
 		model.addAttribute("message", "리뷰작성이 완료되었습니다.");

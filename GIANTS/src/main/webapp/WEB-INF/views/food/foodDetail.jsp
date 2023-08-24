@@ -32,7 +32,6 @@
 		</c:if>
 		<c:if test="${!empty user.mem_auth && user.mem_auth == 2 }">
 			<div class="float-right">
-				<input type="button" class="emptyCart" value="카트비우기" >
 			</div>
 		</c:if>
 	</div>
@@ -42,7 +41,7 @@
 		<div class="food-detail"><!-- 상세페이지 링크는 스크립트로 해결해야함. -->
 			<div class="f-line"></div>
 			<div class="f-img"><img src="${pageContext.request.contextPath}/food/imageView.do?food_num=${food.food_num}&food_type=1" class="food-main-img"></div>
-			<div class="food-title"><b>식품명 - ${food.food_name}</b></div>
+			<div class="food-title"><b>${food.food_name}</b></div>
 			<div class="food-price align-right" data-price="${food.food_price}"><b><fmt:formatNumber value="${food.food_price}"/>원</b></div>
 			<div class="food-quantity align-right">
 				<input type="number" id="food_quantity" min="1" max="999" value="1"><b> 개</b> 

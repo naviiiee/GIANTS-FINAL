@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,7 +33,7 @@ public class FoodVO {						//논리명					키 분류
 	private String food_photo2_name;        //식품 상세이미지 명
 	private Date food_regDate;              //식품 등록날짜
 	private Date food_modifyDate;           //식품 수정날짜
-	@NotEmpty
+	@NotNull
 	private int food_status;             //식품 판매상태 ex) 2:판매중, 1:판매중지(상품준비중)
 	
 	//업로드 파일 처리 - 메인

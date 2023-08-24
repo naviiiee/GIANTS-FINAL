@@ -56,7 +56,7 @@
 							<img src="${pageContext.request.contextPath}/food/compImageView?comp_num=${comp.comp_num}" class="food-main-img">
 						</c:if> 
 					</div>
-					<div class="comp-title"><b>매장명 - ${comp.comp_name}</b></div>
+					<div class="comp-title"><b>${comp.comp_name}</b></div>
 					<div class="comp-score"><b>별점 - ${comp.comp_score}</b></div>
 					<div class="comp-content">
 						${comp.comp_content}

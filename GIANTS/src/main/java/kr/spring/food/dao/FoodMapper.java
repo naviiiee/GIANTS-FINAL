@@ -112,5 +112,8 @@ public interface FoodMapper {
 	//------------------식품 리뷰--------------------------
 	//리뷰 등록하기
 	public void insertFoodReview(Food_reviewVO review);
-
+	@Update("UPDATE f_order SET f_order_status=2 WHERE f_order_num=#{f_order_num}")
+	public void updateF_orderStatusByReview(String f_order_num);
+	
+	
 }
