@@ -47,6 +47,7 @@ SELECT
     o.order_regdate, 
     d.goods_dprice, 
     d.order_quantity, 
+    d.goods_name,
     (d.goods_dprice * d.order_quantity) as goods_total_list,
     RANK() OVER (ORDER BY d.goods_dprice * d.order_quantity DESC) as goods_rank
 FROM g_order o 
