@@ -82,7 +82,6 @@ public class GoodsController {
 	@PostMapping("/goods/registerGoods.do")
 	public String submit(@Valid GoodsVO goodsVO, BindingResult result, Model model,
 							HttpServletRequest request, HttpSession session) {
-		log.debug("<<상품등록>> : " + goodsVO);
 		
 		if(goodsVO.getGoods_photo().length >= 5*1024*1024) {//5MB
 			result.rejectValue("goods_photo", "limitUploadSize", new Object[] {"5MB"}, null);
@@ -569,8 +568,6 @@ public class GoodsController {
 	@RequestMapping("/goods/deleteReview.do")
 	public String deleteReview(@RequestParam int review_num) {
 		
-		log.debug("<<리뷰 삭제 - review_num>> : " + review_num);
-		
 		GoodsReviewVO db_review = goodsService.selectGoodsReview(review_num);
 		int goods_num = db_review.getGoods_num();
 		
@@ -729,9 +726,6 @@ public class GoodsController {
 	public Map<String, Object> getAnswerList(@RequestParam(value="pageNum", defaultValue="1") int currentPage, 
 											@RequestParam(value="rowCount", defaultValue="5") int rowCount,
 											@RequestParam int qna_num, HttpSession session){
-		
-		log.debug("<<currentPage>> : " + currentPage);
-		log.debug("<<qna_num>> : " + qna_num);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("qna_num", qna_num);
