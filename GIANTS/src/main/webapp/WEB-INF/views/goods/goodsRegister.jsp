@@ -17,7 +17,7 @@
 }
 </style>
 <div class="page-main">
-		<div class="goods-title">
+	<div class="goods-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>[관리자] 상품등록</h2>
 		<hr size="0.05" width="100%" noshade>
@@ -31,7 +31,7 @@
 				<br> --%>
 				<label for="upload">상품 썸네일 사진</label>
 				<input type="file" id="upload" name="upload" accept="image/gif,image/png,image/jpeg">
-				<form:errors path="goods_photo" cssColor="error-color"/>
+				<form:errors path="goods_photo" cssClass="error-color"/>
 			</li>
 			<li> 
 				<form:label path="goods_name">상품명</form:label>

@@ -42,7 +42,6 @@ public class GoodsServiceImpl implements GoodsService{
 		
 		//상품 정보 저장
 		goodsMapper.insertGoods(goodsVO);
-		goodsMapper.getGoodsTotalStock(goodsVO.getGoods_num());
 		
 		for(int i=0; i < (goodsVO.getGoods_stocks()).length; i++) {
 			String goods_size = goodsVO.getGoods_sizes()[i];
@@ -50,6 +49,8 @@ public class GoodsServiceImpl implements GoodsService{
 			
 			goodsMapper.insertGoodsOption(goodsVO.getGoods_num(), goods_size, goods_stock);
 		}
+		
+		goodsMapper.getGoodsTotalStock(goodsVO.getGoods_num());
 		 
 	}
 

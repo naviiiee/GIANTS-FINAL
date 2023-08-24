@@ -29,7 +29,7 @@ $(function(){
 	
 	$('#goods_stock1').on('keyup mouseup', function(){
 		if($('#goods_stock1').val() == ''){
-			$('#stock_msg1').text('수량 필수 입력. 0이상의 숫자만 입력.');
+			$('#stock_msg1').text('수량 필수 입력. 0 ~ 9999999 사이의 숫자만 입력.');
 			return;
 		} else if($('#goods_stock1').val() < 0 || $('#goods_stock1').val() > 9999999){
 			$('#stock_msg1').text('수량 필수 입력. 0 ~ 9999999 사이의 숫자만 입력.');
@@ -117,7 +117,7 @@ $(function(){
 			$('#stock_msg7').text('');
 		}
 	});
-	
+
 	
 	getCategory();
 	

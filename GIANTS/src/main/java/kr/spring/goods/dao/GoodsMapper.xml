@@ -302,7 +302,8 @@
 			 		*
 			 	  FROM goods_qna q JOIN member m
 			 	  ON q.mem_num=m.mem_num
-			 	  WHERE goods_num=#{goods_num})a)
+			 	  WHERE goods_num=#{goods_num}
+			 	  ORDER BY qna_num DESC)a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>

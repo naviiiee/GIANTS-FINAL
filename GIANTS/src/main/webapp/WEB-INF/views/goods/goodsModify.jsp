@@ -17,7 +17,7 @@
 }
 </style>
 <div class="page-main">
-		<div class="goods-title">
+	<div class="goods-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
 		<h2>[관리자] 상품수정</h2>
 		<hr size="0.05" width="100%" noshade>
@@ -64,7 +64,7 @@
 					<input type="hidden" name="goods_sizes" value="${goodsOptionVO.goods_size}">
 					<label for="goods_stock${status.count}">${goodsOptionVO.goods_size} 수량</label>
 					<input id="goods_stock${status.count}" name="goods_stocks" type="number" value="${goodsOptionVO.goods_stock}" placeholder="재고수량 입력"/>
-					<c:if test="">${goodsOptionVO.goods_size} 수량 필수 입력</c:if>
+					<span id="stock_msg${status.count}"></span>
 				</div>
 				</c:forEach>
 			</li>
@@ -74,22 +74,37 @@
 					<input type="hidden" name="goods_sizes" value="${goodsOptionVO.goods_size}">
 					<label for="goods_stocks7">${goodsOptionVO.goods_size} 수량</label>
 					<input name="goods_stocks" id="goods_stocks7" type="number" value="${goodsOptionVO.goods_stock}" placeholder="재고수량 입력"/>
+					<span id="stock_msg7"></span>
 				</div>
 				</c:forEach>
+				<script>
+					$('#goods_stock7').on('keyup mouseup', function(){
+						if($('#goods_stock7').val() == ''){
+							$('#stock_msg7').text('수량 필수 입력. 0 ~ 9999999 사이의 숫자만 입력.');
+							return;
+						} else if($('#goods_stock7').val() < 0 || $('#goods_stock7').val() > 9999999){
+							$('#stock_msg7').text('수량 필수 입력. 0 ~ 9999999 사이의 숫자만 입력.');
+							$('#goods_stock7').val('');
+							return;
+						} else{
+							$('#stock_msg7').text('');
+						}
+					});
+				</script>
 			</li>
 			<li>
 				<form:label path="goods_price">상품가격</form:label>
-				<form:input path="goods_price" type="number"/>
+				<form:input path="goods_price" type="number"/> 원
 				<form:errors path="goods_price" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="goods_disc">할인율</form:label>
-				<form:input path="goods_disc" type="number"/>
+				<form:input path="goods_disc" type="number"/> %
 				<form:errors path="goods_disc" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="goods_dprice">판매가격</form:label>
-				<form:input path="goods_dprice" type="number" readonly="true"/>
+				<form:input path="goods_dprice" type="number" readonly="true"/> 원
 				<form:errors path="goods_dprice" cssClass="error-color"/>
 			</li>
 			<li>상품설명</li>

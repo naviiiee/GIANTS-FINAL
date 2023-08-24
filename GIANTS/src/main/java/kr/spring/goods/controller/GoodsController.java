@@ -402,6 +402,8 @@ public class GoodsController {
 		model.addAttribute("goodsVO", goodsVO);
 		model.addAttribute("list", list);
 		
+		log.debug("<<로그찍기******>>  " + goodsVO);
+		
 		return "goodsModify";	
 	}
 	
@@ -414,7 +416,8 @@ public class GoodsController {
 			
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
-			return "goodsModify";
+			//return "goodsModify";
+			return formUpdate(goodsVO.getGoods_num(), model);
 		}
 		
 		GoodsVO db_goods = goodsService.selectGoods(goodsVO.getGoods_num());

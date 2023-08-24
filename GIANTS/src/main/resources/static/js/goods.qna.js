@@ -41,8 +41,8 @@ $(function(){
 						a += '<td>' + value.qna_num +'</td>';
 						
 						a += '<td style="cursor:pointer;">';
-						a += '<a href="detailQna.do?qna_num="' + value.qna_num + '></a>';
-						a += value.qna_title + '</td>'
+						a += '<a href="detailQna.do?qna_num=' + value.qna_num + '">';
+						a += value.qna_title + '</a></td>'
 						
 						a += '<td>' + value.mem_id + '</td>';
 						a += '<td>' + value.qna_regdate + '</td>';
