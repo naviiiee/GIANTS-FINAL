@@ -2,6 +2,8 @@ package kr.spring.gorder.vo;
 
 import java.sql.Date;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 import lombok.Getter;
@@ -15,6 +17,8 @@ public class GorderVO {
 	private int opt_num;
 	private int goods_revenue; //상품 매출
 	
+	private String start_month;//01~12월 - sql문에서 비교를 해주기 때문에 날짜 크기 비교 따로 처리 x
+	private String end_month; //01~12월
 	
 	
 	//==========

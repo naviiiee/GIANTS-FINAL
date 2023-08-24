@@ -29,19 +29,9 @@
 			</if>
 		</if>
 	</sql>
-
-
-<resultMap id="gorderDetailVOMap" type="gorderDetailVO">
-    <result property="goods_num" column="goods_num"/>
-    <result property="goods_dprice" column="goods_dprice"/>
-    <result property="order_quantity" column="order_quantity"/>
-    <result property="goods_total_list" column="goods_total_list"/>
-     <result property="goods_rank" column="goods_rank"/>
-</resultMap>
-
-
+	
 <!-- 매출 목록 , 부등호 무조건 변환해줘야함!!!!!!!!!!!-->
-<select id="getListSale" resultMap="gorderDetailVOMap">
+<select id="getListSale" resultType="gorderDetailVO">
 SELECT 
     d.goods_num, 
     o.order_regdate, 
@@ -56,64 +46,18 @@ WHERE o.order_status &lt; 5
 ORDER BY goods_total_list DESC
 </select>
 
-
-	
-	
-	<!-- 매출 목록 -->
-<!-- 	\\<select id="getListRevenue" parameterType="map" resultMap="gorderVO">
-		select d.goods_num, sum(o.order_total) as sub_total
-from g_order_detail d join g_order o
-on d.order_num=o.order_num
-where o.order_status<5
-group by d.goods_num
-	
-<select id="getAllTotalByGoodsNum" parameterType="map" resultMap="gorderVO">	
-	select sum(o.order_total) as sub_total
-from g_order_detail d join g_order o
-on d.order_num=o.order_num
-where o.order_status<5 and d.goods_num=#{goods_num}
-	</select>  -->
-
-<!-- where절이 2개라 오류남 include하면 -->
-<!-- 상품 매출 리스트 + 페이지 처리 
-<select id="revenueGoods" parameterType="map" resultType="gorderVO">
-	SELECT
-		  *
-		FROM (SELECT
-		       a.*,
-		       rownum rnum
-		      FROM(SELECT d.goods_num, sum(goods_total) as goods_revenue
-						FROM g_order_detail d JOIN g_order o 
-						ON d.order_num = o.order_num
-						WHERE d.goods_num=#{goods_num} AND o.order_status<5
-						group by d.goods_num
-		           ORDER BY d.goods_num DESC
-                   )a)
-		<![CDATA[
-		WHERE rnum >= #{start} AND rnum <= #{end}
-		]]>
-</select>-->
-
-<!-- <select id="revenueGoods" parameterType="map" resultType="gorderVO">
-	SELECT
-		  *
-		FROM (SELECT
-		       a.*,
-		       rownum rnum
-		      FROM(SELECT d.goods_num, sum(goods_total) as goods_revenue
-						FROM g_order_detail d JOIN g_order o 
-						ON d.order_num = o.order_num
-						<include refid="orderSearch"></include>
-				   GROUP BY d.goods_num
-		           ORDER BY d.goods_num DESC
-                   )a)
-		<![CDATA[
-		WHERE rnum >= #{start} AND rnum <= #{end}
-		]]>
+<!-- 월 별 매출 -->
+<select id="orderMonth" parameterType="string" resultType="gorderDetailVO" >
+SELECT 
+REPLACE(SUBSTR(TO_CHAR(o.order_regdate,'YYYY-MM'),INSTR(TO_CHAR(o.order_regdate,'YYYY-MM'),'-')+1),'0','') title_month, SUM(d.goods_dprice * d.order_quantity) month_sale
+FROM g_order o 
+JOIN g_order_detail d ON o.order_num = d.order_num
+<![CDATA[	
+WHERE o.order_status < 5 AND TO_CHAR(o.order_regdate,'YYYY') = #{year}  GROUP BY TO_CHAR(o.order_regdate,'YYYY-MM')
+]]>
 </select>
- -->
- 
- 
+	
+
 
 <!-- 상품 주문 -->
 	<insert id="insertOrder" parameterType="gorderVO">
@@ -260,21 +204,4 @@ where o.order_status<5 and d.goods_num=#{goods_num}
 		  order_modifydate=SYSDATE
 		WHERE order_num=#{order_num}
 	</update>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </mapper>

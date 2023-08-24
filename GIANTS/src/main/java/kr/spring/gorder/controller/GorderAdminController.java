@@ -1,5 +1,8 @@
 package kr.spring.gorder.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,79 +37,84 @@ public class GorderAdminController {
 	
 	@RequestMapping("/member/adminMypageSaleManage.do")
 	public String SaleList(HttpSession session, Model model) {
-		//총 매출, 굿즈 별 매출
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		
+		//총 매출, 굿즈 별 매출
 		//총 매출
-		int order_revenue = orderService.allTotal();
-		log.debug("<<매출 - 총매출>> : " + order_revenue);
-
-		// 굿즈 번호 별 총 금액
-		//int all_total = orderService.getAllTotalByGoodsNum(map);
-		//log.debug("<<매출(굿즈 번호 별 총액)>> : " + all_total);
-		//// 개별 상품의 주문 정보 - goods_name의 외 1건 등을 하나하나 읽어올 수 있음
-		//List<GorderDetailVO> detailList = orderService.selectListOrderDetail(order_num);
+		int order_revenue = orderService.allTotal(); //int 형으로 안넘어감 왜???
 		
+		//매출 리스트
 		List<GorderVO> list = null;
 		if(order_revenue>0) {
 			list = orderService.getListSale();
-			log.debug("<<매출 - 모든 내용>> : " + list); 
-			
-			//List<GorderDetailVO> detailList = orderService.selectListOrderDetail(orderVO.getOrder_num());
-			
 			
 		}
-		//if (all_total > 0) {
-		//	list = orderService.getListRevenue(map);
-		//}
+		List<GorderDetailVO> monthList = null;
+		List<Integer> months = new ArrayList<Integer>();
+		List<GorderDetailVO> monthList2 = new ArrayList<GorderDetailVO>();
+		if(order_revenue>0) {
+			Date now = new Date();
+			SimpleDateFormat sf = new SimpleDateFormat("YYYY");
+			monthList = orderService.orderMonth(sf.format(now));
+			log.debug("<<통계>> : " + monthList);
+			for(GorderDetailVO vo : monthList) {
+				months.add(vo.getTitle_month());
+			}
+			GorderDetailVO vo2;
+			for(int i=1;i<=12;i++) {
+				if(!months.contains((Integer)i)) {
+					vo2 = new GorderDetailVO();
+					vo2.setTitle_month(i);
+					vo2.setMonth_sale(0);
+					monthList2.add(vo2);
+				}else {
+					for(GorderDetailVO v : monthList) {
+						if(i == v.getTitle_month()) {
+							monthList2.add(v);
+						}
+					}
+				}
+			}
+		}	
 		model.addAttribute("order_revenue", order_revenue);
 		model.addAttribute("list", list);
+		model.addAttribute("monthList", monthList2);
+		/*
+		model.addAttribute("Jan", Jan); //1월 판매금액
+		model.addAttribute("Feb", Feb);
+		model.addAttribute("Mar", Mar);
+		model.addAttribute("Apr", Apr);
+		model.addAttribute("Jun", Jun);
+		model.addAttribute("Jul", Jul);
+		model.addAttribute("Aug", Aug);
+		model.addAttribute("Sep", Sep);
+		model.addAttribute("Oct", Oct);
+		model.addAttribute("Nov", Nov);
+		model.addAttribute("Dec", Dec);*/
+		
 
 		return "adminMypageSaleManage";
 	}
 	
 	
-
-	/*
-	 *  ====================== 매출 ======================
-	 
-	@RequestMapping("/member/adminMypageSaleManage.do")
-	//String keyfield, String keyword
-	public ModelAndView goodsRevenue(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		//map.put("keyfield", keyfield);
-		//map.put("keyword", keyword);
-
-		// 전체/검색 레코드 수
-		int count = orderService.selectOrderCount(map);
-		log.debug("<<R-count>> : " + count);
-
-		// 페이지 처리
-		//PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 20, 10, "adminMypageSaleManage.do");
-
-		List<GorderVO> list = null;
-		if (count > 0) {
-			//map.put("start", page.getStartRow());
-			//map.put("end", page.getEndRow());
-			list = orderService.revenueGoods(map);
-			log.debug("<<R-매출 >>  : " + list);
-			
-			//List<GorderDetailVO> detailList = null;
-			//detailList = orderService.selectListOrderDetail(order_num);
-			
-			
-		}
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("adminMypageSaleManage");
-		mav.addObject("count", count);
-		mav.addObject("list", list);
-		//mav.addObject("page", page.getPage());
-
-		return mav; 
-	}*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	
 	/*

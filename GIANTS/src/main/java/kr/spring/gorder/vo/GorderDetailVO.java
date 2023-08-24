@@ -23,6 +23,11 @@ public class GorderDetailVO {
 	
 	
 	
+	private int month_sale;
+	private int title_month;
+	
+	
+	
 	
 	private int goods_total_list;
 	private int goods_rank;

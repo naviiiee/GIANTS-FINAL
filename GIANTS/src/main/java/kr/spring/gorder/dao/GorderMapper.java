@@ -15,12 +15,6 @@ import kr.spring.gorder.vo.GorderDetailVO;
 
 @Mapper
 public interface GorderMapper {
-	//매출ㅌxx
-	public List<GorderVO> revenueGoods(Map<String, Object> map);
-	//굿즈 번호 별 총액xx
-		public int getAllTotalByGoodsNum(Map<String, Object> map);
-		// 매출 목록xx
-			public List<GcartVO> getListRevenue(Map<String, Object> map);
 	//===============================
 	//주문 목록 모든 리스트
 	public List<GorderVO> getListSale();		
@@ -32,6 +26,8 @@ public interface GorderMapper {
 	@Select("select goods_name from goods where goods_num=#{goods_num}")
 	public String dbGoodsName(int goods_num);
 	
+	//월 별 매출
+	public  List<GorderDetailVO> orderMonth(String year);
 	
 	//==============================
 	

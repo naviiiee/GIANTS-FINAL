@@ -15,7 +15,7 @@ import kr.spring.gorder.vo.GorderVO;
 @Service
 @Transactional
 public class GorderServiceImpl implements GorderService{
-	
+	  
 	@Autowired
 	GorderMapper orderMapper;
 
@@ -102,20 +102,6 @@ public class GorderServiceImpl implements GorderService{
 		}
 	}
 
-	@Override
-	public List<GorderVO> revenueGoods(Map<String, Object> map) {
-		return orderMapper.revenueGoods(map);
-	}
-
-	@Override
-	public int getAllTotalByGoodsNum(Map<String, Object> map) {
-		return orderMapper.getAllTotalByGoodsNum(map);
-	}
-
-	@Override
-	public List<GcartVO> getListRevenue(Map<String, Object> map) {
-		return orderMapper.getListRevenue(map);
-	}
 
 	@Override
 	public int allTotal() {
@@ -130,9 +116,14 @@ public class GorderServiceImpl implements GorderService{
 
 	@Override
 	public String dbGoodsName(int goods_num) {
-		// TODO Auto-generated method stub
 		return orderMapper.dbGoodsName(goods_num);
 	}
+
+	@Override
+	public List<GorderDetailVO> orderMonth(String year) {
+		return orderMapper.orderMonth(year);
+	}
+
 
 
 

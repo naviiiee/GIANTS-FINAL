@@ -14,8 +14,8 @@ import kr.spring.gorder.vo.GorderVO;
 
 public interface GorderService {
 	
-	//매출 xxx
-	public List<GorderVO> revenueGoods(Map<String, Object> map);
+	//월 별 굿즈이름, 판매량
+	public  List<GorderDetailVO> orderMonth(String year);
 	
 	//총 매출
 	public int allTotal();
@@ -23,11 +23,6 @@ public interface GorderService {
 	
 	//원래 상품명 읽어오기
 	public String dbGoodsName(int goods_num);
-	
-	//굿즈 번호 별 총액
-	public int getAllTotalByGoodsNum(Map<String, Object> map);
-	// 매출 목록
-		public List<GcartVO> getListRevenue(Map<String, Object> map);
 	
 	// 주문 등록
 	// 포인트 누적해주기
