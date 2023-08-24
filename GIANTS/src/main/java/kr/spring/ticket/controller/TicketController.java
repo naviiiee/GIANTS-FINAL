@@ -72,15 +72,9 @@ public class TicketController {
 	/* ----- [Ticket] 예매메인 -----*/
 	@RequestMapping("/ticket/ticketMain.do")
 	public String ticketMain(@RequestParam int game_num, GradeVO gradeVO, Model model) {
-		log.debug("<<gradeVO : >>" + gradeVO);
-		
 		List<GradeVO> list = ticketService.selectGradeList(gradeVO);
 		
-		log.debug("<<list : >>" + list);
-		
 		for(GradeVO grade : list) {
-			log.debug("<<selected_grade>> : " + grade.getGrade_num());
-			
 			int count = ticketService.selectCountByGradeNum(game_num, grade.getGrade_num());
 			int admin_count = ticketService.selectAdminCountByGradeNum(grade.getGrade_num());
 			int quantity = grade.getQuantity();
@@ -98,8 +92,6 @@ public class TicketController {
 	@RequestMapping("/ticket/selectedGrade.do")
 	@ResponseBody
 	public Map<String, Object> selectedGrade(@RequestParam int game_num, @RequestParam int grade_num, SeatVO seatVO, HttpSession session) {
-		log.debug("<<grade_num>> : " + grade_num);
-		
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		
 		List<SeatVO> list = null;
@@ -115,8 +107,6 @@ public class TicketController {
 				int count = ticketService.selectCountBySeatNum(game_num, seat.getSeat_num());
 				int admin = ticketService.selectAdminCountBySeatNum(seat.getSeat_num());
 				int seat_quantity = seat.getSeat_quantity();
-				
-				log.debug("<admin> : " + admin);
 				
 				if(count > 0 || admin > 0) { seat.setSeat_quantity(seat_quantity - count - admin); }
 			}
@@ -139,11 +129,9 @@ public class TicketController {
 		if(user == null) { mapJson.put("result", "logout"); }
 		else {
 			SeatVO seat =  ticketService.selectSeat(seat_num);
-			log.debug("<<seat>> : " + seat);
 			
 			List<SeatStatusVO> status = ticketService.selectStatusByGame(game_num);
 			List<SeatStatusVO> list = ticketService.selectStatusBySeat(seat_num);
-			log.debug("<<list>> : " + list);
 			
 			mapJson.put("result", "success");
 			mapJson.put("seat", seat);
@@ -157,7 +145,6 @@ public class TicketController {
 	/* ----- [Order] 티켓주문 -----*/
 	@PostMapping("/ticket/orderForm.do")
 	public String orderTicketForm(@RequestParam int game_num, @RequestParam int grade_num, @RequestParam int seat_num, SeatVO seatVO, HttpSession session, Model model, HttpServletRequest request) {
-		log.debug("<<seat_info>> : " + seatVO.getSeat_info());
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
@@ -204,8 +191,6 @@ public class TicketController {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		ticketVO.setMem_num(user.getMem_num());
 		
-		log.debug("<<ticketVO>> : " + ticketVO);
-		
 		int check_num = ticketVO.getCheck_num();
 		int status_num = ticketService.selectStatusNum();
 		
@@ -230,7 +215,7 @@ public class TicketController {
 			
 			ticketService.insertSeatStatus(status);			
 		}
-		log.debug("<<status_num>> : " + status_num);
+
 		ticketVO.setStatus_num(status_num);
 		ticketVO.setQrlink("/ticket/ticketQRcode.do?ticket_num=" + ticketVO.getTicket_num());
 		
@@ -281,8 +266,6 @@ public class TicketController {
 			model.addAttribute("grade", grade);
 		}
 		
-		log.debug("<<SeatStatusVO>> : " + list);
-		
 		model.addAttribute("ticket", ticket);
 		model.addAttribute("list", list);
 		
@@ -292,8 +275,6 @@ public class TicketController {
 	/* ----- [Order] 티켓취소 -----*/
 	@RequestMapping("/ticket/deleteTorder.do")
 	public String deleteTorder(@RequestParam String ticket_num) {
-		log.debug("<<주문번호>> : " + ticket_num);
-		
 		TicketVO ticket = ticketService.selectTicket(ticket_num);
 		
 		ticketService.deleteStatus(ticket.getStatus_num());
