@@ -9,6 +9,10 @@ input[type="button"], button[type="submit"]{
 	border:none;
 	cursor:pointer;
 }
+.error-color{
+	color:red;
+}
+
 /* 별점 표시
 ------------------*/
 #review_register fieldset,

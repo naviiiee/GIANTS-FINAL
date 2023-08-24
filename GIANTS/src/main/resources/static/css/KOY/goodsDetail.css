@@ -9,6 +9,10 @@ input[type="button"], input[type="submit"], button[type="submit"]:not(.not-css){
 	border:none;
 	cursor:pointer;
 }
+.error-color{
+	color:red;
+}
+
 /* 굿즈 상세페이지
 ----------------*/
 div.goods-title h2{

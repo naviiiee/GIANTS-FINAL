@@ -9,6 +9,9 @@ input[type="button"], input[type="submit"], button[type="submit"]{
 	border:none;
 	cursor:pointer;
 }
+.error-color{
+	color:red;
+}
 
 /* 굿즈 등록, 수정
 ----------------*/
