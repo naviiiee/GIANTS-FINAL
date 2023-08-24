@@ -11,11 +11,12 @@
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/qrcode.js"></script>
 
-<div class="page-main">
-	<div class="main-title">
-		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
-		<h2>티켓정보</h2>
-		<hr size="0.05" width="100%" noshade>
+<div class="mypage-form2">
+	<div class="mypage-top2">
+		<div class="mypage-top-title">
+			<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+			<h2>티켓정보</h2>
+		</div>
 	</div>
 	<c:if test="${ticket.order_status != 0 && ticket.ticket_status == 1 && user.mem_auth != 9}">
 	<div class="ticket-info align-right">

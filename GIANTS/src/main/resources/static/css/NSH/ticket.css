@@ -155,3 +155,33 @@ input[type="checkbox"], input[type="radio"]{ accent-color:#dd032f; }
 
 /**/
 .edit-btnGroup{ text-align:center; margin:0 auto; }
+
+.mypage-form2{
+	margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    width:1000px;
+}
+
+.mypage-top2{
+	display: flex;
+    position: relative;
+    border-bottom: 1px solid #BBB;
+    padding: 25px 0;
+    height: 40px;
+    z-index: 19;
+    margin:0 auto 30px auto;
+    width:1000px;
+}
+.mypage-top-title .h2{
+	display: inline-block;
+	font-size: 29px;
+	line-height: 30px;
+	padding-top: 10px;
+	background: url(../_Img/Common/ico_mtit.gif) no-repeat 0 0;
+	margin-right: 25px;
+}
+.mypage-top-title .p{
+	display: inline-block;
+	font-size: 13px;
+}
