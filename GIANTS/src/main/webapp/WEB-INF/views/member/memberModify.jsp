@@ -18,43 +18,38 @@
 				<li>
 					<form:label path="memberDetailVO.mem_name">이름(한글)</form:label>
 					<form:input path="memberDetailVO.mem_name"/>
-					<form:errors path="memberDetailVO.mem_name"/>
+					<br><form:errors path="memberDetailVO.mem_name" cssClass="error-color"/>
 				</li>
 				<li>
 					<form:label path="memberDetailVO.mem_public">생년월일</form:label>
 					<form:input path="memberDetailVO.mem_public" placeholder="숫자 6자"/>
-					<form:errors path="memberDetailVO.mem_public"/>
+					<br><form:errors path="memberDetailVO.mem_public"/>
 				</li>
 				<li>
 					<form:label path="memberDetailVO.mem_phone">연락처</form:label>
 					<form:input path="memberDetailVO.mem_phone" placeholder="숫자 11자"/>
-					<form:errors path="memberDetailVO.mem_phone"/>
+					<br><form:errors path="memberDetailVO.mem_phone" cssClass="error-color"/>
 				</li>
 				<li>
 					<form:label path="memberDetailVO.mem_email">이메일</form:label>
 					<form:input path="memberDetailVO.mem_email"/>
-					<input type="button" id="#" value="이메일인증" class="default-btn">
-					<form:errors path="memberDetailVO.mem_email"/>
+					<br><form:errors path="memberDetailVO.mem_email" cssClass="error-color"/>
 				</li>
 				<li>
 					<form:label path="memberDetailVO.mem_zipcode">우편번호</form:label>
 					<form:input path="memberDetailVO.mem_zipcode"/>
 					<input type="button" onclick="execDaumPostcode()" value="우편번호찾기" class="default-btn">
-					<form:errors path="memberDetailVO.mem_zipcode"/>
+					<br><form:errors path="memberDetailVO.mem_zipcode" cssClass="error-color"/>
 				</li>
 				<li>
 					<form:label path="memberDetailVO.mem_address1">주소</form:label>
 					<form:input path="memberDetailVO.mem_address1"/>
-					<form:errors path="memberDetailVO.mem_address1"/>
+					<br><form:errors path="memberDetailVO.mem_address1" cssClass="error-color"/>
 				</li>
 				<li>
 					<form:label path="memberDetailVO.mem_address2">상세주소</form:label>
 					<form:input path="memberDetailVO.mem_address2"/>
-					<form:errors path="memberDetailVO.mem_address2"/>
-				</li>
-				<li>
-					<form:label path="mem_nickname">닉네임</form:label>
-					<form:input path="mem_nickname"/>
+					<br><form:errors path="memberDetailVO.mem_address2" cssClass="error-color"/>
 				</li>
 			</ul>
 		<div class="mypage-bottom">

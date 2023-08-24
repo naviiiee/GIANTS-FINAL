@@ -22,7 +22,7 @@
 			</li>
 			<li>
 				<form:label path="passwd">비밀번호</form:label>
-	            <form:input path="passwd"/>
+	            <form:password path="passwd"/>
 			</li>
 			<li>
 		</ul>

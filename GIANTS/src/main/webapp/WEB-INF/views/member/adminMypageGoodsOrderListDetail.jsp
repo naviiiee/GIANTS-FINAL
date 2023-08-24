@@ -79,19 +79,6 @@
 	    </table>        
 	   <br>
 		</div>
-		<div class="align-center">
-			<c:if test="${orderVO.order_status == 1}">
-			<input type="button" value="배송지정보수정" 
-			 onclick="location.href='${pageContext.request.contextPath}/member/adminMypageGoodsOrderModify.do?order_num=${orderVO.order_num}'" class="default-btn">
-			</c:if>
-			<c:if test="${orderVO.order_status != 5}">
-			<input type="button" value="배송상태수정" onclick="location.href='${pageContext.request.contextPath}/member/adminMypageGoodsOrderStatus.do?order_num=${orderVO.order_num}'" class="default-btn">
-			</c:if>
-			<input type="button" value="주문목록" class="default-btn"
-			 onclick="location.href='${pageContext.request.contextPath}/member/adminMypageGoodsOrderList.do'">
-			<input type="button" value="MyPage" class="default-btn"
-			 onclick="location.href='${pageContext.request.contextPath}/member/myPage.do'">
-		</div>             
 <div class="member-mypage">
 	<table class="mem-table">
 		<tr>
@@ -131,6 +118,19 @@
 			</tr>
 	</table>
 </div>
+<div class="align-center">
+			<c:if test="${orderVO.order_status == 1}">
+			<input type="button" value="배송지정보수정" 
+			 onclick="location.href='${pageContext.request.contextPath}/member/adminMypageGoodsOrderModify.do?order_num=${orderVO.order_num}'" class="default-btn">
+			</c:if>
+			<c:if test="${orderVO.order_status != 5}">
+			<input type="button" value="배송상태수정" onclick="location.href='${pageContext.request.contextPath}/member/adminMypageGoodsOrderStatus.do?order_num=${orderVO.order_num}'" class="default-btn">
+			</c:if>
+			<input type="button" value="주문목록" class="default-btn"
+			 onclick="location.href='${pageContext.request.contextPath}/member/adminMypageGoodsOrderList.do'">
+			<input type="button" value="MyPage" class="default-btn"
+			 onclick="location.href='${pageContext.request.contextPath}/member/myPage.do'">
+		</div>   
 <!-- 주문내역 끝 -->
 
 

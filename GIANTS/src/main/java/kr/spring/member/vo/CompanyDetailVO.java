@@ -4,7 +4,6 @@ import java.sql.Date;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.Getter;
@@ -13,7 +12,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString 
+@ToString(exclude = {"comp_photo"})
 public class CompanyDetailVO {
 	// Comp_detail 테이블
 	@Size(min = 10, max = 10)

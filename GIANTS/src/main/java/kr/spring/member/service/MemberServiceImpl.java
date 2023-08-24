@@ -53,8 +53,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void updateMember(MemberVO member) {
-		memberMapper.updateMember(member);
+	public void updateMember_detail(MemberVO member) {
 		memberMapper.updateMember_detail(member);
 	}
 	

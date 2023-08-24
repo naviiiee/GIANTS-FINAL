@@ -3,9 +3,6 @@ package kr.spring.member.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-
 import kr.spring.food.vo.F_orderVO;
 import kr.spring.food.vo.F_order_detailVO;
 import kr.spring.food.vo.FoodVO;
@@ -30,7 +27,7 @@ public interface MemberService {
 	public CompanyDetailVO selectCompanyDetail(String comp_num); 
 	
 	//회원정보 수정 
-	public void updateMember(MemberVO member);
+	public void updateMember_detail(MemberVO member);
 	public void updateCompany(MemberVO member);
 	public void updateMemberNk(MemberVO member);
 	

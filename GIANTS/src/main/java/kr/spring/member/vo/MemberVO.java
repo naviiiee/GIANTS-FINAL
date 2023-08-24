@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Date;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 import org.springframework.web.multipart.MultipartFile;

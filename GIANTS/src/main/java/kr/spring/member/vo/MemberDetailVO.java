@@ -15,7 +15,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString 
+@ToString(exclude = {"mem_photo"})
 public class MemberDetailVO {
 	private String mem_auid; // 자동로그인
 	@NotEmpty

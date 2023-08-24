@@ -29,7 +29,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.food.vo.F_orderVO;
 import kr.spring.food.vo.F_order_detailVO;
-import kr.spring.food.vo.FoodVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.ticket.vo.TicketVO;
@@ -480,7 +479,7 @@ public class MemberController {
 		memberVO.setMem_num(user.getMem_num());
 		
 		//회원정보변경
-		memberService.updateMember(memberVO);
+		memberService.updateMember_detail(memberVO);
 		
 		return "redirect:/member/myPage.do";
 	}
@@ -628,9 +627,9 @@ public class MemberController {
 		}else { //로그인 된 경우
 			log.debug("<<로그인 된 경우>> : " + user);
 			MemberVO memberVO;
-			byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("/image_bundle/face.png"));
-			model.addAttribute("imageFile", readbyte);
-			model.addAttribute("filename", "face.png");
+			//byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("/image_bundle/face.png"));
+			//model.addAttribute("imageFile", readbyte);
+			//model.addAttribute("filename", "face.png");
 			if(user.getMem_auth()==3) {
 				memberVO = memberService.selectCompany(user.getMem_num());
 			}else{
@@ -655,10 +654,12 @@ public class MemberController {
 	
 	//프로필 사진 처리를 위한 공통 코드
 	public void viewProfile(MemberVO memberVO, HttpServletRequest request, Model model) {
+		
 		log.debug("<<memberVO1>> : " + memberVO);
-		if (memberVO == null || memberVO.getMem_photoname()==null) {
+		if (memberVO == null || (memberVO.getMem_auth()==3 &&  memberVO.getCompanyDetailVO().getComp_photoname()==null) || (memberVO.getMem_auth()==2 &&  memberVO.getMemberDetailVO().getMem_photoname()==null)) {
 			// 업로드한 프로필 사진이 없는 경우
 			log.debug("<<업로드한 프로필 사진이 없는경우>> : " + memberVO);
+			log.debug("<<업로드한 프로필 사진>> : " + memberVO.getMemberDetailVO().getMem_photoname());
 			
 			// 기본 이미지 읽기
 			byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("/image_bundle/face.png"));
@@ -667,7 +668,7 @@ public class MemberController {
 			model.addAttribute("filename", "face.png");
 		
 		} else { // 업로드한 프로필 사진이 있는 경우
-			log.debug("<<업로드한 프로필 사진이 있는경우>>");
+			log.debug("<<업로드한 프로필 사진이 있는경우>> : " + memberVO);
 			
 			if(memberVO.getMem_auth()==3) {
 				model.addAttribute("imageFile", memberVO.getCompanyDetailVO().getComp_photo());

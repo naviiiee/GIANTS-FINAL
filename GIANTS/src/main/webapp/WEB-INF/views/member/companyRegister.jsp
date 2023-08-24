@@ -38,7 +38,7 @@
 				<form:radiobutton path="companyDetailVO.comp_cate" value="3"/>분식
 				<form:radiobutton path="companyDetailVO.comp_cate" value="4"/>간식
 				<form:radiobutton path="companyDetailVO.comp_cate" value="5"/>패스트푸드
-				<form:errors path="companyDetailVO.comp_cate" cssClass="error-color"/>
+				<br><form:errors path="companyDetailVO.comp_cate" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="mem_id">아이디</form:label>
@@ -60,7 +60,7 @@
 			<li>
 				<form:label path="companyDetailVO.comp_email">이메일</form:label>
 				<form:input path="companyDetailVO.comp_email" placeholder="test@test.com"/>
-				<form:errors path="companyDetailVO.comp_email" cssClass="error-color"/>
+				<br><form:errors path="companyDetailVO.comp_email" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="companyDetailVO.comp_zipcode">우편번호</form:label>
