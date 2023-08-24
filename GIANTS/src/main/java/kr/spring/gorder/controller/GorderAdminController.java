@@ -34,6 +34,8 @@ import lombok.extern.slf4j.Slf4j;
 public class GorderAdminController {
 	@Autowired
 	private GorderService orderService;
+	
+	//카테고리 별 매출
 	@RequestMapping("/gorder/adminMypageSaleManage.do")
 	public String SaleListGoods(HttpSession session, Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -42,8 +44,12 @@ public class GorderAdminController {
 		if(order_revenue>0) {
 			categoryList = orderService.countCategory();
 		}
-		
-		
+		//매출 리스트
+		List<GorderVO> list = null;
+		if(order_revenue>0) {
+			list = orderService.getListSale();
+		}
+		model.addAttribute("list", list);
 		model.addAttribute("categoryList", categoryList);
 		return "adminMypageGoodsSale";
 	}
@@ -70,7 +76,6 @@ public class GorderAdminController {
 			Date now = new Date();
 			SimpleDateFormat sf = new SimpleDateFormat("YYYY");
 			monthList = orderService.orderMonth(sf.format(now));
-			log.debug("<<통계>> : " + monthList);
 			for(GorderDetailVO vo : monthList) {
 				months.add(vo.getTitle_month());
 			}
@@ -101,42 +106,10 @@ public class GorderAdminController {
 		model.addAttribute("order_revenue", order_revenue);
 		model.addAttribute("list", list);
 		model.addAttribute("monthList", monthList2);
-		/*
-		model.addAttribute("Jan", Jan); //1월 판매금액
-		model.addAttribute("Feb", Feb);
-		model.addAttribute("Mar", Mar);
-		model.addAttribute("Apr", Apr);
-		model.addAttribute("Jun", Jun);
-		model.addAttribute("Jul", Jul);
-		model.addAttribute("Aug", Aug);
-		model.addAttribute("Sep", Sep);
-		model.addAttribute("Oct", Oct);
-		model.addAttribute("Nov", Nov);
-		model.addAttribute("Dec", Dec);*/
-		
 
 		return "adminMypageSaleManage";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 	
 	/*
 	 * ====================== 주문 목록 ======================
@@ -150,7 +123,6 @@ public class GorderAdminController {
 
 		// 전체/검색 레코드 수
 		int count = orderService.selectOrderCount(map);
-		log.debug("<<count>> : " + count);
 
 		// 페이지 처리
 		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, 20, 10, "adminMypageGoodsOrderList.do");
@@ -160,7 +132,6 @@ public class GorderAdminController {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 			list = orderService.selectListOrder(map);
-			log.debug("<<관리자 주문 내역 >>  : " + list);
 		}
 		
 		ModelAndView mav = new ModelAndView();
@@ -184,11 +155,9 @@ public class GorderAdminController {
 		int order_total = order.getOrder_total() - order.getUsed_point();
 		
 		order.setOrder_total(order_total);
-		log.debug("<<최종금액 세팅해주기>>" + order.getOrder_total());
 		
 		// 개별 상품의 주문 정보 - goods_name의 외 1건 등을 하나하나 읽어올 수 있음
 		List<GorderDetailVO> detailList = orderService.selectListOrderDetail(order_num);
-		log.debug("<<주문상세>> : " + detailList);
 
 
 		model.addAttribute("orderVO", order);
@@ -213,7 +182,6 @@ public class GorderAdminController {
 	@PostMapping("/membmer/adminMypageGoodsOrderModify.do")
 	public String submitModify(@Valid GorderVO orderVO, BindingResult result, Model model, HttpServletRequest request) {
 
-		log.debug("<<관리자) 배송지 정보 수정 GorderVO>> : " + orderVO);
 
 		// 유효성 체크 결과 오류가 있으면 폼 호출
 		if (result.hasErrors()) {
@@ -221,7 +189,6 @@ public class GorderAdminController {
 		}
 
 		GorderVO db_order = orderService.selectOrder(orderVO.getOrder_num());
-		log.debug("<<배송지정보수정 - 배송상태>> : " + db_order.getOrder_status());
 		if (db_order.getOrder_status() == 5) {
 			// 주문취소일 경우 배송지정보를 수정할 수 없음
 			model.addAttribute("message", "사용자가 주문을 취소하여 배송지정보를 수정할 수 없습니다.");
@@ -253,7 +220,6 @@ public class GorderAdminController {
 	@PostMapping("/member/adminMypageGoodsOrderStatus.do")
 	public String submitStatus(GorderVO orderVO, Model model, HttpServletRequest request) {
 		GorderVO db_order = orderService.selectOrder(orderVO.getOrder_num());
-		log.debug("<<배송상태수정>> : " + db_order.getOrder_status());
 
 		if (db_order.getOrder_status() == 5) {
 			// 주문취소시 배송상태수정 불가

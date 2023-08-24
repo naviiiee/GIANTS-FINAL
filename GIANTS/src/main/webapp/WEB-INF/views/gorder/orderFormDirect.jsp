@@ -28,12 +28,6 @@ background-color : #dd032f;
 }
 </style>
 <div class="page-main">
-((list)) : ${list}
-<br>
-((all_tota)) : ${all_total}
-<br>
-((mem_point))  : ${mem_point }
-
 		<h3>주문 리스트</h3>
 		<hr size="1">
 		<br>

@@ -20,7 +20,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/gorder/orderFormDirect.jsp"/>
 	</definition> 
 	
-	<!-- 그 외 -->
+	<!-- 그 외 --> 
 	<!-- 사용자 -->
     <definition name="orderList" extends="memberMypageGoodList">
     	<put-attribute name="title" value="주문목록"/>
