@@ -158,6 +158,6 @@ public interface GoodsMapper {
 	public void deleteGoodsAnswerByQnaNum(Integer qna_num);
 	
 	//할인율 높은 순으로 정렬한 굿즈목록
-	@Select("SELECT * FROM goods WHERE goods_status=1 ORDER BY goods_disc DESC")
+	@Select("SELECT goods_num, goods_name FROM goods WHERE goods_status=1 ORDER BY goods_disc DESC")
 	public List<GoodsVO> selectListByDisc(GoodsVO goodsVO);
 }
