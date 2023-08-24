@@ -47,7 +47,6 @@ public class MemberAdminController {
 		
 		//전체/검색 레코드 수
 		int count = memberService.selectRowCount(map);
-		log.debug("<<count>> : " + count);
 		
 		//페이지 처리
 		PagingUtil page =
@@ -62,7 +61,6 @@ public class MemberAdminController {
 			
 			list = memberService.selectList(map);
 		}
-		log.debug("<<memberDetailVO 체크>> : " + list);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("adminMemberList");
 		mav.addObject("count", count);
@@ -85,8 +83,6 @@ public class MemberAdminController {
 	@PostMapping("/member/admin_updateMem.do")
 	public String submit(MemberVO memberVO, Model model,
 						 HttpServletRequest request) {
-		
-		log.debug("<<관리자 회원권한 수정>> : " + memberVO);
 		
 		//회원권한 수정
 		memberService.updateByAdmin(memberVO);
@@ -113,8 +109,6 @@ public class MemberAdminController {
 	@PostMapping("/member/admin_updateComp.do")
 	public String submitComp(MemberVO memberVO, Model model,
 						 HttpServletRequest request) {
-		
-		log.debug("<<관리자 회원권한 수정>> : " + memberVO);
 		
 		//회원권한 수정
 		memberService.updateByAdmin(memberVO);

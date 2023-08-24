@@ -122,7 +122,6 @@ public class MemberController {
 	 *=====================*/
 	@GetMapping("/member/findPw.do")
 	public String formFindPw() {
-		log.debug("<<findPw>>");
 		return "memberfindPw";
 	}
 	@PostMapping("/member/findPw.do")
@@ -134,20 +133,14 @@ public class MemberController {
 														memberVO.getMem_phone(),
 														memberVO.getMem_email());
 		
-		log.debug("<<db_member>> : " + db_member);
-		log.debug("<<db_member>> : " + memberVO.getMem_id());
-		log.debug("<<db_member>> : " + memberVO.getMem_email());
-		
 		if(db_member!=null) {
 			if(db_member.getMem_id().equals(memberVO.getMem_id())
 					&& db_member.getMemberDetailVO().getMem_name().equals(memberVO.getMem_name())
 					&& db_member.getMemberDetailVO().getMem_phone().equals(memberVO.getMem_phone())
 					&& db_member.getMemberDetailVO().getMem_email().equals(memberVO.getMem_email())) {
-				log.debug("<<조건문 통과>>");
 				
 				 // 난수 생성
 		        String new_passwd = RandomStringUtils.randomNumeric(6);
-		        log.debug("<<new_passwd>> : " + new_passwd);
 		        
 		        // 모델에 난수 추가
 		        model.addAttribute("new_passwd", new_passwd);
@@ -169,7 +162,6 @@ public class MemberController {
 	 *=====================*/
 	@GetMapping("/member/findPwCp.do")
 	public String formFindPwCp() {
-		log.debug("<<findPw>>");
 		return "companyfindPw";
 	}
 	@PostMapping("/member/findPwCp.do")
@@ -186,11 +178,9 @@ public class MemberController {
 					&& db_member.getCompanyDetailVO().getComp_owner().equals(memberVO.getComp_owner())
 					&& db_member.getCompanyDetailVO().getComp_phone().equals(memberVO.getComp_phone())
 					&& db_member.getCompanyDetailVO().getComp_email().equals(memberVO.getComp_email())) {
-				log.debug("<<조건문 통과>>");
 				
 				 // 난수 생성
 		        String new_passwd = RandomStringUtils.randomNumeric(6);
-		        log.debug("<<new_passwd>> : " + new_passwd);
 		        
 		        // 모델에 난수 추가
 		        model.addAttribute("new_passwd", new_passwd);
@@ -215,7 +205,6 @@ public class MemberController {
 	@RequestMapping("/member/confirmId.do")
 	@ResponseBody
 	public Map<String, String> confirmId(@RequestParam String mem_id) {
-		log.debug("<<아이디 중복 체크>> : " + mem_id);
 
 		Map<String, String> mapAjax = new HashMap<String, String>();
 		MemberVO member = memberService.selectCheckMember(mem_id);
@@ -237,7 +226,6 @@ public class MemberController {
 	@RequestMapping("/member/confirmNk.do")
 	@ResponseBody
 	public Map<String, String> confirmNk(@RequestParam String mem_nickname) {
-		log.debug("<<닉네임 중복 체크>> : " + mem_nickname);
 		Map<String, String> mapAjax = new HashMap<String, String>();
 		MemberVO member2 = memberService.selectCheckMemberNk(mem_nickname);
 		if (member2 != null) {
@@ -253,7 +241,6 @@ public class MemberController {
 	@RequestMapping("/member/confirmNkMd.do")
 	@ResponseBody
 	public Map<String, String> confirmNkMd(@RequestParam String mem_nickname) {
-		log.debug("<<닉네임 중복 체크>> : " + mem_nickname);
 		Map<String, String> mapAjax = new HashMap<String, String>();
 		MemberVO member = memberService.selectCheckMemberNk(mem_nickname);
 		if (member != null) {
@@ -277,7 +264,6 @@ public class MemberController {
 	@PostMapping("/member/registerMember.do")
 	public String submit(@Valid MemberVO memberVO, BindingResult result,
 			Model model, HttpServletRequest request, HttpSession session) {
-		logger.debug("<<일반회원가입>> : " + memberVO);
 		// 일반 회원 가입시 auth 값을 2
 		memberVO.setMem_auth(2);
 		memberVO.getMemberDetailVO().setMem_point(0);
@@ -303,16 +289,9 @@ public class MemberController {
 	@PostMapping("/member/registerCompany.do")
 	public String submitCompany(@Valid MemberVO memberVO, BindingResult result,
 								Model model) {
-		// logger.debug("<<기업회원가입>> : " + memberVO);
 		
 		// 기업 회원 가입시 auth 값을 3
 		memberVO.setMem_auth(3);
-
-		/*
-		 * String comp_num = companydetailVO.getComp_num_1() +
-		 * companydetailVO.getComp_num_2() + companydetailVO.getComp_num_3();
-		 * companydetailVO.setComp_num(comp_num);
-		 */
 
 		// 유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) { return formCompany(); }
@@ -340,7 +319,6 @@ public class MemberController {
 							   HttpSession session,
 							   Model model,
 						   	   HttpServletResponse response) {
-		// logger.debug("<<회원로그인>> : " + memberVO);
 
 		// id와 passwd 필드만 유효성 체크 결과 오류가 있으면 폼 호출
 		if (result.hasFieldErrors("mem_id") || result.hasFieldErrors("passwd")) {
@@ -350,7 +328,6 @@ public class MemberController {
 		MemberVO member = null;
 		try {
 			member = memberService.selectCheckMember(memberVO.getMem_id());
-			logger.debug("<<인증전>> : " + member);
 			boolean check = false;
 
 			if (member != null) {
@@ -367,7 +344,6 @@ public class MemberController {
 					if (au_id == null) {
 						// 자동로그인 체크 식별값 생성
 						au_id = UUID.randomUUID().toString();
-						log.debug("<<au_id>> : " + au_id);
 						memberService.updateAu_id(au_id, member.getMem_num());
 					}
 
@@ -383,11 +359,9 @@ public class MemberController {
 				if (member.getMem_auth() == 3) {
 					// 기업일때 기업정보 세팅
 					member = memberService.selectCompany(member.getMem_num());
-					logger.debug("<<인증후==3>> : " + member);
 				} else {
 					// 기업이 아닌 회원정보 세팅 (정지, 일반, 관리자)
 					member = memberService.selectMember(member.getMem_num());
-					logger.debug("<<인증후==2>> : " + member);
 				}
 				// 인증 성공, 로그인 처리
 				session.setAttribute("user", member);
@@ -404,7 +378,6 @@ public class MemberController {
 			} else {
 				result.reject("invalidIdOrPassword");
 			}
-			logger.debug("<<인증 실패>>");
 			return formLogin();
 		}
 	}
@@ -439,13 +412,10 @@ public class MemberController {
 	public String myPage(HttpSession session, Model model) {
 		
 		MemberVO user = (MemberVO) session.getAttribute("user");
-		log.debug("<<MypageUser>> : " + user);
 		// 회원 정보 반환
 		MemberVO member = memberService.selectMember(user.getMem_num());
 		MemberVO company = memberService.selectCompany(user.getMem_num());
 		
-		log.debug("<<MypageMember>> : " + member);
-		log.debug("<<MypageCompany>> : " + company);
 		
 		model.addAttribute("member", member);
 		model.addAttribute("company", company);
@@ -561,8 +531,6 @@ public class MemberController {
 									 HttpSession session,
 									 HttpServletRequest request,
 									 Model model) {
-		//전송된 데이터 값 보기
-		logger.debug("<<비밀번호변경 처리>> : " + memberVO);
 		
 		//now_passwd와 passwd 유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasFieldErrors("now_passwd") || 
@@ -616,20 +584,14 @@ public class MemberController {
 							 HttpServletRequest request,
 							 Model model) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		log.debug("<<프로필 사진 출력>> : " + user);
 		if(user==null) { //로그인이 안된 경우
 			// 기본 이미지 읽기
-			log.debug("<<기본 이미지 읽기>> : " + user);
 			byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("/image_bundle/face.png"));
 			// model을 이용한 전달
 			model.addAttribute("imageFile", readbyte);
 			model.addAttribute("filename", "face.png");
 		}else { //로그인 된 경우
-			log.debug("<<로그인 된 경우>> : " + user);
 			MemberVO memberVO;
-			//byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("/image_bundle/face.png"));
-			//model.addAttribute("imageFile", readbyte);
-			//model.addAttribute("filename", "face.png");
 			if(user.getMem_auth()==3) {
 				memberVO = memberService.selectCompany(user.getMem_num());
 			}else{
@@ -646,7 +608,6 @@ public class MemberController {
 									  HttpServletRequest request,
 									  Model model) {
 		MemberVO memberVO = memberService.selectMember(mem_num);
-		log.debug("<<프로필 사진 호출(회원번호지정) : >>" + memberVO);
 		viewProfile(memberVO, request, model);
 		
 		return "imageView";
@@ -655,11 +616,8 @@ public class MemberController {
 	//프로필 사진 처리를 위한 공통 코드
 	public void viewProfile(MemberVO memberVO, HttpServletRequest request, Model model) {
 		
-		log.debug("<<memberVO1>> : " + memberVO);
 		if (memberVO == null || (memberVO.getMem_auth()==3 &&  memberVO.getCompanyDetailVO().getComp_photoname()==null) || (memberVO.getMem_auth()==2 &&  memberVO.getMemberDetailVO().getMem_photoname()==null)) {
 			// 업로드한 프로필 사진이 없는 경우
-			log.debug("<<업로드한 프로필 사진이 없는경우>> : " + memberVO);
-			log.debug("<<업로드한 프로필 사진>> : " + memberVO.getMemberDetailVO().getMem_photoname());
 			
 			// 기본 이미지 읽기
 			byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("/image_bundle/face.png"));
@@ -668,8 +626,6 @@ public class MemberController {
 			model.addAttribute("filename", "face.png");
 		
 		} else { // 업로드한 프로필 사진이 있는 경우
-			log.debug("<<업로드한 프로필 사진이 있는경우>> : " + memberVO);
-			
 			if(memberVO.getMem_auth()==3) {
 				model.addAttribute("imageFile", memberVO.getCompanyDetailVO().getComp_photo());
 				model.addAttribute("filename", memberVO.getCompanyDetailVO().getComp_photoname());
@@ -687,16 +643,13 @@ public class MemberController {
 	public Map<String,String> updateProfile(MemberVO memberVO,
 											HttpSession session){
 		//updateComProfile
-		logger.debug("<<프로필 사진 업데이트>> : " + memberVO);
 		Map<String,String> mapAjax = new HashMap<String,String>();
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
 		if(user==null) {
-			logger.debug("<<프로필 사진 업데이트 if>> : " + memberVO);
 			mapAjax.put("result", "logout");
 			
 		}else {
-			logger.debug("<<프로필 사진 업데이트 else>> : " + memberVO);
 			memberVO.setMem_num(user.getMem_num());
 			if (user.getMem_auth() == 2) {
 				memberService.updateProfile(memberVO);
@@ -815,8 +768,6 @@ public class MemberController {
 		// 전체/검색 레코드수
 		int count = memberService.selectTicketCountByMem_num(map);
 		
-		log.debug("<<count>> : " + count);
-		
 		//페이지 처리
 		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage, count, 20, 10, "memberMypageTicketList.do");
 		
@@ -854,8 +805,6 @@ public class MemberController {
 		
 		//전체/검색 레코드수
 		int count = memberService.selectOrderCountByMem_num(map);
-		
-		log.debug("<<count>> : " + count);
 		
 		//페이지 처리
 		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,
@@ -912,7 +861,6 @@ public class MemberController {
 	public String submitCancel(@RequestParam String f_order_num,
 			                   Model model, HttpSession session,
 			                   HttpServletRequest request) {
-		log.debug("<<f_order_num>> : " + f_order_num);
 		//주문취소
 		F_orderVO vo = new F_orderVO();
 		

@@ -122,10 +122,6 @@ public class MemberCompanyController {
 		//전체/검색 레코드 수
 		int count = memberService.selectOrderCountFd(map);
 		
-		log.debug("<<count>> : " + count);
-		log.debug("<<user>> : " + user);
-		log.debug("<<map>> : " + map);
-		
 		//페이지 처리
 		PagingUtil page = 
 				new PagingUtil(keyfield,keyword,currentPage,count,20,10,
