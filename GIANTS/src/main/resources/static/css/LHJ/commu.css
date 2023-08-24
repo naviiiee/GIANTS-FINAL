@@ -302,12 +302,7 @@ div.commu-table table th{
 	color: black;
 }
 
-a:hover{ /* 선수 정보 수정 링크 */
-	color: #196ef7;
-}
-a:visited{
-	color: #196ef7;
-}
+
 
 .commu_title a:hover{ /* 커뮤니티 리스트 제목 */
 	color: black;

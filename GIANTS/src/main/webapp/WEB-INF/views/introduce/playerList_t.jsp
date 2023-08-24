@@ -22,7 +22,7 @@ li{
 }
 
 .modifyLink:hover{
-	color:gray;
+	color:#196ef7;
 }
 
 

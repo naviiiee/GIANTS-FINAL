@@ -207,7 +207,7 @@ strong{
 				Mater Dei High School (캘리포니아, 미국)<br>
 				University of Illinois (일리노이, 미국)
 				</dd>
-				<dt>선수 경력사항</dt>
+				<dt>선수경력사항</dt>
 				<dd>
 				(1992) 캔자스시티 로얄스 지명<br>
 				(1992-1999) 캔자스시티 로얄스<br>
@@ -217,7 +217,7 @@ strong{
 				(2005-2006) 현대 유니콘스<br>
 				(2007) 기아 타이거즈
 				</dd>
-				<dt>코치 경력사항</dt>
+				<dt>코치경력사항</dt>
 				<dd>${player.player_career}</dd>
 			</dl>
 		</div>			
