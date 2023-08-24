@@ -34,6 +34,19 @@ import lombok.extern.slf4j.Slf4j;
 public class GorderAdminController {
 	@Autowired
 	private GorderService orderService;
+	@RequestMapping("/gorder/adminMypageSaleManage.do")
+	public String SaleListGoods(HttpSession session, Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<GorderDetailVO> categoryList = null;
+		int order_revenue = orderService.allTotal(); 
+		if(order_revenue>0) {
+			categoryList = orderService.countCategory();
+		}
+		
+		
+		model.addAttribute("categoryList", categoryList);
+		return "adminMypageGoodsSale";
+	}
 	
 	@RequestMapping("/member/adminMypageSaleManage.do")
 	public String SaleList(HttpSession session, Model model) {
@@ -77,6 +90,14 @@ public class GorderAdminController {
 				}
 			}
 		}	
+		
+		List<GorderDetailVO> categoryList = null;
+		if(order_revenue>0) {
+			categoryList = orderService.countCategory();
+		}
+		
+		
+		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("order_revenue", order_revenue);
 		model.addAttribute("list", list);
 		model.addAttribute("monthList", monthList2);

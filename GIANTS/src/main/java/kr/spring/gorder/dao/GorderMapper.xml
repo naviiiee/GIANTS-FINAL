@@ -56,8 +56,17 @@ JOIN g_order_detail d ON o.order_num = d.order_num
 WHERE o.order_status < 5 AND TO_CHAR(o.order_regdate,'YYYY') = #{year}  GROUP BY TO_CHAR(o.order_regdate,'YYYY-MM')
 ]]>
 </select>
-	
-
+<!-- 카테고리 count -->
+<select id="countCategory" resultType="gorderDetailVO">
+select g.goods_category as goods_category, count(g.goods_category) as count_category
+from g_order_detail d join goods g
+on g.goods_num = d.goods_num 
+join g_order o on o.order_num=d.order_num
+<![CDATA[	
+where o.order_status<5
+]]>
+group by g.goods_category
+</select>
 
 <!-- 상품 주문 -->
 	<insert id="insertOrder" parameterType="gorderVO">

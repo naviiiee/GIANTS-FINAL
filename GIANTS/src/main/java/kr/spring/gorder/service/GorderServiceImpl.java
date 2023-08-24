@@ -124,6 +124,11 @@ public class GorderServiceImpl implements GorderService{
 		return orderMapper.orderMonth(year);
 	}
 
+	@Override
+	public List<GorderDetailVO> countCategory() {
+		return orderMapper.countCategory();
+	}
+
 
 
 

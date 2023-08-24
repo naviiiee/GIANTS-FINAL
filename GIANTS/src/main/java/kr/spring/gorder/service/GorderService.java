@@ -21,8 +21,13 @@ public interface GorderService {
 	public int allTotal();
 	public List<GorderVO> getListSale();
 	
+	//카테고리 count
+	public List<GorderDetailVO> countCategory();
+	
 	//원래 상품명 읽어오기
 	public String dbGoodsName(int goods_num);
+	
+	
 	
 	// 주문 등록
 	// 포인트 누적해주기

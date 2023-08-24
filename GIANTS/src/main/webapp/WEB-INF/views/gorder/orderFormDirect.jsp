@@ -14,9 +14,17 @@
 .btn-api{
 	background-color : #dd032f;
 	color : white;
-	width: 800px;
+	width: 1200px;
 	height: 30px;
 	border : none;
+}
+.btn-account{
+background-color : #dd032f;
+	color : white;
+	width: 1200px;
+	height: 30px;
+	border : none;
+
 }
 </style>
 <div class="page-main">
@@ -214,12 +222,15 @@
 		</li>
 		
 		<div id="bankInfo" style="display: none;">
-    		<span>계좌번호: xxx-xxxx-xxxx (3시간 이내로 입금하지 않으면 자동 취소됩니다.)</span>
-    		<!-- select로 처리하고 입력받도록... 가상계좌 구현은 하지 않기? 배송 상태 변경해주는 것처럼 아이디랑 입금자명 일치하면 관리자가 처리해주도록? -->
-		</div>
-		
-		<div id="payInfo" style="display : none;'">
-			<button class="btn-api" id="paymentButton" onclick="requestPay()">주문API</button>
+			<select>
+				<option class="align-center">====3시간 이내로 입금하지 않으면 자동취소됩니다.====</option>
+				<option class="align-center">(국민)123-1234-1234 자이언트</option>
+			</select>
+			<br>
+			<br>
+			<div class="align-center">
+			<button class="btn-account">주문하기</button>
+			</div>
 		</div>
 		<script type="text/javascript">
 		//=================radio 버튼 처리 시작=================
@@ -259,12 +270,12 @@
 		    });		
 		</script>				
 
-		
+		<div class="align-center">
 		<input type="button" value="주문취소" class="default-btn"
 			 onclick="location.href='${pageContext.request.contextPath}/gorder/goods_cart.do'">
 		 <input type="button" value="굿즈목록" class="default-btn"
 		 onclick="location.href='${pageContext.request.contextPath}/goods/goodsList.do'">
-		
+		</div>
 		
 		
 		<c:forEach var="cart" items="${list}">

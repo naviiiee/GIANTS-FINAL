@@ -29,6 +29,10 @@ public interface GorderMapper {
 	//월 별 매출
 	public  List<GorderDetailVO> orderMonth(String year);
 	
+	//카테고리 별 count
+	public List<GorderDetailVO> countCategory();
+	
+	
 	//==============================
 	
 	

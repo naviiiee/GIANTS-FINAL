@@ -446,7 +446,8 @@ a:hover,a:hover,a.visited:hover{color:#333;text-decoration:none;}
 	width:750px;
 	margin:0 auto;
 	padding:50px 0;
-	position:relative;
+    bottom: 0; 
+    
 }
 .footer-top img{ margin-right:5px; }
 .footer-top li{

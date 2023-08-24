@@ -22,7 +22,8 @@ public class GorderDetailVO {
 	private int order_quantity; //구매수량
 	
 	
-	
+	private int count_category; //카테고리 별 수량
+	private int goods_category;
 	private int month_sale;
 	private int title_month;
 	
