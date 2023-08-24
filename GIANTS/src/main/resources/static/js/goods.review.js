@@ -71,7 +71,11 @@ $(function(){
 						}
 						a += '</div>';  
 						
-						a += '<div class="align-left">' + value.review_content + '</div>';
+						a += '<div class="align-left" style="margin-left:10px;">';
+						if(value.review_photoname != null){
+							a += '<img src="../goods/imageView2.do?review_num=' + value.review_num + '" height="300"><br>';
+						}
+						a += value.review_content + '</div>';
 						a += '</td>';
 						a += '</tr>';
 					}); //end of each
