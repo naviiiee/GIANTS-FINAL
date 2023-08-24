@@ -71,9 +71,21 @@ $(document).ready(function() {
 		</c:forEach>
 	</div>
 	<div class="main2">
-		<div class="section-title align-center">
-			<h2>GOOS TOP3</h2>
+		<div class="section-title align-center goods-space">
+			<h2>GOODS TOP3</h2>
 			<hr size="0.05" width="10%" noshade style="margin:3px auto;">
+			<c:forEach var="goods" items="${goodsList}" begin="0" end="6">
+			<div class="news-info">
+				<div class="news-left">
+					<img src="${pageContext.request.contextPath}/goods/imageView.do?goods_num=${goods.goods_num}" height="62">
+				</div>
+				<div class="news-right">
+					<a href="${pageContext.request.contextPath}/goods/goodsDetail.do?goods_num=${goods.goods_num}">
+						<span>${goods.goods_name}</span>
+					</a>
+				</div>
+			</div>
+			</c:forEach>
 		</div>
 	</div>
 	<div class="main3">

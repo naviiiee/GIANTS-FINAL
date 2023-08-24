@@ -100,4 +100,7 @@ public interface GoodsService {
 	public void updateGoodsAnswer(GoodsAnswerVO answer);
 	//답변 삭제
 	public void deleteGoodsAnswer(Integer gans_num);
+	
+	//할인율 높은 순으로 정렬한 굿즈목록
+	public List<GoodsVO> selectListByDisc(GoodsVO goodsVO);
 }

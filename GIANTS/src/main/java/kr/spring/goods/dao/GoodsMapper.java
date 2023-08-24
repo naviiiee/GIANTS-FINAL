@@ -156,4 +156,8 @@ public interface GoodsMapper {
 	
 	//문의글 삭제시 댓글이 존재하면 문의글 삭제 전에 답변 삭제
 	public void deleteGoodsAnswerByQnaNum(Integer qna_num);
+	
+	//할인율 높은 순으로 정렬한 굿즈목록
+	@Select("SELECT * FROM goods WHERE goods_status=1 ORDER BY goods_disc DESC")
+	public List<GoodsVO> selectListByDisc(GoodsVO goodsVO);
 }

@@ -248,4 +248,9 @@ public class GoodsServiceImpl implements GoodsService{
 		return goodsMapper.selectGoodsFavCountByMem_num(map);
 	}
 
+	@Override
+	public List<GoodsVO> selectListByDisc(GoodsVO goodsVO) {
+		return goodsMapper.selectListByDisc(goodsVO);
+	}
+
 }

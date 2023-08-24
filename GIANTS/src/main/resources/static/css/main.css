@@ -21,3 +21,17 @@
 .ticket-btn, .goods-btn{ margin:10px auto; }
 
 .ticket-btn img, .goods-btn img{ width:100%; }
+
+.goods-space .horizontal-area{
+	margin:2px;
+	padding:3px;
+	width:24%;
+	height:150px;
+	float:left;
+	text-align:center;
+	overflow:hidden;
+}
+.goods-space .horizontal-area img{
+	width:100%;
+	height:100px;
+}
