@@ -81,14 +81,12 @@ public class GorderController {
 			}
 			
 			cartVO.setMem_num(user.getMem_num()); //mem_num 세팅
-			GcartVO db_cart = cartService.getCart(cartVO); //장바구니 확인
-			//장바구니에 상품이 있는 경우 상품 삭제 요청
-			if(db_cart !=null) {
-				mapJson.put("result", "clearCart");
-			}
+			int mem_num = cartVO.getMem_num();
+			List<GcartVO> db_cart = orderService.CheckCartToDirectBuy(mem_num);
 			
+			//장바구니에 상품이 있는 경우 상품 삭제 요청
 			//장바구니가 null인 경우 바로 구매 가능
-			else {
+			if(db_cart==null) {
 				int db_stock = cartService.getStockByoption(cartVO.getGoods_num(), cartVO.getOpt_num()); 
 				int order_quantity = cartVO.getOrder_quantity();
 				
@@ -100,6 +98,12 @@ public class GorderController {
 					mapJson.put("result", "success");
 				}
 			}
+			
+			else {
+				mapJson.put("result", "clearCart");
+			}
+			
+			
 			return mapJson;
 		}
 

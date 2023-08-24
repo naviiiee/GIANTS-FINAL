@@ -13,7 +13,9 @@ import kr.spring.gorder.vo.GorderDetailVO;
 import kr.spring.gorder.vo.GorderVO;
 
 public interface GorderService {
-	
+	//바로구매 시 장바구니 null체크 
+	public List<GcartVO> CheckCartToDirectBuy(int mem_num);
+		
 	//월 별 굿즈이름, 판매량
 	public  List<GorderDetailVO> orderMonth(String year);
 	

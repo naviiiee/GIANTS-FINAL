@@ -129,6 +129,11 @@ public class GorderServiceImpl implements GorderService{
 		return orderMapper.countCategory();
 	}
 
+	@Override
+	public List<GcartVO> CheckCartToDirectBuy(int mem_num) {
+		return orderMapper.CheckCartToDirectBuy(mem_num);
+	}
+
 
 
 

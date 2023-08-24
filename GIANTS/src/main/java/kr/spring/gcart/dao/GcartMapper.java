@@ -45,5 +45,5 @@ public interface GcartMapper {
 
 	// 옵션과 상품 번호로 재고 가져오기 - 굿즈쪽으로 나중에 보내기
 	@Select("SELECT goods_stock FROM goods_option WHERE goods_num=#{goods_num} AND opt_num=#{opt_num}")
-	public int getStockByoption(@Param(value = "goods_num") int goods_num, @Param(value = "opt_num")int opt_num);
+	public int getStockByoption(int goods_num, int opt_num);
 }
