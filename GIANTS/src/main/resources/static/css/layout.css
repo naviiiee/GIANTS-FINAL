@@ -255,7 +255,7 @@ a:hover,a:hover,a.visited:hover{color:#333;text-decoration:none;}
 	opacity: 0;
 }
 .sidebar-Fin{
-	background-color: #EF8354;
+	background-color: #dd032f;
 	transition: 1.5s;
 	opacity: 1;
 }
@@ -411,6 +411,7 @@ a:hover,a:hover,a.visited:hover{color:#333;text-decoration:none;}
 }
 
 .sidebar-item-sub a{
+	color:white;
 	display: inline-block;
 	line-height:91px;
 	height: 91px;
