@@ -79,11 +79,6 @@ $(document).ready(function() {
 		<div class="section-title align-center goods-space">
 			<h2>GOODS TOP7</h2>
 			<hr size="0.05" width="10%" noshade style="margin:3px auto;">
-			<c:if test="${user.mem_auth==9}">
-				<button onclick="location.href='${pageContext.request.contextPath}/gorder/adminMypageSaleManage.do'">
-					<h3>굿즈 판매량 확인</h3>
-				</button>
-			</c:if>
 			<c:forEach var="goods" items="${goodsList}" begin="0" end="6">
 			<div class="news-info">
 				<div class="news-left">

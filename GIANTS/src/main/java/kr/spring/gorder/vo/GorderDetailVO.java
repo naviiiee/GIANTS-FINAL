@@ -27,15 +27,10 @@ public class GorderDetailVO {
 	private int month_sale;
 	private int title_month;
 	
-	
-	
+	private int total_sales;
+	private int sales_rank;
 	
 	private int goods_total_list;
-	private int goods_rank;
-	  public void setGoods_rank(int goods_rank) {
-	        this.goods_rank = goods_rank;
-	    }
-	
 	
 	private GoodsVO goodsVO;
 }

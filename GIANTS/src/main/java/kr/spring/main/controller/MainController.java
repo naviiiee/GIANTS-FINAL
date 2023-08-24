@@ -38,11 +38,9 @@ public class MainController {
 		List<GameVO> list = ticketService.selectTicketGameList(gameVO);
 		List<NewsVO> newsList = newsService.selectNewsForMain(newsVO);
 		List<GoodsVO> goodsList = goodsService.selectListByDisc(goodsVO);
-		MemberVO user = (MemberVO)session.getAttribute("user");
 		model.addAttribute("list", list);
 		model.addAttribute("newsList", newsList);
 		model.addAttribute("goodsList", goodsList);
-		model.addAttribute("user", user);
 		
 		return "main";	// Tiles 설정의 식별자(main.jsp 의미 X)
 	}

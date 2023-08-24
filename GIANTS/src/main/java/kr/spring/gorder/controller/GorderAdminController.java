@@ -51,7 +51,7 @@ public class GorderAdminController {
 		}
 		model.addAttribute("list", list);
 		model.addAttribute("categoryList", categoryList);
-		return "adminMypageGoodsSale";
+		return "adminMypageSaleDetail";
 	}
 	
 	@RequestMapping("/member/adminMypageSaleManage.do")
@@ -80,6 +80,7 @@ public class GorderAdminController {
 				months.add(vo.getTitle_month());
 			}
 			GorderDetailVO vo2;
+			//1~12월 루프를 돌면서 인덱스에 값이 존재하지 않으면(null) 0으로 값을 셋팅
 			for(int i=1;i<=12;i++) {
 				if(!months.contains((Integer)i)) {
 					vo2 = new GorderDetailVO();
@@ -96,20 +97,12 @@ public class GorderAdminController {
 			}
 		}	
 		
-		List<GorderDetailVO> categoryList = null;
-		if(order_revenue>0) {
-			categoryList = orderService.countCategory();
-		}
-		
-		
-		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("order_revenue", order_revenue);
 		model.addAttribute("list", list);
 		model.addAttribute("monthList", monthList2);
 
 		return "adminMypageSaleManage";
 	}
-	
 	
 	/*
 	 * ====================== 주문 목록 ======================
