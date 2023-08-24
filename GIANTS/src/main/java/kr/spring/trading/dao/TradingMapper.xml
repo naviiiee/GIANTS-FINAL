@@ -85,6 +85,24 @@
 		SELECT * FROM trading t JOIN member m USING(mem_num) WHERE t.trade_num=#{trade_num}
 	</select>
 	
+	<!-- 글 수정 -->
+	<update id="updateTrading" parameterType="TradingVO">
+		UPDATE 
+			trading
+		SET
+			<if test="trade_photo.length > 0">
+			trade_photo=#{trade_photo},
+			trade_photoname=#{trade_photoname},
+			</if>
+			trade_title=#{trade_title},
+			trade_content=#{trade_content},
+			trade_price=#{trade_price},
+			trade_ip=#{trade_ip},
+			trade_status=#{trade_status},
+			trade_modifydate=SYSDATE
+		WHERE trade_num=#{trade_num}
+	</update>
+		
 	<!-- 회원별 북마크 레코드 수 -->
 	<select id="selectBookmarkRowCount" parameterType="map" resultType="integer">
 		SELECT COUNT(*) FROM bookmark WHERE mem_num=#{mem_num}

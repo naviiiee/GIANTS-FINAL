@@ -178,3 +178,6 @@ ul.detail-info li:last-child{
     width: 800px;
     margin: 0 auto;
 }
+table.striped-table th {
+    color: black;
+}
