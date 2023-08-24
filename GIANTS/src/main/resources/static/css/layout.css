@@ -410,7 +410,7 @@ a:hover,a:hover,a.visited:hover{color:#333;text-decoration:none;}
 	border-bottom: 1px solid white;
 }
 
-.sidebar-item-sub a{
+.sidebar-item-sub a{ 
 	color:white;
 	display: inline-block;
 	line-height:91px;
