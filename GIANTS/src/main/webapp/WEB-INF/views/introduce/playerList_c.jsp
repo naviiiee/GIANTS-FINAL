@@ -17,12 +17,16 @@ li{
 
 .modifyLink{
 	text-decoration : underline;
-	color: #196ef7;
-	text-decoration-color:#196ef7;
+	color: gray;
+	text-decoration-color:gray;
 }
 
 .modifyLink:hover{
 	color:#196ef7;
+}
+
+modifyLink:hover visited{
+	color:gray;
 }
 
 

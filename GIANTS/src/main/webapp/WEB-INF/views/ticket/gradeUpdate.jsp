@@ -9,7 +9,7 @@
 	<div class="mypage-top2">
 		<div class="mypage-top-title">
 			<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
-			<h2>등급등록</h2>
+			<h2>등급수정</h2>
 		</div>
 	</div>
 	<form:form action="gradeUpdate.do" id="update_grade" method="post" modelAttribute="gradeVO">
@@ -18,17 +18,17 @@
 		<ul>
 			<li>
 				<form:label path="title">등급이름</form:label>
-				<form:input path="title" autocomplete="off"/>
+				<form:input path="title" autocomplete="off"/><br>
 				<form:errors path="title" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="price_week">주중가격</form:label>
-				<form:input path="price_week" type="number"/>
+				<form:input path="price_week" type="number"/><br>
 				<form:errors path="price_week" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="price_weekend">주말가격</form:label>
-				<form:input path="price_weekend" type="number"/>
+				<form:input path="price_weekend" type="number"/><br>
 				<form:errors path="price_weekend" cssClass="error-color"/>
 			</li>
 		</ul>

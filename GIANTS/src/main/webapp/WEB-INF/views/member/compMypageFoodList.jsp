@@ -7,7 +7,7 @@
 <div class="mypage-top2">
 	<div class="mypage-top-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
-		<h2>주문내역</h2>
+		<h2>푸드목록</h2>
 		<p>자이언츠 (기업)${company.companyDetailVO.comp_name} 푸드목록 입니다.</p>
 	</div> 
 </div>
