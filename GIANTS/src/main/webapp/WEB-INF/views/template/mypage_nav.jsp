@@ -37,6 +37,7 @@
 		<ul class="mypage-nav">
 			<li><b>관리</b></li>
 			<li><a href="${pageContext.request.contextPath}/member/admin_list.do">회원목록</a></li>
+			<li><a href="${pageContext.request.contextPath}/ticket/gradeList.do">좌석관리</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/adminMypageTicket.do">티켓관리</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/adminMypageGoodsList.do">굿즈목록</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/adminMypageGoodsOrderList.do">굿즈주문내역</a></li>

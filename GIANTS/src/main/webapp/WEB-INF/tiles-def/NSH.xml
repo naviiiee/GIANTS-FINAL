@@ -10,7 +10,7 @@
 	
 	<!-- [Grade] -->
 	<definition name="gradeList" extends="myPage">
-		<put-attribute name="title" value="등급관리"/>
+		<put-attribute name="title" value="좌석관리"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticket/gradeList.jsp"/>
 	</definition>
 	
@@ -20,7 +20,7 @@
 	</definition>
 	
 	<definition name="seatEditForm" extends="myPage">
-		<put-attribute name="title" value="좌석관리"/>
+		<put-attribute name="title" value="좌석상태관리"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticket/seatEdit.jsp"/>
 	</definition>
 	
