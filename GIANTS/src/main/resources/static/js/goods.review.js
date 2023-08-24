@@ -27,9 +27,7 @@ $(function(){
 				}
 				
 				else{
-					/*let page = param.page;*/
-					let startPage = param.start;
-					let endPage = param.end;
+					
 					let list = param.list;
 					
 					a += '<table class="detail-tb align-center">';

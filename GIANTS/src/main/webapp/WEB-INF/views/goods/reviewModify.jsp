@@ -16,11 +16,7 @@
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 			<li>
-				<label>작성자</label>
-				<span>${memberVO.mem_id}</span>
-			</li>
-			<li> <%-- 임시로 상품목록 표시 --%>
-				<label>상품</label>
+				<label>상품명</label>
 				${goodsReviewVO.goods_name}
 			</li>
 			<li>

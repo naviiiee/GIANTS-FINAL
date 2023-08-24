@@ -92,7 +92,7 @@ public interface GoodsMapper {
 	//상품 후기 등록
 	public void insertGoodReview(GoodsReviewVO review);
 	//상품 후기 - 구매목록 불러오기
-	@Select("SELECT * FROM g_order_detail WHERE mem_num=#{mem_num}")
+	@Select("SELECT goods_num, goods_name FROM g_order_detail WHERE mem_num=#{mem_num}")
 	public List<GorderDetailVO> selectOrderDetailList(Integer mem_num);
 	
 	//상품 후기 상세

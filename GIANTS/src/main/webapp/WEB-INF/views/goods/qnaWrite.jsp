@@ -15,8 +15,8 @@
 		<ul>
 			<li>
 				<label for="goods_num">문의할 상품</label>
-				<select name="goods_num" required>
-					<option class="select-gnum" >====선택====</option>
+				<select name="goods_num" id="qna_gnum" required>
+					<option class="select-gnum align-center" value="0">====선택====</option>
 					<c:forEach var="goods" items="${goods_list}">
 					<option class="select-gnum" value="${goods.goods_num}"<c:if test="${goods_num == goods.goods_num}">selected</c:if>>${goods.goods_name}</option>
 					</c:forEach>
@@ -26,9 +26,11 @@
 					$(function(){
 						$('#gnum_error').text('상품 필수 선택');
 						
-						if($('.select_gnum').val() > 0){
+						console.log($('#qna_gnum option:selected').val());
+						if($('#qna_gnum option:selected').val() > 0){
 							$('#gnum_error').text('');
-						} 
+						}
+						
 					});
 				</script>
 			</li>

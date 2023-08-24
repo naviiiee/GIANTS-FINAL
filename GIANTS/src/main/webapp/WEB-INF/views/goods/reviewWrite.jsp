@@ -27,7 +27,8 @@
 						
 						if($('#select_gnum').val() > 0){
 							$('#gnum_error').text('');
-						} 
+						}
+						
 					});
 				</script>
 			</li>
