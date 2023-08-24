@@ -2,6 +2,10 @@
 div.news-title h2{
 	margin-bottom:7px;
 }
+.error-color{
+	color:red;
+}
+
 /* 뉴스 상세
 -------------*/
 input[type="button"], input[type="submit"], button[type="submit"]{
