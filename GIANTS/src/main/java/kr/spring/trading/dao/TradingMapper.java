@@ -22,7 +22,7 @@ public interface TradingMapper {
 	public TradingVO selectTrading(Integer trade_num);
 	@Update("UPDATE trading SET trade_hit=trade_hit+1 WHERE trade_num=#{trade_num}")
 	public void updateHit(Integer trade_num);
-	@Update("UPDATE trading SET trade_title=#{trade_title}, trade_content=#{trade_content}, trade_price=#{trade_price}, trade_photo=#{trade_photo}, trade_photoname=#{trade_photoname}, trade_ip=#{trade_ip}, trade_status=#{trade_status}, trade_modifydate=SYSDATE WHERE trade_num=#{trade_num}")
+	//@Update("UPDATE trading SET trade_title=#{trade_title}, trade_content=#{trade_content}, trade_price=#{trade_price}, trade_photo=#{trade_photo}, trade_photoname=#{trade_photoname}, trade_ip=#{trade_ip}, trade_status=#{trade_status}, trade_modifydate=SYSDATE WHERE trade_num=#{trade_num}")
 	public void updateTrading(TradingVO trading);
 	@Delete("DELETE FROM trading WHERE trade_num=#{trade_num}")
 	public void deleteTrading(Integer trade_num);

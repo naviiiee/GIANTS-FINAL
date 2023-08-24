@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 중고거래 게시판 글 수정 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
@@ -35,6 +36,11 @@
 				<li>
 					<label for="upload"><b>상품 이미지</b></label>
 					<input type="file" name="upload" id="upload" accept="image/gif,image/png,image/jpeg">
+					<c:if test="${!empty tradingVO.trade_photo}">
+					<div id="file_detail">
+						<span>(${tradingVO.trade_photoname})파일이 등록되어 있습니다.</span>
+					</div>
+					</c:if>				
 					<form:errors path="trade_photo" cssClass="error-color"/>
 				</li>
 				<br>

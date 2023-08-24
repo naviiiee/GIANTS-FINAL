@@ -55,7 +55,7 @@ public class TradingController {
 	@PostMapping("/trading/tradingWrite.do")
 	public String submit(@Valid TradingVO tradingVO, BindingResult result, HttpServletRequest request, HttpSession session, Model model) {
 		log.debug("<<중고거래 게시판 글쓰기>> : " + tradingVO);
-		/*
+		
 		//상품 이미지 유효성 체크
 		//MultipartFile -> byte[]로 변환한 경우, 파일을 업로드하지 않으면 byte[]로 생성되고 length는 0임
 		if(tradingVO.getTrade_photo().length == 0) {
@@ -65,7 +65,7 @@ public class TradingController {
 							// 자바빈의 field명,    error code,  	 	에러 문구에 전달할 값,   기본 에러 문구(null일시 사용x)
 			result.rejectValue("trade_photo", "limitUploadSize", new Object[] {"5MB"}, null);
 		}
-		*/
+		
 		//유효성 체크 결과, 오류가 있을 시 form 호출
 		if(result.hasErrors()) {
 			return form();
