@@ -10,18 +10,17 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/chatting.js"></script>
 </head>
 <body>
-<div id="chatting" class="page-main">
-	<!--  
-	<div class="align-right">
-		<input class="classic-btn" type="button" value="채팅방 퇴장" id="delete_chatroom">
+<div id="chatting" class="page-main">  
+	<div class="align-center">
+		<h2>채팅방</h2>
 	</div>
-	-->
+	
 	<div id="chatting_message"></div>
 	
 	<form id="detail_form">
 		<input type="hidden" name="chatroom_num" value="${param.chatroom_num}" id="chatroom_num">
 		<div class="float-left">
-			<textarea rows="5" cols="100" name="message" id="message"></textarea>
+			<textarea rows="5" cols="100" name="message" id="message" placeholder="메시지를 입력하세요."></textarea>
 		</div>
 		<div class="float-left">
 			<input class="classic-btn" type="submit" value="전송하기" id="msg_btn">

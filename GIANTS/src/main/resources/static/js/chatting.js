@@ -54,7 +54,7 @@ $(function(){
 						//날짜 추출 - 공백을 기준으로 날짜,시간 분리하면 0번 인덱스에 저장됨
 						if(chat_date != item.chat_date.split(' ')[0]){
 							chat_date = item.chat_date.split(' ')[0];
-							output += '<div class="date-position"><span>'+chat_date+'</span></div><br><br>';
+							output += '<div class="date-position"><span>'+chat_date+'</span></div><br>';
 						}
 						
 						//일반 메시지
@@ -73,7 +73,7 @@ $(function(){
 						output += ' <span>' + item.message.replace(/\r\n/g, '<br>').replace(/\r/g, '<br>').replace(/\n/g, '<br>') + '</span>';
 						output += '</div>';
 						//시간 추출 - 공백을 기준으로 날짜,시간 분리하면 1번 인덱스에 저장됨
-						output += '<div class="chat_date">' + item.chat_date.split(' ')[1] + '</div>';
+						output += '<div class="chat_date">' + item.chat_date.split(' ')[1] + '</div><br>';
 						output += '</div>';
 						output += '</div><div class="space-clear"></div>';
 						
