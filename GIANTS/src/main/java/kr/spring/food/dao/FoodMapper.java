@@ -115,5 +115,13 @@ public interface FoodMapper {
 	@Update("UPDATE f_order SET f_order_status=2 WHERE f_order_num=#{f_order_num}")
 	public void updateF_orderStatusByReview(String f_order_num);
 	
+	//리뷰 삭제하기
+	@Delete("DELETE FROM food_review WHERE review_num=#{review_num}")
+	public void deleteReview(int review_num);
+	
+	//리뷰 상세정보
+	@Select("SELECT * FROM food_review WHERE review_num=#{review_num}")
+	public Food_reviewVO selectReview(int review_num);
+	
 	
 }

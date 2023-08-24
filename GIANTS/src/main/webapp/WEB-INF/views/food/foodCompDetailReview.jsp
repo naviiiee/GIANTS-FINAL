@@ -54,22 +54,26 @@
 			<div id="showReview" class="food-cbox-on">리뷰 보기</div>
 		</div>
 		<!-- 메뉴보기, 리뷰보기 내용-->
-		<div id="compMenu_content">
+		<div id="compReview_content">
 			<c:if test="${count == 0}">
 				<h1 class="align-center">표시할 리뷰가 없습니다.</h1>
 			</c:if>
 			<c:if test="${count > 0}">
 				<div class="compReview-container">
-					<ul>
+					<table id="review_List">
+						<tr>
+							<th>별점</th>
+							<th>제목</th>
+							<th>작성일</th>
+						</tr>
 						<c:forEach var="review" items="${list}">
-							<li>
-								<div>
-									<h3>${review.review_title}</h3>
-									<h4>별점 - ${review.comp_score}점</h4> <h4>작성일 - ${review.review_regdate}</h4>
-								</div>
-							</li>
+						<tr>
+							<td><b>${review.comp_score}</b> 점</td>
+							<td><a href="${pageContext.request.contextPath}/food/foodReviewDetail.do?review_num=${review.review_num}"><b>${review.review_title}</b></a></td>
+							<td>${review.review_regdate}</td>
+						</tr>
 						</c:forEach>
-					</ul>
+					</table>
 				</div>
 				<div class="paging align-center">${page}</div>
 			</c:if>

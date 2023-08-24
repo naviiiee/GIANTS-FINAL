@@ -45,16 +45,26 @@ public class AppConfig implements WebMvcConfigurer {
 				//오세진 - Food
 				.addPathPatterns("/food/foodCompDetailMenu.do")
 				.addPathPatterns("/food/foodCompDetailReview.do")
-				.addPathPatterns("/food/fixCompFoodList.do")
-				.addPathPatterns("/food/addNewFood.do")
-				.addPathPatterns("/food/fixFood.do")
-				.addPathPatterns("/food/deleteFood.do")
 				.addPathPatterns("/food/foodDetail.do")
 				.addPathPatterns("/food/foodCartCheck.do")
 				.addPathPatterns("/food/foodEmptyCart.do")
 				.addPathPatterns("/food/foodAddCart.do")
-				//오세진 - 푸드 장바구니
+				.addPathPatterns("/food/selectCartNums.do")
+				.addPathPatterns("/food/foodCompDetailReview.do")
+				.addPathPatterns("/food/foodReviewDetail.do")
+				.addPathPatterns("/food/foodReviewDelete.do")
+				.addPathPatterns("/food/foodReviewForm.do")
 				.addPathPatterns("/food/fcart/foodUserCartList.do")
+				.addPathPatterns("/food/fcart/changeCartQuantity.do")
+				.addPathPatterns("/food/fcart/deleteOneCart.do")
+				.addPathPatterns("/food/forder/foodOrderForm.do")
+				.addPathPatterns("/food/forder/checkBeforePayment.do")
+				.addPathPatterns("/food/forder/insertF_orderPay.do")
+				.addPathPatterns("/food/forder/foodOrderSuccess.do")
+				.addPathPatterns("/food/forder/myFoodQRcode.do")
+				.addPathPatterns("/food/forder/myFoodOrderList.do")
+				.addPathPatterns("/food/forder/myFoodOrderDetail.do")
+				
 				//윤현종
 				.addPathPatterns("/member/updateMember.do")
 				.addPathPatterns("/member/updateCompany.do")
@@ -91,7 +101,8 @@ public class AppConfig implements WebMvcConfigurer {
 				.addPathPatterns("/food/fixCompFoodList.do")
 				.addPathPatterns("/food/addNewFood.do")
 				.addPathPatterns("/food/fixFood.do")
-				.addPathPatterns("/food/deleteFood.do");
+				.addPathPatterns("/food/deleteFood.do")
+				.addPathPatterns("/food/companyCheckQR.do");
 		
 		//Admin(관리자) 인터셉터 설정
 		registry.addInterceptor(adminCheck) 

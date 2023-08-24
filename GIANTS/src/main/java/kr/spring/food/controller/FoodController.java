@@ -174,38 +174,7 @@ public class FoodController {
 		return mav;
 	}
 	
-	/*	============================
-	 *		(공용) 기업 상세페이지 - 기업 리뷰
-	 * 	============================*/
-	@RequestMapping("/food/foodCompDetailReview.do")
-	public ModelAndView foodCompDetailReview(@RequestParam String comp_num,
-									   		 @RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
-									   		 HttpSession session) {
-		//log.debug("기업상세 페이지 진입 >>> comp_num : " + comp_num);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("comp_num", comp_num);
-		
-		CompanyDetailVO comp = foodService.selectComp(comp_num);
-		int count = foodService.selectReviewRowCount(map);
-		
-		PagingUtil page = new PagingUtil(currentPage, count, 5, 5, "foodCompDetailReview.do");
-		
-		List<Food_reviewVO> list = null;
-		if (count > 0) {
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
-			
-			list = foodService.selectReviewList(map);
-		}
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("foodCompDetailReview");
-		mav.addObject("comp", comp);
-		mav.addObject("count", count);
-		mav.addObject("list", list);
-		mav.addObject("page", page.getPage());
-		return mav;
-	}
+	
 	
 	/*	========================================
 	 *		(기업) 기업 상세 -> 기업 수정 페이지 
@@ -306,37 +275,27 @@ public class FoodController {
 	public String submitFixFood(@Valid FoodVO vo, BindingResult result,
 								 Model model, HttpServletRequest request,
 								 HttpSession session) {
-/*		
-		if (vo.getFood_photo1().length == 0) 
-			result.rejectValue("food_photo1", "required");
-		if (vo.getFood_photo2().length == 0) 
-			result.rejectValue("food_photo2", "required");
-		
-		if(vo.getFood_photo1().length >= 10*1024*1024) 
-			result.rejectValue("food_photo1", "limitUploadSize", new Object[] {"10MB"}, null);
-		if(vo.getFood_photo2().length >= 10*1024*1024) 
-			result.rejectValue("food_photo2", "limitUploadSize", new Object[] {"10MB"}, null);
-*/
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if (result.hasErrors()) {
 			log.debug("<<< 푸드 수정 폼 호출중 >>>");
 			return formFixFood(vo.getFood_num(), model);
 		}
-		log.debug("<<< 푸드 수정 submit 이미지 파일 수정 전 호출중 >>> : " + vo);
+		
+		//log.debug("<<< 푸드 수정 submit 이미지 파일 수정 전 호출중 >>> : " + vo.getFood_photo1_name().length());
 		
 		//upload 이미지 파일들이 모두 동일할 경우 기존 데이터로 세팅
 		FoodVO db_foodVO = foodService.selectFood(vo.getFood_num());
 		
-		if (vo.getFood_photo1_name()==db_foodVO.getFood_photo1_name() || vo.getFood_photo1_name().trim()=="") {
+		if (vo.getFood_photo1_name()==db_foodVO.getFood_photo1_name() || vo.getFood_photo1_name().length()==0) {
 			vo.setFood_photo1(null);
 			vo.setFood_photo1_name(null);
 		}
-		if (vo.getFood_photo2_name()==db_foodVO.getFood_photo2_name() || vo.getFood_photo2_name().trim()=="") {
+		if (vo.getFood_photo2_name()==db_foodVO.getFood_photo2_name() || vo.getFood_photo2_name().length()==0) {
 			vo.setFood_photo2(null);
 			vo.setFood_photo2_name(null);
 		}
 		
-		log.debug("<<< 푸드 수정 submit 이미지 파일 수정 후 >>> : " + vo);
+		log.debug("<<< 푸드 수정 submit 이미지 파일 수정 후 >>> : " + vo.getFood_photo1_name());
 		
 		foodService.fixFood(vo);
 		
@@ -862,6 +821,79 @@ public class FoodController {
 		model.addAttribute("list", detailList);
 		
 		return "compAfterCheckQR";
+	}
+	
+	
+	/*	============================
+	 *		(공용) 기업 상세페이지 - 기업 리뷰
+	 * 	============================*/
+	@RequestMapping("/food/foodCompDetailReview.do")
+	public ModelAndView foodCompDetailReview(@RequestParam String comp_num,
+									   		 @RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
+									   		 HttpSession session) {
+		//log.debug("기업상세 페이지 진입 >>> comp_num : " + comp_num);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("comp_num", comp_num);
+		
+		CompanyDetailVO comp = foodService.selectComp(comp_num);
+		int count = foodService.selectReviewRowCount(map);
+		
+		PagingUtil page = new PagingUtil(currentPage, count, 10, 5, "foodCompDetailReview.do","&comp_num="+comp_num);
+		
+		List<Food_reviewVO> list = null;
+		if (count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = foodService.selectReviewList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("foodCompDetailReview");
+		mav.addObject("comp", comp);
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		return mav;
+	}
+	
+	/*	============================
+	 *		(공용) 리뷰 상세보기
+	 * 	============================*/
+	@RequestMapping("/food/foodReviewDetail.do")
+	public ModelAndView foodReviewDetail(@RequestParam int review_num, HttpSession session) {
+		
+		Food_reviewVO food_reviewVO = foodService.selectReview(review_num);
+		CompanyDetailVO comp = foodService.selectComp(food_reviewVO.getComp_num());
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("foodReviewDetail");
+		mav.addObject("review", food_reviewVO);
+		mav.addObject("comp", comp);
+		return mav;
+	}
+	
+	// 리뷰 삭제하기	foodReviewDetail.jsp 의 스크립트 동작
+	@RequestMapping("/food/foodReviewDelete.do")
+	@ResponseBody
+	public Map<String,Object> foodReviewDelete(@RequestParam int review_num, HttpSession session){
+		
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		Food_reviewVO db_review = foodService.selectReview(review_num);
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else if (user.getMem_auth()==9) {
+			//관리자인 경우 수행
+			foodService.deleteReview(review_num);
+			mapJson.put("result", "success");
+		}else if(db_review.getMem_num() != user.getMem_num()) {
+			mapJson.put("result", "MisMatchUser");
+		}else{
+			foodService.deleteReview(review_num);
+			mapJson.put("result", "success");
+		}
+		return mapJson;
 	}
 	
 	/*	==========================

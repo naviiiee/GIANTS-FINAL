@@ -81,4 +81,8 @@ public interface FoodService {
 	public void insertFoodReview(Food_reviewVO review);
 	//리뷰 등록 후, 스탯 변경
 	public void updateF_orderStatusByReview(String f_order_num);
+	//리뷰 삭제하기
+	public void deleteReview(int review_num);
+	//리뷰 상세보기
+	public Food_reviewVO selectReview(int review_num);
 }

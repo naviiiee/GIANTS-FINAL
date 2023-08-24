@@ -22,16 +22,25 @@
 		<put-attribute name="body" value="/WEB-INF/views/food/foodCompDetailReview.jsp"/>
 	</definition>
 	
+	<!-- 리뷰 상세보기 -->
+	<definition name="foodReviewDetail" extends="main">
+		<put-attribute name="title" value="식품 - 매장상세정보 - 리뷰상세보기"/>
+		<put-attribute name="body" value="/WEB-INF/views/food/foodReviewDetail.jsp"/>
+	</definition>
+	
+	<!-- 매장수정목록 -->
 	<definition name="fixCompFoodList" extends="main">
 		<put-attribute name="title" value="식품 - 매장 - 수정"/>
 		<put-attribute name="body" value="/WEB-INF/views/food/fixCompFoodList.jsp"/>
 	</definition>
 	
+	<!-- 매장 식품 등록 -->
 	<definition name="addNewFood" extends="main">
 		<put-attribute name="title" value="식품 - 매장 - 메뉴/식품 등록"/>
 		<put-attribute name="body" value="/WEB-INF/views/food/addNewFood.jsp"/>
 	</definition>
 	
+	<!-- 매장 식품 수정 -->
 	<definition name="fixFood" extends="main">
 		<put-attribute name="title" value="식품 - 매장 - 메뉴/식품 수정"/>
 		<put-attribute name="body" value="/WEB-INF/views/food/fixFood.jsp"/>

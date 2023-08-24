@@ -172,6 +172,18 @@ public class FoodServiceImpl implements FoodService{
 	public int selectReviewRowCount(Map<String, Object> map) {
 		return foodMapper.selectReviewRowCount(map);
 	}
+	
+	@Override
+	public void deleteReview(int review_num) {
+		foodMapper.deleteReview(review_num);
+	}
+
+	@Override
+	public Food_reviewVO selectReview(int review_num) {
+		return foodMapper.selectReview(review_num);
+	}
+
+	
 
 	
 

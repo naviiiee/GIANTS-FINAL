@@ -24,4 +24,6 @@ public class Food_reviewVO {				//논리명			키 분류
 	private Date review_mdate;			//후기 수정일
 	@NotEmpty
 	private String comp_rate;
+	
+	private String name;				//작성자명 = buyerName
 }
