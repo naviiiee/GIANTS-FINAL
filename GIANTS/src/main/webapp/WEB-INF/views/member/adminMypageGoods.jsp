@@ -80,7 +80,7 @@
 		<input type="button" value="상품등록" class="defa"
 		       onclick="location.href='${pageContext.request.contextPath}/goods/registerGoods.do'">
 		</p> --%>
-		<p class="Mypage-p">*주문번호 클릭시 상세페이지로 이동</p>
+		<p class="Mypage-p">*상품번호 클릭시 상세페이지로 이동</p>
 		<table class="striped-table">
 			<tr>
 				<th>번호</th>
