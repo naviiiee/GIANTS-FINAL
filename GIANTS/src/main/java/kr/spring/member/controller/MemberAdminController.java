@@ -94,7 +94,7 @@ public class MemberAdminController {
 								  + memberVO.getMem_num());
 		
 		return "common/resultView";
-	}
+	} 
 	
 	/*=====================
 	 * 기업회원 수정폼

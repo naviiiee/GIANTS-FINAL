@@ -251,7 +251,7 @@ public class MemberController {
 		}
 		return mapAjax;
 	}
-	
+	 
 	
 	/*=====================
 	 * 일반 회원가입

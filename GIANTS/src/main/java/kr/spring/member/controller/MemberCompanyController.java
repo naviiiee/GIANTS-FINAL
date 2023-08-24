@@ -134,7 +134,7 @@ public class MemberCompanyController {
 			map.put("end", page.getEndRow());
 			
 			list = memberService.selectListOrderFd(map);
-		}
+		} 
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("compMypageOrderList");
