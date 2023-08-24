@@ -65,8 +65,6 @@ public class TicketAdminController {
 	// 전송된 데이터 처리
 	@PostMapping("/ticket/gradeWrite.do")
 	public String gradeSubmit(@Valid GradeVO gradeVO, BindingResult result) {
-		log.debug("<<등급등록>> : " + gradeVO);
-		
 		if(result.hasErrors()) { return gradeForm(); }
 		
 		ticketService.insertGrade(gradeVO);
@@ -87,8 +85,6 @@ public class TicketAdminController {
 	// 전송된 데이터 처리
 	@PostMapping("/ticket/gradeUpdate.do")
 	public String gradeUpdateSubmit(@Valid GradeVO gradeVO, BindingResult result, HttpServletRequest request, Model model) {
-		log.debug("<<경기상태 수정>> : " + gradeVO);
-		
 		if(result.hasErrors()) { return "gradeUpdate"; }
 		
 		ticketService.updateGrade(gradeVO);
@@ -102,10 +98,7 @@ public class TicketAdminController {
 	/* ----- [Grade] 좌석등급 삭제 -----*/
 	@RequestMapping("/ticket/gradeDelete.do")
 	public String gradeDelete(@RequestParam int grade_num) {
-		log.debug("<<등급 삭제>> : " + grade_num);
-		
 		List<SeatVO> seatVO = ticketService.selectSeatByG(grade_num);
-		log.debug("<<등급 삭제 seatVO>> : " + seatVO);
 		
 		for(SeatVO seat : seatVO) {
 			ticketService.deleteSeatStatusByG(seat.getGrade_num());
@@ -120,8 +113,6 @@ public class TicketAdminController {
 	/* ----- [Seat] 좌석정보 등록 ----- */
 	@PostMapping("/ticket/seatWrite.do")
 	public String seatSubmit(SeatVO seatVO, @RequestParam int grade_num) {
-		log.debug("<<좌석정보등록>> : " + seatVO);
-		
 		seatVO.setGrade_num(grade_num);
 		
 		ticketService.insertSeat(seatVO);
@@ -133,16 +124,12 @@ public class TicketAdminController {
 	/* ----- [Seat] 좌석정보 상세 -----*/
 	@RequestMapping("/ticket/seatList.do")
 	public ModelAndView seatList(@RequestParam int grade_num, SeatVO seatVO) {
-		log.debug("<<등급상세>> : " + grade_num);
-		
 		GradeVO grade = ticketService.selectGrade(grade_num);
 		
 		int count = ticketService.selectSeatCount(seatVO);
 		//int quantity = ticketService.selectSeatQuantity(grade_num);
 		
 		List<SeatVO> list = ticketService.selectSeatList(seatVO);
-		
-		log.debug("<<seatVO>>" + seatVO);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("seatList");
@@ -158,8 +145,6 @@ public class TicketAdminController {
 	/* ----- [Seat] 좌석정보 수정 -----*/
 	@PostMapping("/ticket/seatUpdate.do")
 	public String seatUpdateSubmit(SeatVO seatVO, @RequestParam int seat_num, @RequestParam int grade_num) {
-		log.debug("<<좌석정보 수정>> : " + seatVO);
-		
 		ticketService.updateSeat(seatVO);
 		ticketService.updateGradeQuantity(grade_num);
 		
@@ -205,9 +190,6 @@ public class TicketAdminController {
 			else if(statusVO.getSeat_auth() == 0) { ticketService.deleteAdminStatus(status_num); }
 		}
 		
-		log.debug("<<statusVO>> : " + statusVO);
-		log.debug("<<count>> : " + count);
-		
 		/*
 		 *  
 		 * status.setSeat_num(seat_num); status.setGrade_num(grade_num);
@@ -225,8 +207,6 @@ public class TicketAdminController {
 	// 전송된 데이터 처리
 	@PostMapping("/ticket/gameWrite.do")
 	public String gameSubmit(@Valid GameVO gameVO, BindingResult result) {
-		log.debug("<<경기등록>> : " + gameVO);
-		
 		if(result.hasErrors()) { return gameForm(); }
 		
 		ticketService.insertGame(gameVO);
@@ -247,8 +227,6 @@ public class TicketAdminController {
 	// 전송된 데이터 처리
 	@PostMapping("/ticket/gameUpdate.do")
 	public String gameUpdateSubmit(@Valid GameVO gameVO, BindingResult result, HttpServletRequest request, Model model) {
-		log.debug("<<경기상태 수정>> : " + gameVO);
-		
 		if(result.hasErrors()) { return "gameUpdate"; }
 		
 		if(gameVO.getGame_state() == 3) { ticketService.updateTicketByGameStatus(gameVO.getGame_num()); }
