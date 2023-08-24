@@ -31,9 +31,6 @@
 			</li>
 		</ul>
 	</form>
-	<div class="align-right">
-		<input type="button" value="좌석관리" onclick="location.href='${pageContext.request.contextPath}/ticket/gradeList.do'" class="admin-btn">
-	</div>
 	<c:if test="${count == 0}">
 		<div class="result-display">Ticket구매내역 없습니다.</div>
 	</c:if>
