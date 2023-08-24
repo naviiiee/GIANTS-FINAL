@@ -17,7 +17,7 @@ import kr.spring.news.vo.NewsVO;
 import kr.spring.ticket.service.TicketService;
 import kr.spring.ticket.vo.GameVO;
 import lombok.extern.slf4j.Slf4j;
-
+ 
 @Slf4j
 @Controller
 public class MainController {

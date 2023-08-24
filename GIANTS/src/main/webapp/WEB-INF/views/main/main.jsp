@@ -74,7 +74,7 @@ $(document).ready(function() {
 			</div>
 		</div>
 		</c:forEach>
-	</div>
+	</div> 
 	<div class="main2">
 		<div class="section-title align-center goods-space">
 			<h2>GOODS TOP7</h2>
