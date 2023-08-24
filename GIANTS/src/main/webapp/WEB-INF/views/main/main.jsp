@@ -52,7 +52,7 @@ $(document).ready(function() {
 			<hr size="0.05" width="10%" noshade style="margin:3px auto;">
 			<h3>롯데자이언츠 정규리그 일정</h3>
 		</div>
-		<c:forEach var="game" items="${list}">
+		<c:forEach var="game" items="${list}" begin="0" end="3">
 		<div class="game-info align-center">
 			<div class="div-margin">
 			<c:if test="${game.game_week == 0}"><span class="spanWeek">WEEK</span></c:if>
