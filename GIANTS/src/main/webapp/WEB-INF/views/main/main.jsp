@@ -97,8 +97,10 @@ $(document).ready(function() {
 					<div class="news-info">
 						<div class="news-left"><img src="${pageContext.request.contextPath}/images/giants.png"></div>
 						<div class="news-right">
-							<h3>${fn:substring(news.news_title, 0, 20)}</h3>
-							<p>${fn:substring(news.news_content, 0, 20)}</p>
+							<a href="${pageContext.request.contextPath}/news/newsDetail.do?news_num=${news.news_num}">
+								<h3>${fn:substring(news.news_title, 0, 20)}</h3>
+								<p>${fn:substring(news.news_content, 0, 20)}</p>
+							</a>
 						</div>
 					</div>
 				</c:forEach>
