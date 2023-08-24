@@ -72,7 +72,7 @@ $(document).ready(function() {
 	</div>
 	<div class="main2">
 		<div class="section-title align-center goods-space">
-			<h2>GOODS TOP3</h2>
+			<h2>GOODS TOP7</h2>
 			<hr size="0.05" width="10%" noshade style="margin:3px auto;">
 			<c:forEach var="goods" items="${goodsList}" begin="0" end="6">
 			<div class="news-info">

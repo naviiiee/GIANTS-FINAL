@@ -34,10 +34,12 @@
 					<li>${ticket.game_date} ${ticket.game_time}</li>
 				</ul>
 			</div>
+			<c:if test="${ticket.ticket_status == 1}">
 			<div class="ticket-qr">
 				<input type="hidden" value="http://localhost:8000${ticket.qrlink}" id="qrlink">
 				<div id="qrcode"></div>
 			</div>
+			</c:if>
 		</div>
 		
 		<div class="ticket-content2">
@@ -79,10 +81,12 @@
 					<td>총 결제내역</td>
 					<td>${ticket.pg} <fmt:formatNumber value="${ticket.total_price}"/>원</td>
 				</tr>
+				<c:if test="${user.mem_auth != 9}">
 				<tr>
 					<td>수령방법</td>
-					<td>무인발권기 발권 또는 경기 당일 모바일티켓 발권</td>
+					<td>무인발권기 발권<br>또는 경기 당일 모바일티켓 발권</td>
 				</tr>
+				</c:if>
 			</table>
 		</div>
 	</div>
