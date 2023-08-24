@@ -34,7 +34,7 @@
 					<li>${ticket.game_date} ${ticket.game_time}</li>
 				</ul>
 			</div>
-			<c:if test="${ticket.ticket_status == 1}">
+			<c:if test="${ticket.order_status == 1}">
 			<div class="ticket-qr">
 				<input type="hidden" value="http://localhost:8000${ticket.qrlink}" id="qrlink">
 				<div id="qrcode"></div>
