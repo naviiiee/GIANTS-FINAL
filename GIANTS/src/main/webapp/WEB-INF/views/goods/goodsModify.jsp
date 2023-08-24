@@ -58,7 +58,8 @@
 				<c:if test="${goodsVO.goods_category == 3}">응원도구</c:if>
 				<c:if test="${goodsVO.goods_category == 4}">기타</c:if>
 			</li>
-			<li class="hasSize" style="display:none;">
+				
+			<li>
 				<c:forEach var="goodsOptionVO" items="${list}" varStatus="status">
 				<div>
 					<input type="hidden" name="goods_sizes" value="${goodsOptionVO.goods_size}">
@@ -67,30 +68,6 @@
 					<span id="stock_msg${status.count}"></span>
 				</div>
 				</c:forEach>
-			</li>
-			<li class="hasNoSize" style="display:none;">
-				<c:forEach var="goodsOptionVO" items="${list}" varStatus="status">
-				<div>
-					<input type="hidden" name="goods_sizes" value="${goodsOptionVO.goods_size}">
-					<label for="goods_stocks7">${goodsOptionVO.goods_size} 수량</label>
-					<input name="goods_stocks" id="goods_stocks7" type="number" value="${goodsOptionVO.goods_stock}" placeholder="재고수량 입력"/>
-					<span id="stock_msg7"></span>
-				</div>
-				</c:forEach>
-				<script>
-					$('#goods_stock7').on('keyup mouseup', function(){
-						if($('#goods_stock7').val() == ''){
-							$('#stock_msg7').text('수량 필수 입력. 0 ~ 9999999 사이의 숫자만 입력.');
-							return;
-						} else if($('#goods_stock7').val() < 0 || $('#goods_stock7').val() > 9999999){
-							$('#stock_msg7').text('수량 필수 입력. 0 ~ 9999999 사이의 숫자만 입력.');
-							$('#goods_stock7').val('');
-							return;
-						} else{
-							$('#stock_msg7').text('');
-						}
-					});
-				</script>
 			</li>
 			<li>
 				<form:label path="goods_price">상품가격</form:label>

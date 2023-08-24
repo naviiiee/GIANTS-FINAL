@@ -409,10 +409,9 @@ public class GoodsController {
 	
 	//전송된 데이터 처리
 	@PostMapping("/goods/goodsUpdate.do")
-	public String submitUpdate(@Valid GoodsVO goodsVO, @Valid GoodsOptionVO goodsOptionVO,
-								BindingResult result, HttpServletRequest request, Model model)	{
+	public String submitUpdate(@Valid GoodsVO goodsVO, BindingResult result, 
+								HttpServletRequest request, Model model)	{
 		log.debug("<<상품 정보 수정 - GoodsVO>> : " + goodsVO);
-		log.debug("<<상품 재고 수정 - GoodsOptionVO>> : " + goodsOptionVO);
 			
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
