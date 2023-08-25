@@ -703,7 +703,7 @@ public class MemberController {
 				// 로그아웃
 				session.invalidate();
 				model.addAttribute("accessMsg", "회원탈퇴를 완료했습니다.");
-				return "common/notice";
+				return "memregresult2";
 			}
 			// 인증실패
 			throw new AuthCheckException();
@@ -747,7 +747,7 @@ public class MemberController {
 				// 로그아웃
 				session.invalidate();
 				model.addAttribute("accessMsg", "회원탈퇴를 완료했습니다.");
-				return "common/notice";
+				return "memregresult2";
 			}
 			// 인증실패
 			throw new AuthCheckException();
