@@ -86,7 +86,7 @@ public class GorderController {
 			
 			//장바구니에 상품이 있는 경우 상품 삭제 요청
 			//장바구니가 null인 경우 바로 구매 가능
-			if(db_cart==null) {
+			if(db_cart!=null) {
 				int db_stock = cartService.getStockByoption(cartVO.getGoods_num(), cartVO.getOpt_num()); 
 				int order_quantity = cartVO.getOrder_quantity();
 				
