@@ -64,7 +64,11 @@ public class MemberController {
 	public String form() {
 		return "commonRegister";
 	}
-
+	
+	@RequestMapping("/member/memregresult.do")
+	public String formm() {
+		return "memregresult";
+	}
 	
 	/*=====================
 	 * 일반회원 아이디 찾기
@@ -275,7 +279,7 @@ public class MemberController {
 		memberService.insertMember(memberVO);
 		model.addAttribute("accessMsg", "(일반)회원가입이 완료되었습니다.");
 
-		return "common/notice";
+		return "memregresult";
 	}
 	
 	/*=====================
@@ -300,7 +304,7 @@ public class MemberController {
 		memberService.insertCompany(memberVO);
 		model.addAttribute("accessMsg", "(기업)회원가입이 완료되었습니다.");
 
-		return "common/notice";
+		return "memregresult";
 	}
 	
 
