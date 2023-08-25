@@ -39,7 +39,7 @@
 					<img src="${pageContext.request.contextPath}/images/product-ready.png" class="food-main-img">
 				</c:if> 
 				<c:if test="${!empty comp.comp_photoname}">
-					<img src="${pageContext.request.contextPath}/food/compImageView?comp_num=${comp.comp_num}" class="food-main-img">
+					<img src="${pageContext.request.contextPath}/food/compImageView.do?comp_num=${comp.comp_num}" class="food-main-img">
 				</c:if> 
 			</div>
 			<div class="comp-title"><b>${comp.comp_name}</b></div>

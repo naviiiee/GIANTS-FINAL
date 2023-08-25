@@ -68,6 +68,8 @@ public class FoodController {
 	@RequestMapping("/food/compImageView.do")
 	public ModelAndView compImg(@RequestParam String comp_num) {
 		
+		
+		log.debug("기업 프로필 확인중 >>> "+ comp_num);
 		CompanyDetailVO comp = memberService.selectCompanyDetail(comp_num);
 		
 		ModelAndView mav = new ModelAndView();
