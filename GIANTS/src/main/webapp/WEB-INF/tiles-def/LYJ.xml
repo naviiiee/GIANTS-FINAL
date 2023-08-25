@@ -34,8 +34,8 @@
     	<put-attribute name="title" value="주문수정"/>
 	    <put-attribute name="body" value="/WEB-INF/views/gorder/user_modifyForm.jsp"/>
     </definition>
-    <!-- 매출관리 -->
-	<definition name="adminMypageSaleDetail" extends="main">
+    <!-- 매출관리 -->   
+	<definition name="adminMypageSaleDetail" extends="main"> 
 		<put-attribute name="title" value="매출상세"/>
 		<put-attribute name="body" value="/WEB-INF/views/gorder/adminMypageSaleManage.jsp"/>
 	</definition>	
