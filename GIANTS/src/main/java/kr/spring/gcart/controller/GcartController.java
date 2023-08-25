@@ -28,6 +28,7 @@ import kr.spring.gcart.vo.GcartVO;
 import kr.spring.goods.service.GoodsService;
 import kr.spring.goods.vo.GoodsOptionVO;
 import kr.spring.goods.vo.GoodsVO;
+import kr.spring.gorder.service.GorderService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
 import kr.spring.util.StringUtil;
@@ -40,6 +41,10 @@ public class GcartController {
 	private GcartService cartService;
 	@Autowired
 	private GoodsService goodsService;
+	@Autowired
+	private GorderService orderService;
+	
+
 
 	/*
 	 * ======================== 장바구니 목록 조회 ========================

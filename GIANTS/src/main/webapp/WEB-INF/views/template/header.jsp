@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style>
+.cart_count{
+	position : relative;
+	right : 200px;
+	color : red;
+}
+</style>
+
 <div id="header">
 	<div id="header_bg_top"></div>
 	<div id="header_bg_bottom"></div>
@@ -21,7 +29,11 @@
 				<c:if test="${!empty user && user.mem_auth == 2}">
 					<li class="top-menu-mypage"><a href="${pageContext.request.contextPath}/member/myPage.do"><img src="${pageContext.request.contextPath}/images/캐릭터.png">마이페이지</a></li>
 					<li class="top-menu-food-cart"><a href="${pageContext.request.contextPath}/food/fcart/foodUserCartList.do">장바구니(푸드)</a></li>
+					
 					<li class="top-menu-cart"><a href="${pageContext.request.contextPath}/gorder/goods_cart.do">장바구니</a></li>
+					<c:if test="${cart_count > 0 }">
+					 	<span class="cart_count">${cart_count}</span>
+					</c:if>
 					<li class="top-menu-chat"><a href="${pageContext.request.contextPath}/chat/chatList.do"><img id="chatlist" src="${pageContext.request.contextPath}/images/speech-bubble.png"></a></li> 
 				</c:if>
 				<c:if test="${!empty user && user.mem_auth == 3}">

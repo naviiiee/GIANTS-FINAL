@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.spring.gcart.vo.GcartVO;
 import kr.spring.goods.service.GoodsService;
 import kr.spring.goods.vo.GoodsVO;
+import kr.spring.gorder.service.GorderService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.news.service.NewsService;
 import kr.spring.news.vo.NewsVO;
@@ -30,6 +32,9 @@ public class MainController {
 	@Autowired
 	private GoodsService goodsService;
 	
+	@Autowired
+	private GorderService orderService;
+	
 	@RequestMapping("/")
 	public String main() { return "redirect:/main/main.do"; }
 	
@@ -38,6 +43,18 @@ public class MainController {
 		List<GameVO> list = ticketService.selectTicketGameList(gameVO);
 		List<NewsVO> newsList = newsService.selectNewsForMain(newsVO);
 		List<GoodsVO> goodsList = goodsService.selectListByDisc(goodsVO);
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		if(user!=null) {
+			int mem_num = user.getMem_num();
+			List<GcartVO> cartList = orderService.CheckCartToDirectBuy(mem_num);
+			int cart_count = cartList.size();
+			model.addAttribute("cart_count", cart_count);
+		}
+		
+		
+		
 		model.addAttribute("list", list);
 		model.addAttribute("newsList", newsList);
 		model.addAttribute("goodsList", goodsList);

@@ -84,11 +84,18 @@ public class GorderController {
 			int mem_num = cartVO.getMem_num();
 			List<GcartVO> db_cart = orderService.CheckCartToDirectBuy(mem_num);
 			
+			
+			
+			
 			//장바구니에 상품이 있는 경우 상품 삭제 요청
 			//장바구니가 null인 경우 바로 구매 가능
-			if(db_cart!=null) {
+			if(db_cart.size()==0) {
+				
 				int db_stock = cartService.getStockByoption(cartVO.getGoods_num(), cartVO.getOpt_num()); 
 				int order_quantity = cartVO.getOrder_quantity();
+				
+				log.debug("<<db_stock 확인>> : " + db_stock);
+				log.debug("<<order_quantity 확인>> : " + order_quantity);
 				
 				if(db_stock < order_quantity) {
 					mapJson.put("result", "overquantity");  
@@ -100,6 +107,7 @@ public class GorderController {
 			}
 			
 			else {
+				log.debug("<<db_cart - null이 아닌 경우 진입>> : " + db_cart.size());
 				mapJson.put("result", "clearCart");
 			}
 			
