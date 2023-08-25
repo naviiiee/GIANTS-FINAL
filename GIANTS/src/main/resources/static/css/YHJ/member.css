@@ -122,8 +122,8 @@
 .login-sub{
     float: right;
     border-left: 1px solid #ddd;
-    padding: 10px 150px 10px 40px;
-    width: 255px;
+    padding: 10px 135px 10px 40px;
+    width: 270px;
 }
 .login-sub li{
 	margin-bottom:15px;
@@ -381,6 +381,7 @@ ul.search li input{
 	color:#fff;	
 }
 .default-btn2{
+	padding:0px 5px;
 	height:30px;
 	border: 1px #dd032f solid;
     background-color: #dd032f;
