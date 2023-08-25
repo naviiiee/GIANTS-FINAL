@@ -109,7 +109,7 @@ public class MemberController {
 					&& db_member.getCompanyDetailVO().getComp_phone().equals(memberVO.getComp_phone())) {
 				
 				model.addAttribute("db_member", db_member);
-				return "findIdResult";
+				return "findIdResultCp";
 			}
 		}else {
 			return "companyfindId";

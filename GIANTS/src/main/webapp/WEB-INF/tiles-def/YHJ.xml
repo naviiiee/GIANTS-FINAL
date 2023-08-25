@@ -21,10 +21,16 @@
     	<put-attribute name="body" value="/WEB-INF/views/member/findIdFormCp.jsp"/>
     </definition>
     
-    <!-- 아이디 찾기 결과 -->
+    <!-- 일반회원 아이디 찾기 결과 -->
 	<definition name="findIdResult" extends="main">
 		<put-attribute name="title" value="아이디찾기결과"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/findIdResult.jsp"/>
+	</definition>
+	
+	<!-- 기업회원 아이디 찾기 결과 -->
+	<definition name="findIdResultCp" extends="main">
+		<put-attribute name="title" value="아이디찾기결과"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/findIdResultCp.jsp"/>
 	</definition>
 	
 	<!-- 일반회원 비밀번호 찾기 -->
