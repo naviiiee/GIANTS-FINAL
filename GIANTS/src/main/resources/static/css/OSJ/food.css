@@ -7,6 +7,8 @@
 .error-color{
 	color:#ff0000;
 }
+
+.enFont{font-family: "NotoSans";}
 /*===== 푸드 공용
 ==========================*/
 input[type="number"]::-webkit-inner-spin-button,

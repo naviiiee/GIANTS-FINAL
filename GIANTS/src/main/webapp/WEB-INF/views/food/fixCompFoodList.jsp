@@ -15,7 +15,7 @@
 	<div class="food-category">
 		<!-- 우측 수정, 취소 버튼 -->
 		<div class="float-right">
-			<input type="submit" class="adminBtn" value="수정">
+			<input type="submit" class="adminBtn" value="수정" onclick="location.href='${pageContext.request.contextPath}/member/myPage.do'">
 			<input type="button" class="adminBtn" value="뒤로가기" onclick='location.href="/food/foodCompDetailMenu.do?comp_num=${comp.comp_num}"'>
 		</div>
 	</div>

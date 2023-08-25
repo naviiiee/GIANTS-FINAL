@@ -19,6 +19,9 @@
 			</c:if>
 			<c:if test="${count > 0}"> <!-- 목록 있을 경우 -->
 				<p class="Mypage-p">*상품번호 클릭시 상세페이지로 이동</p>
+				<div class="float-right">
+            		<input type="button" class="foodModify-btn" value="수정하기" onclick='location.href="/food/fixCompFoodList.do?comp_num=${comp.comp_num}"'>
+        		 </div>
 				<table class="striped-table">
 					<tr>
 						<th>상품번호</th>

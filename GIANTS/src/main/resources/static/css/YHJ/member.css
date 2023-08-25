@@ -445,7 +445,9 @@ table.striped-table2 th{
 	height:30px;
 }
 .Mypage-p{
+	display:inline-block;
 	padding-left:50px;
+	width: 500px;
 }
 .Myfooddetail-table{
 	width:800px;
@@ -461,4 +463,17 @@ table.striped-table2 th{
 .mypage-r{
 	padding-left:890px;
 	padding-bottom:5px;
+}
+#fix_compMenu div.float-right{
+	margin-right: 50px;
+}
+
+.foodModify-btn{
+	background-color: #dd032f;
+    color: #FFF;
+    font-weight: bold;
+    border: 1px solid #dd032f;
+    border-radius: 3px;
+    padding: 5px;
+    margin-bottom: 5px;
 }
