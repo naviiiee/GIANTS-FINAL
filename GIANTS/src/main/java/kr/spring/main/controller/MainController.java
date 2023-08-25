@@ -33,7 +33,7 @@ public class MainController {
 	private GoodsService goodsService;
 	
 	@Autowired
-	private GorderService orderService;
+	private GorderService orderService; 
 	
 	@RequestMapping("/")
 	public String main() { return "redirect:/main/main.do"; }
