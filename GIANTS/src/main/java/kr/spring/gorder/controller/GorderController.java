@@ -91,7 +91,7 @@ public class GorderController {
 				int order_quantity = cartVO.getOrder_quantity();
 				
 				if(db_stock < order_quantity) {
-					mapJson.put("result", "overquantity"); 
+					mapJson.put("result", "overquantity");  
 				}
 				else {
 					cartService.insertCart(cartVO);
