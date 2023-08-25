@@ -20,6 +20,6 @@
 	<input type="button" value="로그인" class="bottom-btn"
 			       onclick="location.href='${pageContext.request.contextPath}/member/login.do'">
     <input type="button" value="비밀번호찾기" class="default-btn"
-    	   onclick="location.href='${pageContext.request.contextPath}/member/findPw.do'">
+    	   onclick="location.href='${pageContext.request.contextPath}/member/findPwCp.do'">
 	</div>
 </div>

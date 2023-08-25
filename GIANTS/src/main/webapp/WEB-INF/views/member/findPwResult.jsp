@@ -15,7 +15,7 @@
 	<div class="member-mypage">
 	<ul>
 		<li>자이언츠 임시비밀번호 입니다.</li>
-		<li>아이디 : ${new_passwd}</li>
+		<li>비밀번호 : ${new_passwd}</li>
 	</ul>
 	<input type="button" value="로그인" class="bottom-btn"
 			       onclick="location.href='${pageContext.request.contextPath}/member/login.do'">

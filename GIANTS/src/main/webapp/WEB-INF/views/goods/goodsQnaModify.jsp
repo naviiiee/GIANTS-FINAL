@@ -16,12 +16,8 @@
 		<form:errors element="div" cssColor="error-color"/>
 		<ul>
 			<li>
-				<label>작성자</label>
-				<span>${qnaVO.mem_id}</span>
-			</li>
-			<li>
 				<label>문의할 상품</label>
-				${qnaVO.goods_name}
+				${goodsQnaVO.goods_name}
 			</li>
 			<li>
 				<form:label path="qna_title">제목</form:label>
@@ -36,7 +32,7 @@
 		</ul>
 		<div class="align-center">
 			<form:button>수정</form:button>
-			<input type="button" value="상세페이지" onclick="location.href='goodsDetail.do?goods_num=${qnaVO.goods_num}'">
+			<input type="button" value="상세페이지" onclick="location.href='goodsDetail.do?goods_num=${goodsQnaVO.goods_num}#goods_qna'">
 		</div>
 	</form:form>
 </div>

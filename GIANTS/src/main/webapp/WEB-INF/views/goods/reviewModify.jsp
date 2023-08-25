@@ -57,7 +57,7 @@
 		</ul>
 		<div class="align-center">
 			<form:button>등록</form:button>
-			<input type="button" value="이전" onclick="location.href='goodsDetail.do?goods_num=${goods.goods_num}#goods_review'">
+			<input type="button" value="이전" onclick="location.href='goodsDetail.do?goods_num=${goodsReviewVO.goods_num}#goods_review'">
 		</div>
 	</form:form>
 </div>

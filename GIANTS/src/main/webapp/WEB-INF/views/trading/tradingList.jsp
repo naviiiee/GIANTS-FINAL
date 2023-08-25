@@ -41,7 +41,7 @@
 				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
 			</li>
 			<li>
-				<input type="submit" value="검색" class="red-btn middle">
+				<input type="submit" value="검색" class="red-btn middle2">
 			</li>
 		</ul>
 		<div class="trading_right">

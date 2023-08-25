@@ -6,20 +6,17 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/profile.js"></script>
 <div>
 	<div class="mypage-top2">
-		<div class="mypage-top-title">
-			<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
-			<h2>아이디찾기</h2>
-			<p>자이언츠 아이디찾기 입니다.</p>
+			<div class="mypage-top-title">
+				<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
+				<h2>회원가입</h2>
+				<p>자이언츠 회원가입 입니다.</p>
+			</div>
 		</div>
-	</div>
 	<div class="member-mypage">
 	<ul>
-		<li>자이언츠 아이디 입니다.</li>
-		<li>아이디 : ${db_member.mem_id}</li>
+		<li>회원가입이 완료되었습니다.</li>
 	</ul>
 	<input type="button" value="로그인" class="bottom-btn"
 			       onclick="location.href='${pageContext.request.contextPath}/member/login.do'">
-    <input type="button" value="비밀번호찾기" class="default-btn"
-    	   onclick="location.href='${pageContext.request.contextPath}/member/findPw.do'">
 	</div>
 </div>
