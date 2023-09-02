@@ -19,19 +19,37 @@
     box-sizing: border-box;
     overflow: hidden;
 }
+
+input[type="button"] {
+    padding: 8px 16px;
+    background-color: #052345;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 3px;
+    margin-right: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.align-right{
+	text-align: right;
+	
+
+}
  </style>
 <div class="mypage-top2">
 	<div class="mypage-top-title">
 		<img src="${pageContext.request.contextPath}/images/title_icon.gif" class="title-img">
-		<h2><a href="${pageContext.request.contextPath}/member/adminMypageSaleManage.do">총 매출</a> / <a href="${pageContext.request.contextPath}/member/adminMypageSaleDetail.do">상세 매출</h2></a>
+		<h2>매출관리</h2>
 		<p>자이언츠 총 매출 정보입니다.</p>
 	</div>
 </div>
+
 <div class="mypage-form-test">
 	<!-- 굿즈 판매 원형 차트 사용을 위해 변수 셋팅-->
 	<c:set var="order_sale" value=""/>
 	<c:set var="title_month" value=""/>
-	<c:forEach var="sales" items="${monthList}" varStatus="status">
+	<c:forEach var="sales" items="${monthList2}" varStatus="status">
 		<c:if test="${status.index==0}">
 			<c:set var="title_month" value="${title_month  += sales.title_month}"/>
 		</c:if>
@@ -49,13 +67,17 @@
 		</c:if>
 	</c:forEach>
 	
-	
 	<div class="align-center">
-		<h3>2023년 총 매출</h3>
-		<br>
+		<h3><a href="${pageContext.request.contextPath}/member/adminMypageSaleManage.do">총 매출</a> / <a href="${pageContext.request.contextPath}/gorder/adminMypageSaleManage.do">상세 매출</a></h3>
+	</div>
+	<br>
+
+	<div class="align-center">
+		<h3>${year}년 총 매출</h3>
 		<em><h1><fmt:formatNumber value="${order_revenue}"/>원</h1></em>
 	</div>
 	<br>
+	
 	<!-- 총 매출 그래프 시작--> 
 	<div class="myChartCss">
 		<canvas id="myChart"></canvas>
@@ -103,6 +125,10 @@
 		</script>	
 	</div>	
 	<br>
+	
+	
+	
+	
 	
   
 </div>

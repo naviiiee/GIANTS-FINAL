@@ -61,21 +61,23 @@ public class GorderAdminController {
 		
 		//총 매출, 굿즈 별 매출
 		//총 매출
-		int order_revenue = orderService.allTotal(); //int 형으로 안넘어감 왜???
-		
+		int order_revenue = orderService.allTotal(); 
 		//매출 리스트
 		List<GorderVO> list = null;
 		if(order_revenue>0) {
 			list = orderService.getListSale();
-			
 		}
 		List<GorderDetailVO> monthList = null;
-		List<Integer> months = new ArrayList<Integer>();
 		List<GorderDetailVO> monthList2 = new ArrayList<GorderDetailVO>();
+		List<Integer> months = new ArrayList<Integer>();
+		
 		if(order_revenue>0) {
 			Date now = new Date();
 			SimpleDateFormat sf = new SimpleDateFormat("YYYY");
-			monthList = orderService.orderMonth(sf.format(now));
+			String year = sf.format(now);
+			monthList = orderService.orderMonth(year);
+			model.addAttribute("year", year);
+
 			for(GorderDetailVO vo : monthList) {
 				months.add(vo.getTitle_month());
 			}
@@ -99,8 +101,9 @@ public class GorderAdminController {
 		
 		model.addAttribute("order_revenue", order_revenue);
 		model.addAttribute("list", list);
-		model.addAttribute("monthList", monthList2);
-
+		model.addAttribute("monthList", monthList); //연도
+		model.addAttribute("monthList2", monthList2); //월 매출
+		
 		return "adminMypageSaleManage";
 	}
 	
